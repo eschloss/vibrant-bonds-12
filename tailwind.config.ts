@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -82,8 +81,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Outfit', 'system-ui', 'sans-serif'],
-				display: ['Playfair Display', 'serif'],
+				sans: ['Lexend', 'system-ui', 'sans-serif'],
+				display: ['Space Grotesk', 'system-ui', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {
