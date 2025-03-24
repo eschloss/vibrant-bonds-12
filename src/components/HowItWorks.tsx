@@ -7,7 +7,15 @@ import {
   Heart, 
   Calendar, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Search,
+  ThumbsUp,
+  MapPin,
+  Bell,
+  CheckCircle,
+  User,
+  Clock,
+  Coffee
 } from "lucide-react";
 
 const features = [
@@ -45,6 +53,45 @@ const features = [
   }
 ];
 
+// Mock data for the app screens
+const appScreenContent = {
+  discover: {
+    title: "Find Your People",
+    profiles: [
+      { name: "Alex", interests: ["Photography", "Hiking", "Jazz"], match: 92, location: "2 miles away" },
+      { name: "Jordan", interests: ["Gaming", "Anime", "Coffee"], match: 87, location: "5 miles away" },
+      { name: "Taylor", interests: ["Yoga", "Cooking", "Art"], match: 85, location: "1 mile away" },
+    ]
+  },
+  connect: {
+    title: "Chat",
+    conversation: [
+      { sender: "You", message: "Hey! I noticed you're into rock climbing too!" },
+      { sender: "Sam", message: "Yeah! Been climbing for about 2 years now. How about you?" },
+      { sender: "AI", message: "Ask about their favorite climbing spot...", isPrompt: true },
+      { sender: "You", message: "Do you have a favorite climbing spot nearby?" },
+    ],
+    suggestions: ["Ask about gear", "Share a climbing story", "Suggest meeting up"]
+  },
+  meetup: {
+    title: "Activities Near You",
+    events: [
+      { name: "Coffee Tasting Workshop", date: "Sat, May 18", attendees: 6, distance: "0.5 miles" },
+      { name: "Sunset Hike Group", date: "Sun, May 19", attendees: 8, distance: "2 miles" },
+      { name: "Board Game Night", date: "Fri, May 24", attendees: 12, distance: "1 mile" },
+    ]
+  },
+  friendship: {
+    title: "Friendship Timeline",
+    events: [
+      { date: "2 months ago", activity: "First coffee meetup" },
+      { date: "Last month", activity: "Went hiking at Pine Trail" },
+      { date: "Last week", activity: "Book club discussion" },
+    ],
+    reminder: { message: "Jamie's birthday is next week!", action: "Send a message or plan something special" }
+  }
+};
+
 const HowItWorks = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [isInView, setIsInView] = useState(false);
@@ -80,6 +127,305 @@ const HowItWorks = () => {
       return () => clearInterval(interval);
     }
   }, [isInView]);
+
+  // Function to render different app screens based on the active feature
+  const renderAppScreen = (featureId) => {
+    const content = appScreenContent[featureId];
+    
+    switch (featureId) {
+      case "discover":
+        return (
+          <div className="relative overflow-hidden rounded-xl h-full">
+            <div className="px-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-t-xl">
+              <h3 className="text-lg font-medium">{content.title}</h3>
+              <div className="flex items-center gap-3 mt-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                  <input 
+                    type="text" 
+                    className="w-full pl-9 pr-3 py-2 bg-white/20 text-white placeholder-white/60 rounded-full text-sm"
+                    placeholder="Search interests, locations..."
+                  />
+                </div>
+                <button className="p-2 bg-white/20 rounded-full">
+                  <MapPin size={16} className="text-white" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="bg-gray-900 h-full p-3 rounded-b-xl">
+              {content.profiles.map((profile, idx) => (
+                <motion.div 
+                  key={profile.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 + 0.2 }}
+                  className="bg-gray-800 p-4 rounded-xl mb-3 border border-gray-700"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold">
+                      {profile.name[0]}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-bold text-white">{profile.name}</h4>
+                        <span className="text-green-400 text-xs font-semibold">{profile.match}% match</span>
+                      </div>
+                      <p className="text-xs text-gray-400">{profile.location}</p>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {profile.interests.map(interest => (
+                          <span key={interest} className="text-xs bg-gray-700 text-blue-300 px-2 py-1 rounded-full">
+                            {interest}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+              
+              <motion.div 
+                className="flex justify-center mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm font-medium">
+                  Find More People
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        );
+      
+      case "connect":
+        return (
+          <div className="relative overflow-hidden rounded-xl h-full">
+            <div className="px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-t-xl">
+              <div className="flex items-center gap-2">
+                <button className="p-1">
+                  <ArrowRight size={16} className="text-white rotate-180" />
+                </button>
+                <div className="flex-1 text-center">
+                  <h3 className="text-lg font-medium">Sam</h3>
+                </div>
+                <div className="w-6"></div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-900 h-full p-3 rounded-b-xl">
+              <div className="h-[280px] overflow-y-auto mb-4">
+                {content.conversation.map((msg, idx) => (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.2 + 0.2 }}
+                    className={`mb-3 ${msg.isPrompt ? "mx-auto max-w-[80%]" : ""}`}
+                  >
+                    {msg.isPrompt ? (
+                      <div className="bg-purple-900/50 p-2 rounded-lg border border-purple-500/30 text-sm text-purple-300">
+                        <Sparkles size={12} className="inline-block mr-1 text-purple-400" />
+                        {msg.message}
+                      </div>
+                    ) : (
+                      <div className={`flex ${msg.sender === "You" ? "justify-end" : "justify-start"}`}>
+                        <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                          msg.sender === "You" 
+                            ? "bg-blue-600 text-white rounded-br-none" 
+                            : "bg-gray-800 text-gray-100 rounded-bl-none"
+                        }`}>
+                          {msg.message}
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.div 
+                className="bg-gray-800 p-2 rounded-xl"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 }}
+              >
+                <p className="text-xs text-gray-500 mb-2">Conversation starters:</p>
+                <div className="flex flex-wrap gap-2">
+                  {content.suggestions.map((suggestion, idx) => (
+                    <motion.button 
+                      key={suggestion}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.3 + idx * 0.1 }}
+                      className="text-xs bg-gray-700 text-blue-300 px-3 py-1.5 rounded-full hover:bg-gray-600"
+                    >
+                      {suggestion}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="mt-3 flex items-center gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.6 }}
+              >
+                <input 
+                  type="text" 
+                  className="flex-1 bg-gray-800 border border-gray-700 rounded-full px-4 py-2 text-sm text-white"
+                  placeholder="Type your message..."
+                />
+                <button className="p-2 bg-blue-600 rounded-full">
+                  <MessageCircle size={18} className="text-white" />
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        );
+      
+      case "meetup":
+        return (
+          <div className="relative overflow-hidden rounded-xl h-full">
+            <div className="px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-400 text-white rounded-t-xl">
+              <h3 className="text-lg font-medium">{content.title}</h3>
+              <div className="flex items-center justify-between mt-2">
+                <div className="flex gap-2">
+                  <button className="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Nearby</button>
+                  <button className="px-3 py-1 bg-white/10 rounded-full text-xs font-medium">This Week</button>
+                </div>
+                <button className="p-1.5 bg-white/20 rounded-full">
+                  <MapPin size={14} className="text-white" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="bg-gray-900 h-full p-3 rounded-b-xl">
+              {content.events.map((event, idx) => (
+                <motion.div 
+                  key={event.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.15 + 0.2 }}
+                  className="bg-gray-800 p-4 rounded-xl mb-3 border border-gray-700"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-400 to-amber-300 flex items-center justify-center text-white">
+                      {idx === 0 ? <Coffee size={22} /> : idx === 1 ? <MapPin size={22} /> : <Users size={22} />}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h4 className="font-bold text-white">{event.name}</h4>
+                          <p className="text-xs text-gray-400">{event.date} • {event.distance}</p>
+                        </div>
+                        <span className="text-xs bg-gray-700 px-2 py-1 rounded-full text-orange-300">
+                          {event.attendees} going
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 mt-3">
+                        <button className="flex-1 text-xs bg-gradient-to-r from-orange-500 to-amber-400 text-white px-3 py-1.5 rounded-full font-medium">
+                          Join Event
+                        </button>
+                        <button className="px-3 py-1.5 text-xs bg-gray-700 text-white rounded-full">
+                          Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+              
+              <motion.div 
+                className="flex justify-center mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-400 rounded-full text-white text-sm font-medium">
+                  Find More Events
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        );
+      
+      case "friendship":
+        return (
+          <div className="relative overflow-hidden rounded-xl h-full">
+            <div className="px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-t-xl">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <User size={20} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium">Jamie</h3>
+                  <p className="text-xs text-green-200">Friends for 3 months</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-900 h-full p-3 rounded-b-xl">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-red-500/20 border border-red-500/30 p-3 rounded-xl mb-4"
+              >
+                <div className="flex items-start gap-2">
+                  <Bell size={18} className="text-red-400 mt-0.5" />
+                  <div>
+                    <h4 className="font-medium text-white text-sm">{content.reminder.message}</h4>
+                    <p className="text-xs text-gray-400 mt-1">{content.reminder.action}</p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <h4 className="font-medium text-green-400 mb-3 flex items-center gap-1.5">
+                <Clock size={14} /> Friendship Timeline
+              </h4>
+              
+              <div className="relative pl-6 border-l border-gray-700">
+                {content.events.map((event, idx) => (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.2 + 0.4 }}
+                    className="mb-6 relative"
+                  >
+                    <div className="absolute -left-[25px] w-5 h-5 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                      <CheckCircle size={12} className="text-white" />
+                    </div>
+                    <p className="text-xs text-gray-500 mb-1">{event.date}</p>
+                    <div className="bg-gray-800 p-3 rounded-xl border border-gray-700">
+                      <p className="text-sm text-white">{event.activity}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.div 
+                className="flex justify-between mt-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <button className="px-3 py-1.5 bg-gray-800 text-green-400 rounded-full text-xs flex items-center gap-1">
+                  <Calendar size={12} /> Plan Activity
+                </button>
+                <button className="px-3 py-1.5 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-full text-xs">
+                  Send Message
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
 
   return (
     <section 
@@ -118,61 +464,52 @@ const HowItWorks = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Interactive Feature Display */}
+          {/* App Screenshots Display */}
           <div>
-            <div className="relative bg-gray-800 rounded-3xl p-1 overflow-hidden shadow-xl border border-gray-700">
+            <div className="relative bg-gray-800 rounded-3xl p-1.5 overflow-hidden shadow-xl border border-gray-700">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 opacity-50"></div>
               
-              <div className="relative bg-gray-900 rounded-[22px] p-8 h-[460px] overflow-hidden">
+              <div className="relative bg-gray-900 rounded-[22px] p-2 h-[460px] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800"></div>
                 
-                {features.map((feature, index) => {
-                  const isActive = activeFeature === index;
-                  const Icon = feature.icon;
+                {/* Phone frame */}
+                <div className="relative h-full rounded-xl overflow-hidden border border-gray-800">
+                  {/* Status bar */}
+                  <div className="absolute top-0 inset-x-0 h-6 bg-black z-10 flex items-center justify-between px-4">
+                    <div className="text-white text-xs">9:41</div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-3 rounded-full bg-white/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-white/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-white/80"></div>
+                    </div>
+                  </div>
                   
-                  return (
-                    <motion.div
-                      key={feature.id}
-                      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                      animate={{ 
-                        opacity: isActive ? 1 : 0,
-                        scale: isActive ? 1 : 0.9,
-                        y: isActive ? 0 : 20
-                      }}
-                      transition={{ duration: 0.5 }}
-                      className={`absolute inset-0 flex items-center justify-center p-10 ${isActive ? '' : 'pointer-events-none'}`}
-                    >
-                      <div className="text-center">
-                        <motion.div 
-                          className={`mx-auto mb-8 relative`}
-                          animate={{ 
-                            y: [0, -10, 0],
-                          }}
-                          transition={{ 
-                            repeat: Infinity, 
-                            duration: 2,
-                            ease: "easeInOut"
-                          }}
-                        >
-                          <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} p-5 mx-auto`}>
-                            <Icon size={40} className="text-white" />
-                          </div>
-                          
-                          {/* Rainbow halo effect */}
-                          <div className="absolute -inset-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-3xl blur-xl opacity-30 -z-10"></div>
-                        </motion.div>
-                        
-                        <h3 className={`text-2xl font-bold mb-4 ${feature.textColor}`}>
-                          {feature.title}
-                        </h3>
-                        
-                        <p className="text-gray-300 max-w-md mx-auto leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                  {/* Home indicator */}
+                  <div className="absolute bottom-1 inset-x-0 flex justify-center z-10">
+                    <div className="w-24 h-1 bg-white/40 rounded-full"></div>
+                  </div>
+                  
+                  {/* App screens */}
+                  {features.map((feature, index) => {
+                    const isActive = activeFeature === index;
+                    
+                    return (
+                      <motion.div
+                        key={feature.id}
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ 
+                          opacity: isActive ? 1 : 0,
+                          scale: isActive ? 1 : 0.95,
+                          y: isActive ? 0 : 10
+                        }}
+                        transition={{ duration: 0.4 }}
+                        className={`absolute inset-0 pt-6 pb-1 px-1 ${isActive ? '' : 'pointer-events-none'}`}
+                      >
+                        {renderAppScreen(feature.id)}
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
