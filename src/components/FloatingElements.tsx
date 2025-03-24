@@ -26,18 +26,6 @@ const FloatingElements = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas to full screen
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      
-      // Recreate objects on resize
-      generateFloatingObjects();
-    };
-
-    setCanvasSize();
-    window.addEventListener("resize", setCanvasSize);
-
     // Colors
     const colors = [
       "#8B5CF6", // Purple
@@ -76,7 +64,17 @@ const FloatingElements = () => {
       floatingObjectsRef.current = objects;
     };
 
-    generateFloatingObjects();
+    // Set canvas to full screen
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Recreate objects on resize
+      generateFloatingObjects();
+    };
+
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
 
     // Draw functions for different shapes
     const drawShape = (obj: FloatingObject) => {
