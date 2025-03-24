@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { 
@@ -17,7 +18,11 @@ import {
   Coffee,
   UserPlus,
   Bookmark,
-  Zap
+  Zap,
+  X,
+  MoreVertical,
+  Send,
+  Lightbulb
 } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -60,21 +65,26 @@ const features = [
 // Mock data for the app screens
 const appScreenContent = {
   discover: {
-    title: "You've Been Matched!",
-    groupName: "Portland Photography Enthusiasts",
+    title: "Match found!",
+    groupName: "Pet Owners in LA",
     members: [
-      { name: "Alex", image: null, color: "from-purple-400 to-pink-500" },
-      { name: "Jamie", image: null, color: "from-blue-400 to-indigo-500" },
-      { name: "Taylor", image: null, color: "from-green-400 to-teal-500" },
-      { name: "Morgan", image: null, color: "from-red-400 to-orange-500" },
-      { name: "Jordan", image: null, color: "from-amber-400 to-yellow-500" },
-      { name: "Riley", image: null, color: "from-pink-400 to-rose-500" },
-      { name: "Casey", image: null, color: "from-indigo-400 to-blue-500" },
-      { name: "Drew", image: null, color: "from-emerald-400 to-green-500" },
-      { name: "Quinn", image: null, color: "from-fuchsia-400 to-purple-500" },
-      { name: "Avery", image: null, color: "from-cyan-400 to-blue-500" }
+      { name: "Adam", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-purple-400 to-pink-500", dotColor: "bg-pink-500" },
+      { name: "William", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-blue-400 to-indigo-500", dotColor: "bg-pink-600" },
+      { name: "Peter", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-green-400 to-teal-500", dotColor: "bg-teal-400" },
+      { name: "Julia", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-red-400 to-orange-500", dotColor: "bg-pink-400" },
+      { name: "Adam", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-amber-400 to-yellow-500", dotColor: "bg-pink-500" },
+      { name: "William", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-pink-400 to-rose-500", dotColor: "bg-pink-600" },
+      { name: "Peter", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-indigo-400 to-blue-500", dotColor: "bg-teal-400" },
+      { name: "Julia", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-emerald-400 to-green-500", dotColor: "bg-pink-400" },
     ],
-    interests: ["Photography", "Hiking", "Art Galleries", "Urban Exploration", "Coffee Tasting"],
+    interests: [
+      { icon: "🍳", label: "Cooking" },
+      { icon: "🧶", label: "Craft" },
+      { icon: "⛺", label: "Camping" },
+      { icon: "🎨", label: "Arts" },
+      { icon: "🎾", label: "Sport" },
+      { icon: "🧗", label: "Climbing" }
+    ],
     matchScore: 94
   },
   connect: {
@@ -149,72 +159,113 @@ const HowItWorks = () => {
     switch (featureId) {
       case "discover":
         return (
-          <div className="relative overflow-hidden rounded-xl h-full">
-            <div className="px-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-t-xl">
-              <h3 className="text-lg font-semibold">{content.title}</h3>
-              <div className="flex items-center gap-2 mt-1">
-                <Zap size={15} className="text-yellow-300" />
-                <span className="text-sm text-yellow-200 font-medium">{content.matchScore}% Match Rate</span>
+          <div className="relative overflow-hidden rounded-xl h-full bg-white">
+            {/* Phone status bar */}
+            <div className="absolute top-0 inset-x-0 h-8 bg-white z-10 flex items-center justify-between px-4">
+              <div className="text-black text-xs font-medium">9:41</div>
+              <div className="flex items-center gap-1">
+                <div className="w-3 h-3 rounded-full bg-black/80"></div>
+                <div className="w-3 h-3 rounded-full bg-black/80"></div>
+                <div className="w-3 h-3 rounded-full bg-black/80"></div>
               </div>
             </div>
             
-            <div className="bg-gray-900 h-full p-4 rounded-b-xl">
+            <div className="h-full pt-8 relative">
+              {/* Header */}
+              <div className="flex justify-between items-center px-4 mb-2">
+                <X size={24} className="text-gray-900" />
+                <MoreVertical size={24} className="text-gray-900" />
+              </div>
+              
+              {/* Confetti background */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(30)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className={`absolute w-2 h-2 rounded-full ${
+                      i % 3 === 0 ? "bg-purple-400" : i % 3 === 1 ? "bg-yellow-300" : "bg-indigo-500"
+                    }`}
+                    initial={{ 
+                      x: Math.random() * 300 - 150, 
+                      y: Math.random() * 300 - 200,
+                      opacity: 0
+                    }}
+                    animate={{ 
+                      x: Math.random() * 300 - 150,
+                      y: Math.random() * 300 - 100,
+                      opacity: [0, 1, 0],
+                      scale: [0, 1, 0.5]
+                    }}
+                    transition={{ 
+                      repeat: Infinity,
+                      duration: 5 + Math.random() * 5,
+                      delay: Math.random() * 2
+                    }}
+                  />
+                ))}
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={`square-${i}`}
+                    className={`absolute w-2 h-2 ${
+                      i % 3 === 0 ? "bg-purple-500" : i % 3 === 1 ? "bg-yellow-300" : "bg-indigo-600"
+                    }`}
+                    initial={{ 
+                      x: Math.random() * 300 - 150, 
+                      y: Math.random() * 300 - 200,
+                      opacity: 0,
+                      rotate: 0
+                    }}
+                    animate={{ 
+                      x: Math.random() * 300 - 150,
+                      y: Math.random() * 300 - 100,
+                      opacity: [0, 1, 0],
+                      scale: [0, 1, 0.5],
+                      rotate: 180
+                    }}
+                    transition={{ 
+                      repeat: Infinity,
+                      duration: 5 + Math.random() * 5,
+                      delay: Math.random() * 2
+                    }}
+                  />
+                ))}
+              </div>
+              
+              {/* Match title */}
               <motion.div 
+                className="text-center mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-gray-800/80 p-3 rounded-xl border border-purple-500/20 mb-4"
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <Bookmark className="text-purple-400" size={16} />
-                  <h4 className="font-bold text-white">
-                    {content.groupName}
-                  </h4>
-                </div>
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {content.interests.map(interest => (
-                    <Badge 
-                      key={interest} 
-                      className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-0 rounded-full px-2.5 py-0.5"
-                    >
-                      {interest}
-                    </Badge>
-                  ))}
-                </div>
+                <h2 className="text-3xl font-bold text-indigo-500 mb-1">{content.title}</h2>
+                <h3 className="text-2xl font-bold text-indigo-500">{content.groupName}</h3>
               </motion.div>
               
-              <div>
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="mb-3"
-                >
-                  <p className="text-sm text-gray-400 mb-2 flex items-center gap-1.5">
-                    <UserPlus size={14} className="text-purple-400" />
-                    <span>Your new tribe ({content.members.length} people)</span>
-                  </p>
-                </motion.div>
-                
-                <div className="grid grid-cols-5 gap-2">
+              {/* Matched people grid */}
+              <div className="px-6 mb-4">
+                <div className="grid grid-cols-4 gap-2">
                   {content.members.map((member, idx) => (
                     <motion.div 
-                      key={member.name}
+                      key={`${member.name}-${idx}`}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + idx * 0.05 }}
                       className="flex flex-col items-center"
                     >
-                      <Avatar className="w-10 h-10 mb-1 border-2 border-gray-700">
-                        {member.image ? (
-                          <AvatarImage src={member.image} alt={member.name} />
-                        ) : (
-                          <AvatarFallback className={`bg-gradient-to-br ${member.color} text-white text-xs`}>
-                            {member.name.substring(0, 2)}
-                          </AvatarFallback>
-                        )}
-                      </Avatar>
-                      <span className="text-xs text-gray-300 text-center">
+                      <div className="relative">
+                        <Avatar className="w-16 h-16 border-2 border-white ring-2 ring-gray-100">
+                          {member.image ? (
+                            <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+                          ) : (
+                            <AvatarFallback className={`bg-gradient-to-br ${member.color} text-white`}>
+                              {member.name.substring(0, 2)}
+                            </AvatarFallback>
+                          )}
+                        </Avatar>
+                        <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${member.dotColor}`}></div>
+                      </div>
+                      <span className="text-xs text-gray-900 font-medium mt-1">
                         {member.name}
                       </span>
                     </motion.div>
@@ -222,16 +273,60 @@ const HowItWorks = () => {
                 </div>
               </div>
               
-              <motion.div 
-                className="mt-5 flex justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-              >
-                <button className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-sm font-medium">
-                  Start Chatting
-                </button>
-              </motion.div>
+              {/* Interests */}
+              <div className="px-4 mb-6">
+                <motion.div 
+                  className="flex flex-wrap gap-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  {content.interests.map((interest, idx) => (
+                    <motion.div
+                      key={interest.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 + idx * 0.1 }}
+                      className="flex items-center gap-1 px-3 py-2 bg-gray-100 rounded-full"
+                    >
+                      <span className="text-base">{interest.icon}</span>
+                      <span className="text-sm font-medium text-gray-800">{interest.label}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+              
+              {/* Buttons */}
+              <div className="px-4 space-y-3">
+                <motion.button 
+                  className="w-full py-3 bg-indigo-500 rounded-full text-white text-base font-medium"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2 }}
+                >
+                  Start with an Icebraker
+                </motion.button>
+                
+                <motion.div 
+                  className="flex items-center gap-2 bg-gray-100 rounded-full p-2 px-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.4 }}
+                >
+                  <Lightbulb size={20} className="text-indigo-400" />
+                  <input 
+                    type="text" 
+                    placeholder="Type a message..." 
+                    className="bg-transparent text-gray-800 text-sm flex-1 outline-none"
+                  />
+                  <Send size={20} className="text-indigo-500" />
+                </motion.div>
+              </div>
+              
+              {/* Bottom indicator */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+                <div className="w-10 h-1 bg-gray-900 rounded-full"></div>
+              </div>
             </div>
           </div>
         );
