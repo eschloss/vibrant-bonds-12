@@ -26,18 +26,6 @@ const FloatingElements = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas to full screen
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      
-      // Recreate objects on resize
-      generateFloatingObjects();
-    };
-
-    setCanvasSize();
-    window.addEventListener("resize", setCanvasSize);
-
     // Colors
     const colors = [
       "#8B5CF6", // Purple
@@ -49,7 +37,7 @@ const FloatingElements = () => {
 
     const emojis = ["✨", "🌈", "💫", "🔮", "👋", "🫂", "🌟", "✌️", "🙌", "💭"];
 
-    // Generate random floating objects
+    // Generate random floating objects - Define this function BEFORE it's used in setCanvasSize
     const generateFloatingObjects = () => {
       const objects: FloatingObject[] = [];
       const numObjects = Math.max(10, Math.floor(window.innerWidth / 100));
@@ -76,7 +64,17 @@ const FloatingElements = () => {
       floatingObjectsRef.current = objects;
     };
 
-    generateFloatingObjects();
+    // Set canvas to full screen - Now this function can safely call generateFloatingObjects
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Recreate objects on resize
+      generateFloatingObjects();
+    };
+
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
 
     // Draw functions for different shapes
     const drawShape = (obj: FloatingObject) => {
