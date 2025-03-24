@@ -70,11 +70,6 @@
   * {
     @apply border-border;
   }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -87,7 +82,7 @@
 
 @layer components {
   .glass {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-glass;
+    @apply bg-white/30 backdrop-blur-lg border border-white/20 shadow-glass;
   }
   
   .glass-dark {
@@ -99,10 +94,7 @@
   }
   
   .pulse-gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(-45deg, #8B5CF6, #F97316, #5EEAD4, #FDA4AF);
-    background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pulse-purple to-pulse-blue;
   }
   
   .pulse-gradient-cta {
@@ -170,19 +162,6 @@
            after:scale-x-0 hover:after:scale-x-100 after:transition-transform
            after:duration-300 after:ease-out hover:after:origin-bottom-left;
   }
-  
-  /* New 3D transform utilities */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-  .transform-style-3d {
-    transform-style: preserve-3d;
-  }
-  
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
 }
 
 @font-face {
@@ -194,31 +173,3 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-/* New animations */
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes float-rotate {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
-  }
-}
