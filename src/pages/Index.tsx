@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import PsychedelicBackground from "@/components/PsychedelicBackground";
 import MouseTrail from "@/components/MouseTrail";
 import FloatingElements from "@/components/FloatingElements";
-import { useToast } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
 
 const Index = () => {
