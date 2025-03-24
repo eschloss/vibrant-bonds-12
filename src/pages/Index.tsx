@@ -11,10 +11,13 @@ const Index = () => {
   useEffect(() => {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
+    
+    // Set dark mode
+    document.documentElement.classList.add('dark');
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen dark">
       <Navbar />
       
       <main className="flex-grow">
