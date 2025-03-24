@@ -67,22 +67,22 @@ const appScreenContent = {
     title: "Match found!",
     groupName: "Pet Owners in LA",
     members: [
-      { name: "Adam", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-purple-400 to-pink-500", dotColor: "bg-pink-500" },
-      { name: "William", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-blue-400 to-indigo-500", dotColor: "bg-pink-600" },
-      { name: "Peter", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-green-400 to-teal-500", dotColor: "bg-teal-400" },
-      { name: "Julia", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-red-400 to-orange-500", dotColor: "bg-pink-400" },
-      { name: "Adam", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-amber-400 to-yellow-500", dotColor: "bg-pink-500" },
-      { name: "William", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-pink-400 to-rose-500", dotColor: "bg-pink-600" },
-      { name: "Peter", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-indigo-400 to-blue-500", dotColor: "bg-teal-400" },
-      { name: "Julia", image: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png", color: "from-emerald-400 to-green-500", dotColor: "bg-pink-400" },
+      { name: "Alex", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces", color: "from-purple-400 to-pink-500", dotColor: "bg-pink-500" },
+      { name: "Jenna", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces", color: "from-blue-400 to-indigo-500", dotColor: "bg-pink-600" },
+      { name: "Marcus", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&h=150&fit=crop&crop=faces", color: "from-green-400 to-teal-500", dotColor: "bg-teal-400" },
+      { name: "Sophia", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces", color: "from-red-400 to-orange-500", dotColor: "bg-pink-400" },
+      { name: "Ravi", image: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=150&h=150&fit=crop&crop=faces", color: "from-amber-400 to-yellow-500", dotColor: "bg-pink-500" },
+      { name: "Tara", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=faces", color: "from-pink-400 to-rose-500", dotColor: "bg-pink-600" },
+      { name: "David", image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=faces", color: "from-indigo-400 to-blue-500", dotColor: "bg-teal-400" },
+      { name: "Emma", image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=faces", color: "from-emerald-400 to-green-500", dotColor: "bg-pink-400" },
     ],
     interests: [
-      { icon: "🍳", label: "Cooking" },
-      { icon: "🧶", label: "Craft" },
-      { icon: "⛺", label: "Camping" },
+      { icon: "🐕", label: "Dog lover" },
+      { icon: "🐈", label: "Cat owner" },
+      { icon: "🏞️", label: "Hiking" },
+      { icon: "🧘", label: "Yoga" },
       { icon: "🎨", label: "Arts" },
-      { icon: "🎾", label: "Sport" },
-      { icon: "🧗", label: "Climbing" }
+      { icon: "🎭", label: "Theatre" }
     ],
     matchScore: 94
   },
@@ -151,7 +151,6 @@ const HowItWorks = () => {
     }
   }, [isInView]);
 
-  // Function to render different app screens based on the active feature
   const renderAppScreen = (featureId) => {
     const content = appScreenContent[featureId];
     
@@ -167,9 +166,9 @@ const HowItWorks = () => {
               </div>
             </div>
             
-            <div className="bg-gray-900 h-full p-4 rounded-b-xl">
+            <div className="bg-gray-900 h-full p-4 rounded-b-xl flex flex-col">
               <motion.div 
-                className="text-center mb-5"
+                className="text-center mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -182,7 +181,7 @@ const HowItWorks = () => {
               </motion.div>
               
               <motion.div 
-                className="mb-6"
+                className="mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -198,18 +197,15 @@ const HowItWorks = () => {
                       className="flex flex-col items-center"
                     >
                       <div className="relative">
-                        <Avatar className="w-14 h-14 border-2 border-gray-800">
-                          {member.image ? (
-                            <AvatarImage src={member.image} alt={member.name} className="object-cover" />
-                          ) : (
-                            <AvatarFallback className={`bg-gradient-to-br ${member.color} text-white`}>
-                              {member.name.charAt(0)}
-                            </AvatarFallback>
-                          )}
+                        <Avatar className="w-12 h-12 border-2 border-gray-800">
+                          <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+                          <AvatarFallback className={`bg-gradient-to-br ${member.color} text-white`}>
+                            {member.name.charAt(0)}
+                          </AvatarFallback>
                         </Avatar>
                         <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-gray-800 ${member.dotColor}`}></div>
                       </div>
-                      <span className="text-xs text-gray-400 mt-1">
+                      <span className="text-xs text-gray-400 mt-1 truncate max-w-full">
                         {member.name}
                       </span>
                     </motion.div>
@@ -218,7 +214,7 @@ const HowItWorks = () => {
               </motion.div>
               
               <motion.div 
-                className="mb-6"
+                className="mb-3 flex-grow"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
@@ -241,7 +237,7 @@ const HowItWorks = () => {
               </motion.div>
               
               <motion.div 
-                className="space-y-3"
+                className="space-y-3 mt-auto"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 }}
