@@ -12,6 +12,8 @@ export type DotCluster = {
   cluster: number;
   color: string;
   pulseSpeed: number;
+  originalX?: number; // Store original position
+  originalY?: number; // Store original position
 };
 
 export type Connection = {
@@ -20,6 +22,11 @@ export type Connection = {
   strength: number;
   type: 'intra' | 'inter';
 };
+
+// Mouse interaction settings
+const MOUSE_INFLUENCE_RADIUS = 150; // How far the mouse influence reaches
+const MOUSE_REPEL_STRENGTH = 0.8; // How strongly dots move away from cursor
+const RETURN_SPEED = 0.05; // How quickly dots return to original position
 
 // Colors for each cluster
 const CLUSTER_COLORS = [
@@ -66,6 +73,8 @@ export function initializeNetwork(
         id: c * dotsPerCluster + i,
         x,
         y,
+        originalX: x, // Store original position for returning after mouse interaction
+        originalY: y, // Store original position for returning after mouse interaction
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         size: 2.5 + Math.random() * 2.5, // Increased dot size
@@ -144,10 +153,15 @@ export function initializeNetwork(
   const extraDots = 20; // Additional random dots
   for (let i = 0; i < extraDots; i++) {
     const randomCluster = Math.floor(Math.random() * clusters);
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+    
     dots.push({
       id: dots.length,
-      x: Math.random() * width,
-      y: Math.random() * height,
+      x,
+      y,
+      originalX: x, // Store original position
+      originalY: y, // Store original position
       vx: (Math.random() - 0.5) * 0.2,
       vy: (Math.random() - 0.5) * 0.2,
       size: 2 + Math.random() * 2,
@@ -166,6 +180,7 @@ export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
   const animationRef = useRef<number>(0);
   const dotsRef = useRef<DotCluster[]>([]);
   const connectionsRef = useRef<Connection[]>([]);
+  const mouseRef = useRef<{ x: number, y: number, active: boolean }>({ x: 0, y: 0, active: false });
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -188,6 +203,26 @@ export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
       connectionsRef.current = connections;
     };
     
+    // Mouse event handlers
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+        active: true
+      };
+    };
+    
+    const handleMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+    
+    // Add event listeners
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+    
     // Call resize initially and on window resize
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -198,6 +233,52 @@ export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const time = Date.now() * 0.001; // Current time in seconds
+      
+      // Update dot positions based on mouse influence
+      if (mouseRef.current.active) {
+        dotsRef.current.forEach(dot => {
+          // Calculate distance from mouse
+          const dx = dot.x - mouseRef.current.x;
+          const dy = dot.y - mouseRef.current.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < MOUSE_INFLUENCE_RADIUS) {
+            // Calculate repulsion force (stronger when closer)
+            const force = (1 - distance / MOUSE_INFLUENCE_RADIUS) * MOUSE_REPEL_STRENGTH;
+            
+            // Apply force to move away from mouse
+            const angle = Math.atan2(dy, dx);
+            dot.x += Math.cos(angle) * force * 5;
+            dot.y += Math.sin(angle) * force * 5;
+            
+            // Keep dots within boundaries with some padding
+            const padding = dot.size * 3;
+            if (dot.x < padding) dot.x = padding;
+            if (dot.x > canvas.width - padding) dot.x = canvas.width - padding;
+            if (dot.y < padding) dot.y = padding;
+            if (dot.y > canvas.height - padding) dot.y = canvas.height - padding;
+          }
+        });
+      } else {
+        // Return dots slowly to their original positions when mouse is not active
+        dotsRef.current.forEach(dot => {
+          if (dot.originalX !== undefined && dot.originalY !== undefined) {
+            dot.x += (dot.originalX - dot.x) * RETURN_SPEED;
+            dot.y += (dot.originalY - dot.y) * RETURN_SPEED;
+          }
+          
+          // Apply gentle movement with boundaries
+          dot.x += Math.sin(time * dot.pulseSpeed) * 0.3;
+          dot.y += Math.cos(time * dot.pulseSpeed * 1.3) * 0.3;
+          
+          // Keep dots within boundaries with some padding
+          const padding = dot.size * 3;
+          if (dot.x < padding) dot.x = padding;
+          if (dot.x > canvas.width - padding) dot.x = canvas.width - padding;
+          if (dot.y < padding) dot.y = padding;
+          if (dot.y > canvas.height - padding) dot.y = canvas.height - padding;
+        });
+      }
       
       // Draw connections
       connectionsRef.current.forEach(conn => {
@@ -226,17 +307,6 @@ export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
       
       // Update and draw dots
       dotsRef.current.forEach(dot => {
-        // Apply gentle movement with boundaries
-        dot.x += Math.sin(time * dot.pulseSpeed) * 0.5; // More movement
-        dot.y += Math.cos(time * dot.pulseSpeed * 1.3) * 0.5;
-        
-        // Keep dots within boundaries with some padding
-        const padding = dot.size * 3;
-        if (dot.x < padding) dot.x = padding;
-        if (dot.x > canvas.width - padding) dot.x = canvas.width - padding;
-        if (dot.y < padding) dot.y = padding;
-        if (dot.y > canvas.height - padding) dot.y = canvas.height - padding;
-        
         // Draw the dot with pulsing effect
         const pulseSize = dot.size * (0.8 + Math.sin(time * 2 + dot.id * 0.3) * 0.25 * dot.pulseSpeed);
         
@@ -276,6 +346,8 @@ export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
     // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationRef.current);
     };
   }, [totalDots, clusters]);

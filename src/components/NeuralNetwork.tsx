@@ -5,7 +5,7 @@ import { Brain, Heart, ZapIcon } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 
 // Configuration for neural network visualization
-const TOTAL_DOTS = 100;
+const TOTAL_DOTS = 120; // Increased for better coverage
 const CLUSTERS = 4;
 
 const NeuralNetwork = () => {
@@ -51,13 +51,19 @@ const NeuralNetwork = () => {
         <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gradient-to-b from-black to-gray-900 shadow-xl">
           <canvas 
             ref={canvasRef} 
-            className="w-full h-full"
+            className="w-full h-full cursor-pointer"
+            title="Move your cursor to interact with the neural network"
           ></canvas>
           
-          {/* Optional network labels */}
+          {/* Network labels */}
           <div className="absolute top-4 left-4 flex items-center gap-2 text-white/60 text-sm font-medium bg-black/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
             <ZapIcon className="w-4 h-4" />
-            <span>Neural Network Visualization</span>
+            <span>Interactive Neural Network</span>
+          </div>
+          
+          {/* Instruction overlay */}
+          <div className="absolute bottom-4 right-4 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/60 text-sm">
+            <span>Move your cursor over the network to interact</span>
           </div>
         </div>
         
