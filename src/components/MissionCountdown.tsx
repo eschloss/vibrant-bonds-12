@@ -232,10 +232,12 @@ const MissionCountdown = () => {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Alert variant="destructive" className="bg-pulse-coral/20 border-pulse-coral/40 text-white">
+                      <Alert 
+                        className="bg-gradient-to-r from-pulse-pink/20 to-pulse-coral/20 border border-pulse-coral/40 backdrop-blur-sm text-white shadow-lg"
+                      >
                         <AlertTriangle className="h-5 w-5 text-pulse-coral" />
-                        <AlertTitle className="text-white">Time is running out!</AlertTitle>
-                        <AlertDescription className="text-white/80">
+                        <AlertTitle className="text-white font-medium">Time is running out!</AlertTitle>
+                        <AlertDescription className="text-white/90">
                           You have less than 24 hours to agree on a plan or your group will be dissolved.
                         </AlertDescription>
                       </Alert>
