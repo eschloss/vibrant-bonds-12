@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Brain } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
+import { Button } from "@/components/ui/button";
 
 // Configuration for neural network visualization
 const TOTAL_DOTS = 150; // Increased for better coverage with 5 clusters
@@ -56,10 +57,23 @@ const NeuralNetwork = () => {
           
           <motion.p 
             variants={fadeInUp}
-            className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-sm p-2 rounded-lg bg-gray-900/30"
+            className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-sm p-2 rounded-lg bg-gray-900/30 mb-6"
           >
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
+          
+          {/* New CTA Button */}
+          <motion.div 
+            variants={fadeInUp}
+            className="mt-6"
+          >
+            <Button 
+              size="lg" 
+              className="bg-pulse-purple hover:bg-pulse-purple/90 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+            >
+              Meet your new friends
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     </div>
