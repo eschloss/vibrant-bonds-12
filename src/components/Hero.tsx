@@ -1,14 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { ChevronRight, Download, Smartphone } from "lucide-react";
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  
   return <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden section-padding">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
@@ -36,9 +32,7 @@ const Hero = () => {
             Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
           </h1>
           
-          <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
-            Connect with like-minded people in your city. From coffee meetups to weekend adventures — make friends that get you.
-          </p>
+          <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <a href="#download" className="button-secondary flex items-center justify-center gap-2">
@@ -67,5 +61,4 @@ const Hero = () => {
       </div>
     </section>;
 };
-
 export default Hero;
