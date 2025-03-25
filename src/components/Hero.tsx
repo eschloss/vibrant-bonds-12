@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ChevronRight, Download, Smartphone } from "lucide-react";
 const Hero = () => {
@@ -55,7 +54,7 @@ const Hero = () => {
             }}></div>)}
             </div>
             <p className="text-sm text-foreground/70">
-              <span className="font-semibold">1,000+</span> new connections made today
+              <span className="font-semibold">3,000+</span> new connections made today
             </p>
           </div>
         </div>
