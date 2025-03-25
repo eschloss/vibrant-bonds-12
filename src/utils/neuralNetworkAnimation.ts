@@ -1,4 +1,3 @@
-
 // Neural network animation utilities
 import { useEffect, useRef } from 'react';
 
@@ -34,7 +33,7 @@ const CLUSTER_COLORS = [
 export function initializeNetwork(
   width: number, 
   height: number, 
-  totalDots: number = 100, 
+  totalDots: number = 120, // Increased dot count for better coverage
   clusters: number = 4
 ): { dots: DotCluster[], connections: Connection[] } {
   const dotsPerCluster = Math.floor(totalDots / clusters);
@@ -44,31 +43,32 @@ export function initializeNetwork(
   // Create clusters
   for (let c = 0; c < clusters; c++) {
     // Define cluster center positions distributed across the canvas
-    const clusterCenterX = width * (0.25 + 0.5 * (c % 2));
-    const clusterCenterY = height * (0.25 + 0.5 * Math.floor(c / 2));
-    const clusterRadius = Math.min(width, height) * 0.15;
-
+    // Spread clusters to cover more of the canvas
+    const clusterCenterX = width * (0.2 + 0.6 * (c % 2));
+    const clusterCenterY = height * (0.2 + 0.6 * Math.floor(c / 2));
+    const clusterRadius = Math.min(width, height) * 0.25; // Increased radius
+    
     // Create dots for this cluster using a spiral pattern for better distribution
     const clusterColor = CLUSTER_COLORS[c];
     
     for (let i = 0; i < dotsPerCluster; i++) {
       // Use a spiral pattern to place dots
-      const angle = (i / dotsPerCluster) * Math.PI * 6; // Multiple rotations for spiral
-      const radiusRatio = Math.sqrt(i / dotsPerCluster); // Square root for more even distribution
+      const angle = (i / dotsPerCluster) * Math.PI * 8; // More rotations for wider spread
+      const radiusRatio = Math.pow(i / dotsPerCluster, 0.5); // Better distribution
       const distance = radiusRatio * clusterRadius;
       
-      // Add some slight randomness but prevent overlap
-      const x = clusterCenterX + Math.cos(angle) * distance + (Math.random() - 0.5) * 5;
-      const y = clusterCenterY + Math.sin(angle) * distance + (Math.random() - 0.5) * 5;
+      // Add some randomness but prevent overlap
+      const x = clusterCenterX + Math.cos(angle) * distance + (Math.random() - 0.5) * 10;
+      const y = clusterCenterY + Math.sin(angle) * distance + (Math.random() - 0.5) * 10;
       
-      // Create the dot
+      // Create the dot with larger size
       dots.push({
         id: c * dotsPerCluster + i,
         x,
         y,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        size: 1.5 + Math.random() * 1.5,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: 2.5 + Math.random() * 2.5, // Increased dot size
         cluster: c,
         color: clusterColor,
         pulseSpeed: 0.8 + Math.random() * 0.4
@@ -101,11 +101,11 @@ export function initializeNetwork(
             const distance = Math.sqrt(dx * dx + dy * dy);
             
             // Only connect if reasonably close
-            if (distance < clusterRadius * 0.6) {
+            if (distance < clusterRadius * 0.8) { // Increased connection distance
               connections.push({
                 from: i,
                 to: targetIndex,
-                strength: 0.8 - (distance / (clusterRadius * 0.8)),
+                strength: 0.8 - (distance / (clusterRadius * 1.2)),
                 type: 'intra'
               });
               
@@ -118,11 +118,11 @@ export function initializeNetwork(
     }
   }
   
-  // Create fewer connections between clusters
+  // Create more connections between clusters
   for (let c1 = 0; c1 < clusters; c1++) {
     for (let c2 = c1 + 1; c2 < clusters; c2++) {
-      // Add 3-6 connections between each pair of clusters
-      const interConnections = 3 + Math.floor(Math.random() * 4);
+      // Add 5-8 connections between each pair of clusters (increased)
+      const interConnections = 5 + Math.floor(Math.random() * 4);
       
       for (let i = 0; i < interConnections; i++) {
         const fromIndex = c1 * dotsPerCluster + Math.floor(Math.random() * dotsPerCluster);
@@ -132,7 +132,7 @@ export function initializeNetwork(
           connections.push({
             from: fromIndex,
             to: toIndex,
-            strength: 0.2 + Math.random() * 0.2, // Weaker connections between clusters
+            strength: 0.3 + Math.random() * 0.3, // Stronger connections between clusters
             type: 'inter'
           });
         }
@@ -140,11 +140,28 @@ export function initializeNetwork(
     }
   }
   
+  // Add some random dots to fill in empty spaces
+  const extraDots = 20; // Additional random dots
+  for (let i = 0; i < extraDots; i++) {
+    const randomCluster = Math.floor(Math.random() * clusters);
+    dots.push({
+      id: dots.length,
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      size: 2 + Math.random() * 2,
+      cluster: randomCluster,
+      color: CLUSTER_COLORS[randomCluster],
+      pulseSpeed: 0.8 + Math.random() * 0.4
+    });
+  }
+  
   return { dots, connections };
 }
 
 // Animation hook that handles the canvas rendering
-export function useNeuralNetworkAnimation(totalDots = 100, clusters = 4) {
+export function useNeuralNetworkAnimation(totalDots = 120, clusters = 4) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number>(0);
   const dotsRef = useRef<DotCluster[]>([]);
@@ -197,11 +214,11 @@ export function useNeuralNetworkAnimation(totalDots = 100, clusters = 4) {
           // Within-cluster connection
           const baseColor = fromDot.color.replace('0.8', `${conn.strength * 0.5}`);
           ctx.strokeStyle = baseColor;
-          ctx.lineWidth = conn.strength * 1;
+          ctx.lineWidth = conn.strength * 1.2; // Thicker lines
         } else {
           // Between-cluster connection
-          ctx.strokeStyle = `rgba(255, 255, 255, ${conn.strength * 0.2})`;
-          ctx.lineWidth = conn.strength * 0.5;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${conn.strength * 0.3})`; // More visible
+          ctx.lineWidth = conn.strength * 0.7; // Thicker lines
         }
         
         ctx.stroke();
@@ -210,21 +227,28 @@ export function useNeuralNetworkAnimation(totalDots = 100, clusters = 4) {
       // Update and draw dots
       dotsRef.current.forEach(dot => {
         // Apply gentle movement with boundaries
-        dot.x += Math.sin(time * dot.pulseSpeed) * 0.3;
-        dot.y += Math.cos(time * dot.pulseSpeed * 1.3) * 0.3;
+        dot.x += Math.sin(time * dot.pulseSpeed) * 0.5; // More movement
+        dot.y += Math.cos(time * dot.pulseSpeed * 1.3) * 0.5;
+        
+        // Keep dots within boundaries with some padding
+        const padding = dot.size * 3;
+        if (dot.x < padding) dot.x = padding;
+        if (dot.x > canvas.width - padding) dot.x = canvas.width - padding;
+        if (dot.y < padding) dot.y = padding;
+        if (dot.y > canvas.height - padding) dot.y = canvas.height - padding;
         
         // Draw the dot with pulsing effect
-        const pulseSize = dot.size * (0.8 + Math.sin(time * 2 + dot.id * 0.3) * 0.2 * dot.pulseSpeed);
+        const pulseSize = dot.size * (0.8 + Math.sin(time * 2 + dot.id * 0.3) * 0.25 * dot.pulseSpeed);
         
         // Create glowing effect
         const gradient = ctx.createRadialGradient(
           dot.x, dot.y, 0,
-          dot.x, dot.y, pulseSize * 3
+          dot.x, dot.y, pulseSize * 4 // Larger glow
         );
         
         // Extract base color components for gradient
         const baseColor = dot.color;
-        const lightColor = baseColor.replace('0.8', '0.3');
+        const lightColor = baseColor.replace('0.8', '0.4'); // More visible glow
         
         gradient.addColorStop(0, baseColor);
         gradient.addColorStop(0.5, lightColor);
@@ -233,7 +257,7 @@ export function useNeuralNetworkAnimation(totalDots = 100, clusters = 4) {
         // Draw glow
         ctx.beginPath();
         ctx.fillStyle = gradient;
-        ctx.arc(dot.x, dot.y, pulseSize * 3, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, pulseSize * 4, 0, Math.PI * 2);
         ctx.fill();
         
         // Draw solid dot center
