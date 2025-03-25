@@ -74,42 +74,44 @@ export function initializeNetwork(
         pulseSpeed: 0.8 + Math.random() * 0.4
       });
     }
-  }
-  
-  // Create connections within clusters
-  for (let i = 0; i < dots.length; i++) {
-    const dot = dots[i];
-    const clusterStart = Math.floor(dot.id / dotsPerCluster) * dotsPerCluster;
+    
+    // Create connections within this cluster
+    const clusterStart = c * dotsPerCluster;
     const clusterEnd = clusterStart + dotsPerCluster;
     
-    // Connect to 2-4 other dots in same cluster
-    const connectionCount = 2 + Math.floor(Math.random() * 3);
-    const connected = new Set<number>();
-    
-    for (let c = 0; c < connectionCount; c++) {
-      // Try to find a suitable connection
-      for (let attempt = 0; attempt < 5; attempt++) {
-        const targetIndex = clusterStart + Math.floor(Math.random() * dotsPerCluster);
-        
-        if (targetIndex !== i && !connected.has(targetIndex) && targetIndex < dots.length) {
-          const target = dots[targetIndex];
+    // For each dot in this cluster
+    for (let i = clusterStart; i < clusterEnd && i < dots.length; i++) {
+      const dot = dots[i];
+      
+      // Connect to 2-4 other dots in same cluster
+      const connectionCount = 2 + Math.floor(Math.random() * 3);
+      const connected = new Set<number>();
+      
+      for (let c = 0; c < connectionCount; c++) {
+        // Try to find a suitable connection
+        for (let attempt = 0; attempt < 5; attempt++) {
+          const targetIndex = clusterStart + Math.floor(Math.random() * dotsPerCluster);
           
-          // Calculate distance
-          const dx = dot.x - target.x;
-          const dy = dot.y - target.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          // Only connect if reasonably close
-          if (distance < clusterRadius * 0.6) {
-            connections.push({
-              from: i,
-              to: targetIndex,
-              strength: 0.8 - (distance / (clusterRadius * 0.8)),
-              type: 'intra'
-            });
+          if (targetIndex !== i && !connected.has(targetIndex) && targetIndex < dots.length) {
+            const target = dots[targetIndex];
             
-            connected.add(targetIndex);
-            break;
+            // Calculate distance
+            const dx = dot.x - target.x;
+            const dy = dot.y - target.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Only connect if reasonably close
+            if (distance < clusterRadius * 0.6) {
+              connections.push({
+                from: i,
+                to: targetIndex,
+                strength: 0.8 - (distance / (clusterRadius * 0.8)),
+                type: 'intra'
+              });
+              
+              connected.add(targetIndex);
+              break;
+            }
           }
         }
       }
