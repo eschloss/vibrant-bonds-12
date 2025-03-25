@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Brain, Heart, ZapIcon } from "lucide-react";
@@ -18,53 +19,48 @@ const NeuralNetwork = () => {
   };
   
   return (
-    <div className="w-full overflow-hidden bg-gray-950 py-16 md:py-24">
-      <div className="container px-4 md:px-6">
+    <div className="w-full overflow-hidden bg-gray-950 py-16 md:py-24 relative">
+      {/* Neural Network Animation as Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <canvas 
+          ref={canvasRef} 
+          className="w-full h-full cursor-pointer"
+          title="Move your cursor to interact with the neural network"
+        ></canvas>
+        
+        {/* Interaction hint overlay */}
+        <div className="absolute bottom-4 right-4 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/60 text-sm z-10">
+          <span>Move your cursor over the network to interact</span>
+        </div>
+      </div>
+      
+      {/* Content overlay with gradient backdrop */}
+      <div className="container px-4 md:px-6 relative z-10">
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-10 md:mb-16"
         >
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
             <Brain className="w-4 h-4 text-pulse-purple" />
             <span className="text-sm font-medium text-pulse-purple">Neural Network Technology</span>
           </motion.div>
           
           <motion.h2 
             variants={fadeInUp}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-sm px-4 py-2 rounded-lg bg-gray-900/40"
           >
             AI-Powered Match<span className="pulse-gradient-text">ing</span> for Genuine Connections
           </motion.h2>
           
           <motion.p 
             variants={fadeInUp}
-            className="text-lg text-gray-400 max-w-2xl mx-auto"
+            className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-sm p-2 rounded-lg bg-gray-900/30"
           >
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
         </motion.div>
-        
-        {/* Neural Network Visualization */}
-        <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gradient-to-b from-black to-gray-900 shadow-xl">
-          <canvas 
-            ref={canvasRef} 
-            className="w-full h-full cursor-pointer"
-            title="Move your cursor to interact with the neural network"
-          ></canvas>
-          
-          {/* Network labels */}
-          <div className="absolute top-4 left-4 flex items-center gap-2 text-white/60 text-sm font-medium bg-black/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
-            <ZapIcon className="w-4 h-4" />
-            <span>Interactive Neural Network</span>
-          </div>
-          
-          {/* Instruction overlay */}
-          <div className="absolute bottom-4 right-4 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/60 text-sm">
-            <span>Move your cursor over the network to interact</span>
-          </div>
-        </div>
         
         {/* Feature cards */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -73,13 +69,13 @@ const NeuralNetwork = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
+            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
           >
             <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
               <Brain className="w-6 h-6 text-pulse-purple" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Smart Analysis</h3>
-            <p className="text-gray-400">Our neural network analyzes thousands of data points to understand your unique preferences.</p>
+            <p className="text-gray-300">Our neural network analyzes thousands of data points to understand your unique preferences.</p>
           </motion.div>
           
           <motion.div 
@@ -87,7 +83,7 @@ const NeuralNetwork = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             viewport={{ once: true }}
-            className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
+            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
           >
             <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-pulse-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,7 +91,7 @@ const NeuralNetwork = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Meaningful Matches</h3>
-            <p className="text-gray-400">We prioritize quality over quantity, focusing on deep connections rather than endless swiping.</p>
+            <p className="text-gray-300">We prioritize quality over quantity, focusing on deep connections rather than endless swiping.</p>
           </motion.div>
           
           <motion.div 
@@ -103,13 +99,13 @@ const NeuralNetwork = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             viewport={{ once: true }}
-            className="bg-gray-900/50 p-6 rounded-xl border border-gray-800"
+            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
           >
             <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
               <Heart className="w-6 h-6 text-pulse-purple" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Continuous Learning</h3>
-            <p className="text-gray-400">Our algorithm evolves with your feedback, getting better at finding your perfect matches over time.</p>
+            <p className="text-gray-300">Our algorithm evolves with your feedback, getting better at finding your perfect matches over time.</p>
           </motion.div>
         </div>
       </div>
