@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ChevronRight, Download, Smartphone } from "lucide-react";
 const Hero = () => {
@@ -29,7 +30,7 @@ const Hero = () => {
           </div>
           
           <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6">
-            Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
+            Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships <span className="pulse-gradient-text">in Your City</span>
           </h1>
           
           <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
