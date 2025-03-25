@@ -1,7 +1,6 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Brain, Download } from "lucide-react";
+import { Brain } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 import { Button } from "@/components/ui/button";
 
@@ -55,12 +54,11 @@ const NeuralNetwork = () => {
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
           
-          {/* Updated CTA Button to match header style */}
+          {/* New CTA Button */}
           <motion.div variants={fadeInUp} className="mt-6">
-            <a href="#download" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium inline-flex justify-center">
-              <Download size={18} />
-              <span>Meet Your Crew</span>
-            </a>
+            <Button size="lg" className="bg-pulse-purple hover:bg-pulse-purple/90 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+              Meet your new friends
+            </Button>
           </motion.div>
         </motion.div>
       </div>
