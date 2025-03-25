@@ -1,3 +1,4 @@
+
 // Neural network animation utilities
 import { useEffect, useRef } from 'react';
 
@@ -28,20 +29,21 @@ const MOUSE_INFLUENCE_RADIUS = 150; // How far the mouse influence reaches
 const MOUSE_REPEL_STRENGTH = 0.8; // How strongly dots move away from cursor
 const RETURN_SPEED = 0.05; // How quickly dots return to original position
 
-// Colors for each cluster
+// Colors for each cluster - added a new color for the central cluster
 const CLUSTER_COLORS = [
   'rgba(139, 92, 246, 0.8)',  // Purple
   'rgba(249, 115, 22, 0.8)',  // Orange
   'rgba(16, 185, 129, 0.8)',  // Green
-  'rgba(59, 130, 246, 0.8)'   // Blue
+  'rgba(59, 130, 246, 0.8)',  // Blue
+  'rgba(236, 72, 153, 0.8)'   // Pink (for central cluster)
 ];
 
 // Initialize neural network dots in a non-overlapping grid pattern
 export function initializeNetwork(
   width: number, 
   height: number, 
-  totalDots: number = 120, // Increased dot count for better coverage
-  clusters: number = 4
+  totalDots: number = 150, // Increased dot count for 5 clusters
+  clusters: number = 5     // Updated to 5 clusters
 ): { dots: DotCluster[], connections: Connection[] } {
   const dotsPerCluster = Math.floor(totalDots / clusters);
   const dots: DotCluster[] = [];
@@ -49,13 +51,26 @@ export function initializeNetwork(
   
   // Create clusters
   for (let c = 0; c < clusters; c++) {
-    // Define cluster center positions distributed across the canvas
-    // Spread clusters to cover more of the canvas
-    const clusterCenterX = width * (0.2 + 0.6 * (c % 2));
-    const clusterCenterY = height * (0.2 + 0.6 * Math.floor(c / 2));
-    const clusterRadius = Math.min(width, height) * 0.25; // Increased radius
+    // Define cluster positions - with the 5th cluster in the center
+    let clusterCenterX, clusterCenterY;
     
-    // Create dots for this cluster using a spiral pattern for better distribution
+    if (c === 4) { // Central cluster (5th cluster)
+      clusterCenterX = width * 0.5;
+      clusterCenterY = height * 0.5;
+    } else {
+      // Position the 4 outer clusters in a square formation
+      const angle = (c * Math.PI / 2) + (Math.PI / 4); // Positions at 45°, 135°, 225°, 315°
+      const distance = Math.min(width, height) * 0.28; // Distance from center
+      clusterCenterX = width * 0.5 + Math.cos(angle) * distance;
+      clusterCenterY = height * 0.5 + Math.sin(angle) * distance;
+    }
+    
+    // Calculate cluster radius
+    const clusterRadius = c === 4 
+      ? Math.min(width, height) * 0.18  // Smaller radius for central cluster
+      : Math.min(width, height) * 0.22; // Radius for outer clusters
+    
+    // Create dots for this cluster
     const clusterColor = CLUSTER_COLORS[c];
     
     for (let i = 0; i < dotsPerCluster; i++) {
@@ -68,7 +83,7 @@ export function initializeNetwork(
       const x = clusterCenterX + Math.cos(angle) * distance + (Math.random() - 0.5) * 10;
       const y = clusterCenterY + Math.sin(angle) * distance + (Math.random() - 0.5) * 10;
       
-      // Create the dot with larger size
+      // Create the dot
       dots.push({
         id: c * dotsPerCluster + i,
         x,
@@ -127,11 +142,14 @@ export function initializeNetwork(
     }
   }
   
-  // Create more connections between clusters
+  // Create more connections between clusters with special focus on the central cluster
   for (let c1 = 0; c1 < clusters; c1++) {
     for (let c2 = c1 + 1; c2 < clusters; c2++) {
-      // Add 5-8 connections between each pair of clusters (increased)
-      const interConnections = 5 + Math.floor(Math.random() * 4);
+      // Add more connections if one of the clusters is the central one (cluster index 4)
+      const isConnectionWithCentral = c1 === 4 || c2 === 4;
+      const interConnections = isConnectionWithCentral
+        ? 8 + Math.floor(Math.random() * 4) // More connections to central cluster
+        : 5 + Math.floor(Math.random() * 4); // Regular connections
       
       for (let i = 0; i < interConnections; i++) {
         const fromIndex = c1 * dotsPerCluster + Math.floor(Math.random() * dotsPerCluster);
@@ -141,7 +159,9 @@ export function initializeNetwork(
           connections.push({
             from: fromIndex,
             to: toIndex,
-            strength: 0.3 + Math.random() * 0.3, // Stronger connections between clusters
+            strength: isConnectionWithCentral 
+              ? 0.5 + Math.random() * 0.3 // Stronger connections to central cluster
+              : 0.3 + Math.random() * 0.3,
             type: 'inter'
           });
         }
@@ -149,8 +169,8 @@ export function initializeNetwork(
     }
   }
   
-  // Add some random dots to fill in empty spaces
-  const extraDots = 20; // Additional random dots
+  // Add some random dots to fill in empty spaces - fewer as we now have 5 clusters
+  const extraDots = 15; // Additional random dots
   for (let i = 0; i < extraDots; i++) {
     const randomCluster = Math.floor(Math.random() * clusters);
     const x = Math.random() * width;

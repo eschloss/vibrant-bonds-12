@@ -1,12 +1,11 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Brain, Heart, ZapIcon } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 
 // Configuration for neural network visualization
-const TOTAL_DOTS = 120; // Increased for better coverage
-const CLUSTERS = 4;
+const TOTAL_DOTS = 150; // Increased for better coverage with 5 clusters
+const CLUSTERS = 5; // Updated to 5 clusters
 
 const NeuralNetwork = () => {
   // Use our custom hook for the neural network animation
