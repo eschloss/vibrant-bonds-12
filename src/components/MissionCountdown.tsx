@@ -122,12 +122,12 @@ const MissionCountdown = () => {
           </div>
           
           <h2 className="heading-lg mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300">
-            Plan Your <span className="font-bold">First Meetup</span>
+            <span className="font-bold">Meet in Real Life</span> — 24h Countdown!
           </h2>
           
           <p className="paragraph text-white/80 max-w-2xl mx-auto">
-            Every Pulse group has one mission: to organize an in-person gathering within 7 days.
-            This creates momentum and transforms digital connections into real friendships.
+            Your Pulse group's mission: transform digital connections into real friendships by meeting in person. 
+            Share an experience tailored to your group's unique interests — but hurry, you only have 7 days total to make it happen!
           </p>
         </div>
 
@@ -253,8 +253,8 @@ const MissionCountdown = () => {
                     <Calendar className="w-6 h-6 text-pulse-pink" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Suggest a Meetup Idea</h4>
-                    <p className="text-gray-300">Share activity ideas that match your group's interests and vote on the best options.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">Suggest Perfect Activities</h4>
+                    <p className="text-gray-300">Share activity ideas tailored to your group's shared interests and vote on favorites.</p>
                   </div>
                 </div>
                 
@@ -263,8 +263,8 @@ const MissionCountdown = () => {
                     <Users className="w-6 h-6 text-pulse-blue" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Everyone Participates</h4>
-                    <p className="text-gray-300">The 7-day deadline ensures all group members are committed to making real connections.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">Forge Real Connections</h4>
+                    <p className="text-gray-300">Meeting in person creates meaningful friendships that last beyond the digital space.</p>
                   </div>
                 </div>
                 
@@ -273,8 +273,8 @@ const MissionCountdown = () => {
                     <AlertTriangle className="w-6 h-6 text-pulse-purple" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Stakes Create Success</h4>
-                    <p className="text-gray-300">Our data shows the 7-day deadline leads to 83% more successful in-person connections.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">83% Success Rate</h4>
+                    <p className="text-gray-300">Groups that meet within 7 days are 5x more likely to become lasting friend circles.</p>
                   </div>
                 </div>
               </div>
