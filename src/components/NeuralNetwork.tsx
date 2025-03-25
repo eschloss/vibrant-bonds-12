@@ -7,7 +7,8 @@ import { Badge } from "@/components/ui/badge";
 // Configuration for neural network visualization
 const TOTAL_DOTS = 100;
 const CLUSTERS = 4;
-const DOTS_PER_CLUSTER = TOTAL_DOTS / CLUSTERS;
+const DOTS_PER_CLUSTER = Math.floor(TOTAL_DOTS / CLUSTERS); // 25 dots per cluster
+
 const CLUSTER_COLORS = [
   { main: "rgba(139, 92, 246, 0.8)", light: "rgba(139, 92, 246, 0.3)" }, // Purple
   { main: "rgba(249, 115, 22, 0.8)", light: "rgba(249, 115, 22, 0.3)" },  // Orange
@@ -43,12 +44,17 @@ const NeuralNetwork = () => {
       const clusterCenterY = height * (0.25 + 0.5 * Math.floor(clusterIndex / 2));
       const clusterRadius = Math.min(width, height) * 0.15;
       
+      // Create a grid within each cluster to ensure dots don't overlap
       for (let i = 0; i < DOTS_PER_CLUSTER; i++) {
-        // Create dots in a circular pattern around cluster center
-        const angle = (i / DOTS_PER_CLUSTER) * Math.PI * 2;
-        const distance = Math.random() * clusterRadius;
-        const x = clusterCenterX + Math.cos(angle) * distance;
-        const y = clusterCenterY + Math.sin(angle) * distance;
+        // Use a more structured approach to position dots within cluster
+        // This creates a spiral pattern to maximize spacing
+        const angle = (i / DOTS_PER_CLUSTER) * Math.PI * 6; // Multiple rotations for spiral
+        const radiusRatio = Math.sqrt(i / DOTS_PER_CLUSTER); // Square root for more even distribution
+        const distance = radiusRatio * clusterRadius;
+        
+        // Calculate position with some randomness but prevent overlap
+        const x = clusterCenterX + Math.cos(angle) * distance + (Math.random() - 0.5) * 5;
+        const y = clusterCenterY + Math.sin(angle) * distance + (Math.random() - 0.5) * 5;
         
         newDots.push({
           id: clusterIndex * DOTS_PER_CLUSTER + i,
@@ -59,7 +65,7 @@ const NeuralNetwork = () => {
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
           cluster: clusterIndex,
-          size: 3 + Math.random() * 3,
+          size: 2 + Math.random() * 2, // Smaller dots to reduce overlap
           pulseFactor: 0.8 + Math.random() * 0.4
         });
       }
@@ -70,35 +76,52 @@ const NeuralNetwork = () => {
     
     // First, connect dots within the same cluster
     for (let i = 0; i < newDots.length; i++) {
-      for (let j = i + 1; j < newDots.length; j++) {
-        const dotA = newDots[i];
-        const dotB = newDots[j];
-        
-        // Connect dots in the same cluster
-        if (dotA.cluster === dotB.cluster) {
-          // Calculate distance between dots to determine connection strength
-          const dx = dotA.x - dotB.x;
-          const dy = dotA.y - dotB.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+      // Connect to some nearby dots in the same cluster (not all, to avoid too many connections)
+      const dotA = newDots[i];
+      const clusterDotsStart = Math.floor(dotA.id / DOTS_PER_CLUSTER) * DOTS_PER_CLUSTER;
+      const clusterDotsEnd = clusterDotsStart + DOTS_PER_CLUSTER;
+      
+      // Connect to up to 5 random dots in the same cluster
+      const connectionsCount = 2 + Math.floor(Math.random() * 3);
+      const connectedDots = new Set();
+      
+      for (let c = 0; c < connectionsCount; c++) {
+        // Find a random dot in the same cluster that's not already connected
+        let attempts = 0;
+        while (attempts < 10) { // Limit attempts to avoid infinite loop
+          const randomIndex = clusterDotsStart + Math.floor(Math.random() * DOTS_PER_CLUSTER);
           
-          // Only connect dots that are close to each other
-          if (distance < Math.min(width, height) * 0.1) {
-            newConnections.push({
-              from: i,
-              to: j,
-              strength: 1 - (distance / (Math.min(width, height) * 0.1)),
-              type: "intra-cluster" // Connection within the same cluster
-            });
+          if (randomIndex !== i && !connectedDots.has(randomIndex)) {
+            const dotB = newDots[randomIndex];
+            
+            // Calculate distance
+            const dx = dotA.x - dotB.x;
+            const dy = dotA.y - dotB.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Only connect if they're reasonably close
+            if (distance < clusterRadius * 0.5) {
+              newConnections.push({
+                from: i,
+                to: randomIndex,
+                strength: 1 - (distance / (clusterRadius * 0.5)),
+                type: "intra-cluster" // Connection within the same cluster
+              });
+              
+              connectedDots.add(randomIndex);
+              break;
+            }
           }
+          attempts++;
         }
       }
     }
     
-    // Add some inter-cluster connections (fewer, to show distinction)
+    // Add some inter-cluster connections
     for (let c1 = 0; c1 < CLUSTERS; c1++) {
       for (let c2 = c1 + 1; c2 < CLUSTERS; c2++) {
         // Add a few connections between each pair of clusters
-        const connectionsCount = 3 + Math.floor(Math.random() * 4); // 3-6 connections
+        const connectionsCount = 5 + Math.floor(Math.random() * 5); // 5-9 connections between clusters
         
         for (let i = 0; i < connectionsCount; i++) {
           const dotAIndex = c1 * DOTS_PER_CLUSTER + Math.floor(Math.random() * DOTS_PER_CLUSTER);
@@ -107,7 +130,7 @@ const NeuralNetwork = () => {
           newConnections.push({
             from: dotAIndex,
             to: dotBIndex,
-            strength: 0.3 + Math.random() * 0.3, // Weaker connections between clusters
+            strength: 0.2 + Math.random() * 0.3, // Weaker connections between clusters
             type: "inter-cluster" // Connection between different clusters
           });
         }
@@ -329,3 +352,4 @@ const NeuralNetwork = () => {
 };
 
 export default NeuralNetwork;
+
