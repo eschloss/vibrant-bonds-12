@@ -36,7 +36,7 @@ const Hero = () => {
               </div>
               
               <h1 className="heading-xl">
-                <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
+                Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
               </h1>
               
               <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-md">
