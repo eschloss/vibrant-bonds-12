@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Brain, Heart } from "lucide-react";
@@ -80,6 +79,7 @@ const NeuralNetwork = () => {
       const dotA = newDots[i];
       const clusterDotsStart = Math.floor(dotA.id / DOTS_PER_CLUSTER) * DOTS_PER_CLUSTER;
       const clusterDotsEnd = clusterDotsStart + DOTS_PER_CLUSTER;
+      const currentClusterRadius = Math.min(width, height) * 0.15; // Define clusterRadius for this scope
       
       // Connect to up to 5 random dots in the same cluster
       const connectionsCount = 2 + Math.floor(Math.random() * 3);
@@ -100,11 +100,11 @@ const NeuralNetwork = () => {
             const distance = Math.sqrt(dx * dx + dy * dy);
             
             // Only connect if they're reasonably close
-            if (distance < clusterRadius * 0.5) {
+            if (distance < currentClusterRadius * 0.5) {
               newConnections.push({
                 from: i,
                 to: randomIndex,
-                strength: 1 - (distance / (clusterRadius * 0.5)),
+                strength: 1 - (distance / (currentClusterRadius * 0.5)),
                 type: "intra-cluster" // Connection within the same cluster
               });
               
@@ -162,7 +162,7 @@ const NeuralNetwork = () => {
         // Recalculate the base position for each dot based on its cluster
         const clusterCenterX = width * (0.25 + 0.5 * (dot.cluster % 2));
         const clusterCenterY = height * (0.25 + 0.5 * Math.floor(dot.cluster / 2));
-        const clusterRadius = Math.min(width, height) * 0.15;
+        const clusterRadius = Math.min(width, height) * 0.15; // Define clusterRadius in this scope
         
         // Get the angle and distance from the dot's current position to its cluster center
         const angle = Math.atan2(dot.y - dot.baseY, dot.x - dot.baseX);
@@ -352,4 +352,3 @@ const NeuralNetwork = () => {
 };
 
 export default NeuralNetwork;
-
