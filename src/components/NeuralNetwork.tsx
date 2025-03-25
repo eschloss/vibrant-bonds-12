@@ -1,7 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Brain, Heart, ZapIcon } from "lucide-react";
+import { Brain } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 
 // Configuration for neural network visualization
@@ -40,7 +40,7 @@ const NeuralNetwork = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-10 md:mb-16"
+          className="text-center"
         >
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
             <Brain className="w-4 h-4 text-pulse-purple" />
@@ -61,53 +61,6 @@ const NeuralNetwork = () => {
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
         </motion.div>
-        
-        {/* Feature cards */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
-          >
-            <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
-              <Brain className="w-6 h-6 text-pulse-purple" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Smart Analysis</h3>
-            <p className="text-gray-300">Our neural network analyzes thousands of data points to understand your unique preferences.</p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            viewport={{ once: true }}
-            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
-          >
-            <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-pulse-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Meaningful Matches</h3>
-            <p className="text-gray-300">We prioritize quality over quantity, focusing on deep connections rather than endless swiping.</p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            viewport={{ once: true }}
-            className="bg-gray-900/70 backdrop-blur-md p-6 rounded-xl border border-gray-800"
-          >
-            <div className="w-12 h-12 bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
-              <Heart className="w-6 h-6 text-pulse-purple" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Continuous Learning</h3>
-            <p className="text-gray-300">Our algorithm evolves with your feedback, getting better at finding your perfect matches over time.</p>
-          </motion.div>
-        </div>
       </div>
     </div>
   );
