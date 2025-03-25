@@ -5,68 +5,46 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MissionCountdown = () => {
-  // State for the timer countdown
+  // State for the timer countdown - starting at 24 hours remaining
   const [timeLeft, setTimeLeft] = useState({
-    days: 6,
-    hours: 23,
-    minutes: 59,
-    seconds: 59
+    days: 1,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
   
-  // State to track if we're in warning mode (24 hours or less)
-  const [isWarning, setIsWarning] = useState(false);
+  // State to track if we're in warning mode (always true from the start now)
+  const [isWarning, setIsWarning] = useState(true);
   
-  // State to control the initial animation
-  const [showQuickCountdown, setShowQuickCountdown] = useState(true);
-  const [quickCountdownComplete, setQuickCountdownComplete] = useState(false);
+  // State to show the initial animation of time passing
+  const [showInitialAnimation, setShowInitialAnimation] = useState(true);
+  const [animationComplete, setAnimationComplete] = useState(false);
+  
+  // Initial total days reference
+  const [totalDaysShown, setTotalDaysShown] = useState(7);
   
   // Animation timeouts
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to handle the quick countdown animation at the beginning
+  // Function to handle the initial animation showing the progression from 7 days to 1 day
   useEffect(() => {
-    if (showQuickCountdown) {
-      // Start with 7 days and quickly count down to ~5 days
-      let tempDays = 6;
-      let tempHours = 23;
-      let tempMinutes = 59;
-      let tempSeconds = 59;
+    if (showInitialAnimation) {
+      // Start with showing 7 days total and quickly count down to 24 hours
+      setTotalDaysShown(7);
       
-      // Create a quick animation that shows the timer counting down rapidly
       animationTimeoutRef.current = setTimeout(() => {
         const quickInterval = setInterval(() => {
-          tempSeconds -= 15;
-          
-          if (tempSeconds < 0) {
-            tempSeconds = 45;
-            tempMinutes -= 1;
-            
-            if (tempMinutes < 0) {
-              tempMinutes = 59;
-              tempHours -= 1;
-              
-              if (tempHours < 0) {
-                tempHours = 23;
-                tempDays -= 1;
-              }
+          setTotalDaysShown(prev => {
+            if (prev <= 1) {
+              clearInterval(quickInterval);
+              setShowInitialAnimation(false);
+              setAnimationComplete(true);
+              return 1;
             }
-          }
-          
-          setTimeLeft({
-            days: tempDays,
-            hours: tempHours,
-            minutes: tempMinutes,
-            seconds: tempSeconds
+            return prev - 0.5;
           });
-          
-          // Stop the quick animation after a few seconds
-          if (tempDays <= 5 && tempHours <= 12) {
-            clearInterval(quickInterval);
-            setShowQuickCountdown(false);
-            setQuickCountdownComplete(true);
-          }
-        }, 50); // Update very quickly for the animation effect
+        }, 300); // Quick visual countdown
         
         return () => clearInterval(quickInterval);
       }, 1000); // Start after 1 second
@@ -77,11 +55,11 @@ const MissionCountdown = () => {
         clearTimeout(animationTimeoutRef.current);
       }
     };
-  }, [showQuickCountdown]);
+  }, [showInitialAnimation]);
 
-  // Start the normal countdown after the quick animation finishes
+  // Start the normal countdown after the animation finishes
   useEffect(() => {
-    if (quickCountdownComplete) {
+    if (animationComplete) {
       countdownRef.current = setInterval(() => {
         setTimeLeft(prev => {
           let newSeconds = prev.seconds - 1;
@@ -104,11 +82,6 @@ const MissionCountdown = () => {
             }
           }
           
-          // Check if we've reached the 24-hour warning threshold
-          if (newDays === 1 && newHours === 0 && newMinutes === 0 && newSeconds === 0) {
-            setIsWarning(true);
-          }
-          
           return {
             days: newDays,
             hours: newHours,
@@ -116,7 +89,7 @@ const MissionCountdown = () => {
             seconds: newSeconds
           };
         });
-      }, 1000);
+      }, 1000); // Update every second for the countdown
     }
     
     return () => {
@@ -124,7 +97,7 @@ const MissionCountdown = () => {
         clearInterval(countdownRef.current);
       }
     };
-  }, [quickCountdownComplete]);
+  }, [animationComplete]);
 
   // Format time with leading zeros
   const formatTime = (value: number) => {
@@ -163,67 +136,96 @@ const MissionCountdown = () => {
             <div className="grid md:grid-cols-2 gap-10 items-center">
               {/* Left side: Timer and warning */}
               <div className="space-y-8">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <Timer size={28} className="text-pulse-coral" />
-                  <h3 className="text-xl md:text-2xl font-bold text-white">Mission Countdown</h3>
-                </div>
-                
-                <div className="flex justify-center md:justify-start gap-4">
-                  <div className="flex flex-col items-center">
-                    <motion.div 
-                      className={`text-4xl md:text-5xl font-bold ${isWarning ? 'text-pulse-coral' : 'text-white'}`}
-                      key={`days-${timeLeft.days}`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
+                {showInitialAnimation ? (
+                  <div className="flex flex-col items-center md:items-start">
+                    <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+                      <Timer size={28} className="text-pulse-coral" />
+                      <h3 className="text-xl md:text-2xl font-bold text-white">Mission Duration: 7 Days</h3>
+                    </div>
+                    
+                    <div className="w-full bg-gray-800/50 h-8 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-gradient-to-r from-pulse-coral to-pulse-pink"
+                        style={{ 
+                          width: `${((7 - totalDaysShown) / 7) * 100}%`,
+                          transition: "width 0.3s ease-out"
+                        }}
+                      />
+                    </div>
+                    
+                    <motion.p 
+                      className="mt-3 text-lg font-semibold text-white"
+                      animate={{ opacity: [0.7, 1, 0.7] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
                     >
-                      {formatTime(timeLeft.days)}
-                    </motion.div>
-                    <span className="text-white/60 text-sm mt-1">Days</span>
+                      {Math.ceil(totalDaysShown)} days remaining...
+                    </motion.p>
                   </div>
-                  <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
-                  <div className="flex flex-col items-center">
-                    <motion.div 
-                      className={`text-4xl md:text-5xl font-bold ${isWarning ? 'text-pulse-coral' : 'text-white'}`}
-                      key={`hours-${timeLeft.hours}`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {formatTime(timeLeft.hours)}
-                    </motion.div>
-                    <span className="text-white/60 text-sm mt-1">Hours</span>
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
-                  <div className="flex flex-col items-center">
-                    <motion.div 
-                      className={`text-4xl md:text-5xl font-bold ${isWarning ? 'text-pulse-coral' : 'text-white'}`}
-                      key={`minutes-${timeLeft.minutes}`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {formatTime(timeLeft.minutes)}
-                    </motion.div>
-                    <span className="text-white/60 text-sm mt-1">Mins</span>
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
-                  <div className="flex flex-col items-center">
-                    <motion.div 
-                      className={`text-4xl md:text-5xl font-bold ${isWarning ? 'text-pulse-coral' : 'text-white'}`}
-                      key={`seconds-${timeLeft.seconds}`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {formatTime(timeLeft.seconds)}
-                    </motion.div>
-                    <span className="text-white/60 text-sm mt-1">Secs</span>
-                  </div>
-                </div>
+                ) : (
+                  <>
+                    <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                      <Timer size={28} className="text-pulse-coral" />
+                      <h3 className="text-xl md:text-2xl font-bold text-white">Last 24 Hours!</h3>
+                    </div>
+                    
+                    <div className="flex justify-center md:justify-start gap-4">
+                      <div className="flex flex-col items-center">
+                        <motion.div 
+                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
+                          key={`days-${timeLeft.days}`}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {formatTime(timeLeft.days)}
+                        </motion.div>
+                        <span className="text-white/60 text-sm mt-1">Days</span>
+                      </div>
+                      <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
+                      <div className="flex flex-col items-center">
+                        <motion.div 
+                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
+                          key={`hours-${timeLeft.hours}`}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {formatTime(timeLeft.hours)}
+                        </motion.div>
+                        <span className="text-white/60 text-sm mt-1">Hours</span>
+                      </div>
+                      <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
+                      <div className="flex flex-col items-center">
+                        <motion.div 
+                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
+                          key={`minutes-${timeLeft.minutes}`}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {formatTime(timeLeft.minutes)}
+                        </motion.div>
+                        <span className="text-white/60 text-sm mt-1">Mins</span>
+                      </div>
+                      <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
+                      <div className="flex flex-col items-center">
+                        <motion.div 
+                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
+                          key={`seconds-${timeLeft.seconds}`}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {formatTime(timeLeft.seconds)}
+                        </motion.div>
+                        <span className="text-white/60 text-sm mt-1">Secs</span>
+                      </div>
+                    </div>
+                  </>
+                )}
                 
                 <AnimatePresence>
-                  {isWarning && (
+                  {isWarning && !showInitialAnimation && (
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
