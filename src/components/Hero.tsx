@@ -1,11 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { ChevronRight, Download, Smartphone } from "lucide-react";
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  
   useEffect(() => {
     setIsVisible(true);
   }, []);
+  
   return <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden section-padding">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
@@ -21,7 +24,7 @@ const Hero = () => {
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Hero Content */}
-          <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} md:order-1 order-2`}>
+          <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} md:order-1 order-2 w-full`}>
             <div className="flex flex-col gap-6 w-full">
               <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium border border-gray-200 w-fit">
                 <span className="relative flex h-3 w-3">
@@ -31,7 +34,7 @@ const Hero = () => {
                 Now in San Francisco, LA, and NYC
               </div>
               
-              <h1 className="heading-xl">
+              <h1 className="heading-xl w-full">
                 Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
               </h1>
               
@@ -71,4 +74,5 @@ const Hero = () => {
       </div>
     </section>;
 };
+
 export default Hero;
