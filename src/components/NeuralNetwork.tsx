@@ -1,6 +1,7 @@
+
 import React from "react";
 import { motion } from "framer-motion";
-import { Brain } from "lucide-react";
+import { Brain, ArrowRight } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 import { Button } from "@/components/ui/button";
 
@@ -54,10 +55,13 @@ const NeuralNetwork = () => {
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
           
-          {/* New CTA Button */}
+          {/* Updated CTA Button */}
           <motion.div variants={fadeInUp} className="mt-6">
-            <Button size="lg" className="bg-pulse-purple hover:bg-pulse-purple/90 text-white font-medium px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
-              Meet your new friends
+            <Button 
+              className="pulse-gradient-cta text-white font-medium px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm flex items-center gap-2"
+            >
+              <span>Meet Your Crew</span>
+              <ArrowRight className="ml-1" />
             </Button>
           </motion.div>
         </motion.div>

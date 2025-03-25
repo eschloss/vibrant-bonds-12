@@ -1,6 +1,7 @@
 
 import { useRef, useEffect, useState } from "react";
-import { Download, Smartphone } from "lucide-react";
+import { Download, Rocket, ChevronRight, ArrowRight, Smartphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const DownloadCTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -40,11 +41,12 @@ const DownloadCTA = () => {
       </div>
 
       <div className="container mx-auto">
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-radial from-pulse-purple/5 to-transparent opacity-80"></div>
-          
-          <div className="relative z-10">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* App Download Section */}
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-radial from-pulse-purple/5 to-transparent opacity-80"></div>
+            
+            <div className="relative z-10">
               <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
                 <h2 className="heading-lg mb-6">
                   Get Matched With <span className="pulse-gradient-text">Friends</span> in Your City
@@ -100,21 +102,65 @@ const DownloadCTA = () => {
                   </p>
                 </div>
               </div>
-              
-              <div className={`${isVisible ? 'animate-slide-down' : 'opacity-0'} flex justify-center md:justify-end`}>
-                <div className="relative max-w-xs">
-                  <div className="absolute inset-0 bg-gradient-cta opacity-20 rounded-3xl blur-3xl transform scale-95"></div>
-                  <div className="relative z-10 bg-white p-4 rounded-3xl shadow-xl border border-gray-100">
-                    <div className="aspect-[9/16] w-full bg-gradient-blue rounded-2xl overflow-hidden relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Smartphone size={120} className="text-white/20" />
-                        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center w-full px-6">
-                          <h3 className="text-white font-bold text-xl mb-2">Find Your People</h3>
-                          <p className="text-white/80 text-sm">Pulse connects you with friends who share your interests</p>
-                        </div>
-                      </div>
-                    </div>
+            </div>
+          </div>
+
+          {/* Start Mission Section */}
+          <div className="bg-gradient-to-br from-gray-900 via-indigo-900/90 to-gray-900 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-800 relative overflow-hidden text-white">
+            <div className="absolute inset-0 overflow-hidden opacity-30">
+              <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-purple-500 rounded-full mix-blend-screen filter blur-[80px] animate-float"></div>
+              <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-blue-500 rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{
+                animationDelay: "2s"
+              }}></div>
+            </div>
+            
+            <div className="relative z-10">
+              <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
+                <div className="inline-block p-2 px-4 rounded-full bg-white/10 backdrop-blur-sm mb-4">
+                  <div className="flex items-center gap-2 text-white/90">
+                    <Rocket size={18} className="text-pulse-pink" />
+                    <span className="text-sm font-medium">Begin Your Journey</span>
                   </div>
+                </div>
+                
+                <h2 className="heading-lg mb-6">
+                  Start Your First <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue">Mission</span> Today
+                </h2>
+                
+                <p className="paragraph text-white/80 mb-8 max-w-md">
+                  Create or join a crew and meet awesome people in your city who share your interests and passions.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                    <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+                      <span className="text-xl font-bold text-pulse-purple">1</span>
+                    </div>
+                    <p className="text-white/90">Join a crew of 3-5 people in your city</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                    <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+                      <span className="text-xl font-bold text-pulse-purple">2</span>
+                    </div>
+                    <p className="text-white/90">Plan an activity together within 7 days</p>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                    <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+                      <span className="text-xl font-bold text-pulse-purple">3</span>
+                    </div>
+                    <p className="text-white/90">Meet in real life and have fun!</p>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <Button 
+                    className="pulse-gradient-cta text-white font-medium px-8 py-6 rounded-full shadow-lg hover:shadow-xl text-lg flex items-center gap-2"
+                  >
+                    <span>Find Your Crew</span>
+                    <ArrowRight className="ml-1" />
+                  </Button>
                 </div>
               </div>
             </div>
