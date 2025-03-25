@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import NeuralNetwork from "@/components/NeuralNetwork";
 import AiIcebreakers from "@/components/AiIcebreakers";
-import Testimonials from "@/components/Testimonials";
+import MissionCountdown from "@/components/MissionCountdown";
 import DownloadCTA from "@/components/DownloadCTA";
 import Footer from "@/components/Footer";
 
@@ -27,7 +27,7 @@ const Index = () => {
         <HowItWorks />
         <NeuralNetwork />
         <AiIcebreakers />
-        <Testimonials />
+        <MissionCountdown />
         <DownloadCTA />
       </main>
       
