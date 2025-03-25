@@ -1,7 +1,10 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Timer, AlertTriangle, Users, Calendar } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+
 const MissionCountdown = () => {
   // State for the timer countdown - starting at 24 hours remaining
   const [timeLeft, setTimeLeft] = useState({
@@ -121,11 +124,11 @@ const MissionCountdown = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-10 items-center">
-              {/* Left side: Timer and warning */}
+            <div className="flex flex-col gap-10">
+              {/* Countdown section - now full width */}
               <div className="space-y-8">
-                {showInitialAnimation ? <div className="flex flex-col items-center md:items-start">
-                    <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+                {showInitialAnimation ? <div className="flex flex-col items-center">
+                    <div className="flex items-center justify-center gap-3 mb-6">
                       <Timer size={28} className="text-pulse-coral" />
                       <h3 className="text-xl md:text-2xl font-bold text-white">Mission Duration: 7 Days</h3>
                     </div>
@@ -146,12 +149,12 @@ const MissionCountdown = () => {
                       {Math.ceil(totalDaysShown)} days remaining...
                     </motion.p>
                   </div> : <>
-                    <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                    <div className="flex items-center justify-center gap-3 mb-2">
                       <Timer size={28} className="text-pulse-coral" />
-                      <h3 className="text-xl md:text-2xl font-bold text-white">Last 24 Hours!</h3>
+                      <h3 className="text-xl md:text-2xl font-bold text-white">Time's Running Out — Connection at Risk!</h3>
                     </div>
                     
-                    <div className="flex justify-center md:justify-start gap-4">
+                    <div className="flex justify-center gap-4">
                       <div className="flex flex-col items-center">
                         <motion.div className="text-4xl md:text-5xl font-bold text-pulse-coral" key={`days-${timeLeft.days}`} initial={{
                       opacity: 0,
@@ -238,37 +241,49 @@ const MissionCountdown = () => {
                 </AnimatePresence>
               </div>
               
-              {/* Right side: Features and benefits */}
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-pink-500/20 p-3 rounded-lg shrink-0">
-                    <Calendar className="w-6 h-6 text-pulse-pink" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Curated Suggestions</h4>
-                    <p className="text-gray-300">We suggest activities based on the city and the group interests</p>
-                  </div>
-                </div>
+              {/* Features cards - now full width and in a grid */}
+              <div className="grid md:grid-cols-3 gap-4">
+                <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-pink-500/20 p-3 rounded-lg shrink-0">
+                        <Calendar className="w-6 h-6 text-pulse-pink" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-white mb-2">Curated Suggestions</h4>
+                        <p className="text-gray-300">We suggest activities based on the city and the group interests</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
                 
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-500/20 p-3 rounded-lg shrink-0">
-                    <Users className="w-6 h-6 text-pulse-blue" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Just show up</h4>
-                    <p className="text-gray-300">All you have to do is show up with a positive attitude and open mind</p>
-                  </div>
-                </div>
+                <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-blue-500/20 p-3 rounded-lg shrink-0">
+                        <Users className="w-6 h-6 text-pulse-blue" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-white mb-2">Just show up</h4>
+                        <p className="text-gray-300">All you have to do is show up with a positive attitude and open mind</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
                 
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-500/20 p-3 rounded-lg shrink-0">
-                    <AlertTriangle className="w-6 h-6 text-pulse-purple" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Repeat Mission</h4>
-                    <p className="text-gray-300">Each crew can vote on whether they want to repeat the mission and meet again</p>
-                  </div>
-                </div>
+                <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-purple-500/20 p-3 rounded-lg shrink-0">
+                        <AlertTriangle className="w-6 h-6 text-pulse-purple" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-white mb-2">Repeat Mission</h4>
+                        <p className="text-gray-300">Each crew can vote on whether they want to repeat the mission and meet again</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
