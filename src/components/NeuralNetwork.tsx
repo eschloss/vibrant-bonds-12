@@ -1,63 +1,24 @@
-import React, { useEffect, useRef } from "react";
+
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Brain, Heart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// Define user profiles with interests for the visualization
-const profiles = [
-  {
-    id: 1,
-    name: "Alex",
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=faces",
-    initials: "AJ",
-    interests: ["Dogs", "Hiking", "Photography"],
-    cluster: 1,
-  },
-  {
-    id: 2,
-    name: "Taylor",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=faces",
-    initials: "TS",
-    interests: ["Cats", "Reading", "Coffee"],
-    cluster: 2,
-  },
-  {
-    id: 3,
-    name: "Jordan",
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=faces",
-    initials: "JK",
-    interests: ["Dogs", "Hiking", "Travel"],
-    cluster: 1,
-  },
-  {
-    id: 4,
-    name: "Morgan",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
-    initials: "MR",
-    interests: ["Cats", "Music", "Coffee"],
-    cluster: 2,
-  },
-  {
-    id: 5,
-    name: "Casey",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces",
-    initials: "CL",
-    interests: ["Dogs", "Photography", "Hiking"],
-    cluster: 1,
-  },
-  {
-    id: 6,
-    name: "Riley",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces",
-    initials: "RB",
-    interests: ["Cats", "Art", "Reading"],
-    cluster: 2,
-  },
+// Configuration for neural network visualization
+const TOTAL_DOTS = 100;
+const CLUSTERS = 4;
+const DOTS_PER_CLUSTER = TOTAL_DOTS / CLUSTERS;
+const CLUSTER_COLORS = [
+  { main: "rgba(139, 92, 246, 0.8)", light: "rgba(139, 92, 246, 0.3)" }, // Purple
+  { main: "rgba(249, 115, 22, 0.8)", light: "rgba(249, 115, 22, 0.3)" },  // Orange
+  { main: "rgba(16, 185, 129, 0.8)", light: "rgba(16, 185, 129, 0.3)" },  // Green
+  { main: "rgba(59, 130, 246, 0.8)", light: "rgba(59, 130, 246, 0.3)" },  // Blue
 ];
 
 const NeuralNetwork = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [dots, setDots] = useState<any[]>([]);
+  const [connections, setConnections] = useState<any[]>([]);
   
   // Animation properties
   const fadeInUp = {
@@ -65,10 +26,102 @@ const NeuralNetwork = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
   };
   
+  // Generate nodes and connections for network visualization
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const canvas = canvasRef.current;
+    const width = canvas.width = canvas.clientWidth;
+    const height = canvas.height = canvas.clientHeight;
+    
+    // Create clusters of dots
+    const newDots = [];
+    
+    for (let clusterIndex = 0; clusterIndex < CLUSTERS; clusterIndex++) {
+      // Define cluster center positions distributed across the canvas
+      const clusterCenterX = width * (0.25 + 0.5 * (clusterIndex % 2));
+      const clusterCenterY = height * (0.25 + 0.5 * Math.floor(clusterIndex / 2));
+      const clusterRadius = Math.min(width, height) * 0.15;
+      
+      for (let i = 0; i < DOTS_PER_CLUSTER; i++) {
+        // Create dots in a circular pattern around cluster center
+        const angle = (i / DOTS_PER_CLUSTER) * Math.PI * 2;
+        const distance = Math.random() * clusterRadius;
+        const x = clusterCenterX + Math.cos(angle) * distance;
+        const y = clusterCenterY + Math.sin(angle) * distance;
+        
+        newDots.push({
+          id: clusterIndex * DOTS_PER_CLUSTER + i,
+          x,
+          y,
+          baseX: x,
+          baseY: y,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          cluster: clusterIndex,
+          size: 3 + Math.random() * 3,
+          pulseFactor: 0.8 + Math.random() * 0.4
+        });
+      }
+    }
+    
+    // Create connections between dots
+    const newConnections = [];
+    
+    // First, connect dots within the same cluster
+    for (let i = 0; i < newDots.length; i++) {
+      for (let j = i + 1; j < newDots.length; j++) {
+        const dotA = newDots[i];
+        const dotB = newDots[j];
+        
+        // Connect dots in the same cluster
+        if (dotA.cluster === dotB.cluster) {
+          // Calculate distance between dots to determine connection strength
+          const dx = dotA.x - dotB.x;
+          const dy = dotA.y - dotB.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Only connect dots that are close to each other
+          if (distance < Math.min(width, height) * 0.1) {
+            newConnections.push({
+              from: i,
+              to: j,
+              strength: 1 - (distance / (Math.min(width, height) * 0.1)),
+              type: "intra-cluster" // Connection within the same cluster
+            });
+          }
+        }
+      }
+    }
+    
+    // Add some inter-cluster connections (fewer, to show distinction)
+    for (let c1 = 0; c1 < CLUSTERS; c1++) {
+      for (let c2 = c1 + 1; c2 < CLUSTERS; c2++) {
+        // Add a few connections between each pair of clusters
+        const connectionsCount = 3 + Math.floor(Math.random() * 4); // 3-6 connections
+        
+        for (let i = 0; i < connectionsCount; i++) {
+          const dotAIndex = c1 * DOTS_PER_CLUSTER + Math.floor(Math.random() * DOTS_PER_CLUSTER);
+          const dotBIndex = c2 * DOTS_PER_CLUSTER + Math.floor(Math.random() * DOTS_PER_CLUSTER);
+          
+          newConnections.push({
+            from: dotAIndex,
+            to: dotBIndex,
+            strength: 0.3 + Math.random() * 0.3, // Weaker connections between clusters
+            type: "inter-cluster" // Connection between different clusters
+          });
+        }
+      }
+    }
+    
+    setDots(newDots);
+    setConnections(newConnections);
+  }, []);
+  
   // Canvas animation for neural network visualization
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || dots.length === 0) return;
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -77,49 +130,41 @@ const NeuralNetwork = () => {
     const resizeCanvas = () => {
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
+      
+      // Reposition dots when canvas resizes
+      const width = canvas.width;
+      const height = canvas.height;
+      
+      setDots(prevDots => prevDots.map(dot => {
+        // Recalculate the base position for each dot based on its cluster
+        const clusterCenterX = width * (0.25 + 0.5 * (dot.cluster % 2));
+        const clusterCenterY = height * (0.25 + 0.5 * Math.floor(dot.cluster / 2));
+        const clusterRadius = Math.min(width, height) * 0.15;
+        
+        // Get the angle and distance from the dot's current position to its cluster center
+        const angle = Math.atan2(dot.y - dot.baseY, dot.x - dot.baseX);
+        const normalizedDistance = Math.sqrt(
+          Math.pow((dot.x - dot.baseX) / canvas.width, 2) + 
+          Math.pow((dot.y - dot.baseY) / canvas.height, 2)
+        );
+        
+        const newBaseX = clusterCenterX + Math.cos(angle) * clusterRadius * normalizedDistance * 10;
+        const newBaseY = clusterCenterY + Math.sin(angle) * clusterRadius * normalizedDistance * 10;
+        
+        return {
+          ...dot,
+          baseX: newBaseX,
+          baseY: newBaseY,
+          x: newBaseX,
+          y: newBaseY
+        };
+      }));
     };
     
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    // Create node positions for profiles
-    const nodes = profiles.map((profile, index) => {
-      // Position nodes in clusters based on interests
-      const clusterOffset = profile.cluster === 1 
-        ? -canvas.width / 4
-        : canvas.width / 4;
-        
-      return {
-        id: profile.id,
-        x: canvas.width / 2 + clusterOffset + (Math.random() - 0.5) * 150,
-        y: canvas.height / 2 + (Math.random() - 0.5) * 150,
-        profile,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-      };
-    });
-    
-    // Create connections between profiles with similar interests
-    const connections: Array<{from: number, to: number, strength: number}> = [];
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const profileA = nodes[i].profile;
-        const profileB = nodes[j].profile;
-        
-        // Count shared interests
-        const sharedInterests = profileA.interests.filter(interest => 
-          profileB.interests.includes(interest)
-        ).length;
-        
-        if (sharedInterests > 0) {
-          connections.push({
-            from: i,
-            to: j,
-            strength: sharedInterests / 3, // Normalize strength (max 3 interests)
-          });
-        }
-      }
-    }
+    let animationFrameId: number;
     
     // Animation loop
     const animate = () => {
@@ -127,75 +172,75 @@ const NeuralNetwork = () => {
       
       // Draw connections
       connections.forEach(conn => {
-        const nodeA = nodes[conn.from];
-        const nodeB = nodes[conn.to];
+        const dotA = dots[conn.from];
+        const dotB = dots[conn.to];
+        
+        if (!dotA || !dotB) return;
         
         ctx.beginPath();
-        ctx.moveTo(nodeA.x, nodeA.y);
-        ctx.lineTo(nodeB.x, nodeB.y);
+        ctx.moveTo(dotA.x, dotA.y);
+        ctx.lineTo(dotB.x, dotB.y);
         
-        // Gradient based on strength and cluster
-        const gradient = ctx.createLinearGradient(nodeA.x, nodeA.y, nodeB.x, nodeB.y);
-        
-        if (nodeA.profile.cluster === nodeB.profile.cluster) {
-          // Same cluster - use purple gradient
-          gradient.addColorStop(0, `rgba(139, 92, 246, ${conn.strength * 0.7})`);
-          gradient.addColorStop(1, `rgba(147, 197, 253, ${conn.strength * 0.7})`);
+        // Style based on connection type
+        if (conn.type === "intra-cluster") {
+          // Connections within clusters
+          const clusterColor = CLUSTER_COLORS[dotA.cluster];
+          ctx.strokeStyle = `rgba(${clusterColor.main}, ${conn.strength * 0.7})`;
+          ctx.lineWidth = conn.strength * 1.5;
         } else {
-          // Different clusters - use orange gradient
-          gradient.addColorStop(0, `rgba(249, 115, 22, ${conn.strength * 0.4})`);
-          gradient.addColorStop(1, `rgba(253, 164, 175, ${conn.strength * 0.4})`);
+          // Connections between clusters
+          ctx.strokeStyle = `rgba(255, 255, 255, ${conn.strength * 0.25})`;
+          ctx.lineWidth = conn.strength * 0.8;
         }
         
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = conn.strength * 2;
         ctx.stroke();
       });
       
-      // Update node positions with gentle movement
-      nodes.forEach(node => {
-        node.x += node.vx;
-        node.y += node.vy;
+      // Update and draw dots
+      const time = Date.now() * 0.001;
+      
+      dots.forEach(dot => {
+        // Apply gentle movement to dots
+        dot.x += Math.sin(time * 1 + dot.id * 0.1) * 0.3;
+        dot.y += Math.cos(time * 1.3 + dot.id * 0.1) * 0.3;
         
-        // Bounce off walls
-        if (node.x < 50 || node.x > canvas.width - 50) {
-          node.vx *= -1;
-        }
-        if (node.y < 50 || node.y > canvas.height - 50) {
-          node.vy *= -1;
-        }
+        // Draw pulsing dot
+        const pulseSize = dot.size * (0.8 + Math.sin(time * 2 + dot.id * 0.3) * 0.2 * dot.pulseFactor);
         
-        // Draw pulsing circle behind avatar
-        ctx.beginPath();
-        const pulseSize = 40 + Math.sin(Date.now() * 0.003) * 5;
+        const clusterColor = CLUSTER_COLORS[dot.cluster];
         
+        // Create glowing effect
         const gradient = ctx.createRadialGradient(
-          node.x, node.y, 0,
-          node.x, node.y, pulseSize
+          dot.x, dot.y, 0,
+          dot.x, dot.y, pulseSize * 2
         );
         
-        if (node.profile.cluster === 1) {
-          gradient.addColorStop(0, 'rgba(139, 92, 246, 0.6)');
-          gradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
-        } else {
-          gradient.addColorStop(0, 'rgba(249, 115, 22, 0.6)');
-          gradient.addColorStop(1, 'rgba(249, 115, 22, 0)');
-        }
+        gradient.addColorStop(0, clusterColor.main);
+        gradient.addColorStop(0.5, clusterColor.light);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
+        ctx.beginPath();
         ctx.fillStyle = gradient;
-        ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, pulseSize * 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw solid dot center
+        ctx.beginPath();
+        ctx.fillStyle = clusterColor.main;
+        ctx.arc(dot.x, dot.y, pulseSize, 0, Math.PI * 2);
         ctx.fill();
       });
       
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
     
     animate();
     
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [dots, connections]);
   
   return (
     <div className="w-full overflow-hidden bg-gray-950 py-16 md:py-24">
@@ -226,61 +271,11 @@ const NeuralNetwork = () => {
           </motion.p>
         </motion.div>
         
-        <div className="relative w-full h-[500px] rounded-xl overflow-hidden">
+        <div className="relative w-full h-[500px] rounded-xl overflow-hidden bg-gradient-to-b from-black to-gray-900">
           <canvas 
             ref={canvasRef} 
-            className="w-full h-full bg-gradient-to-b from-black to-gray-900"
+            className="w-full h-full"
           ></canvas>
-          
-          {/* Overlay the avatars at the node positions */}
-          <div className="absolute inset-0 pointer-events-none">
-            {profiles.map((profile, index) => (
-              <motion.div 
-                key={profile.id}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  delay: index * 0.1,
-                  duration: 0.5,
-                  type: "spring",
-                  stiffness: 100 
-                }}
-                className="absolute"
-                style={{ 
-                  left: `calc(${profile.cluster === 1 ? '35%' : '65%'} + ${(Math.random() - 0.5) * 150}px)`, 
-                  top: `calc(50% + ${(Math.random() - 0.5) * 150}px)`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-              >
-                <div className="flex flex-col items-center">
-                  <div className={`mb-2 ring-2 ${profile.cluster === 1 ? 'ring-pulse-purple' : 'ring-pulse-coral'} ring-offset-2 ring-offset-gray-900`}>
-                    <Avatar className="h-16 w-16 border-2 border-background">
-                      <AvatarImage src={profile.image} alt={profile.name} />
-                      <AvatarFallback>{profile.initials}</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm font-medium text-white mb-1">{profile.name}</p>
-                    <div className="flex flex-wrap justify-center gap-1">
-                      {profile.interests.slice(0, 1).map(interest => (
-                        <Badge 
-                          key={interest} 
-                          variant="outline" 
-                          className={`text-xs ${
-                            profile.cluster === 1 
-                              ? 'bg-purple-950/50 text-purple-200 border-purple-800/50' 
-                              : 'bg-orange-950/50 text-orange-200 border-orange-800/50'
-                          }`}
-                        >
-                          {interest}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
         
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
