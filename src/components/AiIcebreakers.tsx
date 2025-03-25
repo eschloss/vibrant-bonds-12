@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, Sparkles } from "lucide-react";
+import { MessageSquare, Sparkles, Users, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -174,7 +174,7 @@ const AiIcebreakers = () => {
             className="lg:col-span-5 space-y-6"
           >
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-white">How Our Icebreakers Work</h3>
+              <h3 className="text-2xl font-bold text-white">Our Icebreaker Games</h3>
               
               <Card className="backdrop-blur-md bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 overflow-hidden">
                 <CardContent className="p-6">
@@ -183,8 +183,8 @@ const AiIcebreakers = () => {
                       <Sparkles className="w-6 h-6 text-pulse-purple" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Topic Discovery</h3>
-                      <p className="text-gray-300">Our AI asks engaging questions that reveal common interests among group members</p>
+                      <h3 className="text-xl font-bold text-white mb-2">Icebreaker Characters</h3>
+                      <p className="text-gray-300">Each game has a unique personality and theme to match different group dynamics and interests</p>
                     </div>
                   </div>
                 </CardContent>
@@ -194,11 +194,25 @@ const AiIcebreakers = () => {
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="bg-blue-500/20 p-3 rounded-lg">
-                      <MessageSquare className="w-6 h-6 text-pulse-blue" />
+                      <Users className="w-6 h-6 text-pulse-blue" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Conversation Flow</h3>
-                      <p className="text-gray-300">When conversation slows down, our AI jumps in with perfect timing to keep things flowing</p>
+                      <h3 className="text-xl font-bold text-white mb-2">AI for Context</h3>
+                      <p className="text-gray-300">Our AI analyzes the conversation, members' profiles, and interests to create perfectly tailored discussion topics</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-md bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-pink-500/20 p-3 rounded-lg">
+                      <Calendar className="w-6 h-6 text-pulse-pink" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Relevant Meetup Suggestions</h3>
+                      <p className="text-gray-300">We suggest plans, events, and experiences based on the group's shared interests to encourage real-life connections</p>
                     </div>
                   </div>
                 </CardContent>
