@@ -67,23 +67,23 @@ const DownloadCTA = () => {
                 Create or join a crew and meet awesome people in your city who share your interests and passions.
               </p>
               
-              <div className="grid md:grid-cols-3 gap-4 mb-8">
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
-                  <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="flex flex-col items-center text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                  <div className="bg-pulse-purple/20 p-3 rounded-lg mb-4">
                     <span className="text-xl font-bold text-pulse-purple">1</span>
                   </div>
                   <p className="text-white/90">Join a crew of 3-5 people in your city</p>
                 </div>
                 
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
-                  <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+                <div className="flex flex-col items-center text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                  <div className="bg-pulse-purple/20 p-3 rounded-lg mb-4">
                     <span className="text-xl font-bold text-pulse-purple">2</span>
                   </div>
                   <p className="text-white/90">Plan an activity together within 7 days</p>
                 </div>
                 
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-xl">
-                  <div className="bg-pulse-purple/20 p-3 rounded-lg shrink-0">
+                <div className="flex flex-col items-center text-center bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                  <div className="bg-pulse-purple/20 p-3 rounded-lg mb-4">
                     <span className="text-xl font-bold text-pulse-purple">3</span>
                   </div>
                   <p className="text-white/90">Meet in real life and have fun!</p>
