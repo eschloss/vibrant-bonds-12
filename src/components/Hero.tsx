@@ -37,7 +37,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <a href="#download" className="button-secondary flex items-center justify-center gap-2">
               <Download size={18} />
-              <span>Meet Your Group</span>
+              <span>Meet Your Crew</span>
             </a>
             
             <a href="#how-it-works" className="button-tertiary flex items-center justify-center gap-2">

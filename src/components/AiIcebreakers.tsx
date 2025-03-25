@@ -236,9 +236,7 @@ const AiIcebreakers = () => {
             }} transition={{
               duration: 0.2
             }} className="flex justify-center mt-8">
-                <Button size="lg" className="px-8 py-6 rounded-full text-lg pulse-gradient-cta">
-                  Check out all our Icebreaker Games
-                </Button>
+                <Button size="lg" className="px-8 py-6 rounded-full text-lg pulse-gradient-cta">Meet our Game Characters</Button>
               </motion.div>
             </div>
           </motion.div>

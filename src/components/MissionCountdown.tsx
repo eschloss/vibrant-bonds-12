@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Timer, AlertTriangle, Users, Calendar } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { motion, AnimatePresence } from "framer-motion";
-
 const MissionCountdown = () => {
   // State for the timer countdown - starting at 24 hours remaining
   const [timeLeft, setTimeLeft] = useState({
@@ -12,17 +10,17 @@ const MissionCountdown = () => {
     minutes: 0,
     seconds: 0
   });
-  
+
   // State to track if we're in warning mode (always true from the start now)
   const [isWarning, setIsWarning] = useState(true);
-  
+
   // State to show the initial animation of time passing
   const [showInitialAnimation, setShowInitialAnimation] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
-  
+
   // Initial total days reference
   const [totalDaysShown, setTotalDaysShown] = useState(7);
-  
+
   // Animation timeouts
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
@@ -32,7 +30,6 @@ const MissionCountdown = () => {
     if (showInitialAnimation) {
       // Start with showing 7 days total and quickly count down to 24 hours
       setTotalDaysShown(7);
-      
       animationTimeoutRef.current = setTimeout(() => {
         const quickInterval = setInterval(() => {
           setTotalDaysShown(prev => {
@@ -45,11 +42,10 @@ const MissionCountdown = () => {
             return prev - 0.5;
           });
         }, 300); // Quick visual countdown
-        
+
         return () => clearInterval(quickInterval);
       }, 1000); // Start after 1 second
     }
-    
     return () => {
       if (animationTimeoutRef.current) {
         clearTimeout(animationTimeoutRef.current);
@@ -66,22 +62,18 @@ const MissionCountdown = () => {
           let newMinutes = prev.minutes;
           let newHours = prev.hours;
           let newDays = prev.days;
-          
           if (newSeconds < 0) {
             newSeconds = 59;
             newMinutes -= 1;
-            
             if (newMinutes < 0) {
               newMinutes = 59;
               newHours -= 1;
-              
               if (newHours < 0) {
                 newHours = 23;
                 newDays -= 1;
               }
             }
           }
-          
           return {
             days: newDays,
             hours: newHours,
@@ -91,7 +83,6 @@ const MissionCountdown = () => {
         });
       }, 1000); // Update every second for the countdown
     }
-    
     return () => {
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
@@ -103,13 +94,13 @@ const MissionCountdown = () => {
   const formatTime = (value: number) => {
     return value.toString().padStart(2, '0');
   };
-
-  return (
-    <section className="section-padding bg-gradient-to-br from-gray-900/90 via-indigo-900/80 to-gray-900/90 relative overflow-hidden">
+  return <section className="section-padding bg-gradient-to-br from-gray-900/90 via-indigo-900/80 to-gray-900/90 relative overflow-hidden">
       {/* Animated gradient blobs */}
       <div className="absolute inset-0 overflow-hidden opacity-30">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-500 rounded-full mix-blend-screen filter blur-[80px] animate-float"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500 rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{ animationDelay: "2s" }}></div>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500 rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{
+        animationDelay: "2s"
+      }}></div>
       </div>
       
       <div className="container mx-auto relative z-10">
@@ -125,10 +116,7 @@ const MissionCountdown = () => {
             <span className="font-bold">Meet in Real Life</span> — 24h Countdown!
           </h2>
           
-          <p className="paragraph text-white/80 max-w-2xl mx-auto">
-            Your Pulse group's mission: transform digital connections into real friendships by meeting in person. 
-            Share an experience tailored to your group's unique interests — but hurry, you only have 7 days total to make it happen!
-          </p>
+          <p className="paragraph text-white/80 max-w-2xl mx-auto">Every crew has the same mission. Agree on a plan, activity, event, or whatever the group wants within the 7 day mission deadline</p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -136,33 +124,28 @@ const MissionCountdown = () => {
             <div className="grid md:grid-cols-2 gap-10 items-center">
               {/* Left side: Timer and warning */}
               <div className="space-y-8">
-                {showInitialAnimation ? (
-                  <div className="flex flex-col items-center md:items-start">
+                {showInitialAnimation ? <div className="flex flex-col items-center md:items-start">
                     <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                       <Timer size={28} className="text-pulse-coral" />
                       <h3 className="text-xl md:text-2xl font-bold text-white">Mission Duration: 7 Days</h3>
                     </div>
                     
                     <div className="w-full bg-gray-800/50 h-8 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full bg-gradient-to-r from-pulse-coral to-pulse-pink"
-                        style={{ 
-                          width: `${((7 - totalDaysShown) / 7) * 100}%`,
-                          transition: "width 0.3s ease-out"
-                        }}
-                      />
+                      <motion.div className="h-full bg-gradient-to-r from-pulse-coral to-pulse-pink" style={{
+                    width: `${(7 - totalDaysShown) / 7 * 100}%`,
+                    transition: "width 0.3s ease-out"
+                  }} />
                     </div>
                     
-                    <motion.p 
-                      className="mt-3 text-lg font-semibold text-white"
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ repeat: Infinity, duration: 1.5 }}
-                    >
+                    <motion.p className="mt-3 text-lg font-semibold text-white" animate={{
+                  opacity: [0.7, 1, 0.7]
+                }} transition={{
+                  repeat: Infinity,
+                  duration: 1.5
+                }}>
                       {Math.ceil(totalDaysShown)} days remaining...
                     </motion.p>
-                  </div>
-                ) : (
-                  <>
+                  </div> : <>
                     <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
                       <Timer size={28} className="text-pulse-coral" />
                       <h3 className="text-xl md:text-2xl font-bold text-white">Last 24 Hours!</h3>
@@ -170,79 +153,88 @@ const MissionCountdown = () => {
                     
                     <div className="flex justify-center md:justify-start gap-4">
                       <div className="flex flex-col items-center">
-                        <motion.div 
-                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
-                          key={`days-${timeLeft.days}`}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <motion.div className="text-4xl md:text-5xl font-bold text-pulse-coral" key={`days-${timeLeft.days}`} initial={{
+                      opacity: 0,
+                      y: -10
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      duration: 0.2
+                    }}>
                           {formatTime(timeLeft.days)}
                         </motion.div>
                         <span className="text-white/60 text-sm mt-1">Days</span>
                       </div>
                       <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
                       <div className="flex flex-col items-center">
-                        <motion.div 
-                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
-                          key={`hours-${timeLeft.hours}`}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <motion.div className="text-4xl md:text-5xl font-bold text-pulse-coral" key={`hours-${timeLeft.hours}`} initial={{
+                      opacity: 0,
+                      y: -10
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      duration: 0.2
+                    }}>
                           {formatTime(timeLeft.hours)}
                         </motion.div>
                         <span className="text-white/60 text-sm mt-1">Hours</span>
                       </div>
                       <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
                       <div className="flex flex-col items-center">
-                        <motion.div 
-                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
-                          key={`minutes-${timeLeft.minutes}`}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <motion.div className="text-4xl md:text-5xl font-bold text-pulse-coral" key={`minutes-${timeLeft.minutes}`} initial={{
+                      opacity: 0,
+                      y: -10
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      duration: 0.2
+                    }}>
                           {formatTime(timeLeft.minutes)}
                         </motion.div>
                         <span className="text-white/60 text-sm mt-1">Mins</span>
                       </div>
                       <div className="text-4xl md:text-5xl font-bold text-white/50">:</div>
                       <div className="flex flex-col items-center">
-                        <motion.div 
-                          className="text-4xl md:text-5xl font-bold text-pulse-coral"
-                          key={`seconds-${timeLeft.seconds}`}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <motion.div className="text-4xl md:text-5xl font-bold text-pulse-coral" key={`seconds-${timeLeft.seconds}`} initial={{
+                      opacity: 0,
+                      y: -10
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      duration: 0.2
+                    }}>
                           {formatTime(timeLeft.seconds)}
                         </motion.div>
                         <span className="text-white/60 text-sm mt-1">Secs</span>
                       </div>
                     </div>
-                  </>
-                )}
+                  </>}
                 
                 <AnimatePresence>
-                  {isWarning && !showInitialAnimation && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Alert 
-                        className="bg-gradient-to-r from-pulse-pink/20 to-pulse-coral/20 border border-pulse-coral/40 backdrop-blur-sm text-white shadow-lg"
-                      >
+                  {isWarning && !showInitialAnimation && <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} animate={{
+                  opacity: 1,
+                  y: 0
+                }} exit={{
+                  opacity: 0,
+                  y: -20
+                }} transition={{
+                  duration: 0.3
+                }}>
+                      <Alert className="bg-gradient-to-r from-pulse-pink/20 to-pulse-coral/20 border border-pulse-coral/40 backdrop-blur-sm text-white shadow-lg">
                         <AlertTriangle className="h-5 w-5 text-pulse-coral" />
                         <AlertTitle className="text-white font-medium">Time is running out!</AlertTitle>
                         <AlertDescription className="text-white/90">
                           You have less than 24 hours to agree on a plan or your group will be dissolved.
                         </AlertDescription>
                       </Alert>
-                    </motion.div>
-                  )}
+                    </motion.div>}
                 </AnimatePresence>
               </div>
               
@@ -253,8 +245,8 @@ const MissionCountdown = () => {
                     <Calendar className="w-6 h-6 text-pulse-pink" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Suggest Perfect Activities</h4>
-                    <p className="text-gray-300">Share activity ideas tailored to your group's shared interests and vote on favorites.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">Curated Suggestions</h4>
+                    <p className="text-gray-300">We suggest activities based on the city and the group interests</p>
                   </div>
                 </div>
                 
@@ -263,8 +255,8 @@ const MissionCountdown = () => {
                     <Users className="w-6 h-6 text-pulse-blue" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Forge Real Connections</h4>
-                    <p className="text-gray-300">Meeting in person creates meaningful friendships that last beyond the digital space.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">Just show up</h4>
+                    <p className="text-gray-300">All you have to do is show up with a positive attitude and open mind</p>
                   </div>
                 </div>
                 
@@ -273,8 +265,8 @@ const MissionCountdown = () => {
                     <AlertTriangle className="w-6 h-6 text-pulse-purple" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-2">83% Success Rate</h4>
-                    <p className="text-gray-300">Groups that meet within 7 days are 5x more likely to become lasting friend circles.</p>
+                    <h4 className="text-lg font-bold text-white mb-2">Repeat Mission</h4>
+                    <p className="text-gray-300">Each crew can vote on whether they want to repeat the mission and meet again</p>
                   </div>
                 </div>
               </div>
@@ -282,8 +274,6 @@ const MissionCountdown = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default MissionCountdown;
