@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ChevronRight, Download, Smartphone } from "lucide-react";
 const Hero = () => {
@@ -21,7 +22,7 @@ const Hero = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Hero Content */}
           <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} md:order-1 order-2`}>
-            <div className="flex flex-col gap-6 max-w-xl">
+            <div className="flex flex-col gap-6 w-full">
               <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium border border-gray-200 w-fit">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pulse-coral opacity-75"></span>
@@ -34,7 +35,7 @@ const Hero = () => {
                 Creating <span className="pulse-gradient-text">Effortless</span> Real-World Friendships
               </h1>
               
-              <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-md">
+              <p className="paragraph text-lg md:text-xl text-foreground/80">
                 Connect with like-minded people in your city. From coffee meetups to weekend adventures — make friends that get you.
               </p>
               
