@@ -55,8 +55,8 @@ const NeuralNetwork = () => {
             Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
           </motion.p>
           
-          {/* Updated CTA Button */}
-          <motion.div variants={fadeInUp} className="mt-6">
+          {/* Updated CTA Button - Center aligned */}
+          <motion.div variants={fadeInUp} className="mt-6 flex justify-center">
             <Button 
               className="pulse-gradient-cta text-white font-medium px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm flex items-center gap-2"
             >
