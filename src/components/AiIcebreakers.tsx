@@ -1,70 +1,71 @@
-
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Sparkles, Users, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-const messages = [
-  {
-    id: 1,
-    user: "Pulse AI",
-    avatar: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png",
-    message: "What's one place you've always wanted to visit but haven't had the chance yet?",
-    type: "ai",
-    delay: 0
-  }, 
-  {
-    id: 2,
-    user: "Sarah",
-    avatar: "https://source.unsplash.com/random/100x100/?portrait&woman",
-    message: "I've always dreamed of visiting Kyoto during cherry blossom season! The temples and gardens look magical.",
-    type: "user",
-    delay: 2
-  }, 
-  {
-    id: 3,
-    user: "James",
-    avatar: "https://source.unsplash.com/random/100x100/?portrait&man",
-    message: "Same! Japan is high on my list. I'm also fascinated by the food culture there.",
-    type: "user",
-    delay: 3.5
-  }, 
-  {
-    id: 4,
-    user: "Mia",
-    avatar: "https://source.unsplash.com/random/100x100/?portrait&woman2",
-    message: "I've been to Tokyo but missed Kyoto. We should plan a group trip!",
-    type: "user",
-    delay: 5
-  }, 
-  {
-    id: 5,
-    user: "Kevin",
-    avatar: "https://source.unsplash.com/random/100x100/?portrait&man2",
-    message: "I'd be down for that! When were you thinking?",
-    type: "user",
-    delay: 6.5
-  }, 
-  {
-    id: 6,
-    user: "Pulse AI",
-    avatar: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png",
-    message: "Great conversation! I see you're all interested in Japan. Would you like to set up a video call this weekend to discuss plans?",
-    type: "ai",
-    delay: 8
-  }
-];
-
-const MessageBubble = ({ message, visible }) => {
+const messages = [{
+  id: 1,
+  user: "Pulse AI",
+  avatar: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png",
+  message: "What's one place you've always wanted to visit but haven't had the chance yet?",
+  type: "ai",
+  delay: 0
+}, {
+  id: 2,
+  user: "Sarah",
+  avatar: "https://source.unsplash.com/random/100x100/?portrait&woman",
+  message: "I've always dreamed of visiting Kyoto during cherry blossom season! The temples and gardens look magical.",
+  type: "user",
+  delay: 2
+}, {
+  id: 3,
+  user: "James",
+  avatar: "https://source.unsplash.com/random/100x100/?portrait&man",
+  message: "Same! Japan is high on my list. I'm also fascinated by the food culture there.",
+  type: "user",
+  delay: 3.5
+}, {
+  id: 4,
+  user: "Mia",
+  avatar: "https://source.unsplash.com/random/100x100/?portrait&woman2",
+  message: "I've been to Tokyo but missed Kyoto. We should plan a group trip!",
+  type: "user",
+  delay: 5
+}, {
+  id: 5,
+  user: "Kevin",
+  avatar: "https://source.unsplash.com/random/100x100/?portrait&man2",
+  message: "I'd be down for that! When were you thinking?",
+  type: "user",
+  delay: 6.5
+}, {
+  id: 6,
+  user: "Pulse AI",
+  avatar: "/lovable-uploads/38e3c054-e0e0-4011-bd40-d167b312c66d.png",
+  message: "Great conversation! I see you're all interested in Japan. Would you like to set up a video call this weekend to discuss plans?",
+  type: "ai",
+  delay: 8
+}];
+const MessageBubble = ({
+  message,
+  visible
+}) => {
   const isAi = message.type === "ai";
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={visible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ duration: 0.5 }}
-      className={`flex ${isAi ? "justify-start" : "justify-end"} mb-4`}
-    >
+  return <motion.div initial={{
+    opacity: 0,
+    y: 20,
+    scale: 0.95
+  }} animate={visible ? {
+    opacity: 1,
+    y: 0,
+    scale: 1
+  } : {
+    opacity: 0,
+    y: 20,
+    scale: 0.95
+  }} transition={{
+    duration: 0.5
+  }} className={`flex ${isAi ? "justify-start" : "justify-end"} mb-4`}>
       <div className={`flex ${isAi ? "flex-row" : "flex-row-reverse"} max-w-xs md:max-w-md items-end gap-2`}>
         <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
           <img src={message.avatar} alt={message.user} className="w-full h-full object-cover" />
@@ -74,27 +75,21 @@ const MessageBubble = ({ message, visible }) => {
           <p className="text-sm">{message.message}</p>
         </div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 };
-
 const AiIcebreakers = () => {
   const [visibleMessages, setVisibleMessages] = useState([]);
-
   useEffect(() => {
     const timers = messages.map(message => {
       return setTimeout(() => {
         setVisibleMessages(prev => [...prev, message.id]);
       }, message.delay * 1000);
     });
-
     return () => {
       timers.forEach(timer => clearTimeout(timer));
     };
   }, []);
-
-  return (
-    <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
+  return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
       {/* Background gradients */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
@@ -104,47 +99,66 @@ const AiIcebreakers = () => {
       
       <div className="container relative z-10 px-4 md:px-6">
         <div className="text-center mb-12">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5
+        }} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
             <MessageSquare className="w-4 h-4 text-pulse-purple" />
             <span className="text-sm font-medium text-pulse-purple">Icebreaker Games</span>
           </motion.div>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4"
-          >
+          <motion.h2 initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.1
+        }} className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
             Spark <span className="pulse-gradient-text">Meaningful Conversations</span>
           </motion.h2>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto mb-6"
-          >
+          <motion.p initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.2
+        }} className="text-lg text-gray-300 max-w-2xl mx-auto mb-6">
             Our AI-powered icebreaker games help break the silence and get everyone talking
           </motion.p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* Message animation */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:col-span-7 bg-gray-800/50 backdrop-blur-md p-6 rounded-xl border border-gray-700/50"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.3
+        }} className="lg:col-span-7 bg-gray-800/50 backdrop-blur-md p-6 rounded-xl border border-gray-700/50">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-pulse-purple" />
@@ -154,25 +168,24 @@ const AiIcebreakers = () => {
             
             <div className="overflow-y-auto max-h-96 pr-2 -mr-2">
               <AnimatePresence>
-                {messages.map(message => (
-                  <MessageBubble 
-                    key={message.id} 
-                    message={message} 
-                    visible={visibleMessages.includes(message.id)} 
-                  />
-                ))}
+                {messages.map(message => <MessageBubble key={message.id} message={message} visible={visibleMessages.includes(message.id)} />)}
               </AnimatePresence>
             </div>
           </motion.div>
           
           {/* Features */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="lg:col-span-5 space-y-6"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.4
+        }} className="lg:col-span-5 space-y-6">
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-white">Our Icebreaker Games</h3>
               
@@ -183,7 +196,7 @@ const AiIcebreakers = () => {
                       <Sparkles className="w-6 h-6 text-pulse-purple" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Icebreaker Characters</h3>
+                      <h3 className="text-xl font-bold text-white mb-2">Engaging Characters</h3>
                       <p className="text-gray-300">Each game has a unique personality and theme to match different group dynamics and interests</p>
                     </div>
                   </div>
@@ -197,8 +210,8 @@ const AiIcebreakers = () => {
                       <Users className="w-6 h-6 text-pulse-blue" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">AI for Context</h3>
-                      <p className="text-gray-300">Our AI analyzes the conversation, members' profiles, and interests to create perfectly tailored discussion topics</p>
+                      <h3 className="text-xl font-bold text-white mb-2">Contextual Understanding</h3>
+                      <p className="text-gray-300">Our game characters has full insight into messages and context of the conversation</p>
                     </div>
                   </div>
                 </CardContent>
@@ -211,18 +224,18 @@ const AiIcebreakers = () => {
                       <Calendar className="w-6 h-6 text-pulse-pink" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Relevant Meetup Suggestions</h3>
-                      <p className="text-gray-300">We suggest plans, events, and experiences based on the group's shared interests to encourage real-life connections</p>
+                      <h3 className="text-xl font-bold text-white mb-2">Curated Meetup Suggestions</h3>
+                      <p className="text-gray-300">Each ice breaker character will propose very different plans based on the interest of the group</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
               
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.2 }}
-                className="flex justify-center mt-8"
-              >
+              <motion.div whileHover={{
+              scale: 1.03
+            }} transition={{
+              duration: 0.2
+            }} className="flex justify-center mt-8">
                 <Button size="lg" className="px-8 py-6 rounded-full text-lg pulse-gradient-cta">
                   Check out all our Icebreaker Games
                 </Button>
@@ -231,8 +244,6 @@ const AiIcebreakers = () => {
           </motion.div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AiIcebreakers;
