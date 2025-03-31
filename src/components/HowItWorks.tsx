@@ -12,7 +12,7 @@ import {
 const steps = [
   {
     icon: Users,
-    title: "Find Your Crew",
+    title: "Get Matched",
     description: "We'll match you with a small group of like-minded people.",
     color: "bg-gradient-to-r from-pink-500 to-purple-600"
   },
