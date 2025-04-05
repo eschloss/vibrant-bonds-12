@@ -6,7 +6,6 @@ import HowItWorks from "@/components/HowItWorks";
 import NeuralNetwork from "@/components/NeuralNetwork";
 import AiIcebreakers from "@/components/AiIcebreakers";
 import MissionCountdown from "@/components/MissionCountdown";
-import DownloadCTA from "@/components/DownloadCTA";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -28,7 +27,6 @@ const Index = () => {
         <NeuralNetwork />
         <AiIcebreakers />
         <MissionCountdown />
-        <DownloadCTA />
       </main>
       
       <Footer />
