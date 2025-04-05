@@ -11,10 +11,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     
-    --primary: 265 84% 66%;
+    --primary: 265 100% 55%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 24 94% 53%;
+    --secondary: 330 100% 50%;
     --secondary-foreground: 0 0% 100%;
     
     --muted: 240 4.8% 95.9%;
@@ -49,9 +49,9 @@
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
-    --primary: 263 85% 50%;
+    --primary: 265 100% 55%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 20 89% 48%;
+    --secondary: 330 100% 50%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;
     --muted-foreground: 240 5% 64.9%;
@@ -154,11 +154,11 @@
   }
   
   .pulse-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pulse-purple to-pulse-blue;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-teal;
   }
   
   .pulse-gradient-cta {
-    @apply bg-gradient-to-r from-pulse-coral to-pulse-pink hover:from-pulse-pink hover:to-pulse-coral transition-all duration-300;
+    @apply bg-gradient-to-r from-pulse-coral to-pulse-purple hover:from-pulse-purple hover:to-pulse-coral transition-all duration-300;
   }
   
   .stagger-animation > * {

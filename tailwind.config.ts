@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -66,13 +67,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Pulse custom colors
+				// Updated Pulse colors to match the screenshot
 				pulse: {
-					purple: '#8B5CF6',
-					coral: '#F97316',
-					blue: '#93C5FD',
-					teal: '#5EEAD4',
-					pink: '#FDA4AF',
+					purple: '#A020F0', // Brighter purple
+					coral: '#FF1493', // Hot pink
+					blue: '#0095FF', // Bright blue
+					teal: '#00E5C9', // Bright teal/turquoise
+					pink: '#FF1493', // Hot pink (same as coral for consistency)
 				}
 			},
 			borderRadius: {
@@ -147,9 +148,9 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-hero': 'linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%)',
-				'gradient-cta': 'linear-gradient(90deg, hsla(22, 100%, 78%, 1) 0%, hsla(2, 78%, 62%, 1) 100%)',
-				'gradient-blue': 'linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)',
+				'gradient-hero': 'linear-gradient(90deg, #FF1493 0%, #A020F0 50%, #0095FF 75%, #00E5C9 100%)', 
+				'gradient-cta': 'linear-gradient(90deg, #FF1493 0%, #A020F0 100%)',
+				'gradient-blue': 'linear-gradient(90deg, #0095FF 0%, #00E5C9 100%)',
 				'noise': 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
 			},
 		}

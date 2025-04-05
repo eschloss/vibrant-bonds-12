@@ -19,8 +19,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        gradient: "bg-gradient-to-r from-pulse-purple to-pulse-blue text-white hover:from-pulse-blue hover:to-pulse-purple",
-        coral: "bg-gradient-to-r from-pulse-coral to-pulse-pink text-white hover:from-pulse-pink hover:to-pulse-coral",
+        gradient: "bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral",
+        coral: "bg-gradient-to-r from-pulse-coral to-pulse-purple text-white hover:from-pulse-purple hover:to-pulse-coral",
       },
       size: {
         default: "h-10 px-4 py-2",
