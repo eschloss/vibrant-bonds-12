@@ -25,13 +25,13 @@ const icebreakers = [{
   bgColor: "bg-blue-600/20",
   message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
 }, {
-  id: "drag-queen",
-  name: "Divine Diva",
-  tagline: "Fabulous & Bold",
-  avatar: "https://images.unsplash.com/photo-1589643138280-f39694648e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+  id: "mother-flawless",
+  name: "Mother Flawless",
+  tagline: "Fierce & Fabulous",
+  avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
-  message: "Darlings! If your life had a theme song that played whenever you entered a room, what would it be and why?"
+  message: "Darling, if you had to either toast someone in this room with ridiculous praise or read them to filth with a savage roast, who would it be and what would you say?"
 }, {
   id: "baby-yoda",
   name: "Baby Yoda",
@@ -75,6 +75,8 @@ const CharacterCard = ({
             "A cackling force of dark magic who twists your tales into haunted nightmares." : 
             character.id === "sherlock" ?
             "The world's most theatrical detective leading a game of deception and clever deduction." :
+            character.id === "mother-flawless" ?
+            "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." :
             `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
