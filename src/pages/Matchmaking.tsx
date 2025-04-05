@@ -1,6 +1,7 @@
+
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Lightning, Zap } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -129,7 +130,7 @@ const Matchmaking = () => {
                   variant="gradient" 
                   className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
                 >
-                  <Lightning size={18} className="text-white" />
+                  <Zap size={18} className="text-white" />
                   <span>Start Matching Now</span>
                 </Button>
                 
