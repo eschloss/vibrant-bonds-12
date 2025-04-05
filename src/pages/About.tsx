@@ -1,7 +1,6 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Mic, Map, Users, MessageSquare, Sparkles } from "lucide-react";
+import { Mic, Map, Users, MessageSquare, Sparkles, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -180,7 +179,7 @@ const About = () => {
         </div>
       </section>
       
-      {/* CTA - Simplified */}
+      {/* CTA - Updated for meeting new friends */}
       <section className="py-16 md:py-20 bg-gray-800/30">
         <div className="container mx-auto px-4 text-center">
           <motion.div 
@@ -190,19 +189,24 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl font-bold mb-4">Join Our Community</h2>
+            <h2 className="text-3xl font-bold mb-4">Ready to Meet New Friends?</h2>
             <p className="text-lg text-gray-300 mb-6">
-              Experience the Pulse approach to forming meaningful friendships in your city
+              Join our community and connect with like-minded people in your city who share your interests
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/cities">
+              <a 
+                href="https://482tykjn26x.typeform.com/pulse#city=" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 <Button size="lg" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 w-full sm:w-auto">
-                  Find your city
+                  <UserPlus className="h-5 w-5 mr-2" />
+                  Start Meeting People
                 </Button>
-              </Link>
-              <Link to="/matchmaking">
+              </a>
+              <Link to="/cities">
                 <Button size="lg" variant="coral" className="rounded-full shadow-lg shadow-pink-500/20 w-full sm:w-auto">
-                  Get matched
+                  Find Your City
                 </Button>
               </Link>
             </div>
