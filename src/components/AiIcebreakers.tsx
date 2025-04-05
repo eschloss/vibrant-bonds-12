@@ -19,11 +19,11 @@ const icebreakers = [{
 }, {
   id: "sherlock",
   name: "Sherlock Holmes",
-  tagline: "Analytical & Curious",
-  avatar: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80",
-  color: "from-blue-500 to-blue-700",
-  bgColor: "bg-blue-500/20",
-  message: "Based on observable evidence, what unusual hobby do you think the person to your left might secretly enjoy?"
+  tagline: "Theatrical & Deductive",
+  avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
+  color: "from-blue-600 to-blue-800",
+  bgColor: "bg-blue-600/20",
+  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
 }, {
   id: "drag-queen",
   name: "Divine Diva",
@@ -73,6 +73,8 @@ const CharacterCard = ({
         <div className="text-xs text-gray-400 mt-2">
           {character.id === "baba-yaga" ? 
             "A cackling force of dark magic who twists your tales into haunted nightmares." : 
+            character.id === "sherlock" ?
+            "The world's most theatrical detective leading a game of deception and clever deduction." :
             `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
