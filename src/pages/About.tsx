@@ -47,9 +47,9 @@ const About = () => {
             >
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1594540637920-4e8972cb5f95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Eric performing opera"
-                  className="rounded-2xl shadow-2xl shadow-purple-500/20 w-full object-cover aspect-[4/5]"
+                  src="/lovable-uploads/8e380861-65d4-4d89-96b3-2de89a3e831c.png" 
+                  alt="Eric performing opera with orchestra"
+                  className="rounded-2xl shadow-2xl shadow-purple-500/20 w-full object-cover aspect-[4/3]"
                 />
                 <div className="absolute -bottom-5 -right-5 bg-gradient-to-r from-pulse-purple to-pulse-blue p-4 rounded-xl shadow-lg">
                   <Mic size={32} className="text-white" />
