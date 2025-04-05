@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play, Users } from "lucide-react";
+import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -82,9 +81,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/communities" className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
-                    <Users size={12} className="mr-1" />
-                    Communities
+                  <Link to="/communities" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    For Communities
                   </Link>
                 </li>
                 <li>
