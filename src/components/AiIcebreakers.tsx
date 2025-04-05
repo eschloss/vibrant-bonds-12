@@ -30,7 +30,7 @@ const icebreakers = [
     id: "drag-queen",
     name: "Divine Diva",
     tagline: "Fabulous & Bold",
-    avatar: "https://images.unsplash.com/photo-1534685785945-60a1b0a2a18d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    avatar: "https://images.unsplash.com/photo-1589643138280-f39694648e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
     color: "from-pink-500 to-purple-600",
     bgColor: "bg-pink-500/20",
     message: "Darlings! If your life had a theme song that played whenever you entered a room, what would it be and why?"
