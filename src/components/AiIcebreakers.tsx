@@ -15,8 +15,7 @@ const icebreakers = [
     avatar: "https://source.unsplash.com/random/200x200/?witch",
     color: "from-emerald-500 to-emerald-700",
     bgColor: "bg-emerald-500/20",
-    message: "If you could possess any magical ability for a day, what would it be and how would you use it?",
-    example: "Time manipulation! I'd slow down those perfect moments we never want to end."
+    message: "If you could possess any magical ability for a day, what would it be and how would you use it?"
   },
   {
     id: "sherlock",
@@ -25,8 +24,7 @@ const icebreakers = [
     avatar: "https://source.unsplash.com/random/200x200/?detective",
     color: "from-blue-500 to-blue-700",
     bgColor: "bg-blue-500/20",
-    message: "Based on observable evidence, what unusual hobby do you think the person to your left might secretly enjoy?",
-    example: "From the calluses on your fingers and rhythmic tapping, I deduce you're secretly a guitarist!"
+    message: "Based on observable evidence, what unusual hobby do you think the person to your left might secretly enjoy?"
   },
   {
     id: "drag-queen",
@@ -35,8 +33,7 @@ const icebreakers = [
     avatar: "https://source.unsplash.com/random/200x200/?glamour",
     color: "from-pink-500 to-purple-600",
     bgColor: "bg-pink-500/20",
-    message: "Darlings! If your life had a theme song that played whenever you entered a room, what would it be and why?",
-    example: "\"Don't Stop Me Now\" by Queen! Because I'm having such a good time, I'm having a ball!"
+    message: "Darlings! If your life had a theme song that played whenever you entered a room, what would it be and why?"
   },
   {
     id: "baby-yoda",
@@ -45,8 +42,7 @@ const icebreakers = [
     avatar: "https://source.unsplash.com/random/200x200/?cute",
     color: "from-green-500 to-green-700",
     bgColor: "bg-green-500/20",
-    message: "Favorite snack from childhood, what is? Share why special to you, hmm?",
-    example: "Those fruit roll-ups! I used to unroll them completely before eating them piece by piece."
+    message: "Favorite snack from childhood, what is? Share why special to you, hmm?"
   }
 ];
 
@@ -74,14 +70,6 @@ const CharacterCard = ({ character }) => {
           <div className={`rounded-2xl px-4 py-3 bg-gradient-to-r ${character.color} text-white`}>
             <p className="text-sm font-medium mb-1">{character.name}</p>
             <p className="text-sm">{character.message}</p>
-          </div>
-        </div>
-        
-        {/* Example response */}
-        <div className="mb-4">
-          <div className="rounded-2xl px-4 py-3 bg-gray-700/50 text-white ml-auto max-w-[90%]">
-            <p className="text-sm font-medium mb-1">Example Response</p>
-            <p className="text-sm">{character.example}</p>
           </div>
         </div>
 
