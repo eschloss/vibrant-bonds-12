@@ -7,6 +7,15 @@ const cities = {
   "san-francisco": "San Francisco",
   "los-angeles": "Los Angeles",
   "new-york": "New York",
+  "chicago": "Chicago",
+  "miami": "Miami",
+  "seattle": "Seattle",
+  "austin": "Austin",
+  "boston": "Boston",
+  "denver": "Denver",
+  "portland": "Portland",
+  "nashville": "Nashville",
+  "atlanta": "Atlanta",
   // Add more cities here as needed
 };
 

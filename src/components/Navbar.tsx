@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, UserPlus, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -13,11 +15,14 @@ const Navbar = () => {
         setScrolled(isScrolled);
       }
     };
+
     window.addEventListener("scroll", handleScroll, {
       passive: true
     });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
@@ -29,6 +34,8 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Home</Link>
+          <Link to="/matchmaking" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Matchmaking</Link>
+          <Link to="/cities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Cities</Link>
           <Link to="/about" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">About Us</Link>
           <Link to="/blog" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Blog</Link>
           <Link to="/contact" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Contact</Link>
@@ -54,6 +61,12 @@ const Navbar = () => {
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Home
             </Link>
+            <Link to="/matchmaking" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Matchmaking
+            </Link>
+            <Link to="/cities" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Cities
+            </Link>
             <Link to="/about" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               About Us
             </Link>
@@ -71,4 +84,5 @@ const Navbar = () => {
         </div>}
     </header>;
 };
+
 export default Navbar;
