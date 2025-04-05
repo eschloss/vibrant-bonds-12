@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -39,24 +38,13 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <Link to="/matchmaking">
-              <Button 
-                size="xl" 
-                variant="gradient" 
-                className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full"
-              >
+              <Button size="xl" variant="gradient" className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full">
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
               </Button>
             </Link>
             
-            <Button 
-              size="xl" 
-              variant="outline" 
-              className="bg-white hover:bg-gray-100 text-pulse-purple rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
-            >
-              <span>Download App</span>
-              <ArrowDownToLine size={18} />
-            </Button>
+            
           </div>
           
           <div className="flex items-center gap-4 mt-4">
