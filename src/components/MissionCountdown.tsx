@@ -4,7 +4,6 @@ import { Timer, AlertTriangle, Users, Calendar, Brain } from "lucide-react";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
 const MissionCountdown = () => {
@@ -16,8 +15,7 @@ const MissionCountdown = () => {
     seconds: 0
   });
 
-  // State to track animation of days passing
-  const [missionProgress, setMissionProgress] = useState(0);
+  // State to track warning state
   const [isWarning, setIsWarning] = useState(false);
 
   // Countdown reference
@@ -51,10 +49,6 @@ const MissionCountdown = () => {
         seconds
       });
       
-      // Calculate progress as percentage completed (not remaining)
-      const newProgress = (secondsElapsed / totalSeconds) * 100;
-      setMissionProgress(newProgress);
-      
       // Set warning state when less than 2 days remaining
       if (days < 2 && !isWarning) {
         setIsWarning(true);
@@ -85,8 +79,8 @@ const MissionCountdown = () => {
       
       <div className="container mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-block p-2 px-4 rounded-full bg-primary/10 backdrop-blur-sm mb-4">
-            <div className="flex items-center gap-2 text-primary">
+          <div className="inline-block p-2 px-4 rounded-full bg-primary/30 backdrop-blur-sm mb-4">
+            <div className="flex items-center gap-2 text-white">
               <Users size={18} />
               <span className="text-sm font-medium">Group Mission</span>
             </div>
@@ -104,18 +98,18 @@ const MissionCountdown = () => {
         <div className="max-w-3xl mx-auto">
           <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 shadow-lg">
             <div className="flex flex-col gap-8">
-              {/* Countdown section */}
+              {/* Countdown section - now bigger */}
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <Timer size={24} className="text-primary" />
-                    <h3 className="text-xl font-bold">Mission Deadline</h3>
+                    <Timer size={28} className="text-primary" />
+                    <h3 className="text-2xl font-bold">Mission Deadline</h3>
                   </div>
                   
                   <div className="flex gap-4 justify-center sm:justify-end">
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-3xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-primary" 
                         key={`days-${timeLeft.days}`} 
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -125,10 +119,10 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Days</span>
                     </div>
-                    <div className="text-3xl font-bold text-foreground/30">:</div>
+                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-3xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-primary" 
                         key={`hours-${timeLeft.hours}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -138,10 +132,10 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Hours</span>
                     </div>
-                    <div className="text-3xl font-bold text-foreground/30">:</div>
+                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-3xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-primary" 
                         key={`minutes-${timeLeft.minutes}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -151,15 +145,20 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Mins</span>
                     </div>
+                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
+                    <div className="flex flex-col items-center">
+                      <motion.div 
+                        className="text-4xl md:text-5xl font-bold text-primary" 
+                        key={`seconds-${timeLeft.seconds}`}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {formatTime(timeLeft.seconds)}
+                      </motion.div>
+                      <span className="text-muted-foreground text-sm">Secs</span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>Mission Progress</span>
-                    <span>{Math.round(missionProgress)}%</span>
-                  </div>
-                  <Progress value={missionProgress} className="h-2" />
                 </div>
                 
                 <AnimatePresence>
@@ -198,7 +197,7 @@ const MissionCountdown = () => {
                   </div>
                   
                   <Button 
-                    className="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-5"
+                    className="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-5 text-base"
                     size="lg"
                   >
                     Take Personality Test
