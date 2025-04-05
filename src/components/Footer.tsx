@@ -116,6 +116,12 @@ const Footer = () => {
                     </Link>
                   </li>
                 ))}
+                <li className="col-span-2 mt-2">
+                  <Link to="/cities" className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
+                    <MapPin size={12} className="mr-1" />
+                    View all cities
+                  </Link>
+                </li>
               </ul>
             </div>
 
