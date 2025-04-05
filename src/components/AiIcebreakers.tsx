@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { MessageSquare } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -149,7 +150,7 @@ const AiIcebreakers = () => {
             </motion.div>)}
         </div>
         
-        {/* Call to action */}
+        {/* Call to action - Updated with Link to matchmaking */}
         <motion.div initial={{
         opacity: 0,
         y: 20
@@ -162,13 +163,15 @@ const AiIcebreakers = () => {
         duration: 0.5,
         delay: 0.5
       }} className="flex justify-center mt-12">
-          <Button 
-            size="xl"
-            variant="gradient"
-            className="rounded-full shadow-lg shadow-purple-500/20"
-          >
-            Meet all our icebreakers
-          </Button>
+          <Link to="/matchmaking">
+            <Button 
+              size="xl"
+              variant="gradient"
+              className="rounded-full shadow-lg shadow-purple-500/20"
+            >
+              Meet all our icebreakers
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </div>;
