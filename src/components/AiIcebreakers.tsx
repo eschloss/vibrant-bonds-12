@@ -11,11 +11,11 @@ import { Card, CardContent } from "@/components/ui/card";
 const icebreakers = [{
   id: "baba-yaga",
   name: "Baba Yaga",
-  tagline: "Mystical & Wise",
-  avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  color: "from-emerald-500 to-emerald-700",
-  bgColor: "bg-emerald-500/20",
-  message: "If you could possess any magical ability for a day, what would it be and how would you use it?"
+  tagline: "Ancient & Wicked",
+  avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
+  color: "from-emerald-800 to-emerald-950",
+  bgColor: "bg-emerald-800/30",
+  message: "If you were to trap another player in my haunted forest, what dark secret would you reveal about them to ensure they never escape?"
 }, {
   id: "sherlock",
   name: "Sherlock Holmes",
@@ -71,7 +71,9 @@ const CharacterCard = ({
         </div>
 
         <div className="text-xs text-gray-400 mt-2">
-          {character.name} creates a {character.tagline.toLowerCase()} environment for authentic sharing.
+          {character.id === "baba-yaga" ? 
+            "A cackling force of dark magic who twists your tales into haunted nightmares." : 
+            `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
     </Card>;
