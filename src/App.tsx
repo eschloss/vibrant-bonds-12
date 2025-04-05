@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Matchmaking from "./pages/Matchmaking";
+import CityPage from "./pages/CityPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -17,11 +19,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/matchmaking" element={<Matchmaking />} />
+          <Route path="/cities/:cityName" element={<CityPage />} />
           {/* Future routes will be added here */}
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}
-          {/* <Route path="/cities/:cityName" element={<CityPage />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -89,14 +90,16 @@ const HowItWorks = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex justify-center mt-12"
         >
-          <Button 
-            size="xl"
-            variant="gradient"
-            className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
-          >
-            Take Personality Test
-            <ArrowRight />
-          </Button>
+          <Link to="/matchmaking">
+            <Button 
+              size="xl"
+              variant="gradient"
+              className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
+            >
+              Take Personality Test
+              <ArrowRight />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>;
