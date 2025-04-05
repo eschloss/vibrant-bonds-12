@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, Sparkles, Users, Calendar } from "lucide-react";
@@ -258,6 +257,7 @@ const AiIcebreakers = () => {
                   name={response.name}
                   message={response.message}
                   isCharacter={false}
+                  color={activeCharacter.color}
                 />
               ))}
             </div>
