@@ -1,10 +1,14 @@
+
 import { Link } from "react-router-dom";
-import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const cities = ["San Francisco", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
-  return <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
+  
+  return (
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 relative">
         {/* Background Blur Effects */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -14,20 +18,141 @@ const Footer = () => {
         </div>
         
         <div className="relative z-10">
+          {/* Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Column 1: About */}
+            <div>
+              <h3 className="text-xl font-display font-bold mb-4 flex items-center">
+                <Sparkles className="text-purple-400 h-5 w-5 mr-2" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-blue-400">Pulse</span>
+              </h3>
+              <p className="text-white/70 text-sm mb-4">
+                Bringing people together through meaningful connections and shared experiences.
+              </p>
+              <div className="flex space-x-3">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                  <Instagram size={18} />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                  <Twitter size={18} />
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                  <Facebook size={18} />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                  <Linkedin size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Company */}
+            <div>
+              <h3 className="text-white text-lg font-bold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/about" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/careers" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    Careers
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Cities */}
+            <div>
+              <h3 className="text-white text-lg font-bold mb-4">Cities</h3>
+              <ul className="grid grid-cols-2 gap-2">
+                {cities.map((city, i) => (
+                  <li key={i}>
+                    <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
+                      <MapPin size={12} className="mr-1" />
+                      {city}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Contact */}
+            <div>
+              <h3 className="text-white text-lg font-bold mb-4">Contact</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Mail size={16} className="text-purple-400 mt-1 mr-2" />
+                  <a href="mailto:hello@pulseapp.com" className="text-white/70 text-sm hover:text-purple-400 transition-colors">
+                    hello@pulseapp.com
+                  </a>
+                </li>
+                <li className="flex items-start">
+                  <MapPin size={16} className="text-purple-400 mt-1 mr-2" />
+                  <span className="text-white/70 text-sm">
+                    123 Market St, San Francisco, CA 94103
+                  </span>
+                </li>
+              </ul>
+
+              {/* App Download Buttons */}
+              <div className="mt-4 flex flex-col space-y-2">
+                <a 
+                  href="https://apps.apple.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md"
+                >
+                  <Apple size={18} className="text-white" />
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/70">Download on the</span>
+                    <span className="text-sm font-medium">App Store</span>
+                  </div>
+                </a>
+                <a 
+                  href="https://play.google.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md"
+                >
+                  <Play size={18} className="text-white" />
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/70">Get it on</span>
+                    <span className="text-sm font-medium">Google Play</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
           
-          
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5,
-          delay: 0.2
-        }} className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <motion.div 
+            initial={{
+              opacity: 0,
+              y: 20
+            }} 
+            whileInView={{
+              opacity: 1,
+              y: 0
+            }} 
+            viewport={{
+              once: true
+            }} 
+            transition={{
+              duration: 0.5,
+              delay: 0.2
+            }} 
+            className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center"
+          >
             <p className="text-white/50 text-sm mb-4 md:mb-0">
               &copy; {currentYear} Pulse App. All rights reserved.
             </p>
@@ -49,6 +174,8 @@ const Footer = () => {
           </motion.div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
