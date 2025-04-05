@@ -24,11 +24,6 @@ const steps = [{
   title: "Plan a meetup",
   description: "Our AI helps you find the perfect time and activity that works for everyone.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
-}, {
-  icon: Sprout,
-  title: "Just Show Up",
-  description: "No more planning stress—simply be there and enjoy your new connections.",
-  color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
 
 const HowItWorks = () => {
@@ -59,7 +54,7 @@ const HowItWorks = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Making friends shouldn't be complicated</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {steps.map((step, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 30
