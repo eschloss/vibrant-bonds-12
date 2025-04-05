@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
@@ -29,7 +28,7 @@ const Hero = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pulse-purple opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-pulse-purple"></span>
             </span>
-            Now in San Francisco, LA, and NYC
+            Turn Strangers into Friends
           </div>
           
           <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6">
