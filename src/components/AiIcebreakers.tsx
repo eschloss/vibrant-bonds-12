@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const icebreakers = [{
   id: "baba-yaga",
   name: "Baba Yaga",
-  tagline: "Ancient & Wicked",
+  tagline: "Choose Your Own Adventure",
   avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
@@ -19,7 +19,7 @@ const icebreakers = [{
 }, {
   id: "sherlock",
   name: "Sherlock Holmes",
-  tagline: "Theatrical & Deductive",
+  tagline: "Two Truths and a Lie",
   avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
   color: "from-blue-600 to-blue-800",
   bgColor: "bg-blue-600/20",
@@ -27,7 +27,7 @@ const icebreakers = [{
 }, {
   id: "mother-flawless",
   name: "Mother Flawless",
-  tagline: "Fierce & Fabulous",
+  tagline: "Toast or Roast",
   avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
@@ -35,7 +35,7 @@ const icebreakers = [{
 }, {
   id: "judge-snooty",
   name: "Judge Snooty",
-  tagline: "Dramatic & Scandalous",
+  tagline: "Chaos Courtroom",
   avatar: "/lovable-uploads/4511f010-fca9-4375-992c-dba8555e7191.png",
   color: "from-amber-500 to-amber-700",
   bgColor: "bg-amber-500/20",
