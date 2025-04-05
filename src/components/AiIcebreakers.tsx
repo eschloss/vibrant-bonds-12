@@ -115,7 +115,7 @@ const AiIcebreakers = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4"
           >
-            AI Characters Make <span className="pulse-gradient-text">Group Chats Fun</span>
+            Spark Meaningful <span className="pulse-gradient-text">Conversations</span>
           </motion.h2>
           
           <motion.p 
