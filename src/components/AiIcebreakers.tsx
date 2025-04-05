@@ -39,6 +39,7 @@ const icebreakers = [{
   bgColor: "bg-green-500/20",
   message: "Favorite snack from childhood, what is? Share why special to you, hmm?"
 }];
+
 const CharacterCard = ({
   character
 }) => {
@@ -73,6 +74,7 @@ const CharacterCard = ({
       </CardContent>
     </Card>;
 };
+
 const AiIcebreakers = () => {
   return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
       {/* Background gradients */}
@@ -160,9 +162,16 @@ const AiIcebreakers = () => {
         duration: 0.5,
         delay: 0.5
       }} className="flex justify-center mt-12">
-          <Button size="lg" className="px-8 py-6 rounded-full text-lg bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white shadow-lg shadow-purple-500/20">Meet all our icebreakers</Button>
+          <Button 
+            size="xl"
+            variant="gradient"
+            className="rounded-full shadow-lg shadow-purple-500/20"
+          >
+            Meet all our icebreakers
+          </Button>
         </motion.div>
       </div>
     </div>;
 };
+
 export default AiIcebreakers;

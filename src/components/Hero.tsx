@@ -1,5 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -35,15 +38,23 @@ const Hero = () => {
           <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
-            <a href="#download" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+            <Button 
+              size="xl" 
+              variant="gradient" 
+              className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full"
+            >
               <UserPlus size={18} />
               <span>Meet Your Crew</span>
-            </a>
+            </Button>
             
-            <a href="#how-it-works" className="bg-white hover:bg-gray-100 text-pulse-purple px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
+            <Button 
+              size="xl" 
+              variant="outline" 
+              className="bg-white hover:bg-gray-100 text-pulse-purple rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
+            >
               <span>Download App</span>
               <ArrowDownToLine size={18} />
-            </a>
+            </Button>
           </div>
           
           <div className="flex items-center gap-4 mt-4">

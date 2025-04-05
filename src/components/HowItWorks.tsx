@@ -90,11 +90,12 @@ const HowItWorks = () => {
           className="flex justify-center mt-12"
         >
           <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-medium px-8 py-6 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300"
+            size="xl"
+            variant="gradient"
+            className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
           >
             Take Personality Test
-            <ArrowRight className="ml-2" />
+            <ArrowRight />
           </Button>
         </motion.div>
       </div>

@@ -58,10 +58,12 @@ const NeuralNetwork = () => {
           {/* Updated CTA Button - Center aligned */}
           <motion.div variants={fadeInUp} className="mt-6 flex justify-center">
             <Button 
-              className="pulse-gradient-cta text-white font-medium px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm flex items-center gap-2"
+              size="xl"
+              variant="coral"
+              className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <span>Meet Your Crew</span>
-              <ArrowRight className="ml-1" />
+              <ArrowRight />
             </Button>
           </motion.div>
         </motion.div>
