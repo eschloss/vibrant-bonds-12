@@ -154,7 +154,7 @@
   }
   
   .pulse-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-teal;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue;
   }
   
   .pulse-gradient-cta {
