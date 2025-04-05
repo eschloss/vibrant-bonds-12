@@ -1,15 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
-
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -17,14 +14,11 @@ const Navbar = () => {
         setScrolled(isScrolled);
       }
     };
-
     window.addEventListener("scroll", handleScroll, {
       passive: true
     });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
-
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
@@ -36,9 +30,9 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Home</Link>
-          <Link to="/matchmaking" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Matchmaking</Link>
-          <Link to="/communities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Communities</Link>
-          <Link to="/cities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Cities</Link>
+          <Link to="/matchmaking" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">How it works</Link>
+          <Link to="/communities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">For Communities</Link>
+          
           <Link to="/about" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">About Us</Link>
           <Link to="/blog" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Blog</Link>
           <Link to="/contact" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Contact</Link>
@@ -46,20 +40,13 @@ const Navbar = () => {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          {isMatchmakingPage ? (
-            <a href="https://482tykjn26x.typeform.com/pulse#city=" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+          {isMatchmakingPage ? <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
               <UserPlus size={18} />
               <span>Meet Your Crew</span>
-            </a>
-          ) : (
-            <Link to="/matchmaking" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+            </a> : <Link to="/matchmaking" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
               <UserPlus size={18} />
               <span>Meet Your Crew</span>
-            </Link>
-          )}
+            </Link>}
         </div>
 
         {/* Mobile Menu Button */}
@@ -92,26 +79,15 @@ const Navbar = () => {
             <Link to="/contact" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Contact
             </Link>
-            {isMatchmakingPage ? (
-              <a 
-                href="https://482tykjn26x.typeform.com/pulse#city=" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" 
-                onClick={() => setIsMenuOpen(false)}
-              >
+            {isMatchmakingPage ? <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
-              </a>
-            ) : (
-              <Link to="https://apps.apple.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
+              </a> : <Link to="https://apps.apple.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
                 <UserPlus size={18} />
                 <span>Download App</span>
-              </Link>
-            )}
+              </Link>}
           </nav>
         </div>}
     </header>;
 };
-
 export default Navbar;
