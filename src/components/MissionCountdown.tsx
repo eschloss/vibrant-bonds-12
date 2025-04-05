@@ -92,7 +92,7 @@ const MissionCountdown = () => {
             </div>
           </div>
           
-          <h2 className="heading-lg mb-4 text-white font-bold">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
             <span className="font-bold">Meet in Real Life</span> — 7 Day Mission
           </h2>
           
