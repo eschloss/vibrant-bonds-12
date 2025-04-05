@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
@@ -73,6 +74,11 @@ const Footer = () => {
                 <li>
                   <Link to="/about" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/matchmaking" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    How It Works
                   </Link>
                 </li>
                 <li>
