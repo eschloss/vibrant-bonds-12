@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Brain, ArrowRight } from "lucide-react";
@@ -47,11 +48,11 @@ const NeuralNetwork = () => {
           </motion.div>
           
           <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-sm px-4 py-2 rounded-lg bg-gray-900/40">
-            AI-Powered Match<span className="pulse-gradient-text">ing</span> for Genuine Connections
+            Find Your Perfect <span className="pulse-gradient-text">Friend</span> Match
           </motion.h2>
           
           <motion.p variants={fadeInUp} className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-sm p-2 rounded-lg bg-gray-900/30 mb-6">
-            Our proprietary neural network analyzes shared interests and personality traits to create meaningful matches that last.
+            Our smart matching system brings together people with shared interests and compatible personalities, making it easy to find friends you'll click with.
           </motion.p>
           
           {/* Updated CTA Button - Center aligned */}
