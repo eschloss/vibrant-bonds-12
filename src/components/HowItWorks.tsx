@@ -1,15 +1,10 @@
 
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ClipboardCheck, ArrowRight } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
 // Define the steps with updated headlines and descriptions
 const steps = [{
-  icon: ClipboardCheck,
-  title: "Take Personality Test",
-  description: "Complete our fun and insightful personality test to help us understand you better.",
-  color: "bg-gradient-to-r from-purple-500 to-indigo-600"
-}, {
   icon: Users,
   title: "Get Matched",
   description: "We'll match you with a small group of like-minded people.",
@@ -59,7 +54,7 @@ const HowItWorks = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Making friends shouldn't be complicated</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {steps.map((step, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 30
