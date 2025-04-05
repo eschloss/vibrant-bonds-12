@@ -51,9 +51,13 @@ const CharacterCard = ({ character }) => {
     <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
       <CardContent className="p-6">
         <div className="flex items-center mb-4">
-          <div className={`w-12 h-12 rounded-full overflow-hidden mr-3 ring-2 ring-white/50 ${character.bgColor}`}>
+          <div className={`w-12 h-12 overflow-hidden mr-3 ring-2 ring-white/50 ${character.bgColor} rounded-full`}>
             <Avatar className="w-full h-full">
-              <AvatarImage src={character.avatar} alt={character.name} />
+              <AvatarImage 
+                src={character.avatar} 
+                alt={character.name}
+                className="object-cover object-center w-full h-full"
+              />
               <AvatarFallback className={`bg-gradient-to-br ${character.color} text-white`}>
                 {character.name.substring(0, 2)}
               </AvatarFallback>
