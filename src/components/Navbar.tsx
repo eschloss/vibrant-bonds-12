@@ -1,12 +1,15 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, UserPlus, Sparkles } from "lucide-react";
+import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -14,17 +17,23 @@ const Navbar = () => {
         setScrolled(isScrolled);
       }
     };
+
     window.addEventListener("scroll", handleScroll, {
       passive: true
     });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
-          <Sparkles className="text-purple-400 h-5 w-5" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-blue-400">Pulse</span>
+          <img 
+            src="/public/lovable-uploads/ec4f40c7-9b3b-45b7-82c0-0f0b7233e101.png" 
+            alt="Pulse Logo" 
+            className="h-8 md:h-10"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -90,4 +99,5 @@ const Navbar = () => {
         </div>}
     </header>;
 };
+
 export default Navbar;
