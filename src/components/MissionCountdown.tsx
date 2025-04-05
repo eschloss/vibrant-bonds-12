@@ -108,7 +108,7 @@ const MissionCountdown = () => {
                   <div className="flex gap-4 justify-center sm:justify-end">
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-4xl md:text-5xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-white" 
                         key={`days-${timeLeft.days}`} 
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -118,10 +118,10 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Days</span>
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
+                    <div className="text-4xl md:text-5xl font-bold text-white/70">:</div>
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-4xl md:text-5xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-white" 
                         key={`hours-${timeLeft.hours}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -131,10 +131,10 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Hours</span>
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
+                    <div className="text-4xl md:text-5xl font-bold text-white/70">:</div>
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-4xl md:text-5xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-white" 
                         key={`minutes-${timeLeft.minutes}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -144,10 +144,10 @@ const MissionCountdown = () => {
                       </motion.div>
                       <span className="text-muted-foreground text-sm">Mins</span>
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold text-foreground/30">:</div>
+                    <div className="text-4xl md:text-5xl font-bold text-white/70">:</div>
                     <div className="flex flex-col items-center">
                       <motion.div 
-                        className="text-4xl md:text-5xl font-bold text-primary" 
+                        className="text-4xl md:text-5xl font-bold text-white" 
                         key={`seconds-${timeLeft.seconds}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
