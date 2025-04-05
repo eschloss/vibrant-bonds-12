@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 const steps = [{
   icon: Users,
   number: 1,
@@ -29,24 +30,19 @@ const steps = [{
   description: "After the initial meet, we'll help you grow your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
+
 const Matchmaking = () => {
   useEffect(() => {
-    // Scroll to top when page loads
     window.scrollTo(0, 0);
-
-    // Set dark mode
     document.documentElement.classList.add('dark');
   }, []);
+
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
       
       <main className="flex-grow">
-        {/* Enhanced Hero Section */}
         <section className="relative py-24 overflow-hidden">
-          {/* Dynamic Background Elements */}
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
-          
-          {/* Animated Particle Background */}
           <div className="absolute inset-0 -z-5">
             {Array.from({
             length: 20
@@ -59,11 +55,8 @@ const Matchmaking = () => {
             animationDelay: `${Math.random() * 5}s`
           }} />)}
           </div>
-          
-          {/* Glow Effects */}
           <div className="absolute top-1/4 -left-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
-          
           <div className="container mx-auto px-4 relative z-10">
             <motion.div initial={{
             opacity: 0,
@@ -74,16 +67,13 @@ const Matchmaking = () => {
           }} transition={{
             duration: 0.7
           }} className="text-center max-w-3xl mx-auto">
-              {/* Decorative Element */}
               <div className="mb-6 inline-flex gap-2 items-center bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10">
                 <Sparkles size={18} className="text-yellow-400" />
                 <span className="text-white/90 text-sm font-medium">Make Friends in Your City</span>
               </div>
-              
               <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
                 Find Your <span className="pulse-gradient-text">Perfect Crew</span>
               </h1>
-              
               <motion.p className="text-xl md:text-2xl text-foreground/80 font-light mb-8" initial={{
               opacity: 0,
               y: 10
@@ -94,10 +84,6 @@ const Matchmaking = () => {
               delay: 0.2,
               duration: 0.5
             }}>Life's too short for awkward small talk. Meet people who get you in your city.</motion.p>
-              
-              {/* City Highlights */}
-              
-              
               <motion.div initial={{
               opacity: 0,
               y: 10
@@ -112,21 +98,17 @@ const Matchmaking = () => {
                   <Zap size={18} className="text-white" />
                   <span>Start Matching Now</span>
                 </Button>
-                
-                
               </motion.div>
             </motion.div>
           </div>
         </section>
         
-        {/* Steps Section */}
         <section className="relative py-16 bg-gray-900 dark:bg-gray-950">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
             <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl"></div>
             <div className="absolute -bottom-24 left-1/2 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
           </div>
-
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto">
               {steps.map((step, index) => <motion.div key={index} initial={{
@@ -149,7 +131,6 @@ const Matchmaking = () => {
                       <step.icon className="text-white/20" size={40} />
                     </div>
                   </div>
-                  
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
                     <p className="text-xl text-gray-300">{step.description}</p>
@@ -159,33 +140,51 @@ const Matchmaking = () => {
           </div>
         </section>
         
-        {/* CTA Section */}
         <section className="relative py-20 bg-gray-900/80">
           <div className="container mx-auto px-4">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.5
-          }} className="text-center max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">
-                Get matched
-              </h2>
-              
-              <div className="mb-8 bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 inline-flex items-center gap-2 text-gray-300">
-                <Clock size={20} className="text-pulse-purple" />
-                Takes 2 minutes
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5 }} 
+              className="text-center max-w-3xl mx-auto"
+            >
+              <div className="mb-6 inline-flex items-center justify-center gap-2 bg-red-500/20 backdrop-blur-sm px-5 py-3 rounded-full border border-red-500/30">
+                <Timer size={22} className="text-red-400 animate-pulse" />
+                <span className="text-white/90 font-medium">7-Day Mission Deadline</span>
               </div>
               
-              <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                Start Matching
-                <ArrowRight size={18} />
-              </Button>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                Ready to Meet Your <span className="pulse-gradient-text">Perfect Crew</span>?
+              </h2>
+              
+              <div className="bg-gray-800/70 backdrop-blur-sm rounded-xl p-6 mb-8 max-w-2xl mx-auto">
+                <div className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <AlertTriangle size={22} className="text-yellow-500" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-semibold text-white mb-2">The Clock is Ticking!</h3>
+                    <p className="text-gray-300">
+                      Once matched, you and your crew have <span className="font-bold text-white">only 7 days</span> to meet in real life. 
+                      Don't miss your chance to make meaningful connections!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button 
+                  size="xl" 
+                  variant="gradient" 
+                  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto animate-pulse-slow"
+                >
+                  Start Matching Now
+                  <ArrowRight size={18} />
+                </Button>
+                
+                <span className="text-gray-400 text-sm">Takes just 2 minutes</span>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -194,4 +193,5 @@ const Matchmaking = () => {
       <Footer />
     </div>;
 };
+
 export default Matchmaking;
