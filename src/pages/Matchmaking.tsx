@@ -184,7 +184,7 @@ const Matchmaking = () => {
                 <Button 
                   size="xl" 
                   variant="gradient" 
-                  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto animate-pulse-slow"
+                  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto"
                 >
                   Start Matching Now
                   <ArrowRight size={18} />
