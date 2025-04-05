@@ -183,7 +183,7 @@ const CityList = () => {
                       <SelectValue placeholder="All Countries" />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border-white/10 text-white">
-                      <SelectItem value="">All Countries</SelectItem>
+                      <SelectItem value="all-countries">All Countries</SelectItem>
                       {countries.map(country => (
                         <SelectItem key={country} value={country}>
                           {country}
