@@ -7,7 +7,7 @@ const Hero = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  return <section className="relative flex items-center pt-12 pb-4 overflow-hidden section-padding">
+  return <section className="relative flex items-center py-16 overflow-hidden section-padding">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
@@ -34,9 +34,9 @@ const Hero = () => {
             <span className="pulse-gradient-text">Meet New Friends</span> in Your City
           </h1>
           
-          <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-6">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
+          <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
-          <div className="flex flex-col sm:flex-row gap-4 mt-2 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <a href="#download" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
               <UserPlus size={18} />
               <span>Meet Your Crew</span>
@@ -48,7 +48,7 @@ const Hero = () => {
             </a>
           </div>
           
-          <div className="flex items-center gap-4 mt-2">
+          <div className="flex items-center gap-4 mt-4">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map(i => <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200" style={{
               backgroundImage: `url(https://i.pravatar.cc/100?img=${i + 10})`,
