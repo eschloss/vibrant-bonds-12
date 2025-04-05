@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
@@ -20,12 +21,18 @@ const steps = [{
 }, {
   icon: CalendarDays,
   number: 3,
-  title: "Just Show Up",
-  description: "We'll plan the meet-up—just show up.",
+  title: "Plan an In Real Life meetup",
+  description: "Our AI icebreakers will guide your group to plan the perfect meetup.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
-  icon: Sprout,
+  icon: Clock,
   number: 4,
+  title: "Just Show Up",
+  description: "We'll help coordinate the details—simply show up and enjoy.",
+  color: "bg-gradient-to-r from-violet-500 to-purple-600"
+}, {
+  icon: Sprout,
+  number: 5,
   title: "Grow Connections",
   description: "After the initial meet, we'll help you grow your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
