@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Brain, ArrowRight } from "lucide-react";
@@ -56,16 +55,7 @@ const NeuralNetwork = () => {
           </motion.p>
           
           {/* Updated CTA Button - Center aligned */}
-          <motion.div variants={fadeInUp} className="mt-6 flex justify-center">
-            <Button 
-              size="xl"
-              variant="coral"
-              className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <span>Meet Your Crew</span>
-              <ArrowRight />
-            </Button>
-          </motion.div>
+          
         </motion.div>
       </div>
     </div>;
