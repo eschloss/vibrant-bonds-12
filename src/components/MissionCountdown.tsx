@@ -17,7 +17,7 @@ const MissionCountdown = () => {
   });
 
   // State to track animation of days passing
-  const [daysProgress, setDaysProgress] = useState(100);
+  const [missionProgress, setMissionProgress] = useState(0);
   const [isWarning, setIsWarning] = useState(false);
 
   // Countdown reference
@@ -25,42 +25,40 @@ const MissionCountdown = () => {
 
   // Start the countdown
   useEffect(() => {
+    const totalSeconds = 7 * 24 * 60 * 60; // 7 days in seconds
+    let secondsElapsed = 0;
+    
     countdownRef.current = setInterval(() => {
-      setTimeLeft(prev => {
-        let newSeconds = prev.seconds - 1;
-        let newMinutes = prev.minutes;
-        let newHours = prev.hours;
-        let newDays = prev.days;
-        
-        if (newSeconds < 0) {
-          newSeconds = 59;
-          newMinutes -= 1;
-          if (newMinutes < 0) {
-            newMinutes = 59;
-            newHours -= 1;
-            if (newHours < 0) {
-              newHours = 23;
-              newDays -= 1;
-            }
-          }
+      secondsElapsed += 1;
+      
+      const secondsRemaining = totalSeconds - secondsElapsed;
+      if (secondsRemaining <= 0) {
+        if (countdownRef.current) {
+          clearInterval(countdownRef.current);
         }
-
-        // Calculate progress percentage based on days left
-        const newProgress = (newDays / 7) * 100;
-        setDaysProgress(newProgress);
-        
-        // Set warning state when less than 2 days remaining
-        if (newDays < 2 && !isWarning) {
-          setIsWarning(true);
-        }
-        
-        return {
-          days: newDays,
-          hours: newHours,
-          minutes: newMinutes,
-          seconds: newSeconds
-        };
+        return;
+      }
+      
+      const days = Math.floor(secondsRemaining / (24 * 60 * 60));
+      const hours = Math.floor((secondsRemaining % (24 * 60 * 60)) / (60 * 60));
+      const minutes = Math.floor((secondsRemaining % (60 * 60)) / 60);
+      const seconds = Math.floor(secondsRemaining % 60);
+      
+      setTimeLeft({
+        days,
+        hours,
+        minutes,
+        seconds
       });
+      
+      // Calculate progress as percentage completed (not remaining)
+      const newProgress = (secondsElapsed / totalSeconds) * 100;
+      setMissionProgress(newProgress);
+      
+      // Set warning state when less than 2 days remaining
+      if (days < 2 && !isWarning) {
+        setIsWarning(true);
+      }
     }, 1000);
 
     return () => {
@@ -94,7 +92,7 @@ const MissionCountdown = () => {
             </div>
           </div>
           
-          <h2 className="heading-lg mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-primary/80">
+          <h2 className="heading-lg mb-4 text-white font-bold">
             <span className="font-bold">Meet in Real Life</span> — 7 Day Mission
           </h2>
           
@@ -159,9 +157,9 @@ const MissionCountdown = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Mission Progress</span>
-                    <span>{Math.round(daysProgress)}%</span>
+                    <span>{Math.round(missionProgress)}%</span>
                   </div>
-                  <Progress value={daysProgress} className="h-2" />
+                  <Progress value={missionProgress} className="h-2" />
                 </div>
                 
                 <AnimatePresence>
