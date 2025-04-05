@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
+import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -29,7 +29,7 @@ const Footer = () => {
               <p className="text-white/70 text-sm mb-4">
                 Bringing people together through meaningful connections and shared experiences.
               </p>
-              <div className="flex space-x-3">
+              <div className="flex space-x-3 mb-4">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Instagram size={18} />
                 </a>
@@ -41,6 +41,28 @@ const Footer = () => {
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Linkedin size={18} />
+                </a>
+              </div>
+              
+              {/* App Download Links */}
+              <div className="flex space-x-2">
+                <a 
+                  href="https://apps.apple.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded text-xs"
+                >
+                  <Apple size={12} className="mr-1" />
+                  App Store
+                </a>
+                <a 
+                  href="https://play.google.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded text-xs"
+                >
+                  <Play size={12} className="mr-1" />
+                  Play Store
                 </a>
               </div>
             </div>
@@ -57,6 +79,12 @@ const Footer = () => {
                 <li>
                   <Link to="/contact" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/communities" className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
+                    <Users size={12} className="mr-1" />
+                    Communities
                   </Link>
                 </li>
                 <li>
