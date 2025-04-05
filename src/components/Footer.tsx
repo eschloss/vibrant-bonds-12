@@ -117,8 +117,7 @@ const Footer = () => {
                   </li>
                 ))}
                 <li className="col-span-2 mt-2">
-                  <Link to="/cities" className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
-                    <MapPin size={12} className="mr-1" />
+                  <Link to="/cities" className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
                     View all cities
                   </Link>
                 </li>
@@ -217,3 +216,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
