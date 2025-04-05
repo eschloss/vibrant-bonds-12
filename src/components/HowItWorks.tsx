@@ -1,8 +1,15 @@
-import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, Sparkles } from "lucide-react";
 
-// Define the steps with more friendly, conversational headlines and descriptions
+import { motion } from "framer-motion";
+import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ClipboardCheck, ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
+
+// Define the steps with updated headlines and descriptions
 const steps = [{
+  icon: ClipboardCheck,
+  title: "Take Personality Test",
+  description: "Complete our fun and insightful personality test to help us understand you better.",
+  color: "bg-gradient-to-r from-purple-500 to-indigo-600"
+}, {
   icon: Users,
   title: "Get Matched",
   description: "We'll match you with a small group of like-minded people.",
@@ -14,15 +21,16 @@ const steps = [{
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
   icon: CalendarDays,
-  title: "Just Show Up",
-  description: "We'll plan the meet-up—you just need to be there.",
-  color: "bg-gradient-to-r from-orange-400 to-yellow-300"
+  title: "Plan a meetup",
+  description: "Our AI helps you find the perfect time and activity that works for everyone.",
+  color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
   icon: Sprout,
-  title: "Grow Together",
-  description: "After the initial meet, we'll help you nurture your new connections.",
+  title: "Just Show Up",
+  description: "No more planning stress—simply be there and enjoy your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
+
 const HowItWorks = () => {
   return <section id="how-it-works" className="relative py-12 bg-gray-900 dark:bg-gray-950">
       <div className="absolute inset-0 opacity-10">
@@ -51,7 +59,7 @@ const HowItWorks = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Making friends shouldn't be complicated</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
           {steps.map((step, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 30
@@ -77,7 +85,25 @@ const HowItWorks = () => {
               </p>
             </motion.div>)}
         </div>
+
+        {/* Call to Action Button */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex justify-center mt-12"
+        >
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-medium px-8 py-6 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300"
+          >
+            Take Personality Test
+            <ArrowRight className="ml-2" />
+          </Button>
+        </motion.div>
       </div>
     </section>;
 };
+
 export default HowItWorks;
