@@ -32,7 +32,7 @@ const Navbar = () => {
           <img 
             src="/public/lovable-uploads/ec4f40c7-9b3b-45b7-82c0-0f0b7233e101.png" 
             alt="Pulse Logo" 
-            className="h-6 md:h-8"
+            className="h-5 md:h-6"
           />
         </Link>
 
