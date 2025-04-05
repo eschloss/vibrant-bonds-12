@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
@@ -76,7 +75,7 @@ const Matchmaking = () => {
           }} className="text-center max-w-3xl mx-auto">
               <div className="mb-6 inline-flex gap-2 items-center bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10">
                 <Sparkles size={18} className="text-yellow-400" />
-                <span className="text-white/90 text-sm font-medium">Make Friends in Your City</span>
+                <span className="text-white/90 text-sm font-medium">Make Friends Effortlessly</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
                 Make Friends in <span className="pulse-gradient-text">Your City</span>
