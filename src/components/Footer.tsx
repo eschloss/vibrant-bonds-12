@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
+import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -26,6 +26,63 @@ const Footer = () => {
           <div className="absolute bottom-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl"></div>
           <div className="absolute -bottom-24 left-1/2 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
         </div>
+        
+        {/* Download App Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative z-10 mb-16 bg-gradient-to-r from-gray-800/70 to-gray-800/50 p-8 rounded-2xl border border-white/10 shadow-xl"
+        >
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <h3 className="text-2xl md:text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-blue-400">
+                Take Pulse Everywhere
+              </h3>
+              <p className="text-white/80 text-lg">
+                Download the Pulse app to make meaningful connections on the go. Available on iOS and Android.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a 
+                  href="https://apps.apple.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-black hover:bg-black/80 text-white py-3 px-6 rounded-xl transition-all duration-200 shadow-lg group"
+                >
+                  <Apple size={24} className="text-white group-hover:scale-110 transition-transform duration-200" />
+                  <div>
+                    <div className="text-xs font-light">Download on the</div>
+                    <div className="text-md font-bold">App Store</div>
+                  </div>
+                </a>
+                <a 
+                  href="https://play.google.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-black hover:bg-black/80 text-white py-3 px-6 rounded-xl transition-all duration-200 shadow-lg group"
+                >
+                  <Play size={24} className="text-white fill-white group-hover:scale-110 transition-transform duration-200" />
+                  <div>
+                    <div className="text-xs font-light">Get it on</div>
+                    <div className="text-md font-bold">Google Play</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <div className="relative">
+                <div className="absolute -top-6 -left-6 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+                <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&auto=format&fit=crop&q=80" 
+                  alt="Pulse app on mobile device" 
+                  className="relative z-10 rounded-xl shadow-2xl w-full max-w-md mx-auto object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
         
         <div className="relative z-10">
           <motion.div
