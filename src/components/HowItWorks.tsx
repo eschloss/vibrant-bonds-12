@@ -8,7 +8,7 @@ import {
   Sparkles
 } from "lucide-react";
 
-// Define the steps with concise headlines
+// Define the steps with more friendly, conversational headlines and descriptions
 const steps = [
   {
     icon: Users,
