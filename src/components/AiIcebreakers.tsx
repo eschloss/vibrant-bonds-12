@@ -1,8 +1,8 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { MessageSquare, ArrowRight } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,12 +15,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
-  message: "If you were to trap another player in my haunted forest, what dark secret would you reveal about them to ensure they never escape?",
-  adventures: [
-    "Escape the Witch's Hut", 
-    "Challenge the Forest Spirits", 
-    "Brew a Potion of Truth"
-  ]
+  message: "If you were to trap another player in my haunted forest, what dark secret would you reveal about them to ensure they never escape?"
 }, {
   id: "sherlock",
   name: "Sherlock Holmes",
@@ -28,12 +23,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
   color: "from-blue-600 to-blue-800",
   bgColor: "bg-blue-600/20",
-  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie.",
-  adventures: [
-    "Solve the London Mystery", 
-    "Outwit Professor Moriarty", 
-    "The Case of the Missing Diamond"
-  ]
+  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
 }, {
   id: "mother-flawless",
   name: "Mother Flawless",
@@ -41,12 +31,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
-  message: "Darling, if you had to either toast someone in this room with ridiculous praise or read them to filth with a savage roast, who would it be and what would you say?",
-  adventures: [
-    "The Catwalk Challenge", 
-    "Backstage Drama", 
-    "Royal Ball Takeover"
-  ]
+  message: "Darling, if you had to either toast someone in this room with ridiculous praise or read them to filth with a savage roast, who would it be and what would you say?"
 }, {
   id: "judge-snooty",
   name: "Judge Snooty",
@@ -54,19 +39,12 @@ const icebreakers = [{
   avatar: "/lovable-uploads/4511f010-fca9-4375-992c-dba8555e7191.png",
   color: "from-amber-500 to-amber-700",
   bgColor: "bg-amber-500/20",
-  message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?",
-  adventures: [
-    "The Grand Courthouse Scandal", 
-    "Mystery of the Missing Gavel", 
-    "Undercover in High Society"
-  ]
+  message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
 }];
 
 const CharacterCard = ({
   character
 }) => {
-  const [showAdventures, setShowAdventures] = useState(false);
-  
   return <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
       <CardContent className="p-6">
         <div className="flex items-center mb-4">
@@ -92,7 +70,7 @@ const CharacterCard = ({
           </div>
         </div>
 
-        <div className="text-xs text-gray-400 mt-2 mb-4">
+        <div className="text-xs text-gray-400 mt-2">
           {character.id === "baba-yaga" ? 
             "A cackling force of dark magic who twists your tales into haunted nightmares." : 
             character.id === "sherlock" ?
@@ -103,32 +81,6 @@ const CharacterCard = ({
             "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." :
             `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
-        
-        {/* Choose Your Adventure section */}
-        <Button 
-          variant="ghost" 
-          size="sm"
-          onClick={() => setShowAdventures(!showAdventures)}
-          className="w-full border border-gray-700 hover:bg-gray-700/30 text-gray-300 mb-2"
-        >
-          {showAdventures ? "Hide Adventures" : "Choose Your Adventure"}
-        </Button>
-        
-        {showAdventures && (
-          <div className="space-y-2 mt-3 animate-fade-in">
-            {character.adventures.map((adventure, index) => (
-              <Button 
-                key={index}
-                variant="ghost" 
-                size="sm"
-                className={`w-full justify-between border-gray-700 text-white bg-gradient-to-r ${character.color} opacity-90 hover:opacity-100`}
-              >
-                {adventure}
-                <ArrowRight size={14} />
-              </Button>
-            ))}
-          </div>
-        )}
       </CardContent>
     </Card>;
 };
