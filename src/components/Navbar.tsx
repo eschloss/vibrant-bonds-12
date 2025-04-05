@@ -37,6 +37,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Home</Link>
           <Link to="/matchmaking" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Matchmaking</Link>
+          <Link to="/communities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Communities</Link>
           <Link to="/cities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Cities</Link>
           <Link to="/about" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">About Us</Link>
           <Link to="/blog" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Blog</Link>
@@ -75,6 +76,9 @@ const Navbar = () => {
             </Link>
             <Link to="/matchmaking" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Matchmaking
+            </Link>
+            <Link to="/communities" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Communities
             </Link>
             <Link to="/cities" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Cities
