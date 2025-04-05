@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,31 +10,26 @@ interface CityMatchmakingTemplateProps {
 
 const steps = [{
   icon: Users,
-  number: 1,
   title: "Get Matched",
   description: "We'll match you with a small group of like-minded people.",
   color: "bg-gradient-to-r from-pink-500 to-purple-600"
 }, {
   icon: MessageSquare,
-  number: 2,
   title: "Break the Ice",
   description: "Chat with fellow group members, guided by our ice-breakers.",
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
   icon: CalendarDays,
-  number: 3,
   title: "Plan an In Real Life meetup",
   description: "Our AI icebreakers will guide your group to plan the perfect meetup.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
   icon: Clock,
-  number: 4,
   title: "Just Show Up",
   description: "We'll help coordinate the details—simply show up and enjoy.",
   color: "bg-gradient-to-r from-violet-500 to-purple-600"
 }, {
   icon: Sprout,
-  number: 5,
   title: "Grow Connections",
   description: "After the initial meet, we'll help you grow your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
@@ -130,11 +124,8 @@ const CityMatchmakingTemplate = ({ cityName }: CityMatchmakingTemplateProps) => 
               delay: index * 0.1
             }} className="flex items-center gap-6 mb-16 last:mb-0">
                   <div className="relative">
-                    <div className={`w-24 h-24 rounded-full ${step.color} flex items-center justify-center text-white text-3xl font-bold`}>
-                      {step.number}
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <step.icon className="text-white/20" size={40} />
+                    <div className={`w-24 h-24 rounded-full ${step.color} flex items-center justify-center`}>
+                      <step.icon className="text-white" size={40} />
                     </div>
                   </div>
                   <div className="flex-1">
