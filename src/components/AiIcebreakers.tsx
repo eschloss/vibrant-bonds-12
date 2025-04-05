@@ -12,7 +12,7 @@ const icebreakers = [
     id: "baba-yaga",
     name: "Baba Yaga",
     tagline: "Mystical & Wise",
-    avatar: "https://source.unsplash.com/random/200x200/?witch",
+    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     color: "from-emerald-500 to-emerald-700",
     bgColor: "bg-emerald-500/20",
     message: "If you could possess any magical ability for a day, what would it be and how would you use it?"
@@ -21,7 +21,7 @@ const icebreakers = [
     id: "sherlock",
     name: "Sherlock Holmes",
     tagline: "Analytical & Curious",
-    avatar: "https://source.unsplash.com/random/200x200/?detective",
+    avatar: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80",
     color: "from-blue-500 to-blue-700",
     bgColor: "bg-blue-500/20",
     message: "Based on observable evidence, what unusual hobby do you think the person to your left might secretly enjoy?"
@@ -30,7 +30,7 @@ const icebreakers = [
     id: "drag-queen",
     name: "Divine Diva",
     tagline: "Fabulous & Bold",
-    avatar: "https://source.unsplash.com/random/200x200/?glamour",
+    avatar: "https://images.unsplash.com/photo-1534685785945-60a1b0a2a18d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
     color: "from-pink-500 to-purple-600",
     bgColor: "bg-pink-500/20",
     message: "Darlings! If your life had a theme song that played whenever you entered a room, what would it be and why?"
@@ -39,7 +39,7 @@ const icebreakers = [
     id: "baby-yoda",
     name: "Baby Yoda",
     tagline: "Cute & Innocent",
-    avatar: "https://source.unsplash.com/random/200x200/?cute",
+    avatar: "https://images.unsplash.com/photo-1501286353178-1ec881214838?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     color: "from-green-500 to-green-700",
     bgColor: "bg-green-500/20",
     message: "Favorite snack from childhood, what is? Share why special to you, hmm?"
