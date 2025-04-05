@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -367,7 +366,7 @@ const communityTypes = [
 const howItWorks = [
   {
     title: "Smart Group Matching",
-    description: "Our AI analyzes member profiles to create small groups of 3-5 people based on shared interests, goals, and compatibility."
+    description: "Our AI analyzes member profiles to create groups of 8-12 people based on shared interests, goals, and compatibility."
   },
   {
     title: "AI-Powered Conversations",
