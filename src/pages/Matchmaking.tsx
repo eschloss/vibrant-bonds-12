@@ -79,7 +79,7 @@ const Matchmaking = () => {
                 <span className="text-white/90 text-sm font-medium">Make Friends in Your City</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
-                Find Your <span className="pulse-gradient-text">Perfect Crew</span>
+                Make Friends in <span className="pulse-gradient-text">Your City</span>
               </h1>
               <motion.p className="text-xl md:text-2xl text-foreground/80 font-light mb-8" initial={{
               opacity: 0,
