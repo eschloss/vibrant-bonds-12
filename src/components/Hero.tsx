@@ -1,13 +1,11 @@
-
 import { useState, useEffect } from "react";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  return <section className="relative flex items-center py-16 pt-28 overflow-hidden section-padding">
+  return <section className="relative flex items-center py-100 pt-50 overflow-hidden section-padding py-[109px]">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
