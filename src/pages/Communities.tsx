@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -22,7 +21,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
 
-// Form validation schema
 const formSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
   name: z.string().min(2, "Your name is required"),
@@ -57,10 +55,10 @@ const CommunitiesPage = () => {
                 Strengthen Your Community
               </span>
               <br />
-              One Connection at a Time
+              With AI-Powered Group Matchmaking
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
-              Transform how members of your community connect, engage, and build lasting relationships through AI-powered matchmaking.
+              Transform how members of your community connect, engage, and build lasting relationships through AI-guided group meetups and icebreaker activities.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a 
@@ -365,7 +363,6 @@ const CommunitiesPage = () => {
   );
 };
 
-// Signup Form Component
 const CommunitySignupForm = () => {
   const { toast } = useToast();
   const form = useForm<FormValues>({
@@ -379,10 +376,8 @@ const CommunitySignupForm = () => {
   });
   
   const onSubmit = async (data: FormValues) => {
-    // This would typically send the data to your backend
     console.log("Form submitted:", data);
     
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     toast({
@@ -501,7 +496,6 @@ const CommunitySignupForm = () => {
   );
 };
 
-// Data for different sections
 const communityTypes = [
   {
     icon: <GraduationCap className="text-white h-6 w-6" />,
