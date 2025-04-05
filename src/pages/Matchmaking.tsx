@@ -1,7 +1,6 @@
-
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Lightning, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -51,28 +50,98 @@ const Matchmaking = () => {
       <Navbar />
       
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
+        {/* Enhanced Hero Section */}
+        <section className="relative py-24 overflow-hidden">
+          {/* Dynamic Background Elements */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
+          
+          {/* Animated Particle Background */}
+          <div className="absolute inset-0 -z-5">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div 
+                key={i}
+                className="absolute rounded-full bg-purple-500/20"
+                style={{
+                  width: `${Math.random() * 10 + 5}px`,
+                  height: `${Math.random() * 10 + 5}px`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                  animationDelay: `${Math.random() * 5}s`
+                }}
+              />
+            ))}
           </div>
           
-          <div className="container mx-auto px-4">
+          {/* Glow Effects */}
+          <div className="absolute top-1/4 -left-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+          
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7 }}
               className="text-center max-w-3xl mx-auto"
             >
-              <h1 className="text-4xl md:text-6xl font-bold mb-8 pulse-gradient-text">
-                Meet New Friends
+              {/* Decorative Element */}
+              <div className="mb-6 inline-flex gap-2 items-center bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-white/10">
+                <Sparkles size={18} className="text-yellow-400" />
+                <span className="text-white/90 text-sm font-medium">Making friendships magical</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
+                Find Your <span className="pulse-gradient-text">Perfect Crew</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-foreground/80 font-light mb-8">
-                Making friends as an adult can be hard. We're here to help.
-              </p>
+              <motion.p 
+                className="text-xl md:text-2xl text-foreground/80 font-light mb-8"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                Life's too short for awkward small talk. Meet people who get you.
+              </motion.p>
+              
+              {/* City Highlights */}
+              <div className="flex justify-center gap-2 mb-12 flex-wrap">
+                {["San Francisco", "Los Angeles", "New York"].map((city) => (
+                  <motion.div 
+                    key={city}
+                    className="px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 text-white/80 flex items-center gap-1"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <Zap size={14} className="text-purple-400" />
+                    {city}
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Button 
+                  size="xl" 
+                  variant="gradient" 
+                  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
+                >
+                  <Lightning size={18} className="text-white" />
+                  <span>Start Matching Now</span>
+                </Button>
+                
+                <Button 
+                  size="xl" 
+                  variant="outline" 
+                  className="rounded-full bg-transparent border border-white/20 text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  <span>How It Works</span>
+                  <ArrowRight size={18} />
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </section>
