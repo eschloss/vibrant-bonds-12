@@ -101,7 +101,7 @@ const Footer = () => {
               <p className="text-white/70 mb-6 max-w-xs">
                 Building a world where creating meaningful friendships is effortless and joyful.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 mb-6">
                 <a 
                   href="https://instagram.com" 
                   target="_blank" 
@@ -137,6 +137,34 @@ const Footer = () => {
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={20} />
+                </a>
+              </div>
+              
+              {/* Download App Buttons */}
+              <div className="flex gap-4">
+                <a 
+                  href="https://apps.apple.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-black hover:bg-black/80 text-white py-2 px-3 rounded-xl transition-all duration-200 shadow-lg"
+                >
+                  <Apple size={18} className="text-white" />
+                  <div className="text-xs">
+                    <div className="text-[10px] font-light">Download on the</div>
+                    <div className="font-bold">App Store</div>
+                  </div>
+                </a>
+                <a 
+                  href="https://play.google.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-black hover:bg-black/80 text-white py-2 px-3 rounded-xl transition-all duration-200 shadow-lg"
+                >
+                  <Play size={18} className="text-white fill-white" />
+                  <div className="text-xs">
+                    <div className="text-[10px] font-light">Get it on</div>
+                    <div className="font-bold">Google Play</div>
+                  </div>
                 </a>
               </div>
             </div>
