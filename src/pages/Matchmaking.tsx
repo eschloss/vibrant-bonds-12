@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
@@ -100,10 +101,16 @@ const Matchmaking = () => {
               delay: 0.4,
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
-                  <Zap size={18} className="text-white" />
-                  <span>Start Matching Now</span>
-                </Button>
+                <a 
+                  href="https://482tykjn26x.typeform.com/pulse#city=" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
+                    <Zap size={18} className="text-white" />
+                    <span>Start Matching Now</span>
+                  </Button>
+                </a>
               </motion.div>
             </motion.div>
           </div>
@@ -180,14 +187,21 @@ const Matchmaking = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button 
-                  size="xl" 
-                  variant="gradient" 
-                  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto"
+                <a 
+                  href="https://482tykjn26x.typeform.com/pulse#city=" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
                 >
-                  Start Matching Now
-                  <ArrowRight size={18} />
-                </Button>
+                  <Button 
+                    size="xl" 
+                    variant="gradient" 
+                    className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto"
+                  >
+                    Start Matching Now
+                    <ArrowRight size={18} />
+                  </Button>
+                </a>
                 
                 <span className="text-gray-400 text-sm">Takes just 2 minutes</span>
               </div>
