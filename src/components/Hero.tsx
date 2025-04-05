@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
-import { ChevronRight, Download, Smartphone } from "lucide-react";
+import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -10,12 +11,12 @@ const Hero = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-coral/10 to-transparent opacity-50"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
       </div>
       
       {/* Decorative Shapes */}
       <div className="absolute top-1/4 left-10 w-12 h-12 rounded-full bg-pulse-blue/20 animate-float"></div>
-      <div className="absolute bottom-1/4 right-10 w-20 h-20 rounded-full bg-pulse-coral/20 animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 right-10 w-20 h-20 rounded-full bg-pulse-purple/20 animate-pulse-slow"></div>
       <div className="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-pulse-teal/20 animate-bounce-gentle"></div>
 
       <div className="container mx-auto">
@@ -23,8 +24,8 @@ const Hero = () => {
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
           <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium border border-gray-200 w-fit mb-6">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pulse-coral opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-pulse-coral"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pulse-purple opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-pulse-purple"></span>
             </span>
             Now in San Francisco, LA, and NYC
           </div>
@@ -36,14 +37,14 @@ const Hero = () => {
           <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
-            <a href="#download" className="button-secondary flex items-center justify-center gap-2">
-              <Download size={18} />
+            <a href="#download" className="button-primary flex items-center justify-center gap-2">
+              <UserPlus size={18} />
               <span>Meet Your Crew</span>
             </a>
             
-            <a href="#how-it-works" className="button-tertiary flex items-center justify-center gap-2">
+            <a href="#how-it-works" className="bg-white hover:bg-gray-100 text-pulse-purple px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
               <span>Download App</span>
-              <ChevronRight size={18} />
+              <ArrowDownToLine size={18} />
             </a>
           </div>
           
