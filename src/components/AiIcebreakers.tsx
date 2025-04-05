@@ -33,13 +33,13 @@ const icebreakers = [{
   bgColor: "bg-pink-500/20",
   message: "Darling, if you had to either toast someone in this room with ridiculous praise or read them to filth with a savage roast, who would it be and what would you say?"
 }, {
-  id: "baby-yoda",
-  name: "Baby Yoda",
-  tagline: "Cute & Innocent",
-  avatar: "https://images.unsplash.com/photo-1501286353178-1ec881214838?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  color: "from-green-500 to-green-700",
-  bgColor: "bg-green-500/20",
-  message: "Favorite snack from childhood, what is? Share why special to you, hmm?"
+  id: "judge-snooty",
+  name: "Judge Snooty",
+  tagline: "Dramatic & Scandalous",
+  avatar: "/lovable-uploads/4511f010-fca9-4375-992c-dba8555e7191.png",
+  color: "from-amber-500 to-amber-700",
+  bgColor: "bg-amber-500/20",
+  message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
 }];
 
 const CharacterCard = ({
@@ -77,6 +77,8 @@ const CharacterCard = ({
             "The world's most theatrical detective leading a game of deception and clever deduction." :
             character.id === "mother-flawless" ?
             "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." :
+            character.id === "judge-snooty" ?
+            "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." :
             `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
