@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -38,14 +39,16 @@ const Hero = () => {
           <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
-            <Button 
-              size="xl" 
-              variant="gradient" 
-              className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full"
-            >
-              <UserPlus size={18} />
-              <span>Meet Your Crew</span>
-            </Button>
+            <Link to="/matchmaking">
+              <Button 
+                size="xl" 
+                variant="gradient" 
+                className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full"
+              >
+                <UserPlus size={18} />
+                <span>Meet Your Crew</span>
+              </Button>
+            </Link>
             
             <Button 
               size="xl" 
