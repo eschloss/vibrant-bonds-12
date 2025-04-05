@@ -9,6 +9,7 @@ import Matchmaking from "./pages/Matchmaking";
 import CityList from "./pages/CityList";
 import CityPage from "./pages/CityPage";
 import Communities from "./pages/Communities";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,8 +26,8 @@ const App = () => (
           <Route path="/cities" element={<CityList />} />
           <Route path="/cities/:cityName" element={<CityPage />} />
           <Route path="/communities" element={<Communities />} />
+          <Route path="/about" element={<About />} />
           {/* Future routes will be added here */}
-          {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}
           <Route path="*" element={<NotFound />} />
