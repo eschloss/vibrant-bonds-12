@@ -7,7 +7,7 @@ const Hero = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  return <section className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden section-padding">
+  return <section className="relative min-h-screen flex items-center pt-20 pb-6 overflow-hidden section-padding">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
