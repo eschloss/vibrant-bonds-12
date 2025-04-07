@@ -38,13 +38,28 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Home</Link>
-          <Link to="/matchmaking" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">How it works</Link>
-          <Link to="/communities" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">For Communities</Link>
+          <Link to="/" className={cn(
+            "hover:text-purple-400 transition-colors font-medium",
+            scrolled ? "text-gray-200" : "text-gray-800"
+          )}>Home</Link>
+          <Link to="/matchmaking" className={cn(
+            "hover:text-purple-400 transition-colors font-medium",
+            scrolled ? "text-gray-200" : "text-gray-800"
+          )}>How it works</Link>
+          <Link to="/communities" className={cn(
+            "hover:text-purple-400 transition-colors font-medium",
+            scrolled ? "text-gray-200" : "text-gray-800"
+          )}>For Communities</Link>
           
-          <Link to="/about" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">About Us</Link>
+          <Link to="/about" className={cn(
+            "hover:text-purple-400 transition-colors font-medium",
+            scrolled ? "text-gray-200" : "text-gray-800"
+          )}>About Us</Link>
           
-          <Link to="/contact" className="text-gray-200 hover:text-purple-400 transition-colors font-medium">Contact</Link>
+          <Link to="/contact" className={cn(
+            "hover:text-purple-400 transition-colors font-medium",
+            scrolled ? "text-gray-200" : "text-gray-800"
+          )}>Contact</Link>
         </nav>
 
         {/* CTA Button */}
@@ -59,7 +74,10 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden flex items-center text-gray-200" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
+        <button className={cn(
+          "md:hidden flex items-center", 
+          scrolled ? "text-gray-200" : "text-gray-800"
+        )} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
