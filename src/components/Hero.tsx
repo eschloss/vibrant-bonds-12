@@ -3,12 +3,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  return <section className="relative flex items-center py-100 pt-50 overflow-hidden section-padding py-[109px]">
+  
+  return (
+    <section className="relative flex items-center py-100 pt-50 overflow-hidden section-padding py-[109px] bg-white dark:bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/10 to-transparent opacity-50"></div>
@@ -24,12 +28,11 @@ const Hero = () => {
         {/* Changed from grid to flex layout */}
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
           
-          
-          <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6">
+          <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6 text-gray-900">
             <span className="pulse-gradient-text">Meet New Friends</span> in Your City
           </h1>
           
-          <p className="paragraph text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
+          <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <Link to="/matchmaking">
@@ -38,8 +41,6 @@ const Hero = () => {
                 <span>Meet Your Crew</span>
               </Button>
             </Link>
-            
-            
           </div>
           
           <div className="flex items-center gap-4 mt-4">
@@ -49,12 +50,14 @@ const Hero = () => {
               backgroundSize: 'cover'
             }}></div>)}
             </div>
-            <p className="text-sm text-foreground/70">
+            <p className="text-sm text-gray-600">
               <span className="font-semibold">3,000+</span> new connections made today
             </p>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
