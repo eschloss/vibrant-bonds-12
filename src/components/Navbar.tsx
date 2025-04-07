@@ -9,6 +9,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,22 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
+  const scrollToSection = (sectionId: string) => {
+    if (!isHomePage) {
+      // If not on home page, navigate to home and then scroll after page loads
+      localStorage.setItem('scrollToSection', sectionId);
+      return true; // Allow default navigation to occur
+    }
+    
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false); // Close mobile menu if open
+      return false; // Prevent default navigation
+    }
+    return true;
+  };
 
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -42,10 +59,30 @@ const Navbar = () => {
             "hover:text-purple-400 transition-colors font-medium",
             scrolled ? "text-gray-200" : "text-gray-800"
           )}>Home</Link>
-          <Link to="/matchmaking" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
-            scrolled ? "text-gray-200" : "text-gray-800"
-          )}>How it works</Link>
+          
+          {isHomePage ? (
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => !scrollToSection('how-it-works') && e.preventDefault()}
+              className={cn(
+                "hover:text-purple-400 transition-colors font-medium cursor-pointer",
+                scrolled ? "text-gray-200" : "text-gray-800"
+              )}
+            >
+              How it works
+            </a>
+          ) : (
+            <Link 
+              to="/#how-it-works" 
+              className={cn(
+                "hover:text-purple-400 transition-colors font-medium",
+                scrolled ? "text-gray-200" : "text-gray-800"
+              )}
+            >
+              How it works
+            </Link>
+          )}
+          
           <Link to="/communities" className={cn(
             "hover:text-purple-400 transition-colors font-medium",
             scrolled ? "text-gray-200" : "text-gray-800"
@@ -88,9 +125,28 @@ const Navbar = () => {
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Home
             </Link>
-            <Link to="/matchmaking" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Matchmaking
-            </Link>
+            
+            {isHomePage ? (
+              <a 
+                href="#how-it-works" 
+                onClick={(e) => {
+                  const result = !scrollToSection('how-it-works');
+                  if (result) e.preventDefault();
+                }}
+                className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors cursor-pointer"
+              >
+                How it works
+              </a>
+            ) : (
+              <Link 
+                to="/#how-it-works" 
+                className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                How it works
+              </Link>
+            )}
+            
             <Link to="/communities" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Communities
             </Link>
