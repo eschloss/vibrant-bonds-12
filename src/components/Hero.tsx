@@ -19,7 +19,7 @@ const Hero = () => {
       <div className="absolute bottom-1/4 right-10 w-20 h-20 rounded-full bg-pulse-purple/20 animate-pulse-slow"></div>
       <div className="absolute top-1/3 right-1/4 w-8 h-8 rounded-full bg-pulse-teal/20 animate-bounce-gentle"></div>
 
-      <div className="container mx-auto py-[50px]">
+      <div className="container mx-auto py-[132px]">
         {/* Changed from grid to flex layout */}
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
           
