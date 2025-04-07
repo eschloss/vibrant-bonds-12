@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
@@ -32,7 +33,7 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <Link to="/matchmaking">
-              <Button size="xl" variant="gradient" className="shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 rounded-full">
+              <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
               </Button>
