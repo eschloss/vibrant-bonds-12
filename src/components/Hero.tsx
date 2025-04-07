@@ -43,17 +43,7 @@ const Hero = () => {
             </Link>
           </div>
           
-          <div className="flex items-center gap-4 mt-4">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map(i => <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200" style={{
-              backgroundImage: `url(https://i.pravatar.cc/100?img=${i + 10})`,
-              backgroundSize: 'cover'
-            }}></div>)}
-            </div>
-            <p className="text-sm text-gray-600">
-              <span className="font-semibold">3,000+</span> new connections made today
-            </p>
-          </div>
+          {/* Removed the flex container with avatars and text */}
         </div>
       </div>
     </section>
