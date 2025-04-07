@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,6 +84,51 @@
   }
 }
 
+@keyframes float-reverse {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(20px) translateX(-10px);
+  }
+  50% {
+    transform: translateY(0) translateX(-20px);
+  }
+  75% {
+    transform: translateY(-20px) translateX(-10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes float-medium {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-15px) translateX(8px);
+  }
+  66% {
+    transform: translateY(15px) translateX(-8px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes float-fast {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
 @keyframes pulse-slow {
   0%, 100% {
     opacity: 0.4;
@@ -94,12 +140,60 @@
   }
 }
 
+@keyframes pulse-fast {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
 @keyframes bounce-gentle {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes draw-path {
+  0% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-path-delayed {
+  0%, 30% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
   }
 }
 
@@ -227,12 +321,40 @@
     animation: float 15s ease-in-out infinite;
   }
   
+  .animate-float-reverse {
+    animation: float-reverse 15s ease-in-out infinite;
+  }
+  
+  .animate-float-medium {
+    animation: float-medium 10s ease-in-out infinite;
+  }
+  
+  .animate-float-fast {
+    animation: float-fast 6s ease-in-out infinite;
+  }
+  
   .animate-pulse-slow {
     animation: pulse-slow 4s ease-in-out infinite;
   }
   
+  .animate-pulse-fast {
+    animation: pulse-fast 2s ease-in-out infinite;
+  }
+  
   .animate-bounce-gentle {
     animation: bounce-gentle 3s ease-in-out infinite;
+  }
+  
+  .animate-ping-slow {
+    animation: ping-slow 5s ease-in-out infinite;
+  }
+  
+  .animate-draw-path {
+    animation: draw-path 4s ease-in-out forwards;
+  }
+  
+  .animate-draw-path-delayed {
+    animation: draw-path-delayed 5s ease-in-out forwards;
   }
   
   .animate-slide-up {
