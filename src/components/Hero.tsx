@@ -22,13 +22,7 @@ const Hero = () => {
       <div className="container mx-auto py-[50px]">
         {/* Changed from grid to flex layout */}
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
-          <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium border border-gray-200 w-fit mb-6">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pulse-purple opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-pulse-purple"></span>
-            </span>
-            Turn Strangers into Friends
-          </div>
+          
           
           <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6">
             <span className="pulse-gradient-text">Meet New Friends</span> in Your City
