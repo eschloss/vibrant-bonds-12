@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -28,22 +27,21 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId: string) => {
     if (!isHomePage) {
-      // If not on home page, navigate to home and then scroll after page loads
       localStorage.setItem('scrollToSection', sectionId);
-      return true; // Allow default navigation to occur
+      return true;
     }
     
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false); // Close mobile menu if open
-      return false; // Prevent default navigation
+      setIsMenuOpen(false);
+      return false;
     }
     return true;
   };
 
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
-      <div className="container mx-auto px-4 sm:max-w-3xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:max-w-5xl lg:max-w-6xl xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
           <img 
