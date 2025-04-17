@@ -52,7 +52,7 @@ const CharacterCard = ({
         <div className="mb-4 relative px-0">
           <div className={`rounded-2xl px-4 py-3 bg-gradient-to-r ${character.color} text-white mb-4 ml-8`}>
             <p className="text-sm font-normal">{character.message}</p>
-            <p className="text-sm mx-0 my-0 text-left font-normal">--{character.name}</p>
+            <p className="text-sm mx-0 my-0 text-left font-normal"> -- {character.name}</p>
           </div>
           
           <div className={`absolute -bottom-3 left-0 w-12 h-12 overflow-hidden ring-2 ring-white/50 ${character.bgColor} rounded-full`}>
