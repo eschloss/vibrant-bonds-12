@@ -55,6 +55,20 @@ const MissionCountdown = () => {
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl mx-auto">
+          {/* Section Label and Title */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4">
+              <Timer size={18} className="text-pulse-purple" />
+              <span className="text-white/90 text-sm font-medium">Group Mission</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Meet in Real Life — 7 Day Mission
+            </h2>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality test to find your perfect match!
+            </p>
+          </div>
+
           <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 shadow-lg">
             <div className="grid grid-cols-2 gap-8">
               {/* Mission Deadlines Column */}
