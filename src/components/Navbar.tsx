@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -51,8 +52,8 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation - Only show on large screens */}
+        <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
             "hover:text-purple-400 transition-colors font-medium",
             scrolled ? "text-gray-200" : "text-gray-800"
@@ -97,8 +98,8 @@ const Navbar = () => {
           )}>Contact</Link>
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* CTA Button - Only show on large screens */}
+        <div className="hidden lg:block">
           {isMatchmakingPage ? <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
               <UserPlus size={18} />
               <span>Meet Your Crew</span>
@@ -108,17 +109,17 @@ const Navbar = () => {
             </Link>}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - Show on small and medium screens */}
         <button className={cn(
-          "md:hidden flex items-center", 
+          "lg:hidden flex items-center", 
           scrolled ? "text-gray-200" : "text-gray-800"
         )} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
+      {/* Mobile Menu - Show on small and medium screens when open */}
+      {isMenuOpen && <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
           <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation">
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Home
