@@ -56,7 +56,7 @@ const MissionCountdown = () => {
                 </div>
                 <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  <p className="text-sm text-white/70 mt-4 text-center">Countdown starts once you're matched into a group</p>
+                  <p className="text-sm text-white/70 mt-4 text-center">Countdown starts once matched into a group</p>
                 </div>
               </div>
             </div>
