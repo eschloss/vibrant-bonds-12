@@ -24,51 +24,55 @@ const MissionCountdown = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section Label and Title */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4 mx-auto">
               <Timer size={18} className="text-pulse-purple" />
               <span className="text-white/90 text-sm font-medium">Group Mission</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
               Meet in Real Life — 7 Day Mission
             </h2>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">
               Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality test to find your perfect match!
             </p>
           </div>
 
           <div className="flex flex-col gap-8">
             {/* First Mission Container */}
-            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg">
+            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
               <div>
                 {isMobile && (
-                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8">Get Matched</h3>
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>
                 )}
-                <MissionDeadline 
-                  title="Get matched into a group"
-                  showButton={true}
-                  type="match"
-                />
+                <div className="flex justify-center mb-6">
+                  <MissionDeadline 
+                    title="Get matched into a group"
+                    showButton={true}
+                    type="match"
+                  />
+                </div>
                 <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay {...timeLeft} />
-                  <p className="text-sm text-white/70 mt-4">Time Left Until Next Match</p>
+                  <p className="text-sm text-white/70 mt-4 text-center">Time Left Until Next Match</p>
                 </div>
               </div>
             </div>
 
             {/* Second Mission Container */}
-            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg">
+            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
               <div>
                 {isMobile && (
-                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8">Meet in Person</h3>
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Meet in Person</h3>
                 )}
-                <MissionDeadline 
-                  title="Meet in real life"
-                  subtitle="Countdown starts once you're matched into a group"
-                  type="meet"
-                />
+                <div className="flex justify-center mb-6">
+                  <MissionDeadline 
+                    title="Meet in real life"
+                    subtitle="Countdown starts once you're matched into a group"
+                    type="meet"
+                  />
+                </div>
                 <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  <p className="text-sm text-white/70 mt-4">Countdown starts once you're matched into a group</p>
+                  <p className="text-sm text-white/70 mt-4 text-center">Countdown starts once you're matched into a group</p>
                 </div>
               </div>
             </div>
