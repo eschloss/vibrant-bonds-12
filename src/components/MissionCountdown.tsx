@@ -35,57 +35,41 @@ const MissionCountdown = () => {
             </p>
           </div>
 
-          <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-6 md:p-8 shadow-lg">
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Mission Deadlines Column */}
-              <div className="space-y-8">
-                {!isMobile && (
-                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Mission Deadline</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* First Mission Container */}
+            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-6 md:p-8 shadow-lg">
+              <div>
+                {isMobile && (
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Get Matched</h3>
                 )}
-                <div className="space-y-8">
-                  <div>
-                    {isMobile && (
-                      <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Get Matched</h3>
-                    )}
-                    <MissionDeadline 
-                      title="Get matched into a group"
-                      showButton={true}
-                      type="match"
-                    />
-                    {isMobile && (
-                      <div className="mt-6">
-                        <TimerDisplay {...timeLeft} />
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    {isMobile && (
-                      <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Meet in Person</h3>
-                    )}
-                    <MissionDeadline 
-                      title="Meet in real life"
-                      subtitle="Countdown starts once you're matched into a group"
-                      type="meet"
-                    />
-                    {isMobile && (
-                      <div className="mt-6">
-                        <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                      </div>
-                    )}
-                  </div>
+                <MissionDeadline 
+                  title="Get matched into a group"
+                  showButton={true}
+                  type="match"
+                />
+                <div className="mt-6">
+                  <TimerDisplay {...timeLeft} />
+                  <p className="text-sm text-white/70 text-center mt-4">Time Left Until Next Match</p>
                 </div>
               </div>
-              
-              {/* Countdown Column - Only shown on desktop */}
-              {!isMobile && (
-                <div>
-                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Time Left</h3>
-                  <div className="space-y-8">
-                    <TimerDisplay {...timeLeft} />
-                    <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  </div>
+            </div>
+
+            {/* Second Mission Container */}
+            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-6 md:p-8 shadow-lg">
+              <div>
+                {isMobile && (
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Meet in Person</h3>
+                )}
+                <MissionDeadline 
+                  title="Meet in real life"
+                  subtitle="Countdown starts once you're matched into a group"
+                  type="meet"
+                />
+                <div className="mt-6">
+                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                  <p className="text-sm text-white/70 text-center mt-4">Countdown starts once you're matched into a group</p>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
