@@ -17,13 +17,13 @@ const steps = [{
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
   icon: CalendarDays,
-  title: "We'll Plan a Meetup",
+  title: "We'll Plan a Meetup —Just Show Up",
   description: "Our AI helps you find the perfect time and activity that works for everyone.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
   icon: Sprout,
-  title: "Just Show Up",
-  description: "No more planning stress—simply be there and enjoy your new connections.",
+  title: "Grow the Friendships",
+  description: "One hangout's just the beginning. We'll help you keeep the momentum going — so new connections turn into real friends.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
 
