@@ -34,7 +34,7 @@ const Footer = () => {
                   <Instagram size={18} />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
-                  
+                  <Twitter size={18} />
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Facebook size={18} />
@@ -62,13 +62,18 @@ const Footer = () => {
               <h3 className="text-white text-lg font-bold mb-4">Company</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/about" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
-                    About Us
+                  <Link to="/" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    Home
                   </Link>
                 </li>
                 <li>
                   <Link to="/matchmaking" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     How It Works
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    About Us
                   </Link>
                 </li>
                 <li>
@@ -84,11 +89,6 @@ const Footer = () => {
                 <li>
                   <Link to="/blog" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/careers" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
-                    Careers
                   </Link>
                 </li>
               </ul>
