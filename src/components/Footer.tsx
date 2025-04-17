@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const cities = ["San Francisco", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
@@ -20,22 +19,16 @@ const Footer = () => {
             {/* Column 1: About */}
             <div>
               <h3 className="text-xl font-display font-bold mb-4 flex items-center">
-                <img 
-                  alt="Pulse Logo" 
-                  className="h-5 md:h-6 object-fill" 
-                  src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" 
-                />
+                <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
               </h3>
-              <p className="text-white/70 text-sm mb-4">
-                Bringing people together through meaningful connections and shared experiences.
-              </p>
+              <p className="text-white/70 text-sm mb-4">Reimagining how we make friends through effortless IRL experiences.</p>
               <div className="flex space-x-3 mb-4">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Instagram size={18} />
                 </a>
                 {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Twitter size={18} />
-                </a>*/}
+                 </a>*/}
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Facebook size={18} />
                 </a>
