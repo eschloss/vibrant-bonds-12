@@ -40,13 +40,13 @@ const icebreakers = [{
   bgColor: "bg-amber-500/20",
   message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
 }];
-
-const CharacterCard = ({ character }) => {
-  return (
-    <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
+const CharacterCard = ({
+  character
+}) => {
+  return <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
       <CardContent className="p-6">
         <div className="mb-4">
-          <p className="text-sm text-gray-300">{character.tagline}</p>
+          <p className="text-gray-300 text-xl">{character.tagline}</p>
         </div>
         
         <div className="mb-4 relative">
@@ -66,21 +66,11 @@ const CharacterCard = ({ character }) => {
         </div>
 
         <div className="text-xs text-gray-400 mt-6">
-          {character.id === "baba-yaga" 
-            ? "A cackling force of dark magic who twists your tales into haunted nightmares." 
-            : character.id === "sherlock" 
-            ? "The world's most theatrical detective leading a game of deception and clever deduction." 
-            : character.id === "mother-flawless" 
-            ? "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." 
-            : character.id === "judge-snooty" 
-            ? "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." 
-            : `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
+          {character.id === "baba-yaga" ? "A cackling force of dark magic who twists your tales into haunted nightmares." : character.id === "sherlock" ? "The world's most theatrical detective leading a game of deception and clever deduction." : character.id === "mother-flawless" ? "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." : character.id === "judge-snooty" ? "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." : `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 const AiIcebreakers = () => {
   return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
       <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -175,5 +165,4 @@ const AiIcebreakers = () => {
       </div>
     </div>;
 };
-
 export default AiIcebreakers;
