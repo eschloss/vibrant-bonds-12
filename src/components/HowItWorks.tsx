@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight } from "lucide-react";
@@ -26,7 +25,6 @@ const steps = [{
   description: "One hangout's just the beginning.\n\nWe'll help you keeep the momentum going\n—so new connections turn into real friends.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
-
 const HowItWorks = () => {
   return <section id="how-it-works" className="relative py-12 bg-gray-900 dark:bg-gray-950">
       <div className="absolute inset-0 opacity-10">
@@ -76,26 +74,27 @@ const HowItWorks = () => {
                 {step.title}
               </h3>
               
-              <p className="text-gray-300 whitespace-pre-line">
+              <p className="text-gray-300 whitespace-pre-line my-[6px]">
                 {step.description}
               </p>
             </motion.div>)}
         </div>
 
         {/* Call to Action Button */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex justify-center mt-12"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.5,
+        delay: 0.3
+      }} className="flex justify-center mt-12">
           <Link to="/matchmaking">
-            <Button 
-              size="xl"
-              variant="gradient"
-              className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
-            >
+            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
               Take Personality Test
               <ArrowRight />
             </Button>
@@ -104,5 +103,4 @@ const HowItWorks = () => {
       </div>
     </section>;
 };
-
 export default HowItWorks;
