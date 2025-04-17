@@ -114,8 +114,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <Mail size={16} className="text-purple-400 mt-1 mr-2" />
-                  <a href="mailto:hello@pulseapp.com" className="text-white/70 text-sm hover:text-purple-400 transition-colors">contact-us@pulsenow.app
-                </a>
+                  <a href="mailto:hello@pulseapp.com" className="text-white/70 text-sm hover:text-purple-400 transition-colors">contact@pulsenow.app</a>
                 </li>
                 <li className="flex items-start">
                   <MapPin size={16} className="text-purple-400 mt-1 mr-2" />
