@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -41,7 +40,6 @@ const icebreakers = [{
   bgColor: "bg-amber-500/20",
   message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
 }];
-
 const CharacterCard = ({
   character
 }) => {
@@ -57,7 +55,7 @@ const CharacterCard = ({
             </Avatar>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white">{character.name}</h3>
+            
             <p className="text-sm text-gray-300">{character.tagline}</p>
           </div>
         </div>
@@ -71,20 +69,11 @@ const CharacterCard = ({
         </div>
 
         <div className="text-xs text-gray-400 mt-2">
-          {character.id === "baba-yaga" ? 
-            "A cackling force of dark magic who twists your tales into haunted nightmares." : 
-            character.id === "sherlock" ?
-            "The world's most theatrical detective leading a game of deception and clever deduction." :
-            character.id === "mother-flawless" ?
-            "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." :
-            character.id === "judge-snooty" ?
-            "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." :
-            `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
+          {character.id === "baba-yaga" ? "A cackling force of dark magic who twists your tales into haunted nightmares." : character.id === "sherlock" ? "The world's most theatrical detective leading a game of deception and clever deduction." : character.id === "mother-flawless" ? "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." : character.id === "judge-snooty" ? "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." : `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
     </Card>;
 };
-
 const AiIcebreakers = () => {
   return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
       {/* Background gradients */}
@@ -173,11 +162,7 @@ const AiIcebreakers = () => {
         delay: 0.5
       }} className="flex justify-center mt-12">
           <Link to="/matchmaking">
-            <Button 
-              size="xl"
-              variant="gradient"
-              className="rounded-full shadow-lg shadow-purple-500/20"
-            >
+            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20">
               Meet all our icebreakers
             </Button>
           </Link>
@@ -185,5 +170,4 @@ const AiIcebreakers = () => {
       </div>
     </div>;
 };
-
 export default AiIcebreakers;
