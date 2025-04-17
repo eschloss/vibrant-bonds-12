@@ -35,7 +35,7 @@ const MissionCountdown = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
             {/* First Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-6 md:p-8 shadow-lg">
               <div>
