@@ -1,19 +1,23 @@
+
 import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
 import { MissionDeadline } from "./mission/MissionDeadline";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
-  return <section className="section-padding bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
+
+  return (
+    <section className="section-padding bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       {/* Subtle animated gradient blobs */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pulse-purple rounded-full mix-blend-screen filter blur-[80px] animate-float"></div>
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-pulse-blue rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{
-        animationDelay: "2s"
-      }}></div>
+          animationDelay: "2s"
+        }}></div>
       </div>
       
       <div className="container mx-auto relative z-10">
@@ -36,11 +40,17 @@ const MissionCountdown = () => {
             {/* First Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
               <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
+                {isMobile && (
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>
+                )}
                 <div className="flex justify-center mb-6">
-                  <MissionDeadline title="Get matched into a group" showButton={true} type="match" />
+                  <MissionDeadline 
+                    title="Get matched into a group"
+                    showButton={true}
+                    type="match"
+                  />
                 </div>
-                <div className="mt-8 flex flex-col items-center my-[22px]">
+                <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay {...timeLeft} />
                   <p className="text-sm text-white/70 mt-4 text-center">Time Left Until Next Match</p>
                 </div>
@@ -50,9 +60,15 @@ const MissionCountdown = () => {
             {/* Second Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
               <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Meet in Person</h3>}
+                {isMobile && (
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Meet in Person</h3>
+                )}
                 <div className="flex justify-center mb-6">
-                  <MissionDeadline title="Meet in real life" subtitle="Countdown starts once you're matched into a group" type="meet" />
+                  <MissionDeadline 
+                    title="Meet in real life"
+                    subtitle="Countdown starts once you're matched into a group"
+                    type="meet"
+                  />
                 </div>
                 <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
@@ -63,6 +79,8 @@ const MissionCountdown = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default MissionCountdown;
