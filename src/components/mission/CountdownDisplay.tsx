@@ -1,6 +1,4 @@
 
-import { motion } from "framer-motion";
-
 interface CountdownDisplayProps {
   value: number;
   label: string;
@@ -13,17 +11,10 @@ export const formatTime = (value: number) => {
 export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
     <div className="flex flex-col items-center">
-      <motion.div 
-        className="text-4xl md:text-5xl font-bold text-white"
-        key={`${label}-${value}`}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
-      >
+      <div className="text-4xl md:text-5xl font-bold text-white">
         {formatTime(value)}
-      </motion.div>
+      </div>
       <span className="text-sm text-white/70 mt-1">{label}</span>
     </div>
   );
 };
-
