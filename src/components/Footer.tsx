@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const cities = ["San Francisco", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
@@ -19,8 +20,11 @@ const Footer = () => {
             {/* Column 1: About */}
             <div>
               <h3 className="text-xl font-display font-bold mb-4 flex items-center">
-                <Sparkles className="text-purple-400 h-5 w-5 mr-2" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-500 to-blue-400">Pulse</span>
+                <img 
+                  alt="Pulse Logo" 
+                  className="h-5 md:h-6 object-fill" 
+                  src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" 
+                />
               </h3>
               <p className="text-white/70 text-sm mb-4">
                 Bringing people together through meaningful connections and shared experiences.
