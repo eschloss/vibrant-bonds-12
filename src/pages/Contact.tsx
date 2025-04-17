@@ -118,8 +118,9 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium mb-1">Visit Us</h3>
                     <address className="text-gray-300 not-italic">
-                      525 Market Street<br />
-                      San Francisco, CA 94105
+                      The Roux Institute<br/>
+                      100 Fore St<br />
+                      Portland, ME 04101
                     </address>
                   </div>
                 </div>
