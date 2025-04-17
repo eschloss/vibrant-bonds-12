@@ -40,7 +40,7 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <MissionDeadline title="Get matched into a group" showButton={true} type="match" />
                 </div>
-                <div className="mt-8 flex flex-col items-center">
+                <div className="mt-8 flex flex-col items-center my-0">
                   <TimerDisplay {...timeLeft} />
                   <p className="text-sm text-white/70 mt-4 text-center">Time left until next match</p>
                 </div>
