@@ -72,6 +72,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/communities" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                    For Communities
+                  </Link>
+                </li>
+                <li>
                   <Link to="/about" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     About Us
                   </Link>
@@ -79,11 +84,6 @@ const Footer = () => {
                 <li>
                   <Link to="/contact" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
                     Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/communities" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
-                    For Communities
                   </Link>
                 </li>
                 <li>
