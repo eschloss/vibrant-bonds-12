@@ -163,16 +163,12 @@ const Footer = () => {
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/privacy" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+              <Link to="https://legal.pulsenow.app/privacy.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+              <Link to="https://legal.pulsenow.app/terms.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 Terms of Service
               </Link>
-              <Link to="/cookie-policy" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
-                Cookie Policy
-              </Link>
-              
             </div>
           </motion.div>
         </div>
