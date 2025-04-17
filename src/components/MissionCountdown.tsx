@@ -1,12 +1,13 @@
-
 import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
 import { MissionDeadline } from "./mission/MissionDeadline";
 import { TimerDisplay } from "./mission/TimerDisplay";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
+  const isMobile = useIsMobile();
 
   return (
     <section className="section-padding bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
@@ -19,7 +20,7 @@ const MissionCountdown = () => {
       </div>
       
       <div className="container mx-auto relative z-10">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Section Label and Title */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4">
@@ -34,33 +35,57 @@ const MissionCountdown = () => {
             </p>
           </div>
 
-          <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 shadow-lg">
-            <div className="grid grid-cols-2 gap-8">
+          <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-6 md:p-8 shadow-lg">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Mission Deadlines Column */}
-              <div>
-                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Mission Deadline</h3>
+              <div className="space-y-8">
+                {!isMobile && (
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Mission Deadline</h3>
+                )}
                 <div className="space-y-8">
-                  <MissionDeadline 
-                    title="Get matched into a group"
-                    showButton={true}
-                    type="match"
-                  />
-                  <MissionDeadline 
-                    title="Meet in real life"
-                    subtitle="Countdown starts once you're matched into a group"
-                    type="meet"
-                  />
+                  <div>
+                    {isMobile && (
+                      <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Get Matched</h3>
+                    )}
+                    <MissionDeadline 
+                      title="Get matched into a group"
+                      showButton={true}
+                      type="match"
+                    />
+                    {isMobile && (
+                      <div className="mt-6">
+                        <TimerDisplay {...timeLeft} />
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    {isMobile && (
+                      <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Meet in Person</h3>
+                    )}
+                    <MissionDeadline 
+                      title="Meet in real life"
+                      subtitle="Countdown starts once you're matched into a group"
+                      type="meet"
+                    />
+                    {isMobile && (
+                      <div className="mt-6">
+                        <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               
-              {/* Countdown Column */}
-              <div>
-                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Time Left</h3>
-                <div className="space-y-8">
-                  <TimerDisplay {...timeLeft} />
-                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+              {/* Countdown Column - Only shown on desktop */}
+              {!isMobile && (
+                <div>
+                  <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Time Left</h3>
+                  <div className="space-y-8">
+                    <TimerDisplay {...timeLeft} />
+                    <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
