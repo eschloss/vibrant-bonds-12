@@ -66,7 +66,7 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <MissionDeadline 
                     title="Meet in real life"
-                    subtitle="Countdown starts once you're matched into a group"
+                    subtitle=""
                     type="meet"
                   />
                 </div>
