@@ -16,14 +16,6 @@ const icebreakers = [{
   bgColor: "bg-emerald-800/30",
   message: "If you were to trap another player in my haunted forest, what dark secret would you reveal about them to ensure they never escape?"
 }, {
-  id: "sherlock",
-  name: "Sherlock Holmes",
-  tagline: "Two Truths and a Lie",
-  avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
-  color: "from-blue-600 to-blue-800",
-  bgColor: "bg-blue-600/20",
-  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
-}, {
   id: "mother-flawless",
   name: "Mother Flawless",
   tagline: "Toast or Roast",
@@ -39,6 +31,14 @@ const icebreakers = [{
   color: "from-amber-500 to-amber-700",
   bgColor: "bg-amber-500/20",
   message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
+}, {
+  id: "sherlock",
+  name: "Sherlock Holmes",
+  tagline: "Two Truths and a Lie",
+  avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
+  color: "from-blue-600 to-blue-800",
+  bgColor: "bg-blue-600/20",
+  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
 }];
 const CharacterCard = ({
   character
