@@ -171,9 +171,7 @@ const Footer = () => {
               <Link to="/cookie-policy" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 Cookie Policy
               </Link>
-              <span className="text-white/50 text-sm flex items-center gap-1">
-                Made with <Heart size={12} className="fill-pink-500 text-pink-500" /> in SF
-              </span>
+              
             </div>
           </motion.div>
         </div>
