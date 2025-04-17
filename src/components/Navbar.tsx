@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
-      <div className="container mx-auto px-4 sm:max-w-5xl xl:max-w-7xl flex items-center justify-between">
+      <div className="container mx-auto px-4 md:max-w-7xl xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
           <img 
