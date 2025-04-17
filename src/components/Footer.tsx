@@ -21,7 +21,7 @@ const Footer = () => {
               <h3 className="text-xl font-display font-bold mb-4 flex items-center">
                 <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
               </h3>
-              <p className="text-white/70 text-sm mb-4">Reimagining how we make friends through effortless IRL experiences.</p>
+              <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless IRL community.</p>
               <div className="flex space-x-3 mb-4">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Instagram size={18} />
