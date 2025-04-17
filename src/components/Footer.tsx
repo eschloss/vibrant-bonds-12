@@ -30,7 +30,7 @@ const Footer = () => {
                   <Instagram size={18} />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
-                  <Twitter size={18} />
+                  
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Facebook size={18} />
