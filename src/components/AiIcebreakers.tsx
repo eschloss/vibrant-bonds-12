@@ -40,13 +40,22 @@ const icebreakers = [{
   bgColor: "bg-amber-500/20",
   message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
 }];
-const CharacterCard = ({
-  character
-}) => {
-  return <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
+
+const CharacterCard = ({ character }) => {
+  return (
+    <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full">
       <CardContent className="p-6">
-        <div className="flex items-center mb-4">
-          <div className={`w-12 h-12 overflow-hidden mr-3 ring-2 ring-white/50 ${character.bgColor} rounded-full`}>
+        <div className="mb-4">
+          <p className="text-sm text-gray-300">{character.tagline}</p>
+        </div>
+        
+        <div className="mb-4 relative">
+          <div className={`rounded-2xl px-4 py-3 bg-gradient-to-r ${character.color} text-white mb-4`}>
+            <p className="text-sm font-medium mb-1">{character.name}</p>
+            <p className="text-sm">{character.message}</p>
+          </div>
+          
+          <div className={`absolute -bottom-3 -left-3 w-12 h-12 overflow-hidden ring-2 ring-white/50 ${character.bgColor} rounded-full`}>
             <Avatar className="w-full h-full">
               <AvatarImage src={character.avatar} alt={character.name} className="object-cover object-center w-full h-full" />
               <AvatarFallback className={`bg-gradient-to-br ${character.color} text-white`}>
@@ -54,29 +63,26 @@ const CharacterCard = ({
               </AvatarFallback>
             </Avatar>
           </div>
-          <div>
-            
-            <p className="text-sm text-gray-300">{character.tagline}</p>
-          </div>
-        </div>
-        
-        {/* Character message */}
-        <div className="mb-4">
-          <div className={`rounded-2xl px-4 py-3 bg-gradient-to-r ${character.color} text-white`}>
-            <p className="text-sm font-medium mb-1">{character.name}</p>
-            <p className="text-sm">{character.message}</p>
-          </div>
         </div>
 
-        <div className="text-xs text-gray-400 mt-2">
-          {character.id === "baba-yaga" ? "A cackling force of dark magic who twists your tales into haunted nightmares." : character.id === "sherlock" ? "The world's most theatrical detective leading a game of deception and clever deduction." : character.id === "mother-flawless" ? "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." : character.id === "judge-snooty" ? "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." : `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
+        <div className="text-xs text-gray-400 mt-6">
+          {character.id === "baba-yaga" 
+            ? "A cackling force of dark magic who twists your tales into haunted nightmares." 
+            : character.id === "sherlock" 
+            ? "The world's most theatrical detective leading a game of deception and clever deduction." 
+            : character.id === "mother-flawless" 
+            ? "A fierce, fabulous diva who dishes out savage roasts or over-the-top toasts to make you the star of the show." 
+            : character.id === "judge-snooty" 
+            ? "A fabulous, over-the-top judge who runs a chaotic courtroom where everyone gets dragged into the drama." 
+            : `${character.name} creates a ${character.tagline.toLowerCase()} environment for authentic sharing.`}
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 const AiIcebreakers = () => {
   return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
-      {/* Background gradients */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
         <div className="absolute top-1/2 -right-24 w-72 h-72 rounded-full bg-blue-600 blur-3xl"></div>
@@ -148,7 +154,6 @@ const AiIcebreakers = () => {
             </motion.div>)}
         </div>
         
-        {/* Call to action - Updated with Link to matchmaking */}
         <motion.div initial={{
         opacity: 0,
         y: 20
@@ -170,4 +175,5 @@ const AiIcebreakers = () => {
       </div>
     </div>;
 };
+
 export default AiIcebreakers;
