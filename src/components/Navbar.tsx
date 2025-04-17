@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
-          <img alt="Pulse Logo" className="h-5 md:h-6" src="/lovable-uploads/571fb6ca-bde5-463d-abd8-02269d300648.png" />
+          <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
         </Link>
 
         {/* Desktop Navigation - Only show on large screens */}
