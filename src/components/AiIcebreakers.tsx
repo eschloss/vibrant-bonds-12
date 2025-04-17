@@ -157,9 +157,7 @@ const AiIcebreakers = () => {
         delay: 0.5
       }} className="flex justify-center mt-12">
           <Link to="/matchmaking">
-            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20">
-              Meet all our icebreakers
-            </Button>
+            
           </Link>
         </motion.div>
       </div>
