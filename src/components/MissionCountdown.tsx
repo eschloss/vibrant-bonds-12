@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Timer, Users, Brain } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -93,7 +92,7 @@ const MissionCountdown = () => {
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
-            <span className="font-bold">Two-Step Mission</span>
+            <span className="font-bold">Meet in Real Life — 7 Day Mission</span>
           </h2>
           
           <p className="paragraph text-foreground/80 max-w-2xl mx-auto">
@@ -216,4 +215,3 @@ const MissionCountdown = () => {
 };
 
 export default MissionCountdown;
-
