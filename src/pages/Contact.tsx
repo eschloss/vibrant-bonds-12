@@ -103,8 +103,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Email Us</h3>
-                    <a href="mailto:hello@pulse-app.com" className="text-gray-300 hover:text-purple-400 transition-colors">
-                      hello@pulse-app.com
+                    <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-purple-400 transition-colors">
+                      contact@pulsenow.app
                     </a>
                   </div>
                 </div>
