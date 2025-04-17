@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -20,6 +22,7 @@ const Navbar = () => {
     });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
   const scrollToSection = (sectionId: string) => {
     if (!isHomePage) {
       localStorage.setItem('scrollToSection', sectionId);
@@ -35,7 +38,9 @@ const Navbar = () => {
     }
     return true;
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
+
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", 
+    scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
@@ -44,19 +49,41 @@ const Navbar = () => {
 
         {/* Desktop Navigation - Only show on large screens */}
         <nav className="hidden lg:flex items-center space-x-8">
-          <Link to="/" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : "text-gray-800")}>Home</Link>
+          <Link to="/" className={cn("hover:text-purple-400 transition-colors font-medium", 
+            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")}>Home</Link>
           
-          {isHomePage ? <a href="#how-it-works" onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} className={cn("hover:text-purple-400 transition-colors font-medium cursor-pointer", scrolled ? "text-gray-200" : "text-gray-800")}>
+          {isHomePage ? (
+            <a href="#how-it-works" 
+              onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} 
+              className={cn("hover:text-purple-400 transition-colors font-medium cursor-pointer", 
+                scrolled ? "text-gray-200" : "text-gray-800")}>
               How it works
-            </a> : <Link to="/#how-it-works" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : "text-gray-800")}>
+            </a>
+          ) : (
+            <Link to="/#how-it-works" 
+              className={cn("hover:text-purple-400 transition-colors font-medium", 
+                scrolled ? "text-gray-200" : "text-white")}>
               How it works
-            </Link>}
+            </Link>
+          )}
           
-          <Link to="/communities" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : "text-gray-800")}>For Communities</Link>
+          <Link to="/communities" 
+            className={cn("hover:text-purple-400 transition-colors font-medium", 
+              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")}>
+            For Communities
+          </Link>
           
-          <Link to="/about" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : "text-gray-800")}>About Us</Link>
+          <Link to="/about" 
+            className={cn("hover:text-purple-400 transition-colors font-medium", 
+              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")}>
+            About Us
+          </Link>
           
-          <Link to="/contact" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : "text-gray-800")}>Contact</Link>
+          <Link to="/contact" 
+            className={cn("hover:text-purple-400 transition-colors font-medium", 
+              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")}>
+            Contact
+          </Link>
         </nav>
 
         {/* CTA Button - Only show on large screens */}
@@ -71,7 +98,11 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button - Show on small and medium screens */}
-        <button className={cn("lg:hidden flex items-center", scrolled ? "text-gray-200" : "text-gray-800")} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
+        <button 
+          className={cn("lg:hidden flex items-center", 
+            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")} 
+          onClick={() => setIsMenuOpen(!isMenuOpen)} 
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -118,4 +149,5 @@ const Navbar = () => {
         </div>}
     </header>;
 };
+
 export default Navbar;
