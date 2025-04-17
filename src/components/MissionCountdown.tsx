@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
@@ -37,23 +38,25 @@ const MissionCountdown = () => {
             <div className="grid grid-cols-2 gap-8">
               {/* Mission Deadlines Column */}
               <div>
-                <h3 className="text-lg font-medium text-white/70 mb-4">Mission Deadline</h3>
-                <div className="space-y-6">
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Mission Deadline</h3>
+                <div className="space-y-8">
                   <MissionDeadline 
                     title="Get matched into a group"
                     showButton={true}
+                    type="match"
                   />
                   <MissionDeadline 
                     title="Meet in real life"
                     subtitle="Countdown starts once you're matched into a group"
+                    type="meet"
                   />
                 </div>
               </div>
               
               {/* Countdown Column */}
               <div>
-                <h3 className="text-lg font-medium text-white/70 mb-4">Time Left</h3>
-                <div className="space-y-6">
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6">Time Left</h3>
+                <div className="space-y-8">
                   <TimerDisplay {...timeLeft} />
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
                 </div>
