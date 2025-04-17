@@ -23,7 +23,7 @@ const steps = [{
 }, {
   icon: Sprout,
   title: "Grow the Friendships",
-  description: "One hangout's just the beginning. We'll help you keeep the momentum going —so new connections turn into real friends.",
+  description: "One hangout's just the beginning. We'll help you keeep the momentum going\n—so new connections turn into real friends.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
 
@@ -76,7 +76,7 @@ const HowItWorks = () => {
                 {step.title}
               </h3>
               
-              <p className="text-gray-300">
+              <p className="text-gray-300 whitespace-pre-line">
                 {step.description}
               </p>
             </motion.div>)}
