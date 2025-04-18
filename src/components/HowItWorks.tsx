@@ -94,10 +94,7 @@ const HowItWorks = () => {
         delay: 0.3
       }} className="flex justify-center mt-12">
           <Link to="/matchmaking">
-            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
-              Take Personality Test
-              <ArrowRight />
-            </Button>
+            
           </Link>
         </motion.div>
       </div>
