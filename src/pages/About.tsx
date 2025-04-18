@@ -70,9 +70,12 @@ How Pulse Was Born</h1>
           }} className="space-y-6 md:col-span-3">
               <h2 className="text-3xl font-bold">The Journey</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
-              <p className="text-gray-300 text-lg whitespace-pre-line">After living in 10 cities across 3 continents, Eric noticed a pattern: despite being surrounded by people, forming real friendships in a new place was hard—and tech wasn’t helping. As both a software engineer and an opera singer performing internationally, he experienced the highs of human connection—and the lows of isolation. He began to ask: What actually makes people feel close?
+              <p className="text-gray-300 text-lg whitespace-pre-line">After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.
 
- That led to a simple but powerful insight: “When you bring the right people together in the right setting, friendships form naturally.” Pulse was built to make that happen—on purpose, and at scale.</p>
+
+
+
+He realized that real friendship doesn’t come from a swipe or a single meetup. It takes shared context, repeated in-person interaction, and just enough of a nudge to keep it going. Those lessons became Pulse: a new kind of social platform that helps people turn strangers into real friends, in real life.</p>
               
               
               <div className="flex flex-wrap gap-3 pt-2">
