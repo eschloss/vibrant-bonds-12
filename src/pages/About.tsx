@@ -72,7 +72,7 @@ const About = () => {
           }} className="space-y-6 md:col-span-3">
               <h2 className="text-3xl font-bold">The Journey</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
-              <p className="text-gray-300 text-lg">After living in 10 cities across 3 continents, Eric noticed a pattern: despite being surrounded by people, forming real friendships in a new place was hard—and tech wasn’t helping.
+              <p className="text-gray-300 text-lg whitespace-pre-line">After living in 10 cities across 3 continents, Eric noticed a pattern: despite being surrounded by people, forming real friendships in a new place was hard—and tech wasn’t helping.
 
 As both a software engineer and an opera singer performing internationally, he experienced the highs of human connection—and the lows of isolation. He began to ask: What actually makes people feel close?
 
