@@ -10,131 +10,21 @@ import { Input } from "@/components/ui/input";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 type City = {
-  name: string;
-  slug: string;
-  country: string;
-  state?: string;
+  en_name: string;
+  url2: string;
+  en_country: string;
+  en_state?: string;
 };
 
 // Updated city list with country and state information
 const allCities: City[] = [
 // United States
 {
-  name: "San Francisco",
-  slug: "san-francisco",
-  country: "United States",
-  state: "California"
-}, {
-  name: "Los Angeles",
-  slug: "los-angeles",
-  country: "United States",
-  state: "California"
-}, {
-  name: "New York",
-  slug: "new-york",
-  country: "United States",
-  state: "New York"
-}, {
-  name: "Chicago",
-  slug: "chicago",
-  country: "United States",
-  state: "Illinois"
-}, {
-  name: "Miami",
-  slug: "miami",
-  country: "United States",
-  state: "Florida"
-}, {
-  name: "Seattle",
-  slug: "seattle",
-  country: "United States",
-  state: "Washington"
-}, {
-  name: "Austin",
-  slug: "austin",
-  country: "United States",
-  state: "Texas"
-}, {
-  name: "Boston",
-  slug: "boston",
-  country: "United States",
-  state: "Massachusetts"
-}, {
-  name: "Denver",
-  slug: "denver",
-  country: "United States",
-  state: "Colorado"
-}, {
-  name: "Portland",
-  slug: "portland",
-  country: "United States",
-  state: "Oregon"
-}, {
-  name: "Nashville",
-  slug: "nashville",
-  country: "United States",
-  state: "Tennessee"
-}, {
-  name: "Atlanta",
-  slug: "atlanta",
-  country: "United States",
-  state: "Georgia"
-},
-// Canada
-{
-  name: "Toronto",
-  slug: "toronto",
-  country: "Canada"
-}, {
-  name: "Vancouver",
-  slug: "vancouver",
-  country: "Canada"
-}, {
-  name: "Montreal",
-  slug: "montreal",
-  country: "Canada"
-},
-// United Kingdom
-{
-  name: "London",
-  slug: "london",
-  country: "United Kingdom"
-}, {
-  name: "Manchester",
-  slug: "manchester",
-  country: "United Kingdom"
-}, {
-  name: "Edinburgh",
-  slug: "edinburgh",
-  country: "United Kingdom"
-},
-// Australia
-{
-  name: "Sydney",
-  slug: "sydney",
-  country: "Australia"
-}, {
-  name: "Melbourne",
-  slug: "melbourne",
-  country: "Australia"
-}, {
-  name: "Brisbane",
-  slug: "brisbane",
-  country: "Australia"
-},
-// Germany
-{
-  name: "Berlin",
-  slug: "berlin",
-  country: "Germany"
-}, {
-  name: "Munich",
-  slug: "munich",
-  country: "Germany"
-}, {
-  name: "Hamburg",
-  slug: "hamburg",
-  country: "Germany"
+  en_name: "San Francisco",
+  url2: "san-francisco",
+  en_country: "United States",
+  en_state: "California"
+}
 }];
 const CityList = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -142,26 +32,26 @@ const CityList = () => {
   const [filteredCities, setFilteredCities] = useState<City[]>(allCities);
 
   // Get unique list of countries for filter dropdown
-  const countries = Array.from(new Set(allCities.map(city => city.country))).sort();
+  const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
 
   // Filter cities based on search and country selection
   useEffect(() => {
     let result = allCities;
     if (searchTerm) {
-      result = result.filter(city => city.name.toLowerCase().includes(searchTerm.toLowerCase()) || city.state && city.state.toLowerCase().includes(searchTerm.toLowerCase()));
+      result = result.filter(city => city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) || city.en_state && city.en_state.toLowerCase().includes(searchTerm.toLowerCase()));
     }
     if (selectedCountry) {
-      result = result.filter(city => city.country === selectedCountry);
+      result = result.filter(city => city.en_country === selectedCountry);
     }
     setFilteredCities(result);
   }, [searchTerm, selectedCountry]);
 
   // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
-    if (!acc[city.country]) {
-      acc[city.country] = [];
+    if (!acc[city.en_country]) {
+      acc[city.en_country] = [];
     }
-    acc[city.country].push(city);
+    acc[city.en_country].push(city);
     return acc;
   }, {});
   useEffect(() => {
@@ -264,7 +154,7 @@ const CityList = () => {
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {cities.map((city, index) => <motion.div key={city.slug} initial={{
+                            {cities.map((city, index) => <motion.div key={city.url2} initial={{
                       opacity: 0,
                       y: 20
                     }} animate={{
@@ -274,7 +164,7 @@ const CityList = () => {
                       duration: 0.5,
                       delay: index * 0.05
                     }}>
-                                <Link to={`/cities/${city.slug}`} className="block">
+                                <Link to={`/cities${city.url2}`} className="block">
                                   <div className="bg-gray-800/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 h-full hover:bg-gray-800/70 transition-all hover:shadow-lg hover:shadow-purple-500/10 group">
                                     <div className="flex items-start gap-4">
                                       <div className="bg-purple-500/20 rounded-full p-3">
@@ -282,9 +172,9 @@ const CityList = () => {
                                       </div>
                                       
                                       <div className="flex-1">
-                                        <h3 className="text-xl font-bold text-white mb-1 group-hover:text-purple-400 transition-colors">{city.name}</h3>
-                                        {city.state && <p className="text-sm text-gray-400 mb-2">{city.state}</p>}
-                                        <p className="text-gray-300 mb-4">Connect with friends in {city.name}</p>
+                                        <h3 className="text-xl font-bold text-white mb-1 group-hover:text-purple-400 transition-colors">{city.en_name}</h3>
+                                        {city.en_state && <p className="text-sm text-gray-400 mb-2">{city.en_state}</p>}
+                                        <p className="text-gray-300 mb-4">Connect with friends in {city.en_name}</p>
                                         
                                         <div className="flex justify-end">
                                           <Button variant="ghost" size="sm" className="text-purple-400 group-hover:bg-purple-500/20">
