@@ -21,7 +21,7 @@ const allCities: City[] = [
 // United States
 {
   en_name: "San Francisco",
-  url2: "san-francisco",
+  url2: "/san-francisco",
   en_country: "United States",
   en_state: "California"
 }
