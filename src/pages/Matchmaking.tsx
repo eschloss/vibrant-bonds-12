@@ -72,7 +72,7 @@ const Matchmaking = () => {
             }} transition={{
               delay: 0.2,
               duration: 0.5
-            }}>Life's too short for awkward small talk. Meet people who get you in your city.</motion.p>
+            }}>Making friends as an adult can be hard. We're here to help.</motion.p>
               <motion.div initial={{
               opacity: 0,
               y: 10
