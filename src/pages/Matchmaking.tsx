@@ -17,8 +17,8 @@ const steps = [{
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
   icon: CalendarDays,
-  title: "We'll plan the meet-up —just show up.",
-  description: "We'll coordinate the details—simply show up and enjoy.",
+  title: "Meet Up in Real Life",
+  description: "We’ll handle the planning and logistics —simply show up and enjoy yourself.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
   icon: Sprout,
