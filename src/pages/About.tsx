@@ -121,16 +121,16 @@ How Pulse Was Born</h1>
           <div className="grid md:grid-cols-3 gap-6">
             {[{
             icon: <Users className="h-6 w-6 text-pulse-purple" />,
-            title: "Like-minded People",
+            title: "Shared Context",
             description: "The strongest bonds form between people who share core values and interests."
           }, {
             icon: <Map className="h-6 w-6 text-pulse-blue" />,
-            title: "Shared Experiences",
-            description: "Breaking bread together and exploring creates shared context that accelerates relationships."
+            title: "Repeated In-Person Interaction",
+            description: "need to meet repeatedly and it must be in person to fast-track a frienship"
           }, {
             icon: <MessageSquare className="h-6 w-6 text-pulse-pink" />,
-            title: "Meaningful Conversations",
-            description: "The right prompts allow people to bypass small talk and connect on a deeper level."
+            title: "A little Nudge",
+            description: "Someone in the friendship has to nag the other to meet regularly."
           }].map((item, index) => <motion.div key={index} initial={{
             opacity: 0,
             y: 20
