@@ -27,6 +27,7 @@ const CityList = () => {
   const fetchCities = async () => {
       try {
         const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
+        alert("fetched");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
