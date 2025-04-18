@@ -42,7 +42,7 @@ const Hero = () => {
           <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
-            <Link to="/matchmaking">
+            <Link to="/cities">
               <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
