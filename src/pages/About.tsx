@@ -30,9 +30,7 @@ const About = () => {
         }} className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4 md:text-5xl">From Isolation to Connection: How Pulse Was Born
           </h1>
-            <p className="text-xl text-gray-300 mb-6">
-              How a traveling opera singer created a new way to form meaningful friendships
-            </p>
+            <p className="text-xl text-gray-300 mb-6">Our founder’s global journey—from opera stages to software labs—led to a surprising insight about how we build real friendships. That insight became Pulse: a new kind of social platform for meaningful connection in real life.</p>
           </motion.div>
         </div>
       </section>
