@@ -127,7 +127,7 @@ const CityList = () => {
               className="text-center max-w-3xl mx-auto mb-16 my-[20px]"
             >
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                Find Friends in <span className="pulse-gradient-text">Your City</span>
+                Meet New Friends in <span className="pulse-gradient-text">Your City</span>
               </h1>
               <p className="text-xl text-foreground/80 font-light">
                 Select your city to connect with like-minded people near you.
