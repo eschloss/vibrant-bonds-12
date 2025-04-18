@@ -17,34 +17,52 @@ type City = {
 };
 
 // Updated city list with country and state information
-const allCities: City[] = [
-// United States
-{
-  en_name: "San Francisco",
-  url2: "/san-francisco",
-  en_country: "United States",
-  en_state: "California"
-}
-];
+const [allCities, setAllCities] = useState<City[]>([]);
+
 const CityList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>(allCities);
 
+
+  useEffect(() => {
+  const fetchCities = async () => {
+    try {
+      const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data: City[] = await response.json();
+      setAllCities(data);
+      setFilteredCities(data);
+    } catch (error) {
+      console.error("Failed to fetch cities:", error);
+    }
+  };
+
+  fetchCities();
+}, []);
+
   // Get unique list of countries for filter dropdown
   const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
 
   // Filter cities based on search and country selection
-  useEffect(() => {
-    let result = allCities;
-    if (searchTerm) {
-      result = result.filter(city => city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) || city.en_state && city.en_state.toLowerCase().includes(searchTerm.toLowerCase()));
-    }
-    if (selectedCountry) {
-      result = result.filter(city => city.en_country === selectedCountry);
-    }
-    setFilteredCities(result);
-  }, [searchTerm, selectedCountry]);
+useEffect(() => {
+  let result = allCities;
+
+  if (searchTerm) {
+    result = result.filter(city =>
+      city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      city.en_state?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  if (selectedCountry && selectedCountry !== "all-countries") {
+    result = result.filter(city => city.en_country === selectedCountry);
+  }
+
+  setFilteredCities(result);
+}, [searchTerm, selectedCountry, allCities]);
 
   // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
