@@ -31,9 +31,11 @@ const CityList = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data: City[] = await response.json();
+        alert(`Fetched ${data.length} cities`);
         setAllCities(data);
         setFilteredCities(data);
       } catch (error) {
+        alert("Failed to fetch cities");
         console.error("Failed to fetch cities:", error);
       }
     };
