@@ -31,7 +31,7 @@ const CityList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
-  const [openedViaSearch, setOpenedViaSearch] = useState<Set<string>>(new Set());
+  const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -66,7 +66,13 @@ const CityList = () => {
 
     if (searchTerm) {
       const matchingCountries = new Set(result.map(city => city.en_country));
-      setOpenedViaSearch(prev => new Set([...prev, ...matchingCountries]));
+      setOpenCountries(prev => {
+        const updated = { ...prev };
+        matchingCountries.forEach(country => {
+          if (!(country in updated)) updated[country] = true;
+        });
+        return updated;
+      });
     }
   }, [searchTerm, selectedCountry, allCities]);
 
@@ -82,6 +88,13 @@ const CityList = () => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add('dark');
   }, []);
+
+  const toggleCountry = (country: string) => {
+    setOpenCountries(prev => ({
+      ...prev,
+      [country]: !prev[country]
+    }));
+  };
 
   return (
     <div className="flex flex-col min-h-screen dark">
@@ -169,8 +182,11 @@ const CityList = () => {
                       transition={{ duration: 0.5, delay: i * 0.1 }}
                       className="mb-8"
                     >
-                      <Collapsible open={openedViaSearch.has(country)} className="w-full">
-                        <CollapsibleTrigger className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
+                      <Collapsible open={!!openCountries[country]} className="w-full">
+                        <CollapsibleTrigger
+                          onClick={() => toggleCountry(country)}
+                          className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg"
+                        >
                           <h2 className="text-xl font-bold text-white">{country}</h2>
                           <div className="ml-auto px-3 py-1 bg-purple-500/20 rounded-full text-sm text-purple-300">
                             {cities.length} {cities.length === 1 ? "city" : "cities"}
