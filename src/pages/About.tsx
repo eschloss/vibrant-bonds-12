@@ -71,7 +71,7 @@ How Pulse Was Born</h1>
               <h2 className="text-3xl font-bold">The Journey</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
               <p className="text-gray-300 text-lg">After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.</p>
-              <p className="text-gray-300 text-lg">“What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What’s hard is building the rhythm: shared context, repeated time together, and someone willing to say, ‘let’s do this again next week.’”</p>
+              <p className="text-gray-300 text-2xl">“What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What’s hard is building the rhythm: shared context, repeated time together, and someone willing to say, ‘let’s do this again next week.’”</p>
               <p className="text-gray-300 text-lg">Those lessons became Pulse: a new kind of social platform that helps people turn strangers into real friends, in real life.</p>
               
               <div className="flex flex-wrap gap-3 pt-2">
