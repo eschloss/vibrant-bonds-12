@@ -161,7 +161,7 @@ const CityList = () => {
               duration: 0.5,
               delay: countryIndex * 0.1
             }} className="mb-8">
-                      <Collapsible defaultOpen={true} className="w-full">
+                      <Collapsible defaultOpen={false} className="w-full">
                         <CollapsibleTrigger className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
                           <h2 className="text-xl font-bold text-white">{country}</h2>
                           <div className="ml-auto px-3 py-1 bg-purple-500/20 rounded-full text-sm text-purple-300">
