@@ -124,11 +124,11 @@ How Pulse Was Born</h1>
           }, {
             icon: <Map className="h-6 w-6 text-pulse-blue" />,
             title: "Repeated In-Person Interaction",
-            description: "need to meet repeatedly and it must be in person to fast-track a frienship"
+            description: "You can’t build a real friendship from a one-off meetup. It takes seeing each other again and again—and it has to happen in real life."
           }, {
             icon: <MessageSquare className="h-6 w-6 text-pulse-pink" />,
             title: "A little Nudge",
-            description: "Someone in the friendship has to nag the other to meet regularly."
+            description: 'Every great friendship has someone who says, “Let’s hang out.” Pulse plays that role—helping people follow through and stay connected.'
           }].map((item, index) => <motion.div key={index} initial={{
             opacity: 0,
             y: 20
