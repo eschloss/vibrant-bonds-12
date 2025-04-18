@@ -61,7 +61,7 @@ const Matchmaking = () => {
           }} className="text-center max-w-3xl mx-auto my-0 py-[51px]">
               
               <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
-                Make Friends in <span className="pulse-gradient-text">Your City</span>
+                Meet New Friends in <span className="pulse-gradient-text">Your City</span>
               </h1>
               <motion.p className="text-xl md:text-2xl text-foreground/80 font-light mb-8" initial={{
               opacity: 0,
