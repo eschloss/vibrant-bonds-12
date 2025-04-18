@@ -106,7 +106,7 @@ const AiIcebreakers = () => {
           duration: 0.5,
           delay: 0.1
         }} className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl">
-            Spark Meaningful <span className="pulse-gradient-text">Conversations</span>
+            Spark <span className="pulse-gradient-text">Meaningful Conversations</span>
           </motion.h2>
           
           <motion.p initial={{
