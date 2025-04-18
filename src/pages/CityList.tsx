@@ -21,7 +21,7 @@ const allCities: City[] = [
 // United States
 {
   name: "San Francisco",
-  slug: "san-francisco",
+  slug: "california/san-francisco",
   country: "United States",
   state: "California"
 }, {
