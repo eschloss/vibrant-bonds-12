@@ -14,21 +14,16 @@ const steps = [{
 }, {
   icon: MessageSquare,
   title: "Break the Ice",
-  description: "Chat with fellow group members, guided by our ice-breakers.",
+  description: "Chat with fellow group members, guided by our conversation starters and games.",
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
   icon: CalendarDays,
-  title: "Plan an In Real Life meetup",
-  description: "Our AI icebreakers will guide your group to plan the perfect meetup.",
+  title: "Meet Up in Real Life",
+  description: "We’ll handle the planning and logistics —simply show up and enjoy yourself.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
-  icon: Clock,
-  title: "Just Show Up",
-  description: "We'll help coordinate the details—simply show up and enjoy.",
-  color: "bg-gradient-to-r from-violet-500 to-purple-600"
-}, {
   icon: Sprout,
-  title: "Grow Connections",
+  title: "Grow the Friendships",
   description: "After the initial meet, we'll help you grow your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
@@ -78,7 +73,7 @@ const CityMatchmakingTemplate = ({
             }} transition={{
               delay: 0.2,
               duration: 0.5
-            }}>Life's too short for awkward small talk. Meet people who get you in {cityName}.</motion.p>
+            }}>Making friends as an adult can be hard. We're here to help.</motion.p>
               <motion.div initial={{
               opacity: 0,
               y: 10
