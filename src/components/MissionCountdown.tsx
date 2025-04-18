@@ -24,7 +24,7 @@ const MissionCountdown = () => {
               <Timer size={18} className="text-pulse-purple" />
               <span className="text-white/90 text-sm font-medium">Group Mission</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
               Meet in Real Life — 7 Day Mission
             </h2>
             <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your match!</p>

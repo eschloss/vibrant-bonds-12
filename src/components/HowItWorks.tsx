@@ -50,7 +50,7 @@ const HowItWorks = () => {
             How It Works
           </span>
           
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Making friends shouldn't be complicated</h2>
+          <h2 className="text-3xl font-bold mb-4 text-white md:text-5xl w-full max-w-4xl mx-auto mb-6 ">Making friends shouldn't be complicated</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

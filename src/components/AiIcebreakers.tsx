@@ -105,7 +105,7 @@ const AiIcebreakers = () => {
         }} transition={{
           duration: 0.5,
           delay: 0.1
-        }} className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4">
+        }} className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl">
             Spark Meaningful <span className="pulse-gradient-text">Conversations</span>
           </motion.h2>
           
