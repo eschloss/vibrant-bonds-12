@@ -16,32 +16,30 @@ type City = {
   en_state?: string;
 };
 
-// Updated city list with country and state information
-const [allCities, setAllCities] = useState<City[]>([]);
-
 
 const CityList = () => {
+  const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>(allCities);
 
   useEffect(() => {
   const fetchCities = async () => {
-    try {
-      const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      try {
+        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: City[] = await response.json();
+        setAllCities(data);
+        setFilteredCities(data);
+      } catch (error) {
+        console.error("Failed to fetch cities:", error);
       }
-      const data: City[] = await response.json();
-      setAllCities(data);
-      setFilteredCities(data);
-    } catch (error) {
-      console.error("Failed to fetch cities:", error);
-    }
-  };
+    };
 
-  fetchCities();
-}, []);
+    fetchCities();
+  }, []);
 
   // Get unique list of countries for filter dropdown
   const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
