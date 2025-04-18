@@ -72,9 +72,18 @@ const About = () => {
           }} className="space-y-6 md:col-span-3">
               <h2 className="text-3xl font-bold">The Journey</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
-              <p className="text-gray-300 text-lg">
-                Pulse began with our founder Eric, a software engineer at Harvard's Research Lab who traveled the world as an opera performer. Living in 10 cities across 3 continents, he discovered a formula for making meaningful connections in new places.
-              </p>
+              <p className="text-gray-300 text-lg">After living in 10 cities across 3 continents, Eric noticed a pattern: despite being surrounded by people, forming real friendships in a new place was hard—and tech wasn’t helping.
+
+As both a software engineer and an opera singer performing internationally, he experienced the highs of human connection—and the lows of isolation. He began to ask: What actually makes people feel close?
+
+That led to a simple but powerful insight:
+| “When you bring the right people together in the right setting, friendships form naturally.”
+
+Pulse was built to make that happen—on purpose, and at scale.
+
+
+
+            </p>
               <p className="text-gray-300 text-lg">
                 "I realized that forming friendships is surprisingly simple when you connect like-minded people in settings where they can share interests. That insight became the foundation of Pulse."
               </p>
