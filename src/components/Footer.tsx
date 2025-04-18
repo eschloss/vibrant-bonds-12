@@ -121,14 +121,14 @@ const Footer = () => {
 
               {/* App Download Buttons */}
               <div className="mt-4 flex flex-col space-y-2">
-                <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
+                <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
                   <Apple size={18} className="text-white" />
                   <div className="flex flex-col">
                     <span className="text-xs text-white/70">Download on the</span>
                     <span className="text-sm font-medium">App Store</span>
                   </div>
                 </a>
-                <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
+                <a href="https://play.google.com/store/apps/details?id=eu.kikiapp.kiki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
                   <Play size={18} className="text-white" />
                   <div className="flex flex-col">
                     <span className="text-xs text-white/70">Get it on</span>
