@@ -52,9 +52,7 @@ How Pulse Was Born</h1>
           }} className="md:col-span-2">
               <div className="relative">
                 <img src="/lovable-uploads/8e380861-65d4-4d89-96b3-2de89a3e831c.png" alt="Eric performing opera" className="rounded-2xl shadow-2xl shadow-purple-500/20 w-full object-cover aspect-[4/3]" />
-                <div className="absolute -bottom-5 -right-5 bg-gradient-to-r from-pulse-purple to-pulse-blue p-4 rounded-xl shadow-lg">
-                  <Mic size={32} className="text-white" />
-                </div>
+                
               </div>
             </motion.div>
             
