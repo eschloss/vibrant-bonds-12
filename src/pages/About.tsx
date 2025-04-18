@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+
 const About = () => {
   return <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
@@ -179,7 +180,9 @@ How Pulse Was Born</h1>
         }} transition={{
           duration: 0.6
         }} className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10">
-            <blockquote className="text-xl md:text-2xl font-light italic text-center mb-6">"In a world where technology often isolates us, Pulse uses tech to bring people together. We’re building a world where forming meaningful friendships is no longer left to chance."</blockquote>
+            <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-purple pl-4 py-2 bg-gray-800/30 rounded-r-xl">
+              "What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared context, repeated time together, and someone willing to say, 'Let's do this again next week!'"
+            </blockquote>
             <div className="flex justify-center">
               <p className="text-lg font-medium">— Eric, Founder</p>
             </div>
@@ -225,4 +228,5 @@ How Pulse Was Born</h1>
       <Footer />
     </div>;
 };
+
 export default About;
