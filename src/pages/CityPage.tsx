@@ -9,7 +9,7 @@ type CityParam = {
 const CityPage = () => {
   const { cityName } = useParams<CityParam>();
   const navigate = useNavigate();
-  const [cityData, setCityData] = useState<{ name: string; country: string; state?: string } | null>(null);
+  const [cityData, setCityData] = useState<{ name: string; country: string; state?: string; code: string } | null>(null);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -28,6 +28,7 @@ const CityPage = () => {
           name: matchedCity.en_name,
           country: matchedCity.en_country,
           state: matchedCity.en_state,
+          code: matchedCity.code
         });
 
         window.scrollTo(0, 0);
