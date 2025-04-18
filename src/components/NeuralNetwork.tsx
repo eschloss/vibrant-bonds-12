@@ -48,7 +48,7 @@ const NeuralNetwork = () => {
           </motion.div>
           
           <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-sm px-4 py-2 rounded-lg bg-gray-900/40">
-            Find Your Perfect <span className="pulse-gradient-text">Friend</span> Match
+            Find Your Perfect <span className="pulse-gradient-text">Friend Group Match</span>
           </motion.h2>
           
           <motion.p variants={fadeInUp} className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-sm p-2 rounded-lg bg-gray-900/30 mb-6">
