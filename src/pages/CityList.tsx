@@ -48,15 +48,21 @@ const CityList = () => {
 
   // Filter cities based on search and country selection
   useEffect(() => {
-    let result = allCities;
-    if (searchTerm) {
-      result = result.filter(city => city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) || city.en_state && city.en_state.toLowerCase().includes(searchTerm.toLowerCase()));
-    }
-    if (selectedCountry) {
-      result = result.filter(city => city.en_country === selectedCountry);
-    }
-    setFilteredCities(result);
-  }, [searchTerm, selectedCountry]);
+  let result = allCities;
+
+  if (searchTerm) {
+    result = result.filter(city =>
+      city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      city.en_state?.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  if (selectedCountry && selectedCountry !== "all-countries") {
+    result = result.filter(city => city.en_country === selectedCountry);
+  }
+
+  setFilteredCities(result);
+}, [searchTerm, selectedCountry, allCities]);
 
   // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
