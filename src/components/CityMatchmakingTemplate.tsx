@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, Clock, ArrowRight, Sparkles, Zap, Timer, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 interface CityMatchmakingTemplateProps {
@@ -87,10 +88,12 @@ const CityMatchmakingTemplate = ({
               delay: 0.4,
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
-                  <Zap size={18} className="text-white" />
-                  <span>Start Matching in {cityName}</span>
-                </Button>
+                <Link to="/cities">
+                  <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30">
+                    <Zap size={18} className="text-white" />
+                    <span>Start Matching in {cityName}</span>
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
