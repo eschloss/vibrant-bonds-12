@@ -51,7 +51,7 @@ How Pulse Was Born</h1>
             duration: 0.6
           }} className="md:col-span-2">
               <div className="relative">
-                <img src="/lovable-uploads/8e380861-65d4-4d89-96b3-2de89a3e831c.png" alt="Eric performing opera" className="rounded-2xl shadow-2xl shadow-purple-500/20 w-full object-cover aspect-[4/3]" />
+                <img alt="Eric performing opera" src="/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" className="rounded-2xl shadow-2xl shadow-purple-500/20 w-full aspect-[2/3] object-fill" />
                 
               </div>
             </motion.div>
