@@ -19,11 +19,11 @@ type City = {
 // Updated city list with country and state information
 const [allCities, setAllCities] = useState<City[]>([]);
 
+
 const CityList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>(allCities);
-
 
   useEffect(() => {
   const fetchCities = async () => {
@@ -47,22 +47,16 @@ const CityList = () => {
   const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
 
   // Filter cities based on search and country selection
-useEffect(() => {
-  let result = allCities;
-
-  if (searchTerm) {
-    result = result.filter(city =>
-      city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      city.en_state?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }
-
-  if (selectedCountry && selectedCountry !== "all-countries") {
-    result = result.filter(city => city.en_country === selectedCountry);
-  }
-
-  setFilteredCities(result);
-}, [searchTerm, selectedCountry, allCities]);
+  useEffect(() => {
+    let result = allCities;
+    if (searchTerm) {
+      result = result.filter(city => city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) || city.en_state && city.en_state.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    if (selectedCountry) {
+      result = result.filter(city => city.en_country === selectedCountry);
+    }
+    setFilteredCities(result);
+  }, [searchTerm, selectedCountry]);
 
   // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
