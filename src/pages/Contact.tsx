@@ -129,19 +129,19 @@ const Contact = () => {
               <div className="mt-10">
                 <h3 className="text-xl font-bold mb-4">Follow Us</h3>
                 <div className="flex gap-4">
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-pink-600 p-3 rounded-full transition-colors" aria-label="Instagram">
+                  <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-pink-600 p-3 rounded-full transition-colors" aria-label="Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                     </svg>
                   </a>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-700 p-3 rounded-full transition-colors" aria-label="Facebook">
+                  <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-700 p-3 rounded-full transition-colors" aria-label="Facebook">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                     </svg>
                   </a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-800 p-3 rounded-full transition-colors" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/company/pulse-plans/" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-800 p-3 rounded-full transition-colors" aria-label="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                       <rect x="2" y="9" width="4" height="12"></rect>
