@@ -46,7 +46,7 @@ const CityPage = () => {
 
   if (!cityData) return null;
 
-  return <CityMatchmakingTemplate cityName={cityData.name} />;
+  return <CityMatchmakingTemplate cityName={cityData.name} code={cityData.code} country={cityData.country} state={cityData.state} />;
 };
 
 export default CityPage;

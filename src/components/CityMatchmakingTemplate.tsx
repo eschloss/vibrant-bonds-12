@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 interface CityMatchmakingTemplateProps {
   cityName: string;
+  code: string;
+  country: string;
+  state?: string;
 }
 const steps = [{
   icon: Users,
@@ -28,7 +31,7 @@ const steps = [{
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
 const CityMatchmakingTemplate = ({
-  cityName
+  cityName, code, country, state
 }: CityMatchmakingTemplateProps) => {
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
