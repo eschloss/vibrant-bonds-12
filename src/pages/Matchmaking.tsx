@@ -35,7 +35,6 @@ const Matchmaking = () => {
       
       <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">
-          {/*<div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>*/}
           <div className="absolute inset-0 -z-5">
             {Array.from({
             length: 20
