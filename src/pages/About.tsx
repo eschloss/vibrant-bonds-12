@@ -184,9 +184,7 @@ How Pulse Was Born</h1>
         }} transition={{
           duration: 0.6
         }} className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10">
-            <blockquote className="text-xl md:text-2xl font-light italic text-center mb-6">
-              "In a world where technology often isolates us, Pulse uses technology to bring us together in the real world. We're creating a global community where authentic friendships form naturally and no one ever has to feel alone in a new city again."
-            </blockquote>
+            <blockquote className="text-xl md:text-2xl font-light italic text-center mb-6">"In a world where technology often isolates us, Pulse uses tech to bring people together. We’re building a world where forming meaningful friendships is no longer left to chance."</blockquote>
             <div className="flex justify-center">
               <p className="text-lg font-medium">— Eric, Founder</p>
             </div>
