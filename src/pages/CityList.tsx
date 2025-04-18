@@ -25,7 +25,7 @@ const allCities: City[] = [
   en_country: "United States",
   en_state: "California"
 }
-}];
+];
 const CityList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
