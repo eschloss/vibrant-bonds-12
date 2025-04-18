@@ -35,7 +35,7 @@ const CityList = () => {
         setAllCities(data);
         setFilteredCities(data);
       } catch (error) {
-        alert("Failed to fetch cities");
+        alert(`Failed to fetch cities: ${error}`);
         console.error("Failed to fetch cities:", error);
       }
     };
