@@ -1,32 +1,13 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  const prevPathRef = useRef<string>("");
-  const scrollingRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (prevPathRef.current !== pathname && !scrollingRef.current) {
-      scrollingRef.current = true;
-      
-      // Use requestAnimationFrame for smoother scrolling
-      requestAnimationFrame(() => {
-        // Reset scroll position with instant behavior to avoid smooth scroll conflicts
-        window.scrollTo({
-          top: 0,
-          behavior: "auto" // Using 'auto' instead of 'instant' for better browser compatibility
-        });
-        
-        // Reset scrolling flag after a very short delay
-        setTimeout(() => {
-          scrollingRef.current = false;
-        }, 50);
-      });
-    }
-    
-    prevPathRef.current = pathname;
+    // Simple, direct scroll to top when pathname changes
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
