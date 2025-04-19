@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -77,6 +78,7 @@
     overscroll-behavior-x: none; /* Prevent overscrolling horizontally */
   }
 
+  /* This is the key styling for navbar background on scroll */
   body.has-scrolled header {
     @apply bg-gray-900/80 backdrop-blur-lg shadow-sm;
   }
