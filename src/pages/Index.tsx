@@ -15,42 +15,33 @@ const Index = () => {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Optimize scrolling
-    const handleScroll = () => {
-      // Add passive listener for better performance
-      return true;
-    };
-    
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Reset scroll position when component mounts
+    window.scrollTo(0, 0);
     
     // Check if we need to scroll to a section based on localStorage
     const scrollToSection = localStorage.getItem('scrollToSection');
     if (scrollToSection) {
       localStorage.removeItem('scrollToSection');
       
-      // Use requestAnimationFrame for smoother scrolling
-      requestAnimationFrame(() => {
+      // Give time for the page to fully render before scrolling
+      setTimeout(() => {
         const section = document.getElementById(scrollToSection);
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' });
         }
-      });
+      }, 100);
     }
     
     // Check if URL has a hash to scroll to
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      });
+      }, 100);
     }
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   return (

@@ -42,8 +42,8 @@ const Navbar = () => {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-visible",
-      scrolled 
-        ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" 
+      scrolled || !isHomePage
+        ? "py-3 bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" 
         : "py-5 bg-transparent"
     )}>
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
@@ -56,7 +56,7 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
+            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )}>Home</Link>
           
           {isHomePage ? (
@@ -75,7 +75,7 @@ const Navbar = () => {
               to="/#how-it-works" 
               className={cn(
                 "hover:text-purple-400 transition-colors font-medium", 
-                scrolled ? "text-gray-200" : "text-white"
+                "text-gray-200"
               )}
             >
               How it works
@@ -84,21 +84,21 @@ const Navbar = () => {
           
           <Link to="/communities" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
+            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )}>
             For Communities
           </Link>
           
           <Link to="/about" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
+            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )}>
             About Us
           </Link>
           
           <Link to="/contact" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
+            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )}>
             Contact
           </Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
         <button 
           className={cn(
             "lg:hidden flex items-center", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
+            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}

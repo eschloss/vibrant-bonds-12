@@ -49,8 +49,6 @@ const Hero = () => {
               </Button>
             </Link>
           </div>
-          
-          {/* Removed the flex container with avatars and text */}
         </div>
       </div>
     </section>
