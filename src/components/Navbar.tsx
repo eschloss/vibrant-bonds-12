@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -59,7 +58,7 @@ const Navbar = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-visible",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-[100vw] overflow-x-visible",
       scrolled 
         ? "py-3 bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" 
         : "py-5 bg-transparent"
@@ -146,10 +145,10 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - Fixed positioning issue */}
         <button 
           className={cn(
-            "lg:hidden flex items-center",
+            "lg:hidden flex items-center mr-0",
             getTextColor()
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
@@ -161,8 +160,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
-          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto">
+        <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw]">
+          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto overflow-x-hidden">
             <Link 
               to="/" 
               className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" 
