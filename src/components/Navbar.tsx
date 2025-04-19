@@ -61,9 +61,9 @@ const Navbar = () => {
 
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-[9999] w-full transform transition-all duration-500 ease-out backdrop-blur-md backdrop-saturate-150 backdrop-contrast-125",
+          "fixed top-0 left-0 right-0 z-[9999] w-full transform transition-all duration-500 ease-out backdrop-blur-md backdrop-saturate-150 backdrop-contrast-125 transition-colors",
           scrolled
-            ? "bg-black/70 shadow-md opacity-100 translate-y-0 py-3"
+            ? "bg-black/70 shadow-md opacity-100 translate-y-0 py-3 text-white"
             : "bg-transparent opacity-90 translate-y-1 py-5",
           isHomePage && !scrolled ? "text-black" : "text-white"
         )}
@@ -90,7 +90,7 @@ const Navbar = () => {
               <Link
                 key={label}
                 to={href}
-                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
+                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
               >
                 {label}
               </Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
               <a
                 href="#how-it-works"
                 onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
-                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all cursor-pointer"
+                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all cursor-pointer"
               >
                 How It Works
               </a>
@@ -108,7 +108,7 @@ const Navbar = () => {
               <Link
                 to="/#how-it-works"
                 onClick={() => scrollToSection("how-it-works")}
-                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
+                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
               >
                 How it works
               </Link>
@@ -121,7 +121,7 @@ const Navbar = () => {
                 href="https://482tykjn26x.typeform.com/pulse#city="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-white"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
@@ -129,7 +129,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/matchmaking"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-white"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
@@ -138,7 +138,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className="lg:hidden flex items-center transition-colors duration-300"
+            className="lg:hidden flex items-center transition-colors duration-300 ease-in-out"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -149,7 +149,7 @@ const Navbar = () => {
 
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white transform transition-all duration-300 ease-in-out",
+          "lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] transform transition-all duration-300 ease-in-out text-white",
           isMenuOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -160,7 +160,7 @@ const Navbar = () => {
             <Link
               key={label}
               to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-purple-400"
               onClick={() => setIsMenuOpen(false)}
             >
               {label}
@@ -168,7 +168,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/#how-it-works"
-            className="text-2xl font-medium hover:text-purple-400 transition-colors"
+            className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-purple-400"
             onClick={() => {
               scrollToSection("how-it-works");
               setIsMenuOpen(false);
