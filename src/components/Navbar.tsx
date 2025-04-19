@@ -9,9 +9,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
-  const isHomePage = location.pathname === "/";
 
-  // Simplified scroll handler
+  // Simple scroll handler similar to Communities page
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -25,11 +24,6 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    if (!isHomePage) {
-      localStorage.setItem('scrollToSection', sectionId);
-      return true;
-    }
-    
     const section = document.getElementById(sectionId);
     if (section) {
       setIsMenuOpen(false);
@@ -58,63 +52,41 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           <Link 
             to="/" 
-            className={cn(
-              "hover:text-purple-400 transition-colors font-medium", 
-              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
-            )}
+            className="text-white hover:text-purple-400 transition-colors font-medium"
           >
             Home
           </Link>
           
-          {isHomePage ? (
-            <a 
-              href="#how-it-works" 
-              onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} 
-              className={cn(
-                "hover:text-purple-400 transition-colors font-medium cursor-pointer", 
-                scrolled ? "text-gray-200" : "text-gray-800"
-              )}
-            >
-              How It Works
-            </a>
-          ) : (
-            <Link 
-              to="/#how-it-works" 
-              className={cn(
-                "hover:text-purple-400 transition-colors font-medium", 
-                scrolled ? "text-gray-200" : "text-white"
-              )}
-            >
-              How it works
-            </Link>
-          )}
+          <a 
+            href="#how-it-works" 
+            onClick={(e) => {
+              if (location.pathname === "/") {
+                e.preventDefault();
+                scrollToSection('how-it-works');
+              }
+            }} 
+            className="text-white hover:text-purple-400 transition-colors font-medium cursor-pointer"
+          >
+            How It Works
+          </a>
           
           <Link 
             to="/communities" 
-            className={cn(
-              "hover:text-purple-400 transition-colors font-medium", 
-              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
-            )}
+            className="text-white hover:text-purple-400 transition-colors font-medium"
           >
             For Communities
           </Link>
           
           <Link 
             to="/about" 
-            className={cn(
-              "hover:text-purple-400 transition-colors font-medium", 
-              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
-            )}
+            className="text-white hover:text-purple-400 transition-colors font-medium"
           >
             About Us
           </Link>
           
           <Link 
             to="/contact" 
-            className={cn(
-              "hover:text-purple-400 transition-colors font-medium", 
-              scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
-            )}
+            className="text-white hover:text-purple-400 transition-colors font-medium"
           >
             Contact
           </Link>
@@ -145,10 +117,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className={cn(
-            "lg:hidden flex items-center", 
-            scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white"
-          )} 
+          className="lg:hidden text-white flex items-center" 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -168,27 +137,19 @@ const Navbar = () => {
               Home
             </Link>
             
-            {isHomePage ? (
-              <a 
-                href="#how-it-works" 
-                onClick={e => {
-                  const result = !scrollToSection('how-it-works');
-                  if (result) e.preventDefault();
-                  setIsMenuOpen(false);
-                }} 
-                className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors cursor-pointer"
-              >
-                How it works
-              </a>
-            ) : (
-              <Link 
-                to="/#how-it-works" 
-                className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" 
-                onClick={() => setIsMenuOpen(false)}
-              >
-                How it works
-              </Link>
-            )}
+            <a 
+              href="#how-it-works" 
+              onClick={(e) => {
+                if (location.pathname === "/") {
+                  e.preventDefault();
+                  scrollToSection('how-it-works');
+                }
+                setIsMenuOpen(false);
+              }} 
+              className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors cursor-pointer"
+            >
+              How it works
+            </a>
             
             <Link 
               to="/communities" 
