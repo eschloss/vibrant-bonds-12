@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -17,21 +16,11 @@ const Navbar = () => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       setScrolled(isScrolled);
-      
-      // Add or remove has-scrolled class to body element
-      if (isScrolled) {
-        document.body.classList.add('has-scrolled');
-      } else {
-        document.body.classList.remove('has-scrolled');
-      }
     };
     
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      document.body.classList.remove('has-scrolled');
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
