@@ -14,8 +14,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 10);
     };
 
     handleScroll();
@@ -24,13 +23,13 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const sectionId = localStorage.getItem('scrollToSection');
+    const sectionId = localStorage.getItem("scrollToSection");
     if (sectionId) {
-      localStorage.removeItem('scrollToSection');
+      localStorage.removeItem("scrollToSection");
       setTimeout(() => {
         const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+          section.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
@@ -38,90 +37,88 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== "/") {
-      localStorage.setItem('scrollToSection', sectionId);
+      localStorage.setItem("scrollToSection", sectionId);
       return true;
     }
 
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
       return false;
     }
     return true;
   };
 
-  const getTextColor = () => {
-    if (scrolled) return "text-white";
-    if (!isHomePage) return "text-gray-200";
-    return "text-gray-800";
-  };
-
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-[100vw] overflow-x-visible",
-      scrolled
-        ? "py-3 bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5"
-        : "py-5 bg-transparent"
-    )}>
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-[100vw] overflow-x-visible",
+        scrolled
+          ? "py-3 bg-black/70 backdrop-blur text-white shadow-md"
+          : "py-5 bg-transparent text-black"
+      )}
+    >
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className={cn(
-          "flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300",
-          getTextColor()
-        )}>
-          <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300"
+        >
+          <img
+            alt="Pulse Logo"
+            className="h-5 md:h-6 object-fill"
+            src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png"
+          />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
-          <Link to="/" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
-            getTextColor()
-          )}>Home</Link>
+          <Link
+            to="/"
+            className="hover:text-purple-400 transition-colors font-medium"
+          >
+            Home
+          </Link>
 
-          {location.pathname === "/" ? (
+          {isHomePage ? (
             <a
               href="#how-it-works"
-              onClick={e => !scrollToSection('how-it-works') && e.preventDefault()}
-              className={cn(
-                "hover:text-purple-400 transition-colors font-medium cursor-pointer",
-                getTextColor()
-              )}
+              onClick={(e) =>
+                !scrollToSection("how-it-works") && e.preventDefault()
+              }
+              className="hover:text-purple-400 transition-colors font-medium cursor-pointer"
             >
               How It Works
             </a>
           ) : (
             <Link
               to="/#how-it-works"
-              onClick={() => scrollToSection('how-it-works')}
-              className={cn(
-                "hover:text-purple-400 transition-colors font-medium",
-                getTextColor()
-              )}
+              onClick={() => scrollToSection("how-it-works")}
+              className="hover:text-purple-400 transition-colors font-medium"
             >
               How it works
             </Link>
           )}
 
-          <Link to="/communities" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
-            getTextColor()
-          )}>
+          <Link
+            to="/communities"
+            className="hover:text-purple-400 transition-colors font-medium"
+          >
             For Communities
           </Link>
 
-          <Link to="/about" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
-            getTextColor()
-          )}>
+          <Link
+            to="/about"
+            className="hover:text-purple-400 transition-colors font-medium"
+          >
             About Us
           </Link>
 
-          <Link to="/contact" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
-            getTextColor()
-          )}>
+          <Link
+            to="/contact"
+            className="hover:text-purple-400 transition-colors font-medium"
+          >
             Contact
           </Link>
         </nav>
@@ -151,10 +148,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={cn(
-            "lg:hidden flex items-center mr-0 transition-colors duration-300",
-            getTextColor()
-          )}
+          className="lg:hidden flex items-center mr-0 transition-colors duration-300"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -164,27 +158,61 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw]">
+        <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
           <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto overflow-x-hidden">
-            {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
-              <Link
-                key={label}
-                to={`/${label.toLowerCase().replace(/\s+/g, '')}`}
-                className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
+            <Link
+              to="/"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+
             <Link
               to="/#how-it-works"
-              className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
               onClick={() => {
-                scrollToSection('how-it-works');
+                scrollToSection("how-it-works");
                 setIsMenuOpen(false);
               }}
             >
               How it works
+            </Link>
+
+            <Link
+              to="/communities"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Communities
+            </Link>
+            <Link
+              to="/cities"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Cities
+            </Link>
+            <Link
+              to="/about"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/blog"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </Link>
+            <Link
+              to="/contact"
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
             </Link>
             {isMatchmakingPage ? (
               <a
