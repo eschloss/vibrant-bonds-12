@@ -13,7 +13,7 @@ export const formatTime = (value: number) => {
 export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative h-[60px] md:h-[72px] flex items-center justify-center overflow-hidden">
+      <div className="relative h-[60px] md:h-[72px] w-[50px] md:w-[60px] flex items-center justify-center">
         <motion.div 
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-white absolute inset-0 flex items-center justify-center"
           key={`${label}-${value}`}

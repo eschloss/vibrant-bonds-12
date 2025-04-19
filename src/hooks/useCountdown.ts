@@ -16,7 +16,7 @@ export const useCountdown = () => {
     nextMonday.setDate(now.getDate() + ((1 + 7 - now.getDay()) % 7));
     nextMonday.setHours(23, 0, 0, 0);
     
-    const diff = nextMonday.getTime() - now.getTime();
+    const diff = Math.max(0, nextMonday.getTime() - now.getTime());
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -42,4 +42,3 @@ export const useCountdown = () => {
 
   return timeLeft;
 };
-
