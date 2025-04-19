@@ -13,7 +13,6 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  // Observe scroll position via sentinel
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -58,22 +57,21 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Sentinel element for scroll detection */}
       <div ref={sentinelRef} className="h-1 w-full" />
 
       <header
-  className={cn(
-    "fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300",
-    scrolled
-      ? "bg-black/70 backdrop-blur-md shadow-md py-3"
-      : "py-5",
-    isHomePage && !scrolled ? "text-black" : "text-white"
-  )}
->
+        className={cn(
+          "fixed top-0 left-0 right-0 z-[9999] w-full transform transition-all duration-500 ease-out backdrop-blur-md backdrop-saturate-150 backdrop-contrast-125",
+          scrolled
+            ? "bg-black/70 shadow-md opacity-100 translate-y-0 py-3"
+            : "bg-transparent opacity-90 translate-y-1 py-5",
+          isHomePage && !scrolled ? "text-black" : "text-white"
+        )}
+      >
         <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
           <Link
             to="/"
-            className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300"
+            className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
           >
             <img
               alt="Pulse Logo"
@@ -83,15 +81,26 @@ const Navbar = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="hover:text-purple-400 transition-colors font-medium">
-              Home
-            </Link>
+            {[
+              { label: "Home", href: "/" },
+              { label: "For Communities", href: "/communities" },
+              { label: "About Us", href: "/about" },
+              { label: "Contact", href: "/contact" }
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                to={href}
+                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
+              >
+                {label}
+              </Link>
+            ))}
 
             {isHomePage ? (
               <a
                 href="#how-it-works"
                 onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
-                className="hover:text-purple-400 transition-colors font-medium cursor-pointer"
+                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all cursor-pointer"
               >
                 How It Works
               </a>
@@ -99,21 +108,11 @@ const Navbar = () => {
               <Link
                 to="/#how-it-works"
                 onClick={() => scrollToSection("how-it-works")}
-                className="hover:text-purple-400 transition-colors font-medium"
+                className="hover:text-purple-400 transition-all duration-200 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
               >
                 How it works
               </Link>
             )}
-
-            <Link to="/communities" className="hover:text-purple-400 transition-colors font-medium">
-              For Communities
-            </Link>
-            <Link to="/about" className="hover:text-purple-400 transition-colors font-medium">
-              About Us
-            </Link>
-            <Link to="/contact" className="hover:text-purple-400 transition-colors font-medium">
-              Contact
-            </Link>
           </nav>
 
           <div className="hidden lg:block">
@@ -139,62 +138,67 @@ const Navbar = () => {
           </div>
 
           <button
-            className="lg:hidden flex items-center mr-0 transition-colors duration-300"
+            className="lg:hidden flex items-center transition-colors duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
-        {isMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
-            <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
-              {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
-                <Link
-                  key={label}
-                  to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
-                  className="text-2xl font-medium hover:text-purple-400 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              ))}
-              <Link
-                to="/#how-it-works"
-                className="text-2xl font-medium hover:text-purple-400 transition-colors"
-                onClick={() => {
-                  scrollToSection("how-it-works");
-                  setIsMenuOpen(false);
-                }}
-              >
-                How it works
-              </Link>
-              {isMatchmakingPage ? (
-                <a
-                  href="https://482tykjn26x.typeform.com/pulse#city="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <UserPlus size={18} />
-                  <span>Meet Your Crew</span>
-                </a>
-              ) : (
-                <Link
-                  to="/matchmaking"
-                  className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <UserPlus size={18} />
-                  <span>Meet Your Crew</span>
-                </Link>
-              )}
-            </nav>
-          </div>
-        )}
       </header>
+
+      <div
+        className={cn(
+          "lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white transform transition-all duration-300 ease-in-out",
+          isMenuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        )}
+      >
+        <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
+          {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
+            <Link
+              key={label}
+              to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
+              className="text-2xl font-medium hover:text-purple-400 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link
+            to="/#how-it-works"
+            className="text-2xl font-medium hover:text-purple-400 transition-colors"
+            onClick={() => {
+              scrollToSection("how-it-works");
+              setIsMenuOpen(false);
+            }}
+          >
+            How it works
+          </Link>
+          {isMatchmakingPage ? (
+            <a
+              href="https://482tykjn26x.typeform.com/pulse#city="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <UserPlus size={18} />
+              <span>Meet Your Crew</span>
+            </a>
+          ) : (
+            <Link
+              to="/matchmaking"
+              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <UserPlus size={18} />
+              <span>Meet Your Crew</span>
+            </Link>
+          )}
+        </nav>
+      </div>
     </>
   );
 };
