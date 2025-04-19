@@ -14,12 +14,18 @@ export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
     <div className="flex flex-col items-center">
       <motion.div 
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white hardware-accelerated"
         key={`${label}-${value}`}
-        initial={{ opacity: 0, y: -5 }}
+        initial={{ opacity: 0, y: -3 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        style={{ willChange: "opacity, transform" }}
+        transition={{ 
+          duration: 0.15, 
+          ease: "easeOut" 
+        }}
+        style={{ 
+          willChange: "opacity, transform",
+          transform: "translateZ(0)"
+        }}
       >
         {formatTime(value)}
       </motion.div>

@@ -57,17 +57,29 @@
     @apply border-border;
   }
 
-  html,
-  body {
+  html {
     scroll-behavior: smooth;
-    position: relative;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    height: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    position: relative;
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  /* Improve scrolling performance */
+  .scroll-container {
+    height: 100%;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .section-padding {
@@ -94,6 +106,7 @@
     @apply bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue hover:from-pulse-purple hover:to-pulse-pink transition-all duration-300;
   }
 
+  /* Optimize animation keyframes */
   @keyframes float {
     0% {
       transform: translateY(0px);
@@ -142,7 +155,7 @@
   @keyframes slide-up {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -152,30 +165,50 @@
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-float-reverse {
     animation: float 7s ease-in-out infinite reverse;
+    will-change: transform;
   }
 
   .animate-spin-slow {
     animation: spin-slow 12s linear infinite;
+    will-change: transform;
   }
 
   .animate-pulse-slow {
     animation: pulse-slow 4s ease-in-out infinite;
+    will-change: transform, opacity;
   }
 
   .animate-bounce-gentle {
     animation: bounce-gentle 3s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-slide-up {
     animation: slide-up 0.6s ease-out forwards;
+    will-change: opacity, transform;
+  }
+
+  /* Optimize animations for motion reduction preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-float-reverse,
+    .animate-spin-slow,
+    .animate-pulse-slow,
+    .animate-bounce-gentle,
+    .animate-slide-up {
+      animation: none;
+      transform: none;
+    }
   }
   
-  /* Add will-change to optimize rendering */
-  .motion-safe\:animate-element {
-    will-change: opacity, transform;
+  /* Add hardware acceleration for smoother scrolling */
+  .hardware-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
