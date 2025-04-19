@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -11,19 +10,29 @@ const Navbar = () => {
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
 
-  // Simple scroll listener that works the same way on all pages
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       setScrolled(isScrolled);
     };
     
-    // Initial check
     handleScroll();
-    
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const sectionId = localStorage.getItem('scrollToSection');
+    if (sectionId) {
+      localStorage.removeItem('scrollToSection');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== "/") {
@@ -33,13 +42,16 @@ const Navbar = () => {
     
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({
-        behavior: 'smooth'
-      });
+      section.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
       return false;
     }
     return true;
+  };
+
+  const getTextColor = () => {
+    if (!isHomePage) return "text-gray-200";
+    return scrolled ? "text-gray-200" : "text-gray-800";
   };
 
   return (
@@ -55,11 +67,11 @@ const Navbar = () => {
           <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
         </Link>
 
-        {/* Desktop Navigation - Only show on large screens */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
-            "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-200"
+            "hover:text-purple-400 transition-colors font-medium",
+            getTextColor()
           )}>Home</Link>
           
           {location.pathname === "/" ? (
@@ -67,8 +79,8 @@ const Navbar = () => {
               href="#how-it-works" 
               onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} 
               className={cn(
-                "hover:text-purple-400 transition-colors font-medium cursor-pointer", 
-                scrolled ? "text-gray-200" : "text-gray-200"
+                "hover:text-purple-400 transition-colors font-medium cursor-pointer",
+                getTextColor()
               )}
             >
               How It Works
@@ -76,9 +88,10 @@ const Navbar = () => {
           ) : (
             <Link 
               to="/#how-it-works" 
+              onClick={() => scrollToSection('how-it-works')}
               className={cn(
-                "hover:text-purple-400 transition-colors font-medium", 
-                "text-gray-200"
+                "hover:text-purple-400 transition-colors font-medium",
+                getTextColor()
               )}
             >
               How it works
@@ -86,28 +99,28 @@ const Navbar = () => {
           )}
           
           <Link to="/communities" className={cn(
-            "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-200"
+            "hover:text-purple-400 transition-colors font-medium",
+            getTextColor()
           )}>
             For Communities
           </Link>
           
           <Link to="/about" className={cn(
-            "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-200"
+            "hover:text-purple-400 transition-colors font-medium",
+            getTextColor()
           )}>
             About Us
           </Link>
           
           <Link to="/contact" className={cn(
-            "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-200"
+            "hover:text-purple-400 transition-colors font-medium",
+            getTextColor()
           )}>
             Contact
           </Link>
         </nav>
 
-        {/* CTA Button - Only show on large screens */}
+        {/* CTA Button */}
         <div className="hidden lg:block">
           {isMatchmakingPage ? (
             <a 
@@ -130,11 +143,11 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button - Show on small and medium screens */}
+        {/* Mobile Menu Button */}
         <button 
           className={cn(
-            "lg:hidden flex items-center", 
-            scrolled ? "text-gray-200" : "text-gray-200"
+            "lg:hidden flex items-center",
+            getTextColor()
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -143,7 +156,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu - Show on small and medium screens when open */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
           <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto">
