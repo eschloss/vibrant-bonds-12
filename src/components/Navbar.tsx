@@ -6,48 +6,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    let ticking = false;
-    const initialScrollPosition = window.scrollY;
-    console.log("Initial scroll position:", initialScrollPosition);
-    setScrolled(initialScrollPosition > 10);
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY;
-          console.log("Scroll position:", scrollPosition);
-          setScrolled(scrollPosition > 10);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    document.addEventListener("scroll", handleScroll, { passive: true });
-    document.body.addEventListener("scroll", handleScroll, { passive: true });
-    
-    console.log("Scroll event listeners attached");
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("scroll", handleScroll);
-      document.body.removeEventListener("scroll", handleScroll);
-      console.log("Scroll event listeners removed");
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log("Navbar component mounted");
-    return () => console.log("Navbar component unmounted");
-  }, []);
 
   useEffect(() => {
     const sectionId = localStorage.getItem("scrollToSection");
@@ -77,14 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 w-full",
-        scrolled
-          ? "py-3 bg-black/70 backdrop-blur text-white shadow-md"
-          : "py-5 bg-transparent text-black"
-      )}
-    >
+    <header className="fixed top-0 left-0 right-0 z-[9999] w-full bg-black/70 backdrop-blur-md text-white py-3">
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         <Link
           to="/"
