@@ -14,14 +14,12 @@ const Navbar = () => {
 
 
   useEffect(() => {
-    console.log("SCROLLED STATE:", scrolled);
-  }, [scrolled]);
-
-  useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const scrollTop = window.scrollY;
+      console.log("Scroll position:", scrollTop);
+      setScrolled(scrollTop > 10);
     };
-    handleScroll();
+  
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
