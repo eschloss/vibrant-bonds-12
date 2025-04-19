@@ -17,12 +17,13 @@ export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
         <motion.div 
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-white absolute inset-0 flex items-center justify-center"
           key={`${label}-${value}`}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          exit={{ opacity: 0, y: -15 }}
           transition={{ 
-            duration: 0.3, 
-            ease: "easeOut" 
+            duration: 0.4,
+            ease: [0.4, 0.0, 0.2, 1], // Custom easing curve for smooth, professional feel
+            opacity: { duration: 0.25 } // Slightly faster opacity transition
           }}
         >
           {formatTime(value)}
