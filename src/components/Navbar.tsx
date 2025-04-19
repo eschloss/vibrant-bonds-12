@@ -15,8 +15,11 @@ const Navbar = () => {
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".scroll-container");
-    if (!scrollContainer) return;
-  
+    if (!scrollContainer) {
+      console.log("No Scroll Container");
+      return;
+    }
+    
     const handleScroll = () => {
       const scrollTop = scrollContainer.scrollTop;
       console.log("Scroll position:", scrollTop);
