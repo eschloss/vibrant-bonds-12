@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mic, Map, Users, MessageSquare, Sparkles, UserPlus } from "lucide-react";
@@ -10,14 +9,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 const About = () => {
-  // Simple useEffect for preventing any scroll issues
   useEffect(() => {
     // Reset any scroll position when component mounts
     window.scrollTo(0, 0);
   }, []);
   
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       
       {/* Hero Section */}

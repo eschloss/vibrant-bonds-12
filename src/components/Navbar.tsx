@@ -1,37 +1,28 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface NavbarProps {
-  scrolled?: boolean;
-  isHomePage?: boolean;
-}
-
-const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(propScrolled || false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
+  const isHomePage = location.pathname === "/";
 
-  // Only set up scroll listener if scrolled prop isn't provided
+  // Simple scroll listener that works the same way on all pages
   useEffect(() => {
-    if (propScrolled !== undefined) {
-      setScrolled(propScrolled);
-      return;
-    }
-    
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      setScrolled(isScrolled);
     };
+    
+    // Initial check
+    handleScroll();
     
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled, propScrolled]);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== "/") {
@@ -53,7 +44,7 @@ const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => 
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-visible",
-      scrolled || !isHomePage
+      scrolled 
         ? "py-3 bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" 
         : "py-5 bg-transparent"
     )}>
@@ -67,7 +58,7 @@ const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => 
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-800"
           )}>Home</Link>
           
           {location.pathname === "/" ? (
@@ -95,21 +86,21 @@ const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => 
           
           <Link to="/communities" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-800"
           )}>
             For Communities
           </Link>
           
           <Link to="/about" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-800"
           )}>
             About Us
           </Link>
           
           <Link to="/contact" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-800"
           )}>
             Contact
           </Link>
@@ -142,7 +133,7 @@ const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => 
         <button 
           className={cn(
             "lg:hidden flex items-center", 
-            scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-800"
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
