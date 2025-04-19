@@ -54,10 +54,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen dark hardware-accelerated">
+    <div className="flex flex-col min-h-screen dark hardware-accelerated overflow-x-hidden w-full">
       <Navbar />
       
-      <main className="flex-grow hardware-accelerated">
+      <main className="flex-grow hardware-accelerated overflow-x-hidden w-full">
         <Hero />
         <div id="how-it-works" ref={howItWorksRef}>
           <HowItWorks />

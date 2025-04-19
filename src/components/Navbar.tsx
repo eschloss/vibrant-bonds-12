@@ -40,7 +40,7 @@ const Navbar = () => {
     return true;
   };
 
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-visible", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
@@ -86,8 +86,8 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu - Show on small and medium screens when open */}
-      {isMenuOpen && <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
-          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto">
+      {isMenuOpen && <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 overflow-y-auto overflow-x-hidden w-full">
+          <nav className="flex flex-col items-center gap-8 p-8 stagger-animation">
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Home
             </Link>
@@ -119,9 +119,9 @@ const Navbar = () => {
             {isMatchmakingPage ? <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
-              </a> : <Link to="https://apps.apple.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
+              </a> : <Link to="/matchmaking" className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" onClick={() => setIsMenuOpen(false)}>
                 <UserPlus size={18} />
-                <span>Download App</span>
+                <span>Meet Your Crew</span>
               </Link>}
           </nav>
         </div>}
