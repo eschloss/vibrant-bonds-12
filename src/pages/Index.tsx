@@ -15,9 +15,13 @@ const Index = () => {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Optimize scrolling
+    // Remove any global scroll event listeners that might interfere
+    const prevHandlers = window.onscroll;
+    window.onscroll = null;
+    
+    // Use a more efficient passive scroll listener
     const handleScroll = () => {
-      // Add passive listener for better performance
+      // Using passive listener for better performance
       return true;
     };
     
@@ -28,28 +32,33 @@ const Index = () => {
     if (scrollToSection) {
       localStorage.removeItem('scrollToSection');
       
-      // Use requestAnimationFrame for smoother scrolling
-      requestAnimationFrame(() => {
-        const section = document.getElementById(scrollToSection);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+      // Delay scrolling slightly to avoid interruption
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          const section = document.getElementById(scrollToSection);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }, 100);
     }
     
     // Check if URL has a hash to scroll to
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
-      requestAnimationFrame(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }, 100);
     }
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.onscroll = prevHandlers; // Restore previous handlers if any
     };
   }, []);
 
