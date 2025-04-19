@@ -60,11 +60,6 @@
   html {
     scroll-behavior: smooth;
     height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overscroll-behavior: none;
   }
 
   body {
@@ -72,11 +67,9 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     position: relative;
     height: 100%;
-    width: 100%;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
-    scroll-padding-top: 80px; /* Add padding to account for fixed navbar */
   }
 
   /* Improve scrolling performance */
@@ -202,10 +195,6 @@
 
   /* Optimize animations for motion reduction preferences */
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    
     .animate-float,
     .animate-float-reverse,
     .animate-spin-slow,
@@ -220,11 +209,6 @@
   /* Add hardware acceleration for smoother scrolling */
   .hardware-accelerated {
     transform: translateZ(0);
-    -webkit-transform: translateZ(0);
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    width: 100%;
-    overflow-x: hidden;
-    will-change: transform;
   }
 }

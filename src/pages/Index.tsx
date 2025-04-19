@@ -15,44 +15,38 @@ const Index = () => {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Create a single unified scroll handler with better performance
+    // Optimize scrolling
     const handleScroll = () => {
-      // Using passive listener for better performance
+      // Add passive listener for better performance
       return true;
     };
     
-    // Use passive event listener for better performance
     window.addEventListener("scroll", handleScroll, { passive: true });
     
-    // Handle any hash-based or localStorage-based scrolling
-    const scrollToTarget = () => {
-      const scrollToSection = localStorage.getItem('scrollToSection');
+    // Check if we need to scroll to a section based on localStorage
+    const scrollToSection = localStorage.getItem('scrollToSection');
+    if (scrollToSection) {
+      localStorage.removeItem('scrollToSection');
       
-      if (scrollToSection) {
-        localStorage.removeItem('scrollToSection');
+      // Use requestAnimationFrame for smoother scrolling
+      requestAnimationFrame(() => {
         const section = document.getElementById(scrollToSection);
         if (section) {
-          // Use a smooth scroll with proper timing
-          section.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
+          section.scrollIntoView({ behavior: 'smooth' });
         }
-      } else if (window.location.hash) {
-        const id = window.location.hash.substring(1);
+      });
+    }
+    
+    // Check if URL has a hash to scroll to
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      requestAnimationFrame(() => {
         const element = document.getElementById(id);
         if (element) {
-          // Use a smooth scroll with proper timing
-          element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
+          element.scrollIntoView({ behavior: 'smooth' });
         }
-      }
-    };
-    
-    // Slight delay before attempting to scroll to allow page to fully render
-    setTimeout(scrollToTarget, 100);
+      });
+    }
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -60,12 +54,10 @@ const Index = () => {
   }, []);
 
   return (
-    // Remove overflow-x-hidden from the flexbox container to prevent scroll freezing
-    <div className="flex flex-col min-h-screen dark hardware-accelerated w-full">
+    <div className="flex flex-col min-h-screen dark hardware-accelerated">
       <Navbar />
       
-      {/* Use a container with better scroll characteristics */}
-      <main className="flex-grow hardware-accelerated w-full">
+      <main className="flex-grow hardware-accelerated">
         <Hero />
         <div id="how-it-works" ref={howItWorksRef}>
           <HowItWorks />
