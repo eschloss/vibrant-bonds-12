@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,7 +81,14 @@
     @apply bg-gray-900/80 backdrop-blur-lg shadow-sm;
   }
 
-  /* Improve scrolling performance */
+  body:not(.has-scrolled) .dark-on-scroll {
+    @apply text-gray-800;
+  }
+  
+  body.has-scrolled .dark-on-scroll {
+    @apply text-gray-200;
+  }
+
   .scroll-container {
     height: 100%;
     perspective: 1px;
@@ -116,7 +122,6 @@
     @apply bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue hover:from-pulse-purple hover:to-pulse-pink transition-all duration-300;
   }
 
-  /* Optimize animation keyframes */
   @keyframes float {
     0% {
       transform: translateY(0px);
@@ -203,7 +208,6 @@
     will-change: opacity, transform;
   }
 
-  /* Optimize animations for motion reduction preferences */
   @media (prefers-reduced-motion: reduce) {
     .animate-float,
     .animate-float-reverse,
@@ -215,14 +219,12 @@
       transform: none;
     }
   }
-  
-  /* Add hardware acceleration for smoother scrolling */
+
   .hardware-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
-  /* Force the navbar to stay visible on mobile devices */
   @media (max-width: 768px) {
     header {
       position: fixed !important;
@@ -232,8 +234,8 @@
       z-index: 50 !important;
       transform: none !important;
       visibility: visible !important;
-      width: 100% !important; /* Ensure navbar doesn't exceed viewport width */
-      max-width: 100vw !important; /* Restrict width to prevent overflow */
+      width: 100% !important;
+      max-width: 100vw !important;
     }
   }
 }
