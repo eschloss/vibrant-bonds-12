@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -6,10 +6,28 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  // Observe scroll position via sentinel
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrolled(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const sectionId = localStorage.getItem("scrollToSection");
@@ -39,114 +57,71 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[9999] w-full bg-black/70 backdrop-blur-md text-white py-3">
-      <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300"
-        >
-          <img
-            alt="Pulse Logo"
-            className="h-5 md:h-6 object-fill"
-            src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png"
-          />
-        </Link>
+    <>
+      {/* Sentinel element for scroll detection */}
+      <div ref={sentinelRef} className="h-1 w-full" />
 
-        <nav className="hidden lg:flex items-center space-x-8">
-          <Link to="/" className="hover:text-purple-400 transition-colors font-medium">
-            Home
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300",
+          scrolled
+            ? "bg-black/70 backdrop-blur-md text-white shadow-md py-3"
+            : "bg-transparent text-black py-5"
+        )}
+      >
+        <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300"
+          >
+            <img
+              alt="Pulse Logo"
+              className="h-5 md:h-6 object-fill"
+              src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png"
+            />
           </Link>
 
-          {isHomePage ? (
-            <a
-              href="#how-it-works"
-              onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
-              className="hover:text-purple-400 transition-colors font-medium cursor-pointer"
-            >
-              How It Works
-            </a>
-          ) : (
-            <Link
-              to="/#how-it-works"
-              onClick={() => scrollToSection("how-it-works")}
-              className="hover:text-purple-400 transition-colors font-medium"
-            >
-              How it works
+          <nav className="hidden lg:flex items-center space-x-8">
+            <Link to="/" className="hover:text-purple-400 transition-colors font-medium">
+              Home
             </Link>
-          )}
 
-          <Link to="/communities" className="hover:text-purple-400 transition-colors font-medium">
-            For Communities
-          </Link>
-          <Link to="/about" className="hover:text-purple-400 transition-colors font-medium">
-            About Us
-          </Link>
-          <Link to="/contact" className="hover:text-purple-400 transition-colors font-medium">
-            Contact
-          </Link>
-        </nav>
-
-        <div className="hidden lg:block">
-          {isMatchmakingPage ? (
-            <a
-              href="https://482tykjn26x.typeform.com/pulse#city="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
-            >
-              <UserPlus size={18} />
-              <span>Meet Your Crew</span>
-            </a>
-          ) : (
-            <Link
-              to="/matchmaking"
-              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
-            >
-              <UserPlus size={18} />
-              <span>Meet Your Crew</span>
-            </Link>
-          )}
-        </div>
-
-        <button
-          className="lg:hidden flex items-center mr-0 transition-colors duration-300"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
-          <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
-            {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
-              <Link
-                key={label}
-                to={`/${label.toLowerCase().replace(/\s+/g, '')}`}
-                className="text-2xl font-medium hover:text-purple-400 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+            {isHomePage ? (
+              <a
+                href="#how-it-works"
+                onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
+                className="hover:text-purple-400 transition-colors font-medium cursor-pointer"
               >
-                {label}
+                How It Works
+              </a>
+            ) : (
+              <Link
+                to="/#how-it-works"
+                onClick={() => scrollToSection("how-it-works")}
+                className="hover:text-purple-400 transition-colors font-medium"
+              >
+                How it works
               </Link>
-            ))}
-            <Link
-              to="/#how-it-works"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => {
-                scrollToSection("how-it-works");
-                setIsMenuOpen(false);
-              }}
-            >
-              How it works
+            )}
+
+            <Link to="/communities" className="hover:text-purple-400 transition-colors font-medium">
+              For Communities
             </Link>
+            <Link to="/about" className="hover:text-purple-400 transition-colors font-medium">
+              About Us
+            </Link>
+            <Link to="/contact" className="hover:text-purple-400 transition-colors font-medium">
+              Contact
+            </Link>
+          </nav>
+
+          <div className="hidden lg:block">
             {isMatchmakingPage ? (
               <a
                 href="https://482tykjn26x.typeform.com/pulse#city="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
-                onClick={() => setIsMenuOpen(false)}
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
@@ -154,17 +129,72 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/matchmaking"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
-                onClick={() => setIsMenuOpen(false)}
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
               </Link>
             )}
-          </nav>
+          </div>
+
+          <button
+            className="lg:hidden flex items-center mr-0 transition-colors duration-300"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      )}
-    </header>
+
+        {isMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
+            <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
+              {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
+                <Link
+                  key={label}
+                  to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
+                  className="text-2xl font-medium hover:text-purple-400 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              ))}
+              <Link
+                to="/#how-it-works"
+                className="text-2xl font-medium hover:text-purple-400 transition-colors"
+                onClick={() => {
+                  scrollToSection("how-it-works");
+                  setIsMenuOpen(false);
+                }}
+              >
+                How it works
+              </Link>
+              {isMatchmakingPage ? (
+                <a
+                  href="https://482tykjn26x.typeform.com/pulse#city="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <UserPlus size={18} />
+                  <span>Meet Your Crew</span>
+                </a>
+              ) : (
+                <Link
+                  to="/matchmaking"
+                  className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <UserPlus size={18} />
+                  <span>Meet Your Crew</span>
+                </Link>
+              )}
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ const Index = () => {
 
   return (
     <div className="flex flex-col min-h-screen dark">
+      <div ref={sentinelRef} className="h-1" />
       <Navbar />
       
       <main className="flex-grow">
