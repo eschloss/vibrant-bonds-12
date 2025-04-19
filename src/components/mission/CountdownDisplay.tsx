@@ -13,22 +13,20 @@ export const formatTime = (value: number) => {
 export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
     <div className="flex flex-col items-center">
-      <motion.div 
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white hardware-accelerated"
-        key={`${label}-${value}`}
-        initial={{ opacity: 0, y: -3 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.15, 
-          ease: "easeOut" 
-        }}
-        style={{ 
-          willChange: "opacity, transform",
-          transform: "translateZ(0)"
-        }}
-      >
-        {formatTime(value)}
-      </motion.div>
+      <div className="relative h-[60px] md:h-[72px] flex items-center justify-center overflow-hidden">
+        <motion.div 
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-white absolute inset-0 flex items-center justify-center"
+          key={`${label}-${value}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ 
+            duration: 0.15, 
+            ease: "easeOut" 
+          }}
+        >
+          {formatTime(value)}
+        </motion.div>
+      </div>
       <span className="text-xs sm:text-sm text-white/70 mt-1">{label}</span>
     </div>
   );
