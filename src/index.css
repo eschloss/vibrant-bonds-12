@@ -82,14 +82,6 @@
     @apply bg-gray-900/80 backdrop-blur-lg shadow-sm;
   }
 
-  body:not(.has-scrolled) .dark-on-scroll {
-    @apply text-gray-800;
-  }
-  
-  body.has-scrolled .dark-on-scroll {
-    @apply text-gray-200;
-  }
-
   /* Improve scrolling performance */
   .scroll-container {
     height: 100%;
