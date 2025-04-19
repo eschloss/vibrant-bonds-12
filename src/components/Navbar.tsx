@@ -12,6 +12,11 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
 
+
+  useEffect(() => {
+    console.log("SCROLLED STATE:", scrolled);
+  }, [scrolled]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
