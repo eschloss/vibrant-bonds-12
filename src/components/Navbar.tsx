@@ -62,13 +62,14 @@ const Navbar = () => {
       <div ref={sentinelRef} className="h-1 w-full" />
 
       <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300",
-          scrolled
-            ? "bg-black/70 backdrop-blur-md text-white shadow-md py-3"
-            : "bg-transparent text-black py-5"
-        )}
-      >
+  className={cn(
+    "fixed top-0 left-0 right-0 z-[9999] w-full transition-all duration-300",
+    scrolled
+      ? "bg-black/70 backdrop-blur-md shadow-md py-3"
+      : "py-5",
+    isHomePage && !scrolled ? "text-black" : "text-white"
+  )}
+>
         <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
           <Link
             to="/"
