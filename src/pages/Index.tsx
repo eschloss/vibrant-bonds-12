@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
@@ -9,6 +9,7 @@ import MissionCountdown from "@/components/MissionCountdown";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
   const howItWorksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,6 +18,16 @@ const Index = () => {
     
     // Reset scroll position when component mounts
     window.scrollTo(0, 0);
+    
+    // Handle scroll events
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     
     // Check if we need to scroll to a section based on localStorage
     const scrollToSection = localStorage.getItem('scrollToSection');
@@ -42,11 +53,15 @@ const Index = () => {
         }
       }, 100);
     }
-  }, []);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
 
   return (
     <div className="flex flex-col min-h-screen dark hardware-accelerated">
-      <Navbar />
+      <Navbar scrolled={scrolled} isHomePage={true} />
       
       <main className="flex-grow hardware-accelerated">
         <Hero />

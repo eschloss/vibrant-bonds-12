@@ -4,14 +4,24 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const Navbar = () => {
+interface NavbarProps {
+  scrolled?: boolean;
+  isHomePage?: boolean;
+}
+
+const Navbar = ({ scrolled: propScrolled, isHomePage = false }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(propScrolled || false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
-  const isHomePage = location.pathname === "/";
 
+  // Only set up scroll listener if scrolled prop isn't provided
   useEffect(() => {
+    if (propScrolled !== undefined) {
+      setScrolled(propScrolled);
+      return;
+    }
+    
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       if (isScrolled !== scrolled) {
@@ -21,13 +31,14 @@ const Navbar = () => {
     
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
+  }, [scrolled, propScrolled]);
 
   const scrollToSection = (sectionId: string) => {
-    if (!isHomePage) {
+    if (location.pathname !== "/") {
       localStorage.setItem('scrollToSection', sectionId);
       return true;
     }
+    
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({
@@ -59,7 +70,7 @@ const Navbar = () => {
             scrolled || !isHomePage ? "text-gray-200" : "text-gray-800"
           )}>Home</Link>
           
-          {isHomePage ? (
+          {location.pathname === "/" ? (
             <a 
               href="#how-it-works" 
               onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} 

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, UserPlus, ArrowDownToLine } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -12,7 +12,7 @@ const Hero = () => {
   }, []);
   
   return (
-    <section className="relative flex items-center py-100 pt-50 overflow-hidden section-padding py-[109px] bg-white dark:bg-white">
+    <section className="relative flex items-center overflow-hidden section-padding bg-white dark:bg-white pt-32 md:pt-36 lg:pt-40">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
