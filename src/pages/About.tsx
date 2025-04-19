@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Mic, Map, Users, MessageSquare, Sparkles, UserPlus } from "lucide-react";
@@ -9,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 const About = () => {
-  return <div className="min-h-screen bg-gray-900 text-white">
+  return <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
@@ -31,7 +32,7 @@ const About = () => {
         }} className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold mb-4 md:text-5xl whitespace-pre-line">From Isolation to Connection:
 How Pulse Was Born</h1>
-            <p className="text-xl text-gray-300 mb-6">Our founder’s global journey—from performing on opera stages to building human-centered tech—led to a quiet but powerful realization about how real friendships form. That insight became Pulse: a new kind of social platform designed to turn digital connections into real-life friendships</p>
+            <p className="text-xl text-gray-300 mb-6">Our founder's global journey—from performing on opera stages to building human-centered tech—led to a quiet but powerful realization about how real friendships form. That insight became Pulse: a new kind of social platform designed to turn digital connections into real-life friendships</p>
           </motion.div>
         </div>
       </section>
@@ -129,11 +130,11 @@ How Pulse Was Born</h1>
           }, {
             icon: <Map className="h-6 w-6 text-pulse-blue" />,
             title: "Repeated In-Person Interaction",
-            description: "You can’t build a real friendship from a one-off meetup. It takes seeing each other again and again—and it has to happen in real life."
+            description: "You can't build a real friendship from a one-off meetup. It takes seeing each other again and again—and it has to happen in real life."
           }, {
             icon: <MessageSquare className="h-6 w-6 text-pulse-pink" />,
             title: "A little Nudge",
-            description: 'Every great friendship has someone who says, “Let’s hang out.” Pulse plays that role—helping people follow through and stay connected.'
+            description: 'Every great friendship has someone who says, "Let's hang out." Pulse plays that role—helping people follow through and stay connected.'
           }].map((item, index) => <motion.div key={index} initial={{
             opacity: 0,
             y: 20

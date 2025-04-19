@@ -1,13 +1,16 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -20,6 +23,7 @@ const Navbar = () => {
     });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
   const scrollToSection = (sectionId: string) => {
     if (!isHomePage) {
       localStorage.setItem('scrollToSection', sectionId);
@@ -35,7 +39,8 @@ const Navbar = () => {
     }
     return true;
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
+
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-visible", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
@@ -82,7 +87,7 @@ const Navbar = () => {
 
       {/* Mobile Menu - Show on small and medium screens when open */}
       {isMenuOpen && <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20">
-          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation">
+          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto">
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
               Home
             </Link>
@@ -122,4 +127,5 @@ const Navbar = () => {
         </div>}
     </header>;
 };
+
 export default Navbar;
