@@ -78,10 +78,6 @@
     overscroll-behavior-x: none; /* Prevent overscrolling horizontally */
   }
 
-  body.has-scrolled header {
-    @apply bg-gray-900/80 backdrop-blur-lg shadow-sm;
-  }
-
   /* Improve scrolling performance */
   .scroll-container {
     height: 100%;
