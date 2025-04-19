@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -12,15 +11,26 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+      lastScrollY = window.scrollY;
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isScrolled = lastScrollY > 10;
+          if (isScrolled !== scrolled) {
+            setScrolled(isScrolled);
+          }
+          ticking = false;
+        });
+        
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true
-    });
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
@@ -29,25 +39,29 @@ const Navbar = () => {
       localStorage.setItem('scrollToSection', sectionId);
       return true;
     }
+    
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({
-        behavior: 'smooth'
-      });
       setIsMenuOpen(false);
+      
+      requestAnimationFrame(() => {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+      
       return false;
     }
     return true;
   };
 
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible will-change-transform", scrolled ? "py-3 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm dark:shadow-purple-500/5" : "py-5 bg-transparent")}>
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-2xl text-foreground">
           <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
         </Link>
 
-        {/* Desktop Navigation - Only show on large screens */}
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn("hover:text-purple-400 transition-colors font-medium", scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")}>Home</Link>
           
@@ -68,7 +82,6 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* CTA Button - Only show on large screens */}
         <div className="hidden lg:block">
           {isMatchmakingPage ? <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
               <UserPlus size={18} />
@@ -79,13 +92,11 @@ const Navbar = () => {
             </Link>}
         </div>
 
-        {/* Mobile Menu Button - Show on small and medium screens */}
         <button className={cn("lg:hidden flex items-center", scrolled ? "text-gray-200" : isHomePage ? "text-gray-800" : "text-white")} onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu - Show on small and medium screens when open */}
       {isMenuOpen && <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 overflow-y-auto overflow-x-hidden w-full">
           <nav className="flex flex-col items-center gap-8 p-8 stagger-animation">
             <Link to="/" className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" onClick={() => setIsMenuOpen(false)}>

@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface TimeLeft {
   days: number;
@@ -9,8 +9,8 @@ interface TimeLeft {
 }
 
 export const useCountdown = () => {
-  // Calculate time until next Monday 11pm
-  const getTimeUntilNextMonday = () => {
+  // Calculate time until next Monday 11pm with memoization
+  const getTimeUntilNextMonday = useCallback(() => {
     const now = new Date();
     const nextMonday = new Date();
     nextMonday.setDate(now.getDate() + ((1 + 7 - now.getDay()) % 7));
@@ -23,22 +23,32 @@ export const useCountdown = () => {
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
     return { days, hours, minutes, seconds };
-  };
+  }, []);
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(getTimeUntilNextMonday());
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    countdownRef.current = setInterval(() => {
-      setTimeLeft(getTimeUntilNextMonday());
-    }, 1000);
+    // Use throttled updates to prevent excessive renders
+    let lastUpdateTime = 0;
+    const THROTTLE_MS = 1000; // Update once per second
+    
+    const updateCountdown = () => {
+      const now = Date.now();
+      if (now - lastUpdateTime >= THROTTLE_MS) {
+        setTimeLeft(getTimeUntilNextMonday());
+        lastUpdateTime = now;
+      }
+    };
+
+    countdownRef.current = setInterval(updateCountdown, 1000);
 
     return () => {
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
       }
     };
-  }, []);
+  }, [getTimeUntilNextMonday]);
 
   return timeLeft;
 };
