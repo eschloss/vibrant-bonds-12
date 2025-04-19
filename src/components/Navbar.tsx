@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -14,28 +13,37 @@ const Navbar = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    // Check initial scroll position
+    let ticking = false;
     const initialScrollPosition = window.scrollY;
     console.log("Initial scroll position:", initialScrollPosition);
     setScrolled(initialScrollPosition > 10);
-    
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      console.log("Scroll position:", scrollPosition);
-      setScrolled(scrollPosition > 10);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY;
+          console.log("Scroll position:", scrollPosition);
+          setScrolled(scrollPosition > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-  
-    // Try multiple possible scroll containers
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("scroll", handleScroll, { passive: true });
+    document.body.addEventListener("scroll", handleScroll, { passive: true });
     
+    console.log("Scroll event listeners attached");
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("scroll", handleScroll);
+      document.body.removeEventListener("scroll", handleScroll);
+      console.log("Scroll event listeners removed");
     };
   }, []);
 
-  // Debug when component mounts/unmounts
   useEffect(() => {
     console.log("Navbar component mounted");
     return () => console.log("Navbar component unmounted");
@@ -78,7 +86,6 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
-        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300"
@@ -90,7 +97,6 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className="hover:text-purple-400 transition-colors font-medium">
             Home
@@ -125,7 +131,6 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* CTA Button */}
         <div className="hidden lg:block">
           {isMatchmakingPage ? (
             <a
@@ -148,7 +153,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className="lg:hidden flex items-center mr-0 transition-colors duration-300"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -158,7 +162,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
           <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
