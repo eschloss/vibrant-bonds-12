@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -58,7 +59,7 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-200"
           )}>Home</Link>
           
           {location.pathname === "/" ? (
@@ -67,7 +68,7 @@ const Navbar = () => {
               onClick={e => !scrollToSection('how-it-works') && e.preventDefault()} 
               className={cn(
                 "hover:text-purple-400 transition-colors font-medium cursor-pointer", 
-                scrolled ? "text-gray-200" : "text-gray-800"
+                scrolled ? "text-gray-200" : "text-gray-200"
               )}
             >
               How It Works
@@ -86,21 +87,21 @@ const Navbar = () => {
           
           <Link to="/communities" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-200"
           )}>
             For Communities
           </Link>
           
           <Link to="/about" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-200"
           )}>
             About Us
           </Link>
           
           <Link to="/contact" className={cn(
             "hover:text-purple-400 transition-colors font-medium", 
-            scrolled ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-200"
           )}>
             Contact
           </Link>
@@ -133,7 +134,7 @@ const Navbar = () => {
         <button 
           className={cn(
             "lg:hidden flex items-center", 
-            scrolled ? "text-gray-200" : "text-gray-800"
+            scrolled ? "text-gray-200" : "text-gray-200"
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -223,14 +224,12 @@ const Navbar = () => {
               </a>
             ) : (
               <Link 
-                to="https://apps.apple.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+                to="/matchmaking" 
                 className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium" 
                 onClick={() => setIsMenuOpen(false)}
               >
                 <UserPlus size={18} />
-                <span>Download App</span>
+                <span>Meet Your Crew</span>
               </Link>
             )}
           </nav>
