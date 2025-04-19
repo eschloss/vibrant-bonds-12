@@ -78,19 +78,11 @@
     overscroll-behavior-x: none; /* Prevent overscrolling horizontally */
   }
 
-  /* This is the key styling for navbar background on scroll */
   body.has-scrolled header {
     @apply bg-gray-900/80 backdrop-blur-lg shadow-sm;
   }
 
-  body:not(.has-scrolled) .dark-on-scroll {
-    @apply text-gray-800;
-  }
-  
-  body.has-scrolled .dark-on-scroll {
-    @apply text-gray-200;
-  }
-
+  /* Improve scrolling performance */
   .scroll-container {
     height: 100%;
     perspective: 1px;
@@ -124,6 +116,7 @@
     @apply bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue hover:from-pulse-purple hover:to-pulse-pink transition-all duration-300;
   }
 
+  /* Optimize animation keyframes */
   @keyframes float {
     0% {
       transform: translateY(0px);
@@ -210,6 +203,7 @@
     will-change: opacity, transform;
   }
 
+  /* Optimize animations for motion reduction preferences */
   @media (prefers-reduced-motion: reduce) {
     .animate-float,
     .animate-float-reverse,
@@ -221,12 +215,14 @@
       transform: none;
     }
   }
-
+  
+  /* Add hardware acceleration for smoother scrolling */
   .hardware-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
+  /* Force the navbar to stay visible on mobile devices */
   @media (max-width: 768px) {
     header {
       position: fixed !important;
