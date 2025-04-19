@@ -12,22 +12,15 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
 
-
   useEffect(() => {
-    const scrollContainer = document.querySelector(".scroll-container");
-    if (!scrollContainer) {
-      console.log("No Scroll Container");
-      return;
-    }
-    
     const handleScroll = () => {
-      const scrollTop = scrollContainer.scrollTop;
-      console.log("Scroll position:", scrollTop);
-      setScrolled(scrollTop > 10);
+      const scrollPosition = window.scrollY;
+      console.log("Scroll position:", scrollPosition);
+      setScrolled(scrollPosition > 10);
     };
   
-    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
-    return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
