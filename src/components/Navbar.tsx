@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const isMatchmakingPage = location.pathname === "/matchmaking";
   const isHomePage = location.pathname === "/";
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -183,7 +186,10 @@ const Navbar = () => {
               <Link 
                 to="/#how-it-works" 
                 className="text-2xl text-gray-200 font-medium hover:text-purple-400 transition-colors" 
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  scrollToSection('how-it-works');
+                  setIsMenuOpen(false);
+                }}
               >
                 How it works
               </Link>
