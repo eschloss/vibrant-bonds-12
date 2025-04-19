@@ -16,11 +16,21 @@ const Navbar = () => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       setScrolled(isScrolled);
+      
+      // Add or remove has-scrolled class to body element
+      if (isScrolled) {
+        document.body.classList.add('has-scrolled');
+      } else {
+        document.body.classList.remove('has-scrolled');
+      }
     };
     
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.body.classList.remove('has-scrolled');
+    };
   }, []);
 
   useEffect(() => {
@@ -72,7 +82,7 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
           <Link to="/" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
+            "hover:text-purple-400 transition-colors font-medium dark-on-scroll",
             getTextColor()
           )}>Home</Link>
           
@@ -115,7 +125,7 @@ const Navbar = () => {
           </Link>
           
           <Link to="/contact" className={cn(
-            "hover:text-purple-400 transition-colors font-medium",
+            "hover:text-purple-400 transition-colors font-medium dark-on-scroll",
             getTextColor()
           )}>
             Contact
@@ -145,10 +155,10 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button - Fixed positioning issue */}
+        {/* Mobile Menu Button */}
         <button 
           className={cn(
-            "lg:hidden flex items-center mr-0",
+            "lg:hidden flex items-center mr-0 dark-on-scroll",
             getTextColor()
           )} 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
