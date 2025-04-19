@@ -34,6 +34,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
+  // 🔒 Add this new effect just below....testing if this scrolling bug fix works
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   const scrollToSection = (sectionId: string) => {
     if (!isHomePage) {
       localStorage.setItem('scrollToSection', sectionId);
