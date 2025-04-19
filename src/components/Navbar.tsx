@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, UserPlus } from "lucide-react";
@@ -13,14 +14,31 @@ const Navbar = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Check initial scroll position
+    const initialScrollPosition = window.scrollY;
+    console.log("Initial scroll position:", initialScrollPosition);
+    setScrolled(initialScrollPosition > 10);
+    
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       console.log("Scroll position:", scrollPosition);
       setScrolled(scrollPosition > 10);
     };
   
+    // Try multiple possible scroll containers
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Debug when component mounts/unmounts
+  useEffect(() => {
+    console.log("Navbar component mounted");
+    return () => console.log("Navbar component unmounted");
   }, []);
 
   useEffect(() => {
