@@ -14,14 +14,17 @@ const Navbar = () => {
 
 
   useEffect(() => {
+    const scrollContainer = document.querySelector(".scroll-container");
+    if (!scrollContainer) return;
+  
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
+      const scrollTop = scrollContainer.scrollTop;
       console.log("Scroll position:", scrollTop);
       setScrolled(scrollTop > 10);
     };
   
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
+    return () => scrollContainer.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
