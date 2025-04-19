@@ -16,7 +16,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -40,7 +39,6 @@ const Navbar = () => {
       localStorage.setItem("scrollToSection", sectionId);
       return true;
     }
-
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +51,7 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-[100vw] overflow-x-visible",
+        "fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 w-full",
         scrolled
           ? "py-3 bg-black/70 backdrop-blur text-white shadow-md"
           : "py-5 bg-transparent text-black"
@@ -74,19 +72,14 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
-          <Link
-            to="/"
-            className="hover:text-purple-400 transition-colors font-medium"
-          >
+          <Link to="/" className="hover:text-purple-400 transition-colors font-medium">
             Home
           </Link>
 
           {isHomePage ? (
             <a
               href="#how-it-works"
-              onClick={(e) =>
-                !scrollToSection("how-it-works") && e.preventDefault()
-              }
+              onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
               className="hover:text-purple-400 transition-colors font-medium cursor-pointer"
             >
               How It Works
@@ -101,24 +94,13 @@ const Navbar = () => {
             </Link>
           )}
 
-          <Link
-            to="/communities"
-            className="hover:text-purple-400 transition-colors font-medium"
-          >
+          <Link to="/communities" className="hover:text-purple-400 transition-colors font-medium">
             For Communities
           </Link>
-
-          <Link
-            to="/about"
-            className="hover:text-purple-400 transition-colors font-medium"
-          >
+          <Link to="/about" className="hover:text-purple-400 transition-colors font-medium">
             About Us
           </Link>
-
-          <Link
-            to="/contact"
-            className="hover:text-purple-400 transition-colors font-medium"
-          >
+          <Link to="/contact" className="hover:text-purple-400 transition-colors font-medium">
             Contact
           </Link>
         </nav>
@@ -159,15 +141,17 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-gray-900 pt-20 w-full max-w-[100vw] text-white">
-          <nav className="flex flex-col items-center gap-8 p-8 h-full stagger-animation overflow-y-auto overflow-x-hidden">
-            <Link
-              to="/"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-
+          <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
+            {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
+              <Link
+                key={label}
+                to={`/${label.toLowerCase().replace(/\s+/g, '')}`}
+                className="text-2xl font-medium hover:text-purple-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
             <Link
               to="/#how-it-works"
               className="text-2xl font-medium hover:text-purple-400 transition-colors"
@@ -177,42 +161,6 @@ const Navbar = () => {
               }}
             >
               How it works
-            </Link>
-
-            <Link
-              to="/communities"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Communities
-            </Link>
-            <Link
-              to="/cities"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Cities
-            </Link>
-            <Link
-              to="/about"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About Us
-            </Link>
-            <Link
-              to="/blog"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link
-              to="/contact"
-              className="text-2xl font-medium hover:text-purple-400 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
             </Link>
             {isMatchmakingPage ? (
               <a
