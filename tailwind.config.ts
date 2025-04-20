@@ -30,51 +30,52 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: '#FF2688', // Neon Fuchsia
+					foreground: '#fff'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+					DEFAULT: '#38D1BF', // Bright Aqua
+					foreground: '#fff'
 				},
 				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
+					DEFAULT: '#E5484D',
+					foreground: '#fff'
 				},
 				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+					DEFAULT: '#741ADD1A',
+					foreground: '#741ADD'
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					DEFAULT: '#741ADD', // Electric Violet
+					foreground: '#fff'
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+					DEFAULT: '#15191C', // Gunmetal Black
+					foreground: '#fff'
 				},
 				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
+					DEFAULT: '#fff',
+					foreground: '#15191C'
 				},
 				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+					DEFAULT: '#15191C',
+					foreground: '#fff',
+					primary: '#FF2688',
+					'primary-foreground': '#fff',
+					accent: '#741ADD',
+					'accent-foreground': '#fff',
+					border: '#15191C',
+					ring: '#741ADD'
 				},
-				// Updated Pulse colors to match the logo gradient
+				// Brand Colors
 				pulse: {
-					purple: '#741ADD', // Updated to new purple
-					coral: '#FF2688', // Updated to new pink/coral
-					blue: '#38D1BF', // Updated to new teal
-					teal: '#38D1BF', // Updated to new teal
-					pink: '#FF2688', // Updated to new pink
-				}
+					coral: '#FF2688',    // Neon Fuchsia
+					purple: '#741ADD',   // Electric Violet
+					blue: '#38D1BF',     // Bright Aqua
+					teal: '#38D1BF',
+					pink: '#FF2688',
+				},
+				black: '#15191C',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -147,10 +148,12 @@ export default {
 				'glass': 'blur(8px)',
 			},
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-hero': 'linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%)', 
+				// Overwrite with brand gradient
+				'gradient-hero': 'linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%)',
 				'gradient-cta': 'linear-gradient(90deg, #FF2688 0%, #741ADD 100%)',
 				'gradient-blue': 'linear-gradient(90deg, #741ADD 0%, #38D1BF 100%)',
+				'gradient-main': 'linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%)',
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'noise': 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
 			},
 		}
