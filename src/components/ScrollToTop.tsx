@@ -8,13 +8,8 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     if (prevPathRef.current !== pathname) {
-      // Using requestAnimationFrame for smoother performance
-      requestAnimationFrame(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: "instant" // Using instant instead of smooth to prevent performance issues
-        });
-      });
+      // Scroll to top immediately when pathname changes
+      window.scrollTo(0, 0);
     }
     
     prevPathRef.current = pathname;
