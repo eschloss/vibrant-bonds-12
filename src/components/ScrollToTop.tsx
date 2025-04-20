@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -7,11 +8,10 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     if (prevPathRef.current !== pathname) {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      }, 0);
+      // Scroll to top immediately when pathname changes
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     }
-
+    
     prevPathRef.current = pathname;
   }, [pathname]);
 
