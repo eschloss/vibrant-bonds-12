@@ -5,8 +5,13 @@ const ScrollToTop = () => {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.key]); // Triggers on *any* navigation
+    const scrollArea = document.getElementById("scroll-content");
+    if (scrollArea) {
+      scrollArea.scrollTo({ top: 0, behavior: "auto" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.key]);
 
   return null;
 };
