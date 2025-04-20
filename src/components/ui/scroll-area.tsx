@@ -10,17 +10,15 @@ const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   ScrollAreaProps
 >(({ className, children, viewportRef, ...props }, ref) => (
-<ScrollAreaPrimitive.Root
-  ref={ref}
-  className={cn("relative h-screen w-screen overflow-hidden", className)} // force full screen
-  {...props}
->
-  <ScrollAreaPrimitive.Viewport
-  ref={viewportRef}
-  className="h-full w-full"
-  style={{ overflow: "auto", paddingRight: "0px" }} // Prevent border flicker
->
-
+  <ScrollAreaPrimitive.Root
+    ref={ref}
+    className={cn("fixed inset-0 overflow-hidden", className)} // 🧠 fills entire screen with no border
+    {...props}
+  >
+    <ScrollAreaPrimitive.Viewport
+      ref={viewportRef}
+      className="h-full w-full overflow-auto"
+    >
       {children}
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar />
@@ -38,10 +36,9 @@ const ScrollBar = React.forwardRef<
     orientation={orientation}
     className={cn(
       "flex touch-none select-none transition-colors",
-      orientation === "vertical" &&
-        "h-full w-2.5 border-l border-l-transparent p-[1px]",
-      orientation === "horizontal" &&
-        "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+      orientation === "vertical"
+        ? "h-full w-2.5 border-l border-l-transparent p-[1px]"
+        : "h-2.5 flex-col border-t border-t-transparent p-[1px]",
       className
     )}
     {...props}
