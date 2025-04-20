@@ -13,7 +13,7 @@ const ScrollArea = React.forwardRef<
     {...props}
   >
 <ScrollAreaPrimitive.Viewport
-  id="scroll-content"
+  id="pulse-scroll-area"
   className="h-full w-full rounded-[inherit]"
 >
       {children}

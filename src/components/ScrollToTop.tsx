@@ -5,9 +5,10 @@ const ScrollToTop = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const scrollArea = document.getElementById("scroll-content");
+    const scrollArea = document.getElementById("pulse-scroll-area");
+
     if (scrollArea) {
-      scrollArea.scrollTo({ top: 0, behavior: "auto" });
+      scrollArea.scrollTop = 0;
     } else {
       window.scrollTo(0, 0);
     }
