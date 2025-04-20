@@ -1,9 +1,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import MenuButton from "./MenuButton";
+import MobileNavLinks from "./MobileNavLinks";
 
 // --- Navigation Link List (for desktop and mobile reuse) ---
 const navLinks = [
@@ -12,57 +14,6 @@ const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
-
-// --- MobileNavLinks Subcomponent ---
-const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: {
-  closeMenu: () => void;
-  scrollToSection: (sectionId: string) => boolean;
-  isMatchmakingPage: boolean;
-}) => (
-  <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
-    {["Home", "Communities", "Cities", "About Us", "Blog", "Contact"].map((label) => (
-      <Link
-        key={label}
-        to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
-        className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
-        onClick={closeMenu}
-      >
-        {label}
-      </Link>
-    ))}
-    <Link
-      to="/#how-it-works"
-      className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
-      onClick={() => {
-        scrollToSection("how-it-works");
-        closeMenu();
-      }}
-    >
-      How it works
-    </Link>
-    {isMatchmakingPage ? (
-      <a
-        href="https://482tykjn26x.typeform.com/pulse#city="
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
-        onClick={closeMenu}
-      >
-        <UserPlus size={18} />
-        <span>Meet Your Crew</span>
-      </a>
-    ) : (
-      <Link
-        to="/matchmaking"
-        className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
-        onClick={closeMenu}
-      >
-        <UserPlus size={18} />
-        <span>Meet Your Crew</span>
-      </Link>
-    )}
-  </nav>
-);
 
 // --- Navbar component ---
 const Navbar = () => {
@@ -186,13 +137,7 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          <button
-            className="lg:hidden flex items-center transition-colors duration-300 ease-in-out"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <MenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
       </header>
       <div
