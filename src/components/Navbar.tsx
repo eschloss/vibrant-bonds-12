@@ -90,7 +90,7 @@ const Navbar = () => {
               <Link
                 key={label}
                 to={href}
-                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
+                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
               >
                 {label}
               </Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
               <a
                 href="#how-it-works"
                 onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
-                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all cursor-pointer"
+                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
               >
                 How It Works
               </a>
@@ -108,7 +108,7 @@ const Navbar = () => {
               <Link
                 to="/#how-it-works"
                 onClick={() => scrollToSection("how-it-works")}
-                className="transition-colors duration-300 ease-in-out hover:text-purple-400 font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-400 after:transition-all"
+                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
               >
                 How it works
               </Link>
@@ -121,7 +121,7 @@ const Navbar = () => {
                 href="https://482tykjn26x.typeform.com/pulse#city="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-white"
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
@@ -129,7 +129,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/matchmaking"
-                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-white"
+                className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-coral px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
                 <UserPlus size={18} />
                 <span>Meet Your Crew</span>
@@ -160,7 +160,7 @@ const Navbar = () => {
             <Link
               key={label}
               to={`/${label.toLowerCase().replace(/\s+/g, "")}`}
-              className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-purple-400"
+              className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
               onClick={() => setIsMenuOpen(false)}
             >
               {label}
@@ -168,7 +168,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/#how-it-works"
-            className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-purple-400"
+            className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
             onClick={() => {
               scrollToSection("how-it-works");
               setIsMenuOpen(false);
@@ -181,7 +181,7 @@ const Navbar = () => {
               href="https://482tykjn26x.typeform.com/pulse#city="
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               <UserPlus size={18} />
@@ -190,7 +190,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/matchmaking"
-              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-purple-500/20 font-medium"
+              className="bg-gradient-to-r from-pulse-coral via-pulse-purple to-pulse-blue text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               <UserPlus size={18} />
