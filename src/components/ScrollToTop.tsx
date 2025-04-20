@@ -6,9 +6,20 @@ const ScrollToTop = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Immediately scroll to top when location changes
-    window.scrollTo(0, 0);
-  }, [location.pathname]); // Change from location.key to location.pathname for more reliability
+    // Force scroll to top with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      // Reset main window scroll
+      window.scrollTo(0, 0);
+      
+      // Also reset any scroll areas if they exist
+      const scrollAreas = document.querySelectorAll('[data-radix-scroll-area-viewport]');
+      scrollAreas.forEach(area => {
+        if (area instanceof HTMLElement) {
+          area.scrollTop = 0;
+        }
+      });
+    }, 0);
+  }, [location.pathname]);
 
   return null;
 };
