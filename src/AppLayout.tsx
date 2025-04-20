@@ -1,0 +1,19 @@
+import { useRef } from "react";
+import { Outlet } from "react-router-dom";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import ScrollToTop from "@/components/ScrollToTop";
+
+const AppLayout = () => {
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <ScrollArea viewportRef={viewportRef} className="h-screen">
+      <ScrollToTop scrollRef={viewportRef} />
+      <div className="px-4 md:px-8">
+        <Outlet />
+      </div>
+    </ScrollArea>
+  );
+};
+
+export default AppLayout;
