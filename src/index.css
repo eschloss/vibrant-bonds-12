@@ -87,13 +87,16 @@
 
 
 
-html,
-body,
-#root {
+html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* prevent body scroll */
+  overflow: hidden;
+  background-color: hsl(var(--background)); /* so dark mode works properly */
 }
+
+
+
 
 html, body, #root {
   height: 100%;
