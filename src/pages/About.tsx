@@ -95,7 +95,7 @@ How Pulse Was Born</h1>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
               <p className="text-gray-300 text-lg">After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.</p>
               <blockquote className="my-8 px-8 py-6 bg-gradient-to-r from-pulse-purple/10 to-pulse-blue/10 rounded-2xl border-l-4 border-pulse-pink relative">
-                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-pulse-purple rounded-full flex items-center justify-center">
+                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-pulse-pink rounded-full flex items-center justify-center">
                   <span className="text-white text-2xl">"</span>
                 </div>
                 <p className="text-gray-300 text-2xl italic leading-relaxed">
@@ -240,7 +240,7 @@ How Pulse Was Born</h1>
             }} 
             className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10"
           >
-            <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-purple pl-4 py-2 bg-gray-800/30 rounded-r-xl">
+            <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-pink pl-4 py-2 bg-gray-800/30 rounded-r-xl">
               "What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared context, repeated time together, and someone willing to say, 'Let's do this again next week!'"
             </blockquote>
             <div className="flex justify-center">
