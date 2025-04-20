@@ -94,7 +94,7 @@ How Pulse Was Born</h1>
               <h2 className="text-3xl font-bold">The Journey</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full"></div>
               <p className="text-gray-300 text-lg">After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.</p>
-              <blockquote className="my-8 px-8 py-6 bg-gradient-to-r from-pulse-purple/10 to-pulse-blue/10 rounded-2xl border-l-4 border-pulse-purple relative">
+              <blockquote className="my-8 px-8 py-6 bg-gradient-to-r from-pulse-purple/10 to-pulse-blue/10 rounded-2xl border-l-4 border-pulse-pink relative">
                 <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-pulse-purple rounded-full flex items-center justify-center">
                   <span className="text-white text-2xl">"</span>
                 </div>
