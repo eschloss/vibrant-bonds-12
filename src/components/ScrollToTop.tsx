@@ -1,23 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  const prevPathRef = useRef<string>("");
+  const location = useLocation();
 
   useEffect(() => {
-    if (prevPathRef.current !== pathname) {
-      // Temporarily disable smooth scrolling
-      const html = document.documentElement;
-      const originalScrollBehavior = html.style.scrollBehavior;
-
-      html.style.scrollBehavior = "auto";
-      window.scrollTo(0, 0);
-      html.style.scrollBehavior = originalScrollBehavior;
-    }
-
-    prevPathRef.current = pathname;
-  }, [pathname]);
+    window.scrollTo(0, 0);
+  }, [location.key]); // Triggers on *any* navigation
 
   return null;
 };
