@@ -10,9 +10,7 @@ const AppLayout = () => {
     <div className="h-screen w-screen overflow-hidden bg-background">
     <ScrollArea viewportRef={viewportRef} className="h-screen">
       <ScrollToTop scrollRef={viewportRef} />
-      <div className="px-4 md:px-8">
         <Outlet />
-      </div>
     </ScrollArea>
     </div>
   );
