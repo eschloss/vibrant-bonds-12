@@ -220,7 +220,7 @@ How Pulse Was Born</h1>
             className="text-center mb-8"
           >
             <h2 className="text-3xl md:text-4xl font-bold">Our Mission</h2>
-            <Separator className="w-20 h-1 bg-gradient-to-r from-pulse-purple to-pulse-blue rounded-full mx-auto mt-4 mb-8" />
+            <Separator className="w-20 h-1 bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] rounded-full mx-auto mt-4 mb-8" />
           </motion.div>
           
           <motion.div 
