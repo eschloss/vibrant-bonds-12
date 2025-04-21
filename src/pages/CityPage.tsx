@@ -9,7 +9,13 @@ type CityParam = {
 const CityPage = () => {
   const { cityName } = useParams<CityParam>();
   const navigate = useNavigate();
-  const [cityData, setCityData] = useState<{ name: string; country: string; state?: string; code: string } | null>(null);
+  const [cityData, setCityData] = useState<{ 
+    name: string; 
+    country: string; 
+    state?: string; 
+    code: string;
+    image?: string;
+  } | null>(null);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -28,7 +34,8 @@ const CityPage = () => {
           name: matchedCity.en_name,
           country: matchedCity.en_country,
           state: matchedCity.en_state,
-          code: matchedCity.code
+          code: matchedCity.code,
+          image: matchedCity.image
         });
 
         window.scrollTo(0, 0);
@@ -46,7 +53,13 @@ const CityPage = () => {
 
   if (!cityData) return null;
 
-  return <CityMatchmakingTemplate cityName={cityData.name} code={cityData.code} country={cityData.country} state={cityData.state} />;
+  return <CityMatchmakingTemplate 
+           cityName={cityData.name} 
+           code={cityData.code} 
+           country={cityData.country} 
+           state={cityData.state}
+           image={cityData.image}
+          />;
 };
 
 export default CityPage;
