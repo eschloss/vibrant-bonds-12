@@ -8,18 +8,21 @@ import Footer from "@/components/Footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 type City = {
   en_name: string;
   url2: string;
   en_country: string;
   en_state?: string;
 };
+
 const CityList = () => {
   const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
+
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -34,6 +37,7 @@ const CityList = () => {
     };
     fetchCities();
   }, []);
+
   useEffect(() => {
     let result = allCities;
     if (searchTerm) {
@@ -56,22 +60,26 @@ const CityList = () => {
       });
     }
   }, [searchTerm, selectedCountry, allCities]);
+
   const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
     if (!acc[city.en_country]) acc[city.en_country] = [];
     acc[city.en_country].push(city);
     return acc;
   }, {});
+
   useEffect(() => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add('dark');
   }, []);
+
   const toggleCountry = (country: string) => {
     setOpenCountries(prev => ({
       ...prev,
       [country]: !prev[country]
     }));
   };
+
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
       <main className="flex-grow">
@@ -121,8 +129,17 @@ const CityList = () => {
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-                    <Input placeholder="Search cities or states..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md" />
+                    <Search
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    <Input
+                      placeholder="Search cities or states..."
+                      value={searchTerm}
+                      onChange={e => setSearchTerm(e.target.value)}
+                      className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md placeholder:text-gray-400"
+                      aria-label="Search cities or states"
+                    />
                   </div>
                 </div>
                 <div className="w-full md:w-40">
@@ -212,4 +229,5 @@ const CityList = () => {
       <Footer />
     </div>;
 };
+
 export default CityList;
