@@ -1,85 +1,41 @@
-import React from "react";
-import { Timer } from "lucide-react";
-import { useCountdown } from "@/hooks/useCountdown";
-import { TimerDisplay } from "./mission/TimerDisplay";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-
+import React from 'react';
+import { Tally1 } from 'lucide-react';
 
 const MissionCountdown = () => {
-  const timeLeft = useCountdown();
-  const isMobile = useIsMobile();
-  return <section className="section-padding bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
-      {/* Subtle animated gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pulse-purple rounded-full mix-blend-screen filter blur-[80px] animate-float"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-pulse-blue rounded-full mix-blend-screen filter blur-[80px] animate-float" style={{
-        animationDelay: "2s"
-      }}></div>
-      </div>
-      
-      <div className="container mx-auto relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Section Label and Title */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4 mx-auto">
-              <Timer size={18} className="text-pulse-purple" />
-              <span className="text-white/90 text-sm font-medium">Group Mission</span>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
-              <span className="pulse-gradient-text">Meet in Real Life</span> — 7 Day Mission
-            </h2>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your crew!</p>
+  return (
+    <div className="relative">
+      <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center flex items-center">
+        <div className="absolute left-[-40px] md:left-[-80px] top-1/2 transform -translate-y-1/2 z-10">
+          <div className="text-[120px] md:text-[200px] font-bold text-primary/10 select-none">
+            1
           </div>
-
-          <div className="flex flex-col gap-8">
-            {/* First Mission Container */}
-            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
-              <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
-                <div className="flex justify-center mb-6">
-                  <div className="flex gap-4 items-start">
-                    <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Get matched into a group</h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 flex flex-col items-center my-0">
-                  <TimerDisplay {...timeLeft} />
-                  <p className="text-sm text-white/70 mt-4 text-center">time left until the current match closes</p>
-                </div>
-                <div className="mt-8">
-                  <Link to="/cities">
-                      <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
-                          <span>Get Matched Now</span>
-                      </Button>  
-                  </Link>
-                </div>
-
-              </div>
+        </div>
+        <div>
+          <h3 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+            Your Mission Starts In:
+          </h3>
+          <div className="flex justify-center items-center space-x-4">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl md:text-5xl font-bold text-primary">24</span>
+              <span className="text-sm md:text-base text-gray-500 dark:text-gray-400">Days</span>
             </div>
-
-            {/* Second Mission Container */}
-            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
-              <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Meet in Person</h3>}
-                <div className="flex justify-center mb-6">
-                  <div className="flex gap-4 items-start">
-                    <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Meet in real life</h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 flex flex-col items-center">
-                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  <p className="text-sm text-white/70 mt-4 text-center">countdown starts once matched into a group</p>
-                </div>
-              </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl md:text-5xl font-bold text-primary">10</span>
+              <span className="text-sm md:text-base text-gray-500 dark:text-gray-400">Hours</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl md:text-5xl font-bold text-primary">59</span>
+              <span className="text-sm md:text-base text-gray-500 dark:text-gray-400">Mins</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl md:text-5xl font-bold text-primary">59</span>
+              <span className="text-sm md:text-base text-gray-500 dark:text-gray-400">Secs</span>
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </div>
+  );
 };
+
 export default MissionCountdown;
