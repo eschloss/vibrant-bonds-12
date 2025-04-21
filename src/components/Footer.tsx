@@ -110,7 +110,7 @@ const Footer = () => {
               <h3 className="text-white text-lg font-bold mb-4">Contact</h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <Mail size={16} className="text-purple-400 mt-1 mr-2" />
+                  <Mail size={16} className="text-pulse-pink mt-1 mr-2" />
                   <a href="mailto:contact@pulsenow.app" className="text-white/70 text-sm hover:text-purple-400 transition-colors">contact@pulsenow.app</a>
                 </li>
                 <li className="flex items-start">
