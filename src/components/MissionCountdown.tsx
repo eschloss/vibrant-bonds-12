@@ -41,7 +41,7 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get matched into a group</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get Matched into a Group</h4>
                     </div>
                   </div>
                 </div>
@@ -67,7 +67,7 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">2. Meet in real life</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">2. Meet in Real Life</h4>
                     </div>
                   </div>
                 </div>
