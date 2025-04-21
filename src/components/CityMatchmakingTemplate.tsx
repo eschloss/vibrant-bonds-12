@@ -108,6 +108,7 @@ const CityMatchmakingTemplate = ({
               Start Matching in {cityName}
               {state ? `, ${state}` : ""}
             </span>
+            <ArrowRight size={18} />
           </Button>
         </Link>
       </motion.div>
