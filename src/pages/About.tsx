@@ -177,7 +177,7 @@ How Pulse Was Born</h1>
           duration: 0.6
         }} className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10">
             <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-pink pl-4 py-2 bg-gray-800/30 rounded-r-xl">
-              "What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared context, repeated time together, and someone willing to say, 'Let's do this again next week!'"
+            To create a world where growing meaningful friendships is effortless and no longer daunting.
             </blockquote>
             <div className="flex justify-center">
               <p className="text-lg font-medium">— Eric, Founder</p>
