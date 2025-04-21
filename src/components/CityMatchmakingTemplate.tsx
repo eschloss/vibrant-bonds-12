@@ -68,7 +68,7 @@ const CityMatchmakingTemplate = ({
             <>
               <div
                 className="absolute inset-0 -z-10 bg-cover bg-center"
-                style={{ backgroundImage: `url(${image})` }}
+                style={{ backgroundImage: `url(https://${image})` }}
               />
               <div className="absolute inset-0 -z-5 bg-black/40" />
             </>
