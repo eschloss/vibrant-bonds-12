@@ -92,7 +92,7 @@ const Footer = () => {
               <h3 className="text-white text-lg font-bold mb-4">Cities</h3>
               <ul className="grid grid-cols-2 gap-2">
                 {cities.map((city, i) => <li key={i}>
-                    <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-purple-400 text-sm transition-colors flex items-center">
+                    <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
                       <MapPin size={12} className="mr-1" />
                       {city}
                     </Link>
