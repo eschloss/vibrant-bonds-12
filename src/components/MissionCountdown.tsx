@@ -3,6 +3,8 @@ import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
+
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
