@@ -157,7 +157,7 @@ const CityMatchmakingTemplate = ({
 
 
         <section className="relative py-20 bg-gray-900/80">
-          <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 Ready to Meet<br/>Your <span className="pulse-gradient-text">{cityName} Crew</span>?
@@ -166,11 +166,11 @@ const CityMatchmakingTemplate = ({
 
               <div className="">
                 <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
+                <p className="text-sm text-white/70 mt-4 text-center">until the next friend group match closes</p>
               </div>
               
               
-              <div className="justify-center gap-4">
+              <div className="justify-center gap-4 mt-8">
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Start Matching in {cityName}
                   <ArrowRight size={18} />
