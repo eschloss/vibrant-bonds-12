@@ -10,6 +10,7 @@ import MobileNavLinks from "./MobileNavLinks";
 // --- Navigation Link List (for desktop and mobile reuse) ---
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "How it works", href: "#how-it-works" },
   { label: "For Communities", href: "/communities" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -89,32 +90,35 @@ const Navbar = () => {
             />
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map(({ label, href }) => (
-              <Link
-                key={label}
-                to={href}
-                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-              >
-                {label}
-              </Link>
-            ))}
-            {isHomePage ? (
-              <a
-                href="#how-it-works"
-                onClick={(e) => !scrollToSection("how-it-works") && e.preventDefault()}
-                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
-              >
-                How It Works
-              </a>
-            ) : (
-              <Link
-                to="/#how-it-works"
-                onClick={() => scrollToSection("how-it-works")}
-                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-              >
-                How it works
-              </Link>
-            )}
+            {navLinks.map(({ label, href }) => {
+  const isHashLink = href.startsWith("#");
+
+  if (isHashLink && isHomePage) {
+    return (
+      <a
+        key={label}
+        href={href}
+        onClick={(e) => {
+          e.preventDefault();
+          scrollToSection(href.replace("#", ""));
+        }}
+        className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
+      >
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      key={label}
+      to={isHashLink ? `/${href}` : href}
+      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
+    >
+      {label}
+    </Link>
+  );
+})}
           </nav>
           <div className="hidden lg:block">
             {isMatchmakingPage ? (
