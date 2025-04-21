@@ -93,7 +93,7 @@ const Navbar = () => {
             {navLinks.map(({ label, href }) => {
   const isHashLink = href.startsWith("#");
 
-  if (isHashLink && isHomePage) {
+  if (isHashLink) {
     return (
       <a
         key={label}
