@@ -40,7 +40,7 @@ const steps = [
     icon: CalendarDays,
     title: "Meet Up in Real Life",
     description:
-      "We’ll handle the planning and logistics —simply show up and enjoy yourself.",
+      "We’ll handle the planning and logistics — simply show up and enjoy yourself.",
     color: "bg-gradient-to-r from-indigo-400 to-blue-500",
   },
   {
@@ -64,90 +64,91 @@ const CityMatchmakingTemplate = ({
 
       <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">
-  {image && image !== "" ? (
-    <>
-      <div
-        className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
-        style={{ backgroundImage: `url(https://${image})` }}
-      />
-      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-    </>
-  ) : (
+          {image && image !== "" ? (
+            <>
+              <div
+                className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
+                style={{ backgroundImage: `url(https://${image})` }}
+              />
+              <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+            </>
+          ) : (
+            <>
+              {/* Light fallback background */}
+              <div className="absolute inset-0 -z-10 bg-white"></div>
 
+              {/* Soft radial accents */}
+              <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pink-100 to-transparent opacity-70"></div>
+              <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-green-100 to-transparent opacity-60"></div>
 
-      <>
-  {/* Pure white background base */}
-  <div className="absolute inset-0 -z-10 bg-white"></div>
+              {/* Floating animated orbs */}
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full bg-pink-200/30"
+                  style={{
+                    width: `${Math.random() * 10 + 6}px`,
+                    height: `${Math.random() * 10 + 6}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
+                    animationDelay: `${Math.random() * 5}s`,
+                  }}
+                />
+              ))}
 
-  {/* Soft radial highlights, Pulse-style */}
-  <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
-  <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
+              {/* Blurred blobs */}
+              <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pink-100/50 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-green-100/50 rounded-full blur-3xl"></div>
+            </>
+          )}
 
-  {/* Floating animated orbs using Pulse brand colors */}
-  {Array.from({ length: 20 }).map((_, i) => (
-    <div
-      key={i}
-      className="absolute rounded-full bg-pulse-pink/20"
-      style={{
-        width: `${Math.random() * 10 + 6}px`,
-        height: `${Math.random() * 10 + 6}px`,
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
-        animationDelay: `${Math.random() * 5}s`,
-      }}
-    />
-  ))}
-
-  {/* Large blurred accents (same feel as Hero section) */}
-  <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pulse-purple/20 rounded-full blur-3xl"></div>
-  <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-pulse-blue/20 rounded-full blur-3xl"></div>
-</>
-
-
-  )}
-
-  <div className="container mx-auto px-4 relative z-10 my-[31px]">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
-      className="text-center max-w-3xl mx-auto"
-    >
-      <h1 className="text-4xl font-bold mb-4 text-white text-soft-glow md:text-5xl">
-        Meet New Friends in <span className="pulse-gradient-text">{cityName}</span>
-      </h1>
-      <motion.p
-        className="text-xl md:text-2xl text-white/90 text-soft-glow font-light mb-8"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        Making friends as an adult can be hard. We're here to help.
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center"
-      >
-        <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
-          <Button
-            size="xl"
-            variant="gradient"
-            className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
-          >
-            <Zap size={18} className="text-white" />
-            <span>
-              Start Matching in {cityName}
-              {state ? `, ${state}` : ""}
-            </span>
-          </Button>
-        </Link>
-      </motion.div>
-    </motion.div>
-  </div>
-</section>
+          <div className="container mx-auto px-4 relative z-10 my-[31px]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <h1 className={`text-4xl font-bold mb-4 md:text-5xl ${
+                image ? "text-white text-soft-glow" : "text-gray-900"
+              }`}>
+                Meet New Friends in{" "}
+                <span className="pulse-gradient-text">{cityName}</span>
+              </h1>
+              <motion.p
+                className={`text-xl md:text-2xl font-light mb-8 ${
+                  image ? "text-white/90 text-soft-glow" : "text-gray-700"
+                }`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                Making friends as an adult can be hard. We're here to help.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
+                  <Button
+                    size="xl"
+                    variant="gradient"
+                    className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
+                  >
+                    <Zap size={18} className="text-white" />
+                    <span>
+                      Start Matching in {cityName}
+                      {state ? `, ${state}` : ""}
+                    </span>
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
         <section className="relative py-16 bg-gray-900 dark:bg-gray-950">
           <div className="absolute inset-0 opacity-10">
