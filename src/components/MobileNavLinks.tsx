@@ -66,4 +66,37 @@ const MobileNavLinks = ({
           <Link
             key={label}
             to={href}
-            className="text-2xl
+            className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
+            onClick={closeMenu}
+          >
+            {label}
+          </Link>
+        );
+      })}
+
+      {isMatchmakingPage ? (
+        <a
+          href="https://482tykjn26x.typeform.com/pulse#city="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
+          onClick={closeMenu}
+        >
+          <UserPlus size={18} />
+          <span>Meet Your Crew</span>
+        </a>
+      ) : (
+        <Link
+          to="/matchmaking"
+          className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
+          onClick={closeMenu}
+        >
+          <UserPlus size={18} />
+          <span>Meet Your Crew</span>
+        </Link>
+      )}
+    </nav>
+  );
+};
+
+export default MobileNavLinks;
