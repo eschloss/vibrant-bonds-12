@@ -30,6 +30,8 @@ const CityPage = () => {
           return;
         }
 
+        alert(matchedCity.image);
+
         setCityData({
           name: matchedCity.en_name,
           country: matchedCity.en_country,
