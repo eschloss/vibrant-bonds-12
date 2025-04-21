@@ -79,7 +79,7 @@ How Pulse Was Born</h1>
                   <span className="text-white text-2xl">"</span>
                 </div>
                 <p className="text-gray-300 text-2xl italic leading-relaxed">
-                  What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared context, repeated time together, and someone willing to say, "Let's do this again next week!"
+                  What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared interests, repeated time together, and someone willing to say, "Let's do this again next week!"
                 </p>
               </blockquote>
               <p className="text-gray-300 text-lg">Those lessons became Pulse: a new kind of social platform that helps people turn strangers into real friends, in real life.</p>
@@ -113,8 +113,8 @@ How Pulse Was Born</h1>
           <div className="grid md:grid-cols-3 gap-6">
             {[{
             icon: <HeartHandshake className="h-6 w-6 text-pulse-pink" />,
-            title: "Shared Context",
-            description: "The strongest bonds form between people who share core values and interests."
+            title: "Shared Interests",
+            description: "People come together faster when plans are built around something they’re all excited to do.\n\nShared interests not only spark connection—they also give you something to focus on, so it's not just endless small talk."
           }, {
             icon: <CalendarDays className="h-6 w-6 text-pulse-blue" />,
             title: "Repeated\nIn-Person Interaction",
