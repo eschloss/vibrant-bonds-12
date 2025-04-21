@@ -206,7 +206,7 @@ How Pulse Was Born</h1>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/cities">
-                <Button size="lg" variant="coral" className="rounded-full shadow-lg shadow-pink-500/20 w-full sm:w-auto">
+                <Button size="lg" variant="gradient" className="rounded-full shadow-lg shadow-pink-500/20 w-full sm:w-auto">
                   Get Matched into a Friend Group
                 </Button>
               </Link>
