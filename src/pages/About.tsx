@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mic, Map, Users, MessageSquare, Sparkles, UserPlus } from "lucide-react";
+import { Mic, Map, Puzzle, CalendarDays, Zap, Users, MessageSquare, Sparkles, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -112,15 +112,15 @@ How Pulse Was Born</h1>
           
           <div className="grid md:grid-cols-3 gap-6">
             {[{
-            icon: <Users className="h-6 w-6 text-pulse-purple" />,
+            icon: <Puzzle className="h-6 w-6 text-pulse-purple" />,
             title: "Shared Context",
             description: "The strongest bonds form between people who share core values and interests."
           }, {
-            icon: <Map className="h-6 w-6 text-pulse-blue" />,
+            icon: <CalendarDays className="h-6 w-6 text-pulse-blue" />,
             title: "Repeated In-Person Interaction",
             description: "You can't build a real friendship from a one-off meetup. It takes seeing each other again and again—and it has to happen in real life."
           }, {
-            icon: <MessageSquare className="h-6 w-6 text-pulse-pink" />,
+            icon: <Zap className="h-6 w-6 text-pulse-pink" />,
             title: "A little Nudge",
             description: 'Every great friendship has someone who says, "Let\'s hang out." Pulse plays that role—helping people follow through and stay connected.'
           }].map((item, index) => <motion.div key={index} initial={{
