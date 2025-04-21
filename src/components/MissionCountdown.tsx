@@ -47,7 +47,7 @@ const MissionCountdown = () => {
                 </div>
                 <div className="mt-2 flex flex-col items-center my-0">
                   <TimerDisplay {...timeLeft} />
-                  <p className="text-sm text-white/70 mt-4 text-center">time left until the current match closes</p>
+                  <p className="text-sm text-white/70 mt-4 text-center">time left until the next match closes</p>
                 </div>
                 <div className="mt-8">
                   <Link to="/cities">
