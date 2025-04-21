@@ -320,6 +320,24 @@ html, body, #root {
   .pulse-border-black {
     border-color: #15191C;
   }
+
+  /* Accent utility for bright aqua, to match #38D1BF for focus, border, highlight */
+  .accent-aqua {
+    --tw-border-opacity: 1;
+    border-color: #38D1BF !important;
+  }
+  .accent-aqua-bg {
+    background-color: #38D1BF !important;
+  }
+  .accent-aqua-bg10 {
+    background-color: rgba(56,209,191,0.10) !important;
+  }
+  .accent-aqua-text {
+    color: #38D1BF !important;
+  }
+  .text-soft-gray {
+    color: #8E9196 !important;
+  }
 }
 
 /* End of Utility Classes */

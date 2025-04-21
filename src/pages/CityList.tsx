@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Search } from "lucide-react";
@@ -22,6 +22,7 @@ const CityList = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -61,17 +62,20 @@ const CityList = () => {
     }
   }, [searchTerm, selectedCountry, allCities]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('dark');
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
+
   const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
     if (!acc[city.en_country]) acc[city.en_country] = [];
     acc[city.en_country].push(city);
     return acc;
   }, {});
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.classList.add('dark');
-  }, []);
 
   const toggleCountry = (country: string) => {
     setOpenCountries(prev => ({
@@ -130,28 +134,38 @@ const CityList = () => {
                 <div className="flex-1">
                   <div className="relative">
                     <Search
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#38D1BF] transition-colors"
                       aria-hidden="true"
                     />
                     <Input
+                      ref={searchInputRef}
                       placeholder="Search cities or states..."
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md placeholder:text-gray-400"
                       aria-label="Search cities or states"
+                      className="pl-10 bg-gray-800/50 border border-white/10 focus:border-[#38D1BF] text-white rounded-md placeholder:text-[#8E9196] focus:ring-2 focus:ring-[#38D1BF] transition-colors"
                     />
                   </div>
                 </div>
                 <div className="w-full md:w-40">
                   <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-                    <SelectTrigger className="bg-gray-800/50 border-white/10 text-white rounded-md">
+                    <SelectTrigger className="bg-gray-800/50 border border-white/10 focus:border-[#38D1BF] focus:ring-2 focus:ring-[#38D1BF] text-white rounded-md transition-colors">
                       <SelectValue placeholder="All Countries" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-800 border-white/10 text-white rounded-md">
-                      <SelectItem value="all-countries">All Countries</SelectItem>
-                      {countries.map(country => <SelectItem key={country} value={country}>
+                    <SelectContent className="bg-gray-800 border border-[#38D1BF] text-white rounded-md z-50">
+                      <SelectItem value="all-countries"
+                        className="data-[state=checked]:bg-[#38D1BF] data-[state=checked]:text-black transition-colors">
+                        All Countries
+                      </SelectItem>
+                      {countries.map(country => (
+                        <SelectItem
+                          key={country}
+                          value={country}
+                          className="data-[state=checked]:bg-[#38D1BF] data-[state=checked]:text-black transition-colors"
+                        >
                           {country}
-                        </SelectItem>)}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -159,69 +173,74 @@ const CityList = () => {
             </motion.div>
 
             <div className="max-w-6xl mx-auto">
-              {Object.entries(groupedCities).length > 0 ? Object.entries(groupedCities).sort(([a], [b]) => a.localeCompare(b)).map(([country, cities], i) => <motion.div key={country} initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.5,
-              delay: i * 0.1
-            }} className="mb-8">
-                      <Collapsible open={!!openCountries[country]} className="w-full">
-                        <CollapsibleTrigger onClick={() => toggleCountry(country)} className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
-                          <h2 className="text-xl font-bold text-white">{country}</h2>
-                          <div className="ml-auto px-3 py-1 bg-purple-500/20 rounded-full text-sm text-purple-300">
-                            {cities.length} {cities.length === 1 ? "city" : "cities"}
-                          </div>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {cities.map((city, index) => <motion.div key={city.url2} initial={{
-                      opacity: 0,
-                      y: 20
-                    }} animate={{
-                      opacity: 1,
-                      y: 0
-                    }} transition={{
-                      duration: 0.5,
-                      delay: index * 0.05
-                    }}>
-                                <Link to={`/cities${city.url2}`} className="block">
-                                  <div className="bg-gray-800/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 h-full hover:bg-gray-800/70 transition-all hover:shadow-lg hover:shadow-purple-500/10 group">
-                                    <div className="flex items-start gap-4">
-                                      <div className="bg-purple-500/20 rounded-full p-3">
-                                        <MapPin className="text-purple-400" />
-                                      </div>
-                                      <div className="flex-1">
-                                        <h3 className="text-xl font-bold text-white mb-1 group-hover:text-purple-400 transition-colors">
-                                          {city.en_name}
-                                        </h3>
-                                        {city.en_state && <p className="text-sm text-gray-400 mb-2">{city.en_state}</p>}
-                                        <p className="text-gray-300 mb-4">Connect with friends in {city.en_name}</p>
-                                        <div className="flex justify-end">
-                                          <Button variant="ghost" size="sm" className="text-purple-400 group-hover:bg-purple-500/20 rounded-md">
-                                            View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                          </Button>
-                                        </div>
+              {Object.entries(groupedCities).length > 0 ? Object.entries(groupedCities)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([country, cities], i) => (
+                  <motion.div key={country} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }} className="mb-8">
+                    <Collapsible open={!!openCountries[country]} className="w-full">
+                      <CollapsibleTrigger
+                        onClick={() => toggleCountry(country)}
+                        className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
+                        <h2 className="text-xl font-bold text-white">{country}</h2>
+                        <div className="ml-auto px-3 py-1 bg-[#38D1BF] bg-opacity-10 rounded-full text-sm text-[#8E9196] font-medium">
+                          {cities.length} {cities.length === 1 ? "city" : "cities"}
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {cities.map((city, index) => (
+                            <motion.div key={city.url2} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: index * 0.05 }}>
+                              <Link to={`/cities${city.url2}`} className="block">
+                                <div className="bg-gray-800/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 h-full 
+                                hover:border-[#38D1BF] transition-all hover:shadow-lg hover:shadow-[#38D1BF]/10 group">
+                                  <div className="flex items-start gap-4">
+                                    <div className="bg-[#38D1BF]/20 rounded-full p-3 group-hover:bg-[#38D1BF]/40 transition-colors">
+                                      <MapPin className="transition-colors text-purple-400 group-hover:text-[#38D1BF]" />
+                                    </div>
+                                    <div className="flex-1">
+                                      <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#38D1BF] transition-colors">
+                                        {city.en_name}
+                                      </h3>
+                                      {city.en_state && (
+                                        <p className="text-sm text-gray-400 mb-2">{city.en_state}</p>
+                                      )}
+                                      <p className="text-gray-300 mb-4">Connect with friends in {city.en_name}</p>
+                                      <div className="flex justify-end">
+                                        <Button
+                                          variant="ghost"
+                                          size="sm"
+                                          className="text-[#38D1BF] group-hover:bg-[#38D1BF]/20 group-hover:text-[#38D1BF] rounded-md font-semibold transition-colors"
+                                        >
+                                          View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </Button>
                                       </div>
                                     </div>
                                   </div>
-                                </Link>
-                              </motion.div>)}
-                          </div>
-                        </CollapsibleContent>
-                      </Collapsible>
-                    </motion.div>) : <div className="text-center py-12">
-                  <p className="text-xl text-gray-400">No cities found matching your search criteria.</p>
-                  <Button variant="outline" className="mt-4 text-purple-400 border-purple-400/30 hover:bg-purple-500/20 rounded-md" onClick={() => {
-                setSearchTerm("");
-                setSelectedCountry("");
-              }}>
-                    Clear Filters
-                  </Button>
-                </div>}
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </motion.div>
+                )) : (
+                  <div className="text-center py-12">
+                    <p className="text-xl text-gray-400">No cities found matching your search criteria.</p>
+                    <Button
+                      variant="outline"
+                      className="mt-4 text-[#38D1BF] border-[#38D1BF]/40 hover:bg-[#38D1BF]/20 rounded-md"
+                      onClick={() => {
+                        setSearchTerm("");
+                        setSelectedCountry("");
+                      }}
+                    >
+                      Clear Filters
+                    </Button>
+                  </div>
+                )}
             </div>
           </div>
         </section>
