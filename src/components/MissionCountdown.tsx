@@ -41,11 +41,11 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Get matched into a group</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get matched into a group</h4>
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 flex flex-col items-center my-0">
+                <div className="mt-2 flex flex-col items-center my-0">
                   <TimerDisplay {...timeLeft} />
                   <p className="text-sm text-white/70 mt-4 text-center">time left until the current match closes</p>
                 </div>
@@ -67,11 +67,11 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Meet in real life</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">2. Meet in real life</h4>
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 flex flex-col items-center">
+                <div className="mt-2 flex flex-col items-center">
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
                   <p className="text-sm text-white/70 mt-4 text-center">countdown starts once matched into a group</p>
                 </div>
