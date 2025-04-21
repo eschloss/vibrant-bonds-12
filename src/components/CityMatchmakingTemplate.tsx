@@ -112,13 +112,16 @@ const CityMatchmakingTemplate = ({
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
- <Button
+<Button
   size="xl"
   variant="gradient"
-  className="rounded-full px-8 py-4 font-semibold text-white bg-white/10 border border-white/30 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300"
+  className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30"
 >
-  Start Matching in {cityName}
-  {state ? `, ${state}` : ""}
+  <Zap size={18} className="text-white" />
+  <span>
+    Start Matching in {cityName}
+    {state ? `, ${state}` : ""}
+  </span>
 </Button>
                 </Link>
               </motion.div>
