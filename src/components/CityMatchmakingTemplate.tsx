@@ -165,35 +165,16 @@ const CityMatchmakingTemplate = ({
 
 
             <div className="flex flex-col gap-8">
-            {/* First Mission Container */}
-            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
-              <div>
-                <div className="flex justify-center mb-6">
-                  <div className="flex gap-4 items-start">
-                    <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get Matched into a Group</h4>
-                    </div>
+              <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
+                  <div className="mt-2 flex flex-col items-center my-0">
+                    <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                    <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
                   </div>
-                </div>
-                <div className="mt-2 flex flex-col items-center my-0">
-                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
-                </div>
-                <div className="mt-8">
-                  <Link to="/cities">
-                      <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
-                          <span>Get Matched Now</span>
-                      </Button>  
-                  </Link>
-                </div>
-
               </div>
-            </div>
             </div>
               
               
               <div className="justify-center gap-4">
-                <div className="text-gray-400 text-sm">Takes just 2 minutes</div>
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Start Matching in {cityName}
                   <ArrowRight size={18} />
