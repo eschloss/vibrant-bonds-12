@@ -52,7 +52,10 @@ const CommunitiesPage = () => {
               </span>
             </h1>
             <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">
-              A private friend group match just for your community—powered by Pulse. We match your members into small group chats, then use AI to spark conversation and plan casual hangouts—so they never show up to an event feeling like a stranger.
+              A private friend group match just for your community—powered by Pulse.
+            </p>
+            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">
+              We match your members into small group chats, then use AI to spark conversation and plan casual hangouts—so they never show up to an event feeling like a stranger.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a href="#signup" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
