@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import MissionCountdown from "@/components/MissionCountdown";
 interface CityMatchmakingTemplateProps {
   cityName: string;
   code: string;
@@ -151,8 +150,6 @@ const CityMatchmakingTemplate = ({
           </div>
         </section>
 
-                <MissionCountdown />
-
 
         <section className="relative py-20 bg-gray-900/80">
           <div className="container mx-auto px-4">
@@ -169,7 +166,7 @@ const CityMatchmakingTemplate = ({
           }} className="text-center max-w-3xl mx-auto">
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                Ready to Meet Your <span className="pulse-gradient-text">{cityName} Crew</span>?
+                Ready to Meet<br/>Your <span className="pulse-gradient-text">{cityName} Crew</span>?
               </h2>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
