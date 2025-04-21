@@ -83,7 +83,7 @@ const CityMatchmakingTemplate = ({
             duration: 0.7
           }} className="text-center max-w-3xl mx-auto relative z-10">
       <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
-        Meet New Friends<br />in{" "}
+        Meet New Friends in{" "}
         <span className="pulse-gradient-text">{cityName}</span>
       </h1>
       <motion.p className="text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
