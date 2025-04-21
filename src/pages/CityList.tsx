@@ -139,7 +139,7 @@ const CityList = () => {
                     />
                     <Input
                       ref={searchInputRef}
-                      placeholder="Search cities or states…"
+                      placeholder="Search cities, states, or provinces…"
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
                       aria-label="Search cities or states"
