@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
+import { useCountdown } from "@/hooks/useCountdown";
+import { TimerDisplay } from "./mission/TimerDisplay";
+
+
 interface CityMatchmakingTemplateProps {
   cityName: string;
   code: string;
@@ -169,6 +173,35 @@ const CityMatchmakingTemplate = ({
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 Ready to Meet<br/>Your <span className="pulse-gradient-text">{cityName} Crew</span>?
               </h2>
+
+
+            <div className="flex flex-col gap-8">
+            {/* First Mission Container */}
+            <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
+              <div>
+                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
+                <div className="flex justify-center mb-6">
+                  <div className="flex gap-4 items-start">
+                    <div>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get Matched into a Group</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-2 flex flex-col items-center my-0">
+                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                  <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
+                </div>
+                <div className="mt-8">
+                  <Link to="/cities">
+                      <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
+                          <span>Get Matched Now</span>
+                      </Button>  
+                  </Link>
+                </div>
+
+              </div>
+            </div>
+              
               
               <div className="justify-center gap-4">
                 <div className="text-gray-400 text-sm">Takes just 2 minutes</div>
