@@ -170,11 +170,11 @@ const CityMatchmakingTemplate = ({
               </h2>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="text-gray-400 text-sm">Takes just 2 minutes</div>
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Start Matching in {cityName}
                   <ArrowRight size={18} />
                 </Button>
-                <span className="text-gray-400 text-sm">Takes just 2 minutes</span>
               </div>
             </motion.div>
           </div>
