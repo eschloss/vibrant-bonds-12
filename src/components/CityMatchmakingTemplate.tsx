@@ -9,6 +9,7 @@ interface CityMatchmakingTemplateProps {
   code: string;
   country: string;
   state?: string;
+  image?: string;
 }
 const steps = [{
   icon: Users,
@@ -39,19 +40,34 @@ const CityMatchmakingTemplate = ({
       
       <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
-          <div className="absolute inset-0 -z-5">
-            {Array.from({
-            length: 20
-          }).map((_, i) => <div key={i} className="absolute rounded-full bg-purple-500/20" style={{
-            width: `${Math.random() * 10 + 5}px`,
-            height: `${Math.random() * 10 + 5}px`,
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-            animationDelay: `${Math.random() * 5}s`
-          }} />)}
-          </div>
+        {image && image !== "" ? (
+          <div
+            className="absolute inset-0 -z-10 bg-cover bg-center"
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
+            <div className="absolute inset-0 -z-5">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full bg-purple-500/20"
+                  style={{
+                    width: `${Math.random() * 10 + 5}px`,
+                    height: `${Math.random() * 10 + 5}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                    animationDelay: `${Math.random() * 5}s`,
+                  }}
+                />
+              ))}
+            </div>
+            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+          </>
+        )}
           <div className="absolute top-1/4 -left-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
           <div className="container mx-auto px-4 relative z-10 my-[31px]">
