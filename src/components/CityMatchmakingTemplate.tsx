@@ -167,7 +167,7 @@ const CityMatchmakingTemplate = ({
               </h2>
 
 
-              <div className="">
+              <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
                 <TimerDisplay {...timeLeft} />
                 <p className="text-sm text-white/70 mt-4 text-center">until the next friend group match closes</p>
               </div>
