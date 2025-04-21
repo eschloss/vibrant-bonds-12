@@ -138,8 +138,8 @@ How Pulse Was Born</h1>
                 <div className="w-12 h-12 bg-gray-700/50 rounded-full flex items-center justify-center mb-4">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-300 flex-grow">
+                <h3 className="text-xl font-bold mb-2 whitespace-pre-line">{item.title}</h3>
+                <p className="text-gray-300 whitespace-pre-line flex-grow">
                   {item.description}
                 </p>
               </motion.div>)}
