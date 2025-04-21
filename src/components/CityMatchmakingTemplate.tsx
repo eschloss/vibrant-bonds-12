@@ -64,72 +64,69 @@ const CityMatchmakingTemplate = ({
 
       <main className="flex-grow">
         <section className="relative py-32 overflow-hidden">
-          {image && image !== "" ? (
-            <>
-              <div
-                className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
-                style={{ backgroundImage: `url(https://${image})` }}
-              />
-              <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-            </>
-          ) : (
-            <>
-              <div
-                className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
-                style={{ backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)` }}
-              />
-              <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-            </>
-          )}
+  {image && image !== "" ? (
+    <>
+      <div
+        className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
+        style={{ backgroundImage: `url(https://${image})` }}
+      />
+      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+    </>
+  ) : (
+    <>
+      <div
+        className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
+        style={{ backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)` }}
+      />
+      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+    </>
+  )}
 
-          <div className="container mx-auto px-4 relative z-10 my-[31px]">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <h1 className={`text-4xl font-bold mb-4 md:text-5xl ${
-                image ? "text-black" : "text-gray-900"
-              }`}>
-                Meet New Friends in{" "}
-                <span className="pulse-gradient-text">{cityName}</span>
-              </h1>
-              <motion.p
-                className={`text-xl md:text-2xl font-light mb-8 ${
-                  image ? "text-black" : "text-gray-700"
-                }`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                Making friends as an adult can be hard. We're here to help.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
-              >
-                <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
-<Button
-  size="xl"
-  className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110"
->
-  <div className="absolute inset-0 z-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-90" />
-  <span className="relative z-10">
-    Start Matching in {cityName}
-    {state ? `, ${state}` : ""}
-  </span>
-</Button>
+  {/* 🧠 Gradient overlay to increase readability */}
+  <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-white via-white/70 to-transparent z-0 pointer-events-none" />
 
+  <div className="container mx-auto px-4 relative z-10 my-[31px]">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="text-center max-w-3xl mx-auto relative z-10"
+    >
+      <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
+        Meet New Friends in{" "}
+        <span className="pulse-gradient-text">{cityName}</span>
+      </h1>
+      <motion.p
+        className="text-xl md:text-2xl font-normal mb-8 text-gray-800"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
+        Making friends as an adult can be hard. We're here to help.
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center"
+      >
+        <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
+          <Button
+            size="xl"
+            className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110"
+          >
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-90" />
+            <span className="relative z-10">
+              Start Matching in {cityName}
+              {state ? `, ${state}` : ""}
+            </span>
+          </Button>
+        </Link>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
-
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
 
         <section className="relative py-16 bg-gray-900 dark:bg-gray-950">
           <div className="absolute inset-0 opacity-10">
