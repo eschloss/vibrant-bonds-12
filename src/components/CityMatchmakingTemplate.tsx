@@ -175,7 +175,7 @@ const CityMatchmakingTemplate = ({
               
               <div className="justify-center gap-4 mt-8">
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                  Start Matching in {cityName}
+                  Get Matched in {cityName} Now
                   <ArrowRight size={18} />
                 </Button>
               </div>
