@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --radius: 8px;
     --background: 151 10% 6%; /* #15191C in HSL approx */
     --foreground: 0 0% 98%;   /* white */
 
