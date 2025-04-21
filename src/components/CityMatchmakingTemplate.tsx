@@ -158,17 +158,6 @@ const CityMatchmakingTemplate = ({
 
         <section className="relative py-20 bg-gray-900/80">
           <div className="container mx-auto px-4">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.5
-          }} className="text-center max-w-3xl mx-auto">
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 Ready to Meet<br/>Your <span className="pulse-gradient-text">{cityName} Crew</span>?
@@ -179,7 +168,6 @@ const CityMatchmakingTemplate = ({
             {/* First Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
               <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
@@ -211,7 +199,6 @@ const CityMatchmakingTemplate = ({
                   <ArrowRight size={18} />
                 </Button>
               </div>
-            </motion.div>
           </div>
         </section>
       </main>
