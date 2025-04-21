@@ -42,11 +42,14 @@ const MissionCountdown = () => {
                   <TimerDisplay {...timeLeft} />
                   <p className="text-sm text-white/70 mt-4 text-center">Time left until next match</p>
                 </div>
-                <Link to="/cities">
-                    <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
-                        <span>Take the Quiz, Get Matched</span>
-                    </Button>  
-                </Link>
+                <div>
+                  <Link to="/cities">
+                      <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
+                          <span>Take the Quiz, Get Matched</span>
+                      </Button>  
+                  </Link>
+                </div>
+
               </div>
             </div>
 
