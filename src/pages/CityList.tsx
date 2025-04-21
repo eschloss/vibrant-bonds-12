@@ -144,7 +144,7 @@ const CityList = () => {
                       onChange={e => setSearchTerm(e.target.value)}
                       aria-label="Search cities or states"
                       className={
-                        "pl-10 bg-gray-800/50 border border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md placeholder:text-[#8E9196] transition-colors"
+                        "pl-10 bg-gray-800/50 border-2 border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md placeholder:text-[#8E9196] transition-colors"
                       }
                       autoFocus
                     />
@@ -152,7 +152,7 @@ const CityList = () => {
                 </div>
                 <div className="w-full md:w-40">
                   <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-                    <SelectTrigger className="bg-gray-800/50 border border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md transition-colors">
+                    <SelectTrigger className="bg-gray-800/50 border-2 border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md transition-colors">
                       <SelectValue placeholder="All Countries" />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border border-[#38D1BF] text-white rounded-md z-50">
