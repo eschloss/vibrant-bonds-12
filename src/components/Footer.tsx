@@ -3,7 +3,7 @@ import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, 
 import { motion } from "framer-motion";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const cities = ["San Francisco", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
+  const cities = ["London", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
   return <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 relative">
         {/* Background Blur Effects */}
