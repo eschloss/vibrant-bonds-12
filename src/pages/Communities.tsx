@@ -23,7 +23,7 @@ const formSchema = z.object({
 });
 type FormValues = z.infer<typeof formSchema>;
 const CommunitiesPage = () => {
-  return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+  return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-0 my-[132px]">
       <Navbar />
       
       {/* Hero Section */}
