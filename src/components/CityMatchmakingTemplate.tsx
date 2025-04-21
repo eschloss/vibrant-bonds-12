@@ -74,12 +74,12 @@ const CityMatchmakingTemplate = ({
     </>
   ) : (
     <>
-  <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-pink-100/40 to-white"></div>
+  <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white/70 to-white"></div>
   <div className="absolute inset-0 -z-5">
     {Array.from({ length: 20 }).map((_, i) => (
       <div
         key={i}
-        className="absolute rounded-full bg-pink-300/30"
+        className="absolute rounded-full bg-pink-200/40"
         style={{
           width: `${Math.random() * 10 + 5}px`,
           height: `${Math.random() * 10 + 5}px`,
@@ -91,9 +91,10 @@ const CityMatchmakingTemplate = ({
       />
     ))}
   </div>
-  <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pink-300/20 rounded-full blur-3xl"></div>
-  <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-green-300/20 rounded-full blur-3xl"></div>
+  <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pink-100/50 rounded-full blur-3xl"></div>
+  <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-green-100/50 rounded-full blur-3xl"></div>
 </>
+
 
   )}
 
