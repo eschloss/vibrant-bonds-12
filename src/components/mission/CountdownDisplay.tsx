@@ -14,7 +14,7 @@ export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
     <div className="flex flex-col items-center">
       <motion.div 
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white hardware-accelerated"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white hardware-accelerated min-w-[3ch] text-center"
         key={`${label}-${value}`}
         initial={{ opacity: 0, y: -3 }}
         animate={{ opacity: 1, y: 0 }}
@@ -33,3 +33,4 @@ export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
     </div>
   );
 };
+
