@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet";
+
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -93,7 +95,7 @@ const CityMatchmakingTemplate = ({
       className="text-center max-w-3xl mx-auto relative z-10"
     >
       <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
-        Meet New Friends <br/>in{" "}
+        Meet New Friends in{" "}
         <span className="pulse-gradient-text">{cityName}</span>
       </h1>
       <motion.p
