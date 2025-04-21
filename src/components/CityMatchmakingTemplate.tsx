@@ -174,10 +174,13 @@ const CityMatchmakingTemplate = ({
               
               
               <div className="justify-center gap-4 mt-8">
+        <Link to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(cityName)}`}>
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Get Matched in {cityName} Now
                   <ArrowRight size={18} />
                 </Button>
+                </Link>
+
               </div>
           </div>
         </section>
