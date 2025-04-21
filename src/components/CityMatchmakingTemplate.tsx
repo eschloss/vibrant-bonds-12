@@ -49,6 +49,9 @@ const CityMatchmakingTemplate = ({
     <link rel="preload" as="image" href={`https://${image}`} />
   </Helmet>;
   }
+
+    const timeLeft = useCountdown();
+
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
 
@@ -165,7 +168,7 @@ const CityMatchmakingTemplate = ({
 
 
               <div className="">
-                <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                <TimerDisplay {...timeLeft} />
                 <p className="text-sm text-white/70 mt-4 text-center">until the next friend group match closes</p>
               </div>
               
