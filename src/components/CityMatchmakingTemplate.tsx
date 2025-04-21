@@ -70,8 +70,12 @@ const CityMatchmakingTemplate = ({
         className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
         style={{ backgroundImage: `url(https://${image})` }}
       />
-      
-        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-black/60 to-transparent" />
+            
+      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-sm mix-blend-lighten" />
+      {/*
+      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-black/60 to-transparent" />
+      */}
     </>
   ) : (
     <>
