@@ -53,11 +53,11 @@ const CommunitiesPage = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                              Build Real Friendships<br/>
+
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Build Real Friendships
-              </span>
-              <br />
               Within Your Community
+              </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
               Match like-minded members into groups of 8-12 people, spark conversations with AI icebreakers, and facilitate meaningful in-person meetups.
