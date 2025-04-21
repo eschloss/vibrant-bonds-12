@@ -91,7 +91,7 @@ const Navbar = () => {
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map(({ label, href }) => {
-  const isHashLink = href.startsWith("#");
+  const isHashLink = href.contains("#");
 
   if (isHashLink) {
     if (isHomePage) {
