@@ -164,12 +164,10 @@ const CityMatchmakingTemplate = ({
               </h2>
 
 
-            <div className="flex flex-col gap-8">
-                <div className="">
-                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
-                  <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
-                </div>
-            </div>
+              <div className="">
+                <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                <p className="text-sm text-white/70 mt-4 text-center">time left until the next friend group match closes</p>
+              </div>
               
               
               <div className="justify-center gap-4">
