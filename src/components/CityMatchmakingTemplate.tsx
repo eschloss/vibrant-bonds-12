@@ -60,6 +60,18 @@ const CityMatchmakingTemplate = ({
   state,
   image,
 }: CityMatchmakingTemplateProps) => {
+
+
+  {image && (
+  <Helmet>
+    <link
+      rel="preload"
+      as="image"
+      href={`https://${image}`}
+    />
+  </Helmet>
+  )}
+  
   return (
     <div className="flex flex-col min-h-screen dark">
       <Navbar />
