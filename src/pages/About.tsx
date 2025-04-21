@@ -205,15 +205,9 @@ How Pulse Was Born</h1>
               Join our community and connect with like-minded people in your city who share your interests
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://482tykjn26x.typeform.com/pulse#city=" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 w-full sm:w-auto">
-                  <UserPlus className="h-5 w-5 mr-2" />
-                  Start Meeting People
-                </Button>
-              </a>
               <Link to="/cities">
                 <Button size="lg" variant="coral" className="rounded-full shadow-lg shadow-pink-500/20 w-full sm:w-auto">
-                  Find Your City
+                  Get Matched into a Friend Group
                 </Button>
               </Link>
             </div>
