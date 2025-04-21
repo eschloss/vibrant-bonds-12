@@ -36,12 +36,17 @@ const MissionCountdown = () => {
               <div>
                 {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
                 <div className="flex justify-center mb-6">
-                  <MissionDeadline title="Get matched into a group" showButton={true} type="match" />
+                  <MissionDeadline title="Get matched into a group" type="match" />
                 </div>
                 <div className="mt-8 flex flex-col items-center my-0">
                   <TimerDisplay {...timeLeft} />
                   <p className="text-sm text-white/70 mt-4 text-center">Time left until next match</p>
                 </div>
+                <Link to="/cities">
+                    <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
+                        <span>Take the Quiz, Get Matched</span>
+                    </Button>  
+                </Link>
               </div>
             </div>
 
