@@ -117,11 +117,11 @@ How Pulse Was Born</h1>
             description: "People come together faster when plans are built around something they’re all excited to do.\n\nShared interests not only spark connection—they also give you something to focus on, so it's not just endless small talk."
           }, {
             icon: <CalendarDays className="h-6 w-6 text-pulse-blue" />,
-            title: "Repeated\nIn-Person Interaction",
+            title: "IRL, Again and Again",
             description: "You can't build a real friendship from a one-off meetup. \n\nIt takes seeing each other again and again—and it has to happen in real life."
           }, {
             icon: <Zap className="h-6 w-6 text-[#FFD600]" />,
-            title: "A little Nudge",
+            title: "A Little Nudge",
             description: 'Every great friendship has someone who says, "Let\'s hang out."\n\nPulse plays that role—helping people follow through and stay connected.'
           }].map((item, index) => <motion.div key={index} initial={{
             opacity: 0,
