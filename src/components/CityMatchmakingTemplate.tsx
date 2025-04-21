@@ -171,20 +171,7 @@ const CityMatchmakingTemplate = ({
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 Ready to Meet Your <span className="pulse-gradient-text">{cityName} Crew</span>?
               </h2>
-              <div className="bg-gray-800/70 backdrop-blur-sm rounded-xl p-6 mb-8 max-w-2xl mx-auto">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <AlertTriangle size={22} className="text-yellow-500" />
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-lg font-semibold text-white mb-2">The Clock is Ticking!</h3>
-                    <p className="text-gray-300">
-                      Once matched, you and your crew have <span className="font-bold text-white">only 7 days</span> to meet in real life.
-                      Don't miss your chance to make meaningful connections in {cityName}!
-                    </p>
-                  </div>
-                </div>
-              </div>
+              
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Start Matching in {cityName}
