@@ -95,20 +95,36 @@ const Navbar = () => {
 
   if (isHashLink) {
     if (isHomePage) {
+      return (
+        <a
+          key={label}
+          href={href}
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection(href.replace(/^.*#/, ""));
+          }}
+          className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
+        >
+          {label}
+        </a>
+      ); 
+    }
+
     return (
-      <a
-        key={label}
-        href={href}
-        onClick={(e) => {
-          e.preventDefault();
-          scrollToSection(href.replace(/^.*#/, ""));
-        }}
-        className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
-      >
-        {label}
-      </a>
-    ); 
-    }}
+    <Link
+      key={label}
+      to={href}
+      onClick={(e) => {
+            //e.preventDefault();
+            scrollToSection(href.replace(/^.*#/, ""));
+      }}
+      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
+    >
+      {label}
+    </Link>
+  );
+    
+  }
 
   return (
     <Link
