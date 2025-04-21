@@ -8,22 +8,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { 
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage 
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import AiIcebreakers from "@/components/AiIcebreakers";
+
 const formSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
   name: z.string().min(2, "Your name is required"),
   email: z.string().email("Invalid email address"),
   communitySize: z.string().min(1, "Please select a community size")
 });
+
 type FormValues = z.infer<typeof formSchema>;
+
 const CommunitiesPage = () => {
-  return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-0 my-[132px]">
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <Navbar />
       
       {/* Hero Section */}
@@ -35,31 +46,34 @@ const CommunitiesPage = () => {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5
-        }} className="text-center max-w-4xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-4xl mx-auto"
+          >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                              Build Real Friendships<br />
+                              Build Real Friendships<br/>
 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
               Within Your Community
               </span>
             </h1>
-            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">
-              Match like-minded members into groups of 8-12 people, spark conversations with AI icebreakers, and facilitate meaningful in-person meetups.
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+              A private friend group match just for your community—powered by Pulse. We match your members into small group chats, then use AI to spark conversation and plan casual hangouts—so they never show up to an event feeling like a stranger.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="#signup" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+              <a 
+                href="#signup" 
+                className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
+              >
                 <Users size={20} />
                 <span>Empower Your Community</span>
               </a>
-              <Link to="/matchmaking" className="bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 border border-white/10 transition-all duration-300 font-medium text-lg">
+              <Link 
+                to="/matchmaking" 
+                className="bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 border border-white/10 transition-all duration-300 font-medium text-lg"
+              >
                 <Sparkles size={20} />
                 <span>See How It Works</span>
               </Link>
@@ -77,17 +91,13 @@ const CommunitiesPage = () => {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5
-        }} className="text-center max-w-3xl mx-auto mb-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-10"
+          >
             <span className="flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 uppercase mb-3">
               <Sparkles size={18} className="text-purple-400" />
               How It Works For Communities
@@ -97,18 +107,15 @@ const CommunitiesPage = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {communitySteps.map((step, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.5,
-            delay: index * 0.1
-          }} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center hover:translate-y-[-8px] transition-transform duration-300">
+            {communitySteps.map((step, index) => (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center hover:translate-y-[-8px] transition-transform duration-300"
+              >
                 <div className={`w-16 h-16 rounded-full mb-6 flex items-center justify-center ${step.color}`}>
                   <step.icon size={24} className="text-white" />
                 </div>
@@ -120,7 +127,8 @@ const CommunitiesPage = () => {
                 <p className="text-gray-300">
                   {step.description}
                 </p>
-              </motion.div>)}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -131,17 +139,13 @@ const CommunitiesPage = () => {
       {/* Community Types Section */}
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5
-        }} className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect For All Types of Communities</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Whether you're managing an alumni network, a professional association, or a special interest group, 
@@ -150,18 +154,14 @@ const CommunitiesPage = () => {
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {communityTypes.map((type, index) => <motion.div key={type.title} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.5,
-            delay: index * 0.1
-          }}>
+            {communityTypes.map((type, index) => (
+              <motion.div
+                key={type.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
                   <CardContent className="p-6">
                     <div className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 flex items-center justify-center mb-4">
@@ -171,7 +171,8 @@ const CommunitiesPage = () => {
                     <p className="text-gray-300">{type.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>)}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -186,17 +187,12 @@ const CommunitiesPage = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <motion.div initial={{
-              opacity: 0,
-              x: -20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.5
-            }}>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Empower Your Community?</h2>
                 <p className="text-gray-300 mb-6">
                   Take the first step towards creating a more connected, engaged community. Our team will reach out to discuss how we can work for your specific needs.
@@ -217,18 +213,12 @@ const CommunitiesPage = () => {
                 </div>
               </motion.div>
               
-              <motion.div initial={{
-              opacity: 0,
-              x: 20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.5,
-              delay: 0.2
-            }}>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <CommunitySignupForm />
               </motion.div>
             </div>
@@ -237,12 +227,12 @@ const CommunitiesPage = () => {
       </section>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 const CommunitySignupForm = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -252,51 +242,86 @@ const CommunitySignupForm = () => {
       communitySize: ""
     }
   });
+  
   const onSubmit = async (data: FormValues) => {
     console.log("Form submitted:", data);
+    
     await new Promise(resolve => setTimeout(resolve, 1500));
+    
     toast({
       title: "Form submitted successfully!",
-      description: "We'll get back to you soon about " + data.communityName
+      description: "We'll get back to you soon about " + data.communityName,
     });
   };
-  return <Form {...form}>
+  
+  return (
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="bg-gray-900/80 backdrop-blur-lg rounded-xl border border-gray-700 p-6 space-y-4">
-        <FormField control={form.control} name="communityName" render={({
-        field
-      }) => <FormItem>
+        <FormField
+          control={form.control}
+          name="communityName"
+          render={({ field }) => (
+            <FormItem>
               <FormLabel className="text-gray-300">Community Name</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Stanford Alumni Network" className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500" {...field} />
+                <Input
+                  placeholder="e.g., Stanford Alumni Network"
+                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
-            </FormItem>} />
+            </FormItem>
+          )}
+        />
         
-        <FormField control={form.control} name="name" render={({
-        field
-      }) => <FormItem>
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
               <FormLabel className="text-gray-300">Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your full name" className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500" {...field} />
+                <Input
+                  placeholder="Your full name"
+                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
-            </FormItem>} />
+            </FormItem>
+          )}
+        />
         
-        <FormField control={form.control} name="email" render={({
-        field
-      }) => <FormItem>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
               <FormLabel className="text-gray-300">Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="your@email.com" className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500" {...field} />
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
-            </FormItem>} />
+            </FormItem>
+          )}
+        />
         
-        <FormField control={form.control} name="communitySize" render={({
-        field
-      }) => <FormItem>
+        <FormField
+          control={form.control}
+          name="communitySize"
+          render={({ field }) => (
+            <FormItem>
               <FormLabel className="text-gray-300">Community Size</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500">
                     <SelectValue placeholder="Select size..." />
@@ -310,23 +335,35 @@ const CommunitySignupForm = () => {
                 </SelectContent>
               </Select>
               <FormMessage />
-            </FormItem>} />
+            </FormItem>
+          )}
+        />
         
-        <Button type="submit" disabled={form.formState.isSubmitting} className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300">
-          {form.formState.isSubmitting ? <span className="flex items-center gap-2">
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+        >
+          {form.formState.isSubmitting ? (
+            <span className="flex items-center gap-2">
               <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               Processing...
-            </span> : <span className="flex items-center gap-2">
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
               <Users size={18} />
               Get Started
-            </span>}
+            </span>
+          )}
         </Button>
       </form>
-    </Form>;
+    </Form>
+  );
 };
+
 const communitySteps = [{
   icon: Users,
   title: "Group Matching",
@@ -348,17 +385,23 @@ const communitySteps = [{
   description: "Members meet in person, forming genuine friendships that strengthen your community.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
-const communityTypes = [{
-  icon: <GraduationCap className="text-white h-6 w-6" />,
-  title: "Alumni Networks",
-  description: "Connect former students who share academic backgrounds but may have diverse career paths and experiences."
-}, {
-  icon: <Building className="text-white h-6 w-6" />,
-  title: "Professional Associations",
-  description: "Create meaningful relationships beyond formal networking events by matching members with similar interests."
-}, {
-  icon: <Megaphone className="text-white h-6 w-6" />,
-  title: "Creator Communities",
-  description: "Help influencers and creators foster connection among their followers through meaningful group matches."
-}];
+
+const communityTypes = [
+  {
+    icon: <GraduationCap className="text-white h-6 w-6" />,
+    title: "Alumni Networks",
+    description: "Connect former students who share academic backgrounds but may have diverse career paths and experiences."
+  },
+  {
+    icon: <Building className="text-white h-6 w-6" />,
+    title: "Professional Associations",
+    description: "Create meaningful relationships beyond formal networking events by matching members with similar interests."
+  },
+  {
+    icon: <Megaphone className="text-white h-6 w-6" />,
+    title: "Creator Communities",
+    description: "Help influencers and creators foster connection among their followers through meaningful group matches."
+  }
+];
+
 export default CommunitiesPage;
