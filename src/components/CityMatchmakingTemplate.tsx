@@ -58,6 +58,7 @@ const CityMatchmakingTemplate = ({
   state,
   image,
 }: CityMatchmakingTemplateProps) => {
+  alert(image);
   return (
     <div className="flex flex-col min-h-screen dark">
       <Navbar />
