@@ -6,6 +6,8 @@ interface MissionDeadlineProps {
   showButton?: boolean;
   type: 'match' | 'meet';
 }
+import { Link } from "react-router-dom";
+
 export const MissionDeadline = ({
   title,
   subtitle,
