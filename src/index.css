@@ -341,3 +341,34 @@ html, body, #root {
 }
 
 /* End of Utility Classes */
+
+/* --- Custom fixes for input/select focus states and colors --- */
+@layer base {
+  /* ... keep existing root/variables ... */
+  input:focus, select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Removing second outline/ring from shadcn or tailwind inputs, for this page */
+  .ring-2,
+  .focus\:ring-2:focus,
+  .focus-visible\:ring-2:focus {
+    box-shadow: none !important;
+  }
+
+  .pulse-gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%);
+  }
+  /* ... keep existing classes ... */
+}
+
+@layer utilities {
+  /* ... keep existing theme util classes ... */
+  .focus-border-aqua:focus {
+    border-color: #38D1BF !important;
+    box-shadow: none !important;
+  }
+}
+/* ... keep the rest of index.css the same ... */

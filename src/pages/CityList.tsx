@@ -134,22 +134,25 @@ const CityList = () => {
                 <div className="flex-1">
                   <div className="relative">
                     <Search
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#38D1BF] transition-colors"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#8E9196]"
                       aria-hidden="true"
                     />
                     <Input
                       ref={searchInputRef}
-                      placeholder="Search cities or states..."
+                      placeholder="Search cities or states…"
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
                       aria-label="Search cities or states"
-                      className="pl-10 bg-gray-800/50 border border-white/10 focus:border-[#38D1BF] text-white rounded-md placeholder:text-[#8E9196] focus:ring-2 focus:ring-[#38D1BF] transition-colors"
+                      className={
+                        "pl-10 bg-gray-800/50 border border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md placeholder:text-[#8E9196] transition-colors"
+                      }
+                      autoFocus
                     />
                   </div>
                 </div>
                 <div className="w-full md:w-40">
                   <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-                    <SelectTrigger className="bg-gray-800/50 border border-white/10 focus:border-[#38D1BF] focus:ring-2 focus:ring-[#38D1BF] text-white rounded-md transition-colors">
+                    <SelectTrigger className="bg-gray-800/50 border border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md transition-colors">
                       <SelectValue placeholder="All Countries" />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border border-[#38D1BF] text-white rounded-md z-50">
@@ -183,7 +186,7 @@ const CityList = () => {
                         onClick={() => toggleCountry(country)}
                         className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
                         <h2 className="text-xl font-bold text-white">{country}</h2>
-                        <div className="ml-auto px-3 py-1 bg-[#38D1BF] bg-opacity-10 rounded-full text-sm text-[#8E9196] font-medium">
+                        <div className="ml-auto px-3 py-1 bg-[#38D1BF]/10 rounded-full text-sm text-[#38D1BF] font-medium">
                           {cities.length} {cities.length === 1 ? "city" : "cities"}
                         </div>
                       </CollapsibleTrigger>
@@ -197,7 +200,7 @@ const CityList = () => {
                                 hover:border-[#38D1BF] transition-all hover:shadow-lg hover:shadow-[#38D1BF]/10 group">
                                   <div className="flex items-start gap-4">
                                     <div className="bg-[#38D1BF]/20 rounded-full p-3 group-hover:bg-[#38D1BF]/40 transition-colors">
-                                      <MapPin className="transition-colors text-purple-400 group-hover:text-[#38D1BF]" />
+                                      <MapPin className="transition-colors text-[#38D1BF] group-hover:text-[#38D1BF]" />
                                     </div>
                                     <div className="flex-1">
                                       <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#38D1BF] transition-colors">
@@ -213,7 +216,7 @@ const CityList = () => {
                                           size="sm"
                                           className="text-[#38D1BF] group-hover:bg-[#38D1BF]/20 group-hover:text-[#38D1BF] rounded-md font-semibold transition-colors"
                                         >
-                                          View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                          View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform text-[#38D1BF]" />
                                         </Button>
                                       </div>
                                     </div>
@@ -248,5 +251,4 @@ const CityList = () => {
       <Footer />
     </div>;
 };
-
 export default CityList;
