@@ -13,7 +13,7 @@
     --pulse-pink: 328 100% 57%;   /* #FF2688 */
     --pulse-coral: 328 100% 57%;  /* #FF2688 */
     --pulse-purple: 272 81% 51%;  /* #741ADD */
-    --pulse-blue: 170 63% 53%;    /* #38D1BF */
+    --pulse-blue: 170 63% 53%;    /* Bright Aqua #38D1BF  */
     --pulse-teal: 170 63% 53%;    /* #38D1BF */
     --pulse-yellow: 45 100% 60%;   /* #FFD600 */
 
@@ -22,7 +22,7 @@
     --secondary-foreground: 0 0% 100%;
     --muted: 272 81% 51% / 10%;   /* #741ADD soft */
     --muted-foreground: 272 81% 51%;
-    --accent: 272 81% 51%;        /* #741ADD */
+    --accent: 272 81% 51%;        /* #Electric Violet 741ADD */
     --accent-foreground: 0 0% 100%;
     --destructive: 359 77% 58%;
     --destructive-foreground: 0 0% 100%;

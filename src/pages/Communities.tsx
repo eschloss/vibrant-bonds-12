@@ -53,7 +53,7 @@ const CommunitiesPage = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-tertiary to-pulse-blue">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 Build Real Friendships
               </span>
               <br />
