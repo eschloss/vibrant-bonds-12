@@ -66,34 +66,34 @@ const CityMatchmakingTemplate = ({
         <section className="relative py-24 overflow-hidden">
   {image && image !== "" ? (
     <>
-      <div
-        className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
-        style={{ backgroundImage: `url(https://${image})` }}
-      />
-      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-    </>
-  ) : (
-    <>
-  <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white/70 to-white"></div>
-  <div className="absolute inset-0 -z-5">
-    {Array.from({ length: 20 }).map((_, i) => (
-      <div
-        key={i}
-        className="absolute rounded-full bg-pink-200/40"
-        style={{
-          width: `${Math.random() * 10 + 5}px`,
-          height: `${Math.random() * 10 + 5}px`,
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-          animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-          animationDelay: `${Math.random() * 5}s`,
-        }}
-      />
-    ))}
-  </div>
-  <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pink-100/50 rounded-full blur-3xl"></div>
-  <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-green-100/50 rounded-full blur-3xl"></div>
+  {/* Pure white background base */}
+  <div className="absolute inset-0 -z-10 bg-white"></div>
+
+  {/* Soft radial highlights, Pulse-style */}
+  <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
+  <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
+
+  {/* Floating animated orbs using Pulse brand colors */}
+  {Array.from({ length: 20 }).map((_, i) => (
+    <div
+      key={i}
+      className="absolute rounded-full bg-pulse-pink/20"
+      style={{
+        width: `${Math.random() * 10 + 6}px`,
+        height: `${Math.random() * 10 + 6}px`,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
+        animationDelay: `${Math.random() * 5}s`,
+      }}
+    />
+  ))}
+
+  {/* Large blurred accents (same feel as Hero section) */}
+  <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pulse-purple/20 rounded-full blur-3xl"></div>
+  <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-pulse-blue/20 rounded-full blur-3xl"></div>
 </>
+
 
 
   )}
