@@ -144,14 +144,12 @@ const Navbar = () => {
           </nav>
           <div className="hidden lg:block">
             {isMatchmakingPage ? (
-              <a
-                href="/cities"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/cities"
                 className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
                 <span>See More Cities</span>
-              </a>
+              </Link>
             ) : (
               <Link
                 to="/cities"

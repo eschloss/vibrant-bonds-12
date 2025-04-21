@@ -75,19 +75,17 @@ const MobileNavLinks = ({
       })}
 
       {isMatchmakingPage ? (
-        <a
-          href="https://482tykjn26x.typeform.com/pulse#city="
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/cities"
           className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
           onClick={closeMenu}
         >
           <UserPlus size={18} />
-          <span>Meet Your Crew</span>
-        </a>
+          <span>See More Cities</span>
+        </Link>
       ) : (
         <Link
-          to="/matchmaking"
+          to="/cities"
           className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
           onClick={closeMenu}
         >
