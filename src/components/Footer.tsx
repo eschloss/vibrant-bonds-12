@@ -55,7 +55,7 @@ const Footer = () => {
               <h3 className="text-white text-lg font-bold mb-4">Company</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/" className="text-white/50 hover:text-purple-400 text-sm transition-colors">
+                  <Link to="/" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     Home
                   </Link>
                 </li>
