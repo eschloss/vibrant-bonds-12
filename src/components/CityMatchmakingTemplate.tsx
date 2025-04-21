@@ -66,6 +66,16 @@ const CityMatchmakingTemplate = ({
         <section className="relative py-24 overflow-hidden">
   {image && image !== "" ? (
     <>
+      <div
+        className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
+        style={{ backgroundImage: `url(https://${image})` }}
+      />
+      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+    </>
+  ) : (
+
+
+      <>
   {/* Pure white background base */}
   <div className="absolute inset-0 -z-10 bg-white"></div>
 
@@ -93,7 +103,6 @@ const CityMatchmakingTemplate = ({
   <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pulse-purple/20 rounded-full blur-3xl"></div>
   <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-pulse-blue/20 rounded-full blur-3xl"></div>
 </>
-
 
 
   )}
