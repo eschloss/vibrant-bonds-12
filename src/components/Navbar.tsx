@@ -21,7 +21,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isMatchmakingPage = location.pathname.contains("cities/");
+  const isMatchmakingPage = location.pathname.includes("cities/");
   const isHomePage = location.pathname === "/" || /^\/cities\/[^/]+$/.test(location.pathname);
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
