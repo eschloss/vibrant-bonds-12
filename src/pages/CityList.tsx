@@ -122,7 +122,7 @@ const CityList = () => {
                 <div className="flex-1">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-                    <Input placeholder="Search cities or states..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md text-pulse-pink" />
+                    <Input placeholder="Search cities or states..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md" />
                   </div>
                 </div>
                 <div className="w-full md:w-40">
