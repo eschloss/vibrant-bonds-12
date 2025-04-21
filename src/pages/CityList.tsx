@@ -148,16 +148,16 @@ const CityList = () => {
                       placeholder="Search cities or states..."
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-gray-800/50 border-white/10 text-white"
+                      className="pl-10 bg-gray-800/50 border-white/10 text-white rounded-md"
                     />
                   </div>
                 </div>
                 <div className="w-full md:w-40">
                   <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-                    <SelectTrigger className="bg-gray-800/50 border-white/10 text-white">
+                    <SelectTrigger className="bg-gray-800/50 border-white/10 text-white rounded-md">
                       <SelectValue placeholder="All Countries" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-800 border-white/10 text-white">
+                    <SelectContent className="bg-gray-800 border-white/10 text-white rounded-md">
                       <SelectItem value="all-countries">All Countries</SelectItem>
                       {countries.map(country => (
                         <SelectItem key={country} value={country}>
@@ -214,7 +214,7 @@ const CityList = () => {
                                         {city.en_state && <p className="text-sm text-gray-400 mb-2">{city.en_state}</p>}
                                         <p className="text-gray-300 mb-4">Connect with friends in {city.en_name}</p>
                                         <div className="flex justify-end">
-                                          <Button variant="ghost" size="sm" className="text-purple-400 group-hover:bg-purple-500/20">
+                                          <Button variant="ghost" size="sm" className="text-purple-400 group-hover:bg-purple-500/20 rounded-md">
                                             View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                           </Button>
                                         </div>
@@ -234,7 +234,7 @@ const CityList = () => {
                   <p className="text-xl text-gray-400">No cities found matching your search criteria.</p>
                   <Button
                     variant="outline"
-                    className="mt-4 text-purple-400 border-purple-400/30 hover:bg-purple-500/20"
+                    className="mt-4 text-purple-400 border-purple-400/30 hover:bg-purple-500/20 rounded-md"
                     onClick={() => {
                       setSearchTerm("");
                       setSelectedCountry("");
