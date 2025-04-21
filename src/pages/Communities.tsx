@@ -57,7 +57,7 @@ const CommunitiesPage = () => {
                 Build Real Friendships
               </span>
               <br />
-              In Your Community
+              Within Your Community
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
               Match like-minded members into groups of 8-12 people, spark conversations with AI icebreakers, and facilitate meaningful in-person meetups.
