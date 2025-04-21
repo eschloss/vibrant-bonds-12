@@ -63,14 +63,15 @@ const CityMatchmakingTemplate = ({
       <Navbar />
 
       <main className="flex-grow">
-        <section className="relative py-40 overflow-hidden">
+        <section className="relative py-24 overflow-hidden">
   {image && image !== "" ? (
     <>
       <div
         className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
         style={{ backgroundImage: `url(https://${image})` }}
       />
-      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/40 to-transparent backdrop-blur-sm mix-blend-lighten" />
+      
+        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-black/60 to-transparent" />
     </>
   ) : (
     <>
@@ -96,18 +97,18 @@ const CityMatchmakingTemplate = ({
     </>
   )}
 
-  <div className="container mx-auto px-4 relative z-10 mt-20">
+  <div className="container mx-auto px-4 relative z-10 my-[31px]">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
       className="text-center max-w-3xl mx-auto"
     >
-      <h1 className="text-4xl font-bold mb-4 text-black md:text-5xl">
+      <h1 className="text-4xl font-bold mb-4 text-white text-soft-glow md:text-5xl">
         Meet New Friends in <span className="pulse-gradient-text">{cityName}</span>
       </h1>
       <motion.p
-        className="text-xl md:text-2xl text-black/80 font-light mb-8"
+        className="text-xl md:text-2xl text-white/90 text-soft-glow font-light mb-8"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -137,7 +138,6 @@ const CityMatchmakingTemplate = ({
     </motion.div>
   </div>
 </section>
-
 
         <section className="relative py-16 bg-gray-900 dark:bg-gray-950">
           <div className="absolute inset-0 opacity-10">
