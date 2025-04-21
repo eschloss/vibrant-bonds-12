@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const cities = ["San Francisco", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
@@ -99,7 +98,7 @@ const Footer = () => {
                     </Link>
                   </li>)}
                 <li className="col-span-2 mt-2">
-                  <Link to="/cities" className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
+                  <Link to="/cities" className=" text-pulse-pink hover:text-pulse-pink-300 text-sm font-medium transition-colors">
                     View all cities
                   </Link>
                 </li>
@@ -169,5 +168,4 @@ const Footer = () => {
       </div>
     </footer>;
 };
-
 export default Footer;
