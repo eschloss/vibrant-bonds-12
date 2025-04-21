@@ -74,32 +74,11 @@ const CityMatchmakingTemplate = ({
             </>
           ) : (
             <>
-              {/* Light fallback background */}
-              <div className="absolute inset-0 -z-10 bg-white"></div>
-
-              {/* Soft radial accents */}
-              <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pink-100 to-transparent opacity-70"></div>
-              <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-green-100 to-transparent opacity-60"></div>
-
-              {/* Floating animated orbs */}
-              {Array.from({ length: 20 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute rounded-full bg-pink-200/30"
-                  style={{
-                    width: `${Math.random() * 10 + 6}px`,
-                    height: `${Math.random() * 10 + 6}px`,
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                    animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
-                    animationDelay: `${Math.random() * 5}s`,
-                  }}
-                />
-              ))}
-
-              {/* Blurred blobs */}
-              <div className="absolute top-1/4 -left-20 w-80 h-80 bg-pink-100/50 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-green-100/50 rounded-full blur-3xl"></div>
+              <div
+                className="absolute inset-0 -z-5 bg-cover bg-center blur-sm"
+                style={{ backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)` }}
+              />
+              <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
             </>
           )}
 
