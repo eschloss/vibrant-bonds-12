@@ -4,6 +4,8 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+
 
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
