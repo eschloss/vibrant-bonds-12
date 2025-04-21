@@ -75,7 +75,7 @@ const Navbar = () => {
           scrolled
             ? "bg-[#15191C]/70 shadow-md opacity-100 translate-y-0 py-3 text-white"
             : "bg-transparent opacity-90 translate-y-1 py-5",
-          isHomePage && !scrolled ? "text-[#15191C]" : "text-white"
+          (isHomePage || isMatchmakingPage) && !scrolled ? "text-[#15191C]" : "text-white"
         )}
       >
         <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
