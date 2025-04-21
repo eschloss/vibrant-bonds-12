@@ -34,7 +34,7 @@ const CommunitiesPage = () => {
           <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-10 py-[85px]">
           <motion.div initial={{
           opacity: 0,
           y: 20
