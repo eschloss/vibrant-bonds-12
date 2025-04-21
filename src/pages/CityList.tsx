@@ -48,18 +48,30 @@ const CityList = () => {
       result = result.filter(city => city.en_country === selectedCountry);
     }
     setFilteredCities(result);
-    if (searchTerm) {
-      const matchingCountries = new Set(result.map(city => city.en_country));
-      setOpenCountries(prev => {
-        const updated = {
-          ...prev
-        };
-        matchingCountries.forEach(country => {
-          if (!(country in updated)) updated[country] = true;
-        });
-        return updated;
-      });
-    }
+
+const matchingCountries = new Set(result.map(city => city.en_country));
+
+// Always open the selected country (if it’s not "all-countries")
+setOpenCountries(prev => {
+  const updated = { ...prev };
+
+  if (selectedCountry && selectedCountry !== "all-countries") {
+    updated[selectedCountry] = true;
+  }
+
+  // Also open countries where there are search results (if searching)
+  if (searchTerm) {
+    matchingCountries.forEach(country => {
+      updated[country] = true;
+    });
+  }
+
+  return updated;
+});
+
+
+
+    
   }, [searchTerm, selectedCountry, allCities]);
 
   useEffect(() => {
