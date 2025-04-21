@@ -1,7 +1,6 @@
 import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
-import { MissionDeadline } from "./mission/MissionDeadline";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import { useIsMobile } from "@/hooks/use-mobile";
 const MissionCountdown = () => {
@@ -36,7 +35,11 @@ const MissionCountdown = () => {
               <div>
                 {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Get Matched</h3>}
                 <div className="flex justify-center mb-6">
-                  <MissionDeadline title="Get matched into a group" type="match" />
+                  <div className="flex gap-4 items-start">
+                    <div>
+                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Get matched into a group</h4>
+                    </div>
+                  </div>
                 </div>
                 <div className="mt-8 flex flex-col items-center my-0">
                   <TimerDisplay {...timeLeft} />
@@ -58,7 +61,11 @@ const MissionCountdown = () => {
               <div>
                 {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-8 text-center">Meet in Person</h3>}
                 <div className="flex justify-center mb-6">
-                  <MissionDeadline title="Meet in real life" subtitle="" type="meet" />
+                  <div className="flex gap-4 items-start">
+                    <div>
+                      <h4 className="text-xl font-semibold text-white tracking-tight mb-2 md:text-3xl">Meet in real life</h4>
+                    </div>
+                  </div>
                 </div>
                 <div className="mt-8 flex flex-col items-center">
                   <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />

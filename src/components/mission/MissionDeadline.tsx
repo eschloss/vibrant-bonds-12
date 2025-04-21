@@ -9,9 +9,7 @@ interface MissionDeadlineProps {
 import { Link } from "react-router-dom";
 
 export const MissionDeadline = ({
-  title,
-  subtitle,
-  type
+  title
 }: MissionDeadlineProps) => {
   return <div className="flex gap-4 items-start">
       <div>
