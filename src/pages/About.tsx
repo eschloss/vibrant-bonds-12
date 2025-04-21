@@ -120,7 +120,7 @@ How Pulse Was Born</h1>
             title: "Repeated In-Person Interaction",
             description: "You can't build a real friendship from a one-off meetup. It takes seeing each other again and again—and it has to happen in real life."
           }, {
-            icon: <Zap className="h-6 w-6 text-[FFD600]" />,
+            icon: <Zap className="h-6 w-6 text-[#FFD600]" />,
             title: "A little Nudge",
             description: 'Every great friendship has someone who says, "Let\'s hang out." Pulse plays that role—helping people follow through and stay connected.'
           }].map((item, index) => <motion.div key={index} initial={{
