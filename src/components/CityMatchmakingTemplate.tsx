@@ -175,6 +175,11 @@ const CityMatchmakingTemplate = ({
         </section>
 
         <section className="relative py-20 bg-gray-900/80">
+                <MissionCountdown />
+        </section>
+
+
+        <section className="relative py-20 bg-gray-900/80">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
