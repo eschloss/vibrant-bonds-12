@@ -114,7 +114,7 @@ const Footer = () => {
                   <a href="mailto:contact@pulsenow.app" className="text-white/70 text-sm hover:text-purple-400 transition-colors">contact@pulsenow.app</a>
                 </li>
                 <li className="flex items-start">
-                  <MapPin size={16} className="text-purple-400 mt-1 mr-2" />
+                  <MapPin size={16} className="text-pulse-pink mt-1 mr-2" />
                   <span className="text-white/70 text-sm">100 Fore St, Portland, ME 04101</span>
                 </li>
               </ul>
