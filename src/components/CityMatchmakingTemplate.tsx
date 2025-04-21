@@ -175,9 +175,7 @@ const CityMatchmakingTemplate = ({
           </div>
         </section>
 
-        <section className="relative py-20 bg-gray-900/80">
                 <MissionCountdown />
-        </section>
 
 
         <section className="relative py-20 bg-gray-900/80">
