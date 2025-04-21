@@ -115,7 +115,7 @@ const CityMatchmakingTemplate = ({
             size="xl"
             className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110"
           >
-            <div className="absolute inset-0 z-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-90" />
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
               Start Matching in {cityName}
               {state ? `, ${state}` : ""}
