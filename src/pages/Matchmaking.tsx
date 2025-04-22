@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 
-type CityParam = {
-  cityName: string;
-};
 
 const CityPage = () => {
-  const { cityName } = useParams<CityParam>();
   const navigate = useNavigate();
   const [cityData, setCityData] = useState<{ 
     name: string; 
@@ -37,7 +33,7 @@ const CityPage = () => {
     };
 
     fetchCities();
-  }, [cityName, navigate]);
+  }, [navigate]);
 
   return <CityMatchmakingTemplate 
            cityName={cityData.name} 
