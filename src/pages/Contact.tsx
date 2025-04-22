@@ -40,7 +40,6 @@ const Contact = () => {
       phone: "",
       message: "",
       agreeToTerms: false,
-      title: ""
     }
   });
   const onSubmit = async (data: FormValues) => {
