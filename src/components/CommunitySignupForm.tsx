@@ -192,7 +192,7 @@ const CommunitySignupForm = () => {
                   <SelectItem value="small">Small (50-500 members)</SelectItem>
                   <SelectItem value="medium">Medium (500-2,000 members)</SelectItem>
                   <SelectItem value="large">Large (2,000-10,000 members)</SelectItem>
-                  <SelectItem value="enterprise">Enterprise (10,000+ members)</SelectItem>
+                  <SelectItem value="enterprise">Extra-Large (10,000+ members)</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
