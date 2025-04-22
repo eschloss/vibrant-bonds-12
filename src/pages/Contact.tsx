@@ -56,7 +56,7 @@ const Contact = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="bg-purple-800/30 p-3 rounded-full">
+                  <div className="bg-pulse-pink/30 p-3 rounded-full">
                     <Mail className="h-6 w-6 text-pulse-pink" />
                   </div>
                   <div>
@@ -67,8 +67,8 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="bg-pink-800/30 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-pulse-accent" />
+                  <div className="bg-pulse-pink/30 p-3 rounded-full">
+                    <MapPin className="h-6 w-6 text-pulse-pink" />
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Visit Us</h3>
