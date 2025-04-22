@@ -62,7 +62,7 @@ const Contact = () => {
     var body = JSON.stringify({ ...data, recaptchaToken: token });
     alert(body)
     // Send data + token to your backend
-    const response = await fetch("https://api.kikiapp.eu/auth/contact/", {
+    const response = await fetch("https://api.kikiapp.eu/desktop/contact/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: body,
