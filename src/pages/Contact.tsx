@@ -124,10 +124,11 @@ const Contact = () => {
       email: data.email,
       phone: data.phone,
       message: data.message,
+      recaptchaToken: token
     }).toString();
 
 
-    alert(`https://api.kikiapp.eu/contact/?${params}`);
+    //alert(`https://api.kikiapp.eu/contact/?${params}`);
     const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`);
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
