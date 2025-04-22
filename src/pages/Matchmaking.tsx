@@ -6,13 +6,15 @@ import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 const CityPage = () => {
   const navigate = useNavigate();
 
-  return <CityMatchmakingTemplate 
+  return <>
+          <CityMatchmakingTemplate 
            cityName="Your City"
            code=""
            country="Worldwide"
            state=""
            image=""
-          />;
+          />
+        </>;
 };
 
 export default CityPage;
