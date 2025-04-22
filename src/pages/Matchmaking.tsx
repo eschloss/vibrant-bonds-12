@@ -7,7 +7,7 @@ const CityPage = () => {
   const navigate = useNavigate();
 
   return <CityMatchmakingTemplate 
-           cityName="Your City2"
+           cityName="Your City"
            code="ssdfsdf"
            country="Worldwide"
            state=""
