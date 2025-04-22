@@ -124,7 +124,7 @@ const Contact = () => {
       email: data.email,
       phone: data.phone,
       message: data.message,
-      recaptchaToken: token
+      recaptcha: token
     }).toString();
 
 
