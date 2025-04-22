@@ -42,14 +42,52 @@ const Contact = () => {
       agreeToTerms: false
     }
   });
-  const onSubmit = (data: FormValues) => {
-    console.log("Form submitted:", data);
-    toast({
-      title: "Message sent!",
-      description: "Thank you for contacting us. We'll get back to you soon."
+  const onSubmit = async (data: FormValues) => {
+  try {
+    // Ensure reCAPTCHA script is available
+    if (!window.grecaptcha) {
+      throw new Error("reCAPTCHA not loaded");
+    }
+
+    const token = await new Promise<string>((resolve, reject) => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute("6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL", { action: "contact_form" })
+          .then(resolve)
+          .catch(reject);
+      });
     });
-    form.reset();
-  };
+
+
+    var body = JSON.stringify({ ...data, recaptchaToken: token });
+    alert(body)
+    // Send data + token to your backend
+    const response = await fetch("https://api.kikiapp.eu/auth/contact/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: body,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      toast({
+        title: "Message sent!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
+      form.reset();
+    } else {
+      throw new Error(result.message || "Something went wrong");
+    }
+  } catch (err: any) {
+    toast({
+      title: "Oops!",
+      description: err.message || "We couldn’t send your message.",
+      variant: "destructive",
+    });
+  }
+};
+
   return <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       
