@@ -284,6 +284,7 @@ const Contact = () => {
                           Send Message
                         </span>}
                     </Button>
+                    <script src="https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL" async defer></script>
                   </form>
                 </Form>
               </div>
