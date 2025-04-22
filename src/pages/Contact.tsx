@@ -59,20 +59,40 @@ const Contact = () => {
   });
 
     useEffect(() => {
-    const loadReCaptcha = () => {
-      const scriptId = "recaptcha-script";
-      if (document.getElementById(scriptId)) return;
+  const scriptId = "recaptcha-script";
 
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.src = "https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    };
+  const loadReCaptcha = () => {
+    if (document.getElementById(scriptId)) return;
 
-    loadReCaptcha();
-  }, []);
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = "https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
+
+  loadReCaptcha();
+
+  return () => {
+    // ✅ Cleanup: remove reCAPTCHA script
+    const script = document.getElementById(scriptId);
+    if (script) {
+      script.remove();
+    }
+
+    // ✅ Also remove badge (invisible reCAPTCHA v3 badge that sticks around)
+    const badge = document.querySelector(".grecaptcha-badge");
+    if (badge) {
+      badge.remove();
+    }
+
+    // ✅ Optional: reset window.grecaptcha reference
+    if (window.grecaptcha) {
+      delete window.grecaptcha;
+    }
+  };
+}, []);
 
   const onSubmit = async (data: FormValues) => {
   try {
