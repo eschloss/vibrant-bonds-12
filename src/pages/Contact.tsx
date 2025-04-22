@@ -1,10 +1,10 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, MessageSquare } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import FAQItem from "@/components/FAQItem";
 
 const Contact = () => {
   return (
@@ -146,86 +146,42 @@ const Contact = () => {
           </motion.div>
           <div className="max-w-4xl mx-auto">
             <div className="grid gap-6">
-              <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} viewport={{
-                once: true
-              }} transition={{
-                duration: 0.4,
-                delay: 0.1
-              }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
-                <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-accent" />
-                  How does the friend matching work?
-                </h3>
-                <p className="text-gray-300">
-                  Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.
-                </p>
-              </motion.div>
-              <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} viewport={{
-                once: true
-              }} transition={{
-                duration: 0.4,
-                delay: 0.2
-              }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
-                <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-accent" />
-                  Is Pulse available in my city?
-                </h3>
-                <p className="text-gray-300">
-                  Pulse is currently available in select major cities across the US, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.
-                </p>
-              </motion.div>
-              <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} viewport={{
-                once: true
-              }} transition={{
-                duration: 0.4,
-                delay: 0.3
-              }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
-                <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-accent" />
-                  How much does Pulse cost?
-                </h3>
-                <p className="text-gray-300">
-                  Pulse offers a free tier that allows you to join a limited number of community events. Our premium membership provides unlimited access to events, priority matching, and exclusive experiences for $19.99/month.
-                </p>
-              </motion.div>
-              <motion.div initial={{
-                opacity: 0,
-                y: 10
-              }} whileInView={{
-                opacity: 1,
-                y: 0
-              }} viewport={{
-                once: true
-              }} transition={{
-                duration: 0.4,
-                delay: 0.4
-              }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
-                <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-accent" />
-                  How can I become a community host?
-                </h3>
-                <p className="text-gray-300">
-                  We're always looking for enthusiastic individuals to host Pulse gatherings. Contact us through this page expressing your interest, and our community team will get back to you with details about our host application process.
-                </p>
-              </motion.div>
+              {[
+                {
+                  question: "How does the friend matching work?",
+                  answer: (
+                    <>Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.</>
+                  ),
+                },
+                {
+                  question: "Is Pulse available in my city?",
+                  answer: (
+                    <>Pulse is currently available in select major cities across the US, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.</>
+                  ),
+                },
+                {
+                  question: "How much does Pulse cost?",
+                  answer: (
+                    <>Pulse offers a free tier that allows you to join a limited number of community events. Our premium membership provides unlimited access to events, priority matching, and exclusive experiences for $19.99/month.</>
+                  ),
+                },
+                {
+                  question: "How can I become a community host?",
+                  answer: (
+                    <>We're always looking for enthusiastic individuals to host Pulse gatherings. Contact us through this page expressing your interest, and our community team will get back to you with details about our host application process.</>
+                  ),
+                },
+              ].map((faq, idx) => (
+                <motion.div
+                  key={faq.question}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 * (idx + 1) }}
+                >
+                  <FAQItem question={faq.question} answer={faq.answer} />
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
