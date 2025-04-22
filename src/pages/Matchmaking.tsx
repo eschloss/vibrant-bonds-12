@@ -8,10 +8,10 @@ const CityPage = () => {
 
   return <CityMatchmakingTemplate 
            cityName="Your City2"
-           code={cityData.code} 
-           country={cityData.country} 
-           state={cityData.state}
-           image={cityData.image}
+           code="ssdfsdf"
+           country="Worldwide"
+           state=""
+           image=""
           />;
 };
 
