@@ -220,8 +220,8 @@ const CityList = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
                         <div>
                           <CityCard
-                            name="Other City"
-                            description="Can't find your city? Click to request a new crew and we'll match you as soon as enough people in your area join."
+                            name="Can't find your city?"
+                            description="Fill out the form and we'll match you as soon as enough people in your area join."
                             link="/matchmaking"
                           />
                         </div>
