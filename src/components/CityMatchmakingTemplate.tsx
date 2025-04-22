@@ -119,6 +119,18 @@ const CityMatchmakingTemplate = ({
           </Button>
         </Link>
       </motion.div>
+      {!code && <motion.p className="text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
+              opacity: 0,
+              y: 10
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.2,
+              duration: 0.5
+            }}>
+        We'll match you into a group as soon as enough people fill out the form.
+      </motion.p>}
     </motion.div>
   </div>
       </section>
@@ -159,7 +171,7 @@ const CityMatchmakingTemplate = ({
         </section>
 
 
-        <section className="relative py-20 bg-gray-900/80">
+        {code && <section className="relative py-20 bg-gray-900/80">
           <div className="max-w-4xl mx-auto text-center">
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
@@ -183,7 +195,7 @@ const CityMatchmakingTemplate = ({
 
               </div>
           </div>
-        </section>
+        </section>}
       </main>
 
       <Footer />
