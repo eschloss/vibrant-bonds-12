@@ -21,7 +21,7 @@ const CityPage = () => {
     const fetchCities = async () => {
       try {
         setCityData({
-          name: "Your City",
+          name: "Your City2",
           country: "Worldwide",
           state: "",
           code: "",
