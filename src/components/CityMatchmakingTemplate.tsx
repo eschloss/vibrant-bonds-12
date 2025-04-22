@@ -129,7 +129,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        We'll match you as soon as enough people in your area join!
+        We'll match you as soon as <br/>enough people in your area join!
       </motion.p>}
     </motion.div>
   </div>
