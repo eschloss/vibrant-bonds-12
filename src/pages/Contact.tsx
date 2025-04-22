@@ -70,6 +70,8 @@ const Contact = () => {
 
     const result = await response.json();
 
+    alert(result);
+
     if (result.success) {
       toast({
         title: "Message sent!",
