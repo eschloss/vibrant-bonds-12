@@ -159,7 +159,7 @@ const Contact = () => {
                 delay: 0.1
               }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
                 <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-purple-400" />
+                  <MessageSquare className="h-5 w-5 text-pulse-tertiary" />
                   How does the friend matching work?
                 </h3>
                 <p className="text-gray-300">
@@ -179,7 +179,7 @@ const Contact = () => {
                 delay: 0.2
               }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
                 <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-purple-400" />
+                  <MessageSquare className="h-5 w-5 text-pulse-tertiary" />
                   Is Pulse available in my city?
                 </h3>
                 <p className="text-gray-300">
@@ -199,7 +199,7 @@ const Contact = () => {
                 delay: 0.3
               }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
                 <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-purple-400" />
+                  <MessageSquare className="h-5 w-5 text-pulse-tertiary" />
                   How much does Pulse cost?
                 </h3>
                 <p className="text-gray-300">
@@ -219,7 +219,7 @@ const Contact = () => {
                 delay: 0.4
               }} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
                 <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-purple-400" />
+                  <MessageSquare className="h-5 w-5 text-pulse-tertiary" />
                   How can I become a community host?
                 </h3>
                 <p className="text-gray-300">
