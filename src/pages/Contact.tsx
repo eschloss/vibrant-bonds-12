@@ -74,6 +74,7 @@ const Contact = () => {
       message: data.message,
     }).toString();
 
+    alert(`https://api.kikiapp.eu/contact/?${params}`);
     const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`, {
       method: "GET",
     });
