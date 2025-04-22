@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -44,13 +44,75 @@ const CommunitySignupForm = () => {
     }
   });
 
+  useEffect(() => {
+    const scriptId = "recaptcha-script";
+    const loadReCaptcha = () => {
+      if (document.getElementById(scriptId)) return;
+
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    };
+
+    loadReCaptcha();
+
+    return () => {
+      const script = document.getElementById(scriptId);
+      if (script) script.remove();
+      const badge = document.querySelector(".grecaptcha-badge");
+      if (badge) badge.remove();
+      if ((window as any).grecaptcha) delete (window as any).grecaptcha;
+    };
+  }, []);
+
   const onSubmit = async (data: FormValues) => {
-    console.log("Form submitted:", data);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast({
-      title: "Form submitted successfully!",
-      description: "We'll get back to you soon about " + data.communityName
-    });
+    try {
+      if (!(window as any).grecaptcha) {
+        throw new Error("reCAPTCHA not loaded");
+      }
+
+      const token = await new Promise<string>((resolve, reject) => {
+        (window as any).grecaptcha.ready(() => {
+          (window as any).grecaptcha
+            .execute("6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL", { action: "contact_form" })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+
+      const response = await fetch("https://api.kikiapp.eu/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: "", // Optional field in this form
+          title: `Community Signup: ${data.communityName}`,
+          message: `Community size: ${data.communitySize}`,
+          recaptcha: token,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        toast({
+          title: "Submitted!",
+          description: "Thanks for your interest— We'll be in touch soon.",
+        });
+        form.reset();
+      } else {
+        throw new Error(result.message || "Something went wrong");
+      }
+    } catch (err: any) {
+      toast({
+        title: "Oops!",
+        description: err.message || "We couldn’t process your submission.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
