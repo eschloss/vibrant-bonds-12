@@ -74,13 +74,13 @@ const Contact = () => {
       message: data.message,
     }).toString();
 
-    const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`, {
-      method: "GET",
-    });
-    alert(response);
+    const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`);
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    alert(response.json());
+    
 
     const result = await response.json();
-    alert(result);
     if (result.success) {
       toast({
         title: "Message sent!",
