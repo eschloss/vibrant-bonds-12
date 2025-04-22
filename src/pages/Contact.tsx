@@ -57,18 +57,18 @@ const Contact = () => {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-purple-800/30 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-purple-400" />
+                    <Mail className="h-6 w-6 text-pulse-pink" />
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Email Us</h3>
-                    <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-purple-400 transition-colors">
+                    <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-pulse-pink transition-colors">
                       contact@pulsenow.app
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="bg-pink-800/30 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-pink-400" />
+                    <MapPin className="h-6 w-6 text-pulse-accent" />
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Visit Us</h3>
