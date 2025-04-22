@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -182,7 +183,7 @@ const ContactForm = () => {
               <Checkbox 
                 checked={field.value} 
                 onCheckedChange={field.onChange} 
-                className="data-[state=checked]:bg-pulse-blue data-[state=checked]:border-pulse-blue" 
+                className="border-blue-blue data-[state=checked]:bg-pulse-blue" 
               />
             </FormControl>
             <div className="space-y-1 leading-none">
@@ -195,7 +196,7 @@ const ContactForm = () => {
         )} />
         <Button 
           type="submit" 
-          className="w-full bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-pink" 
+          className="w-full bg-pulse-blue hover:bg-pulse-blue/90 transition-colors duration-300" 
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? (
