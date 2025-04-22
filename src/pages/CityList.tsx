@@ -219,8 +219,8 @@ const CityList = () => {
                     <div className="max-w-2xl mx-auto mb-8">
                       <div>
                         <CityCard
-                          name="Other City"
-                          state="Can't find your city?"
+                          name="Can't find your city?"
+                          state="Worldwide"
                           description="We'll match you as soon as enough people in your area join."
                           link="/matchmaking"
                         />
