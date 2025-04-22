@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Help, BookOpen, List } from "lucide-react";
+import { HelpCircle, BookOpen, List } from "lucide-react";
 
 type FAQ = {
   question: string;
@@ -11,10 +11,10 @@ type FAQ = {
 
 const faqs: FAQ[] = [
   {
-    question: "How does the friend matching work?",
+    question: "How does the crew matching work?",
     answer: (
       <>
-        Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.
+        Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating balanced groups of 6-12 people who are likely to form genuine connections.
       </>
     ),
     icon: <List className="h-5 w-5 text-accent" aria-hidden="true" />,
@@ -23,10 +23,10 @@ const faqs: FAQ[] = [
     question: "Is Pulse available in my city?",
     answer: (
       <>
-        Pulse is currently available in select major cities across the US, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.
+        Pulse is currently available in select major cities across the US, with new locations being added regularly. We'll match you when enough compatible people in your city sign up—no endless waitlist.
       </>
     ),
-    icon: <Help className="h-5 w-5 text-accent" aria-hidden="true" />,
+    icon: <HelpCircle className="h-5 w-5 text-accent" aria-hidden="true" />,
   },
   {
     question: "How much does Pulse cost?",
