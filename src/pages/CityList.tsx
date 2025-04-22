@@ -220,7 +220,8 @@ const CityList = () => {
                       <div>
                         <CityCard
                           name="Other City"
-                          description="Can't find your city? We'll match you as soon as enough people in your area join."
+                          state="Can't find your city?"
+                          description="We'll match you as soon as enough people in your area join."
                           link="/matchmaking"
                         />
                       </div>
