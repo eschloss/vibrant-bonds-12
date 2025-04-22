@@ -59,13 +59,23 @@ const Contact = () => {
     });
 
 
-    var body = JSON.stringify({ ...data, recaptchaToken: token });
+    /*var body = JSON.stringify({ ...data, recaptchaToken: token });
     alert(body)
     // Send data + token to your backend
     const response = await fetch("https://api.kikiapp.eu/contact/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: body,
+    });*/
+    const params = new URLSearchParams({
+      name: "John Doe",
+      email: "john@example.com",
+      phone: "1234567890",
+      message: "Hello!",
+    }).toString();
+
+    const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`, {
+      method: "GET",
     });
 
     const result = await response.json();
