@@ -188,7 +188,7 @@ const ContactForm = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                I agree to the <a href="/terms" className="text-pulse-blue hover:underline">terms of service</a> and <a href="/privacy" className="text-pulse-blue hover:underline">privacy policy</a>
+                I agree to the <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> and <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
               </FormLabel>
               <FormMessage />
             </div>
