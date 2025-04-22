@@ -215,7 +215,7 @@ const CityList = () => {
                     </Collapsible>
                   </motion.div>
                 )) : (
-                  <div className="text-center py-12">
+                  <div className="text-left py-12">
                     <div className="max-w-2xl mx-auto mb-8">
                       <div>
                         <CityCard
