@@ -337,7 +337,6 @@ const Contact = () => {
                           Send Message
                         </span>}
                     </Button>
-                    <div className="g-recaptcha" data-sitekey="6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL"></div>
                   </form>
                 </Form>
               </div>
