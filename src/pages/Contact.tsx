@@ -68,10 +68,10 @@ const Contact = () => {
       body: body,
     });*/
     const params = new URLSearchParams({
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "1234567890",
-      message: "Hello!",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
     }).toString();
 
     const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`, {
