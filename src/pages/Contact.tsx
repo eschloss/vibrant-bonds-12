@@ -128,7 +128,7 @@ const Contact = () => {
     }).toString();
 
 
-    //alert(`https://api.kikiapp.eu/contact/?${params}`);
+    alert(`https://api.kikiapp.eu/contact/?${params}`);
     const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`);
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
