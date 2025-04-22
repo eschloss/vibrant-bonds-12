@@ -12,6 +12,19 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+
+const loadReCaptcha = () => {
+  const scriptId = "recaptcha-script";
+  if (document.getElementById(scriptId)) return;
+
+  const script = document.createElement("script");
+  script.id = scriptId;
+  script.src = "https://www.google.com/recaptcha/api.js";
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+};
+
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters"
@@ -98,6 +111,10 @@ const Contact = () => {
     });
   }
 };
+
+  useEffect(() => {
+    loadReCaptcha();
+  }, []);
 
   return <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
@@ -284,7 +301,7 @@ const Contact = () => {
                           Send Message
                         </span>}
                     </Button>
-                    <script src="https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL" async defer></script>
+                    <div className="g-recaptcha" data-sitekey="6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL"></div>
                   </form>
                 </Form>
               </div>
