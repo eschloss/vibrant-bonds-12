@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send, MessageSquare } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -12,6 +13,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+
 
 const loadReCaptcha = () => {
   const scriptId = "recaptcha-script";
@@ -55,6 +57,23 @@ const Contact = () => {
       agreeToTerms: false,
     }
   });
+
+    useEffect(() => {
+    const loadReCaptcha = () => {
+      const scriptId = "recaptcha-script";
+      if (document.getElementById(scriptId)) return;
+
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    };
+
+    loadReCaptcha();
+  }, []);
+
   const onSubmit = async (data: FormValues) => {
   try {
     // Ensure reCAPTCHA script is available
