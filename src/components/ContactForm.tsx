@@ -183,7 +183,7 @@ const ContactForm = () => {
               <Checkbox 
                 checked={field.value} 
                 onCheckedChange={field.onChange} 
-                className="border-blue-blue data-[state=checked]:bg-pulse-blue" 
+                className="border-pulse-blue data-[state=checked]:bg-pulse-blue" 
               />
             </FormControl>
             <div className="space-y-1 leading-none">
