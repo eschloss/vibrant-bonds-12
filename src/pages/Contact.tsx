@@ -146,7 +146,12 @@ const Contact = () => {
           </motion.div>
           <div className="max-w-4xl mx-auto">
             <div className="grid gap-6">
-              {[
+              {[{
+                  question: "What exactly is Pulse?",
+                  answer: (
+                    <>Pulse is a new friendgroup-making tool. You complete a short questionnaire, and the system places you in a private group chat with six to twelve people who share similar interests. Automated assistants start the conversation and suggest simple meet‑ups, helping the group move from chat to an in‑person hangout without the usual planning hassle.</>
+                  ),
+                },
                 {
                   question: "How does the friend matching work?",
                   answer: (
@@ -156,19 +161,19 @@ const Contact = () => {
                 {
                   question: "Is Pulse available in my city?",
                   answer: (
-                    <>Pulse is currently available in select major cities across the US, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.</>
+                    <>Pulse is currently available in select cities across the US and Europe, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.</>
                   ),
                 },
                 {
                   question: "How much does Pulse cost?",
                   answer: (
-                    <>Pulse offers a free tier that allows you to join a limited number of community events. Our premium membership provides unlimited access to events, priority matching, and exclusive experiences for $19.99/month.</>
+                    <>Pulse is currently free to use. Stay tuned—our premium membership is coming soon, with access to events, priority matching, and exclusive experiences.</>
                   ),
                 },
                 {
-                  question: "How can I become a community host?",
+                  question: "How do meet‑ups actually happen?",
                   answer: (
-                    <>We're always looking for enthusiastic individuals to host Pulse gatherings. Contact us through this page expressing your interest, and our community team will get back to you with details about our host application process.</>
+                    <>Once your group chat is underway and the gamemasters have warmed things up, an assistant suggests hangouts based on shared interests and everyone's availability. Anyone in the group can accept a suggestion or propose something new.</>
                   ),
                 },
               ].map((faq, idx) => (
