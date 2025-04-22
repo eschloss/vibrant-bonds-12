@@ -5,38 +5,9 @@ import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 
 const CityPage = () => {
   const navigate = useNavigate();
-  const [cityData, setCityData] = useState<{ 
-    name: string; 
-    country: string; 
-    state?: string; 
-    code: string;
-    image?: string;
-  } | null>(null);
-
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        setCityData({
-          name: "Your City2",
-          country: "Worldwide",
-          state: "",
-          code: "",
-          image: ""
-        });
-
-        window.scrollTo(0, 0);
-        document.documentElement.classList.add('dark');
-      } catch (err) {
-        console.error("Failed to fetch cities:", err);
-        navigate("/cities");
-      }
-    };
-
-    fetchCities();
-  }, [navigate]);
 
   return <CityMatchmakingTemplate 
-           cityName={cityData.name} 
+           cityName="Your City2"
            code={cityData.code} 
            country={cityData.country} 
            state={cityData.state}
