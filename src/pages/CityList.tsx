@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import CityCard from "@/components/CityCard";
 
 type City = {
   en_name: string;
@@ -49,29 +50,23 @@ const CityList = () => {
     }
     setFilteredCities(result);
 
-const matchingCountries = new Set(result.map(city => city.en_country));
+    const matchingCountries = new Set(result.map(city => city.en_country));
 
-// Always open the selected country (if it’s not "all-countries")
-setOpenCountries(prev => {
-  const updated = { ...prev };
+    setOpenCountries(prev => {
+      const updated = { ...prev };
 
-  if (selectedCountry && selectedCountry !== "all-countries") {
-    updated[selectedCountry] = true;
-  }
+      if (selectedCountry && selectedCountry !== "all-countries") {
+        updated[selectedCountry] = true;
+      }
 
-  // Also open countries where there are search results (if searching)
-  if (searchTerm) {
-    matchingCountries.forEach(country => {
-      updated[country] = true;
+      if (searchTerm) {
+        matchingCountries.forEach(country => {
+          updated[country] = true;
+        });
+      }
+
+      return updated;
     });
-  }
-
-  return updated;
-});
-
-
-
-    
   }, [searchTerm, selectedCountry, allCities]);
 
   useEffect(() => {
@@ -207,34 +202,12 @@ setOpenCountries(prev => {
                           {cities.map((city, index) => (
                             <motion.div key={city.url2} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.5, delay: index * 0.05 }}>
-                              <Link to={`/cities${city.url2}`} className="block">
-                                <div className="bg-gray-800/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 h-full 
-                                hover:border-[#38D1BF] transition-all hover:shadow-lg hover:shadow-[#38D1BF]/10 group">
-                                  <div className="flex items-start gap-4">
-                                    <div className="bg-[#38D1BF]/20 rounded-full p-3 group-hover:bg-[#38D1BF]/40 transition-colors">
-                                      <MapPin className="transition-colors text-[#38D1BF] group-hover:text-[#38D1BF]" />
-                                    </div>
-                                    <div className="flex-1">
-                                      <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#38D1BF] transition-colors">
-                                        {city.en_name}
-                                      </h3>
-                                      {city.en_state && (
-                                        <p className="text-sm text-gray-400 mb-2">{city.en_state}</p>
-                                      )}
-                                      <p className="text-gray-300 mb-4">Connect with friends in {city.en_name}</p>
-                                      <div className="flex justify-end">
-                                        <Button
-                                          variant="ghost"
-                                          size="sm"
-                                          className="text-[#38D1BF] group-hover:bg-[#38D1BF]/20 group-hover:text-[#38D1BF] rounded-md font-semibold transition-colors"
-                                        >
-                                          View <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform text-[#38D1BF]" />
-                                        </Button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Link>
+                              <CityCard
+                                name={city.en_name}
+                                state={city.en_state}
+                                description={`Connect with friends in ${city.en_name}`}
+                                link={`/cities${city.url2}`}
+                              />
                             </motion.div>
                           ))}
                         </div>
@@ -243,7 +216,17 @@ setOpenCountries(prev => {
                   </motion.div>
                 )) : (
                   <div className="text-center py-12">
-                    <p className="text-xl text-gray-400">No cities found matching your search criteria.</p>
+                    <div className="max-w-2xl mx-auto mb-8">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+                        <div>
+                          <CityCard
+                            name="Other City"
+                            description="Can't find your city? Click to request a new crew and we'll match you as soon as enough people in your area join."
+                            link="/matchmaking"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <Button
                       variant="outline"
                       className="mt-4 text-[#38D1BF] border-[#38D1BF]/40 hover:bg-[#38D1BF]/20 rounded-md"
