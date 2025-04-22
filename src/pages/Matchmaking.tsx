@@ -39,8 +39,6 @@ const CityPage = () => {
     fetchCities();
   }, [cityName, navigate]);
 
-  if (!cityData) return null;
-
   return <CityMatchmakingTemplate 
            cityName={cityData.name} 
            code={cityData.code} 
