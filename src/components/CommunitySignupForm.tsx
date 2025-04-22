@@ -100,7 +100,7 @@ const CommunitySignupForm = () => {
       if (result.success) {
         toast({
           title: "Submitted!",
-          description: "Thanks for your interest— We'll be in touch soon.",
+          description: "We'll be in touch soon.",
         });
         form.reset();
       } else {
