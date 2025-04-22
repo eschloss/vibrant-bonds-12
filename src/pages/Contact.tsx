@@ -39,7 +39,8 @@ const Contact = () => {
       email: "",
       phone: "",
       message: "",
-      agreeToTerms: false
+      agreeToTerms: false,
+      title: ""
     }
   });
   const onSubmit = async (data: FormValues) => {
