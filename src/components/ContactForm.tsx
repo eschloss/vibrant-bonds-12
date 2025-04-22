@@ -93,6 +93,20 @@ const ContactForm = () => {
         });
       });
 
+
+      const response = await fetch("https://api.kikiapp.eu/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          message: data.message,
+          recaptcha: token,
+        }),
+      });
+      
+      /*
       const params = new URLSearchParams({
         name: data.name,
         email: data.email,
@@ -100,8 +114,8 @@ const ContactForm = () => {
         message: data.message,
         recaptcha: token
       }).toString();
-
       const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`);
+      */
 
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
