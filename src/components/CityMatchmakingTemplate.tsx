@@ -119,7 +119,7 @@ const CityMatchmakingTemplate = ({
           </Button>
         </Link>
       </motion.div>
-      {!code && <motion.p className="text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
+      {!code && <motion.p className="text-xl md:text-xl font-normal mb-8 text-gray-800" initial={{
               opacity: 0,
               y: 10
             }} animate={{
@@ -129,7 +129,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        We'll match you into a group as soon as enough people fill out the form.
+        We'll match you as soon as enough people in your area join!
       </motion.p>}
     </motion.div>
   </div>
