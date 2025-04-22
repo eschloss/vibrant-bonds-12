@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -58,19 +57,16 @@ const ContactForm = () => {
     loadReCaptcha();
 
     return () => {
-      // ✅ Cleanup: remove reCAPTCHA script
       const script = document.getElementById(scriptId);
       if (script) {
         script.remove();
       }
 
-      // ✅ Also remove badge (invisible reCAPTCHA v3 badge that sticks around)
       const badge = document.querySelector(".grecaptcha-badge");
       if (badge) {
         badge.remove();
       }
 
-      // ✅ Optional: reset window.grecaptcha reference
       if ((window as any).grecaptcha) {
         delete (window as any).grecaptcha;
       }
@@ -79,7 +75,6 @@ const ContactForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      // Ensure reCAPTCHA script is available
       if (!(window as any).grecaptcha) {
         throw new Error("reCAPTCHA not loaded");
       }
@@ -93,7 +88,6 @@ const ContactForm = () => {
         });
       });
 
-
       const response = await fetch("https://api.kikiapp.eu/contact/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -105,17 +99,6 @@ const ContactForm = () => {
           recaptcha: token,
         }),
       });
-      
-      /*
-      const params = new URLSearchParams({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        message: data.message,
-        recaptcha: token
-      }).toString();
-      const response = await fetch(`https://api.kikiapp.eu/contact/?${params}`);
-      */
 
       const result = await response.json();
       if (result.success) {
@@ -143,7 +126,11 @@ const ContactForm = () => {
           <FormItem>
             <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input placeholder="Your name" {...field} className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500" />
+              <Input 
+                placeholder="Your name" 
+                {...field} 
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -152,7 +139,12 @@ const ContactForm = () => {
           <FormItem>
             <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input placeholder="Your email address" type="email" {...field} className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500" />
+              <Input 
+                placeholder="Your email address" 
+                type="email" 
+                {...field} 
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -161,7 +153,12 @@ const ContactForm = () => {
           <FormItem>
             <FormLabel>Phone (optional)</FormLabel>
             <FormControl>
-              <Input placeholder="Your phone number" type="tel" {...field} className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500" />
+              <Input 
+                placeholder="Your phone number" 
+                type="tel" 
+                {...field} 
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -170,7 +167,11 @@ const ContactForm = () => {
           <FormItem>
             <FormLabel>Message</FormLabel>
             <FormControl>
-              <Textarea placeholder="What would you like to tell us?" {...field} className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 min-h-[120px]" />
+              <Textarea 
+                placeholder="What would you like to tell us?" 
+                {...field} 
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500 min-h-[120px]" 
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -178,17 +179,25 @@ const ContactForm = () => {
         <FormField control={form.control} name="agreeToTerms" render={({ field }) => (
           <FormItem className="flex flex-row items-start space-x-3 space-y-0">
             <FormControl>
-              <Checkbox checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
+              <Checkbox 
+                checked={field.value} 
+                onCheckedChange={field.onChange} 
+                className="data-[state=checked]:bg-pulse-blue data-[state=checked]:border-pulse-blue" 
+              />
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                I agree to the <a href="/terms" className="text-purple-400 hover:underline">terms of service</a> and <a href="/privacy" className="text-purple-400 hover:underline">privacy policy</a>
+                I agree to the <a href="/terms" className="text-pulse-blue hover:underline">terms of service</a> and <a href="/privacy" className="text-pulse-blue hover:underline">privacy policy</a>
               </FormLabel>
               <FormMessage />
             </div>
           </FormItem>
         )} />
-        <Button type="submit" className="w-full bg-gradient-to-r from-pulse-purple to-pulse-blue hover:from-pulse-blue hover:to-pulse-purple" disabled={form.formState.isSubmitting}>
+        <Button 
+          type="submit" 
+          className="w-full bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue hover:from-pulse-blue hover:via-pulse-purple hover:to-pulse-pink" 
+          disabled={form.formState.isSubmitting}
+        >
           {form.formState.isSubmitting ? (
             <span className="flex items-center gap-2">
               <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
