@@ -94,7 +94,7 @@ const ContactForm = () => {
       });
 
 
-      const response = await fetch("https://api.kikiapp.eu/contact/", {
+      const response = await fetch("https://api-us.kikiapp.eu/contact/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
