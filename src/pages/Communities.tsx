@@ -7,7 +7,8 @@ import {
   GraduationCap,
   Building,
   Megaphone,
-  MessageSquare
+  MessageSquare,
+  Globe
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -227,22 +228,24 @@ const CommunitiesPage = () => {
                 <p className="text-gray-300 mb-6">
                   Take the first step towards creating a more connected, engaged community. Our team will reach out to discuss how we can work for your specific needs.
                 </p>
-                <div className="m-32"></div>
-                {/*
+                
                 <div className="hidden md:block">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="rounded-full bg-purple-500/20 p-2">
-                      <Users className="h-5 w-5 text-purple-400" />
+                      <Globe className="h-5 w-5 text-purple-400" />
                     </div>
-                    <p className="text-gray-300">Join 200+ thriving communities</p>
+                    {/*<p className="text-gray-300">Join 200+ thriving communities</p>*/}
+                    <p className="text-gray-300">Strengthening communities globally</p>
+
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="rounded-full bg-pink-500/20 p-2">
-                      <Sparkles className="h-5 w-5 text-pink-400" />
+                      <Users className="h-5 w-5 text-pink-400" />
                     </div>
-                    <p className="text-gray-300">Over 50,000 connections made</p>
+                    {/*<p className="text-gray-300">Over 50,000 connections made</p>*/}
+                    <p className="text-gray-300">Helping your members find their people/p>
                   </div>
-                </div>*/}
+                </div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
