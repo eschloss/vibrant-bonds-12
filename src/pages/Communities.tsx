@@ -231,20 +231,19 @@ const CommunitiesPage = () => {
                 
                 <div className="hidden md:block">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="rounded-full bg-purple-500/20 p-2">
-                      <Globe className="h-5 w-5 text-purple-400" />
+                    <div className="rounded-full bg-pulse-pink/20 p-2">
+                      <Globe className="h-5 w-5 text-pulse-pink" />
                     </div>
                     {/*<p className="text-gray-300">Join 200+ thriving communities</p>*/}
                     <p className="text-gray-300">Strengthening communities globally</p>
 
                   </div>
-                  <div className="flex items-center gap-4">
+                  {/*<div className="flex items-center gap-4">
                     <div className="rounded-full bg-pink-500/20 p-2">
                       <Users className="h-5 w-5 text-pink-400" />
                     </div>
-                    {/*<p className="text-gray-300">Over 50,000 connections made</p>*/}
-                    <p className="text-gray-300">Helping your members find their people</p>
-                  </div>
+                    <p className="text-gray-300">Over 50,000 connections made</p>
+                  </div>*/}
                 </div>
               </motion.div>
               <motion.div
