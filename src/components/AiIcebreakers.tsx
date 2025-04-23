@@ -14,7 +14,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
-  message: "If you were to trap another player in my haunted forest, what dark secret would you reveal about them to ensure they never escape?"
+  message: "You've wandered into my haunted forest, little mortal. Now choose your path: Pick someone here and reveal a dark secret about them—one so twisted, it traps them here forever. Choose wisely…"
 }, {
   id: "mother-flawless",
   name: "Mother Flawless",
@@ -22,7 +22,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
-  message: "Darling, if you had to either toast someone in this room with ridiculous praise or read them to filth with a savage roast, who would it be and what would you say?"
+  message: "Alright, darlings. I’m choosing someone in this room—and when I do, I’m either going to crown you with praise or roast you to ashes. Buckle up."
 }, {
   id: "judge-snooty",
   name: "Judge Snooty",
