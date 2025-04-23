@@ -18,7 +18,7 @@ const steps = [{
   icon: CalendarDays,
   title: "Plan a Meetup\n—Just Show Up",
   description: "Our AI helps you find the perfect time and activity that works for everyone.",
-  color: "bg-gradient-to-r from-indigo-400 to-blue-500"
+  color: "bg-gradient-to-r from-stone-500 to-rose-500"
 }, {
   icon: Sprout,
   title: "Grow the Friendships",
