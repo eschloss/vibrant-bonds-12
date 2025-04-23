@@ -83,16 +83,21 @@ const Navbar = () => {
             to="/"
             className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
           >
-            <div className="h-6 w-24 md:w-32 flex items-left">
-
-            <img
-              alt="Pulse Logo"
-              className="h-5 md:h-6 h-full w-full object-contain"
-              src={ scrolled 
-                    ? "https://s.kikiapp.eu/img/logo_pulse2.png"
-                    : "https://s.kikiapp.eu/img/pulse-text.png"
-              }
-            />
+            <div className="relative h-6 w-32">
+              <img
+                alt="Pulse Logo Default"
+                src="https://s.kikiapp.eu/img/pulse-text.png"
+                className={`absolute top-0 left-0 h-full w-full object-contain transition-opacity duration-300 ${
+                  scrolled ? 'opacity-0' : 'opacity-100'
+                }`}
+              />
+              <img
+                alt="Pulse Logo Scrolled"
+                src="https://s.kikiapp.eu/img/logo_pulse2.png"
+                className={`absolute top-0 left-0 h-full w-full object-contain transition-opacity duration-300 ${
+                  scrolled ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
             </div>
 
           </Link>
