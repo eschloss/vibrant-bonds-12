@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const cities = ["London", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
+  
   return <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 relative">
         {/* Background Blur Effects */}
@@ -17,11 +19,15 @@ const Footer = () => {
           {/* Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Column 1: About */}
-            <div>
-              <h3 className="text-xl font-display font-bold mb-4 flex items-center">
-                <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse_logo.png" />
-              </h3>
-              <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</p>
+          <div>
+            <h3 className="text-xl font-display font-bold mb-4 flex items-center">
+              <img 
+                alt="Pulse Logo" 
+                className="h-10 md:h-12 object-contain" 
+                src="https://s.kikiapp.eu/img/pulse_logo.png" 
+              />
+            </h3>
+            <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</p>
               <div className="flex space-x-3 mb-4">
                 <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Instagram size={18} />
@@ -168,4 +174,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;
