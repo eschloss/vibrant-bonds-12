@@ -10,6 +10,20 @@ import { Button } from "@/components/ui/button";
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
+    const fadeInUp = {
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8
+      }
+    }
+  };
+  
   return <section className="section-padding bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       {/* Subtle animated gradient blobs */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -23,10 +37,14 @@ const MissionCountdown = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section Label and Title */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-4 mx-auto">
-              <Timer size={18} className="text-pulse-purple" />
+
+
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
+            <Timer className="w-4 h-4 text-pulse-purple" />
               <span className="text-white/90 text-sm font-medium">Group Mission</span>
-            </div>
+          </motion.div>
+
+            
             <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
               <span className="pulse-gradient-text">Meet in Real Life</span> — 7 Day Mission
             </h2>
