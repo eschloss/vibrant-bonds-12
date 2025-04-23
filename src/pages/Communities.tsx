@@ -80,8 +80,7 @@ const CommunitiesPage = () => {
             <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">A private friend group match just for your community—powered by Pulse. We match your members into small group chats designed to spark conversation and meet IRL—so they stay engaged and more deeply connected.</p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="#signup" className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <Users size={20} />
+              <a href="#signup" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-blue text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 <span>Empower Your Community</span>
               </a>
               
