@@ -21,7 +21,7 @@ const communitySteps = [{
   icon: CalendarDays,
   title: "Plan a Meetup",
   description: "Our AI helps the group find the perfect time and activity that works for everyone.",
-  color: "bg-gradient-to-r from-rose-600 to-amber-600"
+  color: "bg-gradient-to-r from-stone-500 to-rose-500"
 }, {
   icon: Network,
   title: "Strengthen the Community",
