@@ -19,7 +19,7 @@ const Footer = () => {
             {/* Column 1: About */}
             <div>
               <h3 className="text-xl font-display font-bold mb-4 flex items-center">
-                <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png" />
+                <img alt="Pulse Logo" className="h-5 md:h-6 object-fill" src="https://s.kikiapp.eu/img/pulse_logo.png" />
               </h3>
               <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</p>
               <div className="flex space-x-3 mb-4">
