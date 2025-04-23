@@ -77,9 +77,7 @@ const CommunitiesPage = () => {
                 Within Your Community
               </span>
             </h1>
-            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">
-              A private friend group match just for your community—powered by Pulse.
-            </p>
+            <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">A private friend group match just for your community—powered by Pulse. We match your members into small group chats designed to spark conversation and meet IRL—so they stay engaged and more deeply connected.</p>
             <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto md:text-xl">
               We match your members into small group chats, then use AI to spark conversation and plan casual hangouts—so they never show up to an event feeling like a stranger.
             </p>
