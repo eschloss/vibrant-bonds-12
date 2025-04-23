@@ -83,7 +83,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
           >
-            <div className="h-6 w-24 md:w-32 flex items-center justify-center">
+            <div className="h-6 w-24 md:w-32 flex items-left">
 
             <img
               alt="Pulse Logo"
