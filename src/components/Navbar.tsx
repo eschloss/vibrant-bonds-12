@@ -83,6 +83,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
           >
+            <>
             <img
               alt="Pulse Logo"
               className="h-5 md:h-6 object-fill"
@@ -91,6 +92,8 @@ const Navbar = () => {
                     : "https://s.kikiapp.eu/img/pulse-text.png"
               }
             />
+            </>
+
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map(({ label, href }) => {
