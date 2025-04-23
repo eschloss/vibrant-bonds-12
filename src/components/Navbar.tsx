@@ -78,7 +78,7 @@ const Navbar = () => {
           (isHomePage || isMatchmakingPage) && !scrolled ? "text-[#15191C]" : "text-white"
         )}
       >
-        <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
+        <div className="container mx-auto px-4 xl:max-w-7xl flex items-left justify-between">
           <Link
             to="/"
             className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
