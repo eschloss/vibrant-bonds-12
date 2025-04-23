@@ -129,7 +129,7 @@ const CommunitySignupForm = () => {
               <FormControl>
                 <Input
                   placeholder="e.g., Stanford Alumni Network"
-                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                  className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
               </FormControl>
