@@ -87,14 +87,14 @@ const Navbar = () => {
               <img
                 alt="Pulse Logo Default"
                 src="https://s.kikiapp.eu/img/pulse-text.png"
-                className={`absolute top-0 left-0 h-full w-full object-contain transition-opacity duration-300 ${
+                className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                   scrolled ? 'opacity-0' : 'opacity-100'
                 }`}
               />
               <img
                 alt="Pulse Logo Scrolled"
                 src="https://s.kikiapp.eu/img/logo_pulse2.png"
-                className={`absolute top-0 left-0 h-full w-full object-contain transition-opacity duration-300 ${
+                className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                   scrolled ? 'opacity-100' : 'opacity-0'
                 }`}
               />
