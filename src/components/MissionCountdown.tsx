@@ -5,6 +5,8 @@ import { TimerDisplay } from "./mission/TimerDisplay";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+
 
 
 const MissionCountdown = () => {
