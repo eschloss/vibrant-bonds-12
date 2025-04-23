@@ -14,7 +14,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
-  message: "You've wandered into my haunted forest, little mortal. Now choose your path: Pick someone here and reveal a dark secret about them—one so twisted, it traps them here forever. Choose wisely…"
+  message: "Welcome, little wanderer. The mushrooms are watching. The shadows are bored. Pick someone here and invent a magical creature you two discovered while lost in my forest. Give it a name. Quick!"
 }, {
   id: "mother-flawless",
   name: "Mother Flawless",
