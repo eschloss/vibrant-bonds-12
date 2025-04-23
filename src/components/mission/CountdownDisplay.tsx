@@ -1,26 +1,36 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface CountdownDisplayProps {
-  value: string;
+  value: number;
+  label: string;
 }
 
-const CountdownDisplay: React.FC<CountdownDisplayProps> = ({ value }) => {
+export const formatTime = (value: number) => {
+  return value.toString().padStart(2, '0');
+};
+
+export const CountdownDisplay = ({ value, label }: CountdownDisplayProps) => {
   return (
-    <div className="h-24 w-24 relative flex justify-start"> {/* Fixed height/width container, left alignment */}
-      <motion.div
-        key={value}
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ duration: 0.3 }}
-        className="absolute left-0" // Left alignment
+    <div className="flex flex-col items-center">
+      <motion.div 
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-white hardware-accelerated min-w-[3ch] text-center"
+        key={`${label}-${value}`}
+        initial={{ opacity: 0, y: -3 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.15, 
+          ease: "easeOut" 
+        }}
+        style={{ 
+          willChange: "opacity, transform",
+          transform: "translateZ(0)"
+        }}
       >
-        <span className="text-6xl font-bold">{value}</span>
+        {formatTime(value)}
       </motion.div>
+      <span className="text-xs sm:text-sm text-white/70 mt-1">{label}</span>
     </div>
   );
 };
 
-export default CountdownDisplay;
