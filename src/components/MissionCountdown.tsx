@@ -43,7 +43,7 @@ const MissionCountdown = () => {
 
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
             <Timer className="w-4 h-4 text-pulse-purple" />
-              <span className="text-white/90 text-sm font-medium">Group Mission</span>
+              <span className="text-sm font-medium text-pulse-purple">Group Mission</span>
           </motion.div>
 
             
