@@ -94,6 +94,54 @@ const CommunitiesPage = () => {
         </div>
       </section>
 
+
+     {/* Community Types Section */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5
+        }} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Perfect For All Types of Communities
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Whether you run a local running club, an alumni network, or a work-related community, we help your members turn familiar faces into real friendships..</p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {communityTypes.map((type, index) => <motion.div key={type.title} initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5,
+            delay: index * 0.1
+          }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
+                  <CardContent className="p-6">
+                    <div className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 flex items-center justify-center mb-4">
+                      {type.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{type.title}</h3>
+                    <p className="text-gray-300">{type.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>)}
+          </div>
+        </div>
+      </section>
+    
+
       {/* How It Works Section */}
       <section id="how-it-works" className="relative py-12 bg-gray-900/50 backdrop-blur-lg">
         <div className="absolute inset-0 opacity-10">
@@ -147,51 +195,6 @@ const CommunitiesPage = () => {
       {/* Icebreakers */}
       <AiIcebreakers />
 
-      {/* Community Types Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5
-        }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Perfect For All Types of Communities
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Whether you run a local running club, an alumni network, or a work-related community, we help your members turn familiar faces into real friendships..</p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {communityTypes.map((type, index) => <motion.div key={type.title} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.5,
-            delay: index * 0.1
-          }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <div className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 flex items-center justify-center mb-4">
-                      {type.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{type.title}</h3>
-                    <p className="text-gray-300">{type.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>)}
-          </div>
-        </div>
-      </section>
 
       {/* Signup Section */}
       <section id="signup" className="py-20 relative">
