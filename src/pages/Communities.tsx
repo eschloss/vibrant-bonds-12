@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
+import { Users, Network, CalendarDays, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,19 +14,19 @@ const communitySteps = [{
   color: "bg-gradient-to-r from-pink-500 to-purple-600"
 }, {
   icon: MessageSquare,
-  title: "AI Icebreakers",
-  description: "Customized conversation starters help members connect quickly and meaningfully.",
+  title: "Break the Ice",
+  description: "Our AI chat-guides help members connect quickly and meaningfully.",
   color: "bg-gradient-to-r from-blue-500 to-cyan-400"
 }, {
-  icon: Sparkles,
-  title: "Engagement Insights",
-  description: "Track community engagement metrics and identify successful connection patterns.",
+  icon: CalendarDays,
+  title: "Plan a Meetup",
+  description: "Our AI helps the group find the perfect time and activity that works for everyone.",
   color: "bg-gradient-to-r from-indigo-400 to-blue-500"
 }, {
-  icon: GraduationCap,
-  title: "Real Connections",
+  icon: Network,
+  title: "Strengthen the Community",
   description: "Members meet in person, forming genuine friendships that strengthen your community.",
-  color: "bg-gradient-to-r from-green-400 to-emerald-500"
+  color: "bg-gradient-to-r from-amber-400 to-orange-500"
 }];
 const communityTypes = [{
   icon: <GraduationCap className="text-white h-6 w-6" />,
