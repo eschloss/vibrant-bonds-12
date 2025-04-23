@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, Sparkles, Gamepad, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
+import { Users, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,7 +33,7 @@ const communityTypes = [{
   title: "Alumni Networks",
   description: "Connect former students living in the same city who share academic backgrounds but may have diverse career paths and experiences."
 }, {
-  icon: <Gamepad className="text-white h-6 w-6" />,
+  icon: <Gamepad2 className="text-white h-6 w-6" />,
   title: "Hobby Groups",
   description: "Keep the momentum going between official meetups—so members show up already knowing people and feel part of something."
 }, {
