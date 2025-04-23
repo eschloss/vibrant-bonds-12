@@ -35,7 +35,7 @@ const communityTypes = [{
 }, {
   icon: <Gamepad2 className="text-white h-6 w-6" />,
   title: "Hobby Groups",
-  description: "Keep the momentum going between official meetups—so members show up already knowing people and feel part of something."
+  description: "Keep the momentum going between official meetups—so your runners, knitters, board gamers, or hikers show up already knowing people and feel part of something."
 }, {
   icon: <Briefcase className="text-white h-6 w-6" />,
   title: "Professional Associations",
