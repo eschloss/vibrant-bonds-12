@@ -227,7 +227,7 @@ const CommunitiesPage = () => {
                 <p className="text-gray-300 mb-6">
                   Take the first step towards creating a more connected, engaged community. Our team will reach out to discuss how we can work for your specific needs.
                 </p>
-                <div className="m-16"></div>
+                <div className="m-32"></div>
                 {/*
                 <div className="hidden md:block">
                   <div className="flex items-center gap-4 mb-4">
