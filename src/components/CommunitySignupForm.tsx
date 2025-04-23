@@ -202,7 +202,7 @@ const CommunitySignupForm = () => {
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="w-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-pink/90 hover:via-accent/90 hover:to-pulse-blue/90 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          className="w-full bg-pulse-blue hover:bg-pulse-blue/90 transition-colors duration-300" 
         >
           {form.formState.isSubmitting ? (
             <span className="flex items-center gap-2">
