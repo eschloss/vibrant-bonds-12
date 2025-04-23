@@ -86,7 +86,7 @@ const Navbar = () => {
             <img
               alt="Pulse Logo"
               className="h-5 md:h-6 object-fill"
-              src="https://s.kikiapp.eu/img/pulse-logo-horizontal.png"
+              src="https://s.kikiapp.eu/img/pulse-text.png"
             />
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
