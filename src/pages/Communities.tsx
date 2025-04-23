@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, Network, CalendarDays, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
+import { Users, Asterisk, Network, CalendarDays, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,6 +48,10 @@ const communityTypes = [{
   icon: <Globe className="text-white h-6 w-6" />,
   title: "Expat Communities",
   description: "Make a new city feel like home by helping expats connect with others navigating similar life transitions."
+},{
+  icon: <Asterisk className="text-white h-6 w-6" />,
+  title: "Special-Interest Circles",
+  description: "From niche fandoms to quirky causes, Pulse gathers your one-of-a-kind crowd—so even the most offbeat passions find their crew."
 }];
 const CommunitiesPage = () => {
   return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
