@@ -243,7 +243,7 @@ const CommunitiesPage = () => {
                       <Users className="h-5 w-5 text-pink-400" />
                     </div>
                     {/*<p className="text-gray-300">Over 50,000 connections made</p>*/}
-                    <p className="text-gray-300">Helping your members find their people/p>
+                    <p className="text-gray-300">Helping your members find their people</p>
                   </div>
                 </div>
               </motion.div>
