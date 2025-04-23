@@ -147,7 +147,7 @@ const CommunitySignupForm = () => {
               <FormControl>
                 <Input
                   placeholder="Your full name"
-                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
               </FormControl>
@@ -166,7 +166,7 @@ const CommunitySignupForm = () => {
                 <Input
                   type="email"
                   placeholder="your@email.com"
-                  className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500"
+                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
               </FormControl>
