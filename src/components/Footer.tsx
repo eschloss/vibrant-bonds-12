@@ -23,7 +23,7 @@ const Footer = () => {
             <h3 className="text-xl font-display font-bold mb-4 flex items-center">
               <img 
                 alt="Pulse Logo" 
-                className="h-[15px] md:h-[18px] object-contain" 
+                className="h-10 md:h-12 object-contain" 
                 src="https://s.kikiapp.eu/img/pulse_logo.png" 
               />
             </h3>
@@ -32,6 +32,9 @@ const Footer = () => {
                 <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Instagram size={18} />
                 </a>
+                {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                  <Twitter size={18} />
+                 </a>*/}
                 <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Facebook size={18} />
                 </a>
@@ -40,6 +43,7 @@ const Footer = () => {
                 </a>
               </div>
               
+              {/* App Download Links */}
               <div className="flex space-x-2">
                 <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded-md text-xs">
                   <Apple size={12} className="mr-1" />
@@ -121,6 +125,7 @@ const Footer = () => {
                 </li>
               </ul>
 
+              {/* App Download Buttons */}
               <div className="mt-4 flex flex-col space-y-2">
                 <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
                   <Apple size={18} className="text-white" />
