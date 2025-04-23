@@ -184,7 +184,7 @@ const CommunitiesPage = () => {
                     <div className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 flex items-center justify-center mb-4">
                       {type.icon}
                     </div>
-                    <h3 className="text-xl font-bold mb-2">{type.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-white">{type.title}</h3>
                     <p className="text-gray-300">{type.description}</p>
                   </CardContent>
                 </Card>
