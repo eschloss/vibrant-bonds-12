@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, Sparkles, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
+import { Users, Sparkles, Gamepad, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,15 +31,23 @@ const communitySteps = [{
 const communityTypes = [{
   icon: <GraduationCap className="text-white h-6 w-6" />,
   title: "Alumni Networks",
-  description: "Connect former students who share academic backgrounds but may have diverse career paths and experiences."
+  description: "Connect former students living in the same city who share academic backgrounds but may have diverse career paths and experiences."
 }, {
-  icon: <Building className="text-white h-6 w-6" />,
+  icon: <Gamepad className="text-white h-6 w-6" />,
+  title: "Hobby Groups",
+  description: "Keep the momentum going between official meetups—so members show up already knowing people and feel part of something."
+}, {
+  icon: <Briefcase className="text-white h-6 w-6" />,
   title: "Professional Associations",
-  description: "Create meaningful relationships beyond formal networking events by matching members with similar interests."
+  description: "Help members go beyond business cards by forming friendships that grow through shared interests and regular meetups."
 }, {
-  icon: <Megaphone className="text-white h-6 w-6" />,
+  icon: <Sparkles className="text-white h-6 w-6" />,
   title: "Creator Communities",
-  description: "Help influencers and creators foster connection among their followers through meaningful group matches."
+  description: "Give fans a deeper sense of belonging—and turn your community into a movement that thrives without you needing to be in every room."
+}, {
+  icon: <Globe className="text-white h-6 w-6" />,
+  title: "Expat Communities",
+  description: "Make a new city feel like home by helping expats connect with others navigating similar life transitions."
 }];
 const CommunitiesPage = () => {
   return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
