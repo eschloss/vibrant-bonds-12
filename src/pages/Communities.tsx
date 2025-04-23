@@ -237,7 +237,7 @@ const CommunitiesPage = () => {
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="rounded-full bg-pink-500/20 p-2">
-                      <Sparkles className="h-5 w-5 text-pink-400" />
+                      {/*<Sparkles className="h-5 w-5 text-pink-400" />*/}
                     </div>
                     {/*<p className="text-gray-300">Over 50,000 connections made</p>*/}
                   </div>
