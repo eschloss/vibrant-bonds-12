@@ -156,7 +156,7 @@ const CommunitiesPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Perfect For All Types of Communities
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Whether you run a hobby club, an alumni network, or a professional association, we help your members turn familiar faces into real friendships..</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Whether you run a local running club, an alumni network, or a work-related community, we help your members turn familiar faces into real friendships..</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {communityTypes.map((type, index) => <motion.div key={type.title} initial={{
