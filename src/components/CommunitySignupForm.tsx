@@ -20,7 +20,6 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
 
 const formSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
@@ -134,7 +133,7 @@ const CommunitySignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-soft-gray" />
             </FormItem>
           )}
         />
@@ -152,7 +151,7 @@ const CommunitySignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-soft-gray" />
             </FormItem>
           )}
         />
@@ -171,7 +170,7 @@ const CommunitySignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-soft-gray" />
             </FormItem>
           )}
         />
@@ -195,7 +194,7 @@ const CommunitySignupForm = () => {
                   <SelectItem value="enterprise">Extra-Large (10,000+ members)</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
+              <FormMessage className="text-soft-gray" />
             </FormItem>
           )}
         />
@@ -203,7 +202,7 @@ const CommunitySignupForm = () => {
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          className="w-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-pink/90 hover:via-accent/90 hover:to-pulse-blue/90 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
         >
           {form.formState.isSubmitting ? (
             <span className="flex items-center gap-2">
@@ -230,10 +229,7 @@ const CommunitySignupForm = () => {
               Processing...
             </span>
           ) : (
-            <span className="flex items-center gap-2">
-              <Users size={18} />
-              Get Started
-            </span>
+            <span>Get Started</span>
           )}
         </Button>
       </form>
