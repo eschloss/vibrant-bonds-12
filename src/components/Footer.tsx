@@ -23,7 +23,7 @@ const Footer = () => {
             <h3 className="text-xl font-display font-bold mb-4 flex items-center">
               <img 
                 alt="Pulse Logo" 
-                className="h-20 md:h-24 object-contain" 
+                className="h-24 md:h-28 object-contain" 
                 src="https://s.kikiapp.eu/img/pulse_logo.png" 
               />
             </h3>
