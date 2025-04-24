@@ -187,7 +187,7 @@ const CityMatchmakingTemplate = ({
         </section>}
 
 
-        <motion.p className="text-xl md:text-xl font-normal mt-24 text-gray-800" initial={{
+        <motion.p className="max-w-4xl mx-auto text-center" initial={{
               opacity: 0,
               y: 10
             }} animate={{
