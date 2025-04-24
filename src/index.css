@@ -118,6 +118,7 @@ html, body, #root {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -125,9 +126,9 @@ html, body, #root {
     font-feature-settings: "rlig" 1, "calt" 1;
     position: relative;
     height: 100%;
-    overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
     overscroll-behavior-x: none;
@@ -155,11 +156,11 @@ html, body, #root {
 
 
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply px-4 py-16 md:px-6 md:py-24 lg:px-8 lg:py-32;
   }
 
   .hero-padding {
-    @apply pt-24 md:pt-30 lg:pt-36;
+    @apply px-4 pt-24 md:px-6 md:pt-30 lg:px-8 lg:pt-36;
   }
 
   .heading-xl {
@@ -297,6 +298,49 @@ html, body, #root {
       visibility: visible !important;
       width: 100% !important;
       max-width: 100vw !important;
+    }
+  }
+
+  /* === Update Container Utilities === */
+  .section-padding {
+    @apply px-4 py-16 md:px-6 md:py-24 lg:px-8 lg:py-32;
+  }
+
+  .hero-padding {
+    @apply px-4 pt-24 md:px-6 md:pt-30 lg:px-8 lg:pt-36;
+  }
+
+  .container {
+    @apply px-4 md:px-6 lg:px-8;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @screen sm {
+    .container {
+      max-width: 640px;
+    }
+  }
+  @screen md {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @screen lg {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @screen xl {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  @screen 2xl {
+    .container {
+      max-width: 1400px;
     }
   }
 }

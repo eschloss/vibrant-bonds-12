@@ -18,7 +18,7 @@ const ScrollArea = React.forwardRef<
   >
     <ScrollAreaPrimitive.Viewport
       ref={viewportRef}
-      className="h-full w-full"
+      className="h-full w-full px-0"
     >
       {children}
     </ScrollAreaPrimitive.Viewport>
