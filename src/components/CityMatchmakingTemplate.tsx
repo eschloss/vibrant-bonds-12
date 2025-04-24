@@ -96,7 +96,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        {!code ? "Sign up now—you’ll be first in line to match<br/>as soon as a few more locals join." : "Making friends as an adult can be hard. We're here to help." }
+        {!code ? "Sign up now—you’ll be first in line to match\nas soon as a few more locals join." : "Making friends as an adult can be hard. We're here to help." }
       </motion.p>
       <motion.div initial={{
               opacity: 0,
