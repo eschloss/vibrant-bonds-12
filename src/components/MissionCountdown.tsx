@@ -56,7 +56,7 @@ const MissionCountdown = () => {
                 <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Get Matched</h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">Next friend match happens in...</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">Next friend match happens in...</h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
@@ -78,7 +78,7 @@ const MissionCountdown = () => {
                 <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Meet in Person</h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">Countdown begins after joining a group.</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">Countdown begins after joining a group.</h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
