@@ -196,8 +196,8 @@ const CityMatchmakingTemplate = ({
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
     >
-      <h2 className="pulse-gradient-text text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
-        {!code ? 'Want it sooner?' : 'Spread the word'}
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
+        <span className="pulse-gradient-text">{!code ? 'Want it sooner?' : 'Spread the word'}</span>
       </h2>
 
       <div className="w-32 h-1 mx-auto mb-6 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue rounded-full animate-glow-bar" />
