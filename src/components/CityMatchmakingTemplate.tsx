@@ -198,9 +198,13 @@ const CityMatchmakingTemplate = ({
                 delay: 0.2,
                 duration: 0.5
               }}>
-            {!code ? "Want it sooner?" : ""} Share Pulse with friends!
+            {!code ? <>
+                <div>Want it sooner? Share Pulse with friends!</div>
+                <div>Every signup moves your city up the list.</div>
+              </> : <>
+                <div>Share Pulse with friends!</div>
+              </>
             
-            <br/> {!code ? "Every signup moves your city up the list." : ""}
             <ShareSection />
           </motion.p>
         </section>
