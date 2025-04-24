@@ -53,10 +53,10 @@ const MissionCountdown = () => {
             {/* First Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Get Matched</h3>}
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Get Matched</h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Next friend match happens in...</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">Next friend match happens in...</h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
@@ -75,10 +75,10 @@ const MissionCountdown = () => {
             {/* Second Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <div>
-                {isMobile && <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Meet in Person</h3>}
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Meet in Person</h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">2. Meet in Real Life</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">Countdown begins after joining a group.</h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
