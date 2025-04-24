@@ -119,7 +119,7 @@ const CityMatchmakingTemplate = ({
           </Button>
         </Link>
       </motion.div>
-      {!code && <motion.p className="text-xl md:text-xl font-normal m-16 text-gray-800" initial={{
+      {!code && <motion.p className="text-xl md:text-xl font-normal mt-16 text-gray-800" initial={{
               opacity: 0,
               y: 10
             }} animate={{
