@@ -29,16 +29,16 @@ const Footer = () => {
             </h3>
             <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</p>
               <div className="flex space-x-3 mb-4">
-                <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Instagram size={18} />
                 </a>
                 {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
                   <Twitter size={18} />
                  </a>*/}
-                <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Facebook size={18} />
                 </a>
-                <a href="https://www.linkedin.com/company/pulse-plans/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
+                <a href="https://www.linkedin.com/company/pulse-plans/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Linkedin size={18} />
                 </a>
               </div>
