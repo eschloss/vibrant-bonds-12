@@ -16,8 +16,13 @@ const ShareSection: React.FC = () => {
     },
     {
       name: 'X',
-      icon: <div></div>,
+      icon: "",
       url: `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
+    },
+    {
+    name: 'Reddit',
+    icon: "",
+    url: `https://www.reddit.com/submit?url=${shareUrl}&title=${shareText}`,
     },
     {
       name: 'LinkedIn',
@@ -53,7 +58,7 @@ const ShareSection: React.FC = () => {
           onClick={() => window.open(link.url, '_blank')}
           aria-label={`Share on ${link.name}`}
         >
-          <div className="text-white">{link.icon}</div>
+          {link.icon && <div className="text-white">{link.icon}</div>}
           <span className="hidden sm:inline font-medium">{link.name}</span>
         </Button>
       ))}
