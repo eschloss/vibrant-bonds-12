@@ -86,7 +86,7 @@ const CityMatchmakingTemplate = ({
         {!code ? "Help Launch Pulse in" : "Meet New Friends in"}{" "}
         <span className="pulse-gradient-text">{cityName}</span>
       </h1>
-      <motion.p className="text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
+      <motion.p className="whitespace-pre-line text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
               opacity: 0,
               y: 10
             }} animate={{
