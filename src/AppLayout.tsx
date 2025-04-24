@@ -8,12 +8,10 @@ const AppLayout = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-background">
+    <div className="min-h-screen bg-background">
       <ScrollArea viewportRef={viewportRef} className="h-screen">
-        <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden">
-          <ScrollToTop scrollRef={viewportRef} />
-          <Outlet />
-        </div>
+        <ScrollToTop scrollRef={viewportRef} />
+        <Outlet />
       </ScrollArea>
     </div>
   );
