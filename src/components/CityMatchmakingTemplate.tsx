@@ -196,7 +196,7 @@ const CityMatchmakingTemplate = ({
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
     >
-      <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue bg-clip-text text-transparent animate-pulse-slow drop-shadow-lg">
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue bg-clip-text text-transparent drop-shadow-lg">
         {!code ? 'Want it sooner?' : 'Spread the word'}
       </h2>
 
@@ -217,6 +217,7 @@ const CityMatchmakingTemplate = ({
     </motion.div>
   </div>
 </section>
+
 
 
       </main>
