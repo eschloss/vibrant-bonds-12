@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 const ShareSection: React.FC = () => {
   const shareUrl = encodeURIComponent(window.location.href);
   const shareText = encodeURIComponent(
-    `Join me on Pulse! The more people join in your area, the sooner we launch. 🚀`
+    `New friends, IRL. Join me on Pulse.`
   );
 
   const shareLinks = [
