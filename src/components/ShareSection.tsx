@@ -44,6 +44,11 @@ const ShareSection: React.FC = () => {
       icon: <Send className="w-5 h-5" />,
       url: `https://t.me/share/url?url=${shareUrl}&text=${shareText}`,
     },
+    {
+      name: 'Signal',
+      icon: <Send className="w-5 h-5" />, // closest Lucide match; or use a Signal SVG if you want the real logo
+      url: `https://signal.me/#p/${shareText}%20${shareUrl}`,
+    }
 
   ];
 
