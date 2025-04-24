@@ -37,23 +37,20 @@ const ShareSection: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white/5 dark:bg-black/20 border border-primary/20 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg mt-8">
-      <h3 className="text-white text-2xl font-semibold mb-6">Share Pulse</h3>
-      <div className="flex flex-wrap justify-center gap-4">
-        {shareLinks.map((link) => (
-          <Button
-            key={link.name}
-            variant="ghost"
-            size="lg"
-            className="flex items-center gap-2 text-white border border-white/20 hover:bg-white/10 backdrop-blur-md transition-all"
-            onClick={() => window.open(link.url, '_blank')}
-            aria-label={`Share on ${link.name}`}
-          >
-            {link.icon}
-            <span className="hidden sm:inline">{link.name}</span>
-          </Button>
-        ))}
-      </div>
+    <div className="flex flex-wrap justify-center gap-4 mt-6">
+      {shareLinks.map((link) => (
+        <Button
+          key={link.name}
+          variant="ghost"
+          size="lg"
+          className="flex items-center gap-2 text-white border border-white/20 hover:bg-white/10 backdrop-blur-md transition-all"
+          onClick={() => window.open(link.url, '_blank')}
+          aria-label={`Share on ${link.name}`}
+        >
+          {link.icon}
+          <span className="hidden sm:inline">{link.name}</span>
+        </Button>
+      ))}
     </div>
   );
 };
