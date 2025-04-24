@@ -80,7 +80,6 @@ const MobileNavLinks = ({
           className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
           onClick={closeMenu}
         >
-          <UserPlus size={18} />
           <span>See More Cities</span>
         </Link>
       ) : (
@@ -89,7 +88,6 @@ const MobileNavLinks = ({
           className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
           onClick={closeMenu}
         >
-          <UserPlus size={18} />
           <span>Meet Your Crew</span>
         </Link>
       )}
