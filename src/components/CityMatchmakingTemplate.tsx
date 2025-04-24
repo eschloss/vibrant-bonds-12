@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
+import { ShareSection } from "./ShareSection";
 
 
 interface CityMatchmakingTemplateProps {
@@ -130,6 +131,7 @@ const CityMatchmakingTemplate = ({
               duration: 0.5
             }}>
         Want it sooner? Share Pulse with friends nearby!<br/>Every signup moves your city up the list.
+        <ShareSection />
       </motion.p>}
     </motion.div>
   </div>
