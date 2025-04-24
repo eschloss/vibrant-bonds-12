@@ -61,7 +61,7 @@ const MissionCountdown = () => {
                 <div className="flex justify-center mb-6">
                   <div className="flex gap-4 items-start">
                     <div>
-                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Get Matched into a Group</h4>
+                      <h4 className="text-xl font-semibold text-white tracking-tight md:text-3xl">1. Next friend match happens in...</h4>
                     </div>
                   </div>
                 </div>
