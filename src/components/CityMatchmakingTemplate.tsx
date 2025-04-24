@@ -120,19 +120,6 @@ const CityMatchmakingTemplate = ({
           </Button>
         </Link>
       </motion.div>
-      {!code && <motion.p className="text-xl md:text-xl font-normal mt-24 text-gray-800" initial={{
-              opacity: 0,
-              y: 10
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              delay: 0.2,
-              duration: 0.5
-            }}>
-        Want it sooner? Share Pulse with friends nearby!<br/>Every signup moves your city up the list.
-        <ShareSection />
-      </motion.p>}
     </motion.div>
   </div>
       </section>
@@ -198,6 +185,23 @@ const CityMatchmakingTemplate = ({
               </div>
           </div>
         </section>}
+
+
+        <motion.p className="text-xl md:text-xl font-normal mt-24 text-gray-800" initial={{
+              opacity: 0,
+              y: 10
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.2,
+              duration: 0.5
+            }}>
+          {!code ? "Want it sooner?" : ""} Share Pulse with friends!
+          
+          <br/> {!code ? "Every signup moves your city up the list." : ""}
+          <ShareSection />
+        </motion.p>
       </main>
 
       <Footer />
