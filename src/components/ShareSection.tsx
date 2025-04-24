@@ -30,6 +30,11 @@ const ShareSection: React.FC = () => {
       url: `mailto:?subject=Join%20me%20on%20Pulse!&body=${shareText}%0A${shareUrl}`,
     },
     {
+      name: 'WhatsApp',
+      icon: <Send className="w-5 h-5" />, // or consider a WhatsApp icon if available
+      url: `https://wa.me/?text=${shareText}%20${shareUrl}`,
+    },
+    {
       name: 'Telegram',
       icon: <Send className="w-5 h-5" />,
       url: `https://t.me/share/url?url=${shareUrl}&text=${shareText}`,
