@@ -29,7 +29,7 @@ const ShareCallout: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Share Pulse with friends and help more people in your area get matched.
+            Share Pulse with friends and help grow your local crew.
           </motion.p>
 
           <ShareSection />
