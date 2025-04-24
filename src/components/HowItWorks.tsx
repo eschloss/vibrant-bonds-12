@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Users, MessageSquare, CalendarDays, Sprout, Sparkles } from "lucide-react";
 
 // Define the steps with updated headlines and descriptions
 const steps = [{
@@ -25,26 +24,28 @@ const steps = [{
   description: "One hangout's just the beginning.\nWe'll help you keeep the momentum going\n—so new connections turn into real friends.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
+
 const HowItWorks = () => {
-  return <section id="how-it-works" className="relative py-12 bg-gray-900 dark:bg-gray-950">
+  return (
+    <section id="how-it-works" className="relative section-padding bg-gray-900 dark:bg-gray-950">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
         <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl"></div>
         <div className="absolute -bottom-24 left-1/2 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto">
         <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.5
-      }} className="text-center max-w-3xl mx-auto mb-10">
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5
+        }} className="text-center max-w-3xl mx-auto mb-10">
           <span className="flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 uppercase mb-3">
             <Sparkles size={18} className="text-purple-400" />
             How It Works
@@ -54,18 +55,19 @@ const HowItWorks = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {steps.map((step, index) => <motion.div key={index} initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5,
-          delay: index * 0.1
-        }} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center hover:translate-y-[-8px] transition-transform duration-300">
+          {steps.map((step, index) => (
+            <motion.div key={index} initial={{
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.5,
+              delay: index * 0.1
+            }} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center hover:translate-y-[-8px] transition-transform duration-300">
               <div className={`w-16 h-16 rounded-full mb-6 flex items-center justify-center ${step.color}`}>
                 <step.icon size={24} className="text-white" />
               </div>
@@ -77,27 +79,29 @@ const HowItWorks = () => {
               <p className="text-gray-300 whitespace-pre-line my-[6px]">
                 {step.description}
               </p>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
 
-        {/* Call to Action Button */}
         <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.5,
-        delay: 0.3
-      }} className="flex justify-center mt-12">
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.3
+        }} className="flex justify-center mt-12">
           <Link to="/matchmaking">
             
           </Link>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HowItWorks;

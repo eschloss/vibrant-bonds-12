@@ -1,7 +1,5 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -12,7 +10,7 @@ const Hero = () => {
   }, []);
   
   return (
-    <section className="relative flex items-center overflow-hidden section-padding bg-white dark:bg-white pt-32 md:pt-36 lg:pt-40">
+    <section className="relative flex items-center overflow-hidden bg-white dark:bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
@@ -31,15 +29,16 @@ const Hero = () => {
       <div className="absolute top-1/6 right-1/6 w-10 h-10 rounded-full bg-pulse-coral/20 animate-bounce-gentle"></div>
       <div className="absolute bottom-1/5 left-1/5 w-18 h-18 rounded-full bg-pulse-teal/15 animate-float"></div>
 
-      <div className="container mx-auto py-[132px]">
-        {/* Changed from grid to flex layout */}
+      <div className="container mx-auto section-padding">
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
           
           <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6 text-gray-900">
             <span className="pulse-gradient-text">Meet New Friends</span> in Your City
           </h1>
           
-          <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
+          <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+            We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.
+          </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <Link to="/cities">
