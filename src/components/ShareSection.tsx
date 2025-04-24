@@ -16,7 +16,7 @@ const ShareSection: React.FC = () => {
     },
     {
       name: 'X',
-      icon: </>,
+      icon: <div></div>,
       url: `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
     },
     {
