@@ -187,21 +187,23 @@ const CityMatchmakingTemplate = ({
         </section>}
 
 
-        <motion.p className="max-w-4xl mx-auto text-center" initial={{
-              opacity: 0,
-              y: 10
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              delay: 0.2,
-              duration: 0.5
-            }}>
-          {!code ? "Want it sooner?" : ""} Share Pulse with friends!
-          
-          <br/> {!code ? "Every signup moves your city up the list." : ""}
-          <ShareSection />
-        </motion.p>
+        <section className="relative py-20 bg-gray-900/80">
+          <motion.p className="max-w-4xl mx-auto text-center" initial={{
+                opacity: 0,
+                y: 10
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                delay: 0.2,
+                duration: 0.5
+              }}>
+            {!code ? "Want it sooner?" : ""} Share Pulse with friends!
+            
+            <br/> {!code ? "Every signup moves your city up the list." : ""}
+            <ShareSection />
+          </motion.p>
+        </section>
       </main>
 
       <Footer />
