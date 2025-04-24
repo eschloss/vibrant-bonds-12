@@ -137,6 +137,22 @@ html, body, #root {
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+@keyframes glow-bar {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.1);
+  }
+}
+
+.animate-glow-bar {
+  animation: glow-bar 3s ease-in-out infinite;
+}
+
+
 
   .section-padding {
     @apply py-16 md:py-24 lg:py-32;
