@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
-import ShareSection from "./ShareSection";
+import ShareSection from './ShareSection';
 
 
 interface CityMatchmakingTemplateProps {
