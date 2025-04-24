@@ -203,7 +203,7 @@ const CityMatchmakingTemplate = ({
                 <div>Every signup moves your city up the list.</div>
               </> : <>
                 <div>Share Pulse with friends!</div>
-              </>
+              </> }
             
             <ShareSection />
           </motion.p>
