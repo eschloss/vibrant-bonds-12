@@ -27,7 +27,10 @@ const formSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
   name: z.string().min(2, "Your name is required"),
   email: z.string().email("Invalid email address"),
-  communitySize: z.string().min(1, "Please select a community size")
+  communitySize: z.string().min(1, "Please select a community size"),
+    agreeToTerms: z.boolean().refine(val => val === true, {
+    message: "You must agree to our terms and privacy policy"
+  })
 });
 
 export type FormValues = z.infer<typeof formSchema>;
@@ -41,7 +44,8 @@ const CommunitySignupForm = () => {
       communityName: "",
       name: "",
       email: "",
-      communitySize: ""
+      communitySize: "",
+      agreeToTerms: false,
     }
   });
 
@@ -200,6 +204,25 @@ const CommunitySignupForm = () => {
             </FormItem>
           )}
         />
+
+<FormField control={form.control} name="agreeToTerms" render={({ field }) => (
+          <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+            <FormControl>
+              <Checkbox 
+                checked={field.value} 
+                onCheckedChange={field.onChange} 
+                className="border-pulse-blue data-[state=checked]:bg-pulse-blue" 
+              />
+            </FormControl>
+            <div className="space-y-1 leading-none">
+              <FormLabel>
+                I agree to the <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> and <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+              </FormLabel>
+              <FormMessage />
+            </div>
+          </FormItem>
+        )} />
+        
 
         <Button
           type="submit"
