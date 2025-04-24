@@ -96,7 +96,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        Making friends as an adult can be hard. We're here to help.
+        {!code ? "Sign up now—you’ll be first in line to match as soon as a few more locals join." : "Making friends as an adult can be hard. We're here to help." }
       </motion.p>
       <motion.div initial={{
               opacity: 0,
@@ -129,7 +129,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        We'll match you as soon as <br/>enough people in your area join!
+        Want it sooner? Share Pulse with friends nearby—every signup moves your city up the list.
       </motion.p>}
     </motion.div>
   </div>
