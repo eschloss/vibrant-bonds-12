@@ -203,7 +203,7 @@ const CityMatchmakingTemplate = ({
       <div className="w-32 h-1 mx-auto mb-6 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue rounded-full animate-glow-bar" />
 
       <motion.p
-        className="text-lg md:text-xl text-white/90 font-medium drop-shadow-sm"
+        className="whitespace-pre-line text-lg md:text-xl text-white/90 font-medium drop-shadow-sm"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
