@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Mail, Send } from 'lucide-react';
+import { Facebook, X, Linkedin, Mail, Send } from 'lucide-react';
 import { Button } from './ui/button';
 
 const ShareSection: React.FC = () => {
@@ -15,8 +15,8 @@ const ShareSection: React.FC = () => {
       url: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
     },
     {
-      name: 'X (Twitter)',
-      icon: <Twitter className="w-5 h-5" />,
+      name: 'X',
+      icon: <X className="w-5 h-5" />,
       url: `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
     },
     {
@@ -39,6 +39,7 @@ const ShareSection: React.FC = () => {
       icon: <Send className="w-5 h-5" />,
       url: `https://t.me/share/url?url=${shareUrl}&text=${shareText}`,
     },
+
   ];
 
   return (
