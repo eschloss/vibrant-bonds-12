@@ -210,7 +210,7 @@ const CityMatchmakingTemplate = ({
       >
         {!code
           ? 'Every signup moves your city up the list.\nHelp us launch faster by sharing Pulse.'
-          : 'Share Pulse with friends and help more people in your area get matched!'}
+          : 'Share Pulse with friends and help more people in your area get matched.'}
       </motion.p>
 
       <ShareSection />
