@@ -196,7 +196,7 @@ const CityMatchmakingTemplate = ({
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
     >
-      <h2 className="text-4xl md:text-5xl font-bold mb-4  from-pulse-pink via-accent to-pulse-blue bg-clip-text text-transparent">
+      <h2 className="pulse-gradient-text text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
         {!code ? 'Want it sooner?' : 'Spread the word'}
       </h2>
 
