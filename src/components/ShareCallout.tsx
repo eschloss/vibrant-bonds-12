@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import ShareSection from "@/components/ShareSection";
 
 
-const ShareCallout: React.FC<> = () => {
+const ShareCallout: React.FC = () => {
   return (
     <section className="relative py-20 bg-gray-900 dark:bg-gray-950">
       <div className="container mx-auto px-4 relative z-10">
