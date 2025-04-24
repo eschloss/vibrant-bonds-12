@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, X, Linkedin, Mail, Send } from 'lucide-react';
+import { Facebook, X, Linkedin, Mail, Send, MessageCircle, MessageCircleDashed } from 'lucide-react';
 import { Button } from './ui/button';
 
 const ShareSection: React.FC = () => {
@@ -36,7 +36,7 @@ const ShareSection: React.FC = () => {
     },
     {
       name: 'WhatsApp',
-      icon: <Send className="w-5 h-5" />, // or consider a WhatsApp icon if available
+      icon: <MessageCircle className="w-5 h-5" />, // or consider a WhatsApp icon if available
       url: `https://wa.me/?text=${shareText}%20${shareUrl}`,
     },
     {
@@ -46,7 +46,7 @@ const ShareSection: React.FC = () => {
     },
     {
       name: 'Signal',
-      icon: <Send className="w-5 h-5" />, // closest Lucide match; or use a Signal SVG if you want the real logo
+      icon: <MessageCircleDashed className="w-5 h-5" />, // closest Lucide match; or use a Signal SVG if you want the real logo
       url: `https://signal.me/#p/${shareText}%20${shareUrl}`,
     }
 
