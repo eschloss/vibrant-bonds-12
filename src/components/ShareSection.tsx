@@ -64,7 +64,7 @@ const ShareSection: React.FC = () => {
           aria-label={`Share on ${link.name}`}
         >
           {link.icon && <div className="text-white">{link.icon}</div>}
-          <span className="hidden sm:inline font-medium">{link.name}</span>
+          <span className="inline font-medium">{link.name}</span>
         </Button>
       ))}
     </div>
