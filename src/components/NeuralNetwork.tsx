@@ -41,16 +41,16 @@ const NeuralNetwork = () => {
         once: true,
         margin: "-100px"
       }} className="text-center">
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-lg">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-md">
             <Brain className="w-4 h-4 text-pulse-purple" />
             <span className="text-sm font-medium text-pulse-purple">Neural Network Technology</span>
           </motion.div>
           
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-lg py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl">
+          <motion.h2 variants={fadeInUp} className="text-3xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-md py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl">
             Find Your <span className="pulse-gradient-text">Perfect Friend Group</span>
           </motion.h2>
           
-          <motion.p variants={fadeInUp} className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-lg p-2 rounded-lg bg-gray-900/30 mb-6">
+          <motion.p variants={fadeInUp} className="text-lg text-gray-300 max-w-2xl mx-auto backdrop-blur-md p-2 rounded-lg bg-gray-900/30 mb-6">
             Our smart matching system brings together people with shared interests and compatible personalities, making it easy to find friends you'll click with.
           </motion.p>
           
