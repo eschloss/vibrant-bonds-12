@@ -187,26 +187,28 @@ const CityMatchmakingTemplate = ({
         </section>}
 
 
-        <section className="relative py-20 bg-gray-900/80">
-          <motion.p className="max-w-4xl mx-auto text-center" initial={{
-                opacity: 0,
-                y: 10
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                delay: 0.2,
-                duration: 0.5
-              }}>
-            {!code ? <>
-                <div>Want it sooner? Share Pulse with friends!</div>
-                <div>Every signup moves your city up the list.</div>
-              </> : <>
-                <div>Share Pulse with friends!</div>
-              </> }
-            
-            <ShareSection />
-          </motion.p>
+        <section className="relative py-20 bg-gray-900 dark:bg-gray-950">
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div
+              className="max-w-3xl mx-auto text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                {!code ? "Want it sooner?" : "Spread the word"}
+              </h2>
+              <p className="text-lg text-gray-300 mb-8">
+                {!code
+                  ? "Share Pulse with friends — every signup brings your city closer to launching!"
+                  : "Share Pulse with friends and help more people in your area get matched!"}
+              </p>
+              <div className="bg-white/5 dark:bg-black/20 border border-primary/20 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg">
+                <ShareSection />
+              </div>
+            </motion.div>
+          </div>
         </section>
       </main>
 
