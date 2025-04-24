@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 import { cn } from "@/lib/utils"
@@ -12,12 +13,12 @@ const ScrollArea = React.forwardRef<
 >(({ className, children, viewportRef, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
-    className={cn("fixed inset-0 overflow-hidden", className)} // 🧠 fills entire screen with no border
+    className={cn("fixed inset-0 overflow-hidden w-full max-w-[100vw]", className)}
     {...props}
   >
     <ScrollAreaPrimitive.Viewport
       ref={viewportRef}
-      className="h-full w-full overflow-auto"
+      className="h-full w-full overflow-auto px-4 md:px-0"
     >
       {children}
     </ScrollAreaPrimitive.Viewport>

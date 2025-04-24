@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, X, Linkedin, Mail, Send, MessageCircle, MessageCircleDashed } from 'lucide-react';
 import { Button } from './ui/button';
@@ -53,13 +54,13 @@ const ShareSection: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 mt-6">
+    <div className="flex flex-wrap justify-center gap-3 mt-6 px-4 md:px-6">
       {shareLinks.map((link) => (
         <Button
           key={link.name}
           variant="ghost"
           size="lg"
-          className="flex items-center gap-2 text-white px-5 py-3 rounded-full border border-white/20 backdrop-blur-sm bg-white/5 hover:bg-white/10 hover:shadow-lg hover:shadow-pulse-pink/30 transition-all duration-300"
+          className="flex items-center gap-2 text-white px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm bg-white/5 hover:bg-white/10 hover:shadow-lg hover:shadow-pulse-pink/30 transition-all duration-300 w-full sm:w-auto"
           onClick={() => window.open(link.url, '_blank')}
           aria-label={`Share on ${link.name}`}
         >

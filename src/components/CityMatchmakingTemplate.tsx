@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer, AlertTriangle } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -9,7 +9,6 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import ShareSection from './ShareSection';
 
-
 interface CityMatchmakingTemplateProps {
   cityName: string;
   code: string;
@@ -17,6 +16,7 @@ interface CityMatchmakingTemplateProps {
   state?: string;
   image?: string;
 }
+
 const steps = [{
   icon: Users,
   title: "Get Matched",
@@ -38,6 +38,7 @@ const steps = [{
   description: "After the initial meet, we'll help you grow your new connections.",
   color: "bg-gradient-to-r from-green-400 to-emerald-500"
 }];
+
 const CityMatchmakingTemplate = ({
   cityName,
   code,
@@ -51,7 +52,7 @@ const CityMatchmakingTemplate = ({
   </Helmet>;
   }
 
-    const timeLeft = useCountdown();
+  const timeLeft = useCountdown();
 
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
@@ -226,4 +227,5 @@ const CityMatchmakingTemplate = ({
       <Footer />
     </div>;
 };
+
 export default CityMatchmakingTemplate;
