@@ -129,7 +129,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        Want it sooner? Share Pulse with friends nearby—every signup moves your city up the list.
+        Want it sooner? Share Pulse with friends nearby<br/>—every signup moves your city up the list.
       </motion.p>}
     </motion.div>
   </div>
