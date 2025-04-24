@@ -3,11 +3,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import ShareSection from "@/components/ShareSection";
 
-type ShareCalloutProps = {
-  code?: string | null;
-};
 
-const ShareCallout: React.FC<ShareCalloutProps> = ({ code }) => {
+const ShareCallout: React.FC<> = () => {
   return (
     <section className="relative py-20 bg-gray-900 dark:bg-gray-950">
       <div className="container mx-auto px-4 relative z-10">
@@ -20,7 +17,7 @@ const ShareCallout: React.FC<ShareCalloutProps> = ({ code }) => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
             <span className="pulse-gradient-text">
-              {!code ? "Want it sooner?" : "Spread the word"}
+              Spread the word
             </span>
           </h2>
 
@@ -32,9 +29,7 @@ const ShareCallout: React.FC<ShareCalloutProps> = ({ code }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            {!code
-              ? "Every signup moves your city up the list.\nHelp us launch faster by sharing Pulse."
-              : "Share Pulse with friends and help more people in your area get matched!"}
+            Share Pulse with friends and help more people in your area get matched!
           </motion.p>
 
           <ShareSection />

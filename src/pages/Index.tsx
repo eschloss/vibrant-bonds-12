@@ -7,6 +7,7 @@ import NeuralNetwork from "@/components/NeuralNetwork";
 import AiIcebreakers from "@/components/AiIcebreakers";
 import MissionCountdown from "@/components/MissionCountdown";
 import Footer from "@/components/Footer";
+import ShareCallout from "@/components/ShareCallout";
 
 const Index = () => {
   const howItWorksRef = useRef<HTMLDivElement>(null);
@@ -23,6 +24,7 @@ const Index = () => {
         <NeuralNetwork />
         <AiIcebreakers />
         <MissionCountdown />
+        <ShareCallout />
       </main>
       
       <Footer />
