@@ -38,9 +38,6 @@ const ShareSection: React.FC = () => {
 
   return (
     <div className="mt-16 text-center">
-      <p className="text-xl text-gray-800">
-        Want it sooner? Share Pulse with friends nearby! Every signup moves your city up the list.
-      </p>
       <div className="flex flex-wrap justify-center gap-3 mt-6">
         {shareLinks.map((link) => (
           <Button
