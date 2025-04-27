@@ -176,7 +176,7 @@ How Pulse Was Born</h1>
         }} transition={{
           duration: 0.6
         }} className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10">
-            <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-pink pl-4 py-2 bg-gray-800/30 rounded-r-xl">To create a world where growing meaningful friendships is effortless and not intimidating.</blockquote>
+            <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-pink pl-4 py-2 bg-gray-800/30 rounded-r-xl">To create a world where growing meaningful friendships is effortless.</blockquote>
             <div className="flex justify-center">
               <p className="text-lg font-medium">— Eric, Founder</p>
             </div>
