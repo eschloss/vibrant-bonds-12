@@ -144,7 +144,7 @@ How Pulse Was Born</h1>
             delay: 0.1
           }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop" alt="Stian Hansen" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                <img alt="Stian Hansen" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/a26a7983-2c55-4dca-8d85-5b0d8154c5a8.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Stian Hansen</h3>
               <p className="text-gray-300">Product & Growth</p>
