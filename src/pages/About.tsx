@@ -124,7 +124,7 @@ How Pulse Was Born</h1>
             duration: 0.6
           }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img src="/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" alt="Eric Schlossberg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                <img alt="Eric Schlossberg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/bd8cf463-4a58-4a21-8681-90c958baf08a.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Eric Schlossberg</h3>
               <p className="text-gray-300">Engineering</p>
