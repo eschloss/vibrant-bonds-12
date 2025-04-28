@@ -190,7 +190,7 @@ How Pulse Was Born</h1>
                   </div>
                 </div>
                 <h3 className="text-xl font-bold mb-2">Join Our Team</h3>
-                <p className="text-gray-300 mb-4">Help us build the future of social connection</p>
+                <p className="text-gray-300 mb-4"></p>
                 <Button variant="gradient" className="w-full">
                   Get in Touch
                 </Button>
