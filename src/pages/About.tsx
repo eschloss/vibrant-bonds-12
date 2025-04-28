@@ -7,11 +7,13 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+
 const About = () => {
   useEffect(() => {
     // Reset any scroll position when component mounts
     window.scrollTo(0, 0);
   }, []);
+
   return <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       
@@ -326,4 +328,5 @@ How Pulse Was Born</h1>
       <Footer />
     </div>;
 };
+
 export default About;
