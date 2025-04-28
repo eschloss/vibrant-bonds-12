@@ -167,7 +167,7 @@ How Pulse Was Born</h1>
                 <img alt="Pedro Corchado" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/e59e2f5f-3b38-4156-b86e-fe05d138962f.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Pedro Corchado</h3>
-              <p className="text-gray-300">Marketing</p>
+              <p className="text-gray-300">Marketing &amp; Comms</p>
             </motion.div>
 
             {/* Join Us CTA */}
