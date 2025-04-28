@@ -17,7 +17,7 @@ const TeamSection = () => {
     },
     {
       name: "Pedro Corchado",
-      role: "Marketing & Comms",
+      role: "Marketing & Communications",
       image: "/lovable-uploads/e59e2f5f-3b38-4156-b86e-fe05d138962f.jpg"
     }
   ];
