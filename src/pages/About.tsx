@@ -127,7 +127,7 @@ How Pulse Was Born</h1>
                 <img alt="Eric Schlossberg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/bd8cf463-4a58-4a21-8681-90c958baf08a.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Eric Schlossberg</h3>
-              <p className="text-gray-300">Engineering</p>
+              <p className="text-gray-300">Engineering &amp; UXR</p>
             </motion.div>
 
             {/* Team Member - Stian */}
@@ -164,7 +164,7 @@ How Pulse Was Born</h1>
             delay: 0.2
           }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop" alt="Pedro Corchado" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                <img alt="Pedro Corchado" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/e59e2f5f-3b38-4156-b86e-fe05d138962f.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Pedro Corchado</h3>
               <p className="text-gray-300">Marketing</p>
