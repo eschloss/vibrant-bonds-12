@@ -19,8 +19,9 @@ const About = () => {
       <Navbar />
       <HeroSection />
       <FounderStory />
-      <TeamSection />
       <FriendshipFormula />
+      <TeamSection />
+
       <MissionSection />
       <CTASection />
       <Footer />
