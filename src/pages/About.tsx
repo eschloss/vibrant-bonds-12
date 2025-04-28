@@ -185,7 +185,7 @@ How Pulse Was Born</h1>
           }} className="bg-gradient-to-br from-pulse-purple/20 to-pulse-blue/20 rounded-2xl p-6 border border-pulse-purple/30">
               <Link to="/contact" className="block">
                 <div className="aspect-square mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-pulse-purple to-pulse-blue opacity-75">
-                  <img alt="Join Our Team" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/e59e2f5f-3b38-4156-b86e-fe05d138962f.jpg" />
+                  <img alt="Join Our Team" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/6c2d1f54-0f4e-431e-9cef-97783bc29b11.png" />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Join Our Team</h3>
                 <p className="text-gray-300 mb-4"></p>
