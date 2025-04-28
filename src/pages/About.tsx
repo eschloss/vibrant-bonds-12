@@ -90,6 +90,105 @@ How Pulse Was Born</h1>
         </div>
       </section>
       
+      {/* Team Section */}
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }} className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Team</h2>
+            <p className="text-xl text-gray-300">
+              Meet the people building the future of social connection
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Team Member 1 */}
+            <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6,
+              delay: 0.1
+            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+              <div className="aspect-square mb-6 overflow-hidden rounded-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop" 
+                  alt="Stian Hansen"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Stian Hansen</h3>
+              <p className="text-gray-300">Product & Growth</p>
+            </motion.div>
+
+            {/* Team Member 2 */}
+            <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6,
+              delay: 0.2
+            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+              <div className="aspect-square mb-6 overflow-hidden rounded-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop" 
+                  alt="Pedro Corchado"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Pedro Corchado</h3>
+              <p className="text-gray-300">Marketing</p>
+            </motion.div>
+
+            {/* Join Us CTA */}
+            <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6,
+              delay: 0.3
+            }} className="bg-gradient-to-br from-pulse-purple/20 to-pulse-blue/20 rounded-2xl p-6 border border-pulse-purple/30">
+              <Link to="/contact" className="block">
+                <div className="aspect-square mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-pulse-purple to-pulse-blue opacity-75">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Users className="w-20 h-20 text-white" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Join Our Team</h3>
+                <p className="text-gray-300 mb-4">Help us build the future of social connection</p>
+                <Button variant="gradient" className="w-full">
+                  Get in Touch
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
       {/* The Friendship Formula - Consolidated insights */}
       <section className="py-16 md:py-20 bg-gray-800/30">
         <div className="container mx-auto px-4">
