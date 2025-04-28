@@ -7,13 +7,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
 const About = () => {
   useEffect(() => {
     // Reset any scroll position when component mounts
     window.scrollTo(0, 0);
   }, []);
-
   return <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       
@@ -129,7 +127,7 @@ How Pulse Was Born</h1>
                 <img alt="Eric Schlossberg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" src="/lovable-uploads/bd8cf463-4a58-4a21-8681-90c958baf08a.jpg" />
               </div>
               <h3 className="text-xl font-bold mb-2">Eric Schlossberg</h3>
-              <p className="text-gray-300">Engineering &amp; UXR</p>
+              <p className="text-gray-300">Founder, Engineering & Strategy</p>
             </motion.div>
 
             {/* Team Member - Stian */}
@@ -328,5 +326,4 @@ How Pulse Was Born</h1>
       <Footer />
     </div>;
 };
-
 export default About;
