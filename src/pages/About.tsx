@@ -94,16 +94,16 @@ How Pulse Was Born</h1>
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6
-          }} className="max-w-3xl mx-auto text-center mb-12">
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Team</h2>
             <p className="text-xl text-gray-300">
               Meet the people building the future of social connection
@@ -113,46 +113,38 @@ How Pulse Was Born</h1>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Team Member - Eric */}
             <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6
-            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img 
-                  src="/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
-                  alt="Eric Schlossberg"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
+                <img src="/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" alt="Eric Schlossberg" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
               </div>
               <h3 className="text-xl font-bold mb-2">Eric Schlossberg</h3>
-              <p className="text-gray-300">Founder & Engineering</p>
+              <p className="text-gray-300">Engineering</p>
             </motion.div>
 
             {/* Team Member - Stian */}
             <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6,
-              delay: 0.1
-            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop" 
-                  alt="Stian Hansen"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
+                <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop" alt="Stian Hansen" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
               </div>
               <h3 className="text-xl font-bold mb-2">Stian Hansen</h3>
               <p className="text-gray-300">Product & Growth</p>
@@ -160,23 +152,19 @@ How Pulse Was Born</h1>
 
             {/* Team Member - Pedro */}
             <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6,
-              delay: 0.2
-            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop" 
-                  alt="Pedro Corchado"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop" alt="Pedro Corchado" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
               </div>
               <h3 className="text-xl font-bold mb-2">Pedro Corchado</h3>
               <p className="text-gray-300">Marketing</p>
@@ -184,17 +172,17 @@ How Pulse Was Born</h1>
 
             {/* Join Us CTA */}
             <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6,
-              delay: 0.3
-            }} className="bg-gradient-to-br from-pulse-purple/20 to-pulse-blue/20 rounded-2xl p-6 border border-pulse-purple/30">
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.3
+          }} className="bg-gradient-to-br from-pulse-purple/20 to-pulse-blue/20 rounded-2xl p-6 border border-pulse-purple/30">
               <Link to="/contact" className="block">
                 <div className="aspect-square mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-pulse-purple to-pulse-blue opacity-75">
                   <div className="w-full h-full flex items-center justify-center">
