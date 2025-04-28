@@ -111,7 +111,30 @@ How Pulse Was Born</h1>
           </motion.div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Team Member 1 */}
+            {/* Team Member - Eric */}
+            <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.6
+            }} className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50">
+              <div className="aspect-square mb-6 overflow-hidden rounded-xl">
+                <img 
+                  src="/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
+                  alt="Eric Schlossberg"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Eric Schlossberg</h3>
+              <p className="text-gray-300">Founder & Engineering</p>
+            </motion.div>
+
+            {/* Team Member - Stian */}
             <motion.div initial={{
               opacity: 0,
               y: 20
@@ -135,7 +158,7 @@ How Pulse Was Born</h1>
               <p className="text-gray-300">Product & Growth</p>
             </motion.div>
 
-            {/* Team Member 2 */}
+            {/* Team Member - Pedro */}
             <motion.div initial={{
               opacity: 0,
               y: 20
