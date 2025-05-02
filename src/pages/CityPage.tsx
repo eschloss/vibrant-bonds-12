@@ -23,8 +23,11 @@ const CityPage = () => {
         const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
         const data = await response.json();
 
-        const matchedCity = data.find((city: any) => city.url2.replace(/^\//, '') === cityName);
+        const matchedCity = data.find((city: any) =>
+          city.url2.replace(/^\//, '').toLowerCase() === cityName.toLowerCase()
+        );
 
+        
         if (!matchedCity) {
           navigate("/cities");
           return;
