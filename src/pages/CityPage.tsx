@@ -63,7 +63,7 @@ const CityPage = () => {
       country={cityData.country}
       state={cityData.state}
       image={cityData.image}
-      isQueer=false
+      isQueer={false}
     />
   );
 };
