@@ -30,10 +30,10 @@ const QueerCityPage = () => {
         });
 
         
-        /*if (!matchedCity) {
+        if (!matchedCity) {
           navigate("/cities");
           return;
-        }*/
+        }
 
         setCityData({
           name: matchedCity.en_name,
