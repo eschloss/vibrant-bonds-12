@@ -89,7 +89,7 @@ const CityMatchmakingTemplate = ({
       <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
         {!code ? (
           <>
-            Help Launch Pulse<br />in{" "}
+            Help Launch Pulse in{" "}
             <span className="pulse-gradient-text">{cityName}</span>
           </>
         ) : (
