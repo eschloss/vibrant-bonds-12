@@ -26,13 +26,12 @@ const QueerCityPage = () => {
 
         const matchedCity = data.find((city: any) => {
           const citySlug = city.url2.replace(/^\//, '').toLowerCase(); // strip leading slash
-          alert(citySlug);
-          alert(cityName);
           return citySlug === cityName?.toLowerCase();
         });
 
         
         if (!matchedCity) {
+          alert(cityName);
           alert("City not found");
           navigate("/cities");
           return;
