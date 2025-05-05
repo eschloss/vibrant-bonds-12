@@ -25,8 +25,8 @@ const QueerCityPage = () => {
         const data = await response.json();
 
         const matchedCity = data.find((city: any) => {
-          const normalizedUrl = city.url2.toLowerCase().replace(/^\/|\/$/g, '');
-          return normalizedUrl === `cities/${cityName.toLowerCase()}`;
+          const citySlug = city.url2.replace(/^\//, '').toLowerCase(); // strip leading slash
+          return citySlug === cityName?.toLowerCase();
         });
 
         
