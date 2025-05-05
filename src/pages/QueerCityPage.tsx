@@ -24,9 +24,10 @@ const QueerCityPage = () => {
         const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
         const data = await response.json();
 
-        const matchedCity = data.find((city: any) =>
-          city.url2.replace(/^\//, '').toLowerCase() === cityName.toLowerCase()
-        );
+        const matchedCity = data.find((city: any) => {
+          const normalizedUrl = city.url2.toLowerCase().replace(/^\/|\/$/g, '');
+          return normalizedUrl === `cities/${cityName.toLowerCase()}`;
+        });
 
         
         if (!matchedCity) {
