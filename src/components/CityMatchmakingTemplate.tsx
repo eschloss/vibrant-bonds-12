@@ -15,6 +15,7 @@ interface CityMatchmakingTemplateProps {
   country: string;
   state?: string;
   image?: string;
+  isQueer?: boolean;
 }
 
 const steps = [{
@@ -44,7 +45,8 @@ const CityMatchmakingTemplate = ({
   code,
   country,
   state,
-  image
+  image,
+  isQueer
 }: CityMatchmakingTemplateProps) => {
   {
     image && <Helmet>
@@ -85,7 +87,9 @@ const CityMatchmakingTemplate = ({
             duration: 0.7
           }} className="text-center max-w-3xl mx-auto relative z-10">
       <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
-        {!code ? "Help Launch Pulse in" : "Meet New Friends in"}{" "}
+        {!code
+          ? "Help Launch Pulse in"
+          : `Meet New ${isQueer ? "Queer " : ""}Friends in`}{" "}
         <span className="pulse-gradient-text">{cityName}</span>
       </h1>
       <motion.p className="whitespace-pre-line text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
@@ -110,7 +114,7 @@ const CityMatchmakingTemplate = ({
               delay: 0.4,
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 justify-center">
-       <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}` : ''}`}>
+       <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}` : ''}`}>
           <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
@@ -176,7 +180,7 @@ const CityMatchmakingTemplate = ({
               
               
               <div className="justify-center gap-4 mt-8">
-                <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}` : ''}`}>
+                <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}` : ''}`}>
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                   Get Matched in {cityName} Now
                   <ArrowRight size={18} />

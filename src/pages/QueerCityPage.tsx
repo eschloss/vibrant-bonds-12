@@ -31,8 +31,6 @@ const QueerCityPage = () => {
 
         
         if (!matchedCity) {
-          alert(cityName);
-          alert("City not found");
           navigate("/cities");
           return;
         }
