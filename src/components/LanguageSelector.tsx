@@ -80,10 +80,10 @@ const LanguageSelector = ({
           </div>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="en">English Speakers</SelectItem>
+          <SelectItem value="en">{`${getLanguageLabel("en")}`}</SelectItem>
           {language && language !== "en" && (
             <SelectItem value={language}>
-              {`${getLanguageLabel(language)} Speakers`}
+              {`${getLanguageLabel(language)}`}
             </SelectItem>
           )}
         </SelectContent>
