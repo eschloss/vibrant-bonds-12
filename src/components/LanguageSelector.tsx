@@ -71,7 +71,7 @@ const LanguageSelector = ({
         }}
       >
 <SelectTrigger
-  className={`w-[200px] bg-transparent ${textColor} justify-start px-2 border-none shadow-none outline-none ring-0`}
+className={`w-auto min-w-[200px] bg-transparent ${textColor} justify-start px-2 border-none shadow-none outline-none ring-0 text-left whitespace-nowrap`}
 >
 
           <div className="flex items-center gap-2">
