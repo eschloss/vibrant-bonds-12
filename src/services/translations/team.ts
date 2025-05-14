@@ -18,10 +18,6 @@ export const team = {
     "team.miguel.name": "Pedro Corchado",
     "team.miguel.role": "Marketing & Communications",
     "team.miguel.bio": "",
-    
-    "team.aisha.name": "Aisha Patel",
-    "team.aisha.role": "Marketing Director",
-    "team.aisha.bio": "Digital marketing strategist focused on community-driven growth. Led marketing teams at Meetup and Eventbrite.",
   },
   es: {
     // Team members translations
@@ -31,19 +27,15 @@ export const team = {
     "team.get_in_touch": "Ponte en Contacto",
     
     "team.eric.name": "Eric Schlossberg",
-    "team.eric.role": "Fundador",
-    "team.eric.bio": "Ex cantante de ópera convertido en ingeniero de software. Construyó productos para Amazon, Google y Volvo.",
+    "team.eric.role": "Fundador, Ingeniería y Estrategia",
+    "team.eric.bio": "",
     
-    "team.sarah.name": "Sarah Johnson",
-    "team.sarah.role": "Jefa de Comunidad",
-    "team.sarah.bio": "Constructora de comunidades con experiencia en psicología y planificación de eventos. Creó comunidades prósperas tanto para startups como para marcas establecidas.",
+    "team.sarah.name": "Stian Hansen",
+    "team.sarah.role": "Producto y Crecimiento",
+    "team.sarah.bio": "",
     
-    "team.miguel.name": "Miguel Rodríguez",
-    "team.miguel.role": "Ingeniero Senior",
-    "team.miguel.bio": "Especialista en IA con experiencia en algoritmos de emparejamiento y redes neuronales. Anteriormente en Match.com y Bumble.",
-    
-    "team.aisha.name": "Aisha Patel",
-    "team.aisha.role": "Directora de Marketing",
-    "team.aisha.bio": "Estratega de marketing digital enfocada en el crecimiento impulsado por la comunidad. Dirigió equipos de marketing en Meetup y Eventbrite.",
+    "team.miguel.name": "Pedro Corchado",
+    "team.miguel.role": "Marketing y Comunicaciones",
+    "team.miguel.bio": "",
   }
 };
