@@ -18,6 +18,7 @@ const QueerCityPage = () => {
     state?: string; 
     code: string;
     image?: string;
+    language?: string;
   } | null>(null);
 
   useEffect(() => {
@@ -47,7 +48,8 @@ const QueerCityPage = () => {
           country: matchedCity[countryField] || matchedCity.en_country,
           state: matchedCity[stateField] || matchedCity.en_state,
           code: matchedCity.code,
-          image: matchedCity.image
+          image: matchedCity.image,
+          language: matchedCity.language // Get language from API
         });
 
         window.scrollTo(0, 0);
@@ -73,6 +75,7 @@ const QueerCityPage = () => {
       state={cityData.state}
       image={cityData.image}
       isQueer={true}
+      language={cityData.language}
     />
   );
 };
