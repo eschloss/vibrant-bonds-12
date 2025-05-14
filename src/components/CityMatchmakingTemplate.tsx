@@ -136,7 +136,8 @@ const CityMatchmakingTemplate = ({
             ) : (
               t("city.friends", "Friends ")
             )}
-            {t("city.in", "in")} <span className="pulse-gradient-text">{cityName}</span>
+            {t("city.in", "in")} <Link to="/cities"><span className="pulse-gradient-text">{cityName}</span>
+            </Link>
           </>
         )}
       </h1>
