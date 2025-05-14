@@ -106,8 +106,8 @@ const CommunitySignupForm = () => {
       const result = await response.json();
       if (result.success) {
         toast({
-          title: "Submitted!",
-          description: "We'll be in touch soon.",
+          title: t("community.toast.success.title", "Submitted!"),
+          description: t("community.toast.success.description", "We'll be in touch soon."),
         });
         form.reset();
       } else {
@@ -115,8 +115,8 @@ const CommunitySignupForm = () => {
       }
     } catch (err: any) {
       toast({
-        title: "Oops!",
-        description: err.message || "We couldn’t process your submission.",
+        title: t("community.toast.error.title", "Oops!"),
+        description: err.message || t("community.toast.error.description", "We couldn't process your submission."),
         variant: "destructive",
       });
     }
@@ -218,7 +218,7 @@ const CommunitySignupForm = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                {t("community.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("community.form.agree_terms", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                {t("community.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("community.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
               </FormLabel>
               <FormMessage />
             </div>

@@ -38,6 +38,30 @@ export const communities = {
     "communities.signup.title": "Ready to Empower Your Community?",
     "communities.signup.description": "Take the first step towards creating a more connected, engaged community. Our team will reach out to discuss how we can work for your specific needs.",
     "communities.signup.global": "Strengthening communities globally",
+    
+    // Community Form
+    "community.form.community_name": "Community Name",
+    "community.form.community_name_placeholder": "e.g., Stanford Alumni Network",
+    "community.form.your_name": "Your Name",
+    "community.form.your_name_placeholder": "Your full name",
+    "community.form.email": "Email",
+    "community.form.email_placeholder": "your@email.com",
+    "community.form.community_size": "Community Size",
+    "community.form.select_size": "Select size...",
+    "community.form.small": "Small (50-500 members)",
+    "community.form.medium": "Medium (500-2,000 members)",
+    "community.form.large": "Large (2,000-10,000 members)",
+    "community.form.xlarge": "Extra-Large (10,000+ members)",
+    "community.form.agree_terms": "I agree to the",
+    "community.form.and": "and",
+    "community.form.processing": "Processing...",
+    "community.form.submit": "Get Started",
+    
+    // Toast Messages
+    "community.toast.success.title": "Submitted!",
+    "community.toast.success.description": "We'll be in touch soon.",
+    "community.toast.error.title": "Oops!",
+    "community.toast.error.description": "We couldn't process your submission."
   },
   es: {
     // Communities page
@@ -77,5 +101,29 @@ export const communities = {
     "communities.signup.title": "¿Listo para Empoderar Tu Comunidad?",
     "communities.signup.description": "Da el primer paso hacia la creación de una comunidad más conectada y comprometida. Nuestro equipo te contactará para discutir cómo podemos trabajar para tus necesidades específicas.",
     "communities.signup.global": "Fortaleciendo comunidades globalmente",
+    
+    // Community Form
+    "community.form.community_name": "Nombre de la Comunidad",
+    "community.form.community_name_placeholder": "ej., Red de Exalumnos de Stanford",
+    "community.form.your_name": "Tu Nombre",
+    "community.form.your_name_placeholder": "Tu nombre completo",
+    "community.form.email": "Correo Electrónico",
+    "community.form.email_placeholder": "tu@correo.com",
+    "community.form.community_size": "Tamaño de la Comunidad",
+    "community.form.select_size": "Selecciona tamaño...",
+    "community.form.small": "Pequeña (50-500 miembros)",
+    "community.form.medium": "Mediana (500-2,000 miembros)",
+    "community.form.large": "Grande (2,000-10,000 miembros)",
+    "community.form.xlarge": "Extra-Grande (10,000+ miembros)",
+    "community.form.agree_terms": "Acepto los",
+    "community.form.and": "y",
+    "community.form.processing": "Procesando...",
+    "community.form.submit": "Comenzar",
+    
+    // Toast Messages
+    "community.toast.success.title": "¡Enviado!",
+    "community.toast.success.description": "Nos pondremos en contacto pronto.",
+    "community.toast.error.title": "¡Ups!",
+    "community.toast.error.description": "No pudimos procesar tu envío."
   }
 };
