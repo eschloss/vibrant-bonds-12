@@ -1,10 +1,13 @@
-// components/ShareCallout.tsx
+
 import React from "react";
 import { motion } from "framer-motion";
 import ShareSection from "@/components/ShareSection";
-
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 const ShareCallout: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative py-20 bg-gray-900 dark:bg-gray-950">
       <div className="container mx-auto px-4 relative z-10">
@@ -17,7 +20,7 @@ const ShareCallout: React.FC = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
             <span className="pulse-gradient-text">
-              Spread the word
+              <Text id="share_callout.title" className="">Spread the word</Text>
             </span>
           </h2>
 
@@ -29,7 +32,7 @@ const ShareCallout: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Share Pulse with friends and help grow your local crew.
+            <Text id="share_callout.description" className="">Share Pulse with friends and help grow your local crew.</Text>
           </motion.p>
 
           <ShareSection />

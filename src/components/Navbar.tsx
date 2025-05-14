@@ -6,17 +6,10 @@ import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MenuButton from "./MenuButton";
 import MobileNavLinks from "./MobileNavLinks";
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 // --- Navigation Link List (for desktop and mobile reuse) ---
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "For Communities", href: "/communities" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-// --- Navbar component ---
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -25,6 +18,16 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const { t } = useTranslation();
+
+  // Translated nav links
+  const navLinks = [
+    { label: t("navbar.home", "Home"), href: "/" },
+    { label: t("navbar.how_it_works", "How it works"), href: "/#how-it-works" },
+    { label: t("navbar.communities", "For Communities"), href: "/communities" },
+    { label: t("navbar.about", "About Us"), href: "/about" },
+    { label: t("navbar.contact", "Contact"), href: "/contact" },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -103,56 +106,51 @@ const Navbar = () => {
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map(({ label, href }) => {
-  const isHashLink = href.includes("#");
+              const isHashLink = href.includes("#");
 
-  if (isHashLink) {
-    if (isHomePage) {
-      return (
-        <a
-          key={label}
-          href={href}
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection(href.replace(/^.*#/, ""));
-          }}
-          className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
-        >
-          {label}
-        </a>
-      ); 
-    }
+              if (isHashLink) {
+                if (isHomePage) {
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(href.replace(/^.*#/, ""));
+                      }}
+                      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
+                    >
+                      {label}
+                    </a>
+                  ); 
+                }
 
-    return (
-    <Link
-      key={label}
-      to={href}
-      onClick={(e) => {
-            //e.preventDefault();
-            scrollToSection(href.replace(/^.*#/, ""));
-      }}
-      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-    >
-      {label}
-    </Link>
-  );
-    
-  }
+                return (
+                <Link
+                  key={label}
+                  to={href}
+                  onClick={(e) => {
+                        //e.preventDefault();
+                        scrollToSection(href.replace(/^.*#/, ""));
+                  }}
+                  className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
+                >
+                  {label}
+                </Link>
+              );
+                
+              }
 
-  return (
-    <Link
-      key={label}
-      to={href}
-      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-    >
-      {label}
-    </Link>
-  );
-})}
-
-
-
-
-            
+              return (
+                <Link
+                  key={label}
+                  to={href}
+                  className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </nav>
           <div className="hidden lg:block">
             {isMatchmakingPage ? (
@@ -160,14 +158,14 @@ const Navbar = () => {
                 to="/cities"
                 className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
-                <span>See More Cities</span>
+                <span>{t("navbar.see_more_cities", "See More Cities")}</span>
               </Link>
             ) : (
               <Link
                 to="/cities"
                 className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
-                <span>Meet Your Crew</span>
+                <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>
               </Link>
             )}
           </div>

@@ -137,7 +137,57 @@ export const translations = {
     
     "communities.signup.title": "Ready to Empower Your Community?",
     "communities.signup.description": "Take the first step towards creating a more connected, engaged community. Our team will reach out to discuss how we can work for your specific needs.",
-    "communities.signup.global": "Strengthening communities globally"
+    "communities.signup.global": "Strengthening communities globally",
+    
+    // Navbar translations
+    "navbar.home": "Home",
+    "navbar.how_it_works": "How it works",
+    "navbar.communities": "For Communities",
+    "navbar.about": "About Us",
+    "navbar.contact": "Contact",
+    "navbar.see_more_cities": "See More Cities",
+    "navbar.meet_your_crew": "Meet Your Crew",
+    
+    // How it works section
+    "how_it_works.subtitle": "How It Works",
+    "how_it_works.title": "Making Friends Shouldn't be Hard",
+    "how_it_works.cta": "Get Matched Now",
+    
+    // Steps for main page
+    "steps.get_matched.title": "Get Matched",
+    "steps.get_matched.description": "We'll match you with a small group of like-minded people.",
+    "steps.break_ice.title": "Break the Ice",
+    "steps.break_ice.description": "Chat with fellow group members, guided by our conversation starters.",
+    "steps.meet_up.title": "Plan a Meetup\n—Just Show Up",
+    "steps.meet_up.description": "Our AI helps you find the perfect time and activity that works for everyone.",
+    "steps.grow_friendships.title": "Grow the Friendships",
+    "steps.grow_friendships.description": "One hangout's just the beginning.\nWe'll help you keeep the momentum going\n—so new connections turn into real friends.",
+    
+    // Share callout section
+    "share_callout.title": "Spread the word",
+    "share_callout.description": "Share Pulse with friends and help grow your local crew.",
+    
+    // Footer translations
+    "footer.about_description": "Reimagining how we make friends by turning digital connection into effortless Real-Life community.",
+    "footer.app_store": "App Store",
+    "footer.play_store": "Play Store",
+    "footer.company": "Company",
+    "footer.home": "Home",
+    "footer.how_it_works": "How It Works",
+    "footer.for_communities": "For Communities",
+    "footer.about_us": "About Us",
+    "footer.contact": "Contact",
+    "footer.blog": "Blog",
+    "footer.cities": "Cities",
+    "footer.view_all_cities": "View all cities",
+    "footer.contact_title": "Contact",
+    "footer.download_on": "Download on the",
+    "footer.app_store_full": "App Store",
+    "footer.get_it_on": "Get it on",
+    "footer.google_play": "Google Play",
+    "footer.copyright": "Pulse App. All rights reserved.",
+    "footer.privacy_policy": "Privacy Policy",
+    "footer.terms_of_service": "Terms of Service"
   },
   es: {
     // Hero section translations
@@ -273,7 +323,57 @@ export const translations = {
     
     "communities.signup.title": "¿Listo para Empoderar Tu Comunidad?",
     "communities.signup.description": "Da el primer paso hacia la creación de una comunidad más conectada y comprometida. Nuestro equipo se comunicará contigo para discutir cómo podemos trabajar para tus necesidades específicas.",
-    "communities.signup.global": "Fortaleciendo comunidades globalmente"
+    "communities.signup.global": "Fortaleciendo comunidades globalmente",
+    
+    // Navbar translations
+    "navbar.home": "Inicio",
+    "navbar.how_it_works": "Cómo funciona",
+    "navbar.communities": "Para Comunidades",
+    "navbar.about": "Sobre Nosotros",
+    "navbar.contact": "Contacto",
+    "navbar.see_more_cities": "Ver Más Ciudades",
+    "navbar.meet_your_crew": "Conoce a Tu Grupo",
+    
+    // How it works section
+    "how_it_works.subtitle": "Cómo Funciona",
+    "how_it_works.title": "Hacer Amigos No Debería Ser Difícil",
+    "how_it_works.cta": "Emparéjate Ahora",
+    
+    // Steps for main page
+    "steps.get_matched.title": "Emparéjate",
+    "steps.get_matched.description": "Te emparejaremos con un pequeño grupo de personas afines.",
+    "steps.break_ice.title": "Rompe el Hielo",
+    "steps.break_ice.description": "Chatea con los miembros del grupo, guiado por nuestros iniciadores de conversación.",
+    "steps.meet_up.title": "Planea una Reunión\n—Solo Preséntate",
+    "steps.meet_up.description": "Nuestra IA te ayuda a encontrar el tiempo y la actividad perfectos que funcionen para todos.",
+    "steps.grow_friendships.title": "Haz Crecer las Amistades",
+    "steps.grow_friendships.description": "Un encuentro es solo el comienzo.\nTe ayudaremos a mantener el impulso\n—para que las nuevas conexiones se conviertan en amigos reales.",
+    
+    // Share callout section
+    "share_callout.title": "Corre la voz",
+    "share_callout.description": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local.",
+    
+    // Footer translations
+    "footer.about_description": "Reimaginando cómo hacemos amigos al convertir la conexión digital en una comunidad en la vida real sin esfuerzo.",
+    "footer.app_store": "App Store",
+    "footer.play_store": "Play Store",
+    "footer.company": "Empresa",
+    "footer.home": "Inicio",
+    "footer.how_it_works": "Cómo Funciona",
+    "footer.for_communities": "Para Comunidades",
+    "footer.about_us": "Sobre Nosotros",
+    "footer.contact": "Contacto",
+    "footer.blog": "Blog",
+    "footer.cities": "Ciudades",
+    "footer.view_all_cities": "Ver todas las ciudades",
+    "footer.contact_title": "Contacto",
+    "footer.download_on": "Descarga en la",
+    "footer.app_store_full": "App Store",
+    "footer.get_it_on": "Consíguelo en",
+    "footer.google_play": "Google Play",
+    "footer.copyright": "Pulse App. Todos los derechos reservados.",
+    "footer.privacy_policy": "Política de Privacidad",
+    "footer.terms_of_service": "Términos de Servicio"
   },
   // Add more languages as needed
 };
@@ -282,4 +382,3 @@ export const fetchTranslations = async (lang: string) => {
   // In a real app, this would fetch from an API
   return translations[lang as keyof typeof translations] || translations.en;
 };
-

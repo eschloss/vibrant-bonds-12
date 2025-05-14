@@ -1,97 +1,94 @@
+
 import { Link, useLocation } from "react-router-dom";
-import { UserPlus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 interface MobileNavLinksProps {
   closeMenu: () => void;
-  scrollToSection: (sectionId: string) => boolean;
+  scrollToSection: (id: string) => boolean;
   isMatchmakingPage: boolean;
 }
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "For Communities", href: "/communities" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-const MobileNavLinks = ({
-  closeMenu,
-  scrollToSection,
-  isMatchmakingPage,
-}: MobileNavLinksProps) => {
+const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: MobileNavLinksProps) => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/" || /^\/cities\/[^/]+$/.test(location.pathname);
+  const isHomePage = location.pathname === "/";
+  const { t } = useTranslation();
+
+  // Translated nav links
+  const navLinks = [
+    { label: t("navbar.home", "Home"), href: "/" },
+    { label: t("navbar.how_it_works", "How it works"), href: "/#how-it-works" },
+    { label: t("navbar.communities", "For Communities"), href: "/communities" },
+    { label: t("navbar.about", "About Us"), href: "/about" },
+    { label: t("navbar.contact", "Contact"), href: "/contact" },
+  ];
 
   return (
-    <nav className="flex flex-col items-center gap-8 p-8 h-full overflow-y-auto overflow-x-hidden">
-      {navLinks.map(({ label, href }) => {
-        const isHashLink = href.includes("#");
-        const scrollTarget = href.replace(/^.*#/, "");
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col space-y-6">
+        {navLinks.map(({ label, href }, idx) => {
+          const isHashLink = href.includes("#");
 
-        if (isHashLink) {
-          if (isHomePage) {
+          if (isHashLink && isHomePage) {
             return (
               <a
-                key={label}
+                key={idx}
                 href={href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection(scrollTarget);
                   closeMenu();
+                  const sectionId = href.replace(/^.*#/, "");
+                  scrollToSection(sectionId);
                 }}
-                className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
+                className="text-xl font-semibold hover:text-pulse-pink"
               >
                 {label}
               </a>
             );
-          } else {
-            return (
-              <Link
-                key={label}
-                to={href}
-                onClick={() => {
-                  scrollToSection(scrollTarget);
-                  closeMenu();
-                }}
-                className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
-              >
-                {label}
-              </Link>
-            );
           }
-        }
 
-        return (
-          <Link
-            key={label}
-            to={href}
-            className="text-2xl font-medium transition-colors duration-300 ease-in-out hover:text-[#FF2688]"
-            onClick={closeMenu}
-          >
-            {label}
-          </Link>
-        );
-      })}
+          return (
+            <Link
+              key={idx}
+              to={href}
+              onClick={() => {
+                closeMenu();
+                if (isHashLink) {
+                  const sectionId = href.replace(/^.*#/, "");
+                  scrollToSection(sectionId);
+                }
+              }}
+              className="text-xl font-semibold hover:text-pulse-pink"
+            >
+              {label}
+            </Link>
+          );
+        })}
 
-      {isMatchmakingPage ? (
-        <Link
-          to="/cities"
-          className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
-          onClick={closeMenu}
-        >
-          <span>See More Cities</span>
-        </Link>
-      ) : (
-        <Link
-          to="/cities"
-          className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-white px-6 py-3 rounded-full flex items-center gap-2 mt-4 shadow-lg shadow-[#FF2688]/20 font-medium"
-          onClick={closeMenu}
-        >
-          <span>Meet Your Crew</span>
-        </Link>
-      )}
-    </nav>
+        <div className="pt-6">
+          {isMatchmakingPage ? (
+            <Link
+              to="/cities"
+              onClick={closeMenu}
+              className="inline-flex bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+            >
+              <span>{t("navbar.see_more_cities", "See More Cities")}</span>
+            </Link>
+          ) : (
+            <Link
+              to="/cities"
+              onClick={closeMenu}
+              className="inline-flex bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+            >
+              <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>
+              <ArrowRight size={16} />
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

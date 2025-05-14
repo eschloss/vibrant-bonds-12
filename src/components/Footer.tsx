@@ -1,9 +1,14 @@
+
 import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
+  
   const cities = ["London", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
   
   return <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
@@ -19,22 +24,21 @@ const Footer = () => {
           {/* Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Column 1: About */}
-          <div>
-            <h3 className="text-xl font-display font-bold mb-4 flex items-center">
-              <img 
-                alt="Pulse Logo" 
-                className="h-24 md:h-28 object-contain" 
-                src="https://s.kikiapp.eu/img/pulse_logo.png" 
-              />
-            </h3>
-            <p className="text-white/70 text-sm mb-4">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</p>
+            <div>
+              <h3 className="text-xl font-display font-bold mb-4 flex items-center">
+                <img 
+                  alt="Pulse Logo" 
+                  className="h-24 md:h-28 object-contain" 
+                  src="https://s.kikiapp.eu/img/pulse_logo.png" 
+                />
+              </h3>
+              <p className="text-white/70 text-sm mb-4">
+                <Text id="footer.about_description" className="">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</Text>
+              </p>
               <div className="flex space-x-3 mb-4">
                 <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Instagram size={18} />
                 </a>
-                {/*<a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-purple-400 transition-colors">
-                  <Twitter size={18} />
-                 </a>*/}
                 <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Facebook size={18} />
                 </a>
@@ -47,47 +51,49 @@ const Footer = () => {
               <div className="flex space-x-2">
                 <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded-md text-xs">
                   <Apple size={12} className="mr-1" />
-                  App Store
+                  <Text id="footer.app_store" className="">App Store</Text>
                 </a>
                 <a href="https://play.google.com/store/apps/details?id=eu.kikiapp.kiki" target="_blank" rel="noopener noreferrer" className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded-md text-xs">
                   <Play size={12} className="mr-1" />
-                  Play Store
+                  <Text id="footer.play_store" className="">Play Store</Text>
                 </a>
               </div>
             </div>
 
             {/* Column 2: Company */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">Company</h3>
+              <h3 className="text-white text-lg font-bold mb-4">
+                <Text id="footer.company" className="">Company</Text>
+              </h3>
               <ul className="space-y-2">
                 <li>
                   <Link to="/" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Home
+                    <Text id="footer.home" className="">Home</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to="/matchmaking" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    How It Works
+                    <Text id="footer.how_it_works" className="">How It Works</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to="/communities" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    For Communities
+                    <Text id="footer.for_communities" className="">For Communities</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to="/about" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    About Us
+                    <Text id="footer.about_us" className="">About Us</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to="/contact" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Contact
+                    <Text id="footer.contact" className="">Contact</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to="/blog" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Blog
+                    <Text id="footer.blog" className="">Blog</Text>
                   </Link>
                 </li>
               </ul>
@@ -95,7 +101,9 @@ const Footer = () => {
 
             {/* Column 3: Cities */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">Cities</h3>
+              <h3 className="text-white text-lg font-bold mb-4">
+                <Text id="footer.cities" className="">Cities</Text>
+              </h3>
               <ul className="grid grid-cols-2 gap-2">
                 {cities.map((city, i) => <li key={i}>
                     <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
@@ -105,7 +113,7 @@ const Footer = () => {
                   </li>)}
                 <li className="col-span-2 mt-2">
                   <Link to="/cities" className=" text-pulse-pink hover:text-pulse-pink-300 text-sm font-medium transition-colors">
-                    View all cities
+                    <Text id="footer.view_all_cities" className="">View all cities</Text>
                   </Link>
                 </li>
               </ul>
@@ -113,7 +121,9 @@ const Footer = () => {
 
             {/* Column 4: Contact */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">Contact</h3>
+              <h3 className="text-white text-lg font-bold mb-4">
+                <Text id="footer.contact_title" className="">Contact</Text>
+              </h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <Mail size={16} className="text-pulse-pink mt-1 mr-2" />
@@ -130,15 +140,23 @@ const Footer = () => {
                 <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
                   <Apple size={18} className="text-white" />
                   <div className="flex flex-col">
-                    <span className="text-xs text-white/70">Download on the</span>
-                    <span className="text-sm font-medium">App Store</span>
+                    <span className="text-xs text-white/70">
+                      <Text id="footer.download_on" className="">Download on the</Text>
+                    </span>
+                    <span className="text-sm font-medium">
+                      <Text id="footer.app_store_full" className="">App Store</Text>
+                    </span>
                   </div>
                 </a>
                 <a href="https://play.google.com/store/apps/details?id=eu.kikiapp.kiki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
                   <Play size={18} className="text-white" />
                   <div className="flex flex-col">
-                    <span className="text-xs text-white/70">Get it on</span>
-                    <span className="text-sm font-medium">Google Play</span>
+                    <span className="text-xs text-white/70">
+                      <Text id="footer.get_it_on" className="">Get it on</Text>
+                    </span>
+                    <span className="text-sm font-medium">
+                      <Text id="footer.google_play" className="">Google Play</Text>
+                    </span>
                   </div>
                 </a>
               </div>
@@ -158,15 +176,15 @@ const Footer = () => {
           delay: 0.2
         }} className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-white/50 text-sm mb-4 md:mb-0">
-              &copy; {currentYear} Pulse App. All rights reserved.
+              &copy; {currentYear} <Text id="footer.copyright" className="">Pulse App. All rights reserved.</Text>
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="https://legal.pulsenow.app/privacy.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
-                Privacy Policy
+                <Text id="footer.privacy_policy" className="">Privacy Policy</Text>
               </Link>
               <Link to="https://legal.pulsenow.app/terms.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
-                Terms of Service
+                <Text id="footer.terms_of_service" className="">Terms of Service</Text>
               </Link>
             </div>
           </motion.div>
