@@ -181,7 +181,7 @@ const CityMatchmakingTemplate = ({
         </Link>
          {state && (
     <div className="text-black mt-2 text-center">
-      {t("city.get_matched_in", "Get Matched in")} {cityName}, {state}
+      {cityName}, {state}
     </div>
   )}
          </div>
