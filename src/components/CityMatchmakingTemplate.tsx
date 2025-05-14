@@ -82,7 +82,6 @@ const CityMatchmakingTemplate = ({
 
     {/* Floating decorative elements (above background) */}
     <div className="absolute top-1/4 left-10 w-16 h-16 rounded-full bg-pulse-blue/30 animate-float z-20"></div>
-    <div className="absolute bottom-1/4 right-10 w-24 h-24 rounded-full bg-pulse-purple/30 animate-pulse-slow z-20"></div>
     <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-pulse-teal/30 animate-bounce-gentle z-20"></div>
     <div className="absolute top-2/3 left-1/4 w-20 h-20 rounded-full bg-pulse-coral/20 animate-float-reverse z-20"></div>
     <div className="absolute top-1/2 right-1/3 w-8 h-8 rounded-full bg-pulse-blue/20 animate-spin-slow z-20"></div>
