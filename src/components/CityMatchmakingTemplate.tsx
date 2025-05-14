@@ -392,33 +392,6 @@ const CityMatchmakingTemplate = ({
 
       <ShareSection />
       
-     {showLanguageSelector && (
-  <div className="flex items-center gap-2">
-    <Select
-      defaultValue={currentLanguage}
-      onValueChange={(value) => {
-        if (value !== currentLanguage) {
-          window.location.href = getLanguageUrl(value);
-        }
-      }}
-    >
-      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
-        <div className="flex items-center gap-2">
-          <Globe size={16} className="text-white/70" />
-          <SelectValue />
-        </div>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
-        {language && language !== "en" && (
-          <SelectItem value={language}>
-            {`${getLanguageLabel(language)}`}
-          </SelectItem>
-        )}
-      </SelectContent>
-    </Select>
-  </div>
-)}
 
     </motion.div>
   </div>
