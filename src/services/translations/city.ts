@@ -45,6 +45,8 @@ export const city = {
     "citylist.worldwide": "Worldwide",
     "citylist.your_city_next": "Your city's next—Lead the way!",
     "citylist.clear_filters": "Clear Filters",
+    "citylist.error": "Error",
+    "citylist.fetch_error": "Failed to fetch cities. Please try again later.",
   },
   es: {
     // City page translations
@@ -91,5 +93,7 @@ export const city = {
     "citylist.worldwide": "Mundial",
     "citylist.your_city_next": "Tu ciudad es la siguiente—¡Lidera el camino!",
     "citylist.clear_filters": "Borrar Filtros",
+    "citylist.error": "Error",
+    "citylist.fetch_error": "No se pudieron obtener las ciudades. Por favor, inténtalo más tarde.",
   }
 };
