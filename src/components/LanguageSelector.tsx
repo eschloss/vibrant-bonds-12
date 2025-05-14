@@ -17,7 +17,7 @@ interface LanguageSelectorProps {
 const LanguageSelector = ({ 
   language, 
   variant = "light",
-  width = "120px" 
+  width = "200px"  // Wider to avoid wrapping
 }: LanguageSelectorProps) => {
   const { currentLanguage } = useLanguage();
 
@@ -57,8 +57,6 @@ const LanguageSelector = ({
     }
   };
 
-  // Style helpers
-  const borderColor = variant === "dark" ? "border-white/70" : "border-black/70";
   const textColor = variant === "dark" ? "text-white" : "text-black";
   const iconColor = variant === "dark" ? "text-white/70" : "text-black/70";
 
@@ -73,7 +71,7 @@ const LanguageSelector = ({
         }}
       >
         <SelectTrigger
-          className={`w-[160px] bg-transparent backdrop-blur-sm border ${borderColor} ${textColor}`}
+          className={`w-[200px] bg-transparent backdrop-blur-sm ${textColor} justify-start px-2`}
         >
           <div className="flex items-center gap-2">
             <Globe size={16} className={iconColor} />
@@ -81,10 +79,10 @@ const LanguageSelector = ({
           </div>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="en">{`${getLanguageLabel("en")}`}</SelectItem>
+          <SelectItem value="en">English Speakers</SelectItem>
           {language && language !== "en" && (
             <SelectItem value={language}>
-              {`${getLanguageLabel(language)}`}
+              {`${getLanguageLabel(language)} Speakers`}
             </SelectItem>
           )}
         </SelectContent>
