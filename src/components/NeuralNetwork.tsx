@@ -63,7 +63,7 @@ const NeuralNetwork = () => {
             variants={fadeInUp} 
             className="text-3xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-md py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
           >
-            {t("neural.heading", "Find Your")} <span className="pulse-gradient-text">{t("neural.heading", "Perfect Friend Group")}</span>
+            {t("neural.heading1", "Find Your")} <span className="pulse-gradient-text">{t("neural.heading2", "Perfect Friend Group")}</span>
           </motion.h2>
           
           <motion.p 
