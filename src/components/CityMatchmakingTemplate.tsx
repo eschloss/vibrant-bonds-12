@@ -88,7 +88,7 @@ const CityMatchmakingTemplate = ({
     {/* Conditionally rendered custom background image */}
     {image && image !== "" && (
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-80"
+        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
         style={{
           backgroundImage: `url(https://${image})`
         }}
