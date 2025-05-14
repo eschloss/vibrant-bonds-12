@@ -47,7 +47,7 @@ const TeamSection = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
-              key={member.nameKey}
+              key={t(member.nameKey, "")}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -56,14 +56,14 @@ const TeamSection = () => {
             >
               <div className="aspect-square mb-6 overflow-hidden rounded-xl">
                 <img 
-                  alt={t(member.nameKey)} 
+                  alt={t(member.nameKey, "")} 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
                   src={member.image}
                 />
               </div>
-              <h3 className="text-xl font-bold mb-2">{t(member.nameKey)}</h3>
-              <p className="text-gray-300 mb-4">{t(member.roleKey)}</p>
-              <p className="text-sm text-gray-400">{t(member.bioKey)}</p>
+              <h3 className="text-xl font-bold mb-2">{t(member.nameKey, "")}</h3>
+              <p className="text-gray-300 mb-4">{t(member.roleKey, "")}</p>
+              <p className="text-sm text-gray-400">{t(member.bioKey, "")}</p>
             </motion.div>
           ))}
 
