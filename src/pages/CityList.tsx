@@ -11,16 +11,21 @@ import { Input } from "@/components/ui/input";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import CityCard from "@/components/CityCard";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type City = {
   en_name: string;
+  es_name?: string;
   url2: string;
   en_country: string;
+  es_country?: string;
   en_state?: string;
+  es_state?: string;
 };
 
 const CityList = () => {
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
   const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -43,17 +48,44 @@ const CityList = () => {
     fetchCities();
   }, []);
 
+  // Helper function to get the correct name, country, or state based on the current language
+  const getLocalizedField = (city: City, field: 'name' | 'country' | 'state') => {
+    if (currentLanguage === 'es') {
+      switch (field) {
+        case 'name':
+          return city.es_name || city.en_name;
+        case 'country':
+          return city.es_country || city.en_country;
+        case 'state':
+          return city.es_state || city.en_state;
+      }
+    } else {
+      switch (field) {
+        case 'name':
+          return city.en_name;
+        case 'country':
+          return city.en_country;
+        case 'state':
+          return city.en_state;
+      }
+    }
+  };
+
   useEffect(() => {
     let result = allCities;
     if (searchTerm) {
-      result = result.filter(city => city.en_name.toLowerCase().includes(searchTerm.toLowerCase()) || city.en_state?.toLowerCase().includes(searchTerm.toLowerCase()));
+      result = result.filter(city => {
+        const cityName = getLocalizedField(city, 'name')?.toLowerCase() || '';
+        const cityState = getLocalizedField(city, 'state')?.toLowerCase() || '';
+        return cityName.includes(searchTerm.toLowerCase()) || cityState.includes(searchTerm.toLowerCase());
+      });
     }
     if (selectedCountry && selectedCountry !== "all-countries") {
-      result = result.filter(city => city.en_country === selectedCountry);
+      result = result.filter(city => getLocalizedField(city, 'country') === selectedCountry);
     }
     setFilteredCities(result);
 
-    const matchingCountries = new Set(result.map(city => city.en_country));
+    const matchingCountries = new Set(result.map(city => getLocalizedField(city, 'country')));
 
     setOpenCountries(prev => {
       const updated = { ...prev };
@@ -64,13 +96,13 @@ const CityList = () => {
 
       if (searchTerm) {
         matchingCountries.forEach(country => {
-          updated[country] = true;
+          if (country) updated[country] = true;
         });
       }
 
       return updated;
     });
-  }, [searchTerm, selectedCountry, allCities]);
+  }, [searchTerm, selectedCountry, allCities, currentLanguage]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -80,10 +112,18 @@ const CityList = () => {
     }
   }, []);
 
-  const countries = Array.from(new Set(allCities.map(city => city.en_country))).sort();
+  // Get unique countries in the correct language
+  const countries = Array.from(
+    new Set(allCities.map(city => getLocalizedField(city, 'country')))
+  ).filter(Boolean).sort();
+
+  // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
-    if (!acc[city.en_country]) acc[city.en_country] = [];
-    acc[city.en_country].push(city);
+    const countryName = getLocalizedField(city, 'country');
+    if (!countryName) return acc;
+    
+    if (!acc[countryName]) acc[countryName] = [];
+    acc[countryName].push(city);
     return acc;
   }, {});
 
@@ -206,9 +246,9 @@ const CityList = () => {
                             <motion.div key={city.url2} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                               transition={{ duration: 0.5, delay: index * 0.05 }}>
                               <CityCard
-                                name={city.en_name}
-                                state={city.en_state}
-                                description={t("citylist.connect_with_friends", "Connect with friends in") + " " + city.en_name}
+                                name={getLocalizedField(city, 'name') || ''}
+                                state={getLocalizedField(city, 'state')}
+                                description={t("citylist.connect_with_friends", "Connect with friends in") + " " + (getLocalizedField(city, 'name') || '')}
                                 link={`/cities${city.url2}`}
                               />
                             </motion.div>
@@ -249,3 +289,4 @@ const CityList = () => {
     </div>;
 };
 export default CityList;
+
