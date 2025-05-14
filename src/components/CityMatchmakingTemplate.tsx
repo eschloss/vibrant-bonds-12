@@ -166,9 +166,6 @@ const CityMatchmakingTemplate = ({
               delay: 0.4,
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-
-{/* Language Selector */}
-        <LanguageSelector language={language} variant="light" />
         
        <Link 
            to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
@@ -182,6 +179,9 @@ const CityMatchmakingTemplate = ({
             <ArrowRight size={18} />
           </Button>
         </Link>
+
+        {/* Language Selector */}
+        <LanguageSelector language={language} variant="light" />
         
         
       </motion.div>
@@ -244,8 +244,7 @@ const CityMatchmakingTemplate = ({
               
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                 
-                    {/* Language Selector - Second Location */}
-               <LanguageSelector language={language} variant="dark" />
+         
                 
                 <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : ''}`}>
                   <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
@@ -254,7 +253,8 @@ const CityMatchmakingTemplate = ({
                   </Button>
                 </Link>
 
-            
+                       {/* Language Selector - Second Location */}
+               <LanguageSelector language={language} variant="dark" />
               </div>
           </div>
         </section>}
