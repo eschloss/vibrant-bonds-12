@@ -7,7 +7,7 @@ export const team = {
     "team.join": "Join Our Team",
     "team.get_in_touch": "Get in Touch",
     
-    "team.eric.name": "Eric Bennett",
+    "team.eric.name": "Eric Schlossberg",
     "team.eric.role": "Founder",
     "team.eric.bio": "Former opera singer turned software engineer. Built products for Amazon, Google, and Volvo.",
     
@@ -30,7 +30,7 @@ export const team = {
     "team.join": "Únete a Nuestro Equipo",
     "team.get_in_touch": "Ponte en Contacto",
     
-    "team.eric.name": "Eric Bennett",
+    "team.eric.name": "Eric Schlossberg",
     "team.eric.role": "Fundador",
     "team.eric.bio": "Ex cantante de ópera convertido en ingeniero de software. Construyó productos para Amazon, Google y Volvo.",
     
