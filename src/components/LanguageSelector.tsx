@@ -60,55 +60,51 @@ const LanguageSelector = ({
   };
 
   // Get language display name
-  const getLanguageLabel = (code: string) => {
-    switch (code) {
-      case "en":
-        return "English";
-      case "es":
-        return "Español";
-      case "fr":
-        return "Français";
-      case "de":
-        return "Deutsch";
-      case "pt":
-        return "Português";
-      default:
-        return code.toUpperCase();
-    }
-  };
+const getLanguageLabel = (code: string) => {
+  switch (code) {
+    case "en":
+      return "English Speakers";
+    case "es":
+      return "Hablantes de Español";
+    case "fr":
+      return "Francophones";
+    case "de":
+      return "Deutschsprachige";
+    case "pt":
+      return "Falantes de Português";
+    // Add more as needed
+    default:
+      return code.toUpperCase();
+  }
+};
+
 
   return (
-    <div className="flex items-center gap-2">
-      <Select 
-        defaultValue={currentLanguage}
-        onValueChange={(value) => {
-          if (value !== currentLanguage) {
-            window.location.href = getLanguageUrl(value);
-          }
-        }}
-      >
-        <SelectTrigger 
-          className={`w-[${width}] ${
-            variant === "light" 
-              ? "bg-white/90 backdrop-blur-sm border border-gray-200" 
-              : "bg-white/10 backdrop-blur-sm border border-white/30 text-white"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            <Globe size={16} className={variant === "light" ? "text-gray-500" : "text-white/70"} />
-            <SelectValue placeholder={currentLanguage.toUpperCase()} />
-          </div>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="en">{getLanguageLabel("en")}</SelectItem>
-          {language && language !== "en" && (
-            <SelectItem value={language}>
-              {getLanguageLabel(language)}
-            </SelectItem>
-          )}
-        </SelectContent>
-      </Select>
-    </div>
+  <div className="flex items-center gap-2">
+    <Select
+      defaultValue={currentLanguage}
+      onValueChange={(value) => {
+        if (value !== currentLanguage) {
+          window.location.href = getLanguageUrl(value);
+        }
+      }}
+    >
+      <SelectTrigger className="w-[160px] bg-white/10 backdrop-blur-sm border border-white/30 text-black">
+        <div className="flex items-center gap-2">
+          <Globe size={16} className="text-white/70" />
+          <SelectValue />
+        </div>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="en">English Speakers</SelectItem>
+        {language && language !== "en" && (
+          <SelectItem value={language}>
+            {`${getLanguageLabel(language)} Speakers`}
+          </SelectItem>
+        )}
+      </SelectContent>
+    </Select>
+  </div>
   );
 };
 
