@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Outlet } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
+import LanguageSelector from "@/components/LanguageSelector";
 
 const AppLayout = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -15,6 +16,7 @@ const AppLayout = () => {
           <Outlet />
         </div>
       </ScrollArea>
+      <LanguageSelector />
     </div>
   );
 };

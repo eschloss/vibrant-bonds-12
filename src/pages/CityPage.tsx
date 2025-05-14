@@ -46,7 +46,7 @@ const CityPage = () => {
           country: matchedCity[countryField] || matchedCity.en_country,
           state: matchedCity[stateField] || matchedCity.en_state,
           code: matchedCity.code,
-          image: matchedCity.image
+          image: matchedCity.image,
         });
 
         window.scrollTo(0, 0);
