@@ -70,9 +70,10 @@ const LanguageSelector = ({
           }
         }}
       >
-        <SelectTrigger
-          className={`w-[200px] bg-transparent backdrop-blur-sm ${textColor} justify-start px-2`}
-        >
+<SelectTrigger
+  className={`w-[200px] bg-transparent backdrop-blur-sm ${textColor} justify-start px-2 border-none shadow-none outline-none ring-0`}
+>
+
           <div className="flex items-center gap-2">
             <Globe size={16} className={iconColor} />
             <SelectValue />
