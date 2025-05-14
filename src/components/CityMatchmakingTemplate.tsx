@@ -96,9 +96,10 @@ const CityMatchmakingTemplate = ({
     {/* Conditionally rendered custom background image */}
     {image && image !== "" && (
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
+        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50 animate-fade-in"
         style={{
-          backgroundImage: `url(https://${image})`
+          backgroundImage: `url(https://${image})`,
+              animation: "fadeIn 1s ease-in-out forwards"
         }}
       />
     )}
