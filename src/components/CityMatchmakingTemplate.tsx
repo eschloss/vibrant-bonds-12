@@ -174,13 +174,12 @@ const CityMatchmakingTemplate = ({
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
               {t("city.get_matched_in", "Get Matched in")} {cityName}
-              {/*{state ? `, ${state}` : ""}*/}
             </span>
             <ArrowRight size={18} />
           </Button>
         </Link>
          {state && (
-    <div className="text-black mt-2 text-center">
+    <div className="text-sm text-black/60 mt-2 text-center font-light">
       {cityName}, {state}
     </div>
   )}
