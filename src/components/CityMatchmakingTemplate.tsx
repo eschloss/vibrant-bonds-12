@@ -61,17 +61,22 @@ const CityMatchmakingTemplate = ({
 
       <main className="flex-grow">
         <section className="relative py-32 overflow-hidden">
-  {image && image !== "" ? <>
-      <div className="absolute inset-0 -z-5 bg-cover bg-center blur-sm" style={{
-            backgroundImage: `url(https://${image})`
-          }} />
-      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-    </> : <>
-      <div className="absolute inset-0 -z-5 bg-cover bg-center blur-sm" style={{
-            backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)`
-          }} />
-      <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
-    </>}
+          <>
+            {/* Default background - always rendered */}
+            <div className="absolute inset-0 -z-6 bg-cover bg-center blur-sm" style={{
+              backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)`
+            }} />
+          
+            {/* Custom image - conditionally rendered above default */}
+            {image && image !== "" && (
+              <div className="absolute inset-0 -z-5 bg-cover bg-center blur-sm opacity-80" style={{
+                backgroundImage: `url(https://${image})`
+              }} />
+            )}
+          
+            {/* Gradient overlay - always rendered on top */}
+            <div className="absolute inset-0 -z-4 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
+          </>
 
   {/* 🧠 Gradient overlay to increase readability */}
   <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-white via-white/70 to-transparent z-0 pointer-events-none" />
