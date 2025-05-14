@@ -86,6 +86,25 @@ const CityMatchmakingTemplate = ({
     return urlObj.toString();
   };
 
+  const getLanguageLabel = (code: string) => {
+    switch (code) {
+      case "en":
+        return "English";
+      case "es":
+        return "Español";
+      case "fr":
+        return "Français";
+      case "de":
+        return "Deutsch";
+      case "pt":
+        return "Português";
+      // Add more as needed
+      default:
+        return code.toUpperCase();
+    }
+  };
+
+
   // Translate the steps
   const steps = [{
     icon: Users,
@@ -374,9 +393,9 @@ const CityMatchmakingTemplate = ({
 
       <ShareSection />
       
-      {/* Language Selector - Third Location */}
+      {/* Language Selector - Second Location */}
       {showLanguageSelector && (
-        <div className="flex justify-center mt-8">
+        <div className="flex items-center gap-2">
           <Select 
             defaultValue={currentLanguage}
             onValueChange={(value) => {
@@ -385,17 +404,17 @@ const CityMatchmakingTemplate = ({
               }
             }}
           >
-            <SelectTrigger className="w-[120px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
+            <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
               <div className="flex items-center gap-2">
                 <Globe size={16} className="text-white/70" />
-                <SelectValue placeholder={currentLanguage.toUpperCase()} />
+                <SelectValue placeholder={`${getLanguageLabel(currentLanguage)} Speaking Group`} />
               </div>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="en">English Speaking Group</SelectItem>
               {language && language !== "en" && (
                 <SelectItem value={language}>
-                  {language === "es" ? "Español" : language.toUpperCase()}
+                  {`${getLanguageLabel(language)} Speaking Group`}
                 </SelectItem>
               )}
             </SelectContent>
