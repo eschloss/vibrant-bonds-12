@@ -8,39 +8,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 
-// Define our unique icebreaker characters
-const icebreakers = [{
+// Define our unique icebreaker characters with translation keys
+const getIcebreakers = (t) => [{
   id: "baba-yaga",
-  name: "Baba Yaga",
-  tagline: "Choose Your Own Adventure",
+  name: t("icebreakers.characters.baba_yaga.name", "Baba Yaga"),
+  tagline: t("icebreakers.characters.baba_yaga.tagline", "Choose Your Own Adventure"),
   avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
-  message: "Welcome, little wanderer. The mushrooms are watching. The shadows are bored. Pick someone here and invent a magical creature you two discovered while lost in my forest. Give it a name. Quick!"
+  message: t("icebreakers.characters.baba_yaga.message", "Welcome, little wanderer. The mushrooms are watching. The shadows are bored. Pick someone here and invent a magical creature you two discovered while lost in my forest. Give it a name. Quick!")
 }, {
   id: "mother-flawless",
-  name: "Mother Flawless",
-  tagline: "Toast or Roast",
+  name: t("icebreakers.characters.mother_flawless.name", "Mother Flawless"),
+  tagline: t("icebreakers.characters.mother_flawless.tagline", "Toast or Roast"),
   avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
-  message: "Alright, darlings. I'm choosing someone in this room—and when I do, I'm either going to crown you with praise or roast you to ashes. Buckle up."
+  message: t("icebreakers.characters.mother_flawless.message", "Alright, darlings. I'm choosing someone in this room—and when I do, I'm either going to crown you with praise or roast you to ashes. Buckle up.")
 }, {
   id: "judge-snooty",
-  name: "Judge Snooty",
-  tagline: "Chaos Courtroom",
+  name: t("icebreakers.characters.judge_snooty.name", "Judge Snooty"),
+  tagline: t("icebreakers.characters.judge_snooty.tagline", "Chaos Courtroom"),
   avatar: "/lovable-uploads/4511f010-fca9-4375-992c-dba8555e7191.png",
   color: "from-amber-500 to-amber-700",
   bgColor: "bg-amber-500/20",
-  message: "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?"
+  message: t("icebreakers.characters.judge_snooty.message", "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?")
 }, {
   id: "sherlock",
-  name: "Sherlock Holmes",
-  tagline: "Two Truths and a Lie",
+  name: t("icebreakers.characters.sherlock.name", "Sherlock Holmes"),
+  tagline: t("icebreakers.characters.sherlock.tagline", "Two Truths and a Lie"),
   avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
   color: "from-blue-600 to-blue-800",
   bgColor: "bg-blue-600/20",
-  message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
+  message: t("icebreakers.characters.sherlock.message", "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie.")
 }];
 
 const CharacterCard = ({ character }) => {
@@ -73,6 +73,7 @@ const CharacterCard = ({ character }) => {
 
 const AiIcebreakers = () => {
   const { t } = useTranslation();
+  const icebreakers = getIcebreakers(t);
   
   return (
     <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
@@ -102,7 +103,7 @@ const AiIcebreakers = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl"
           >
-            {t("icebreakers.heading", "Spark")} <span className="pulse-gradient-text">{t("icebreakers.heading", "Meaningful Conversations")}</span>
+            {t("icebreakers.heading1", "Spark")} <span className="pulse-gradient-text">{t("icebreakers.heading2", "Meaningful Conversations")}</span>
           </motion.h2>
           
           <motion.p 
