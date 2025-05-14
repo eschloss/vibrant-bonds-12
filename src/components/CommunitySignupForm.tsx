@@ -24,6 +24,15 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 
+// Create a type to represent our form values
+type FormValues = {
+  communityName: string;
+  name: string;
+  email: string;
+  communitySize: string;
+  agreeToTerms: boolean;
+}
+
 const CommunitySignupForm = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -38,8 +47,6 @@ const CommunitySignupForm = () => {
       message: t("community.validation.terms", "You must agree to our terms and privacy policy")
     })
   });
-
-  export type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
