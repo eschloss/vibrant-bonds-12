@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type CityParam = {
   cityName: string;
@@ -10,6 +11,7 @@ type CityParam = {
 const QueerCityPage = () => {
   const { cityName } = useParams<CityParam>();
   const navigate = useNavigate();
+  const { currentLanguage } = useLanguage();
   const [cityData, setCityData] = useState<{ 
     name: string; 
     country: string; 
@@ -35,10 +37,15 @@ const QueerCityPage = () => {
           return;
         }
 
+        // Use Spanish city data if language is Spanish, otherwise English
+        const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
+        const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
+        const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
+
         setCityData({
-          name: matchedCity.en_name,
-          country: matchedCity.en_country,
-          state: matchedCity.en_state,
+          name: matchedCity[nameField] || matchedCity.en_name, // Fallback to English if Spanish not available
+          country: matchedCity[countryField] || matchedCity.en_country,
+          state: matchedCity[stateField] || matchedCity.en_state,
           code: matchedCity.code,
           image: matchedCity.image
         });
@@ -54,7 +61,7 @@ const QueerCityPage = () => {
     if (cityName) {
       fetchCities();
     }
-  }, [cityName, navigate]);
+  }, [cityName, navigate, currentLanguage]);
 
   if (!cityData) return null;
 
