@@ -24,21 +24,22 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const formSchema = z.object({
-  communityName: z.string().min(2, "Community name must be at least 2 characters"),
-  name: z.string().min(2, "Your name is required"),
-  email: z.string().email("Invalid email address"),
-  communitySize: z.string().min(1, "Please select a community size"),
-  agreeToTerms: z.boolean().refine(val => val === true, {
-    message: "You must agree to our terms and privacy policy"
-  })
-});
-
-export type FormValues = z.infer<typeof formSchema>;
-
 const CommunitySignupForm = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+
+  // Create the form schema with translated validation messages
+  const formSchema = z.object({
+    communityName: z.string().min(2, t("community.validation.community_name", "Community name must be at least 2 characters")),
+    name: z.string().min(2, t("community.validation.name", "Your name is required")),
+    email: z.string().email(t("community.validation.email", "Invalid email address")),
+    communitySize: z.string().min(1, t("community.validation.community_size", "Please select a community size")),
+    agreeToTerms: z.boolean().refine(val => val === true, {
+      message: t("community.validation.terms", "You must agree to our terms and privacy policy")
+    })
+  });
+
+  export type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),

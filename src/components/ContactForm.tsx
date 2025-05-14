@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,25 +11,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters"
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address"
-  }),
-  phone: z.string().optional(),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters"
-  }),
-  agreeToTerms: z.boolean().refine(val => val === true, {
-    message: "You must agree to our terms and privacy policy"
-  })
-});
-type FormValues = z.infer<typeof formSchema>;
-
 const ContactForm = () => {
   const { t } = useTranslation();
+
+  // Create the form schema with translated validation messages
+  const formSchema = z.object({
+    name: z.string().min(2, {
+      message: t("contact.validation.name", "Name must be at least 2 characters")
+    }),
+    email: z.string().email({
+      message: t("contact.validation.email", "Please enter a valid email address")
+    }),
+    phone: z.string().optional(),
+    message: z.string().min(10, {
+      message: t("contact.validation.message", "Message must be at least 10 characters")
+    }),
+    agreeToTerms: z.boolean().refine(val => val === true, {
+      message: t("contact.validation.terms", "You must agree to our terms and privacy policy")
+    })
+  });
+  
+  type FormValues = z.infer<typeof formSchema>;
   const { toast } = useToast();
 
   const form = useForm<FormValues>({

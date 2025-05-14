@@ -37,6 +37,12 @@ export const contact = {
     "contact.faq.answer4": "Pulse is currently free to use. Stay tuned—our premium membership is coming soon, with access to events, priority matching, and exclusive experiences.",
     "contact.faq.question5": "How do meet‑ups actually happen?",
     "contact.faq.answer5": "Once your group chat is underway and the gamemasters have warmed things up, an assistant suggests hangouts based on shared interests and everyone's availability. Anyone in the group can accept a suggestion or propose something new.",
+    
+    // Validation Messages
+    "contact.validation.name": "Name must be at least 2 characters",
+    "contact.validation.email": "Please enter a valid email address",
+    "contact.validation.message": "Message must be at least 10 characters",
+    "contact.validation.terms": "You must agree to our terms and privacy policy"
   },
   es: {
     // Contact page
@@ -75,5 +81,11 @@ export const contact = {
     "contact.faq.answer4": "Pulse es actualmente gratuito. Mantente atento—nuestra membresía premium llegará pronto, con acceso a eventos, emparejamiento prioritario y experiencias exclusivas.",
     "contact.faq.question5": "¿Cómo suceden realmente las reuniones?",
     "contact.faq.answer5": "Una vez que tu chat grupal está en marcha y los maestros del juego han calentado la atmósfera, un asistente sugiere encuentros basados en intereses compartidos y la disponibilidad de todos. Cualquiera en el grupo puede aceptar una sugerencia o proponer algo nuevo.",
+    
+    // Validation Messages
+    "contact.validation.name": "El nombre debe tener al menos 2 caracteres",
+    "contact.validation.email": "Por favor, ingresa un correo electrónico válido",
+    "contact.validation.message": "El mensaje debe tener al menos 10 caracteres",
+    "contact.validation.terms": "Debes aceptar nuestros términos y política de privacidad"
   }
 };

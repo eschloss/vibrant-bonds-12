@@ -61,7 +61,14 @@ export const communities = {
     "community.toast.success.title": "Submitted!",
     "community.toast.success.description": "We'll be in touch soon.",
     "community.toast.error.title": "Oops!",
-    "community.toast.error.description": "We couldn't process your submission."
+    "community.toast.error.description": "We couldn't process your submission.",
+    
+    // Validation Messages
+    "community.validation.community_name": "Community name must be at least 2 characters",
+    "community.validation.name": "Your name is required",
+    "community.validation.email": "Invalid email address",
+    "community.validation.community_size": "Please select a community size",
+    "community.validation.terms": "You must agree to our terms and privacy policy"
   },
   es: {
     // Communities page
@@ -124,6 +131,13 @@ export const communities = {
     "community.toast.success.title": "¡Enviado!",
     "community.toast.success.description": "Nos pondremos en contacto pronto.",
     "community.toast.error.title": "¡Ups!",
-    "community.toast.error.description": "No pudimos procesar tu envío."
+    "community.toast.error.description": "No pudimos procesar tu envío.",
+    
+    // Validation Messages
+    "community.validation.community_name": "El nombre de la comunidad debe tener al menos 2 caracteres",
+    "community.validation.name": "Tu nombre es obligatorio",
+    "community.validation.email": "Dirección de correo electrónico inválida",
+    "community.validation.community_size": "Por favor selecciona un tamaño de comunidad",
+    "community.validation.terms": "Debes aceptar nuestros términos y política de privacidad"
   }
 };
