@@ -180,7 +180,7 @@ const CityMatchmakingTemplate = ({
         </Link>
         
         {/* Language Selector */}
-        {showLanguageSelector & (<LanguageSelector language={language} variant="light" />)}
+        {showLanguageSelector && <LanguageSelector language={language} variant="light" />}
       </motion.div>
     </motion.div>
   </div>
@@ -248,7 +248,7 @@ const CityMatchmakingTemplate = ({
                 </Link>
 
                 {/* Language Selector - Second Location */}
-               {showLanguageSelector & (<LanguageSelector language={language} variant="dark" />)}
+               {showLanguageSelector && <LanguageSelector language={language} variant="dark" />}
               </div>
           </div>
         </section>}
