@@ -47,7 +47,7 @@ const TeamSection = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
-              key={t(member.nameKey, str(index))}
+              key={t(member.nameKey, index.toString())}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
