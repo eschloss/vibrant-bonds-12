@@ -330,34 +330,33 @@ const CityMatchmakingTemplate = ({
                 </Button>
                 </Link>
 
-                {/* Language Selector - Second Location */}
-                {showLanguageSelector && (
-                  <div className="flex items-center gap-2">
-                    <Select 
-                      defaultValue={currentLanguage}
-                      onValueChange={(value) => {
-                        if (value !== currentLanguage) {
-                          window.location.href = getLanguageUrl(value);
-                        }
-                      }}
-                    >
-                      <SelectTrigger className="w-[120px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
-                        <div className="flex items-center gap-2">
-                          <Globe size={16} className="text-white/70" />
-                          <SelectValue placeholder={currentLanguage.toUpperCase()} />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="en">English</SelectItem>
-                        {language && language !== "en" && (
-                          <SelectItem value={language}>
-                            {language === "es" ? "Español" : language.toUpperCase()}
-                          </SelectItem>
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
+    {showLanguageSelector && (
+  <div className="flex items-center gap-2">
+    <Select
+      defaultValue={currentLanguage}
+      onValueChange={(value) => {
+        if (value !== currentLanguage) {
+          window.location.href = getLanguageUrl(value);
+        }
+      }}
+    >
+      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
+        <div className="flex items-center gap-2">
+          <Globe size={16} className="text-white/70" />
+          <SelectValue />
+        </div>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
+        {language && language !== "en" && (
+          <SelectItem value={language}>
+            {`${getLanguageLabel(language)}`}
+          </SelectItem>
+        )}
+      </SelectContent>
+    </Select>
+  </div>
+)}
               </div>
           </div>
         </section>}
@@ -393,8 +392,7 @@ const CityMatchmakingTemplate = ({
 
       <ShareSection />
       
-      {/* Language Selector - Second Location */}
-      {showLanguageSelector && (
+     {showLanguageSelector && (
   <div className="flex items-center gap-2">
     <Select
       defaultValue={currentLanguage}
@@ -404,17 +402,17 @@ const CityMatchmakingTemplate = ({
         }
       }}
     >
-      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-black">
+      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
         <div className="flex items-center gap-2">
           <Globe size={16} className="text-white/70" />
           <SelectValue />
         </div>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">English Speaking Group</SelectItem>
+        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
         {language && language !== "en" && (
           <SelectItem value={language}>
-            {`${getLanguageLabel(language)} Speaking Group`}
+            {`${getLanguageLabel(language)}`}
           </SelectItem>
         )}
       </SelectContent>
