@@ -180,7 +180,7 @@ const CityMatchmakingTemplate = ({
         </Link>
         
         {/* Language Selector */}
-        <LanguageSelector language={language} variant="light" />
+        {showLanguageSelector & (<LanguageSelector language={language} variant="light" />)}
       </motion.div>
     </motion.div>
   </div>
@@ -248,7 +248,7 @@ const CityMatchmakingTemplate = ({
                 </Link>
 
                 {/* Language Selector - Second Location */}
-                <LanguageSelector language={language} variant="dark" />
+               {showLanguageSelector & (<LanguageSelector language={language} variant="dark" />)}
               </div>
           </div>
         </section>}
@@ -284,10 +284,6 @@ const CityMatchmakingTemplate = ({
 
       <ShareSection />
       
-      {/* Language Selector - Third Location */}
-      <div className="mt-8 flex justify-center">
-        <LanguageSelector language={language} variant="dark" />
-      </div>
     </motion.div>
   </div>
 </section>
