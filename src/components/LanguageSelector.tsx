@@ -58,7 +58,7 @@ const LanguageSelector = ({
   };
 
   const textColor = variant === "dark" ? "text-white" : "text-black";
-  const iconColor = variant === "dark" ? "text-white/70" : "text-black/70";
+  const iconColor = variant === "dark" ? "text-white" : "text-black";
 
   return (
     <div className="flex items-center gap-2">
