@@ -11,13 +11,13 @@ export const team = {
     "team.eric.role": "Founder, Engineering & Strategy",
     "team.eric.bio": "",
     
-    "team.sarah.name": "Stian Hansen",
-    "team.sarah.role": "Product & Growth",
-    "team.sarah.bio": "",
+    "team.stian.name": "Stian Hansen",
+    "team.stian.role": "Product & Growth",
+    "team.stian.bio": "",
     
-    "team.miguel.name": "Pedro Corchado",
-    "team.miguel.role": "Marketing & Communications",
-    "team.miguel.bio": "",
+    "team.pedro.name": "Pedro Corchado",
+    "team.pedro.role": "Marketing & Communications",
+    "team.pedro.bio": "",
   },
   es: {
     // Team members translations
@@ -30,12 +30,12 @@ export const team = {
     "team.eric.role": "Fundador, Ingeniería y Estrategia",
     "team.eric.bio": "",
     
-    "team.sarah.name": "Stian Hansen",
-    "team.sarah.role": "Producto y Crecimiento",
-    "team.sarah.bio": "",
+    "team.stian.name": "Stian Hansen",
+    "team.stian.role": "Producto y Crecimiento",
+    "team.stian.bio": "",
     
-    "team.miguel.name": "Pedro Corchado",
-    "team.miguel.role": "Marketing y Comunicaciones",
-    "team.miguel.bio": "",
+    "team.pedro.name": "Pedro Corchado",
+    "team.pedro.role": "Marketing y Comunicaciones",
+    "team.pedro.bio": "",
   }
 };

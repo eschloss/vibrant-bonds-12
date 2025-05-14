@@ -15,22 +15,16 @@ const TeamSection = () => {
       image: "/lovable-uploads/bd8cf463-4a58-4a21-8681-90c958baf08a.jpg"
     },
     {
-      nameKey: "team.sarah.name",
-      roleKey: "team.sarah.role",
-      bioKey: "team.sarah.bio",
+      nameKey: "team.stian.name",
+      roleKey: "team.stian.role",
+      bioKey: "team.stian.bio",
       image: "/lovable-uploads/a26a7983-2c55-4dca-8d85-5b0d8154c5a8.jpg"
     },
     {
-      nameKey: "team.miguel.name",
-      roleKey: "team.miguel.role",
-      bioKey: "team.miguel.bio",
+      nameKey: "team.pedro.name",
+      roleKey: "team.pedro.role",
+      bioKey: "team.pedro.bio",
       image: "/lovable-uploads/e59e2f5f-3b38-4156-b86e-fe05d138962f.jpg"
-    },
-    {
-      nameKey: "team.aisha.name", 
-      roleKey: "team.aisha.role",
-      bioKey: "team.aisha.bio",
-      image: "/lovable-uploads/6c2d1f54-0f4e-431e-9cef-97783bc29b11.png"
     }
   ];
 
