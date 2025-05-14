@@ -8,16 +8,16 @@ export const team = {
     "team.get_in_touch": "Get in Touch",
     
     "team.eric.name": "Eric Schlossberg",
-    "team.eric.role": "Founder",
-    "team.eric.bio": "Former opera singer turned software engineer. Built products for Amazon, Google, and Volvo.",
+    "team.eric.role": "Founder, Engineering & Strategy",
+    "team.eric.bio": "",
     
-    "team.sarah.name": "Sarah Johnson",
-    "team.sarah.role": "Head of Community",
-    "team.sarah.bio": "Community builder with a background in psychology and event planning. Created thriving communities for startups and established brands alike.",
+    "team.sarah.name": "Stian Hansen",
+    "team.sarah.role": "Product & Growth",
+    "team.sarah.bio": "",
     
-    "team.miguel.name": "Miguel Rodriguez",
-    "team.miguel.role": "Senior Engineer",
-    "team.miguel.bio": "AI specialist with expertise in matching algorithms and neural networks. Previously at Match.com and Bumble.",
+    "team.miguel.name": "Pedro Corchado",
+    "team.miguel.role": "Marketing & Communications",
+    "team.miguel.bio": "",
     
     "team.aisha.name": "Aisha Patel",
     "team.aisha.role": "Marketing Director",
