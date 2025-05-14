@@ -6,6 +6,7 @@ export const team = {
     "team.description": "Meet the people building the future of social connection",
     "team.join": "Join Our Team",
     "team.get_in_touch": "Get in Touch",
+    "team.join_subtitle": "We're looking for bold, curious minds to help us bring people together.",
     
     "team.eric.name": "Eric Schlossberg",
     "team.eric.role": "Founder, Engineering & Strategy",
@@ -25,6 +26,8 @@ export const team = {
     "team.description": "Conoce a las personas que construyen el futuro de la conexión social",
     "team.join": "Únete a Nuestro Equipo",
     "team.get_in_touch": "Ponte en Contacto",
+    "team.join_subtitle": "Buscamos personas valientes y curiosas que nos ayuden a unir a otras.",
+
     
     "team.eric.name": "Eric Schlossberg",
     "team.eric.role": "Fundador, Ingeniería y Estrategia",
