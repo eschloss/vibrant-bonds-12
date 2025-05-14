@@ -166,6 +166,7 @@ const CityMatchmakingTemplate = ({
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 items-center justify-center">
         
+       <div className="flex flex-col items-center">
        <Link 
            to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
          >
@@ -178,6 +179,12 @@ const CityMatchmakingTemplate = ({
             <ArrowRight size={18} />
           </Button>
         </Link>
+         {state && (
+    <div className="text-black mt-2 text-center">
+      {t("city.get_matched_in", "Get Matched in")} {cityName}, {state}
+    </div>
+  )}
+         </div>
 
         {/* Language Selector */}
         <LanguageSelector language={language} variant="light" />
