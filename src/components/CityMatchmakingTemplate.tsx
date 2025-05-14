@@ -89,15 +89,15 @@ const CityMatchmakingTemplate = ({
   const getLanguageLabel = (code: string) => {
     switch (code) {
       case "en":
-        return "English";
+        return "English Speakers";
       case "es":
-        return "Español";
+        return "Hablantes de Español";
       case "fr":
-        return "Français";
+        return "Francophones";
       case "de":
-        return "Deutsch";
+        return "Deutschsprachige";
       case "pt":
-        return "Português";
+        return "Falantes de Português";
       // Add more as needed
       default:
         return code.toUpperCase();
@@ -230,7 +230,7 @@ const CityMatchmakingTemplate = ({
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
               {t("city.get_matched_in", "Get Matched in")} {cityName}
-              <br/>{state ? `, ${state}` : ""}
+              {/*{state ? `, ${state}` : ""}*/}
             </span>
             <ArrowRight size={18} />
           </Button>
@@ -253,10 +253,10 @@ const CityMatchmakingTemplate = ({
         </div>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">English Speaking Group</SelectItem>
+        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
         {language && language !== "en" && (
           <SelectItem value={language}>
-            {`${getLanguageLabel(language)} Speaking Group`}
+            {`${getLanguageLabel(language)}`}
           </SelectItem>
         )}
       </SelectContent>
