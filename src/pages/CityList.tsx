@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import CityCard from "@/components/CityCard";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type City = {
   en_name: string;
@@ -18,6 +20,7 @@ type City = {
 };
 
 const CityList = () => {
+  const { t } = useTranslation();
   const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -120,10 +123,10 @@ const CityList = () => {
             duration: 0.7
           }} className="text-center max-w-3xl mx-auto mb-16 my-[20px]">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                Meet New Friends in <span className="pulse-gradient-text">Your City</span>
+                {t("citylist.title", "Meet New Friends in")} <span className="pulse-gradient-text">{t("citylist.your_city", "Your City")}</span>
               </h1>
               <p className="text-xl text-foreground/80 font-light">
-                Select your city to connect with like-minded people near you.
+                {t("citylist.description", "Select your city to connect with like-minded people near you.")}
               </p>
             </motion.div>
 
@@ -146,10 +149,10 @@ const CityList = () => {
                     />
                     <Input
                       ref={searchInputRef}
-                      placeholder="Search cities, states, or provinces…"
+                      placeholder={t("citylist.search_placeholder", "Search cities, states, or provinces…")}
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
-                      aria-label="Search cities or states"
+                      aria-label={t("citylist.search_label", "Search cities or states")}
                       className={
                         "pl-10 bg-gray-800/50 border-2 border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md placeholder:text-[#8E9196] transition-colors"
                       }
@@ -160,12 +163,12 @@ const CityList = () => {
                 <div className="w-full md:w-40">
                   <Select value={selectedCountry} onValueChange={setSelectedCountry}>
                     <SelectTrigger className="bg-gray-800/50 border-2 border-[#38D1BF] focus:border-[#38D1BF] focus:ring-0 text-white rounded-md transition-colors">
-                      <SelectValue placeholder="All Countries" />
+                      <SelectValue placeholder={t("citylist.all_countries", "All Countries")} />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border border-[#38D1BF] text-white rounded-md z-50">
                       <SelectItem value="all-countries"
                         className="data-[state=checked]:bg-[#38D1BF] data-[state=checked]:text-black transition-colors">
-                        All Countries
+                        {t("citylist.all_countries", "All Countries")}
                       </SelectItem>
                       {countries.map(country => (
                         <SelectItem
@@ -194,7 +197,7 @@ const CityList = () => {
                         className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
                         <h2 className="text-xl font-bold text-white">{country}</h2>
                         <div className="ml-auto px-3 py-1 bg-[#38D1BF]/10 rounded-full text-sm text-[#38D1BF] font-medium">
-                          {cities.length} {cities.length === 1 ? "city" : "cities"}
+                          {cities.length} {cities.length === 1 ? t("citylist.city", "city") : t("citylist.cities", "cities")}
                         </div>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -205,7 +208,7 @@ const CityList = () => {
                               <CityCard
                                 name={city.en_name}
                                 state={city.en_state}
-                                description={`Connect with friends in ${city.en_name}`}
+                                description={t("citylist.connect_with_friends", "Connect with friends in") + " " + city.en_name}
                                 link={`/cities${city.url2}`}
                               />
                             </motion.div>
@@ -219,9 +222,9 @@ const CityList = () => {
                     <div className="max-w-2xl mx-auto mb-8">
                       <div>
                         <CityCard
-                          name="Can't find your city?"
-                          state="Worldwide"
-                          description="Your city’s next—Lead the way!"
+                          name={t("citylist.cant_find_city", "Can't find your city?")}
+                          state={t("citylist.worldwide", "Worldwide")}
+                          description={t("citylist.your_city_next", "Your city's next—Lead the way!")}
                           link="/matchmaking"
                         />
                       </div>
@@ -234,7 +237,7 @@ const CityList = () => {
                         setSelectedCountry("");
                       }}
                     >
-                      Clear Filters
+                      {t("citylist.clear_filters", "Clear Filters")}
                     </Button>
                   </div>
                 )}

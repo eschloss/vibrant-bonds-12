@@ -5,8 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FAQItem from "@/components/FAQItem";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Contact = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
@@ -29,9 +32,9 @@ const Contact = () => {
           }} transition={{
             duration: 0.5
           }} className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Get in Touch</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t("contact.hero.title", "Get in Touch")}</h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              {t("contact.hero.description", "We'd love to hear from you. Send us a message and we'll respond as soon as possible.")}
             </p>
           </motion.div>
         </div>
@@ -52,7 +55,7 @@ const Contact = () => {
             }} transition={{
               duration: 0.6
             }} className="bg-gray-800/30 p-8 md:p-10 rounded-2xl border border-gray-700/50">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">Contact Information</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("contact.info.title", "Contact Information")}</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -60,7 +63,7 @@ const Contact = () => {
                     <Mail className="h-6 w-6 text-pulse-pink" />
                   </div>
                   <div>
-                    <h3 className="font-medium mb-1">Email Us</h3>
+                    <h3 className="font-medium mb-1">{t("contact.info.email.title", "Email Us")}</h3>
                     <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-pulse-pink transition-colors">
                       contact@pulsenow.app
                     </a>
@@ -71,7 +74,7 @@ const Contact = () => {
                     <MapPin className="h-6 w-6 text-pulse-pink" />
                   </div>
                   <div>
-                    <h3 className="font-medium mb-1">Visit Us</h3>
+                    <h3 className="font-medium mb-1">{t("contact.info.visit.title", "Visit Us")}</h3>
                     <address className="text-gray-300 not-italic">
                       The Roux Institute<br/>
                       100 Fore St<br />
@@ -81,7 +84,7 @@ const Contact = () => {
                 </div>
               </div>
               <div className="mt-10">
-                <h3 className="text-xl font-bold mb-4">Follow Us</h3>
+                <h3 className="text-xl font-bold mb-4">{t("contact.info.follow.title", "Follow Us")}</h3>
                 <div className="flex gap-4">
                   <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-pink-600 p-3 rounded-full transition-colors" aria-label="Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -118,7 +121,7 @@ const Contact = () => {
               delay: 0.2
             }}>
               <div className="bg-gray-800/30 p-8 md:p-10 rounded-2xl border border-gray-700/50">
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">Send a Message</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("contact.form.title", "Send a Message")}</h2>
                 <ContactForm />
               </div>
             </motion.div>
@@ -139,41 +142,41 @@ const Contact = () => {
           }} transition={{
             duration: 0.6
           }} className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t("contact.faq.title", "Frequently Asked Questions")}</h2>
             <p className="text-xl text-gray-300">
-              Find answers to the most common questions about Pulse.
+              {t("contact.faq.description", "Find answers to the most common questions about Pulse.")}
             </p>
           </motion.div>
           <div className="max-w-4xl mx-auto">
             <div className="grid gap-6">
               {[{
-                  question: "What exactly is Pulse?",
+                  question: t("contact.faq.question1", "What exactly is Pulse?"),
                   answer: (
-                    <>Pulse is a new friendgroup-making tool. You complete a short questionnaire, and the system places you in a private group chat with six to twelve people who share similar interests. Automated assistants start the conversation and suggest simple meet‑ups, helping the group move from chat to an in‑person hangout without the usual planning hassle.</>
+                    <>{t("contact.faq.answer1", "Pulse is a new friendgroup-making tool. You complete a short questionnaire, and the system places you in a private group chat with six to twelve people who share similar interests. Automated assistants start the conversation and suggest simple meet‑ups, helping the group move from chat to an in-person hangout without the usual planning hassle.")}</>
                   ),
                 },
                 {
-                  question: "How does the friend matching work?",
+                  question: t("contact.faq.question2", "How does the friend matching work?"),
                   answer: (
-                    <>Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.</>
+                    <>{t("contact.faq.answer2", "Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.")}</>
                   ),
                 },
                 {
-                  question: "Is Pulse available in my city?",
+                  question: t("contact.faq.question3", "Is Pulse available in my city?"),
                   answer: (
-                    <>Pulse is currently available in select cities across the US and Europe, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.</>
+                    <>{t("contact.faq.answer3", "Pulse is currently available in select cities across the US and Europe, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.")}</>
                   ),
                 },
                 {
-                  question: "How much does Pulse cost?",
+                  question: t("contact.faq.question4", "How much does Pulse cost?"),
                   answer: (
-                    <>Pulse is currently free to use. Stay tuned—our premium membership is coming soon, with access to events, priority matching, and exclusive experiences.</>
+                    <>{t("contact.faq.answer4", "Pulse is currently free to use. Stay tuned—our premium membership is coming soon, with access to events, priority matching, and exclusive experiences.")}</>
                   ),
                 },
                 {
-                  question: "How do meet‑ups actually happen?",
+                  question: t("contact.faq.question5", "How do meet‑ups actually happen?"),
                   answer: (
-                    <>Once your group chat is underway and the gamemasters have warmed things up, an assistant suggests hangouts based on shared interests and everyone's availability. Anyone in the group can accept a suggestion or propose something new.</>
+                    <>{t("contact.faq.answer5", "Once your group chat is underway and the gamemasters have warmed things up, an assistant suggests hangouts based on shared interests and everyone's availability. Anyone in the group can accept a suggestion or propose something new.")}</>
                   ),
                 },
               ].map((faq, idx) => (
