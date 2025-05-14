@@ -72,11 +72,6 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/matchmaking" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.how_it_works" className="">How It Works</Text>
-                  </Link>
-                </li>
-                <li>
                   <Link to="/communities" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.for_communities" className="">For Communities</Text>
                   </Link>
