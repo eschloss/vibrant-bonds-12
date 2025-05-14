@@ -23,7 +23,7 @@ const CityPage = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
+        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities_expanded");
         const data = await response.json();
 
         const matchedCity = data.find((city: any) =>
