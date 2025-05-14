@@ -11,6 +11,7 @@ import { TimerDisplay } from "./mission/TimerDisplay";
 import ShareSection from './ShareSection';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -30,6 +31,7 @@ const CityMatchmakingTemplate = ({
   isQueer
 }: CityMatchmakingTemplateProps) => {
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
 
   {
     image && <Helmet>
@@ -157,7 +159,9 @@ const CityMatchmakingTemplate = ({
               delay: 0.4,
               duration: 0.5
             }} className="flex flex-col sm:flex-row gap-4 justify-center">
-       <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}` : ''}`}>
+       <Link 
+           to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
+         >
           <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
