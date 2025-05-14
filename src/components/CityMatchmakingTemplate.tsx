@@ -69,7 +69,7 @@ const CityMatchmakingTemplate = ({
           
             {/* Custom image - conditionally rendered above default */}
             {image && image !== "" && (
-              <div className="absolute inset-0 -z-5 bg-cover bg-center blur-sm opacity-80" style={{
+              <div className="absolute inset-0 -z-5 bg-cover bg-center blur-sm opacity-60" style={{
                 backgroundImage: `url(https://${image})`
               }} />
             )}
