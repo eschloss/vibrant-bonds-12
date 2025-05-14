@@ -1,0 +1,47 @@
+
+export const contact = {
+  en: {
+    // Contact page
+    "contact.hero.title": "Get in Touch",
+    "contact.hero.description": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "contact.info.title": "Contact Information",
+    "contact.info.email.title": "Email Us",
+    "contact.info.visit.title": "Visit Us",
+    "contact.info.follow.title": "Follow Us",
+    "contact.form.title": "Send a Message",
+    "contact.faq.title": "Frequently Asked Questions",
+    "contact.faq.description": "Find answers to the most common questions about Pulse.",
+    "contact.faq.question1": "What exactly is Pulse?",
+    "contact.faq.answer1": "Pulse is a new friendgroup-making tool. You complete a short questionnaire, and the system places you in a private group chat with six to twelve people who share similar interests. Automated assistants start the conversation and suggest simple meet‑ups, helping the group move from chat to an in-person hangout without the usual planning hassle.",
+    "contact.faq.question2": "How does the friend matching work?",
+    "contact.faq.answer2": "Our matching algorithm considers your interests, values, and personality to connect you with like-minded individuals in your city. We focus on creating small groups of 8-12 people who are likely to form genuine connections.",
+    "contact.faq.question3": "Is Pulse available in my city?",
+    "contact.faq.answer3": "Pulse is currently available in select cities across the US and Europe, with new locations being added regularly. Check our Cities page to see if we're in your area yet, or to request that we expand to your city.",
+    "contact.faq.question4": "How much does Pulse cost?",
+    "contact.faq.answer4": "Pulse is currently free to use. Stay tuned—our premium membership is coming soon, with access to events, priority matching, and exclusive experiences.",
+    "contact.faq.question5": "How do meet‑ups actually happen?",
+    "contact.faq.answer5": "Once your group chat is underway and the gamemasters have warmed things up, an assistant suggests hangouts based on shared interests and everyone's availability. Anyone in the group can accept a suggestion or propose something new.",
+  },
+  es: {
+    // Contact page
+    "contact.hero.title": "Ponte en Contacto",
+    "contact.hero.description": "Nos encantaría saber de ti. Envíanos un mensaje y responderemos lo antes posible.",
+    "contact.info.title": "Información de Contacto",
+    "contact.info.email.title": "Envíanos un Email",
+    "contact.info.visit.title": "Visítanos",
+    "contact.info.follow.title": "Síguenos",
+    "contact.form.title": "Envía un Mensaje",
+    "contact.faq.title": "Preguntas Frecuentes",
+    "contact.faq.description": "Encuentra respuestas a las preguntas más comunes sobre Pulse.",
+    "contact.faq.question1": "¿Qué es exactamente Pulse?",
+    "contact.faq.answer1": "Pulse es una nueva herramienta para formar grupos de amigos. Completas un breve cuestionario, y el sistema te coloca en un chat grupal privado con seis a doce personas que comparten intereses similares. Asistentes automatizados inician la conversación y sugieren reuniones simples, ayudando al grupo a pasar del chat a un encuentro en persona sin la molestia habitual de planificar.",
+    "contact.faq.question2": "¿Cómo funciona el emparejamiento de amigos?",
+    "contact.faq.answer2": "Nuestro algoritmo de emparejamiento considera tus intereses, valores y personalidad para conectarte con personas afines en tu ciudad. Nos enfocamos en crear pequeños grupos de 8-12 personas que probablemente formen conexiones genuinas.",
+    "contact.faq.question3": "¿Está Pulse disponible en mi ciudad?",
+    "contact.faq.answer3": "Pulse está actualmente disponible en ciudades seleccionadas de EE.UU. y Europa, con nuevas ubicaciones agregándose regularmente. Consulta nuestra página de Ciudades para ver si ya estamos en tu área, o para solicitar que nos expandamos a tu ciudad.",
+    "contact.faq.question4": "¿Cuánto cuesta Pulse?",
+    "contact.faq.answer4": "Pulse es actualmente gratuito. Mantente atento—nuestra membresía premium llegará pronto, con acceso a eventos, emparejamiento prioritario y experiencias exclusivas.",
+    "contact.faq.question5": "¿Cómo suceden realmente las reuniones?",
+    "contact.faq.answer5": "Una vez que tu chat grupal está en marcha y los maestros del juego han calentado la atmósfera, un asistente sugiere encuentros basados en intereses compartidos y la disponibilidad de todos. Cualquiera en el grupo puede aceptar una sugerencia o proponer algo nuevo.",
+  }
+};

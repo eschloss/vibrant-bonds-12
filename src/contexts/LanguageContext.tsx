@@ -1,18 +1,19 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { translations } from "../services/languageService";
+import { fetchTranslations } from "../services/translations";
 
 interface LanguageContextType {
   currentLanguage: string;
   translate: (key: string, fallback: string) => string;
-  translations: Record<string, Record<string, string>>;
+  translations: Record<string, string>;
   isLoading: boolean;
+  changeLanguage?: (lang: string) => void; // For future use
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   currentLanguage: "en",
   translate: (_, fallback) => fallback,
-  translations,
+  translations: {},
   isLoading: false,
 });
 
@@ -24,7 +25,8 @@ interface LanguageProviderProps {
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
-  const [isLoading, setIsLoading] = useState(false);
+  const [translations, setTranslations] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const detectLanguage = () => {
@@ -35,7 +37,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
       if (subdomainParts.length > 1 && subdomainParts[0].length === 2) {
         const lang = subdomainParts[0].toLowerCase();
         // Only set if it's a supported language
-        if (translations[lang as keyof typeof translations]) {
+        if (["en", "es"].includes(lang)) {
           setCurrentLanguage(lang);
           return;
         }
@@ -47,11 +49,25 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     
     detectLanguage();
   }, []);
+  
+  useEffect(() => {
+    const loadTranslations = async () => {
+      setIsLoading(true);
+      try {
+        const translationData = await fetchTranslations(currentLanguage);
+        setTranslations(translationData);
+      } catch (error) {
+        console.error("Failed to load translations:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadTranslations();
+  }, [currentLanguage]);
 
   const translate = (key: string, fallback: string): string => {
-    const langTranslations = translations[currentLanguage as keyof typeof translations] || translations.en;
-    
-    return langTranslations[key] || fallback;
+    return translations[key] || fallback;
   };
 
   return (
