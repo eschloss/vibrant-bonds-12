@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
@@ -6,10 +7,13 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
+  
   const fadeInUp = {
     hidden: {
       opacity: 0,
@@ -40,23 +44,34 @@ const MissionCountdown = () => {
           <div className="text-center mb-8 sm:mb-12">
             <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
               <Timer className="w-4 h-4 text-pulse-purple" />
-              <span className="text-sm font-medium text-pulse-purple">Group Mission</span>
+              <span className="text-sm font-medium text-pulse-purple">
+                {t("mission_countdown.group_mission", "Group Mission")}
+              </span>
             </motion.div>
             
             <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
-              7 Day Mission<br/>to <span className="pulse-gradient-text">Meet in Real Life</span>
+              {t("mission_countdown.seven_day_mission", "7 Day Mission")}<br/>
+              {t("mission_countdown.to", "to")} <span className="pulse-gradient-text">
+                {t("mission_countdown.meet_in_real_life", "Meet in Real Life")}
+              </span>
             </h2>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your crew!</p>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">
+              {t("mission_countdown.description", "Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your crew!")}
+            </p>
           </div>
 
           <div className="flex flex-col gap-6">
             {/* First Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <div>
-                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Get Matched</h3>
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">
+                  {t("mission_countdown.get_matched", "Get Matched")}
+                </h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">Next friend match happens in...</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">
+                      {t("mission_countdown.next_friend_match", "Next friend match happens in...")}
+                    </h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
@@ -65,7 +80,7 @@ const MissionCountdown = () => {
                 <div className="mt-6">
                   <Link to="/cities">
                     <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
-                      <span>Get Matched Now</span>
+                      <span>{t("mission_countdown.get_matched_now", "Get Matched Now")}</span>
                     </Button>  
                   </Link>
                 </div>
@@ -75,10 +90,14 @@ const MissionCountdown = () => {
             {/* Second Mission Container */}
             <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-4 sm:p-6 md:p-8 text-center">
               <div>
-                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">Meet in Person</h3>
+                <h3 className="text-base font-medium text-white/70 uppercase tracking-wider mb-6 text-center">
+                  {t("mission_countdown.meet_in_person", "Meet in Person")}
+                </h3>
                 <div className="flex justify-center mb-4">
                   <div>
-                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">Countdown begins after joining a group.</h4>
+                    <h4 className="text-xl font-semibold text-white tracking-tight md:text-2xl">
+                      {t("mission_countdown.countdown_begins", "Countdown begins after joining a group.")}
+                    </h4>
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
