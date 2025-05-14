@@ -1,7 +1,3 @@
-
-// Mock translations for demonstration
-// In a real app, these would be loaded from a server or JSON files
-
 export const translations = {
   en: {
     // Hero section translations

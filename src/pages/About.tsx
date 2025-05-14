@@ -8,7 +8,6 @@ import TeamSection from "@/components/about/TeamSection";
 import FriendshipFormula from "@/components/about/FriendshipFormula";
 import MissionSection from "@/components/about/MissionSection";
 import CTASection from "@/components/about/CTASection";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
   useEffect(() => {

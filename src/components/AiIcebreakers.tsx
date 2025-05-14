@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -5,6 +6,7 @@ import { MessageSquare } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // Define our unique icebreaker characters
 const icebreakers = [{
@@ -22,7 +24,7 @@ const icebreakers = [{
   avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
-  message: "Alright, darlings. I’m choosing someone in this room—and when I do, I’m either going to crown you with praise or roast you to ashes. Buckle up."
+  message: "Alright, darlings. I'm choosing someone in this room—and when I do, I'm either going to crown you with praise or roast you to ashes. Buckle up."
 }, {
   id: "judge-snooty",
   name: "Judge Snooty",
@@ -40,10 +42,10 @@ const icebreakers = [{
   bgColor: "bg-blue-600/20",
   message: "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie."
 }];
-const CharacterCard = ({
-  character
-}) => {
-  return <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full py-0">
+
+const CharacterCard = ({ character }) => {
+  return (
+    <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full py-0">
       <CardContent className="p-6 my-0 py-[24px] px-[12px]">
         <div className="mb-4">
           <p className="text-gray-300 text-xl text-center my-0 py-0 px-[25px]">{character.tagline}</p>
@@ -64,13 +66,16 @@ const CharacterCard = ({
             </Avatar>
           </div>
         </div>
-
-        
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 const AiIcebreakers = () => {
-  return <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
+  const { t } = useTranslation();
+  
+  return (
+    <div className="relative w-full overflow-hidden bg-gray-900 py-16 md:py-24">
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
         <div className="absolute top-1/2 -right-24 w-72 h-72 rounded-full bg-blue-600 blur-3xl"></div>
@@ -79,86 +84,65 @@ const AiIcebreakers = () => {
       
       <div className="container relative z-10 px-4 md:px-6">
         <div className="text-center mb-12">
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5
-        }} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm"
+          >
             <MessageSquare className="w-4 h-4 text-pulse-purple" />
-            <span className="text-sm font-medium text-pulse-purple">AI Icebreakers</span>
+            <span className="text-sm font-medium text-pulse-purple">{t("icebreakers.title", "AI Icebreakers")}</span>
           </motion.div>
           
-          <motion.h2 initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5,
-          delay: 0.1
-        }} className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl">
-            Spark <span className="pulse-gradient-text">Meaningful Conversations</span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl"
+          >
+            {t("icebreakers.heading", "Spark")} <span className="pulse-gradient-text">{t("icebreakers.heading", "Meaningful Conversations")}</span>
           </motion.h2>
           
-          <motion.p initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5,
-          delay: 0.2
-        }} className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">
-            Each character brings a unique personality to break the ice and spark engaging conversations
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg text-gray-300 max-w-2xl mx-auto mb-10"
+          >
+            {t("icebreakers.description", "Each character brings a unique personality to break the ice and spark engaging conversations")}
           </motion.p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {icebreakers.map(character => <motion.div key={character.id} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.5,
-          delay: 0.3
-        }}>
+          {icebreakers.map(character => (
+            <motion.div 
+              key={character.id} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               <CharacterCard character={character} />
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
         
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.5,
-        delay: 0.5
-      }} className="flex justify-center mt-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex justify-center mt-12"
+        >
           <Link to="/matchmaking">
-            
           </Link>
         </motion.div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default AiIcebreakers;

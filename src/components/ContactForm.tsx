@@ -10,6 +10,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -29,6 +30,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -125,10 +127,10 @@ const ContactForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField control={form.control} name="name" render={({ field }) => (
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>{t("contact.form.name", "Name")}</FormLabel>
             <FormControl>
               <Input 
-                placeholder="Your name" 
+                placeholder={t("contact.form.name_placeholder", "Your name")}
                 {...field} 
                 className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
               />
@@ -138,10 +140,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="email" render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t("contact.form.email", "Email")}</FormLabel>
             <FormControl>
               <Input 
-                placeholder="Your email address" 
+                placeholder={t("contact.form.email_placeholder", "Your email address")}
                 type="email" 
                 {...field} 
                 className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
@@ -152,10 +154,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="phone" render={({ field }) => (
           <FormItem>
-            <FormLabel>Phone (optional)</FormLabel>
+            <FormLabel>{t("contact.form.phone", "Phone (optional)")}</FormLabel>
             <FormControl>
               <Input 
-                placeholder="Your phone number" 
+                placeholder={t("contact.form.phone_placeholder", "Your phone number")}
                 type="tel" 
                 {...field} 
                 className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
@@ -166,10 +168,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="message" render={({ field }) => (
           <FormItem>
-            <FormLabel>Message</FormLabel>
+            <FormLabel>{t("contact.form.message", "Message")}</FormLabel>
             <FormControl>
               <Textarea 
-                placeholder="What would you like to tell us?" 
+                placeholder={t("contact.form.message_placeholder", "What would you like to tell us?")}
                 {...field} 
                 className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500 min-h-[120px]" 
               />
@@ -188,7 +190,7 @@ const ContactForm = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                I agree to the <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> and <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                {t("contact.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("contact.form.agree_terms", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
               </FormLabel>
               <FormMessage />
             </div>
@@ -205,12 +207,12 @@ const ContactForm = () => {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Sending...
+              {t("contact.form.sending", "Sending...")}
             </span>
           ) : (
             <span className="flex items-center gap-2">
               <Send className="h-4 w-4" />
-              Send Message
+              {t("contact.form.submit", "Send Message")}
             </span>
           )}
         </Button>

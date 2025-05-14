@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,14 +22,14 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-
+import { useTranslation } from "@/hooks/useTranslation";
 
 const formSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
   name: z.string().min(2, "Your name is required"),
   email: z.string().email("Invalid email address"),
   communitySize: z.string().min(1, "Please select a community size"),
-    agreeToTerms: z.boolean().refine(val => val === true, {
+  agreeToTerms: z.boolean().refine(val => val === true, {
     message: "You must agree to our terms and privacy policy"
   })
 });
@@ -36,6 +37,7 @@ const formSchema = z.object({
 export type FormValues = z.infer<typeof formSchema>;
 
 const CommunitySignupForm = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -131,10 +133,10 @@ const CommunitySignupForm = () => {
           name="communityName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-gray-300">Community Name</FormLabel>
+              <FormLabel className="text-gray-300">{t("community.form.community_name", "Community Name")}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="e.g., Stanford Alumni Network"
+                  placeholder={t("community.form.community_name_placeholder", "e.g., Stanford Alumni Network")}
                   className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
@@ -149,11 +151,11 @@ const CommunitySignupForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-gray-300">Your Name</FormLabel>
+              <FormLabel className="text-gray-300">{t("community.form.your_name", "Your Name")}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Your full name"
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+                  placeholder={t("community.form.your_name_placeholder", "Your full name")}
+                  className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
               </FormControl>
@@ -167,12 +169,12 @@ const CommunitySignupForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-gray-300">Email</FormLabel>
+              <FormLabel className="text-gray-300">{t("community.form.email", "Email")}</FormLabel>
               <FormControl>
                 <Input
                   type="email"
-                  placeholder="your@email.com"
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+                  placeholder={t("community.form.email_placeholder", "your@email.com")}
+                  className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
                   {...field}
                 />
               </FormControl>
@@ -186,18 +188,18 @@ const CommunitySignupForm = () => {
           name="communitySize"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-gray-300">Community Size</FormLabel>
+              <FormLabel className="text-gray-300">{t("community.form.community_size", "Community Size")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger className="bg-gray-800 border-gray-700 text-white focus:ring-purple-500">
-                    <SelectValue placeholder="Select size..." />
+                    <SelectValue placeholder={t("community.form.select_size", "Select size...")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                  <SelectItem value="small">Small (50-500 members)</SelectItem>
-                  <SelectItem value="medium">Medium (500-2,000 members)</SelectItem>
-                  <SelectItem value="large">Large (2,000-10,000 members)</SelectItem>
-                  <SelectItem value="enterprise">Extra-Large (10,000+ members)</SelectItem>
+                  <SelectItem value="small">{t("community.form.small", "Small (50-500 members)")}</SelectItem>
+                  <SelectItem value="medium">{t("community.form.medium", "Medium (500-2,000 members)")}</SelectItem>
+                  <SelectItem value="large">{t("community.form.large", "Large (2,000-10,000 members)")}</SelectItem>
+                  <SelectItem value="enterprise">{t("community.form.xlarge", "Extra-Large (10,000+ members)")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-soft-gray" />
@@ -205,7 +207,7 @@ const CommunitySignupForm = () => {
           )}
         />
 
-<FormField control={form.control} name="agreeToTerms" render={({ field }) => (
+        <FormField control={form.control} name="agreeToTerms" render={({ field }) => (
           <FormItem className="flex flex-row items-start space-x-3 space-y-0">
             <FormControl>
               <Checkbox 
@@ -216,13 +218,12 @@ const CommunitySignupForm = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                I agree to the <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> and <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                {t("community.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("community.form.agree_terms", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
               </FormLabel>
               <FormMessage />
             </div>
           </FormItem>
         )} />
-        
 
         <Button
           type="submit"
@@ -251,10 +252,10 @@ const CommunitySignupForm = () => {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              Processing...
+              {t("community.form.processing", "Processing...")}
             </span>
           ) : (
-            <span>Get Started</span>
+            <span>{t("community.form.submit", "Get Started")}</span>
           )}
         </Button>
       </form>
