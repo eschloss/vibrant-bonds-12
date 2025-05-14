@@ -66,7 +66,10 @@ const CityMatchmakingTemplate = ({
       <Navbar />
 
       <main className="flex-grow">
-        <section className="relative py-32 overflow-hidden">
+        {/*<section className="relative py-32 overflow-hidden">*/}
+        <section className="relative flex items-center overflow-hidden section-padding bg-white dark:bg-white pt-32 md:pt-36 lg:pt-40">
+
+          
           <>
             {/* Default background - always rendered 
             <div className="absolute inset-0 -z-6 bg-cover bg-center blur-sm" style={{
