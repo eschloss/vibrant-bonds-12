@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer, Globe } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -12,13 +12,7 @@ import ShareSection from './ShareSection';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import LanguageSelector from "./LanguageSelector";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -53,57 +47,6 @@ const CityMatchmakingTemplate = ({
   // Determine if we need to show the language selector
   // Show when website language is not English OR when API language differs from current site language
   const showLanguageSelector = currentLanguage !== "en" || (language && language !== currentLanguage);
-
-  // Function to get URL for a specific language
-  const getLanguageUrl = (targetLang: string) => {
-    // Get current URL
-    const currentUrl = window.location.href;
-    const urlObj = new URL(currentUrl);
-    const hostname = urlObj.hostname;
-    
-    // Split the hostname into parts
-    const hostParts = hostname.split('.');
-    
-    // If target language is English, remove any language subdomain
-    if (targetLang === 'en') {
-      // If we have a subdomain that's a language code (2 letters), remove it
-      if (hostParts.length > 2 && hostParts[0].length === 2) {
-        const newHostname = hostParts.slice(1).join('.');
-        urlObj.hostname = newHostname;
-      }
-    } else {
-      // For non-English languages, add/replace the language subdomain
-      if (hostParts.length > 2 && hostParts[0].length === 2) {
-        // Replace existing language subdomain
-        hostParts[0] = targetLang;
-        urlObj.hostname = hostParts.join('.');
-      } else {
-        // Add language subdomain
-        urlObj.hostname = `${targetLang}.${hostname}`;
-      }
-    }
-    
-    return urlObj.toString();
-  };
-
-  const getLanguageLabel = (code: string) => {
-    switch (code) {
-      case "en":
-        return "English Speakers";
-      case "es":
-        return "Hablantes de Español";
-      case "fr":
-        return "Francophones";
-      case "de":
-        return "Deutschsprachige";
-      case "pt":
-        return "Falantes de Português";
-      // Add more as needed
-      default:
-        return code.toUpperCase();
-    }
-  };
-
 
   // Translate the steps
   const steps = [{
@@ -222,7 +165,7 @@ const CityMatchmakingTemplate = ({
             }} transition={{
               delay: 0.4,
               duration: 0.5
-            }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            }} className="flex flex-col sm:flex-row gap-4 items-center justify-center">
        <Link 
            to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
          >
@@ -236,34 +179,8 @@ const CityMatchmakingTemplate = ({
           </Button>
         </Link>
         
-        {showLanguageSelector && (
-  <div className="flex items-center gap-2">
-    <Select
-      defaultValue={currentLanguage}
-      onValueChange={(value) => {
-        if (value !== currentLanguage) {
-          window.location.href = getLanguageUrl(value);
-        }
-      }}
-    >
-      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
-        <div className="flex items-center gap-2">
-          <Globe size={16} className="text-white/70" />
-          <SelectValue />
-        </div>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
-        {language && language !== "en" && (
-          <SelectItem value={language}>
-            {`${getLanguageLabel(language)}`}
-          </SelectItem>
-        )}
-      </SelectContent>
-    </Select>
-  </div>
-)}
-
+        {/* Language Selector */}
+        <LanguageSelector language={language} variant="light" />
       </motion.div>
     </motion.div>
   </div>
@@ -322,41 +239,16 @@ const CityMatchmakingTemplate = ({
               </div>
               
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                 <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : ''}`}>
-                <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                  {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
-                  <ArrowRight size={18} />
-                </Button>
+                  <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                    {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
+                    <ArrowRight size={18} />
+                  </Button>
                 </Link>
 
-    {showLanguageSelector && (
-  <div className="flex items-center gap-2">
-    <Select
-      defaultValue={currentLanguage}
-      onValueChange={(value) => {
-        if (value !== currentLanguage) {
-          window.location.href = getLanguageUrl(value);
-        }
-      }}
-    >
-      <SelectTrigger className="w-[180px] bg-white/10 backdrop-blur-sm border border-white/30 text-white">
-        <div className="flex items-center gap-2">
-          <Globe size={16} className="text-white/70" />
-          <SelectValue />
-        </div>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en"> {`${getLanguageLabel("en")}`}</SelectItem>
-        {language && language !== "en" && (
-          <SelectItem value={language}>
-            {`${getLanguageLabel(language)}`}
-          </SelectItem>
-        )}
-      </SelectContent>
-    </Select>
-  </div>
-)}
+                {/* Language Selector - Second Location */}
+                <LanguageSelector language={language} variant="dark" />
               </div>
           </div>
         </section>}
@@ -392,7 +284,10 @@ const CityMatchmakingTemplate = ({
 
       <ShareSection />
       
-
+      {/* Language Selector - Third Location */}
+      <div className="mt-8 flex justify-center">
+        <LanguageSelector language={language} variant="dark" />
+      </div>
     </motion.div>
   </div>
 </section>
