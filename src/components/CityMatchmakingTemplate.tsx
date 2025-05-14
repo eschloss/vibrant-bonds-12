@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,8 @@ import { Helmet } from "react-helmet";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import ShareSection from './ShareSection';
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -18,28 +21,6 @@ interface CityMatchmakingTemplateProps {
   isQueer?: boolean;
 }
 
-const steps = [{
-  icon: Users,
-  title: "Get Matched",
-  description: "We'll match you with a small group of like-minded people.",
-  color: "bg-gradient-to-r from-pink-500 to-purple-600"
-}, {
-  icon: MessageSquare,
-  title: "Break the Ice",
-  description: "Chat with fellow group members, guided by our conversation starters and games.",
-  color: "bg-gradient-to-r from-blue-500 to-cyan-400"
-}, {
-  icon: CalendarDays,
-  title: "Meet Up in Real Life",
-  description: "We’ll handle the planning and logistics — simply show up and enjoy yourself.",
-  color: "bg-gradient-to-r from-indigo-400 to-blue-500"
-}, {
-  icon: Sprout,
-  title: "Grow the Friendships",
-  description: "After the initial meet, we'll help you grow your new connections.",
-  color: "bg-gradient-to-r from-green-400 to-emerald-500"
-}];
-
 const CityMatchmakingTemplate = ({
   cityName,
   code,
@@ -48,6 +29,8 @@ const CityMatchmakingTemplate = ({
   image,
   isQueer
 }: CityMatchmakingTemplateProps) => {
+  const { t } = useTranslation();
+
   {
     image && <Helmet>
     <link rel="preload" as="image" href={`https://${image}`} />
@@ -55,6 +38,29 @@ const CityMatchmakingTemplate = ({
   }
 
   const timeLeft = useCountdown();
+
+  // Translate the steps
+  const steps = [{
+    icon: Users,
+    title: t("city.steps.get_matched.title", "Get Matched"),
+    description: t("city.steps.get_matched.description", "We'll match you with a small group of like-minded people."),
+    color: "bg-gradient-to-r from-pink-500 to-purple-600"
+  }, {
+    icon: MessageSquare,
+    title: t("city.steps.break_ice.title", "Break the Ice"),
+    description: t("city.steps.break_ice.description", "Chat with fellow group members, guided by our conversation starters and games."),
+    color: "bg-gradient-to-r from-blue-500 to-cyan-400"
+  }, {
+    icon: CalendarDays,
+    title: t("city.steps.meet_up.title", "Meet Up in Real Life"),
+    description: t("city.steps.meet_up.description", "We'll handle the planning and logistics — simply show up and enjoy yourself."),
+    color: "bg-gradient-to-r from-indigo-400 to-blue-500"
+  }, {
+    icon: Sprout,
+    title: t("city.steps.grow_friendships.title", "Grow the Friendships"),
+    description: t("city.steps.grow_friendships.description", "After the initial meet, we'll help you grow your new connections."),
+    color: "bg-gradient-to-r from-green-400 to-emerald-500"
+  }];
 
   return <div className="flex flex-col min-h-screen dark">
       <Navbar />
@@ -94,20 +100,20 @@ const CityMatchmakingTemplate = ({
       <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
         {!code ? (
           <>
-            Help Launch Pulse in{" "}
+            {t("city.help_launch", "Help Launch Pulse in")}{" "}
             <span className="pulse-gradient-text">{cityName}</span>
           </>
         ) : (
           <>
-            Meet New{" "}
+            {t("city.meet_new", "Meet New")}{" "}
             {isQueer ? (
               <>
-                Queer Friends<br />
+                {t("city.queer_friends", "Queer Friends")}<br />
               </>
             ) : (
-              "Friends "
+              t("city.friends", "Friends ")
             )}
-            in <span className="pulse-gradient-text">{cityName}</span>
+            {t("city.in", "in")} <span className="pulse-gradient-text">{cityName}</span>
           </>
         )}
       </h1>
@@ -123,7 +129,9 @@ const CityMatchmakingTemplate = ({
               delay: 0.2,
               duration: 0.5
             }}>
-        {!code ? "Sign up now—you’ll be first in line to match\nas soon as a few more locals join." : "Making friends as an adult can be hard. We're here to help." }
+        {!code 
+          ? t("city.signup_now", "Sign up now—you'll be first in line to match\nas soon as a few more locals join.")
+          : t("city.making_friends", "Making friends as an adult can be hard. We're here to help.")}
       </motion.p>
       <motion.div initial={{
               opacity: 0,
@@ -139,7 +147,7 @@ const CityMatchmakingTemplate = ({
           <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
             <span className="relative z-10">
-              Get Matched in {cityName}
+              {t("city.get_matched_in", "Get Matched in")} {cityName}
               {state ? `, ${state}` : ""}
             </span>
             <ArrowRight size={18} />
@@ -190,20 +198,23 @@ const CityMatchmakingTemplate = ({
           <div className="max-w-4xl mx-auto text-center">
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                Ready to Meet<br/>Your <span className="pulse-gradient-text">{cityName} Crew</span>?
+                {t("city.ready_to_meet", "Ready to Meet")}<br/>
+                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">{cityName} {t("city.crew", "Crew")}</span>?
               </h2>
 
 
               <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
                 <TimerDisplay {...timeLeft} />
-                <p className="text-sm text-white/70 mt-4 text-center">until the next friend group match closes</p>
+                <p className="text-sm text-white/70 mt-4 text-center">
+                  {t("city.until_next_match", "until the next friend group match closes")}
+                </p>
               </div>
               
               
               <div className="justify-center gap-4 mt-8">
                 <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}` : ''}`}>
                 <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                  Get Matched in {cityName} Now
+                  {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
                   <ArrowRight size={18} />
                 </Button>
                 </Link>
@@ -223,7 +234,9 @@ const CityMatchmakingTemplate = ({
       transition={{ duration: 0.7 }}
     >
       <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
-        <span className="pulse-gradient-text">{!code ? 'Want it sooner?' : 'Spread the word'}</span>
+        <span className="pulse-gradient-text">
+          {!code ? t("city.want_it_sooner", "Want it sooner?") : t("city.spread_the_word", "Spread the word")}
+        </span>
       </h2>
 
       <div className="w-32 h-1 mx-auto mb-6 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue rounded-full animate-glow-bar" />
@@ -235,8 +248,8 @@ const CityMatchmakingTemplate = ({
         transition={{ delay: 0.2, duration: 0.6 }}
       >
         {!code
-          ? 'Every signup moves your city up the list.\nHelp us launch faster by sharing Pulse.'
-          : 'Share Pulse with friends and help grow your local crew.'}
+          ? t("city.every_signup", "Every signup moves your city up the list.\nHelp us launch faster by sharing Pulse.")
+          : t("city.share_with_friends", "Share Pulse with friends and help grow your local crew.")}
       </motion.p>
 
       <ShareSection />

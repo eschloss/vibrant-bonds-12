@@ -1,7 +1,10 @@
 
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -17,11 +20,10 @@ const HeroSection = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <h1 className="text-4xl font-bold mb-4 md:text-5xl whitespace-pre-line">
-            From Isolation to Connection:
-            How Pulse Was Born
+            {t("about.hero.title", "From Isolation to Connection:\nHow Pulse Was Born")}
           </h1>
           <p className="text-xl text-gray-300 mb-6">
-            Our founder's global journey—from performing on opera stages to building human-centered tech—led to a quiet but powerful realization about how real friendships form. That insight became Pulse: a new kind of social platform designed to turn digital connections into real-life friendships
+            {t("about.hero.description", "Our founder's global journey—from performing on opera stages to building human-centered tech—led to a quiet but powerful realization about how real friendships form. That insight became Pulse: a new kind of social platform designed to turn digital connections into real-life friendships")}
           </p>
         </motion.div>
       </div>

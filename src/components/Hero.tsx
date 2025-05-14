@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
+import Text from "@/components/Text";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
   
   useEffect(() => {
     setIsVisible(true);
@@ -36,15 +39,17 @@ const Hero = () => {
         <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'} flex flex-col items-center text-center`}>
           
           <h1 className="heading-xl w-full max-w-4xl mx-auto mb-6 text-gray-900">
-            <span className="pulse-gradient-text">Meet New Friends</span> in Your City
+            <span className="pulse-gradient-text">{t("hero.title", "Meet New Friends")}</span> {t("hero.in_your_city", "in Your City")}
           </h1>
           
-          <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.</p>
+          <p className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+            {t("hero.description", "We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.")}
+          </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-4 mb-8">
             <Link to="/cities">
               <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
-                <span>Meet Your Crew</span>
+                <span>{t("hero.cta", "Meet Your Crew")}</span>
               </Button>
             </Link>
           </div>
