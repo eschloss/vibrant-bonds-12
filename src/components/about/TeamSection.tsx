@@ -79,7 +79,7 @@ const TeamSection = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">{t("team.join", "Join Our Team")}</h3>
                   <p className="text-gray-300 mb-4 md:mb-0">
-                    {t("team.description", "Meet the people building the future of social connection")}
+                    {t("team.join_subtitle", "We're looking for bold, curious minds to help us bring people together.")}
                   </p>
                 </div>
                 <Button variant="gradient">
