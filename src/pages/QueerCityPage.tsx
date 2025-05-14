@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSeo } from "@/hooks/useSeo";
 
 type CityParam = {
   cityName: string;
@@ -20,6 +21,19 @@ const QueerCityPage = () => {
     image?: string;
     language?: string;
   } | null>(null);
+
+  // Set SEO metadata for this specific queer city
+  useSeo({
+    title: {
+      en: cityData ? `Meet New Queer Friends in ${cityData.name} | Pulse App` : 'Find Your Queer Crew | Pulse App',
+      es: cityData ? `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
+    },
+    description: {
+      en: cityData ? `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse` : 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
+      es: cityData ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse` : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
+    },
+    image: cityData?.image
+  });
 
   useEffect(() => {
     const fetchCities = async () => {

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,5 +36,41 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Script to handle dynamic SEO metadata based on language
+      (function() {
+        // This will be replaced by a more robust detection when the app loads
+        const hostname = window.location.hostname;
+        const subdomainParts = hostname.split(".");
+        const isSpanish = subdomainParts.length > 1 && subdomainParts[0].toLowerCase() === "es";
+        
+        // Update meta tags if Spanish is detected from subdomain
+        if (isSpanish) {
+          // Update HTML lang attribute
+          document.documentElement.lang = "es";
+          
+          // Update title and meta descriptions
+          document.title = "Pulse: Nuevos Amigos y Planes en la Vida Real";
+          
+          const metaDescription = document.querySelector('meta[name="description"]');
+          if (metaDescription) {
+            metaDescription.content = "Pulse: Nuevos Amigos y Planes en la Vida Real";
+          }
+          
+          // Update Open Graph metadata
+          const ogTitle = document.querySelector('meta[property="og:title"]');
+          const ogDesc = document.querySelector('meta[property="og:description"]');
+          
+          if (ogTitle) {
+            ogTitle.content = "Pulse: Nuevos Amigos y Planes en la Vida Real";
+          }
+          
+          if (ogDesc) {
+            ogDesc.content = "Conecta con personas afines y planifica encuentros en la vida real con Pulse";
+          }
+        }
+      })();
+    </script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { fetchTranslations } from "../services/translations";
+import { Helmet } from "react-helmet";
 
 interface LanguageContextType {
   currentLanguage: string;
@@ -22,6 +23,22 @@ export const useLanguage = () => useContext(LanguageContext);
 interface LanguageProviderProps {
   children: ReactNode;
 }
+
+// SEO metadata translations
+const seoMetadata = {
+  en: {
+    title: "Pulse: New Friends and IRL Plans",
+    description: "Meet like-minded people and plan real-life meetups with Pulse",
+    ogTitle: "Pulse: New Friends and IRL Plans",
+    ogDescription: "Connect with like-minded people and plan real-life meetups with Pulse"
+  },
+  es: {
+    title: "Pulse: Nuevos Amigos y Planes en la Vida Real",
+    description: "Conoce personas afines y planifica encuentros en la vida real con Pulse",
+    ogTitle: "Pulse: Nuevos Amigos y Planes en la Vida Real",
+    ogDescription: "Conecta con personas afines y planifica encuentros en la vida real con Pulse"
+  }
+};
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
@@ -64,11 +81,17 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     };
     
     loadTranslations();
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLanguage;
   }, [currentLanguage]);
 
   const translate = (key: string, fallback: string): string => {
     return translations[key] || fallback;
   };
+
+  // Get SEO metadata for the current language
+  const metadata = seoMetadata[currentLanguage as keyof typeof seoMetadata] || seoMetadata.en;
 
   return (
     <LanguageContext.Provider
@@ -79,6 +102,13 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         isLoading
       }}
     >
+      <Helmet>
+        <html lang={currentLanguage} />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta property="og:title" content={metadata.ogTitle} />
+        <meta property="og:description" content={metadata.ogDescription} />
+      </Helmet>
       {children}
     </LanguageContext.Provider>
   );
