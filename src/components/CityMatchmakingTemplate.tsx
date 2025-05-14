@@ -68,10 +68,35 @@ const CityMatchmakingTemplate = ({
       <main className="flex-grow">
         <section className="relative py-32 overflow-hidden">
           <>
-            {/* Default background - always rendered */}
+            {/* Default background - always rendered 
             <div className="absolute inset-0 -z-6 bg-cover bg-center blur-sm" style={{
               backgroundImage: `url(https://s.kikiapp.eu/img/colorful-white.png)`
             }} />
+            */}
+
+            {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-pulse-purple/20 to-transparent opacity-70"></div>
+      </div>
+      
+      {/* Enhanced Animated Decorative Elements */}
+      <div className="absolute top-1/4 left-10 w-16 h-16 rounded-full bg-pulse-blue/30 animate-float"></div>
+      <div className="absolute bottom-1/4 right-10 w-24 h-24 rounded-full bg-pulse-purple/30 animate-pulse-slow"></div>
+      <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-pulse-teal/30 animate-bounce-gentle"></div>
+      
+      {/* Additional Animated Elements */}
+      <div className="absolute top-2/3 left-1/4 w-20 h-20 rounded-full bg-pulse-coral/20 animate-float-reverse"></div>
+      <div className="absolute top-1/2 right-1/3 w-8 h-8 rounded-full bg-pulse-blue/20 animate-spin-slow"></div>
+      <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-full bg-pulse-purple/25 animate-pulse-slow"></div>
+      <div className="absolute top-1/6 right-1/6 w-10 h-10 rounded-full bg-pulse-coral/20 animate-bounce-gentle"></div>
+      <div className="absolute bottom-1/5 left-1/5 w-18 h-18 rounded-full bg-pulse-teal/15 animate-float"></div>
+
+
+
+            
+
+            
           
             {/* Custom image - conditionally rendered above default */}
             {image && image !== "" && (
