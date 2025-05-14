@@ -164,7 +164,7 @@ const CityMatchmakingTemplate = ({
             }} transition={{
               delay: 0.4,
               duration: 0.5
-            }} className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
         
        <div className="flex flex-col items-center">
        <Link 
