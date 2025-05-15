@@ -173,7 +173,6 @@ export const Seo = ({
       <>
         <meta name="ai:geo:latitude" content={String(geoData.lat)} />
         <meta name="ai:geo:longitude" content={String(geoData.lng)} />
-        <meta name="ai:geo:placename" content={geoData.name} />
       </>
     )}
     </Helmet>
