@@ -44,7 +44,7 @@ const CityPage = () => {
     },
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
     geoData: {
-        name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
+        name: 'temp city name',
     }
   };
 
