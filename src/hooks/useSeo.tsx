@@ -20,6 +20,11 @@ interface SeoProps {
   modifiedTime?: string;
   type?: string; // website, article, product, etc.
   section?: string; // For articles, the section/category
+  geoData?: {
+    name: string;
+    lat?: number;
+    lng?: number;
+  };
 }
 
 export const useSeo = ({
@@ -32,7 +37,8 @@ export const useSeo = ({
   publishedTime,
   modifiedTime,
   type = "website",
-  section
+  section,
+  geoData
 }: SeoProps) => {
   const { currentLanguage } = useLanguage();
   
@@ -112,6 +118,18 @@ export const useSeo = ({
     }
   };
 
+  // Create geo location data structure for city pages
+  const geoLocationData = geoData && geoData.lat && geoData.lng ? {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "name": geoData.name,
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": geoData.lat,
+      "longitude": geoData.lng
+    }
+  } : null;
+
   return (
     <Helmet>
       <html lang={currentLanguage} />
@@ -158,10 +176,24 @@ export const useSeo = ({
         {JSON.stringify(pageStructuredData)}
       </script>
       
+      {/* Geo location data for city pages */}
+      {geoLocationData && (
+        <script type="application/ld+json">
+          {JSON.stringify(geoLocationData)}
+        </script>
+      )}
+      
       {/* AI-specific meta tags */}
       <meta name="ai:description" content={finalDescription} />
       <meta name="ai:keywords" content={keywords.join(", ")} />
       <meta name="ai:last-modified" content={modifiedTime || new Date().toISOString()} />
+      {geoData && geoData.lat && geoData.lng && (
+        <>
+          <meta name="ai:geo:latitude" content={String(geoData.lat)} />
+          <meta name="ai:geo:longitude" content={String(geoData.lng)} />
+          <meta name="ai:geo:placename" content={geoData.name} />
+        </>
+      )}
     </Helmet>
   );
 };

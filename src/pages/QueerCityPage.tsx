@@ -20,6 +20,8 @@ const QueerCityPage = () => {
     code: string;
     image?: string;
     language?: string;
+    lat?: number;
+    lng?: number;
   } | null>(null);
 
   // Set SEO metadata for this specific queer city
@@ -32,7 +34,13 @@ const QueerCityPage = () => {
       en: cityData ? `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse` : 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
       es: cityData ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse` : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
     },
-    image: cityData?.image
+    image: cityData?.image,
+    // Add geo schema for this city
+    geoData: cityData ? {
+      name: `${cityData.name}${cityData.state ? `, ${cityData.state}` : ''}, ${cityData.country}`,
+      lat: cityData.lat,
+      lng: cityData.lng
+    } : undefined
   });
 
   useEffect(() => {
@@ -63,7 +71,9 @@ const QueerCityPage = () => {
           state: matchedCity[stateField] || matchedCity.en_state,
           code: matchedCity.code,
           image: matchedCity.image,
-          language: matchedCity.language // Get language from API
+          language: matchedCity.language, // Get language from API
+          lat: matchedCity.lat, // Get latitude from API  
+          lng: matchedCity.lng  // Get longitude from API
         });
 
         window.scrollTo(0, 0);
