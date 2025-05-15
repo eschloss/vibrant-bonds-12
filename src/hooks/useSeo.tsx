@@ -99,7 +99,15 @@ export const Seo = ({
     }
   };
 
-  const geoLocationData = geoData?.lat != null && geoData?.lng != null && typeof geoData.name === "string"
+
+  const hasValidGeo =
+      geoData &&
+      typeof geoData.name === "string" &&
+      geoData.lat != null &&
+      geoData.lng != null;
+
+
+  const geoLocationData = hasValidGeo
   ? {
       "@context": "https://schema.org",
       "@type": "Place",
