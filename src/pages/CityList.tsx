@@ -81,7 +81,7 @@ const CityList = () => {
         const cityName = getLocalizedField(city, 'name')?.toLowerCase() || '';
         const cityState = getLocalizedField(city, 'state')?.toLowerCase() || '';
         const cityCountry = getLocalizedField(city, 'country')?.toLowerCase() || '';
-        normalizedSearchTerm = normalize(searchTerm).toLowerCase();
+        const normalizedSearchTerm = normalize(searchTerm).toLowerCase();
         return normalize(cityName).includes(normalizedSearchTerm) || normalize(cityState).includes(normalizedSearchTerm) || normalize(cityCountry).includes(normalizedSearchTerm);
       });
     }
