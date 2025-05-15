@@ -42,6 +42,8 @@ export const useSeo = ({
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     const hostParts = url.hostname.split('.');
+    console.log("Hostname:", window.location.hostname);
+    console.log("href:", window.location.href);
   
     // Remove leading www or known language subdomains like 'es', 'en', etc.
     const knownSubdomains = ['www', 'es', 'en', 'fr', 'de', 'pt'];
