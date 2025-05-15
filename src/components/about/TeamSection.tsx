@@ -18,7 +18,8 @@ const TeamSection = () => {
       nameKey: "team.stian.name",
       roleKey: "team.stian.role",
       bioKey: "team.stian.bio",
-      image: "/lovable-uploads/a26a7983-2c55-4dca-8d85-5b0d8154c5a8.jpg"
+      image: "https://s.kikiapp.eu/img/team/stian.jpeg"
+      //image: "/lovable-uploads/a26a7983-2c55-4dca-8d85-5b0d8154c5a8.jpg"
     },
     {
       nameKey: "team.pedro.name",
