@@ -24,7 +24,7 @@ const CityPage = () => {
     lng?: number;
   } | null>(null);
 
-  /*const seoProps = {
+  const seoProps = {
     title: {
       en: cityData ? `Meet New Friends in ${cityData.name} | Pulse App` : 'Find Your Crew | Pulse App',
       es: cityData ? `Conoce Nuevos Amigos en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo | Pulse App'
@@ -45,29 +45,7 @@ const CityPage = () => {
           lng: cityData.lng
         }
       : undefined
-  };*/
-
-  const seoProps = {
-    title: {
-      en: cityData ? `Meet New Friends in ${cityData.name} | Pulse App` : 'Find Your Crew | Pulse App',
-      es: cityData ? `Conoce Nuevos Amigos en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo | Pulse App'
-    },
-    description: {
-      en: cityData
-        ? `Connect with like-minded people in ${cityData.name} and plan real-life meetups with Pulse`
-        : 'Pulse matches you with like-minded people to form meaningful friendships',
-      es: cityData
-        ? `Conecta con personas afines en ${cityData.name} y planifica encuentros en la vida real con Pulse`
-        : 'Pulse te conecta con personas afines para formar amistades significativas'
-    },
-    image: cityData?.image,
-  geoData: cityData?.lat != null && cityData?.lng != null
-  ? {
-      name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
-      lat: cityData.lat,
-      lng: cityData.lng
-    }
-  : undefined
+  };
 
   
   useEffect(() => {

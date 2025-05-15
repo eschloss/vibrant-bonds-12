@@ -99,16 +99,18 @@ export const Seo = ({
     }
   };
 
-  const geoLocationData = geoData?.lat && geoData?.lng && typeof geoData.name === "string" ? {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    "name": geoData.name,
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": geoData.lat,
-      "longitude": geoData.lng
+  const geoLocationData = geoData?.lat != null && geoData?.lng != null && typeof geoData.name === "string"
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Place",
+      "name": geoData.name,
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": geoData.lat,
+        "longitude": geoData.lng
+      }
     }
-  } : null;
+  : null;
 
   return (
     <Helmet>
@@ -159,13 +161,13 @@ export const Seo = ({
         <meta name="ai:keywords" content={keywords.join(", ")} />
       )}
       <meta name="ai:last-modified" content={(modifiedTime || new Date().toISOString()).toString()} />
-      {geoData?.lat && geoData?.lng && typeof geoData.name === "string" && (
-        <>
-          <meta name="ai:geo:latitude" content={String(geoData.lat)} />
-          <meta name="ai:geo:longitude" content={String(geoData.lng)} />
-          <meta name="ai:geo:placename" content={geoData.name} />
-        </>
-      )}
+      {geoData?.lat != null && geoData?.lng != null && typeof geoData.name === "string" && (
+      <>
+        <meta name="ai:geo:latitude" content={String(geoData.lat)} />
+        <meta name="ai:geo:longitude" content={String(geoData.lng)} />
+        <meta name="ai:geo:placename" content={geoData.name} />
+      </>
+    )}
     </Helmet>
   );
 };
