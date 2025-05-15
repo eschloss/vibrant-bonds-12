@@ -259,12 +259,11 @@ const CityList = () => {
                   </motion.div>
                 )) : (
                   <div className="text-left py-12">
-                    <div className="max-w-2xl mx-auto mb-8">
-                        <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 2 }}
-  >
+                    <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 2, duration: .5 }}
+>
                         <CityCard
                           name={t("citylist.cant_find_city", "Can't find your city?")}
                           state={t("citylist.worldwide", "Worldwide")}
