@@ -38,22 +38,32 @@ export const useSeo = ({
       : 'Meet like-minded people and plan real-life meetups with Pulse'
   );
 
-  // Construct base URL without language subdomain
+  // Construct base URL handling www and language subdomains correctly
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     const hostParts = url.hostname.split('.');
     
-    // Remove language subdomain if it exists
-    if (hostParts.length > 2 && hostParts[0].length === 2) {
-      url.hostname = hostParts.slice(1).join('.');
+    // Create the base domain (without any subdomain)
+    let baseDomain = url.hostname;
+    
+    // Remove 'www' or language subdomain if they exist
+    if (hostParts.length > 2) {
+      // If first part is 'www' or a language code (e.g., 'es')
+      if (hostParts[0] === 'www' || hostParts[0].length === 2) {
+        baseDomain = hostParts.slice(1).join('.');
+      }
     }
     
-    return url.origin;
+    // Reconstruct the base URL with the protocol and without subdomains
+    return `${url.protocol}//${baseDomain}`;
   };
 
   // Construct URLs for different languages
   const baseUrl = getBaseUrl();
   const currentUrl = canonicalUrl || `${baseUrl}${pathname}`;
+  
+  // For English: use the base domain (or with www if that's how it was accessed)
+  // For Spanish: use es subdomain on the base domain
   const alternateUrls = {
     en: currentUrl,
     es: `${baseUrl.replace('://', '://es.')}${pathname}`
