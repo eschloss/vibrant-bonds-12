@@ -14,7 +14,7 @@ export const howItWorks = {
     "steps.meet_up.title": "Plan a Meetup\n—Just Show Up",
     "steps.meet_up.description": "Our AI helps you find the perfect time and activity that works for everyone.",
     "steps.grow_friendships.title": "Grow the Friendships",
-    "steps.grow_friendships.description": "One hangout's just the beginning.\nWe'll help you keeep the momentum going\n—so new connections turn into real friends.",
+    "steps.grow_friendships.description": "We’ll help you keep the momentum—so new connections become real friends.",
   },
   es: {
     // How it works section
@@ -30,6 +30,6 @@ export const howItWorks = {
     "steps.meet_up.title": "Planea una Reunión\n—Solo Preséntate",
     "steps.meet_up.description": "Nuestra IA te ayuda a encontrar el momento y la actividad perfectos que funcionan para todos.",
     "steps.grow_friendships.title": "Cultiva las Amistades",
-    "steps.grow_friendships.description": "Una reunión es solo el comienzo.\nTe ayudaremos a mantener el impulso\n—para que las nuevas conexiones se conviertan en amigos de verdad.",
+    "steps.grow_friendships.description": "Te ayudaremos a mantener el impulso\n—para que las nuevas conexiones se conviertan en amigos de verdad.",
   }
 };
