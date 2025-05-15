@@ -159,6 +159,19 @@ export const Seo = ({
         {JSON.stringify(pageStructuredData)}
       </script>
 
+
+      <meta name="ai:description" content={finalDescription} />
+      {Array.isArray(keywords) && keywords.length > 0 && (
+        <meta name="ai:keywords" content={keywords.join(", ")} />
+      )}
+      <meta name="ai:last-modified" content={(modifiedTime || new Date().toISOString()).toString()} />
+      {hasValidGeo && (
+      <>
+        <meta name="ai:geo:latitude" content={String(geoData.lat)} />
+        <meta name="ai:geo:longitude" content={String(geoData.lng)} />
+        <meta name="ai:geo:placename" content={geoData.name} />
+      </>
+      )}
     </Helmet>
   );
 };
