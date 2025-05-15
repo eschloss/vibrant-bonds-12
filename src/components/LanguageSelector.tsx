@@ -81,7 +81,13 @@ className={`w-auto min-w-[200px] bg-transparent ${textColor} justify-start px-2 
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="en">{`${getLanguageLabel("en")}`}</SelectItem>
-          {language && language !== "en" && (
+          {currentLanguage && currentLanguage !== "en" && (
+            <SelectItem value={currentLanguage}>
+              {`${getLanguageLabel(currentLanguage)}`}
+            </SelectItem>
+          )}
+          
+          {language && language !== "en" && language !== currentLanguage && (
             <SelectItem value={language}>
               {`${getLanguageLabel(language)}`}
             </SelectItem>
