@@ -77,7 +77,8 @@ const CityList = () => {
       result = result.filter(city => {
         const cityName = getLocalizedField(city, 'name')?.toLowerCase() || '';
         const cityState = getLocalizedField(city, 'state')?.toLowerCase() || '';
-        return cityName.includes(searchTerm.toLowerCase()) || cityState.includes(searchTerm.toLowerCase());
+        const cityCountry = getLocalizedField(city, 'country')?.toLowerCase() || '';
+        return cityName.includes(searchTerm.toLowerCase()) || cityState.includes(searchTerm.toLowerCase()) || cityCountry.includes(searchTerm.toLowerCase());
       });
     }
     if (selectedCountry && selectedCountry !== "all-countries") {
