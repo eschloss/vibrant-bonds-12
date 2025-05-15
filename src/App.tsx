@@ -20,31 +20,43 @@ import AppLayout from "./AppLayout";
 
 const queryClient = new QueryClient();
 
-// Helper component to handle www redirection
+// Enhanced WwwRedirect component with immediate execution
 const WwwRedirect = () => {
   useEffect(() => {
-    const hostname = window.location.hostname;
-    
-    // Check if hostname starts with "www."
-    if (hostname.startsWith('www.')) {
-      // Create new URL without www
-      const newUrl = new URL(window.location.href);
-      newUrl.hostname = hostname.replace(/^www\./, '');
+    // Only run in the browser environment
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
       
-      // Redirect to the naked domain while preserving path, query parameters, and hash
-      window.location.replace(newUrl.toString());
+      // Check if hostname starts with "www."
+      if (hostname.startsWith('www.')) {
+        // Preserve the entire URL except replace www. with nothing
+        const newUrl = window.location.href.replace(/^(https?:\/\/)www\./i, '$1');
+        
+        // Use replace instead of assign to prevent back button from returning to www version
+        window.location.replace(newUrl);
+        
+        // Return early since we're redirecting
+        return;
+      }
     }
   }, []);
   
+  // Component doesn't render anything
   return null;
 };
+
+// Add redirect outside the React component tree for immediate execution
+if (typeof window !== 'undefined' && window.location.hostname.startsWith('www.')) {
+  const newUrl = window.location.href.replace(/^(https?:\/\/)www\./i, '$1');
+  window.location.replace(newUrl);
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {/* Add the WwwRedirect component */}
+      {/* Add the WwwRedirect component at the top level */}
       <WwwRedirect />
       <BrowserRouter>
         <Routes>

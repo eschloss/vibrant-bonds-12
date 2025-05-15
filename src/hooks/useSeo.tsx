@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -54,7 +53,7 @@ export const useSeo = ({
       : 'Meet like-minded people and plan real-life meetups with Pulse'
   );
 
-  // Construct base URL handling www and language subdomains correctly
+  // Improved base URL construction that ensures www is removed
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     const hostParts = url.hostname.split('.');
@@ -62,7 +61,7 @@ export const useSeo = ({
     // Remove leading www and known language subdomains
     const knownSubdomains = ['www', 'es', 'en', 'fr', 'de', 'pt'];
     
-    // Create clean domain without any subdomain
+    // Create clean domain without any subdomain we want to exclude
     let cleanDomain;
     
     // If we have something like www.domain.com or es.domain.com
@@ -144,7 +143,7 @@ export const useSeo = ({
         <meta name="keywords" content={keywords.join(", ")} />
       )}
       
-      {/* Canonical URL */}
+      {/* Canonical URL - always use the naked domain */}
       <link rel="canonical" href={currentUrl} />
       
       {/* Alternate language links */}
