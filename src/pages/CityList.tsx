@@ -291,7 +291,7 @@ const CityList = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 2, duration: .5 }}
+                    transition={{ delay: 1, duration: .5 }}
                   >
                     <CityCard
                       name={t("citylist.cant_find_city", "Can't find your city?")}
