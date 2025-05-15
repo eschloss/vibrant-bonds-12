@@ -46,7 +46,9 @@ const CityPage = () => {
     geoData: {
           name: cityData
             ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
-            : 'Unspecified City'
+            : 'Unspecified City',
+          lat: cityData ? cityData.lat : 0,
+          lng: cityData ? cityData.lng : 0,
     }
   };
 
