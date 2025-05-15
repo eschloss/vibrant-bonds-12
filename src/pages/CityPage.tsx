@@ -46,6 +46,8 @@ const CityPage = () => {
         }
       : undefined
   };
+  console.log("SEO debug", seoProps);
+
   
   useEffect(() => {
     const fetchCities = async () => {
