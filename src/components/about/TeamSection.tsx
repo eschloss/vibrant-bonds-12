@@ -19,7 +19,6 @@ const TeamSection = () => {
       roleKey: "team.stian.role",
       bioKey: "team.stian.bio",
       image: "https://s.kikiapp.eu/img/team/stian.jpeg"
-      //image: "/lovable-uploads/a26a7983-2c55-4dca-8d85-5b0d8154c5a8.jpg"
     },
     {
       nameKey: "team.pedro.name",
@@ -60,6 +59,7 @@ const TeamSection = () => {
                   alt={t(member.nameKey, "")} 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
                   src={member.image}
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-xl font-bold mb-2">{t(member.nameKey, "")}</h3>

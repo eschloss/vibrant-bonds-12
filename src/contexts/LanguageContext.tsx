@@ -92,6 +92,27 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
   // Get SEO metadata for the current language
   const metadata = seoMetadata[currentLanguage as keyof typeof seoMetadata] || seoMetadata.en;
+  
+  // Get base URL without language subdomain
+  const getBaseUrl = () => {
+    const url = new URL(window.location.href);
+    const hostParts = url.hostname.split('.');
+    
+    // Remove language subdomain if it exists
+    if (hostParts.length > 2 && hostParts[0].length === 2) {
+      url.hostname = hostParts.slice(1).join('.');
+    }
+    
+    return url.origin;
+  };
+  
+  // Construct URLs for different languages
+  const baseUrl = getBaseUrl();
+  const currentPath = window.location.pathname;
+  const alternateUrls = {
+    en: `${baseUrl}${currentPath}`,
+    es: `${baseUrl.replace('://', '://es.')}${currentPath}`
+  };
 
   return (
     <LanguageContext.Provider
@@ -106,8 +127,16 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         <html lang={currentLanguage} />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
+        
+        {/* Base SEO tags set at context level */}
         <meta property="og:title" content={metadata.ogTitle} />
         <meta property="og:description" content={metadata.ogDescription} />
+        <meta property="og:type" content="website" />
+        
+        {/* Alternate language links */}
+        <link rel="alternate" href={alternateUrls.en} hrefLang="en" />
+        <link rel="alternate" href={alternateUrls.es} hrefLang="es" />
+        <link rel="alternate" href={alternateUrls.en} hrefLang="x-default" />
       </Helmet>
       {children}
     </LanguageContext.Provider>
