@@ -169,7 +169,13 @@ export const Seo = ({
         <meta name="ai:keywords" content={keywords.join(", ")} />
       )}
       <meta name="ai:last-modified" content={(modifiedTime || new Date().toISOString()).toString()} />
-
+      {geoLocationData && (
+      <>
+        <meta name="ai:geo:latitude" content={String(geoData.lat)} />
+        <meta name="ai:geo:longitude" content={String(geoData.lng)} />
+        <meta name="ai:geo:placename" content={geoData.name} />
+      </>
+      )}
     </Helmet>
   );
 };
