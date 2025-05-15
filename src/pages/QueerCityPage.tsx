@@ -37,6 +37,13 @@ const QueerCityPage = () => {
         : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
     },
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
+    geoData: {
+      name: cityData
+        ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
+        : 'Unspecified City',
+      lat: cityData ? cityData.lat : 0,
+      lng: cityData ? cityData.lng : 0,
+    }
   };
 
   useEffect(() => {
