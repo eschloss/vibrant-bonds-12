@@ -72,13 +72,17 @@ const CityList = () => {
   };
 
   useEffect(() => {
+    const normalize = (str: string) =>
+        str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
     let result = allCities;
     if (searchTerm) {
       result = result.filter(city => {
         const cityName = getLocalizedField(city, 'name')?.toLowerCase() || '';
         const cityState = getLocalizedField(city, 'state')?.toLowerCase() || '';
         const cityCountry = getLocalizedField(city, 'country')?.toLowerCase() || '';
-        return cityName.includes(searchTerm.toLowerCase()) || cityState.includes(searchTerm.toLowerCase()) || cityCountry.includes(searchTerm.toLowerCase());
+        normalizedSearchTerm = normalize(searchTerm).toLowerCase();
+        return normalize(cityName).includes(normalizedSearchTerm) || normalize(cityState).includes(normalizedSearchTerm) || normalize(cityCountry).includes(normalizedSearchTerm);
       });
     }
     if (selectedCountry && selectedCountry !== "all-countries") {
