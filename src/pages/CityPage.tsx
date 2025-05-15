@@ -24,7 +24,6 @@ const CityPage = () => {
     lng?: number;
   } | null>(null);
 
-  const hasValidGeo = cityData?.lat != null && cityData?.lng != null && typeof cityData?.name === "string";
 
   const seoProps = {
     title: {
@@ -44,6 +43,9 @@ const CityPage = () => {
         : 'Pulse te conecta con personas afines para formar amistades significativas'
     },
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
+    geoData: {
+        name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
+    }
   };
 
   
