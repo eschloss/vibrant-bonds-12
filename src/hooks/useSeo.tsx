@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -18,7 +17,7 @@ interface SeoProps {
   publishedTime?: string;
   modifiedTime?: string;
   type?: string; // website, article, product, etc.
-  section?: string; // For articles, the section/category
+  section?: string;
   geoData?: {
     name: string;
     lat?: number;
@@ -26,7 +25,7 @@ interface SeoProps {
   };
 }
 
-export const useSeo = ({
+export const Seo = ({
   title,
   description,
   image,
@@ -40,56 +39,39 @@ export const useSeo = ({
   geoData
 }: SeoProps) => {
   const { currentLanguage } = useLanguage();
-  
-  const finalTitle = title?.[currentLanguage as keyof typeof title] || (
-    currentLanguage === 'es' 
+
+  const finalTitle = title?.[currentLanguage] || (
+    currentLanguage === 'es'
       ? 'Pulse: Nuevos Amigos y Planes en la Vida Real'
       : 'Pulse: New Friends and IRL Plans'
   );
-  
-  const finalDescription = description?.[currentLanguage as keyof typeof description] || (
+
+  const finalDescription = description?.[currentLanguage] || (
     currentLanguage === 'es'
       ? 'Conoce personas afines y planifica encuentros en la vida real con Pulse'
       : 'Meet like-minded people and plan real-life meetups with Pulse'
   );
 
-  // Improved base URL construction that ensures www is removed
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     const hostParts = url.hostname.split('.');
-    
-    // Remove leading www and known language subdomains
     const knownSubdomains = ['www', 'es', 'en', 'fr', 'de', 'pt'];
-    
-    // Create clean domain without any subdomain we want to exclude
-    let cleanDomain;
-    
-    // If we have something like www.domain.com or es.domain.com
-    if (hostParts.length > 2) {
-      if (knownSubdomains.includes(hostParts[0].toLowerCase())) {
-        cleanDomain = hostParts.slice(1).join('.');
-      } else {
-        cleanDomain = hostParts.join('.');
-      }
-    } else {
-      cleanDomain = hostParts.join('.');
-    }
-    
+
+    const cleanDomain =
+      hostParts.length > 2 && knownSubdomains.includes(hostParts[0].toLowerCase())
+        ? hostParts.slice(1).join('.')
+        : hostParts.join('.');
+
     return `${url.protocol}//${cleanDomain}`;
   };
 
-  // Construct URLs for different languages
   const baseUrl = getBaseUrl();
   const currentUrl = canonicalUrl || `${baseUrl}${pathname}`;
-  
-  // For English: use the base domain
-  // For Spanish: use es subdomain on the base domain
   const alternateUrls = {
     en: `${baseUrl}${pathname}`,
     es: `${baseUrl.replace('://', '://es.')}${pathname}`
   };
 
-  // Default organization data for structured data
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -99,13 +81,12 @@ export const useSeo = ({
     "logo": `${baseUrl}/lovable-uploads/pulse-favicon.png`
   };
 
-  // Generate a WebPage or Article structured data based on the type
   const pageStructuredData = {
     "@context": "https://schema.org",
     "@type": type === "article" ? "Article" : "WebPage",
     "headline": finalTitle,
     "description": finalDescription,
-    "image": image ? image : `${baseUrl}/lovable-uploads/pulse-favicon.png`,
+    "image": image || `${baseUrl}/lovable-uploads/pulse-favicon.png`,
     "url": currentUrl,
     "inLanguage": currentLanguage,
     ...(publishedTime && { "datePublished": publishedTime }),
@@ -117,8 +98,7 @@ export const useSeo = ({
     }
   };
 
-  // Create geo location data structure for city pages
-  const geoLocationData = geoData && geoData.lat && geoData.lng ? {
+  const geoLocationData = geoData?.lat && geoData?.lng && typeof geoData.name === "string" ? {
     "@context": "https://schema.org",
     "@type": "Place",
     "name": geoData.name,
@@ -134,59 +114,50 @@ export const useSeo = ({
       <html lang={currentLanguage} />
       <title>{finalTitle}</title>
       <meta name="description" content={finalDescription} />
-      
-      {/* Language and region */}
+
       <meta property="og:locale" content={currentLanguage === "es" ? "es_ES" : "en_US"} />
-      
-      {/* Keywords for SEO */}
-      {keywords.length > 0 && (
+
+      {Array.isArray(keywords) && keywords.length > 0 && (
         <meta name="keywords" content={keywords.join(", ")} />
       )}
-      
-      {/* Canonical URL - always use the naked domain */}
+
       <link rel="canonical" href={currentUrl} />
-      
-      {/* Alternate language links */}
       <link rel="alternate" href={alternateUrls.en} hrefLang="en" />
       <link rel="alternate" href={alternateUrls.es} hrefLang="es" />
       <link rel="alternate" href={alternateUrls.en} hrefLang="x-default" />
-      
-      {/* Open Graph meta tags */}
+
       <meta property="og:title" content={finalTitle} />
       <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content={type} />
-      {image && <meta property="og:image" content={image} />}
+      {image && typeof image === "string" && <meta property="og:image" content={image} />}
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {section && <meta property="article:section" content={section} />}
-      
-      {/* Twitter meta tags */}
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
-      {image && <meta name="twitter:image" content={image} />}
-      
-      {/* Structured data for search engines and LLMs */}
+      {image && typeof image === "string" && <meta name="twitter:image" content={image} />}
+
       <script type="application/ld+json">
         {JSON.stringify(organizationData)}
       </script>
       <script type="application/ld+json">
         {JSON.stringify(pageStructuredData)}
       </script>
-      
-      {/* Geo location data for city pages */}
       {geoLocationData && (
         <script type="application/ld+json">
           {JSON.stringify(geoLocationData)}
         </script>
       )}
-      
-      {/* AI-specific meta tags */}
+
       <meta name="ai:description" content={finalDescription} />
-      <meta name="ai:keywords" content={keywords.join(", ")} />
-      <meta name="ai:last-modified" content={modifiedTime || new Date().toISOString()} />
-      {geoData && geoData.lat && geoData.lng && (
+      {Array.isArray(keywords) && keywords.length > 0 && (
+        <meta name="ai:keywords" content={keywords.join(", ")} />
+      )}
+      <meta name="ai:last-modified" content={(modifiedTime || new Date().toISOString()).toString()} />
+      {geoData?.lat && geoData?.lng && typeof geoData.name === "string" && (
         <>
           <meta name="ai:geo:latitude" content={String(geoData.lat)} />
           <meta name="ai:geo:longitude" content={String(geoData.lng)} />

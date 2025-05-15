@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useSeo } from "@/hooks/useSeo";
+import { Seo } from "@/hooks/useSeo";
 
 type CityParam = {
   cityName: string;
@@ -47,8 +47,6 @@ const CityPage = () => {
       : undefined
   };
   
-  const seo = useSeo(seoProps);
-
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -98,7 +96,7 @@ const CityPage = () => {
 
   return (
     <>
-      {seo}
+      <Seo {...seoProps} />
       <CityMatchmakingTemplate 
         cityName={cityData.name}
         code={cityData.code}
