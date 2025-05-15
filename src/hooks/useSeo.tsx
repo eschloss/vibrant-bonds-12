@@ -42,21 +42,17 @@ export const useSeo = ({
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     const hostParts = url.hostname.split('.');
-    
-    // Create the base domain (without any subdomain)
-    let baseDomain = url.hostname;
-    
-    // Remove 'www' or language subdomain if they exist
-    if (hostParts.length > 2) {
-      // If first part is 'www' or a language code (e.g., 'es')
-      if (hostParts[0] === 'www' || hostParts[0].length === 2) {
-        baseDomain = hostParts.slice(1).join('.');
-      }
+  
+    // Remove leading www or known language subdomains like 'es', 'en', etc.
+    const knownSubdomains = ['www', 'es', 'en', 'fr', 'de', 'pt'];
+    while (knownSubdomains.includes(hostParts[0])) {
+      hostParts.shift();
     }
-    
-    // Reconstruct the base URL with the protocol and without subdomains
+  
+    const baseDomain = hostParts.join('.');
     return `${url.protocol}//${baseDomain}`;
   };
+
 
   // Construct URLs for different languages
   const baseUrl = getBaseUrl();
