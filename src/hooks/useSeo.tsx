@@ -162,6 +162,10 @@ export const Seo = ({
         <script type="application/ld+json">
           {JSON.stringify(geoLocationData)}
         </script>
+
+        <meta name="ai:geo:latitude" content={String(geoLocationData.geo.latitude)} />
+        <meta name="ai:geo:longitude" content={String(geoLocationData.geo.longitude)} />
+        <meta name="ai:geo:placename" content={geoLocationData.name} />
       )}
 
       <meta name="ai:description" content={finalDescription} />
