@@ -49,7 +49,7 @@ const CityPage = () => {
 
   const seoProps = {
     title: {
-      en: 'dFind Your Crew | Pulse App',
+      en: cityData ? `Meet New Friends in ${cityData.name} | Pulse App` : 'Find Your Crew | Pulse App',
       es: 'cityData ? Conoce Nuevo'
     },
     description: {
