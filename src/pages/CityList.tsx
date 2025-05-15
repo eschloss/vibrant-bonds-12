@@ -134,34 +134,46 @@ const CityList = () => {
     }));
   };
 
-  return <div className="flex flex-col min-h-screen dark">
+  return (
+    <div className="flex flex-col min-h-screen dark">
       <Navbar />
       <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
           <div className="absolute inset-0 -z-5">
             {Array.from({
-            length: 20
-          }).map((_, i) => <div key={i} className="absolute rounded-full bg-purple-500/20" style={{
-            width: `${Math.random() * 10 + 5}px`,
-            height: `${Math.random() * 10 + 5}px`,
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-            animationDelay: `${Math.random() * 5}s`
-          }} />)}
+              length: 20
+            }).map((_, i) => (
+              <div 
+                key={i} 
+                className="absolute rounded-full bg-purple-500/20" 
+                style={{
+                  width: `${Math.random() * 10 + 5}px`,
+                  height: `${Math.random() * 10 + 5}px`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                  animationDelay: `${Math.random() * 5}s`
+                }} 
+              />
+            ))}
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.7
-          }} className="text-center max-w-3xl mx-auto mb-16 my-[20px]">
+            <motion.div 
+              initial={{
+                opacity: 0,
+                y: 20
+              }} 
+              animate={{
+                opacity: 1,
+                y: 0
+              }} 
+              transition={{
+                duration: 0.7
+              }} 
+              className="text-center max-w-3xl mx-auto mb-16 my-[20px]"
+            >
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
                 {t("citylist.title", "Meet New Friends in")} <span className="pulse-gradient-text">{t("citylist.your_city", "Your City")}</span>
               </h1>
@@ -170,16 +182,21 @@ const CityList = () => {
               </p>
             </motion.div>
 
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.5,
-            delay: 0.2
-          }} className="max-w-4xl mx-auto mb-10 space-y-4">
+            <motion.div 
+              initial={{
+                opacity: 0,
+                y: 20
+              }} 
+              animate={{
+                opacity: 1,
+                y: 0
+              }} 
+              transition={{
+                duration: 0.5,
+                delay: 0.2
+              }} 
+              className="max-w-4xl mx-auto mb-10 space-y-4"
+            >
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <div className="relative">
@@ -226,69 +243,82 @@ const CityList = () => {
             </motion.div>
 
             <div className="max-w-6xl mx-auto">
-              {Object.entries(groupedCities).length > 0 ? Object.entries(groupedCities)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([country, cities], i) => (
-                  <motion.div key={country} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }} className="mb-8">
-                    <Collapsible open={!!openCountries[country]} className="w-full">
-                      <CollapsibleTrigger
-                        onClick={() => toggleCountry(country)}
-                        className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg">
-                        <h2 className="text-xl font-bold text-white">{country}</h2>
-                        <div className="ml-auto px-3 py-1 bg-[#38D1BF]/10 rounded-full text-sm text-[#38D1BF] font-medium">
-                          {cities.length} {cities.length === 1 ? t("citylist.city", "city") : t("citylist.cities", "cities")}
-                        </div>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {cities.map((city, index) => (
-                            <motion.div key={city.url2} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.5, delay: index * 0.05 }}>
-                              <CityCard
-                                name={getLocalizedField(city, 'name') || ''}
-                                state={getLocalizedField(city, 'state')}
-                                description={t("citylist.connect_with_friends", "Connect with friends in") + " " + (getLocalizedField(city, 'name') || '')}
-                                link={`/cities${city.url2}`}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
+              {Object.entries(groupedCities).length > 0 ? (
+                Object.entries(groupedCities)
+                  .sort(([a], [b]) => a.localeCompare(b))
+                  .map(([country, cities], i) => (
+                    <motion.div 
+                      key={country} 
+                      initial={{ opacity: 0, y: 20 }} 
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }} 
+                      className="mb-8"
+                    >
+                      <Collapsible open={!!openCountries[country]} className="w-full">
+                        <CollapsibleTrigger
+                          onClick={() => toggleCountry(country)}
+                          className="flex items-center w-full p-4 mb-4 bg-gray-800/70 rounded-lg"
+                        >
+                          <h2 className="text-xl font-bold text-white">{country}</h2>
+                          <div className="ml-auto px-3 py-1 bg-[#38D1BF]/10 rounded-full text-sm text-[#38D1BF] font-medium">
+                            {cities.length} {cities.length === 1 ? t("citylist.city", "city") : t("citylist.cities", "cities")}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {cities.map((city, index) => (
+                              <motion.div 
+                                key={city.url2} 
+                                initial={{ opacity: 0, y: 20 }} 
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.05 }}
+                              >
+                                <CityCard
+                                  name={getLocalizedField(city, 'name') || ''}
+                                  state={getLocalizedField(city, 'state')}
+                                  description={t("citylist.connect_with_friends", "Connect with friends in") + " " + (getLocalizedField(city, 'name') || '')}
+                                  link={`/cities${city.url2}`}
+                                />
+                              </motion.div>
+                            ))}
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </motion.div>
+                  ))
+              ) : (
+                <div className="text-left py-12">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: .5 }}
+                  >
+                    <CityCard
+                      name={t("citylist.cant_find_city", "Can't find your city?")}
+                      state={t("citylist.worldwide", "Worldwide")}
+                      description={t("citylist.your_city_next", "Your city's next—Lead the way!")}
+                      link="/matchmaking"
+                    />
                   </motion.div>
-                )) : (
-                  <div className="text-left py-12">
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 2, duration: .5 }}
-                    >
-                        <CityCard
-                          name={t("citylist.cant_find_city", "Can't find your city?")}
-                          state={t("citylist.worldwide", "Worldwide")}
-                          description={t("citylist.your_city_next", "Your city's next—Lead the way!")}
-                          link="/matchmaking"
-                        />
-                      </motion.div>
-                    <Button
-                      variant="outline"
-                      className="mt-4 text-[#38D1BF] border-[#38D1BF]/40 hover:bg-[#38D1BF]/20 rounded-md"
-                      onClick={() => {
-                        setSearchTerm("");
-                        setSelectedCountry("");
-                      }}
-                    >
-                      {t("citylist.clear_filters", "Clear Filters")}
-                    </Button>
-                  </div>
-                )}
+                  <Button
+                    variant="outline"
+                    className="mt-4 text-[#38D1BF] border-[#38D1BF]/40 hover:bg-[#38D1BF]/20 rounded-md"
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedCountry("");
+                    }}
+                  >
+                    {t("citylist.clear_filters", "Clear Filters")}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </section>
       </main>
       <Footer />
-    </div>;
+    </div>
+  );
 };
-export default CityList;
 
+export default CityList;
