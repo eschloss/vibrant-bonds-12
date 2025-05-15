@@ -46,7 +46,6 @@ const CityPage = () => {
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
   };
 
-
   
   useEffect(() => {
     const fetchCities = async () => {
@@ -78,6 +77,12 @@ const CityPage = () => {
           language: matchedCity.language, // Get language from API
           lat: matchedCity.lat, // Get latitude from API
           lng: matchedCity.lng  // Get longitude from API
+        });
+
+        console.log("Geo:", {
+          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
+          lat: cityData.lat,
+          lng: cityData.lng
         });
 
         window.scrollTo(0, 0);

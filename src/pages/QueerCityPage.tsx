@@ -36,7 +36,7 @@ const QueerCityPage = () => {
         ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse`
         : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
     },
-    image: cityData?.image,
+    image: typeof cityData?.image === "string" ? cityData.image : undefined,
   };
 
   useEffect(() => {
