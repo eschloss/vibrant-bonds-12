@@ -79,12 +79,6 @@ const CityPage = () => {
           lng: matchedCity.lng  // Get longitude from API
         });
 
-        console.log("Geo:", {
-          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
-          lat: cityData.lat,
-          lng: cityData.lng
-        });
-
         window.scrollTo(0, 0);
         document.documentElement.classList.add('dark');
       } catch (err) {
