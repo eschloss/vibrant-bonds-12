@@ -14,7 +14,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const About = () => {
   const { currentLanguage } = useLanguage();
   
-  // Set SEO metadata for About page
+  // Enhanced SEO metadata for About page
   useSeo({
     title: {
       en: "About Pulse | Making Friendship Simple",
@@ -24,7 +24,15 @@ const About = () => {
       en: "Learn about Pulse's mission to connect people and build meaningful friendships through our group matching technology",
       es: "Conoce la misión de Pulse para conectar personas y construir amistades significativas a través de nuestra tecnología de emparejamiento de grupos"
     },
-    pathname: "/about"
+    pathname: "/about",
+    keywords: [
+      "friendship platform", "social connections", "group matching", "friend finder",
+      "real-life meetups", "community building", "social networking", "pulse app"
+    ],
+    modifiedTime: "2025-05-15T12:00:00Z",
+    type: "article",
+    section: "About",
+    image: "/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
   });
 
   useEffect(() => {
