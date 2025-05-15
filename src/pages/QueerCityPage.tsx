@@ -24,24 +24,37 @@ const QueerCityPage = () => {
     lng?: number;
   } | null>(null);
 
-  // Set SEO metadata for this specific queer city
-  useSeo({
-    title: {
-      en: cityData ? `Meet New Queer Friends in ${cityData.name} | Pulse App` : 'Find Your Queer Crew | Pulse App',
-      es: cityData ? `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
-    },
-    description: {
-      en: cityData ? `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse` : 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
-      es: cityData ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse` : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
-    },
-    image: cityData?.image,
-    // Add geo schema for this city
-    geoData: cityData ? {
-      name: `${cityData.name}${cityData.state ? `, ${cityData.state}` : ''}, ${cityData.country}`,
-      lat: cityData.lat,
-      lng: cityData.lng
-    } : undefined
-  });
+  // ✅ 1. Construct SEO props *conditionally* but outside JSX/hooks
+  const seoProps = cityData
+    ? {
+        title: {
+          en: `Meet New Queer Friends in ${cityData.name} | Pulse App`,
+          es: `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App`
+        },
+        description: {
+          en: `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse`,
+          es: `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse`
+        },
+        image: cityData.image,
+        geoData: {
+          name: `${cityData.name}${cityData.state ? `, ${cityData.state}` : ''}, ${cityData.country}`,
+          lat: cityData.lat,
+          lng: cityData.lng
+        }
+      }
+    : {
+        title: {
+          en: 'Find Your Queer Crew | Pulse App',
+          es: 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
+        },
+        description: {
+          en: 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
+          es: 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
+        }
+      };
+
+  // ✅ 2. Always call the hook with those props (it will rerun when cityData changes)
+  useSeo(seoProps);
 
   useEffect(() => {
     const fetchCities = async () => {
