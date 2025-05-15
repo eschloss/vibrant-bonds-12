@@ -61,6 +61,13 @@ const CityPage = () => {
         : 'Pulse te conecta con personas afines para formar amistades significativas'
     },
     image: cityData?.image,
+  geoData: cityData
+    ? {
+        name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`,
+        lat: typeof cityData.lat === "number" ? cityData.lat : undefined,
+        lng: typeof cityData.lng === "number" ? cityData.lng : undefined
+      }
+    : undefined
   };
 
   
