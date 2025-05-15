@@ -169,11 +169,7 @@ export const Seo = ({
         <meta name="ai:keywords" content={keywords.join(", ")} />
       )}
       <meta name="ai:last-modified" content={(modifiedTime || new Date().toISOString()).toString()} />
-      {hasValidGeo && (
-      <>
 
-      </>
-      )}
     </Helmet>
   );
 };
