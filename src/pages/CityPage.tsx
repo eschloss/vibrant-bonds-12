@@ -60,7 +60,7 @@ const CityPage = () => {
         ? `Conecta con personas afines en ${cityData.name} y planifica encuentros en la vida real con Pulse`
         : 'Pulse te conecta con personas afines para formar amistades significativas'
     },
-    image: '',
+    image: cityData?.image,
   };
 
   
