@@ -9,7 +9,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
   
-  const cities = ["London", "Los Angeles", "New York", "Austin", "Seattle", "Portland", "Chicago", "Boston"];
+  const cities = ["London", "Los Angeles", "New York", "Berlin", "Madrid", "Portland", "Chicago", "Boston"];
   
   return <footer className="bg-gray-900 dark:bg-gray-950 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 relative">
