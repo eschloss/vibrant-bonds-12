@@ -1,3 +1,4 @@
+
 import { Helmet } from 'react-helmet';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -140,6 +141,7 @@ export const Seo = ({
       <meta name="twitter:description" content={finalDescription} />
       {image && typeof image === "string" && <meta name="twitter:image" content={image} />}
 
+      {/* Stringify JSON for structured data */}
       <script type="application/ld+json">
         {JSON.stringify(organizationData)}
       </script>
