@@ -47,7 +47,7 @@ const CityPage = () => {
       : undefined
   };
   
-  useSeo(seoProps);
+  const seo = useSeo(seoProps);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -97,15 +97,18 @@ const CityPage = () => {
   if (!cityData) return null;
 
   return (
-    <CityMatchmakingTemplate 
-      cityName={cityData.name}
-      code={cityData.code}
-      country={cityData.country}
-      state={cityData.state}
-      image={cityData.image}
-      isQueer={false}
-      language={cityData.language}
-    />
+    <>
+      {seo}
+      <CityMatchmakingTemplate 
+        cityName={cityData.name}
+        code={cityData.code}
+        country={cityData.country}
+        state={cityData.state}
+        image={cityData.image}
+        isQueer={false}
+        language={cityData.language}
+      />
+    </>
   );
 };
 
