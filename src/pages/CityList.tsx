@@ -260,14 +260,18 @@ const CityList = () => {
                 )) : (
                   <div className="text-left py-12">
                     <div className="max-w-2xl mx-auto mb-8">
-                      <div>
+                        <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 2 }}
+  >
                         <CityCard
                           name={t("citylist.cant_find_city", "Can't find your city?")}
                           state={t("citylist.worldwide", "Worldwide")}
                           description={t("citylist.your_city_next", "Your city's next—Lead the way!")}
                           link="/matchmaking"
                         />
-                      </div>
+                      </motion.div>
                     </div>
                     <Button
                       variant="outline"
