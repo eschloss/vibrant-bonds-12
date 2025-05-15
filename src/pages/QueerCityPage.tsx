@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useSeo } from "@/hooks/useSeo";
+import { Seo } from "@/hooks/useSeo";
 
 type CityParam = {
   cityName: string;
@@ -24,37 +23,28 @@ const QueerCityPage = () => {
     lng?: number;
   } | null>(null);
 
-  // ✅ 1. Construct SEO props *conditionally* but outside JSX/hooks
-  const seoProps = cityData
-    ? {
-        title: {
-          en: `Meet New Queer Friends in ${cityData.name} | Pulse App`,
-          es: `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App`
-        },
-        description: {
-          en: `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse`,
-          es: `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse`
-        },
-        image: cityData.image,
-        geoData: {
+  const seoProps = {
+    title: {
+      en: cityData ? `Meet New Queer Friends in ${cityData.name} | Pulse App` : 'Find Your Queer Crew | Pulse App',
+      es: cityData ? `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
+    },
+    description: {
+      en: cityData
+        ? `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse`
+        : 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
+      es: cityData
+        ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse`
+        : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
+    },
+    image: cityData?.image,
+    geoData: cityData
+      ? {
           name: `${cityData.name}${cityData.state ? `, ${cityData.state}` : ''}, ${cityData.country}`,
           lat: cityData.lat,
           lng: cityData.lng
         }
-      }
-    : {
-        title: {
-          en: 'Find Your Queer Crew | Pulse App',
-          es: 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
-        },
-        description: {
-          en: 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
-          es: 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
-        }
-      };
-
-  // ✅ 2. Always call the hook with those props (it will rerun when cityData changes)
-  useSeo(seoProps);
+      : undefined
+  };
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -67,13 +57,11 @@ const QueerCityPage = () => {
           return citySlug === cityName?.toLowerCase();
         });
 
-        
         if (!matchedCity) {
           navigate("/cities");
           return;
         }
 
-        // Use Spanish city data if language is Spanish, otherwise English
         const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
         const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
         const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
@@ -105,15 +93,18 @@ const QueerCityPage = () => {
   if (!cityData) return null;
 
   return (
-    <CityMatchmakingTemplate 
-      cityName={cityData.name}
-      code={cityData.code}
-      country={cityData.country}
-      state={cityData.state}
-      image={cityData.image}
-      isQueer={true}
-      language={cityData.language}
-    />
+    <>
+      <Seo {...seoProps} />
+      <CityMatchmakingTemplate 
+        cityName={cityData.name}
+        code={cityData.code}
+        country={cityData.country}
+        state={cityData.state}
+        image={cityData.image}
+        isQueer={true}
+        language={cityData.language}
+      />
+    </>
   );
 };
 

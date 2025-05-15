@@ -8,14 +8,13 @@ import TeamSection from "@/components/about/TeamSection";
 import FriendshipFormula from "@/components/about/FriendshipFormula";
 import MissionSection from "@/components/about/MissionSection";
 import CTASection from "@/components/about/CTASection";
-import { useSeo } from "@/hooks/useSeo";
+import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
   const { currentLanguage } = useLanguage();
   
-  // Enhanced SEO metadata for About page
-  useSeo({
+  const seoProps = {
     title: {
       en: "About Pulse | Making Friendship Simple",
       es: "Sobre Pulse | Haciendo la Amistad Simple"
@@ -33,23 +32,26 @@ const About = () => {
     type: "article",
     section: "About",
     image: "/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
-  });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <Navbar />
-      <HeroSection />
-      <FounderStory />
-      <FriendshipFormula />
-      <TeamSection />
-      <MissionSection />
-      <CTASection />
-      <Footer />
-    </div>
+    <>
+      <Seo {...seoProps} />
+      <div className="min-h-screen bg-gray-900 text-white">
+        <Navbar />
+        <HeroSection />
+        <FounderStory />
+        <FriendshipFormula />
+        <TeamSection />
+        <MissionSection />
+        <CTASection />
+        <Footer />
+      </div>
+    </>
   );
 };
 
