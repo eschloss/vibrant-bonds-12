@@ -160,11 +160,15 @@ export const Seo = ({
       </script>
       {geoLocationData && (
         <>
-          <script type="application/ld+json">
-            {JSON.stringify(geoLocationData)}
-          </script>
-          <meta name="ai:geo:latitude" content={String(geoLocationData.geo.latitude)} />
-          <meta name="ai:geo:longitude" content={String(geoLocationData.geo.longitude)} />
+          <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(geoLocationData),
+      }}
+    />
+    <meta name="ai:geo:latitude" content={String(geoLocationData.geo.latitude)} />
+    <meta name="ai:geo:longitude" content={String(geoLocationData.geo.longitude)} />
+    <meta name="ai:geo:placename" content={geoLocationData.name} />
         </>
       )}
 
