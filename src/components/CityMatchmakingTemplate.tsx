@@ -93,7 +93,7 @@ const CityMatchmakingTemplate = ({
       <motion.div
   initial={{ opacity: 0 }}
   animate={{ opacity: 0.5 }}
-  transition={{ duration: 3 }}
+  transition={{ delay: 1, duration: 3 }}
         className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
         style={{
           backgroundImage: `url(https://${image})`
