@@ -92,9 +92,9 @@ const CityMatchmakingTemplate = ({
     {image && image !== "" && (
       <motion.div
           key={image} // this forces animation reset on image change
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 0.5 }}
-  transition={{ duration: 3 }}
+  initial={{ opacity: 0, filter: "blur(20px)" }}
+  animate={{ opacity: 0.5, filter: "blur(0px)" }}
+  transition={{ delay: 2, duration: 3 }}
         className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
         style={{
           backgroundImage: `url(https://${image})`
