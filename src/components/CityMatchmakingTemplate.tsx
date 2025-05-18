@@ -104,7 +104,10 @@ const CityMatchmakingTemplate = ({
           backgroundImage: `url(https://${peopleImage})`
         }}
       />
-  
+      )}
+
+
+    {image && image !== "" && (
       <motion.div
           key={image} // this forces animation reset on image change
   initial={{ opacity: 0, filter: "blur(20px)" }}
