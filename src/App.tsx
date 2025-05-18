@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import AppLayout from "./AppLayout";
+import Sitemap from "./pages/Sitemap";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,8 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          {/* Add the sitemap route outside of AppLayout to avoid wrapping it with UI elements */}
+          <Route path="/sitemap.xml" element={<Sitemap />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
