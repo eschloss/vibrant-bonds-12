@@ -100,7 +100,7 @@ const CityMatchmakingTemplate = ({
   transition={{ delay: 1, duration: 2 }}
         className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
         style={{
-          backgroundImage: `url(https://${peopleImage})`
+          backgroundImage: `url(${peopleImage})`
         }}
       />
       )}
