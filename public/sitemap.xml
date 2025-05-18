@@ -49,6 +49,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- City URLs -->
   <url>
     <loc>https://pulsenow.app/cities/amsterdam</loc>
     <lastmod>2025-05-18</lastmod>
@@ -62,7 +63,25 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/bangalore</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/bangkok</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/barcelona</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/beijing</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -74,7 +93,43 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/bogota</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/boston</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/brussels</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/budapest</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/buenos-aires</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/cairo</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/cape-town</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -86,7 +141,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://pulsenow.app/cities/dublin</loc>
+    <loc>https://pulsenow.app/cities/cologne</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -98,7 +153,139 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/dallas</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/delhi</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/denver</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/dublin</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/dubai</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/edinburgh</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/florence</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/frankfurt</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/geneva</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/hamburg</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/helsinki</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/hong-kong</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/houston</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/istanbul</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/jakarta</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/johannesburg</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/kiev</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/kuala-lumpur</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/kyoto</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/lagos</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/las-vegas</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/lima</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/lisbon</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -116,7 +303,55 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/luxembourg</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/lyon</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/madrid</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/malaga</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/manchester</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/manila</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/marseille</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/melbourne</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/mexico-city</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -128,13 +363,67 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/milan</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/minneapolis</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/montreal</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/moscow</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/mumbai</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/munich</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/nairobi</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/new-delhi</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/new-york</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/nice</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/oslo</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -164,6 +453,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/porto</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/prague</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/rio-de-janeiro</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/rome</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/rotterdam</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/san-diego</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -176,7 +495,73 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/santiago</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/sao-paulo</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/seattle</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/seoul</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/shanghai</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/singapore</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/stockholm</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/stuttgart</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/sydney</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/taipei</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/tel-aviv</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/tokyo</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -188,13 +573,116 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/valencia</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/vancouver</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://pulsenow.app/cities/venice</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/vienna</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/warsaw</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://pulsenow.app/cities/washington-dc</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/zurich</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Queer city pages -->
+  <url>
+    <loc>https://pulsenow.app/cities/amsterdam/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/austin/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/barcelona/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/berlin/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/london/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/los-angeles/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/madrid/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/miami/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/new-york/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/paris/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/san-francisco/queer</loc>
+    <lastmod>2025-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pulsenow.app/cities/toronto/queer</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
