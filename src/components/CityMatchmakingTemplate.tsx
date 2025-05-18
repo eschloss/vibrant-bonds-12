@@ -24,9 +24,6 @@ interface CityMatchmakingTemplateProps {
   language?: string;
 }
 
-const peopleOptions: string[] = ["https://s.kikiapp.eu/img/people/people1.jpg",
-                                 ];
-
 const CityMatchmakingTemplate = ({
   cityName,
   code,
@@ -38,6 +35,8 @@ const CityMatchmakingTemplate = ({
 }: CityMatchmakingTemplateProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+
+  const peopleOptions: string[] = ["https://s.kikiapp.eu/img/people/people1.jpg",];
   const peopleImage = peopleOptions[Math.floor(Math.random() * peopleOptions.length)];
 
   {
