@@ -2,7 +2,7 @@
 import { City } from "@/types/city";
 
 // Base URL for the site
-const BASE_URL = "https://pulse.kikiapp.eu";
+const BASE_URL = "https://pulsenow.app";
 
 // Static routes that should be included in the sitemap
 const STATIC_ROUTES = [
