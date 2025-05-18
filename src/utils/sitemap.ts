@@ -1,7 +1,7 @@
 
 import { City } from "@/types/city";
 
-// Base URL for the site
+// Base URL for the site - ensure this matches robots.txt
 const BASE_URL = "https://pulsenow.app";
 
 // Static routes that should be included in the sitemap
@@ -18,13 +18,19 @@ const STATIC_ROUTES = [
 
 /**
  * Generates XML content for the sitemap
- * @param cities - Array of cities from the API
  * @returns XML string for the sitemap
  */
 export async function generateSitemap(): Promise<string> {
   try {
     // Fetch cities data
-    const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities_expanded");
+    const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities_expanded", {
+      headers: {
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache'
+      },
+      // Add a reasonable timeout
+      signal: AbortSignal.timeout(10000) // 10 seconds timeout
+    });
     
     if (!response.ok) {
       throw new Error(`Failed to fetch cities: ${response.status}`);
@@ -45,23 +51,27 @@ export async function generateSitemap(): Promise<string> {
       xml += `  </url>\n`;
     });
     
-    // Add dynamic city routes
-    cities.forEach(city => {
-      if (city.url2) {
-        xml += `  <url>\n`;
-        xml += `    <loc>${BASE_URL}/cities${city.url2}</loc>\n`;
-        xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.7</priority>\n`;
-        xml += `  </url>\n`;
-        
-        // Also add queer city route
-        xml += `  <url>\n`;
-        xml += `    <loc>${BASE_URL}/cities${city.url2}/queer</loc>\n`;
-        xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.7</priority>\n`;
-        xml += `  </url>\n`;
-      }
-    });
+    // Add dynamic city routes if cities were successfully fetched
+    if (cities && Array.isArray(cities)) {
+      cities.forEach(city => {
+        if (city && city.url2) {
+          xml += `  <url>\n`;
+          xml += `    <loc>${BASE_URL}/cities${city.url2}</loc>\n`;
+          xml += `    <changefreq>weekly</changefreq>\n`;
+          xml += `    <priority>0.7</priority>\n`;
+          xml += `  </url>\n`;
+          
+          // Also add queer city route
+          xml += `  <url>\n`;
+          xml += `    <loc>${BASE_URL}/cities${city.url2}/queer</loc>\n`;
+          xml += `    <changefreq>weekly</changefreq>\n`;
+          xml += `    <priority>0.7</priority>\n`;
+          xml += `  </url>\n`;
+        }
+      });
+    } else {
+      console.warn("No cities data available or invalid data format");
+    }
     
     // Close XML content
     xml += '</urlset>';
@@ -69,6 +79,7 @@ export async function generateSitemap(): Promise<string> {
     return xml;
   } catch (error) {
     console.error("Error generating sitemap:", error);
-    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>';
+    // Return a minimal valid sitemap in case of error
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://pulsenow.app/</loc>\n    <priority>1.0</priority>\n  </url>\n</urlset>';
   }
 }

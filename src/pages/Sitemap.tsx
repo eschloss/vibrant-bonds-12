@@ -2,35 +2,48 @@
 import { useEffect, useState } from "react";
 import { generateSitemap } from "@/utils/sitemap";
 
+/**
+ * Sitemap component that generates an XML sitemap
+ * This component doesn't render any UI but sets the document content to XML
+ */
 const Sitemap = () => {
-  const [sitemap, setSitemap] = useState("");
-
   useEffect(() => {
+    // Set content type meta tag immediately
+    const meta = document.createElement("meta");
+    meta.httpEquiv = "Content-Type";
+    meta.content = "application/xml; charset=utf-8";
+    document.head.appendChild(meta);
+    
+    // Remove all existing body content
+    document.body.innerHTML = '';
+    
+    // Generate and set sitemap content
     const fetchSitemap = async () => {
       try {
         const xml = await generateSitemap();
-        setSitemap(xml);
         
-        // Set the correct content type for the document
-        const doc = document.implementation.createDocument("", "", null);
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xml, "application/xml");
-        document.documentElement.replaceWith(xmlDoc.documentElement);
+        // Create a pre element to display the XML
+        const pre = document.createElement('pre');
+        pre.textContent = xml;
+        document.body.appendChild(pre);
         
-        // Set content type meta tag
-        const meta = document.createElement("meta");
-        meta.httpEquiv = "Content-Type";
-        meta.content = "text/xml; charset=utf-8";
-        document.head.appendChild(meta);
+        // Also set response headers via meta tags
+        document.title = "Sitemap"; // Clear the title
       } catch (error) {
         console.error("Error setting sitemap:", error);
+        document.body.textContent = 'Error generating sitemap';
       }
     };
 
     fetchSitemap();
+    
+    // Cleanup
+    return () => {
+      document.head.removeChild(meta);
+    };
   }, []);
 
-  return null; // This component doesn't render any UI
+  return null;
 };
 
 export default Sitemap;
