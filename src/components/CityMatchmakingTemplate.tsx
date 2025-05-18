@@ -24,6 +24,9 @@ interface CityMatchmakingTemplateProps {
   language?: string;
 }
 
+const peopleOptions: string[] = ["https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                 ];
+
 const CityMatchmakingTemplate = ({
   cityName,
   code,
@@ -35,6 +38,7 @@ const CityMatchmakingTemplate = ({
 }: CityMatchmakingTemplateProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  const peopleImage = peopleOptions[Math.floor(Math.random() * peopleOptions.length)];
 
   {
     image && <Helmet>
@@ -90,6 +94,17 @@ const CityMatchmakingTemplate = ({
 
     {/* Conditionally rendered custom background image */}
     {image && image !== "" && (
+      <motion.div
+          key={peopleImage} // this forces animation reset on image change
+  initial={{ opacity: 0, filter: "blur(20px)" }}
+  animate={{ opacity: 0.5, filter: "blur(0px)" }}
+  transition={{ delay: 1, duration: 2 }}
+        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
+        style={{
+          backgroundImage: `url(https://${peopleImage})`
+        }}
+      />
+  
       <motion.div
           key={image} // this forces animation reset on image change
   initial={{ opacity: 0, filter: "blur(20px)" }}
