@@ -91,20 +91,7 @@ const CityMatchmakingTemplate = ({
     <div className="absolute top-[16%] right-[16%] w-10 h-10 rounded-full bg-pulse-coral/20 animate-bounce-gentle z-20"></div>
     <div className="absolute bottom-[20%] left-[20%] w-18 h-18 rounded-full bg-pulse-teal/15 animate-float z-20"></div>
 
-    {/* Conditionally rendered custom background image */}
-    {image && image !== "" && (
-      <motion.div
-          key={peopleImage} // this forces animation reset on image change
-  initial={{ opacity: 0, filter: "blur(20px)" }}
-  animate={{ opacity: 0.5, filter: "blur(0px)" }}
-  transition={{ delay: 1, duration: 2 }}
-        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
-        style={{
-          backgroundImage: `url(${peopleImage})`
-        }}
-      />
-      )}
-
+        {/* Conditionally rendered custom background image */}
 
     {image && image !== "" && (
       <motion.div
@@ -118,6 +105,19 @@ const CityMatchmakingTemplate = ({
         }}
       />
     )}
+
+
+      <motion.div
+          key={peopleImage} // this forces animation reset on image change
+  initial={{ opacity: 0, filter: "blur(20px)" }}
+  animate={{ opacity: 0.5, filter: "blur(0px)" }}
+  transition={{ delay: 1, duration: 2 }}
+        className="absolute inset-0 z-0 bg-cover bg-center blur-sm opacity-50"
+        style={{
+          backgroundImage: `url(${peopleImage})`
+        }}
+      />
+
 
     {/* Gradient overlay on top of image */}
     <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/30 to-transparent backdrop-blur-sm mix-blend-lighten" />
