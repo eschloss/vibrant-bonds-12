@@ -45,7 +45,26 @@ const CityMatchmakingTemplate = ({
     "https://images.unsplash.com/photo-1627125850942-3da2bf94cfcf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     
   ];
-  const peopleImage = peopleOptions[Math.floor(Math.random() * peopleOptions.length)];
+  function cityScore(cityName: string, state: string, country: string): number {
+    const citySum = cityName
+        .split("")
+        .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    const stateSum = state
+        .split("")
+        .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    const countrySum = country
+        .split("")
+        .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    
+    const today = new Date();
+    const dayOfMonth = today.getDate();
+  
+    const total = citySum + dayOfMonth + stateSum + countrySum;
+  
+    return total;
+  }
+  
+  const peopleImage = peopleOptions[cityScore(cityName, state, country) % peopleOptions.length];
 
   {
     image && <Helmet>
