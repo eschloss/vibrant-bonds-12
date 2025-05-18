@@ -36,7 +36,7 @@ const CityMatchmakingTemplate = ({
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
 
-  const peopleOptions: string[] = ["https://images.unsplash.com/photo-1708094018248-c110ceb1aa37?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",];
+  const peopleOptions: string[] = ["https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",];
   const peopleImage = peopleOptions[Math.floor(Math.random() * peopleOptions.length)];
 
   {
