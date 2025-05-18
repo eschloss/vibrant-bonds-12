@@ -72,10 +72,9 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/sitemap.xml" element={<Sitemap />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          {/* Make the sitemap route more explicit and outside of AppLayout */}
-          <Route path="/sitemap.xml" element={<Sitemap />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
