@@ -24,7 +24,7 @@ interface CityMatchmakingTemplateProps {
   language?: string;
 }
 
-const peopleOptions: string[] = ["https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+const peopleOptions: string[] = ["https://s.kikiapp.eu/img/people/people1.jpg",
                                  ];
 
 const CityMatchmakingTemplate = ({
