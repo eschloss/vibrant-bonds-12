@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pulse.kikiapp.eu/sitemap.xml
+Sitemap: https://pulsenow.app/sitemap.xml
