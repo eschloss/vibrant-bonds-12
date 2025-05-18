@@ -134,6 +134,7 @@ const CityMatchmakingTemplate = ({
     )}
 
 
+    {(!image || image == "") && (
       <motion.div
           key={peopleImage} // this forces animation reset on image change
   initial={{ opacity: 0, filter: "blur(20px)" }}
@@ -144,6 +145,8 @@ const CityMatchmakingTemplate = ({
           backgroundImage: `url(${peopleImage})`
         }}
       />
+    )}
+
 
 
     {/* Gradient overlay on top of image */}
