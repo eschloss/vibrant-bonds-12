@@ -22,12 +22,7 @@ const Communities = () => {
       es: "Transforma tu comunidad con el emparejamiento grupal de Pulse. Crea conexiones significativas entre miembros a través de grupos pequeños y encuentros facilitados."
     },
     keywords: ["community platform", "group matching", "member engagement", "community building", "friendship groups", "AI community matching"],
-    type: "website",
-    geoData: {
-      name: "Pulse Community Platform",
-      lat: 37.7749,
-      lng: -122.4194
-    }
+    type: "website"
   };
   
   const communitySteps = [{
