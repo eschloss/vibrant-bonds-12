@@ -1,7 +1,5 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Users, Asterisk, Network, CalendarDays, Sparkles, Gamepad2, Briefcase, GraduationCap, Building, Megaphone, MessageSquare, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,9 +7,28 @@ import { Card, CardContent } from "@/components/ui/card";
 import AiIcebreakers from "@/components/AiIcebreakers";
 import CommunitySignupForm from "@/components/CommunitySignupForm";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Seo } from "@/hooks/useSeo";
 
 const Communities = () => {
   const { t } = useTranslation();
+  
+  const seoProps = {
+    title: {
+      en: "Community Connection Platform | Strengthen Member Bonds | Pulse",
+      es: "Plataforma de Conexión Comunitaria | Fortalece Vínculos | Pulse"
+    },
+    description: {
+      en: "Transform your community with Pulse's AI-powered group matching. Create meaningful connections between members through curated small groups and facilitated meetups.",
+      es: "Transforma tu comunidad con el emparejamiento grupal de Pulse. Crea conexiones significativas entre miembros a través de grupos pequeños y encuentros facilitados."
+    },
+    keywords: ["community platform", "group matching", "member engagement", "community building", "friendship groups", "AI community matching"],
+    type: "website",
+    geoData: {
+      name: "Pulse Community Platform",
+      lat: 37.7749,
+      lng: -122.4194
+    }
+  };
   
   const communitySteps = [{
     icon: Users,
@@ -61,7 +78,9 @@ const Communities = () => {
     description: t("communities.types.special.description", "From niche fandoms to quirky causes, Pulse gathers your one-of-a-kind crowd—so even the most offbeat passions find their crew.")
   }];
   
-  return <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      <Seo {...seoProps} />
       <Navbar />
 
       {/* Hero Section */}
@@ -258,6 +277,8 @@ const Communities = () => {
         </div>
       </section>
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Communities;
