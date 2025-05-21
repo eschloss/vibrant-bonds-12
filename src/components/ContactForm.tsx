@@ -129,7 +129,10 @@ const ContactForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField control={form.control} name="name" render={({ field }) => (
           <FormItem>
-            <FormLabel as="h3" className="font-medium">{t("contact.form.name", "Name")}</FormLabel>
+            <div className="flex items-center">
+              <FormLabel className="font-medium">{t("contact.form.name", "Name")}</FormLabel>
+              <h3 className="sr-only">{t("contact.form.name", "Name")}</h3>
+            </div>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.name_placeholder", "Your name")}
@@ -142,7 +145,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="email" render={({ field }) => (
           <FormItem>
-            <FormLabel as="h3" className="font-medium">{t("contact.form.email", "Email")}</FormLabel>
+            <div className="flex items-center">
+              <FormLabel className="font-medium">{t("contact.form.email", "Email")}</FormLabel>
+              <h3 className="sr-only">{t("contact.form.email", "Email")}</h3>
+            </div>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.email_placeholder", "Your email address")}
@@ -156,7 +162,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="phone" render={({ field }) => (
           <FormItem>
-            <FormLabel as="h3" className="font-medium">{t("contact.form.phone", "Phone (optional)")}</FormLabel>
+            <div className="flex items-center">
+              <FormLabel className="font-medium">{t("contact.form.phone", "Phone (optional)")}</FormLabel>
+              <h3 className="sr-only">{t("contact.form.phone", "Phone (optional)")}</h3>
+            </div>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.phone_placeholder", "Your phone number")}
@@ -170,7 +179,10 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="message" render={({ field }) => (
           <FormItem>
-            <FormLabel as="h3" className="font-medium">{t("contact.form.message", "Message")}</FormLabel>
+            <div className="flex items-center">
+              <FormLabel className="font-medium">{t("contact.form.message", "Message")}</FormLabel>
+              <h3 className="sr-only">{t("contact.form.message", "Message")}</h3>
+            </div>
             <FormControl>
               <Textarea 
                 placeholder={t("contact.form.message_placeholder", "What would you like to tell us?")}
