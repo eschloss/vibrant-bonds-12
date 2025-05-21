@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -128,7 +129,7 @@ const ContactForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField control={form.control} name="name" render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("contact.form.name", "Name")}</FormLabel>
+            <FormLabel as="h3" className="font-medium">{t("contact.form.name", "Name")}</FormLabel>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.name_placeholder", "Your name")}
@@ -141,7 +142,7 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="email" render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("contact.form.email", "Email")}</FormLabel>
+            <FormLabel as="h3" className="font-medium">{t("contact.form.email", "Email")}</FormLabel>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.email_placeholder", "Your email address")}
@@ -155,7 +156,7 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="phone" render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("contact.form.phone", "Phone (optional)")}</FormLabel>
+            <FormLabel as="h3" className="font-medium">{t("contact.form.phone", "Phone (optional)")}</FormLabel>
             <FormControl>
               <Input 
                 placeholder={t("contact.form.phone_placeholder", "Your phone number")}
@@ -169,7 +170,7 @@ const ContactForm = () => {
         )} />
         <FormField control={form.control} name="message" render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("contact.form.message", "Message")}</FormLabel>
+            <FormLabel as="h3" className="font-medium">{t("contact.form.message", "Message")}</FormLabel>
             <FormControl>
               <Textarea 
                 placeholder={t("contact.form.message_placeholder", "What would you like to tell us?")}
