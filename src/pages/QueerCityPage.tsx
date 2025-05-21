@@ -27,7 +27,7 @@ const QueerCityPage = () => {
     title: {
       en: cityData
         ? `Meet Gay, Lesbian, & Queer Friends in ${cityData.name} | Pulse App`
-        : 'Find LGBTQ+, Gay, Lesbian & Queer Friends Near You | Pulse App',
+        : 'Find LGBTQ+, Gay, Lesbian, & Queer Friends Near You | Pulse App',
       es: cityData
         ? `Conoce Amigues Gay, Lesbianas y Queer en ${cityData.name} | Pulse App`
         : 'Encuentra Amigues LGBTQ+, Gay, Lesbianas y Queer Cerca de Ti | Pulse App'
