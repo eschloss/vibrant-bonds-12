@@ -25,16 +25,20 @@ const QueerCityPage = () => {
 
   const seoProps = {
     title: {
-      en: cityData ? `Meet New Queer Friends in ${cityData.name} | Pulse App` : 'Find Your Queer Crew | Pulse App',
-      es: cityData ? `Conoce Nuevos Amigos LGBTQ+ en ${cityData.name} | Pulse App` : 'Encuentra Tu Grupo LGBTQ+ | Pulse App'
+      en: cityData
+        ? `Meet Gay, Lesbian & Queer Friends in ${cityData.name} | Pulse App`
+        : 'Find LGBTQ+, Gay, Lesbian & Queer Friends Near You | Pulse App',
+      es: cityData
+        ? `Conoce Amigues Gay, Lesbianas y Queer en ${cityData.name} | Pulse App`
+        : 'Encuentra Amigues LGBTQ+, Gay, Lesbianas y Queer Cerca de Ti | Pulse App'
     },
     description: {
       en: cityData
-        ? `Connect with LGBTQ+ community in ${cityData.name} and plan real-life meetups with Pulse`
-        : 'Pulse matches you with like-minded LGBTQ+ people to form meaningful friendships',
+        ? `Join the gay, lesbian, queer & LGBTQ+ community in ${cityData.name}. Use Pulse to spark real friendships and plan fun in-person meetups.`
+        : `Pulse helps you meet gay, lesbian, queer & LGBTQ+ people nearby. Make real friends and plan IRL hangouts that actually happen.`,
       es: cityData
-        ? `Conecta con la comunidad LGBTQ+ en ${cityData.name} y planifica encuentros en la vida real con Pulse`
-        : 'Pulse te conecta con personas LGBTQ+ afines para formar amistades significativas'
+        ? `Únete a la comunidad gay, lesbiana, queer y LGBTQ+ en ${cityData.name}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`
+        : `Pulse te ayuda a conocer personas gay, lesbianas, queer y LGBTQ+ cerca de ti. Haz amistades reales y queda en la vida real.`
     },
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
     geoData: {
