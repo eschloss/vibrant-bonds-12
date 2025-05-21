@@ -26,7 +26,7 @@ const QueerCityPage = () => {
   const seoProps = {
     title: {
       en: cityData
-        ? `Meet Gay, Lesbian & Queer Friends in ${cityData.name} | Pulse App`
+        ? `Meet Gay, Lesbian, & Queer Friends in ${cityData.name} | Pulse App`
         : 'Find LGBTQ+, Gay, Lesbian & Queer Friends Near You | Pulse App',
       es: cityData
         ? `Conoce Amigues Gay, Lesbianas y Queer en ${cityData.name} | Pulse App`
