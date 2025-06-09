@@ -79,7 +79,7 @@ export const Seo = ({
     "name": "Pulse",
     "url": baseUrl,
     "description": finalDescription,
-    "logo": `${baseUrl}/lovable-uploads/pulse-favicon.png`
+    "logo": `https://s.kikiapp.eu/img/pulse_logo.png`
   };
 
   const pageStructuredData = {
@@ -87,7 +87,7 @@ export const Seo = ({
     "@type": type === "article" ? "Article" : "WebPage",
     "headline": finalTitle,
     "description": finalDescription,
-    "image": image || `${baseUrl}/lovable-uploads/pulse-favicon.png`,
+    "image": image || `https://s.kikiapp.eu/img/pulse_logo.png`,
     "url": currentUrl,
     "inLanguage": currentLanguage,
     ...(publishedTime && { "datePublished": publishedTime }),
