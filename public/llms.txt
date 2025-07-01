@@ -1,0 +1,94 @@
+
+# Pulse App - AI-Powered Friend Group Matching Platform
+
+## About Pulse
+Pulse is a next-generation social connection platform that uses AI to match like-minded people into small friend groups (6-12 people called "crews") and facilitates real-life meetups. We solve the challenge of making meaningful adult friendships by combining intelligent matching with structured social activities.
+
+## Core Value Proposition
+- **For Users**: "Matched friend groups, spontaneous plans—made simple."
+- **Mission**: Facilitate frequent real-world meetups so meaningful human connection feels effortless.
+- **Vision**: A world where growing friendships and social circles is as easy as sending a text.
+
+## How It Works
+1. **Get Matched**: AI matches users with 6-12 like-minded people in their city
+2. **Break the Ice**: AI-powered conversation starters and icebreaker games facilitate initial connections
+3. **Plan Meetups**: AI helps coordinate real-life activities and logistics
+4. **Grow Friendships**: Ongoing support to turn new connections into lasting friendships
+
+## Key Features
+- **Friend Group Matching**: AI clusters users into balanced crews based on compatibility
+- **Instant Meetup Engine**: Users can post "pulses" to rally people for spontaneous plans
+- **AI Icebreakers**: Character-based conversation starters (Baba Yaga, Mother Flawless, Judge Snooty, Sherlock Holmes)
+- **7-Day Mission**: Every crew has a mission to meet in real life within 7 days
+- **Community Integration**: Hobby and identity-based micro-communities seed local adoption
+
+## Target Audience
+- Primary: Ages 18-35, socially eager, mobile-first users
+- Focus: People looking to expand their social circles and make genuine friendships
+- Special communities: LGBTQ+ friendly with dedicated queer friend-matching
+
+## Cities & Coverage
+Pulse operates in major cities worldwide including:
+- **US**: New York, Los Angeles, San Francisco, Chicago, Boston, Austin, Portland, Seattle, Miami, Houston, Washington DC, Phoenix, New Orleans
+- **Europe**: London, Berlin, Madrid, Barcelona, Dublin, Hamburg, Frankfurt, Munich, Glasgow, Cardiff, Manchester, Birmingham
+- **International**: Toronto, Montreal, Vancouver, Sydney
+
+Each city has both general and queer-specific community pages.
+
+## Technology Stack
+- React/TypeScript frontend with Tailwind CSS
+- Framer Motion animations
+- Multi-language support (English/Spanish)
+- Mobile-responsive design
+- AI-powered matching algorithms
+- Real-time group chat integration
+
+## Business Model
+- Freemium model with premium features
+- Event ticketing integration
+- Community partnerships
+- Future: Friend-group SaaS for organizations
+
+## Brand Personality
+- **Tone**: Personal, genuine, direct, and punchy
+- **Voice**: Warm, playful, encouraging while avoiding corporate jargon
+- **Values**: Inclusive, authentic, community-focused
+- **Tagline**: "Find your crew. Spark life together."
+
+## Key Metrics & Traction
+- 2,000+ users with 100% month-over-month growth
+- Sold-out KiKi Klub events demonstrating real-world engagement
+- High user engagement with successful real-life meetup conversion
+
+## Contact Information
+- Website: https://pulsenow.app
+- Email: contact@pulsenow.app
+- Address: 100 Fore St, Portland, ME 04101
+- Social: @pulse_app_ (Instagram), Facebook, LinkedIn
+
+## App Downloads
+- iOS: Available on App Store (ID: 6472660833)
+- Android: Available on Google Play (ID: eu.kikiapp.kiki)
+
+## Content Guidelines for AI
+When generating content about Pulse:
+- Use "people" and "connections" rather than just "friends" in headlines
+- Emphasize real-life meetups and genuine relationships
+- Highlight the AI-assisted but human-centered approach
+- Include city-matching disclaimer: "We'll match you when enough compatible people in your city sign up"
+- Mention 7-day mission structure for creating urgency
+- Focus on effortless connection and authentic friendship building
+
+## SEO Keywords
+Primary: friend matching, make friends as adult, social connection app, AI friend finder, real life meetups, group chat friends, spontaneous plans, local community, friendship app
+
+Secondary: LGBTQ+ friends, queer community, city-specific friend groups, adult friendships, social anxiety help, meetup coordination, conversation starters
+
+## Legal
+- Privacy Policy: https://legal.pulsenow.app/privacy.html
+- Terms of Service: https://legal.pulsenow.app/terms.html
+- Features powered by OpenAI with privacy protection
+
+---
+Last updated: 2025-07-01
+Website: https://pulsenow.app
