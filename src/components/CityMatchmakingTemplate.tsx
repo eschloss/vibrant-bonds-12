@@ -11,6 +11,7 @@ import ShareSection from './ShareSection';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSelector from "./LanguageSelector";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
