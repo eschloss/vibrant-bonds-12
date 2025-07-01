@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -178,7 +179,7 @@ const CityMatchmakingTemplate = ({
                   </>
                 ) : (
                   <>
-                    {t("city.meet_new", "Meet New")}{isQueer ? <br /> : " "}
+                    {t("city.meet_new", "Meet New")}{isQueer && isAffinity ? <br /> : isQueer ? " " : " "}
                     {isQueer && isAffinity ? (
                       <>
                         {t("city.queer", "Queer")} {affinityName} {t("city.friends", "Friends")}<br />
