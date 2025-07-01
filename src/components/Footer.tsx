@@ -25,13 +25,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Column 1: About */}
             <div>
-              <h3 className="text-xl font-display font-bold mb-4 flex items-center">
+              <div className="text-xl font-display font-bold mb-4 flex items-center">
                 <img 
                   alt="Pulse Logo" 
                   className="h-24 md:h-28 object-contain" 
                   src="https://s.kikiapp.eu/img/pulse_logo.png" 
                 />
-              </h3>
+              </div>
               <p className="text-white/70 text-sm mb-4">
                 <Text id="footer.about_description" className="">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</Text>
               </p>
@@ -62,9 +62,9 @@ const Footer = () => {
 
             {/* Column 2: Company */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">
+              <div className="text-white text-lg font-bold mb-4">
                 <Text id="footer.company" className="">Company</Text>
-              </h3>
+              </div>
               <ul className="space-y-2">
                 <li>
                   <Link to="/" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
@@ -96,9 +96,9 @@ const Footer = () => {
 
             {/* Column 3: Cities */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">
+              <div className="text-white text-lg font-bold mb-4">
                 <Text id="footer.cities" className="">Cities</Text>
-              </h3>
+              </div>
               <ul className="grid grid-cols-2 gap-2">
                 {cities.map((city, i) => <li key={i}>
                     <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
@@ -116,9 +116,9 @@ const Footer = () => {
 
             {/* Column 4: Contact */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">
+              <div className="text-white text-lg font-bold mb-4">
                 <Text id="footer.contact_title" className="">Contact</Text>
-              </h3>
+              </div>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <Mail size={16} className="text-pulse-pink mt-1 mr-2" />
