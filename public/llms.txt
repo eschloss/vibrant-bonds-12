@@ -1,4 +1,3 @@
-
 # Pulse App - AI-Powered Friend Group Matching Platform
 
 ## About Pulse
@@ -35,30 +34,11 @@ Pulse operates in major cities worldwide including:
 
 Each city has both general and queer-specific community pages.
 
-## Technology Stack
-- React/TypeScript frontend with Tailwind CSS
-- Framer Motion animations
-- Multi-language support (English/Spanish)
-- Mobile-responsive design
-- AI-powered matching algorithms
-- Real-time group chat integration
-
-## Business Model
-- Freemium model with premium features
-- Event ticketing integration
-- Community partnerships
-- Future: Friend-group SaaS for organizations
-
 ## Brand Personality
 - **Tone**: Personal, genuine, direct, and punchy
 - **Voice**: Warm, playful, encouraging while avoiding corporate jargon
 - **Values**: Inclusive, authentic, community-focused
 - **Tagline**: "Find your crew. Spark life together."
-
-## Key Metrics & Traction
-- 2,000+ users with 100% month-over-month growth
-- Sold-out KiKi Klub events demonstrating real-world engagement
-- High user engagement with successful real-life meetup conversion
 
 ## Contact Information
 - Website: https://pulsenow.app
