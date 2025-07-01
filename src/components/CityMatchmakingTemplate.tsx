@@ -21,6 +21,9 @@ interface CityMatchmakingTemplateProps {
   state?: string;
   image?: string;
   isQueer?: boolean;
+  isAffinity?: boolean;
+  affinityName?: string;
+  affinityUrl?: string;
   language?: string;
 }
 
@@ -31,6 +34,9 @@ const CityMatchmakingTemplate = ({
   state,
   image,
   isQueer,
+  isAffinity,
+  affinityName,
+  affinityUrl,
   language
 }: CityMatchmakingTemplateProps) => {
   const { t } = useTranslation();
@@ -178,6 +184,10 @@ const CityMatchmakingTemplate = ({
               <>
                 {t("city.queer_friends", "Queer Friends")}<br />
               </>
+            ) : isAffinity ? (
+              <>
+                {affinityName} {t("city.friends", "Friends")}<br />
+              </>
             ) : (
               t("city.friends", "Friends ")
             )}
@@ -215,7 +225,7 @@ const CityMatchmakingTemplate = ({
         
        <div className="flex flex-col items-center">
        <Link 
-           to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
+           to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}` : `?language=${currentLanguage}`}`}
          >
           <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
@@ -282,7 +292,7 @@ const CityMatchmakingTemplate = ({
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 {t("city.ready_to_meet", "Ready to Meet")}<br/>
-                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">{cityName} {t("city.crew", "Crew")}</span>?
+                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">{cityName} {isAffinity ? affinityName : t("city.crew", "Crew")}</span>?
               </h2>
 
 
@@ -296,9 +306,7 @@ const CityMatchmakingTemplate = ({
               
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                 
-         
-                
-                <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}&language=${currentLanguage}` : ''}`}>
+                <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}` : ''}`}>
                   <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                     {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
                     <ArrowRight size={18} />
