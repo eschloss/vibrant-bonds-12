@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -180,7 +179,11 @@ const CityMatchmakingTemplate = ({
         ) : (
           <>
             {t("city.meet_new", "Meet New")}{" "}
-            {isQueer ? (
+            {isQueer && isAffinity ? (
+              <>
+                {t("city.queer", "Queer")} {affinityName} {t("city.friends", "Friends")}<br />
+              </>
+            ) : isQueer ? (
               <>
                 {t("city.queer_friends", "Queer Friends")}<br />
               </>
@@ -196,7 +199,6 @@ const CityMatchmakingTemplate = ({
           </>
         )}
       </h1>
-
 
       <motion.p className="whitespace-pre-line text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
               opacity: 0,
@@ -292,9 +294,16 @@ const CityMatchmakingTemplate = ({
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 {t("city.ready_to_meet", "Ready to Meet")}<br/>
-                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">{cityName} {isAffinity ? affinityName : t("city.crew", "Crew")}</span>?
+                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
+                  {cityName} {
+                    isQueer && isAffinity 
+                      ? `${t("city.queer", "Queer")} ${affinityName}` 
+                      : isAffinity 
+                        ? affinityName 
+                        : t("city.crew", "Crew")
+                  }
+                </span>?
               </h2>
-
 
               <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
                 <TimerDisplay {...timeLeft} />

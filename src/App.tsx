@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import CitiesExpanded from "./pages/CitiesExpanded";
 import CityPage from "./pages/CityPage";
 import QueerCityPage from "./pages/QueerCityPage";
 import AffinityCityPage from "./pages/AffinityCityPage";
+import QueerAffinityCityPage from "./pages/QueerAffinityCityPage";
 import Communities from "./pages/Communities";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -67,6 +69,7 @@ const App = () => (
             <Route path="/cities-expanded" element={<CitiesExpanded />} />
             <Route path="/cities/:cityName" element={<CityPage />} />
             <Route path="/cities/:cityName/queer" element={<QueerCityPage />} />
+            <Route path="/cities/:cityName/queer/:affinityName" element={<QueerAffinityCityPage />} />
             <Route path="/cities/:cityName/:affinityName" element={<AffinityCityPage />} />
             <Route path="/communities" element={<Communities />} />
             <Route path="/about" element={<About />} />
