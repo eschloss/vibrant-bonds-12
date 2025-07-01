@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -39,8 +38,7 @@ const CityMatchmakingTemplate = ({
   affinityUrl,
   language
 }: CityMatchmakingTemplateProps) => {
-  const { t } = useTranslation();
-  const { currentLanguage } = useLanguage();
+  const { t, currentLanguage } = useTranslation();
 
   const peopleOptions: string[] = [
     "https://s.kikiapp.eu/img/people/friends1.avif",
@@ -50,6 +48,7 @@ const CityMatchmakingTemplate = ({
     "https://s.kikiapp.eu/img/people/friends5.avif",
     "https://s.kikiapp.eu/img/people/friends6.avif",
   ];
+  
   function cityScore(cityName: string, state?: string, country?: string): number {
     const citySum = cityName
         .split("")
@@ -179,10 +178,17 @@ const CityMatchmakingTemplate = ({
                   </>
                 ) : (
                   <>
-                    {t("city.meet_new", "Meet New")}{isQueer && isAffinity ? <br /> : isQueer ? " " : " "}
+                    {t("city.meet_new", "Meet New")}{" "}
                     {isQueer && isAffinity ? (
                       <>
-                        {t("city.queer", "Queer")} {affinityName} {t("city.friends", "Friends")}<br />
+                        {currentLanguage === 'es' ? (
+                          <>amigos queer {affinityName}</>
+                        ) : (
+                          <>
+                            {t("city.queer", "Queer")} {affinityName} {t("city.friends", "Friends")}
+                          </>
+                        )}
+                        <br />
                       </>
                     ) : isQueer ? (
                       <>
@@ -190,10 +196,17 @@ const CityMatchmakingTemplate = ({
                       </>
                     ) : isAffinity ? (
                       <>
-                        {affinityName} {t("city.friends", "Friends")}<br />
+                        {currentLanguage === 'es' ? (
+                          <>amigos {affinityName}</>
+                        ) : (
+                          <>{affinityName} {t("city.friends", "Friends")}</>
+                        )}
+                        <br />
                       </>
                     ) : (
-                      t("city.friends", "Friends ")
+                      <>
+                        {t("city.friends", "Friends ")}<br />
+                      </>
                     )}
                     {t("city.in", "in")} <Link to="/cities"><span className="pulse-gradient-text">{cityName}</span>
                     </Link>
@@ -253,7 +266,6 @@ const CityMatchmakingTemplate = ({
             </motion.div>
           </div>
         </section>
-
 
         <section className="relative py-16 bg-gray-900 dark:bg-gray-950">
           <div className="absolute inset-0 opacity-10">
