@@ -32,7 +32,7 @@ export const city = {
     "city.help_launch": "Ayuda a lanzar Pulse en",
     "city.meet_new": "Haz nuevos",
     "city.queer": "amigos queer",
-    "city.friends": "amigos ",
+    "city.friends": "amigos",
     "city.queer_friends": "amigos queer",
     "city.in": "en",
     "city.signup_now": "Regístrate ahora—serás el primero en la fila para hacer match\ntan pronto como se unan más locales.",
