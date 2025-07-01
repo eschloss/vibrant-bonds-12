@@ -178,7 +178,7 @@ const CityMatchmakingTemplate = ({
           </>
         ) : (
           <>
-            {t("city.meet_new", "Meet New")}{" "}
+            {t("city.meet_new", "Meet New")}<br />
             {isQueer && isAffinity ? (
               <>
                 {t("city.queer", "Queer")} {affinityName} {t("city.friends", "Friends")}<br />
@@ -295,13 +295,7 @@ const CityMatchmakingTemplate = ({
               <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
                 {t("city.ready_to_meet", "Ready to Meet")}<br/>
                 {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
-                  {cityName} {
-                    isQueer && isAffinity 
-                      ? `${t("city.queer", "Queer")} ${affinityName}` 
-                      : isAffinity 
-                        ? affinityName 
-                        : t("city.crew", "Crew")
-                  }
+                  {cityName} {t("city.crew", "Crew")}
                 </span>?
               </h2>
 
