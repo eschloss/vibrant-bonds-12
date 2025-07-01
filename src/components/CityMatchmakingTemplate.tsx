@@ -11,7 +11,6 @@ import ShareSection from './ShareSection';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageSelector from "./LanguageSelector";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -178,7 +177,8 @@ const CityMatchmakingTemplate = ({
                   </>
                 ) : (
                   <>
-                    {t("city.meet_new", "Meet New")}{" "}
+                    {t("city.meet_new", "Meet New")}
+                    {isQueer && isAffinity ? <><br /></> : " "}
                     {isQueer && isAffinity ? (
                       <>
                         {currentLanguage === 'es' ? (
