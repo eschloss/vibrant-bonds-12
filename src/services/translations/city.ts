@@ -1,5 +1,4 @@
 
-
 export const city = {
   en: {
     "city.help_launch": "Help Launch Pulse in",
@@ -34,8 +33,8 @@ export const city = {
     "city.help_launch": "Ayuda a Lanzar Pulse en",
     "city.meet_new": "Haz nuevos",
     "city.queer": "queer",
-    "city.friends": "",
-    "city.queer_friends": "queer",
+    "city.friends": "amigos",
+    "city.queer_friends": "amigos queer",
     "city.in": "en",
     "city.signup_now": "Regístrate ahora—serás el primero en la fila para hacer match\ntan pronto como se unan más locales.",
     "city.making_friends": "Hacer amigos de adulto puede ser difícil. Estamos aquí para ayudar.",
@@ -60,4 +59,3 @@ export const city = {
     "city.share_with_friends": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local."
   }
 };
-
