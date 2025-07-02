@@ -95,7 +95,7 @@ const CitiesExpanded = () => {
       setShowCantFind(false);
       const timer = setTimeout(() => {
         setShowCantFind(true);
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     } else {
       setShowCantFind(false);
@@ -279,7 +279,12 @@ const CitiesExpanded = () => {
                     </Collapsible>
                   </motion.div>
                 )) : showCantFind && (
-                  <div className="text-left py-12">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="text-left py-12"
+                  >
                     <div className="max-w-2xl mx-auto mb-8">
                       <div>
                         <CityCard
@@ -300,7 +305,7 @@ const CitiesExpanded = () => {
                     >
                       {t("citylist.clear_filters", "Clear Filters")}
                     </Button>
-                  </div>
+                  </motion.div>
                 )}
             </div>
           </div>
