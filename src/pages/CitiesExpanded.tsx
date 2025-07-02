@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -32,6 +31,7 @@ const CitiesExpanded = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
+  const [showCantFind, setShowCantFind] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -55,7 +55,6 @@ const CitiesExpanded = () => {
     fetchCities();
   }, [t]);
 
-  // Helper function to get the correct name, country, or state based on the current language
   const getLocalizedField = (city: City, field: 'name' | 'country' | 'state') => {
     if (currentLanguage === 'es') {
       switch (field) {
@@ -92,6 +91,16 @@ const CitiesExpanded = () => {
     }
     setFilteredCities(result);
 
+    if (result.length === 0) {
+      setShowCantFind(false);
+      const timer = setTimeout(() => {
+        setShowCantFind(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowCantFind(false);
+    }
+
     const matchingCountries = new Set(result.map(city => getLocalizedField(city, 'country')));
 
     setOpenCountries(prev => {
@@ -119,12 +128,10 @@ const CitiesExpanded = () => {
     }
   }, []);
 
-  // Get unique countries in the correct language
   const countries = Array.from(
     new Set(allCities.map(city => getLocalizedField(city, 'country')))
   ).filter(Boolean).sort();
 
-  // Group cities by country
   const groupedCities = filteredCities.reduce<Record<string, City[]>>((acc, city) => {
     const countryName = getLocalizedField(city, 'country');
     if (!countryName) return acc;
@@ -271,7 +278,7 @@ const CitiesExpanded = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   </motion.div>
-                )) : (
+                )) : showCantFind && (
                   <div className="text-left py-12">
                     <div className="max-w-2xl mx-auto mb-8">
                       <div>
