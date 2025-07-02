@@ -38,8 +38,8 @@ function App() {
               <Route path="matchmaking" element={<Matchmaking />} />
               
               {/* Cities routes */}
-              <Route path="cities" element={<CitiesExpanded />} />
-              <Route path="cities-list" element={<CityList />} />
+              <Route path="cities" element={<CityList />} />
+              <Route path="cities-expanded" element={<CitiesExpanded />} />
               <Route path="cities/:cityName" element={<CityPage />} />
               <Route path="cities/:cityName/queer" element={<QueerCityPage />} />
               <Route path="cities/:cityName/:affinityName" element={<AffinityCityPage />} />
