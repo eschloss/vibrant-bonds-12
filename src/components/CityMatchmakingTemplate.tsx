@@ -42,7 +42,7 @@ const CityMatchmakingTemplate = ({
   const { t, currentLanguage } = useTranslation();
 
   // Get the current full URL for redirect parameter
-  const currentUrl = window.location.href;
+  const currentUrl = window.location.pathname.slice(1) + window.location.search + window.location.hash;
 
   const peopleOptions: string[] = [
     "https://s.kikiapp.eu/img/people/friends1.avif",
