@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
+import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
 
 const ContactForm = () => {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ const ContactForm = () => {
 
       const script = document.createElement("script");
       script.id = scriptId;
-      script.src = "https://www.google.com/recaptcha/api.js?render=6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
+      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
@@ -87,13 +88,13 @@ const ContactForm = () => {
       const token = await new Promise<string>((resolve, reject) => {
         (window as any).grecaptcha.ready(() => {
           (window as any).grecaptcha
-            .execute("6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL", { action: "contact_form" })
+            .execute(RECAPTCHA_SITE_KEY, { action: "contact_form" })
             .then(resolve)
             .catch(reject);
         });
       });
 
-      const response = await fetch("https://api.kikiapp.eu/contact/", {
+      const response = await fetch(`${API_BASE_URL}/contact/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
