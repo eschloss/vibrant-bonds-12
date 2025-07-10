@@ -14,6 +14,8 @@ interface AffinityData {
   name_en: string;
   name_es: string;
   url: string;
+  all_cities: boolean;
+  cities: string[];
 }
 
 const AffinityCityPage = () => {
@@ -88,6 +90,15 @@ const AffinityCityPage = () => {
 
         // If either city or affinity is not found, redirect to cities
         if (!matchedCity || !matchedAffinity) {
+          navigate("/cities");
+          return;
+        }
+
+        // Check if this affinity is available for this city
+        const isAffinityAvailable = matchedAffinity.all_cities || 
+          matchedAffinity.cities.includes(matchedCity.code);
+
+        if (!isAffinityAvailable) {
           navigate("/cities");
           return;
         }
