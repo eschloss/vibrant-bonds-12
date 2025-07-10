@@ -13,11 +13,6 @@ const Redirect = () => {
       // Decode the URL parameter and redirect
       let decodedUrl = decodeURIComponent(url);
       
-      // Replace ://www. with ://
-      if (decodedUrl.includes('://www.')) {
-        decodedUrl = decodedUrl.replace('://www.', '://');
-      }
-      
       window.location.href = decodedUrl;
     } else {
       // If no URL parameter, redirect to home
