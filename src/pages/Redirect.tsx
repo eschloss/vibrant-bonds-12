@@ -10,10 +10,27 @@ const Redirect = () => {
     const url = searchParams.get('url');
     
     if (url) {
-      // Decode the URL parameter and redirect
-      let decodedUrl = decodeURIComponent(url);
-      
-      window.location.href = decodedUrl;
+      try {
+        // Decode the URL parameter
+        let decodedUrl = decodeURIComponent(url);
+        
+        // Parse the URL to validate it
+        const urlObj = new URL(decodedUrl);
+        
+        // Only allow redirects to pulsenow.app and its subdomains
+        const allowedDomain = 'pulsenow.app';
+        const hostname = urlObj.hostname.toLowerCase();
+        
+        if (hostname === allowedDomain || hostname.endsWith('.' + allowedDomain)) {
+          window.location.href = decodedUrl;
+        } else {
+          // Invalid domain, redirect to home
+          navigate('/');
+        }
+      } catch (error) {
+        // Invalid URL, redirect to home
+        navigate('/');
+      }
     } else {
       // If no URL parameter, redirect to home
       navigate('/');
