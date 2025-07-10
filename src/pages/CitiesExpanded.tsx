@@ -181,7 +181,7 @@ const CitiesExpanded = () => {
                 {t("citylist.description", "Select your city to connect with like-minded people near you.")}
               </p>
               <div className="mt-4 text-sm text-[#38D1BF]">
-                Expanded City List
+                {t("citylist.expanded_list", "Expanded City List")}
               </div>
             </motion.div>
 

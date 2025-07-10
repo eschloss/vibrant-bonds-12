@@ -3,6 +3,7 @@ import { shared } from './shared';
 import { about } from './about';
 import { mission } from './mission';
 import { city } from './city';
+import { citylist } from './citylist';
 import { communities } from './communities';
 import { contact } from './contact';
 import { forms } from './forms';
@@ -18,6 +19,7 @@ export const translations = {
     ...about.en,
     ...mission.en,
     ...city.en,
+    ...citylist.en,
     ...communities.en,
     ...contact.en,
     ...forms.en,
@@ -31,6 +33,7 @@ export const translations = {
     ...about.es,
     ...mission.es,
     ...city.es,
+    ...citylist.es,
     ...communities.es,
     ...contact.es,
     ...forms.es,
