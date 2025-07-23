@@ -237,7 +237,7 @@ const CityMatchmakingTemplate = ({
                     <img 
                       src={`https://${communityData.business_image}`} 
                       alt={communityData.business_name}
-                      className="h-10 w-10 rounded-full object-cover border-2 border-gray-800"
+                      className="h-10 w-10 object-cover"
                     />
                   )}
                   <span className="text-base font-bold text-gray-800">{communityData.business_name}</span>
