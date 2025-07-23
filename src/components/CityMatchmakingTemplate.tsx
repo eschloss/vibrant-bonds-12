@@ -25,6 +25,16 @@ interface CityMatchmakingTemplateProps {
   affinityName?: string;
   affinityUrl?: string;
   language?: string;
+  isCommunity?: boolean;
+  communityData?: {
+    title1: string;
+    title2: string;
+    powered_by: string;
+    business_name: string;
+    business_image: string;
+    submatchId: string;
+    cityLabel: string;
+  };
 }
 
 const CityMatchmakingTemplate = ({
@@ -37,7 +47,9 @@ const CityMatchmakingTemplate = ({
   isAffinity,
   affinityName,
   affinityUrl,
-  language
+  language,
+  isCommunity,
+  communityData
 }: CityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();
 
@@ -169,7 +181,11 @@ const CityMatchmakingTemplate = ({
                 duration: 0.7
               }} className="text-center max-w-3xl mx-auto relative z-10">
               <h1 className="text-4xl font-bold mb-4 md:text-5xl text-black">
-                {!code ? (
+                {isCommunity && communityData ? (
+                  <>
+                    {communityData.title1} <span className="pulse-gradient-text">{communityData.title2}</span>
+                  </>
+                ) : !code ? (
                   <>
                     {t("city.help_launch", "Help Launch Pulse in")}{" "}
                     <span className="pulse-gradient-text">{cityName}</span>
@@ -213,6 +229,21 @@ const CityMatchmakingTemplate = ({
                 )}
               </h1>
 
+              {/* Business branding line for communities */}
+              {isCommunity && communityData && communityData.business_name && (
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <span className="text-lg text-gray-700">{communityData.powered_by}</span>
+                  {communityData.business_image && (
+                    <img 
+                      src={`https://${communityData.business_image}`} 
+                      alt={communityData.business_name}
+                      className="h-8 w-auto"
+                    />
+                  )}
+                  <span className="text-lg font-semibold text-gray-700">{communityData.business_name}</span>
+                </div>
+              )}
+
               <motion.p className="whitespace-pre-line text-xl md:text-2xl font-normal mb-8 text-gray-800" initial={{
                   opacity: 0,
                   y: 10
@@ -240,12 +271,12 @@ const CityMatchmakingTemplate = ({
                 
                <div className="flex flex-col items-center">
                 <Link 
-                   to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}
+                   to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}
                  >
                   <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
                     <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
                     <span className="relative z-10">
-                      {t("city.get_matched_in", "Get Matched in")} {cityName}
+                      {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
                     </span>
                     <ArrowRight size={18} />
                   </Button>
@@ -321,9 +352,9 @@ const CityMatchmakingTemplate = ({
                 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                   
-                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}>
+                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}>
                     <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                      {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
+                      {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
                       <ArrowRight size={18} />
                     </Button>
                   </Link>

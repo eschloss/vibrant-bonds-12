@@ -19,6 +19,7 @@ import CityPage from "@/pages/CityPage";
 import QueerCityPage from "@/pages/QueerCityPage";
 import AffinityCityPage from "@/pages/AffinityCityPage";
 import QueerAffinityCityPage from "@/pages/QueerAffinityCityPage";
+import CommunityPage from "@/pages/CommunityPage";
 import Redirect from "@/pages/Redirect";
 import NotFound from "@/pages/NotFound";
 
@@ -53,6 +54,9 @@ function App() {
               <Route path="cities/:cityName/queer" element={<QueerCityPage />} />
               <Route path="cities/:cityName/:affinityName" element={<AffinityCityPage />} />
               <Route path="cities/:cityName/queer/:affinityName" element={<QueerAffinityCityPage />} />
+              
+              {/* Community route */}
+              <Route path="communities/:community_url" element={<CommunityPage />} />
               
               {/* Redirect route */}
               <Route path="redirect" element={<Redirect />} />
