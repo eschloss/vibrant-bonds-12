@@ -16,6 +16,7 @@ interface CommunityData {
   powered_by: string;
   business_name: string;
   business_image: string;
+  business_url: string;
   background_image: string;
   city: string;
 }
@@ -94,6 +95,7 @@ const CommunityPage = () => {
           powered_by: communityData.powered_by,
           business_name: communityData.business_name,
           business_image: communityData.business_image,
+          business_url: communityData.business_url,
           submatchId: communityData.id,
           cityLabel: urlizedTitle2
         }}

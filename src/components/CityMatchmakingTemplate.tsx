@@ -32,6 +32,7 @@ interface CityMatchmakingTemplateProps {
     powered_by: string;
     business_name: string;
     business_image: string;
+    business_url: string;
     submatchId: string;
     cityLabel: string;
   };
@@ -234,13 +235,29 @@ const CityMatchmakingTemplate = ({
                 <div className="flex items-center justify-center gap-3 mb-8 mt-2">
                   <span className="text-base text-gray-600 font-medium">{communityData.powered_by}</span>
                   {communityData.business_image && (
-                    <img 
-                      src={`https://${communityData.business_image}`} 
-                      alt={communityData.business_name}
-                      className="h-10 max-w-20 object-contain"
-                    />
+                    communityData.business_url ? (
+                      <a href={communityData.business_url} target="_blank" rel="noopener noreferrer">
+                        <img 
+                          src={`https://${communityData.business_image}`} 
+                          alt={communityData.business_name}
+                          className="h-10 max-w-20 object-contain cursor-pointer"
+                        />
+                      </a>
+                    ) : (
+                      <img 
+                        src={`https://${communityData.business_image}`} 
+                        alt={communityData.business_name}
+                        className="h-10 max-w-20 object-contain"
+                      />
+                    )
                   )}
-                  <span className="text-base font-bold text-gray-800">{communityData.business_name}</span>
+                  {communityData.business_url ? (
+                    <a href={communityData.business_url} target="_blank" rel="noopener noreferrer" className="text-base font-bold text-gray-800 hover:text-gray-600 transition-colors">
+                      {communityData.business_name}
+                    </a>
+                  ) : (
+                    <span className="text-base font-bold text-gray-800">{communityData.business_name}</span>
+                  )}
                 </div>
               )}
 
