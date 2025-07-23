@@ -231,16 +231,16 @@ const CityMatchmakingTemplate = ({
 
               {/* Business branding line for communities */}
               {isCommunity && communityData && communityData.business_name && (
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-lg text-gray-700">{communityData.powered_by}</span>
+                <div className="flex items-center justify-center gap-3 mb-8 mt-2">
+                  <span className="text-base text-gray-600 font-medium">{communityData.powered_by}</span>
                   {communityData.business_image && (
                     <img 
                       src={`https://${communityData.business_image}`} 
                       alt={communityData.business_name}
-                      className="h-8 w-auto"
+                      className="h-10 w-10 rounded-full object-cover border border-gray-300"
                     />
                   )}
-                  <span className="text-lg font-semibold text-gray-700">{communityData.business_name}</span>
+                  <span className="text-base font-bold text-gray-800">{communityData.business_name}</span>
                 </div>
               )}
 

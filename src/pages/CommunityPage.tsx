@@ -74,8 +74,8 @@ const CommunityPage = () => {
 
   if (!communityData) return null;
 
-  // Create urlized version of title2 for cityLabel
-  const urlizedTitle2 = communityData.title2.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  // Create URL-encoded version of title2 for cityLabel
+  const urlizedTitle2 = encodeURIComponent(communityData.title2);
 
   return (
     <>
