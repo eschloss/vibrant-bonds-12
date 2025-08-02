@@ -75,8 +75,8 @@ const CommunityPage = () => {
 
   if (!communityData) return null;
 
-  // Create URL-encoded version of title2 for cityLabel
-  const urlizedTitle2 = encodeURIComponent(communityData.title2);
+  // Use title2 directly without encoding - it will be encoded in the template
+  const urlizedTitle2 = communityData.title2;
 
   return (
     <>
