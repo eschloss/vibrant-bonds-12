@@ -1,4 +1,5 @@
-export const sharedTranslations = {
+
+export const shared = {
   en: {
     "index.title": "Pulse: New Friends and IRL Plans",
     "index.description": "Meet like-minded people and plan real-life meetups with Pulse",
