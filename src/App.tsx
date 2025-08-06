@@ -25,8 +25,8 @@ import Partnerships from "@/pages/Partnerships";
 import AmbassadorProgram from "@/pages/AmbassadorProgram";
 import Careers from "@/pages/Careers";
 import MeetPip from "@/pages/MeetPip";
-import Events from "@/pages/Events";
-import EventsCity from "@/pages/EventsCity";
+import PlanIdeas from "@/pages/PlanIdeas";
+import PlanIdeasCity from "@/pages/PlanIdeasCity";
 import Redirect from "@/pages/Redirect";
 import NotFound from "@/pages/NotFound";
 
@@ -60,8 +60,8 @@ function App() {
                 <Route path="ambassador-program" element={<AmbassadorProgram />} />
                 <Route path="careers" element={<Careers />} />
                 <Route path="meet-pip" element={<MeetPip />} />
-                <Route path="events" element={<Events />} />
-                <Route path="events/:cityName" element={<EventsCity />} />
+                <Route path="plan-ideas" element={<PlanIdeas />} />
+                <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
                 
                 {/* Cities routes */}
                 <Route path="cities" element={<CityList />} />
