@@ -1,32 +1,15 @@
 
 export const shared = {
   en: {
-    // Navigation
-    "nav.home": "Home",
-    "nav.cities": "Cities",
-    "nav.communities": "Communities",
-    "nav.meet_pip": "Meet Pip",
-    "nav.about": "About",
-    "nav.blog": "Blog",
-    "nav.contact": "Contact",
-    "nav.careers": "Careers",
-    "nav.events": "Events",
-    "nav.partners": "Partners",
-    "nav.ambassador_program": "Ambassador Program",
-    
-    // Footer
+    // Footer translations
     "footer.about_description": "Reimagining how we make friends by turning digital connection into effortless Real-Life community.",
     "footer.app_store": "App Store",
     "footer.play_store": "Play Store",
     "footer.company": "Company",
     "footer.home": "Home",
-    "footer.meet_pip": "Meet Pip",
+    "footer.how_it_works": "How It Works",
     "footer.for_communities": "For Communities",
-    "footer.partnerships": "Partnerships",
-    "footer.ambassadors": "Ambassador Program",
     "footer.about_us": "About Us",
-    "footer.careers": "Careers",
-    "footer.events": "Events",
     "footer.contact": "Contact",
     "footer.blog": "Blog",
     "footer.cities": "Cities",
@@ -40,66 +23,35 @@ export const shared = {
     "footer.privacy_policy": "Privacy Policy",
     "footer.terms_of_service": "Terms of Service",
     
-    // Common buttons and CTAs
-    "cta.join_waitlist": "Join Waitlist",
-    "cta.get_started": "Get Started",
-    "cta.learn_more": "Learn More",
-    "cta.download_app": "Download App",
-    "cta.sign_up": "Sign Up",
-    "cta.contact_us": "Contact Us",
+    // Navbar translations
+    "navbar.home": "Home",
+    "navbar.how_it_works": "How it works",
+    "navbar.communities": "For Communities",
+    "navbar.about": "About Us",
+    "navbar.contact": "Contact",
+    "navbar.see_more_cities": "See More Cities",
+    "navbar.meet_your_crew": "Meet Your Crew",
     
-    // Common labels
-    "common.loading": "Loading...",
-    "common.error": "Error",
-    "common.success": "Success",
-    "common.submit": "Submit",
-    "common.cancel": "Cancel",
-    "common.close": "Close",
-    "common.save": "Save",
-    "common.edit": "Edit",
-    "common.delete": "Delete",
-    "common.back": "Back",
-    "common.next": "Next",
-    "common.previous": "Previous",
-    
-    // Status messages
-    "status.coming_soon": "Coming Soon",
-    "status.available_now": "Available Now",
-    "status.limited_spots": "Limited Spots Available",
+    // Share callout section
+    "share_callout.title": "Spread the word",
+    "share_callout.description": "Share Pulse with friends and help grow your local crew.",
   },
   es: {
-    // Navigation
-    "nav.home": "Inicio",
-    "nav.cities": "Ciudades",
-    "nav.communities": "Comunidades",
-    "nav.meet_pip": "Conoce a Pip",
-    "nav.about": "Acerca de",
-    "nav.blog": "Blog",
-    "nav.contact": "Contacto",
-    "nav.careers": "Carreras",
-    "nav.events": "Eventos",
-    "nav.partners": "Socios",
-    "nav.ambassador_program": "Programa de Embajadores",
-    
-    // Footer
-    "footer.about_description": "Reimaginando cómo hacemos amigos convirtiendo la conexión digital en una comunidad de vida real sin esfuerzo.",
+    // Footer translations
+    "footer.about_description": "Reimaginando cómo hacemos amigos al convertir la conexión digital en comunidad en la Vida Real sin esfuerzo.",
     "footer.app_store": "App Store",
     "footer.play_store": "Play Store",
     "footer.company": "Empresa",
     "footer.home": "Inicio",
-    "footer.meet_pip": "Conoce a Pip",
+    "footer.how_it_works": "Cómo Funciona",
     "footer.for_communities": "Para Comunidades",
-    "footer.partnerships": "Asociaciones",
-    "footer.ambassadors": "Programa de Embajadores",
-    "footer.about_us": "Acerca de Nosotros",
-    "footer.careers": "Carreras",
-    "footer.events": "Eventos",
+    "footer.about_us": "Nosotros",
     "footer.contact": "Contacto",
     "footer.blog": "Blog",
     "footer.cities": "Ciudades",
     "footer.view_all_cities": "Ver todas las ciudades",
     "footer.contact_title": "Contacto",
-    "footer.download_on": "Descargar en",
+    "footer.download_on": "Descarga en el",
     "footer.app_store_full": "App Store",
     "footer.get_it_on": "Consíguelo en",
     "footer.google_play": "Google Play",
@@ -107,31 +59,17 @@ export const shared = {
     "footer.privacy_policy": "Política de Privacidad",
     "footer.terms_of_service": "Términos de Servicio",
     
-    // Common buttons and CTAs
-    "cta.join_waitlist": "Únete a la Lista de Espera",
-    "cta.get_started": "Comenzar",
-    "cta.learn_more": "Saber Más",
-    "cta.download_app": "Descargar App",
-    "cta.sign_up": "Registrarse",
-    "cta.contact_us": "Contáctanos",
+    // Navbar translations
+    "navbar.home": "Inicio",
+    "navbar.how_it_works": "Cómo funciona",
+    "navbar.communities": "Para Comunidades",
+    "navbar.about": "Nosotros",
+    "navbar.contact": "Contacto",
+    "navbar.see_more_cities": "Ver Más Ciudades",
+    "navbar.meet_your_crew": "Conoce a Tu Grupo",
     
-    // Common labels
-    "common.loading": "Cargando...",
-    "common.error": "Error",
-    "common.success": "Éxito",
-    "common.submit": "Enviar",
-    "common.cancel": "Cancelar",
-    "common.close": "Cerrar",
-    "common.save": "Guardar",
-    "common.edit": "Editar",
-    "common.delete": "Eliminar",
-    "common.back": "Atrás",
-    "common.next": "Siguiente",
-    "common.previous": "Anterior",
-    
-    // Status messages
-    "status.coming_soon": "Próximamente",
-    "status.available_now": "Disponible Ahora",
-    "status.limited_spots": "Lugares Limitados Disponibles",
+    // Share callout section
+    "share_callout.title": "Corre la voz",
+    "share_callout.description": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local.",
   }
 };
