@@ -22,9 +22,9 @@ const Footer = () => {
         
         <div className="relative z-10">
           {/* Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             {/* Column 1: About */}
-            <div>
+            <div className="lg:col-span-2">
               <div className="text-xl font-display font-bold mb-4 flex items-center">
                 <img 
                   alt="Pulse Logo" 
@@ -91,6 +91,26 @@ const Footer = () => {
                     <Text id="footer.blog" className="">Blog</Text>
                   </Link>
                 </li>
+                <li>
+                  <Link to="/partners" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.partnerships" className="">Partnerships</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/ambassador-program" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.ambassador_program" className="">Ambassador Program</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/careers" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.careers" className="">Careers</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/meet-pip" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.meet_pip" className="">Meet Pip</Text>
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -99,14 +119,14 @@ const Footer = () => {
               <div className="text-white text-lg font-bold mb-4">
                 <Text id="footer.cities" className="">Cities</Text>
               </div>
-              <ul className="grid grid-cols-2 gap-2">
+              <ul className="grid grid-cols-1 gap-2">
                 {cities.map((city, i) => <li key={i}>
                     <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
                       <MapPin size={12} className="mr-1" />
                       {city}
                     </Link>
                   </li>)}
-                <li className="col-span-2 mt-2">
+                <li className="mt-2">
                   <Link to="/cities" className=" text-pulse-pink hover:text-pulse-pink-300 text-sm font-medium transition-colors">
                     <Text id="footer.view_all_cities" className="">View all cities</Text>
                   </Link>
