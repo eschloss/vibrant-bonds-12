@@ -19,12 +19,11 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "ui-theme",
-  ...props
 }: {
   children: ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
-} & React.ComponentProps<typeof ThemeProviderContext.Provider>) {
+}) {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
@@ -56,7 +55,7 @@ export function ThemeProvider({
   };
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider value={value}>
       {children}
     </ThemeProviderContext.Provider>
   );
