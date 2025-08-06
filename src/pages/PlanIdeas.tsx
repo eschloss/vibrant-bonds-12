@@ -6,17 +6,20 @@ import { Lightbulb, Users, MapPin, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 
 const PlanIdeas = () => {
+  const { t } = useTranslation();
+  
   const seoProps = {
     title: {
-      en: "Group Plan Ideas by City | Activity Inspiration | Pulse",
-      es: "Ideas de Planes Grupales por Ciudad | Inspiración de Actividades | Pulse"
+      en: t("plan_ideas.title", "Group Plan Ideas by City | Activity Inspiration | Pulse"),
+      es: t("plan_ideas.title", "Ideas de Planes Grupales por Ciudad | Inspiración de Actividades | Pulse")
     },
     description: {
-      en: "Discover creative group plan ideas and activities in cities worldwide. Find inspiration for unforgettable experiences with your friend group.",
-      es: "Descubre ideas creativas de planes grupales y actividades en ciudades de todo el mundo. Encuentra inspiración para experiencias inolvidables con tu grupo de amigos."
+      en: t("plan_ideas.description", "Discover creative group plan ideas and activities in cities worldwide. Find inspiration for unforgettable experiences with your friend group."),
+      es: t("plan_ideas.description", "Descubre ideas creativas de planes grupales y actividades en ciudades de todo el mundo. Encuentra inspiración para experiencias inolvidables con tu grupo de amigos.")
     },
     keywords: ["group plan ideas", "city activities", "friend group experiences", "activity inspiration", "group hangouts", "plan ideas by city"],
     type: "website"
@@ -96,17 +99,17 @@ const PlanIdeas = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 uppercase mb-4">
               <Lightbulb size={18} className="text-purple-400" />
-              Group Plan Ideas & Inspiration
+              {t("plan_ideas.hero.subtitle", "Group Plan Ideas & Inspiration")}
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Find Perfect Plan Ideas
+              {t("plan_ideas.hero.title1", "Find Perfect Plan Ideas")}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                For Your Friend Group
+                {t("plan_ideas.hero.title2", "For Your Friend Group")}
               </span>
             </h1>
             <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
-              Discover amazing group activity ideas in cities worldwide. From casual coffee hangouts to epic adventures, explore the kinds of plans that turn acquaintances into lifelong friends.
+              {t("plan_ideas.hero.description", "Discover amazing group activity ideas in cities worldwide. From casual coffee hangouts to epic adventures, explore the kinds of plans that turn acquaintances into lifelong friends.")}
             </p>
           </motion.div>
         </div>
@@ -116,9 +119,9 @@ const PlanIdeas = () => {
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Cities</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("plan_ideas.cities.title", "Explore Cities")}</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Click on any city to discover curated plan ideas perfect for friend groups. Each city has unique experiences waiting to be explored together.
+              {t("plan_ideas.cities.description", "Click on any city to discover curated plan ideas perfect for friend groups. Each city has unique experiences waiting to be explored together.")}
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -163,12 +166,12 @@ const PlanIdeas = () => {
       <section className="py-20 relative">
         <div className="container mx-auto px-4 relative z-10">
           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Planning?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("plan_ideas.cta.title", "Ready to Start Planning?")}</h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join Pulse to get matched with a friend group in your city. Pip will help you plan amazing experiences based on your interests and the activities that work best in your area.
+              {t("plan_ideas.cta.description", "Join Pulse to get matched with a friend group in your city. Pip will help you plan amazing experiences based on your interests and the activities that work best in your area.")}
             </p>
             <a href="/" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-              Join Pulse
+              {t("plan_ideas.cta.button", "Join Pulse")}
             </a>
           </div>
         </div>
