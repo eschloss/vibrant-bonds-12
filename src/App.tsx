@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -22,6 +21,12 @@ import QueerAffinityCityPage from "@/pages/QueerAffinityCityPage";
 import CommunityPage from "@/pages/CommunityPage";
 import Redirect from "@/pages/Redirect";
 import NotFound from "@/pages/NotFound";
+import Partners from "@/pages/Partners";
+import AmbassadorProgram from "@/pages/AmbassadorProgram";
+import Careers from "@/pages/Careers";
+import MeetPip from "@/pages/MeetPip";
+import Events from "@/pages/Events";
+import EventsCity from "@/pages/EventsCity";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +51,14 @@ function App() {
               <Route path="communities" element={<Communities />} />
               <Route path="blog" element={<Blog />} />
               <Route path="matchmaking" element={<Matchmaking />} />
+              
+              {/* New pages */}
+              <Route path="partners" element={<Partners />} />
+              <Route path="ambassador-program" element={<AmbassadorProgram />} />
+              <Route path="careers" element={<Careers />} />
+              <Route path="meet-pip" element={<MeetPip />} />
+              <Route path="events" element={<Events />} />
+              <Route path="events/:cityName" element={<EventsCity />} />
               
               {/* Cities routes */}
               <Route path="cities" element={<CityList />} />

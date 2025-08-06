@@ -72,13 +72,38 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/meet-pip" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.meet_pip" className="">Meet Pip</Text>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/communities" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.for_communities" className="">For Communities</Text>
                   </Link>
                 </li>
                 <li>
+                  <Link to="/partners" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.partnerships" className="">Partnerships</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/ambassador-program" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.ambassadors" className="">Ambassadors</Text>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/about" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.about_us" className="">About Us</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/careers" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.careers" className="">Careers</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/events" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.events" className="">Events</Text>
                   </Link>
                 </li>
                 <li>
