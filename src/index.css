@@ -153,6 +153,125 @@ html, body, #root {
   animation: glow-bar 3s ease-in-out infinite;
 }
 
+/* === Sophisticated Animation Keyframes === */
+@keyframes sophisticated-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(5px, -15px, 0) rotate(0.5deg);
+  }
+  50% {
+    transform: translate3d(-3px, -25px, 0) rotate(-0.3deg);
+  }
+  75% {
+    transform: translate3d(-8px, -15px, 0) rotate(0.2deg);
+  }
+}
+
+@keyframes ambient-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate3d(30px, -20px, 0) scale(1.05);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate3d(-20px, 15px, 0) scale(0.95);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes subtle-parallax {
+  0% {
+    transform: translateY(0) translateZ(0);
+  }
+  100% {
+    transform: translateY(-50px) translateZ(0);
+  }
+}
+
+@keyframes stagger-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes elegant-scale {
+  from {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  to {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes cinematic-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotateX(15deg);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+/* === Animation Classes === */
+.animate-sophisticated-float {
+  animation: sophisticated-float 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 25s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-stagger-up {
+  animation: stagger-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-elegant-scale {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-elegant-scale:hover {
+  animation: elegant-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-cinematic-reveal {
+  animation: cinematic-reveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+/* === Parallax & Depth === */
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.parallax-fast {
+  will-change: transform;
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 
 
   .section-padding {
