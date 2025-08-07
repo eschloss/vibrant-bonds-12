@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Star, Network, CalendarDays, Sparkles, Trophy, Heart, Zap, Gift, Crown, MessageSquare, Globe, DollarSign, TrendingUp, Target, Award, Share2, Megaphone, Building2, Users2, ArrowRight, CheckCircle, Lightbulb, MapPin, Clock, BarChart3 } from "lucide-react";
+import { Users, Star, Network, CalendarDays, Sparkles, Trophy, Heart, Zap, Gift, Crown, MessageSquare, Globe, DollarSign, TrendingUp, Target, Award, Share2, Megaphone, Building2, Users2, ArrowRight, CheckCircle, Lightbulb, MapPin, Clock, BarChart3, Palette, Handshake, Headphones } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -460,6 +460,102 @@ const AmbassadorProgram = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Support & Resources Section */}
+      <section className="py-20 relative bg-gradient-to-br from-blue-500/5 to-purple-500/5">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              We Support Your
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+                Success
+              </span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We provide custom materials, tools, and personalized support to help you succeed as an ambassador. 
+              Your success is our success.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Custom Materials",
+                description: "Professional posters, flyers, and merchandise tailored to your community",
+                icon: Palette,
+                features: ["Custom printed posters", "Branded flyers", "Pulse merchandise", "Digital assets"]
+              },
+              {
+                title: "Digital Support",
+                description: "Landing pages, social media content, and sharing tools",
+                icon: Share2,
+                features: ["Custom landing pages", "Social media templates", "Sharing buttons", "QR codes"]
+              },
+              {
+                title: "Partner Channels",
+                description: "Cross-promotion opportunities with our venue partners",
+                icon: Handshake,
+                features: ["Venue partnerships", "Co-marketing campaigns", "Event collaborations", "Local promotions"]
+              },
+              {
+                title: "Personalized Strategy",
+                description: "One-on-one support to develop your unique approach",
+                icon: Target,
+                features: ["Strategy sessions", "Market analysis", "Goal setting", "Progress tracking"]
+              },
+              {
+                title: "Community Tools",
+                description: "Resources to help you build and engage your network",
+                icon: Users,
+                features: ["Event planning guides", "Networking tips", "Community building", "Engagement tools"]
+              },
+              {
+                title: "Ongoing Support",
+                description: "Continuous assistance and resources as you grow",
+                icon: Headphones,
+                features: ["Regular check-ins", "Performance reviews", "New opportunities", "Training sessions"]
+              }
+            ].map((support, index) => (
+              <motion.div key={support.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pulse-pink to-pulse-blue flex items-center justify-center">
+                        <support.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold text-white">{support.title}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4">{support.description}</p>
+                    <div className="space-y-2">
+                      {support.features.map((feature, i) => (
+                        <div key={i} className="flex items-center gap-2 text-sm">
+                          <div className="w-1.5 h-1.5 rounded-full bg-pulse-pink"></div>
+                          <span className="text-gray-300">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }} className="text-center mt-16">
+            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Have Other Ideas?</h3>
+              <p className="text-gray-300 mb-6">
+                We're always looking for new ways to support our ambassadors. If you have ideas for materials, 
+                tools, or strategies that would help you be more successful, we want to hear about them.
+              </p>
+              <a href="mailto:ambassadors@pulsenow.app?subject=Ambassador Support Ideas" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+                <span>Share Your Ideas</span>
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
