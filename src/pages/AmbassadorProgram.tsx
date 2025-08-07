@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Users, Star, Network, CalendarDays, Sparkles, Trophy, Heart, Zap, Gift, Crown, MessageSquare, Globe, DollarSign, TrendingUp, Target, Award, Share2, Megaphone, Building2, Users2, ArrowRight, CheckCircle, Lightbulb, MapPin, Clock, BarChart3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -24,26 +24,13 @@ const AmbassadorProgram = () => {
     type: "website"
   };
 
-  const earningExamples = [
-    {
-      type: "User Referrals",
-      description: "Refer people to Pulse",
-      calculation: "$30/month × 12 months × 5%",
-      result: "$18 per user per year",
-      example: "Refer 100 users = $1,800/year",
-      icon: Users,
-      color: "from-blue-500 to-cyan-400"
-    },
-    {
-      type: "Venue Referrals", 
-      description: "Refer businesses to partner",
-      calculation: "$300/booking × 260 bookings × 5%",
-      result: "$3,900 per venue per year",
-      example: "Refer 1 venue = $3,900/year",
-      icon: Building2,
-      color: "from-purple-500 to-pink-500"
-    }
-  ];
+  const [userReferrals, setUserReferrals] = useState(10);
+  const [venueReferrals, setVenueReferrals] = useState(1);
+  
+  // Calculate earnings based on current values
+  const userEarningsPerYear = userReferrals * 18; // $18 per user per year
+  const venueEarningsPerYear = venueReferrals * 3900; // $3,900 per venue per year
+  const totalEarnings = userEarningsPerYear + venueEarningsPerYear;
 
   const promotionMethods = [
     {
@@ -214,7 +201,7 @@ const AmbassadorProgram = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Real Earning Potential
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                 With Real Impact
               </span>
             </h2>
@@ -222,43 +209,119 @@ const AmbassadorProgram = () => {
               Earn 5% commission on all revenue from your referrals for a full year. 
               The more people you help connect, the more you earn.
             </p>
+            <p className="text-sm text-gray-400 max-w-4xl mx-auto mt-4">
+              * Calculations shown are estimates and illustrative examples. Actual earnings depend on the total spend and revenue of partners and users. 
+              Commission is calculated on actual revenue generated from your referrals.
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {earningExamples.map((example, index) => (
-              <motion.div key={example.type} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full overflow-hidden group">
-                  <div className="relative h-32 overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-r ${example.color} opacity-20`}></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <example.icon className="h-12 w-12 text-white mb-2" />
-                        <h3 className="text-2xl font-bold text-white">{example.type}</h3>
+          <div className="max-w-4xl mx-auto">
+            {/* Interactive Calculator */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300">
+                <CardContent className="p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-white mb-2">Interactive Earnings Calculator</h3>
+                    <p className="text-gray-300">Adjust the sliders to see your potential earnings</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* User Referrals Slider */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center">
+                          <Users className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-bold text-white">User Referrals</h4>
+                          <p className="text-sm text-gray-400">$18 per user per year</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Number of Users:</span>
+                          <span className="text-pulse-pink font-bold">{userReferrals}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="0"
+                          max="200"
+                          value={userReferrals}
+                          onChange={(e) => setUserReferrals(parseInt(e.target.value))}
+                          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-pulse-pink [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-pulse-pink [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:shadow-lg"
+                          style={{
+                            background: `linear-gradient(to right, #ec4899 0%, #ec4899 ${(userReferrals / 200) * 100}%, #374151 ${(userReferrals / 200) * 100}%, #374151 100%)`
+                          }}
+                        />
+                        <div className="flex justify-between text-xs text-gray-500">
+                          <span>0</span>
+                          <span>200</span>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
+                        <div className="text-sm text-gray-400 mb-1">Estimated Annual Earnings:</div>
+                        <div className="text-blue-400 font-bold text-xl">${userEarningsPerYear.toLocaleString()}</div>
+                      </div>
+                    </div>
+                    
+                    {/* Venue Referrals Slider */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                          <Building2 className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-bold text-white">Venue Referrals</h4>
+                          <p className="text-sm text-gray-400">$3,900 per venue per year</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Number of Venues:</span>
+                          <span className="text-pulse-pink font-bold">{venueReferrals}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          value={venueReferrals}
+                          onChange={(e) => setVenueReferrals(parseInt(e.target.value))}
+                          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-purple-500 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:shadow-lg"
+                          style={{
+                            background: `linear-gradient(to right, #a855f7 0%, #a855f7 ${(venueReferrals / 10) * 100}%, #374151 ${(venueReferrals / 10) * 100}%, #374151 100%)`
+                          }}
+                        />
+                        <div className="flex justify-between text-xs text-gray-500">
+                          <span>0</span>
+                          <span>10</span>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
+                        <div className="text-sm text-gray-400 mb-1">Estimated Annual Earnings:</div>
+                        <div className="text-purple-400 font-bold text-xl">${venueEarningsPerYear.toLocaleString()}</div>
                       </div>
                     </div>
                   </div>
-                  <CardContent className="p-6">
-                    <div className="mb-4">
-                      <h4 className="text-lg font-bold text-white mb-2">{example.description}</h4>
-                      <div className="bg-gray-700/50 rounded-lg p-3 mb-3">
-                        <div className="text-sm text-gray-400 mb-1">Calculation:</div>
-                        <div className="text-green-400 font-mono text-sm">{example.calculation}</div>
-                        <div className="text-pulse-pink font-bold text-lg mt-1">{example.result}</div>
-                      </div>
-                      <div className="bg-gradient-to-r from-pulse-pink/20 to-pulse-blue/20 rounded-lg p-3">
-                        <div className="text-sm text-gray-400 mb-1">Example:</div>
-                        <div className="text-white font-bold">{example.example}</div>
-                      </div>
+                  
+                  {/* Total Earnings Display */}
+                  <div className="mt-8 p-6 bg-gradient-to-r from-pulse-pink/10 to-pulse-blue/10 rounded-xl border border-pulse-pink/20">
+                    <div className="text-center">
+                      <div className="text-sm text-gray-400 mb-2">Total Estimated Annual Earnings</div>
+                      <div className="text-3xl font-bold text-pulse-pink">${totalEarnings.toLocaleString()}</div>
+                      <div className="text-xs text-gray-500 mt-2">* Based on 5% commission on estimated revenue</div>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-16">
-            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
+            <div className="bg-gray-800/50 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold mb-4">💡 Pro Tip</h3>
               <p className="text-gray-300 mb-6">
                 The best ambassadors combine both strategies: they refer both users AND venues. 
