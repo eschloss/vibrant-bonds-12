@@ -46,49 +46,48 @@ const getIcebreakers = (t) => [{
 const CharacterCard = ({ character, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, rotateY: -15 }}
-      whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ 
-        duration: 1, 
-        delay: index * 0.2,
+        duration: 0.6, 
+        delay: index * 0.15,
         ease: [0.16, 1, 0.3, 1]
       }}
       whileHover={{ 
-        scale: 1.03, 
-        y: -8,
-        transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+        y: -4,
+        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
       }}
+      className="will-change-transform"
     >
-      <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full py-0 group hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-500">
-        <CardContent className="p-6 my-0 py-[24px] px-[12px]">
+      <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full overflow-hidden group hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-500">
+        <CardContent className="p-6">
           <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: index * 0.2 + 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.15 + 0.2, duration: 0.5 }}
             className="mb-4"
           >
-            <p className="text-gray-300 text-xl text-center my-0 py-0 px-[25px] group-hover:text-white transition-colors duration-300">{character.tagline}</p>
+            <p className="text-gray-300 text-xl text-center group-hover:text-white transition-colors duration-300">{character.tagline}</p>
           </motion.div>
           
-          <div className="mb-4 relative px-0">
+          <div className="mb-4 relative overflow-hidden">
             <motion.div 
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 15 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.2 + 0.5, duration: 0.8 }}
-              whileHover={{ scale: 1.02 }}
+              transition={{ delay: index * 0.15 + 0.3, duration: 0.6 }}
               className={`rounded-2xl px-4 py-3 bg-gradient-to-r ${character.color} text-white mb-4 ml-8 group-hover:shadow-lg transition-all duration-300`}
             >
               <p className="text-sm font-normal">{character.message}</p>
-              <p className="text-sm mx-0 my-0 text-left font-normal py-[3px]">&nbsp;&nbsp;- {character.name}</p>
+              <p className="text-sm text-left font-normal py-1">&nbsp;&nbsp;- {character.name}</p>
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.2 + 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className={`absolute -bottom-3 left-0 w-12 h-12 overflow-hidden ring-2 ring-white/50 ${character.bgColor} rounded-full transition-all duration-300 group-hover:ring-white/80`}
+              transition={{ delay: index * 0.15 + 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.05 }}
+              className={`absolute -bottom-3 left-0 w-12 h-12 overflow-hidden ring-2 ring-white/50 ${character.bgColor} rounded-full transition-all duration-300 group-hover:ring-white/80 will-change-transform`}
             >
               <Avatar className="w-full h-full">
                 <AvatarImage src={character.avatar} alt={character.name} className="object-cover object-center w-full h-full" />
