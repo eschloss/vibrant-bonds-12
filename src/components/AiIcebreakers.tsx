@@ -62,13 +62,13 @@ const CharacterCard = ({ character, index }) => {
         opacity: 0, 
         y: 60,
         rotateX: 15,
-        z: -100
+        translateZ: -50
       }}
       whileInView={{ 
         opacity: 1, 
         y: 0,
         rotateX: 0,
-        z: 0
+        translateZ: 0
       }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ 
@@ -89,7 +89,7 @@ const CharacterCard = ({ character, index }) => {
           damping: 25
         }
       }}
-      className="will-change-transform perspective-1000"
+      className="will-change-transform"
     >
       <motion.div
         whileHover={{
