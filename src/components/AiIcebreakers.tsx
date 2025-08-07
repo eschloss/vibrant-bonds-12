@@ -60,9 +60,9 @@ const CharacterCard = ({ character, index }) => {
       }}
       className="will-change-transform"
     >
-      <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full overflow-hidden group hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-500">
-        <CardContent className="p-6">
-          <motion.div 
+      <Card className="bg-gray-800/60 backdrop-blur-sm border-gray-700/50 h-full group hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-500">
+        <CardContent className="p-6 pb-8">
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.15 + 0.2, duration: 0.5 }}
@@ -71,7 +71,7 @@ const CharacterCard = ({ character, index }) => {
             <p className="text-gray-300 text-xl text-center group-hover:text-white transition-colors duration-300">{character.tagline}</p>
           </motion.div>
           
-          <div className="mb-4 relative overflow-hidden">
+          <div className="mb-4 relative">
             <motion.div 
               initial={{ opacity: 0, x: 15 }}
               whileInView={{ opacity: 1, x: 0 }}
