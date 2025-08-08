@@ -59,12 +59,7 @@ const AmbassadorProgram = () => {
     }
   ];
 
-  const impactStats = [
-    { number: "21M", label: "Americans with zero friends", icon: Users },
-    { number: "1/3", label: "Adults unsatisfied with friend circle", icon: Heart },
-    { number: "5%", label: "Commission on all referrals", icon: DollarSign },
-    { number: "365", label: "Days of impact per referral", icon: CalendarDays }
-  ];
+  // Removed hero metrics section and related data
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -116,17 +111,7 @@ const AmbassadorProgram = () => {
               </a>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {impactStats.map((stat, index) => (
-                <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + index * 0.1 }} className="text-center">
-                  <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-xl p-4 border border-gray-700">
-                    <div className="text-2xl md:text-3xl font-bold text-pulse-pink mb-2">{stat.number}</div>
-                    <div className="text-sm text-gray-300">{stat.label}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Quick Stats removed per design simplification */}
           </motion.div>
         </div>
       </section>
