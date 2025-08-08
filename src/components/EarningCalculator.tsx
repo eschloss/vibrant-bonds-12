@@ -127,27 +127,51 @@ const EarningCalculator: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
-          {/* Left: Controls */}
-          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
-            {/* Pricing Tier Selection */}
-            <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
-              <CardContent className="p-5">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+          <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
+            <CardContent className="p-6 md:p-8">
+              {/* Metrics on top */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                  <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 text-green-400" />
+                    Revenue / group
+                  </div>
+                  <div className="text-2xl font-bold text-green-400 mt-1">${revenuePerBooking.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup}</div>
+                </div>
+                <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                  <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-pulse-pink" />
+                    Monthly revenue
+                  </div>
+                  <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${revenuePerBooking.toLocaleString()}</div>
+                </div>
+                <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                  <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
+                    <Star className="h-4 w-4 text-yellow-400" />
+                    Annual revenue
+                  </div>
+                  <div className="text-3xl font-bold text-yellow-400 mt-1">${annualRevenue.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
+                </div>
+              </div>
+
+              {/* Controls */}
+              <div>
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <DollarSign className="h-5 w-5 text-pulse-pink" />
                   Choose Your Pricing Tier
                 </h3>
-                
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
                   {pricingTiers.map((tier, index) => (
                     <motion.button
                       key={tier.name}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                                             onClick={() => {
-                         setSelectedTier(index);
-                       }}
+                      onClick={() => setSelectedTier(index)}
                       className={`p-3 rounded-lg border transition-all duration-300 ${
                         selectedTier === index
                           ? 'border-pulse-pink bg-gradient-to-r from-pulse-pink/20 to-pulse-blue/20'
@@ -155,22 +179,13 @@ const EarningCalculator: React.FC = () => {
                       }`}
                     >
                       <div className="text-center">
-                        <div className={`text-sm font-bold mb-0.5 ${
-                          selectedTier === index ? 'text-white' : 'text-gray-300'
-                        }`}>
-                          {tier.name}
-                        </div>
-                        <div className={`text-xs ${
-                          selectedTier === index ? 'text-pulse-pink' : 'text-gray-400'
-                        }`}>
-                          ${tier.minPrice}-${tier.maxPrice}
-                        </div>
+                        <div className={`text-sm font-bold mb-0.5 ${selectedTier === index ? 'text-white' : 'text-gray-300'}`}>{tier.name}</div>
+                        <div className={`text-xs ${selectedTier === index ? 'text-pulse-pink' : 'text-gray-400'}`}>${tier.minPrice}-${tier.maxPrice}</div>
                       </div>
                     </motion.button>
                   ))}
                 </div>
 
-                {/* Tier Description */}
                 <div className="mt-2 p-3 bg-gray-700/30 rounded-lg grid grid-cols-2 gap-2">
                   <p className="text-xs text-gray-300">{currentTier.description}</p>
                   {selectedTier > 0 && (
@@ -181,7 +196,6 @@ const EarningCalculator: React.FC = () => {
                   )}
                 </div>
 
-                {/* Bookings Per Month Slider (combined) */}
                 <div className="mt-6">
                   <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-pulse-blue" />
@@ -189,19 +203,10 @@ const EarningCalculator: React.FC = () => {
                   </h4>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <label className="text-xs font-medium text-gray-300">
-                        Groups per month
-                      </label>
+                      <label className="text-xs font-medium text-gray-300">Groups per month</label>
                       <span className="text-pulse-blue font-bold">{bookingsPerMonth[0]}</span>
                     </div>
-                    <Slider
-                      value={bookingsPerMonth}
-                      onValueChange={setBookingsPerMonth}
-                      min={1}
-                      max={20}
-                      step={1}
-                      className="w-full"
-                    />
+                    <Slider value={bookingsPerMonth} onValueChange={setBookingsPerMonth} min={1} max={20} step={1} className="w-full" />
                     <div className="flex justify-between text-[11px] text-gray-400">
                       <span>1 group</span>
                       <span>20 groups</span>
@@ -221,46 +226,11 @@ const EarningCalculator: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
 
-          {/* Right: Results */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
-              <CardContent className="p-5">
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4 text-green-400" />
-                      Revenue / group
-                    </div>
-                    <div className="text-2xl font-bold text-green-400 mt-1">${revenuePerBooking.toLocaleString()}</div>
-                    <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-pulse-pink" />
-                      Monthly revenue
-                    </div>
-                    <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
-                    <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${revenuePerBooking.toLocaleString()}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
-                      <Star className="h-4 w-4 text-yellow-400" />
-                      Annual revenue
-                    </div>
-                    <div className="text-3xl font-bold text-yellow-400 mt-1">${annualRevenue.toLocaleString()}</div>
-                    <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
-                  </div>
-                </div>
-                <div className="mt-4 text-xs text-gray-400">
-                  Assumptions: 10 people per group • Price uses average of selected tier.
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+                <div className="mt-4 text-xs text-gray-400">Assumptions: 10 people per group • Price uses average of selected tier.</div>
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
 
         {/* Call to Action */}
