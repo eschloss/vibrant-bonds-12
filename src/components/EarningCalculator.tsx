@@ -23,17 +23,9 @@ interface PricingTier {
 
 const EarningCalculator: React.FC = () => {
   const [bookingsPerMonth, setBookingsPerMonth] = useState([4]);
-  const [selectedTier, setSelectedTier] = useState(1);
+  const [selectedTier, setSelectedTier] = useState(0);
 
   const pricingTiers: PricingTier[] = [
-    {
-      name: "Free Events",
-      minPrice: 0,
-      maxPrice: 0,
-      color: "from-gray-500 to-gray-600",
-      examples: ["Walks", "Board Games", "Coffee Meetups"],
-      description: "Perfect for building community and brand awareness"
-    },
     {
       name: "Casual Meetups",
       minPrice: 20,
@@ -61,7 +53,7 @@ const EarningCalculator: React.FC = () => {
   ];
 
   const currentTier = pricingTiers[selectedTier];
-  const pricePerPerson = selectedTier === 0 ? 0 : (currentTier.minPrice + currentTier.maxPrice) / 2;
+  const pricePerPerson = (currentTier.minPrice + currentTier.maxPrice) / 2;
   const peoplePerGroup = 10;
   const revenuePerBooking = pricePerPerson * peoplePerGroup;
   const monthlyRevenue = revenuePerBooking * bookingsPerMonth[0];
@@ -186,15 +178,7 @@ const EarningCalculator: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="mt-2 p-3 bg-gray-700/30 rounded-lg grid grid-cols-2 gap-2">
-                  <p className="text-xs text-gray-300">{currentTier.description}</p>
-                  {selectedTier > 0 && (
-                    <div className="text-right">
-                      <span className="text-[11px] uppercase tracking-wide text-gray-400 mr-2">Avg</span>
-                      <span className="text-sm font-semibold text-pulse-pink">${pricePerPerson}</span>
-                    </div>
-                  )}
-                </div>
+                {/* Removed avg/description bar for simplicity */}
 
                 <div className="mt-6">
                   <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
@@ -206,10 +190,10 @@ const EarningCalculator: React.FC = () => {
                       <label className="text-xs font-medium text-gray-300">Groups per month</label>
                       <span className="text-pulse-blue font-bold">{bookingsPerMonth[0]}</span>
                     </div>
-                    <Slider value={bookingsPerMonth} onValueChange={setBookingsPerMonth} min={1} max={20} step={1} className="w-full" />
+                    <Slider value={bookingsPerMonth} onValueChange={setBookingsPerMonth} min={1} max={100} step={1} className="w-full" />
                     <div className="flex justify-between text-[11px] text-gray-400">
                       <span>1 group</span>
-                      <span>20 groups</span>
+                      <span>100 groups</span>
                     </div>
                   </div>
 
