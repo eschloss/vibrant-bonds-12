@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { 
   TrendingUp, 
   DollarSign, 
-  Users, 
   Calendar,
   Zap,
   Star,
@@ -119,8 +118,7 @@ const EarningCalculator: React.FC = () => {
             variants={itemVariants}
             className="text-base text-gray-300 max-w-2xl mx-auto"
           >
-            Use our interactive calculator to estimate your monthly and annual revenue. 
-            Select your pricing tier and adjust the number of bookings to see your earning potential.
+            Pick a tier and how many groups book each month. We’ll estimate revenue using 10 people per group and the tier’s average price.
           </motion.p>
         </motion.div>
 
@@ -129,10 +127,10 @@ const EarningCalculator: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
         >
-          {/* Calculator Controls */}
-          <motion.div variants={itemVariants} className="space-y-6">
+          {/* Left: Controls */}
+          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
             {/* Pricing Tier Selection */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
               <CardContent className="p-5">
@@ -173,10 +171,13 @@ const EarningCalculator: React.FC = () => {
                 </div>
 
                 {/* Tier Description */}
-                <div className="mt-2 p-3 bg-gray-700/30 rounded-lg flex items-center justify-between">
+                <div className="mt-2 p-3 bg-gray-700/30 rounded-lg grid grid-cols-2 gap-2">
                   <p className="text-xs text-gray-300">{currentTier.description}</p>
                   {selectedTier > 0 && (
-                    <span className="text-sm font-semibold text-pulse-pink">Avg ${pricePerPerson}</span>
+                    <div className="text-right">
+                      <span className="text-[11px] uppercase tracking-wide text-gray-400 mr-2">Avg</span>
+                      <span className="text-sm font-semibold text-pulse-pink">${pricePerPerson}</span>
+                    </div>
                   )}
                 </div>
 
@@ -224,13 +225,12 @@ const EarningCalculator: React.FC = () => {
             </Card>
           </motion.div>
 
-          {/* Results Display */}
+          {/* Right: Results */}
           <motion.div variants={itemVariants} className="space-y-4">
-            {/* Compact Metrics Card */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
               <CardContent className="p-5">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                <div className="space-y-4">
+                  <div>
                     <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                       <TrendingUp className="h-4 w-4 text-green-400" />
                       Revenue / group
@@ -238,7 +238,7 @@ const EarningCalculator: React.FC = () => {
                     <div className="text-2xl font-bold text-green-400 mt-1">${revenuePerBooking.toLocaleString()}</div>
                     <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup}</div>
                   </div>
-                  <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                  <div>
                     <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                       <Zap className="h-4 w-4 text-pulse-pink" />
                       Monthly revenue
@@ -246,7 +246,7 @@ const EarningCalculator: React.FC = () => {
                     <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
                     <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${revenuePerBooking.toLocaleString()}</div>
                   </div>
-                  <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
+                  <div>
                     <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                       <Star className="h-4 w-4 text-yellow-400" />
                       Annual revenue
@@ -255,40 +255,8 @@ const EarningCalculator: React.FC = () => {
                     <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
                   </div>
                 </div>
-
                 <div className="mt-4 text-xs text-gray-400">
                   Assumptions: 10 people per group • Price uses average of selected tier.
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Scenarios */}
-            <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-white">Quick Scenarios</h3>
-                  <span className="text-[11px] text-gray-400">Tap to apply</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[5, 10, 20].map((groups) => {
-                    const monthly = revenuePerBooking * groups;
-                    const isActive = bookingsPerMonth[0] === groups;
-                    return (
-                      <button
-                        key={groups}
-                        onClick={() => setBookingsPerMonth([groups])}
-                        className={`text-left rounded-lg border p-4 transition-colors ${
-                          isActive
-                            ? 'border-pulse-pink bg-gradient-to-r from-pulse-pink/10 to-pulse-blue/10'
-                            : 'border-gray-700 bg-gray-900/40 hover:border-gray-600'
-                        }`}
-                      >
-                        <div className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">{groups} groups</div>
-                        <div className="text-xl font-bold text-white">${monthly.toLocaleString()}</div>
-                        <div className="text-xs text-gray-400 mt-0.5">${revenuePerBooking.toLocaleString()} each</div>
-                      </button>
-                    );
-                  })}
                 </div>
               </CardContent>
             </Card>
