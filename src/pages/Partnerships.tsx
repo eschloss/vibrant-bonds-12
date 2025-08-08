@@ -123,21 +123,7 @@ const Partnerships = () => {
               </a>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-                <div className="text-3xl font-bold text-pulse-pink mb-2">21M</div>
-                <div className="text-gray-300">Americans with zero friends</div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-                <div className="text-3xl font-bold text-pulse-blue mb-2">1/3</div>
-                <div className="text-gray-300">Adults unsatisfied with friend circle</div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="bg-gray-800/50 backdrop-blur-lg rounded-xl p-6 border border-gray-700">
-                <div className="text-3xl font-bold text-accent mb-2">3x</div>
-                <div className="text-gray-300">More visits from friends</div>
-              </motion.div>
-            </div>
+            {/* Quick Stats removed per design simplification */}
           </motion.div>
         </div>
       </section>
