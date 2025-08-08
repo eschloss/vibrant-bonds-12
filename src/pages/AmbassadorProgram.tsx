@@ -131,6 +131,44 @@ const AmbassadorProgram = () => {
         </div>
       </section>
 
+      {/* Who We're Looking For Section - Compact emoji cards (moved up) */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Who We're Looking For
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">Ambassador Profiles</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Connectors, creators, and doers who help people find their circle.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
+            {[
+              { name: "Community Leaders", emoji: "👥", description: "Run clubs and bring people together", tag: "Organizers" },
+              { name: "Influencers & Creators", emoji: "📣", description: "Spark conversations with content", tag: "Creators" },
+              { name: "Network Connectors", emoji: "🤝", description: "Natural connectors with wide circles", tag: "Connectors" },
+              { name: "Business Owners", emoji: "🏢", description: "Venue owners & activity providers", tag: "Partners" },
+              { name: "Passionate Advocates", emoji: "💖", description: "Care deeply about community", tag: "Advocates" },
+              { name: "Students & Young Pros", emoji: "🎓", description: "In transition, eager to build circles", tag: "Emerging" }
+            ].map((persona, index) => (
+              <motion.div key={persona.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-3xl mb-3">{persona.emoji}</div>
+                    <h3 className="text-sm font-bold text-white mb-2">{persona.name}</h3>
+                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{persona.description}</p>
+                    <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">{persona.tag}</span>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Loneliness Problem Section */}
       <section className="py-20 relative bg-gradient-to-br from-red-500/10 to-pink-500/10">
         <div className="container mx-auto px-4">
@@ -376,43 +414,7 @@ const AmbassadorProgram = () => {
         </div>
       </section>
 
-      {/* Who We're Looking For Section - Compact emoji cards */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Who We're Looking For
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">Ambassador Profiles</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Connectors, creators, and doers who help people find their circle.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
-            {[
-              { name: "Community Leaders", emoji: "👥", description: "Run clubs and bring people together", tag: "Organizers" },
-              { name: "Influencers & Creators", emoji: "📣", description: "Spark conversations with content", tag: "Creators" },
-              { name: "Network Connectors", emoji: "🤝", description: "Natural connectors with wide circles", tag: "Connectors" },
-              { name: "Business Owners", emoji: "🏢", description: "Venue owners & activity providers", tag: "Partners" },
-              { name: "Passionate Advocates", emoji: "💖", description: "Care deeply about community", tag: "Advocates" },
-              { name: "Students & Young Pros", emoji: "🎓", description: "In transition, eager to build circles", tag: "Emerging" }
-            ].map((persona, index) => (
-              <motion.div key={persona.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
-                  <CardContent className="p-4 text-center">
-                    <div className="text-3xl mb-3">{persona.emoji}</div>
-                    <h3 className="text-sm font-bold text-white mb-2">{persona.name}</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{persona.description}</p>
-                    <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">{persona.tag}</span>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Support & Resources Section - Matrix with sticky CTA */}
       <section className="py-20 relative bg-gradient-to-br from-blue-500/5 to-purple-500/5">
