@@ -217,29 +217,7 @@ const EarningCalculator: React.FC = () => {
           </Card>
         </motion.div>
 
-        {/* Call to Action */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-16"
-        >
-          <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Ready to Start Earning?</h3>
-            <p className="text-gray-300 mb-6">
-              Join our partnership program and start building meaningful connections while driving revenue. 
-              Our team will help you optimize your events for maximum earnings.
-            </p>
-            <a 
-              href="#apply" 
-              className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
-            >
-              <span>Apply for Partnership</span>
-              <ArrowUpRight className="h-5 w-5" />
-            </a>
-          </div>
-        </motion.div>
+        {/* CTA removed per request */}
       </div>
     </section>
   );
