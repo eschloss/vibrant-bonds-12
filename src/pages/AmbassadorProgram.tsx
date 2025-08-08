@@ -376,72 +376,40 @@ const AmbassadorProgram = () => {
         </div>
       </section>
 
-      {/* Who We're Looking For Section */}
+      {/* Who We're Looking For Section - Compact emoji cards */}
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-3">Who We're Looking For</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Connectors with heart and reach.</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Who We're Looking For
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">Ambassador Profiles</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Connectors, creators, and doers who help people find their circle.
+            </p>
           </motion.div>
 
-          <div className="overflow-x-auto snap-x snap-mandatory pb-2">
-            <div className="min-w-[900px] md:min-w-0 grid grid-flow-col md:grid-cols-3 auto-cols-[minmax(280px,1fr)] gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
             {[
-              {
-                title: "Community Leaders",
-                description: "People who organize events, run clubs, or lead community groups",
-                icon: Crown,
-                examples: ["Event organizers", "Club presidents", "Community activists", "Volunteer coordinators"]
-              },
-              {
-                title: "Influencers & Creators",
-                description: "People with social media followings and content creation skills",
-                icon: Megaphone,
-                examples: ["Social media influencers", "YouTubers", "Bloggers", "Content creators"]
-              },
-              {
-                title: "Network Connectors",
-                description: "People who naturally connect others and have wide social networks",
-                icon: Network,
-                examples: ["Networkers", "Social butterflies", "Professional connectors", "Community builders"]
-              },
-              {
-                title: "Business Owners",
-                description: "People who own or manage venues that could partner with Pulse",
-                icon: Building2,
-                examples: ["Venue owners", "Restaurant managers", "Activity providers", "Event spaces"]
-              },
-              {
-                title: "Passionate Advocates",
-                description: "People who care deeply about solving loneliness and building community",
-                icon: Heart,
-                examples: ["Mental health advocates", "Community volunteers", "Social workers", "Wellness coaches"]
-              },
-              {
-                title: "Students & Young Professionals",
-                description: "People in transition periods who understand the need for connection",
-                icon: Users2,
-                examples: ["College students", "Recent graduates", "Young professionals", "Relocation experts"]
-              }
-            ].map((profile, index) => (
-              <motion.div key={profile.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="snap-center">
-                <div className="bg-gray-800/60 border border-gray-700 rounded-2xl p-6 h-full">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-pink to-pulse-blue flex items-center justify-center">
-                      <profile.icon className="h-5 w-5 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-white">{profile.title}</h3>
-                  </div>
-                  <p className="text-sm text-gray-300 mb-3">{profile.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.examples.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-1 rounded-full border border-gray-600 text-gray-300 bg-gray-800/50">{tag}</span>
-                    ))}
-                  </div>
-                </div>
+              { name: "Community Leaders", emoji: "👥", description: "Run clubs and bring people together", tag: "Organizers" },
+              { name: "Influencers & Creators", emoji: "📣", description: "Spark conversations with content", tag: "Creators" },
+              { name: "Network Connectors", emoji: "🤝", description: "Natural connectors with wide circles", tag: "Connectors" },
+              { name: "Business Owners", emoji: "🏢", description: "Venue owners & activity providers", tag: "Partners" },
+              { name: "Passionate Advocates", emoji: "💖", description: "Care deeply about community", tag: "Advocates" },
+              { name: "Students & Young Pros", emoji: "🎓", description: "In transition, eager to build circles", tag: "Emerging" }
+            ].map((persona, index) => (
+              <motion.div key={persona.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-3xl mb-3">{persona.emoji}</div>
+                    <h3 className="text-sm font-bold text-white mb-2">{persona.name}</h3>
+                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{persona.description}</p>
+                    <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">{persona.tag}</span>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
-            </div>
           </div>
         </div>
       </section>
