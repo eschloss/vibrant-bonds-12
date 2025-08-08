@@ -280,29 +280,29 @@ const Partnerships = () => {
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Program 1: Featured in the City */}
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-4">
+              <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-blue-400/50 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300">
+                <div className="pointer-events-none absolute -top-20 -right-24 w-80 h-80 rounded-full bg-pulse-blue/20 blur-3xl"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="mb-4">
                     <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                       Get Featured in the City
                     </h3>
-                    <span className="text-xs text-gray-400">Open to most local venues</span>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    We promote your venue and events to relevant Pulse friend groups across your city. Great for driving new customers from our existing communities.
+                    We promote your venue to relevant friend groups citywide — bringing new customers every week.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Appears in city feeds and activity suggestions</span>
+                      <span className="text-gray-300">Citywide exposure in group feeds</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Bookings from relevant friend groups</span>
+                      <span className="text-gray-300">Bookings from relevant groups</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">We handle discovery and demand — you run great events</span>
+                      <span className="text-gray-300">Hands‑off demand; you host</span>
                     </li>
                   </ul>
 
@@ -335,35 +335,47 @@ const Partnerships = () => {
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
+
+                  {/* CTAs */}
+                  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#apply" className="px-8 py-4 text-lg rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center gap-2">
+                      Apply Now
+                      <ArrowRight className="h-5 w-5" />
+                    </a>
+                    <a href="#calculator" className="px-8 py-4 text-lg rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center gap-2">
+                      See Revenue Estimation
+                      <ArrowRight className="h-5 w-5" />
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
 
             {/* Program 2: Exclusive Group Match */}
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-4">
+              <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-purple-400/60 hover:shadow-pink-500/20 hover:shadow-xl transition-all duration-300">
+                <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-pulse-pink/20 blur-3xl"></div>
+                <CardContent className="p-8 relative z-10">
+                  <div className="mb-4">
                     <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                       Exclusive Group Match
                     </h3>
-                    <span className="text-xs text-gray-400">Limited partners per city</span>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    Co-create a branded friend group match around your core experience (e.g., Bowling, Fitness, Gaming). We personalize the matching questions and promote the group — you activate your customers on-site and on social.
+                    Co‑create a branded friend‑group match for your core experience. Turn customers into friends to lift retention and spend.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Match your customers with new friends to increase retention and spend</span>
+                      <span className="text-gray-300">Match customers with new friends</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Co-promotion: in-venue + your socials, Pulse app + socials</span>
+                      <span className="text-gray-300">Co‑promotion: venue + Pulse</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Also includes city-wide featuring in relevant groups (same as Program)</span>
+                      <span className="text-gray-300">Includes citywide featuring</span>
                     </li>
                   </ul>
 
@@ -373,11 +385,15 @@ const Partnerships = () => {
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">Gaming</div></div>
                   </div>
 
-                  {/* CTA */}
-                  <div className="mt-6">
-                    <a href="#apply" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium border border-gray-600">
+                  {/* CTAs */}
+                  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#apply" className="px-8 py-4 text-lg rounded-full bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 transition-all duration-300 inline-flex items-center gap-2">
                       Request Details
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-5 w-5" />
+                    </a>
+                    <a href="#calculator" className="px-8 py-4 text-lg rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center gap-2">
+                      See Revenue Estimation
+                      <ArrowRight className="h-5 w-5" />
                     </a>
                   </div>
                 </CardContent>
