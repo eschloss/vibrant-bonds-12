@@ -568,41 +568,7 @@ const Partnerships = () => {
       </section>
       */}
 
-      {/* Event Examples */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Event Examples
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
-                From Our Partners
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Here are real events our partners are running. Each event brings 10 people together - you set the price, we help fill the group.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {eventExamples.map((event, index) => (
-              <motion.div key={event.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-lg font-bold text-white">{event.name}</h3>
-                      <span className="text-pulse-pink font-bold">{event.price}</span>
-                    </div>
-                    <span className="text-sm text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">{event.category}</span>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Removed Suggested Pricing Tiers under Event Examples */}
-        </div>
-      </section>
+      {/* Event Examples removed as requested */}
 
       {/* Removed How Partnership Works section */}
 
