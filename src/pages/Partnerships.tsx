@@ -117,6 +117,10 @@ const Partnerships = () => {
                 <span>Apply for Partnership</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
+              <a href="#calculator" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+                <span>See Earnings Potential</span>
+                <ArrowRight className="h-5 w-5" />
+              </a>
             </div>
 
             {/* Quick Stats */}
