@@ -283,10 +283,9 @@ const Partnerships = () => {
               <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-blue-400/50 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300">
                 <div className="pointer-events-none absolute -top-20 -right-24 w-80 h-80 rounded-full bg-pulse-blue/20 blur-3xl"></div>
                 <CardContent className="p-8 relative z-10">
-                  <div className="mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
-                      Get Featured in the City
-                    </h3>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center text-white text-xl md:text-2xl font-bold">1</div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">Get Featured in the City</h3>
                   </div>
                   <p className="text-gray-300 mb-6">
                     We promote your venue to relevant friend groups citywide — bringing new customers every week.
@@ -356,10 +355,9 @@ const Partnerships = () => {
               <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-purple-400/60 hover:shadow-pink-500/20 hover:shadow-xl transition-all duration-300">
                 <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-pulse-pink/20 blur-3xl"></div>
                 <CardContent className="p-8 relative z-10">
-                  <div className="mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
-                      Exclusive Group Match
-                    </h3>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl md:text-2xl font-bold">2</div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">Exclusive Group Match</h3>
                   </div>
                   <p className="text-gray-300 mb-6">
                     Co‑create a branded friend‑group match for your core experience. Turn customers into friends to lift retention and spend.
