@@ -138,119 +138,7 @@ const Partnerships = () => {
         </div>
       </section>
 
-      {/* Partnership Programs */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-14"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Two Ways to Partner</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Choose between a broad city-wide promotion or an exclusive Group Match that builds a community around your core experience.
-            </p>
-          </motion.div>
-
-          {/* Comparison strip */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Program 1: Featured in the City */}
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300">Program</span>
-                      Get Featured in the City
-                    </h3>
-                    <span className="text-xs text-gray-400">Open to most local venues</span>
-                  </div>
-                  <p className="text-gray-300 mb-6">
-                    We promote your venue and events to relevant Pulse friend groups across your city. Great for driving new customers from our existing communities.
-                  </p>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Appears in city feeds and activity suggestions</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Bookings from relevant friend groups</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">We handle discovery and demand — you run great events</span>
-                    </li>
-                  </ul>
-
-                  <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
-                    <div className="text-sm font-semibold mb-2 text-white">Popular price points</div>
-                    <div className="grid grid-cols-2 gap-3 text-sm text-gray-300">
-                      <div className="flex items-center justify-between"><span>$0</span><span className="text-pulse-pink">Free events</span></div>
-                      <div className="flex items-center justify-between"><span>$20–40</span><span className="text-pulse-pink">Casual meetups</span></div>
-                      <div className="flex items-center justify-between"><span>$50–100</span><span className="text-pulse-pink">Premium nights</span></div>
-                      <div className="flex items-center justify-between"><span>$200+</span><span className="text-pulse-pink">Luxury events</span></div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Program 2: Exclusive Group Match */}
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-purple-500/20 border border-purple-400/40 text-purple-300">Exclusive</span>
-                      Exclusive Group Match
-                    </h3>
-                    <span className="text-xs text-gray-400">Limited partners per city</span>
-                  </div>
-                  <p className="text-gray-300 mb-6">
-                    Co-create a branded friend group match around your core experience (e.g., Bowling, Fitness, Gaming). We personalize the matching questions and promote the group — you activate your customers on-site and on social.
-                  </p>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Match your customers with new friends to increase retention and spend</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Co-promotion: in-venue + your socials, Pulse app + socials</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Also includes city-wide featuring in relevant groups (same as Program)</span>
-                    </li>
-                  </ul>
-
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">Bowling</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">Fitness</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">Gaming</div></div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-
-          {/* Clarifier bar */}
-          <div className="max-w-6xl mx-auto mt-8">
-            <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
-              <span className="text-gray-400">Note:</span>
-              <span>Exclusive Group Match partners also receive full city-wide featuring of their venue and events.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Earning Calculator Section */}
-      <EarningCalculator />
-
-      {/* Venue Types Section */}
+      {/* Venue Types Section (moved up) */}
       <section className="py-20 relative bg-gray-900/50">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
@@ -371,6 +259,118 @@ const Partnerships = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Partnership Programs */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-14"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Two Ways to Partner</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Choose between a broad city-wide promotion or an exclusive Group Match that builds a community around your core experience.
+            </p>
+          </motion.div>
+
+          {/* Comparison strip */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Program 1: Featured in the City */}
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
+                <CardContent className="p-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300">Program</span>
+                      Get Featured in the City
+                    </h3>
+                    <span className="text-xs text-gray-400">Open to most local venues</span>
+                  </div>
+                  <p className="text-gray-300 mb-6">
+                    We promote your venue and events to relevant Pulse friend groups across your city. Great for driving new customers from our existing communities.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Appears in city feeds and activity suggestions</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Bookings from relevant friend groups</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">We handle discovery and demand — you run great events</span>
+                    </li>
+                  </ul>
+
+                  <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
+                    <div className="text-sm font-semibold mb-2 text-white">Popular price points</div>
+                    <div className="grid grid-cols-2 gap-3 text-sm text-gray-300">
+                      <div className="flex items-center justify-between"><span>$0</span><span className="text-pulse-pink">Free events</span></div>
+                      <div className="flex items-center justify-between"><span>$20–40</span><span className="text-pulse-pink">Casual meetups</span></div>
+                      <div className="flex items-center justify-between"><span>$50–100</span><span className="text-pulse-pink">Premium nights</span></div>
+                      <div className="flex items-center justify-between"><span>$200+</span><span className="text-pulse-pink">Luxury events</span></div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Program 2: Exclusive Group Match */}
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
+                <CardContent className="p-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-purple-500/20 border border-purple-400/40 text-purple-300">Exclusive</span>
+                      Exclusive Group Match
+                    </h3>
+                    <span className="text-xs text-gray-400">Limited partners per city</span>
+                  </div>
+                  <p className="text-gray-300 mb-6">
+                    Co-create a branded friend group match around your core experience (e.g., Bowling, Fitness, Gaming). We personalize the matching questions and promote the group — you activate your customers on-site and on social.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Match your customers with new friends to increase retention and spend</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Co-promotion: in-venue + your socials, Pulse app + socials</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Also includes city-wide featuring in relevant groups (same as Program)</span>
+                    </li>
+                  </ul>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">Bowling</div></div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">Fitness</div></div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">Gaming</div></div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Clarifier bar */}
+          <div className="max-w-6xl mx-auto mt-8">
+            <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
+              <span className="text-gray-400">Note:</span>
+              <span>Exclusive Group Match partners also receive full city-wide featuring of their venue and events.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Earning Calculator Section */}
+      <EarningCalculator />
 
       {/* Problem Section */}
       <section className="py-20 relative">
