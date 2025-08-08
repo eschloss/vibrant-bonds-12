@@ -92,7 +92,7 @@ const EarningCalculator: React.FC = () => {
   };
 
   return (
-    <section className="py-12 relative overflow-hidden">
+    <section className="py-10 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div 
           initial="hidden"

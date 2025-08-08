@@ -91,7 +91,7 @@ const Partnerships = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-12 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]"></div>
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
@@ -139,9 +139,9 @@ const Partnerships = () => {
       </section>
 
       {/* Venue Types Section (moved up) */}
-      <section className="py-20 relative bg-gray-900/50">
+      <section className="py-12 relative bg-gray-900/50">
         <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Perfect Partners
               <br />
@@ -261,14 +261,14 @@ const Partnerships = () => {
       </section>
 
       {/* Partnership Programs */}
-      <section className="py-20 relative">
+      <section className="py-12 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-14"
+            className="text-center mb-8"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Two Ways to Partner</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -360,7 +360,7 @@ const Partnerships = () => {
           </div>
 
           {/* Clarifier bar */}
-          <div className="max-w-6xl mx-auto mt-8">
+          <div className="max-w-6xl mx-auto mt-6">
             <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
               <span className="text-gray-400">Note:</span>
               <span>Exclusive Group Match partners also receive full city-wide featuring of their venue and events.</span>
@@ -373,9 +373,9 @@ const Partnerships = () => {
       <EarningCalculator />
 
       {/* Problem Section */}
-      <section className="py-20 relative">
+      <section className="py-12 relative">
         <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Loneliness Is Everywhere
               <br />
