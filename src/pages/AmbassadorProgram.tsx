@@ -32,32 +32,7 @@ const AmbassadorProgram = () => {
   const venueEarningsPerYear = venueReferrals * 3900; // $3,900 per venue per year
   const totalEarnings = userEarningsPerYear + venueEarningsPerYear;
 
-  const promotionMethods = [
-    {
-      title: "Social Media",
-      description: "Share Pulse on Instagram, TikTok, YouTube, and blogs",
-      icon: Share2,
-      examples: ["Create engaging content", "Share your own Pulse experiences", "Tag friends who need connection"]
-    },
-    {
-      title: "Community Spaces",
-      description: "Hang posters and flyers in local gathering places",
-      icon: MapPin,
-      examples: ["Coffee shops", "Community centers", "Gym bulletin boards", "Student unions"]
-    },
-    {
-      title: "Local Businesses",
-      description: "Talk to venue owners about partnership opportunities",
-      icon: Building2,
-      examples: ["Bowling alleys", "Art studios", "Cooking classes", "Escape rooms"]
-    },
-    {
-      title: "Networking Events",
-      description: "Spread the word at meetups and community events",
-      icon: Users2,
-      examples: ["Professional networking", "Community meetings", "Social clubs", "Volunteer groups"]
-    }
-  ];
+  // Updated promo section uses inline data within the section
 
   // Removed hero metrics section and related data
 
@@ -363,39 +338,49 @@ const AmbassadorProgram = () => {
         </div>
       </section>
 
-      {/* Promotion Methods Section - Playbook timeline */}
-      <section className="py-20 relative bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
+      {/* Promotion Methods Section - Animated mosaic */}
+      <section className="py-20 relative bg-gray-900/50 overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl animate-ambient-drift"></div>
+          <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl animate-sophisticated-float"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-3">How to Promote Pulse</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">A simple playbook you can start today.</p>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Do these three and you’ll see momentum fast.</p>
           </motion.div>
 
-          <div className="relative max-w-6xl mx-auto">
-            <div className="absolute left-0 right-0 top-9 md:top-10 h-1 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue opacity-40 rounded-full"></div>
-            <div className="overflow-x-auto snap-x snap-mandatory pb-2">
-              <div className="min-w-[700px] md:min-w-0 grid grid-flow-col md:grid-cols-4 auto-cols-[minmax(260px,1fr)] gap-6">
-                {promotionMethods.map((method, index) => (
-                  <motion.div key={method.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05 }} className="snap-center">
-                    <div className="bg-gray-800/60 border border-gray-700 rounded-2xl p-5 h-full">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pulse-pink to-pulse-blue flex items-center justify-center ring-4 ring-gray-900">
-                          <method.icon className="h-6 w-6 text-white" />
-                        </div>
-                        <h3 className="text-lg font-bold text-white">{method.title}</h3>
-                      </div>
-                      <p className="text-sm text-gray-300">{method.description}</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {method.examples.slice(0, 2).map((ex) => (
-                          <span key={ex} className="text-xs px-2 py-1 rounded-full border border-gray-600 text-gray-300 bg-gray-800/50">{ex}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { emoji: "✨", title: "Create Social Buzz", blurb: "Short reels, authentic stories, real faces" },
+              { emoji: "📍", title: "Show Up Locally", blurb: "Posters, QR codes, campus & cafes" },
+              { emoji: "🤝", title: "Activate Partners", blurb: "Introduce venues that fit Pulse groups" }
+            ].map((card, i) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 40, rotate: i === 0 ? -2 : i === 2 ? 2 : 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: 0.1 * i, ease: [0.16, 1, 0.3, 1] }}
+                className="relative"
+              >
+                <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pulse-pink/20 via-accent/20 to-pulse-blue/20 blur-xl" />
+                <div className="relative rounded-2xl border border-gray-700 bg-gray-800/60 backdrop-blur-md p-6 text-center">
+                  <div className="text-4xl mb-3">{card.emoji}</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{card.title}</h3>
+                  <p className="text-sm text-gray-300">{card.blurb}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex justify-center mt-10">
+            <a href="#apply" className="rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300">
+              Make Me a Top Ambassador
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </motion.div>
         </div>
       </section>
 
