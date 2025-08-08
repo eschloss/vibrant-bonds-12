@@ -490,68 +490,7 @@ const Partnerships = () => {
       {/* Earning Calculator Section */}
       <EarningCalculator />
 
-      {/* Problem Section */}
-      <section className="py-12 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Loneliness Is Everywhere
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500">
-                Including in Your Venue
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Your customers are struggling with loneliness. When they find friends through your venue, 
-              they become loyal regulars who visit more often and spend more money.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="bg-gradient-to-br from-red-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-red-500/30">
-                <div className="text-6xl mb-6">😔</div>
-                <h3 className="text-2xl font-bold mb-4">The Loneliness Epidemic</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>21 million Americans have zero friends</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>1/3 of adults are unsatisfied with their friend circle</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>Loneliness impacts mental health and spending habits</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-lg rounded-2xl p-8 border border-green-500/30">
-                <div className="text-6xl mb-6">🎉</div>
-                <h3 className="text-2xl font-bold mb-4">The Friendship Solution</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Friends visit venues 3x more often</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>They stay longer and spend more money</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Build a loyal community around your venue</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Removed separate Problem Section to merge into bottom CTA */}
 
       {/* Custom Group Match Examples (removed duplicate) */}
       {/*
@@ -684,30 +623,55 @@ const Partnerships = () => {
 
       {/* Removed How Partnership Works section */}
 
-      {/* CTA Section */}
+      {/* CTA Section merged with Problem/Solution */}
       <section id="apply" className="py-20 relative">
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Turn Customers Into Friends
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
-                Right at Your Venue
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join the Pulse Partner Program and start building meaningful connections while driving revenue. 
-              Limited early partner spots available in select cities.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="mailto:partners@pulsenow.app" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <span>Apply for Partnership</span>
-                <ArrowRight className="h-5 w-5" />
-              </a>
-              <a href="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>Try Pulse Now</span>
-                <ArrowRight className="h-5 w-5" />
-              </a>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-5xl mx-auto">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Turn Customers Into Friends
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+                  Right at Your Venue
+                </span>
+              </h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Loneliness is everywhere — but friendship is the solution. Join the Pulse Partner Program to turn social seekers into loyal regulars.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
+              <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
+                <div className="text-3xl mb-2">😔</div>
+                <h3 className="text-lg font-semibold mb-3">Loneliness Is Everywhere</h3>
+                <ul className="space-y-2 text-gray-300 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>21M Americans have zero friends</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>1/3 unsatisfied with their circle</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>Impacts mental health and spend</span></li>
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
+                <div className="text-3xl mb-2">🎉</div>
+                <h3 className="text-lg font-semibold mb-3">The Friendship Solution</h3>
+                <ul className="space-y-2 text-gray-300 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Friends visit 3× more often</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Longer stays and higher spend</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Build a loyal community</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:partners@pulsenow.app" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+                  <span>Apply for Partnership</span>
+                  <ArrowRight className="h-5 w-5" />
+                </a>
+                <a href="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+                  <span>Try Pulse Now</span>
+                  <ArrowRight className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
