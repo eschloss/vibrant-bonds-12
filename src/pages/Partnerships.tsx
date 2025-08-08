@@ -26,6 +26,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
+import EarningCalculator from "@/components/EarningCalculator";
 
 const Partnerships = () => {
   const { t } = useTranslation();
@@ -263,6 +264,9 @@ const Partnerships = () => {
           </div>
         </div>
       </section>
+
+      {/* Earning Calculator Section */}
+      <EarningCalculator />
 
       {/* Venue Types Section */}
       <section className="py-20 relative bg-gray-900/50">
