@@ -397,6 +397,96 @@ const Partnerships = () => {
         </div>
       </section>
 
+      {/* Custom Group Match Examples (moved up) */}
+      <section className="py-12 relative">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Your Custom Group Match <span className="inline-block">✨</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+                What It Could Look Like
+              </span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We create exclusive group matches tailored to your venue and location. Here are real examples of what your custom group could look like.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Meet Bowling Enthusiasts in Boston",
+                venue: "Boston Bowlers",
+                poweredBy: "New England Bowling Alley",
+                description: "A community of bowling lovers who meet weekly for friendly competition and social games.",
+                features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
+                color: "from-blue-500 to-cyan-400"
+              },
+              {
+                title: "Connect with Fitness Lovers in Barcelona",
+                venue: "Barcelona Gym Lovers",
+                poweredBy: "BCN Gym Group",
+                description: "A group of fitness enthusiasts who share workout tips, motivation, and gym buddy connections.",
+                features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                title: "Join Board Game Enthusiasts in Portland",
+                venue: "Portland Board Game Group",
+                poweredBy: "Portland Board Game Cafe",
+                description: "A community of tabletop gamers who love strategy games, card games, and social gaming nights.",
+                features: ["Game preference matching", "Strategy game nights", "Card game tournaments", "New game discovery"],
+                color: "from-green-500 to-emerald-400"
+              },
+              {
+                title: "Meet Art Enthusiasts in Austin",
+                venue: "Austin Art Collective",
+                poweredBy: "Austin Creative Studios",
+                description: "A group of artists and art lovers who share techniques, inspiration, and creative workshops.",
+                features: ["Medium-based matching", "Art workshops", "Gallery visits", "Creative collaborations"],
+                color: "from-orange-500 to-red-500"
+              }
+            ].map((example, index) => (
+              <motion.div key={example.venue} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full overflow-hidden group">
+                  <div className="relative h-32 overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${example.color} opacity-20`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
+                        <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="mb-4">
+                      <h4 className="text-lg font-bold text-white mb-2">{example.title}</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">{example.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-16">
+            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Your Venue, Your Community</h3>
+              <p className="text-gray-300 mb-6">
+                We'll create a custom group match that reflects your venue's unique personality and your customers' interests. 
+                Your group will be exclusive to your venue and promoted to people who share your passion.
+              </p>
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
+                <div className="w-4 h-4">🎯</div>
+                <span>Personalized matching questions based on your services</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Earning Calculator Section */}
       <EarningCalculator />
 
@@ -468,7 +558,7 @@ const Partnerships = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Your Custom Group Match
+              Your Custom Group Match <span className="inline-block">✨</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                 What It Could Look Like
@@ -532,15 +622,6 @@ const Partnerships = () => {
                       <p className="text-gray-300 text-sm leading-relaxed">{example.description}</p>
                     </div>
                     
-                    <div className="space-y-2">
-                      <div className="text-sm text-gray-400 font-medium mb-3">Group Features:</div>
-                      {example.features.map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm">
-                          <div className="w-1.5 h-1.5 rounded-full bg-pulse-pink"></div>
-                          <span className="text-gray-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
