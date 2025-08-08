@@ -678,97 +678,11 @@ const Partnerships = () => {
             ))}
           </div>
 
-          {/* Pricing Tiers */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4">Our Suggested Pricing Tiers</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              We help you structure events at different price points. Each group typically has 10 people - here's how much revenue you can generate per event.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricingTiers.map((tier, index) => {
-              const priceRange = tier.price.replace('$', '').replace('+', '');
-              const minPrice = parseInt(priceRange.split('-')[0]);
-              const maxPrice = priceRange.includes('-') ? parseInt(priceRange.split('-')[1]) : minPrice;
-              const avgPrice = (minPrice + maxPrice) / 2;
-              const revenuePerGroup = avgPrice * 10;
-              
-              return (
-                <motion.div key={tier.tier} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                  <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
-                    <CardContent className="p-6 text-center">
-                      <h4 className="text-xl font-bold text-white mb-2">{tier.tier}</h4>
-                      <div className="text-2xl font-bold text-pulse-pink mb-2">{tier.price}</div>
-                      <div className="text-sm text-gray-300 mb-4">{tier.description}</div>
-                      
-                      {/* Revenue Calculation */}
-                      <div className="bg-gradient-to-r from-pulse-pink/20 to-pulse-blue/20 rounded-lg p-4 mb-4">
-                        <div className="text-sm text-gray-400 mb-1">Revenue per group (10 people)</div>
-                        <div className="text-xl font-bold text-white">${revenuePerGroup.toLocaleString()}</div>
-                        <div className="text-xs text-gray-400 mt-1">${avgPrice} × 10 people</div>
-                      </div>
-                      
-                      <div className="space-y-1">
-                        {tier.examples.map((example, i) => (
-                          <div key={i} className="text-xs text-gray-400">• {example}</div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
+          {/* Removed Suggested Pricing Tiers under Event Examples */}
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 relative bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              How Partnership Works
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We promote your events, venue, and drive customers for you while you promote your exclusive group match.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                step: "1",
-                title: "Apply & Connect",
-                description: "Tell us about your venue and goals. We'll discuss how to create the perfect partnership."
-              },
-              {
-                step: "2", 
-                title: "Custom Setup",
-                description: "We create your exclusive group match and set up your venue promotion in our app."
-              },
-              {
-                step: "3",
-                title: "Launch Together", 
-                description: "We promote your events to our community while you promote your exclusive match."
-              },
-              {
-                step: "4",
-                title: "Grow Together",
-                description: "Track success and continuously optimize to drive more customers and build community."
-              }
-            ].map((step, index) => (
-              <motion.div key={step.step} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center flex flex-col items-center hover:translate-y-[-8px] transition-transform duration-300">
-                <div className="w-16 h-16 rounded-full mb-6 flex items-center justify-center bg-gradient-to-r from-pulse-pink to-pulse-blue text-white text-2xl font-bold">
-                  {step.step}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Removed How Partnership Works section */}
 
       {/* CTA Section */}
       <section id="apply" className="py-20 relative">
