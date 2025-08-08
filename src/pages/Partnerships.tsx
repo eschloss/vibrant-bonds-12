@@ -424,6 +424,7 @@ const Partnerships = () => {
                 venue: "Boston Bowlers",
                 poweredBy: "New England Bowling Alley",
                 description: "A community of bowling lovers who meet weekly for friendly competition and social games.",
+                emoji: "🎳",
                 features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
                 color: "from-blue-500 to-cyan-400"
               },
@@ -432,6 +433,7 @@ const Partnerships = () => {
                 venue: "Barcelona Gym Lovers",
                 poweredBy: "BCN Gym Group",
                 description: "A group of fitness enthusiasts who share workout tips, motivation, and gym buddy connections.",
+                emoji: "🏋️",
                 features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
                 color: "from-purple-500 to-pink-500"
               },
@@ -440,6 +442,7 @@ const Partnerships = () => {
                 venue: "Portland Board Game Group",
                 poweredBy: "Portland Board Game Cafe",
                 description: "A community of tabletop gamers who love strategy games, card games, and social gaming nights.",
+                emoji: "🎲",
                 features: ["Game preference matching", "Strategy game nights", "Card game tournaments", "New game discovery"],
                 color: "from-green-500 to-emerald-400"
               },
@@ -448,6 +451,7 @@ const Partnerships = () => {
                 venue: "Austin Art Collective",
                 poweredBy: "Austin Creative Studios",
                 description: "A group of artists and art lovers who share techniques, inspiration, and creative workshops.",
+                emoji: "🎨",
                 features: ["Medium-based matching", "Art workshops", "Gallery visits", "Creative collaborations"],
                 color: "from-orange-500 to-red-500"
               }
@@ -459,6 +463,7 @@ const Partnerships = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
+                        <div className="text-4xl mb-2">{example.emoji}</div>
                         <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
                         <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
                       </div>
