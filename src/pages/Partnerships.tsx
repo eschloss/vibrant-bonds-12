@@ -307,11 +307,7 @@ const Partnerships = () => {
 
                   <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
                     <div className="text-sm font-semibold mb-4 text-white">Popular price points</div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
-                        <div className="text-lg font-bold text-white">$0</div>
-                        <div className="text-xs text-pulse-pink">Free events</div>
-                      </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$20–40</div>
                         <div className="text-xs text-pulse-pink">Casual meetups</div>
