@@ -283,8 +283,7 @@ const Partnerships = () => {
               <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
                 <CardContent className="p-8">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300">Program</span>
+                    <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                       Get Featured in the City
                     </h3>
                     <span className="text-xs text-gray-400">Open to most local venues</span>
@@ -308,13 +307,33 @@ const Partnerships = () => {
                   </ul>
 
                   <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
-                    <div className="text-sm font-semibold mb-2 text-white">Popular price points</div>
-                    <div className="grid grid-cols-2 gap-3 text-sm text-gray-300">
-                      <div className="flex items-center justify-between"><span>$0</span><span className="text-pulse-pink">Free events</span></div>
-                      <div className="flex items-center justify-between"><span>$20–40</span><span className="text-pulse-pink">Casual meetups</span></div>
-                      <div className="flex items-center justify-between"><span>$50–100</span><span className="text-pulse-pink">Premium nights</span></div>
-                      <div className="flex items-center justify-between"><span>$200+</span><span className="text-pulse-pink">Luxury events</span></div>
+                    <div className="text-sm font-semibold mb-4 text-white">Popular price points</div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
+                        <div className="text-lg font-bold text-white">$0</div>
+                        <div className="text-xs text-pulse-pink">Free events</div>
+                      </div>
+                      <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
+                        <div className="text-lg font-bold text-white">$20–40</div>
+                        <div className="text-xs text-pulse-pink">Casual meetups</div>
+                      </div>
+                      <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
+                        <div className="text-lg font-bold text-white">$50–100</div>
+                        <div className="text-xs text-pulse-pink">Premium nights</div>
+                      </div>
+                      <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
+                        <div className="text-lg font-bold text-white">$200+</div>
+                        <div className="text-xs text-pulse-pink">Luxury events</div>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* CTA */}
+                  <div className="mt-6">
+                    <a href="#apply" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+                      Apply Now
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -325,8 +344,7 @@ const Partnerships = () => {
               <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full">
                 <CardContent className="p-8">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-purple-500/20 border border-purple-400/40 text-purple-300">Exclusive</span>
+                    <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                       Exclusive Group Match
                     </h3>
                     <span className="text-xs text-gray-400">Limited partners per city</span>
@@ -353,6 +371,14 @@ const Partnerships = () => {
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">Bowling</div></div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">Fitness</div></div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">Gaming</div></div>
+                  </div>
+
+                  {/* CTA */}
+                  <div className="mt-6">
+                    <a href="#apply" className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium border border-gray-600">
+                      Request Details
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
                   </div>
                 </CardContent>
               </Card>
