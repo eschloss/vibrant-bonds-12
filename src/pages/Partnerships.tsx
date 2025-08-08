@@ -466,19 +466,7 @@ const Partnerships = () => {
             ))}
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-16">
-            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Your Venue, Your Community</h3>
-              <p className="text-gray-300 mb-6">
-                We'll create a custom group match that reflects your venue's unique personality and your customers' interests. 
-                Your group will be exclusive to your venue and promoted to people who share your passion.
-              </p>
-              <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-                <div className="w-4 h-4">🎯</div>
-                <span>Personalized matching questions based on your services</span>
-              </div>
-            </div>
-          </motion.div>
+          {/* Removed bottom clarifier card under examples for a cleaner section */}
         </div>
       </section>
 
