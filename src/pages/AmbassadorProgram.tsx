@@ -456,13 +456,14 @@ const AmbassadorProgram = () => {
 
           <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { { title: 'Custom Materials', icon: Palette, blurb: 'Posters, flyers, and merch tailored to your community' },
+              {[
+                { title: 'Custom Materials', icon: Palette, blurb: 'Posters, flyers, and merch tailored to your community' },
                 { title: 'Digital Support', icon: Share2, blurb: 'Landing pages, social templates, QR codes' },
                 { title: 'Partner Channels', icon: Handshake, blurb: 'Co‑marketing with venue partners' },
                 { title: 'Personalized Strategy', icon: Target, blurb: '1:1 guidance and a clear plan' },
                 { title: 'Community Tools', icon: Users, blurb: 'Event guides and engagement tips' },
-                { title: 'Ongoing Support', icon: Headphones, blurb: 'Regular check‑ins and new opportunities' } ].map((item, i) => (
+                { title: 'Ongoing Support', icon: Headphones, blurb: 'Regular check‑ins and new opportunities' }
+              ].map((item, i) => (
                 <motion.div key={item.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
                   <div className="rounded-2xl border border-gray-700 bg-gray-800/50 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
@@ -489,8 +490,6 @@ const AmbassadorProgram = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
         </div>
       </section>
 
