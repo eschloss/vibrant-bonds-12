@@ -157,14 +157,14 @@ const EarningCalculator: React.FC = () => {
                   <DollarSign className="h-5 w-5 text-pulse-pink" />
                   Choose Your Pricing Tier
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                   {pricingTiers.map((tier, index) => (
                     <motion.button
                       key={tier.name}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setSelectedTier(index)}
-                      className={`p-3 rounded-lg border transition-all duration-300 ${
+                      className={`w-full p-3 rounded-lg border transition-all duration-300 ${
                         selectedTier === index
                           ? 'border-pulse-pink bg-gradient-to-r from-pulse-pink/20 to-pulse-blue/20'
                           : 'border-gray-600 bg-gray-700/50 hover:border-gray-500'
