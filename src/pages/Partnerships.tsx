@@ -553,7 +553,8 @@ const Partnerships = () => {
         </div>
       </section>
 
-      {/* Custom Group Match Examples */}
+      {/* Custom Group Match Examples (removed duplicate) */}
+      {/*
       <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
@@ -643,6 +644,7 @@ const Partnerships = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       {/* Event Examples */}
       <section className="py-20 relative">
