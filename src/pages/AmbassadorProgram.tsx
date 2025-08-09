@@ -130,13 +130,17 @@ const AmbassadorProgram = () => {
       </section>
 
       {/* Loneliness Problem Section */}
-      <section className="py-20 relative bg-gradient-to-br from-red-500/10 to-pink-500/10">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative bg-gray-900/50 overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-pulse-pink blur-3xl"></div>
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-pulse-blue blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               The Loneliness Epidemic
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
                 Needs Your Voice
               </span>
             </h2>
@@ -146,10 +150,12 @@ const AmbassadorProgram = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="bg-gradient-to-br from-red-500/20 to-pink-500/20 backdrop-blur-lg rounded-2xl p-8 border border-red-500/30">
-                <div className="text-6xl mb-6">😔</div>
+              <div className="relative rounded-2xl p-8 border border-gray-700 bg-gray-800/60 backdrop-blur-lg">
+                <div className="w-12 h-12 rounded-full bg-red-500/15 border border-red-400/30 flex items-center justify-center mb-6">
+                  <BarChart3 className="h-6 w-6 text-red-300" />
+                </div>
                 <h3 className="text-2xl font-bold mb-4">The Problem</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start gap-3">
@@ -169,20 +175,22 @@ const AmbassadorProgram = () => {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-lg rounded-2xl p-8 border border-green-500/30">
-                <div className="text-6xl mb-6">💪</div>
+              <div className="relative rounded-2xl p-8 border border-gray-700 bg-gray-800/60 backdrop-blur-lg">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center mb-6">
+                  <Users2 className="h-6 w-6 text-emerald-300" />
+                </div>
                 <h3 className="text-2xl font-bold mb-4">Your Solution</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Use your network to connect lonely people</span>
+                    <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                    <span>Use your network to help people find new friends</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                     <span>Earn 5% commission on every referral</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                     <span>Build a sustainable income while helping others</span>
                   </li>
                 </ul>
@@ -386,46 +394,82 @@ const AmbassadorProgram = () => {
 
       
 
-      {/* Support & Resources Section - Matrix with sticky CTA */}
-      <section className="py-20 relative bg-gradient-to-br from-blue-500/5 to-purple-500/5">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-8">
-            <h2 className="text-4xl md:text-5xl font-bold mb-3">We Support Your Success</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Tools, assets, and real people behind you.</p>
+      {/* Support & Resources Section - Polished grid with sticky CTA */}
+      <section className="py-20 relative bg-gray-900/50 overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pulse-pink blur-3xl"></div>
+          <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-pulse-blue blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold mb-3">
+              We Support Your Success
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Everything you need to win: assets, templates, and real humans backing you.</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { title: 'Custom Materials', icon: Palette, blurb: 'Posters, flyers, and merch tailored to your community' },
-                { title: 'Digital Support', icon: Share2, blurb: 'Landing pages, social templates, QR codes' },
-                { title: 'Partner Channels', icon: Handshake, blurb: 'Co‑marketing with venue partners' },
-                { title: 'Personalized Strategy', icon: Target, blurb: '1:1 guidance and a clear plan' },
-                { title: 'Community Tools', icon: Users, blurb: 'Event guides and engagement tips' },
-                { title: 'Ongoing Support', icon: Headphones, blurb: 'Regular check‑ins and new opportunities' }
+                { title: 'Custom Materials', icon: Palette, blurb: 'Posters, flyers, and merch tailored to your community', color: 'from-purple-500 to-pink-500' },
+                { title: 'Digital Support', icon: Share2, blurb: 'Landing pages, social templates, QR codes', color: 'from-blue-500 to-cyan-400' },
+                { title: 'Partner Channels', icon: Handshake, blurb: 'Co‑marketing with venue partners', color: 'from-emerald-500 to-green-400' },
+                { title: 'Personalized Strategy', icon: Target, blurb: '1:1 guidance and a clear plan', color: 'from-amber-500 to-orange-400' },
+                { title: 'Community Tools', icon: Users, blurb: 'Event guides and engagement tips', color: 'from-indigo-500 to-violet-500' },
+                { title: 'Ongoing Support', icon: Headphones, blurb: 'Regular check‑ins and new opportunities', color: 'from-rose-500 to-fuchsia-500' }
               ].map((item, i) => (
-                <motion.div key={item.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
-                  <div className="rounded-2xl border border-gray-700 bg-gray-800/50 p-5 h-full">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-pink to-pulse-blue flex items-center justify-center">
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 16, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  className="relative group"
+                >
+                  <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pulse-pink/20 via-accent/20 to-pulse-blue/20 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
+                  <div className="relative rounded-2xl border border-gray-700 bg-gray-800/60 p-6 h-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform`}>
                         <item.icon className="h-5 w-5 text-white" />
                       </div>
-                      <h3 className="text-white font-semibold">{item.title}</h3>
+                      <h3 className="text-white font-semibold text-lg">{item.title}</h3>
                     </div>
-                    <p className="text-sm text-gray-300">{item.blurb}</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">{item.blurb}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
             <div className="lg:col-span-1">
               <div className="sticky top-24">
-                <div className="rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800/60 to-gray-900/60 p-6">
-                  <h3 className="text-xl font-bold mb-2">Need something special?</h3>
-                  <p className="text-sm text-gray-300 mb-4">Tell us what would help you win in your city.</p>
-                  <a href="mailto:ambassadors@pulsenow.app?subject=Ambassador Support Request" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-5 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 font-medium text-sm">
-                    <span>Request Support</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
+                <div className="relative group">
+                  <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pulse-pink/20 via-accent/20 to-pulse-blue/20 blur-xl opacity-0 group-hover:opacity-100 transition"></div>
+                  <div className="relative rounded-2xl border border-gray-700 bg-gray-800/60 p-6 overflow-hidden">
+                    <div className="absolute right-0 -top-16 w-40 h-40 bg-gradient-to-br from-pulse-pink/20 to-pulse-blue/20 rounded-full blur-3xl" />
+                    <h3 className="text-xl font-bold mb-2">Need something special?</h3>
+                    <p className="text-sm text-gray-300 mb-4">Tell us what would help you win in your city.</p>
+
+                    <div className="space-y-2 mb-5">
+                      {[
+                        { icon: Share2, text: 'Editable social templates' },
+                        { icon: Palette, text: 'Custom posters and flyers' },
+                        { icon: Target, text: 'City‑specific growth plan' },
+                        { icon: Headphones, text: '1:1 support from our team' }
+                      ].map((it) => (
+                        <div key={it.text} className="flex items-center text-sm text-gray-300">
+                          <it.icon size={16} className="mr-2 text-gray-400" />
+                          <span>{it.text}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a
+                      href="mailto:ambassadors@pulsenow.app?subject=Ambassador Support Request"
+                      className="w-full justify-center bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-5 py-3 rounded-full inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 font-medium text-sm"
+                    >
+                      <span>Request Support</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

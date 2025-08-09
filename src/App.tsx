@@ -28,6 +28,7 @@ import MeetPip from "@/pages/MeetPip";
 import PlanIdeas from "@/pages/PlanIdeas";
 import PlanIdeasCity from "@/pages/PlanIdeasCity";
 import Redirect from "@/pages/Redirect";
+import FAQ from "@/pages/FAQ";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ function App() {
                 <Route path="meet-pip" element={<MeetPip />} />
                 <Route path="plan-ideas" element={<PlanIdeas />} />
                 <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
+                <Route path="faq" element={<FAQ />} />
                 
                 {/* Cities routes */}
                 <Route path="cities" element={<CityList />} />

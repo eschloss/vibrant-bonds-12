@@ -406,37 +406,37 @@ const Partnerships = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                title: "Meet Bowling Enthusiasts in Boston",
+                title: "Meet Fellow Bowlers in Boston",
                 venue: "Boston Bowlers",
                 poweredBy: "New England Bowling Alley",
-                description: "A community of bowling lovers who meet weekly for friendly competition and social games.",
+                description: "Meet new bowling buddies to play bowling and other fun activities with.",
                 emoji: "🎳",
                 features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
                 color: "from-blue-500 to-cyan-400"
               },
               {
-                title: "Connect with Fitness Lovers in Barcelona",
-                venue: "Barcelona Gym Lovers",
+                title: "Meet Gym Buddies in Barcelona",
+                venue: "Barcelona Gym Buddies",
                 poweredBy: "BCN Gym Group",
-                description: "A group of fitness enthusiasts who share workout tips, motivation, and gym buddy connections.",
+                description: "Meet new gym buddies you can work out with in your city",
                 emoji: "🏋️",
                 features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
                 color: "from-purple-500 to-pink-500"
               },
               {
                 title: "Join Board Game Enthusiasts in Portland",
-                venue: "Portland Board Game Group",
+                venue: "Portland Board Gamers",
                 poweredBy: "Portland Board Game Cafe",
-                description: "A community of tabletop gamers who love strategy games, card games, and social gaming nights.",
+                description: "Meet fellow board game enthusiasts and meet to play games together",
                 emoji: "🎲",
                 features: ["Game preference matching", "Strategy game nights", "Card game tournaments", "New game discovery"],
                 color: "from-green-500 to-emerald-400"
               },
               {
-                title: "Meet Art Enthusiasts in Austin",
+                title: "Meet Fellow Aspiring Artists",
                 venue: "Austin Art Collective",
                 poweredBy: "Austin Creative Studios",
-                description: "A group of artists and art lovers who share techniques, inspiration, and creative workshops.",
+                description: "Meet fellow artists to share your passion with.",
                 emoji: "🎨",
                 features: ["Medium-based matching", "Art workshops", "Gallery visits", "Creative collaborations"],
                 color: "from-orange-500 to-red-500"
