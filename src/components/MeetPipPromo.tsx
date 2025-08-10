@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, MapPin, Repeat } from "lucide-react";
+import { MessageSquare, Calendar, MapPin, Repeat, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface MeetPipPromoProps {
@@ -70,6 +70,12 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
 
   const bulletPoints = points || undefined;
   const richItems = items || defaultItems;
+  const simpleIcons = [
+    <MessageSquare size={18} className="text-white" key="m" />, 
+    <Calendar size={18} className="text-white" key="c" />, 
+    <MapPin size={18} className="text-white" key="p" />, 
+    <Repeat size={18} className="text-white" key="r" />
+  ];
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden bg-transparent">
@@ -92,8 +98,8 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                 <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                 {badgeText || t("meet_pippromo.badge", "Built to spark IRL connections")}
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">
-                {headline || t("meet_pippromo.headline", "Meet Pip")}
+              <h2 className="text-3xl md:text-5xl font-bold mb-3">
+                {headline || t("meet_pippromo.headline", "Meet Pip — Your Social Wingman")}
               </h2>
               <p className="text-gray-300 mb-6 max-w-xl">
                 {subtext ||
@@ -109,7 +115,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                     <li className="flex items-start gap-3" key={idx}>
                       <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
                         <div className="rounded-full bg-gray-900 p-1">
-                          {[<MessageSquare size={18} className=\"text-white\" key=\"m\" />, <Calendar size={18} className=\"text-white\" key=\"c\" />, <MapPin size={18} className=\"text-white\" key=\"p\" />, <Repeat size={18} className=\"text-white\" key=\"r\" />][idx % 4]}
+                          {simpleIcons[idx % 4]}
                         </div>
                       </div>
                       <span className="text-gray-200">{text}</span>
@@ -143,8 +149,14 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                   aria-label={ctaLabel || t("meet_pippromo.cta", "Meet Pip")}
                   className="inline-block"
                 >
-                  <Button className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-                    {ctaLabel || t("meet_pippromo.cta", "Meet Pip")}
+                  <Button
+                    className="relative bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-95 px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl rounded-full shadow-xl shadow-purple-500/30 transition transform hover:scale-[1.02]"
+                  >
+                    <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="inline-flex items-center gap-2">
+                      <Sparkles size={20} className="text-white" />
+                      {ctaLabel || t("meet_pippromo.cta", "Meet Pip")}
+                    </span>
                   </Button>
                 </a>
               </div>
