@@ -104,7 +104,13 @@ const CharacterCard = ({ character, index }) => {
   );
 };
 
-const AiIcebreakers = () => {
+interface AiIcebreakersProps {
+  heading1?: string;
+  heading2?: string;
+  description?: string;
+}
+
+const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, description }) => {
   const { t } = useTranslation();
   const icebreakers = getIcebreakers(t);
   const ref = useRef(null);
@@ -151,7 +157,7 @@ const AiIcebreakers = () => {
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl font-bold tracking-tight text-white mb-4 md:text-5xl"
           >
-            {t("icebreakers.heading1", "Spark")} <span className="pulse-gradient-text">{t("icebreakers.heading2", "Meaningful Conversations")}</span>
+            {heading1 ?? t("icebreakers.heading1", "Spark")} <span className="pulse-gradient-text">{heading2 ?? t("icebreakers.heading2", "Meaningful Conversations")}</span>
           </motion.h2>
           
           <motion.p 
@@ -161,7 +167,7 @@ const AiIcebreakers = () => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg text-gray-300 max-w-2xl mx-auto mb-10"
           >
-            {t("icebreakers.description", "Each character brings a unique personality to break the ice and spark engaging conversations")}
+            {description ?? t("icebreakers.description", "Each character brings a unique personality to break the ice and spark engaging conversations")}
           </motion.p>
         </div>
         
