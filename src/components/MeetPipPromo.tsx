@@ -9,7 +9,10 @@ interface MeetPipPromoProps {
   badgeText?: string;
   headline?: string;
   subtext?: string;
+  // Deprecated: prefer `items`. If provided, rendered as simple lines.
   points?: string[];
+  // Prefer this: richer bullet items with title + body
+  items?: { title: string; text: string }[];
   ctaLabel?: string;
   ctaHref?: string;
 }
@@ -20,6 +23,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
   headline,
   subtext,
   points,
+  items,
   ctaLabel,
   ctaHref,
 }) => {
@@ -29,20 +33,43 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
     imageSrc ||
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20party.png";
 
-  const bulletPoints =
-    points || [
-      t("meet_pippromo.point1", "Breaks the ice with games that get everyone talking"),
-      t("meet_pippromo.point2", "Finds a time that works for the whole crew"),
-      t("meet_pippromo.point3", "Suggests great local spots matched to your vibe"),
-      t("meet_pippromo.point4", "Keeps the hang going with nudges, streaks, and traditions"),
-    ];
-
-  const iconByIndex = [
-    <MessageSquare size={18} className="text-white" key="m" />, 
-    <Calendar size={18} className="text-white" key="c" />, 
-    <MapPin size={18} className="text-white" key="p" />, 
-    <Repeat size={18} className="text-white" key="r" />
+  const defaultItems = [
+    {
+      title: t("meet_pippromo.item1.title", "Ice Breakers"),
+      text: t(
+        "meet_pippromo.item1.text",
+        "Games and prompts that get everyone talking—fast."
+      ),
+      icon: <MessageSquare size={18} className="text-white" />,
+    },
+    {
+      title: t("meet_pippromo.item2.title", "Smart Scheduling"),
+      text: t(
+        "meet_pippromo.item2.text",
+        "Picks a time that works for the whole crew."
+      ),
+      icon: <Calendar size={18} className="text-white" />,
+    },
+    {
+      title: t("meet_pippromo.item3.title", "Local Picks"),
+      text: t(
+        "meet_pippromo.item3.text",
+        "Recommends great nearby spots matched to your vibe."
+      ),
+      icon: <MapPin size={18} className="text-white" />,
+    },
+    {
+      title: t("meet_pippromo.item4.title", "Keep It Going"),
+      text: t(
+        "meet_pippromo.item4.text",
+        "Nudges, streaks, and traditions so hanging out actually happens."
+      ),
+      icon: <Repeat size={18} className="text-white" />,
+    },
   ];
+
+  const bulletPoints = points || undefined;
+  const richItems = items || defaultItems;
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden bg-transparent">
@@ -72,22 +99,43 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                 {subtext ||
                   t(
                     "meet_pippromo.subtext",
-                    "Your group’s AI that turns chat into real plans—and real friendships."
+                    "From awkward silence to IRL plans—Pip energizes your chat, picks a time, and lines up the perfect spot so hanging out actually happens."
                   )}
               </p>
 
-              <ul className="space-y-3">
-                {bulletPoints.map((text, idx) => (
-                  <li className="flex items-start gap-3" key={idx}>
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                      <div className="rounded-full bg-gray-900 p-1">
-                        {iconByIndex[idx % iconByIndex.length]}
+              {bulletPoints ? (
+                <ul className="space-y-3">
+                  {bulletPoints.map((text, idx) => (
+                    <li className="flex items-start gap-3" key={idx}>
+                      <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
+                        <div className="rounded-full bg-gray-900 p-1">
+                          {[<MessageSquare size={18} className=\"text-white\" key=\"m\" />, <Calendar size={18} className=\"text-white\" key=\"c\" />, <MapPin size={18} className=\"text-white\" key=\"p\" />, <Repeat size={18} className=\"text-white\" key=\"r\" />][idx % 4]}
+                        </div>
                       </div>
-                    </div>
-                    <span className="text-gray-200">{text}</span>
-                  </li>
-                ))}
-              </ul>
+                      <span className="text-gray-200">{text}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="space-y-3">
+                  {richItems.map((it, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 bg-gray-800/40 border border-gray-700 rounded-xl p-3 hover:border-accent/40 transition"
+                    >
+                      <div className="mt-1 rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
+                        <div className="rounded-full bg-gray-900 p-1.5">
+                          {it.icon}
+                        </div>
+                      </div>
+                      <p className="text-gray-200">
+                        <span className="font-semibold text-white">{it.title}</span>
+                        <span> — {it.text}</span>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <div className="mt-7">
                 <a
