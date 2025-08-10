@@ -185,11 +185,11 @@ const MeetPip = () => {
                   viewport={{ once: true }}
                 >
                   {[
-                    t("meet_pip.module.point1", "Pip breaks the ice with fun icebreaker games"),
-                    t("meet_pip.module.point2", "Removes the awkward silence and creates continous engagements"),
-                    t("meet_pip.module.point3", "Suggests the perfect meetups for the group to meet and bound over."),
-                    t("meet_pip.module.point4", "Pushes the group to meet again"),
-                  ].map((text, idx) => (
+                    { title: t("meet_pip.module.point1.title", "Ice Breakers"), text: t("meet_pip.module.point1", "Pip breaks the ice with fun icebreaker games") },
+                    { title: t("meet_pip.module.point2.title", "No Awkward Lulls"), text: t("meet_pip.module.point2", "Removes the awkward silence and creates continous engagements") },
+                    { title: t("meet_pip.module.point3.title", "Perfect Meetups"), text: t("meet_pip.module.point3", "Suggests the perfect meetups for the group to meet and bound over.") },
+                    { title: t("meet_pip.module.point4.title", "See You Again"), text: t("meet_pip.module.point4", "Pushes the group to meet again") },
+                  ].map((item, idx) => (
                     <motion.li
                       key={idx}
                       className="flex items-start gap-3 bg-gray-800/40 border border-gray-700 rounded-xl p-3"
@@ -198,11 +198,14 @@ const MeetPip = () => {
                       transition={{ duration: 0.4, delay: idx * 0.08 }}
                     >
                       <div className="mt-1 rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                        <div className="rounded-full bg-gray-900 p-1">
-                          <CheckCircle className="text-accent" size={18} />
+                        <div className="rounded-full bg-accent p-1">
+                          <CheckCircle className="text-white" size={18} />
                         </div>
                       </div>
-                      <span className="text-gray-200">{text}</span>
+                      <p className="text-gray-200">
+                        <span className="font-semibold text-white">{item.title}</span>
+                        <span> — {item.text}</span>
+                      </p>
                     </motion.li>
                   ))}
                 </motion.ul>
