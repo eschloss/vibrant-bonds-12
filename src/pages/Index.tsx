@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import NeuralNetwork from "@/components/NeuralNetwork";
-import AiIcebreakers from "@/components/AiIcebreakers";
+import MeetPipPromo from "@/components/MeetPipPromo";
 import MissionCountdown from "@/components/MissionCountdown";
 import Footer from "@/components/Footer";
 import ShareCallout from "@/components/ShareCallout";
@@ -22,7 +22,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         <NeuralNetwork />
-        <AiIcebreakers />
+        <MeetPipPromo />
         <MissionCountdown />
         <ShareCallout />
       </main>
