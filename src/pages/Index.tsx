@@ -22,7 +22,7 @@ const Index = () => {
           <HowItWorks />
         </div>
         <NeuralNetwork />
-        <MeetPipPromo />
+        <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pipmain.png" />
         <MissionCountdown />
         <ShareCallout />
       </main>
