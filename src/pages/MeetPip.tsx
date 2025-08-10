@@ -122,102 +122,7 @@ const MeetPip = () => {
         </div>
       </section>
 
-      {/* Pip Friendship Formula (compact) */}
-      <section className="py-10 md:py-12 relative">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-6"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold">
-              {t("meet_pip.formula.title", "The Friendship Formula")}
-            </h2>
-            <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
-              {t(
-                "meet_pip.formula.subtitle",
-                "Three simple truths Pip builds on to turn chats into real friendships."
-              )}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            {/* Card 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
-            >
-              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                <div className="rounded-full bg-accent/90 p-2">
-                  <Heart className="text-white" size={18} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {t("meet_pip.formula.shared.title", "Shared Interests")}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {t(
-                  "meet_pip.formula.shared.desc",
-                  "Plans built around what you care about make connection easy."
-                )}
-              </p>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.12 }}
-              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
-            >
-              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                <div className="rounded-full bg-accent/90 p-2">
-                  <Calendar className="text-white" size={18} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {t("meet_pip.formula.irl.title", "IRL, Again and Again")}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {t(
-                  "meet_pip.formula.irl.desc",
-                  "Friendship forms through repeat hangouts—Pip keeps them happening."
-                )}
-              </p>
-            </motion.div>
-
-            {/* Card 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.18 }}
-              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
-            >
-              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                <div className="rounded-full bg-accent/90 p-2">
-                  <Zap className="text-white" size={18} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {t("meet_pip.formula.nudge.title", "A Little Nudge")}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {t(
-                  "meet_pip.formula.nudge.desc",
-                  "Gentle prompts and playful ideas keep the momentum alive."
-                )}
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Meet Pip Module: Image + Content */}
       <section className="py-10 md:py-14 relative">
@@ -329,6 +234,103 @@ const MeetPip = () => {
           "From awkward silence to inside jokes, these quirky characters drop into your chat with games that get everyone talking — and laughing."
         )}
       />
+
+      {/* Pip Friendship Formula (compact) */}
+      <section className="py-10 md:py-12 relative">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-6"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold">
+              {t("meet_pip.formula.title", "The Friendship Formula")}
+            </h2>
+            <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
+              {t(
+                "meet_pip.formula.subtitle",
+                "Three simple truths Pip builds on to turn chats into real friendships."
+              )}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {/* Card 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
+            >
+              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
+                <div className="rounded-full bg-accent/90 p-2">
+                  <Heart className="text-white" size={18} />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {t("meet_pip.formula.shared.title", "Shared Interests")}
+              </h3>
+              <p className="text-gray-300 text-sm">
+                {t(
+                  "meet_pip.formula.shared.desc",
+                  "Plans built around what you care about make connection easy."
+                )}
+              </p>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.12 }}
+              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
+            >
+              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
+                <div className="rounded-full bg-accent/90 p-2">
+                  <Calendar className="text-white" size={18} />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {t("meet_pip.formula.irl.title", "IRL, Again and Again")}
+              </h3>
+              <p className="text-gray-300 text-sm">
+                {t(
+                  "meet_pip.formula.irl.desc",
+                  "Friendship forms through repeat hangouts—Pip keeps them happening."
+                )}
+              </p>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.18 }}
+              className="bg-gray-800/50 border border-gray-700 rounded-2xl p-5 backdrop-blur-md hover:border-accent/40 transition"
+            >
+              <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
+                <div className="rounded-full bg-accent/90 p-2">
+                  <Zap className="text-white" size={18} />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {t("meet_pip.formula.nudge.title", "A Little Nudge")}
+              </h3>
+              <p className="text-gray-300 text-sm">
+                {t(
+                  "meet_pip.formula.nudge.desc",
+                  "Gentle prompts and playful ideas keep the momentum alive."
+                )}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* How Pip Knows What You Love */}
       <section className="py-12 md:py-16 relative">
