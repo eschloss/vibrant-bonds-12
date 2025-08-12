@@ -22,8 +22,8 @@ const Index = () => {
         <div id="how-it-works" ref={howItWorksRef}>
           <HowItWorks />
         </div>
-        <NeuralNetwork />
         <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
+        <NeuralNetwork />
         <MissionCountdown />
         <ShareCallout />
       </main>
