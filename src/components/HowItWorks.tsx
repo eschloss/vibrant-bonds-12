@@ -76,7 +76,7 @@ const HowItWorks = () => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
           >
-            10 new friends. 7 days to meet in real life. Repeat.
+            10 new friends. 7 days to meet in real life.
           </motion.h2>
         </motion.div>
 
