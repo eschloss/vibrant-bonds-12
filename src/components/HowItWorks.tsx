@@ -30,7 +30,7 @@ const HowItWorks = () => {
     color: "bg-gradient-to-r from-blue-500 to-cyan-400"
   }, {
     icon: CalendarDays,
-    title: t("steps.meet_up.title", "Show Up & Smile"),
+    title: t("steps.meet_up.title", "Just Show Up"),
     description: t("steps.meet_up.description", "Pip curates fun local experiences that fit your crew’s vibe and schedule."),
     color: "bg-gradient-to-r from-stone-500 to-rose-500"
   }, {

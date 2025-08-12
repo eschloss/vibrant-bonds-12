@@ -11,7 +11,7 @@ export const howItWorks = {
     "steps.get_matched.description": "Pip pairs you with a small crew who shares your vibe and wants to hang out.",
     "steps.break_ice.title": "Break the Ice",
     "steps.break_ice.description": "Pip serves up quick games and hilarious questions to spark instant connection.",
-  "steps.meet_up.title": "Show Up & Smile",
+  "steps.meet_up.title": "Just Show Up",
     "steps.meet_up.description": "Pip curates fun local experiences that fit your crew’s vibe and schedule.",
     "steps.grow_friendships.title": "Keep It Going",
     "steps.grow_friendships.description": "Keep meeting while Pip drops in with fresh games and hangout ideas.",
