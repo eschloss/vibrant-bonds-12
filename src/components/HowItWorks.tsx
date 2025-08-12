@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight } from "lucide-react";
+import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight, Repeat } from "lucide-react";
 import { Button } from "./ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
@@ -21,22 +21,22 @@ const HowItWorks = () => {
   const steps = [{
     icon: Users,
     title: t("steps.get_matched.title", "Get Matched"),
-    description: t("steps.get_matched.description", "We'll match you with a small group of like-minded people."),
+    description: t("steps.get_matched.description", "Pip pairs you with a small crew who shares your vibe and wants to hang out."),
     color: "bg-gradient-to-r from-pink-500 to-purple-600"
   }, {
     icon: MessageSquare,
     title: t("steps.break_ice.title", "Break the Ice"),
-    description: t("steps.break_ice.description", "Chat with fellow group members, guided by our conversation starters."),
+    description: t("steps.break_ice.description", "Pip serves up quick games and hilarious questions to spark instant connection."),
     color: "bg-gradient-to-r from-blue-500 to-cyan-400"
   }, {
     icon: CalendarDays,
-    title: t("steps.meet_up.title", "Plan a Meetup\n—Just Show Up"),
-    description: t("steps.meet_up.description", "Our AI helps you find the perfect time and activity that works for everyone."),
+    title: t("steps.meet_up.title", "Show Up & Smile"),
+    description: t("steps.meet_up.description", "Pip curates fun local experiences that fit your crew’s vibe and schedule."),
     color: "bg-gradient-to-r from-stone-500 to-rose-500"
   }, {
-    icon: Sprout,
-    title: t("steps.grow_friendships.title", "Grow the Friendships"),
-    description: t("steps.grow_friendships.description", "One hangout's just the beginning.\nWe'll help you keeep the momentum going\n—so new connections turn into real friends."),
+    icon: Repeat,
+    title: t("steps.grow_friendships.title", "Keep It Going"),
+    description: t("steps.grow_friendships.description", "Keep meeting while Pip drops in with fresh games and hangout ideas."),
     color: "bg-gradient-to-r from-green-400 to-emerald-500"
   }];
   
@@ -74,9 +74,9 @@ const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl font-bold tracking-tight text-white mb-4 max-w-3xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
+            className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
           >
-            <Text id="how_it_works.title" className="">Making Friends Shouldn't be Hard</Text>
+            10 new friends. 7 days to meet in real life. Repeat.
           </motion.h2>
         </motion.div>
 

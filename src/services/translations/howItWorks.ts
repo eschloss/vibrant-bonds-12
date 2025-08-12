@@ -8,13 +8,13 @@ export const howItWorks = {
     
     // Steps for main page
     "steps.get_matched.title": "Get Matched",
-    "steps.get_matched.description": "We'll match you with a small group of like-minded people.",
+    "steps.get_matched.description": "Pip pairs you with a small crew who shares your vibe and wants to hang out.",
     "steps.break_ice.title": "Break the Ice",
-    "steps.break_ice.description": "Chat with fellow group members, guided by our conversation starters.",
-    "steps.meet_up.title": "Plan a Meetup\n—Just Show Up",
-    "steps.meet_up.description": "Our AI helps you find the perfect time and activity that works for everyone.",
-    "steps.grow_friendships.title": "Grow the Friendships",
-    "steps.grow_friendships.description": "We’ll help you keep the momentum—so new connections become real friends.",
+    "steps.break_ice.description": "Pip serves up quick games and hilarious questions to spark instant connection.",
+  "steps.meet_up.title": "Show Up & Smile",
+    "steps.meet_up.description": "Pip curates fun local experiences that fit your crew’s vibe and schedule.",
+    "steps.grow_friendships.title": "Keep It Going",
+    "steps.grow_friendships.description": "Keep meeting while Pip drops in with fresh games and hangout ideas.",
   },
   es: {
     // How it works section
@@ -27,8 +27,8 @@ export const howItWorks = {
     "steps.get_matched.description": "Te emparejaremos con un pequeño grupo de personas afines.",
     "steps.break_ice.title": "Rompe el Hielo",
     "steps.break_ice.description": "Chatea con los miembros del grupo, guiado por nuestros iniciadores de conversación.",
-    "steps.meet_up.title": "Planea una Reunión\n—Solo Preséntate",
-    "steps.meet_up.description": "Nuestra IA te ayuda a encontrar el momento y la actividad perfectos que funcionan para todos.",
+  "steps.meet_up.title": "Llega y Sonríe",
+  "steps.meet_up.description": "Pip selecciona experiencias locales divertidas que encajan con el estilo y horario de tu grupo.",
     "steps.grow_friendships.title": "Cultiva las Amistades",
     "steps.grow_friendships.description": "Te ayudaremos a mantener el impulso\n—para que las nuevas conexiones se conviertan en amigos de verdad.",
   }

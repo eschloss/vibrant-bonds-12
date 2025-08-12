@@ -1,7 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, Heart, Zap, Target, Globe, Code, Palette, MessageSquare, TrendingUp } from "lucide-react";
+// Removed lucide-react icons used only in the Values section
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,53 +21,38 @@ const Careers = () => {
     type: "website"
   };
 
-  const values = [
-    {
-      icon: <Heart className="text-white h-6 w-6" />,
-      title: "Human-First",
-      description: "We believe technology should bring people together, not pull them apart."
-    },
-    {
-      icon: <Zap className="text-white h-6 w-6" />,
-      title: "Move Fast",
-      description: "We iterate quickly, learn from feedback, and aren't afraid to experiment."
-    },
-    {
-      icon: <Target className="text-white h-6 w-6" />,
-      title: "Impact Focused",
-      description: "Every decision we make is measured by its impact on real human connection."
-    },
-    {
-      icon: <Globe className="text-white h-6 w-6" />,
-      title: "Global Mindset",
-      description: "We're building for communities everywhere, with diverse perspectives at our core."
-    }
-  ];
+  // Values section removed per request
 
-  const departments = [
+  const openPositions = [
     {
-      icon: <Code className="text-white h-6 w-6" />,
-      title: "Engineering",
-      description: "Build the technology that powers meaningful connections worldwide.",
-      openings: ["Full-Stack Engineer", "Mobile Developer", "AI/ML Engineer"]
+      title: "Social Media Intern",
+      description:
+        "Assist with content creation, scheduling, and community engagement across social platforms.",
+      remote: true
     },
     {
-      icon: <Palette className="text-white h-6 w-6" />,
-      title: "Design",
-      description: "Craft beautiful, intuitive experiences that make connection effortless.",
-      openings: ["Product Designer", "UX Researcher"]
+      title: "Growth Intern",
+      description:
+        "Support growth experiments, analytics, and channel operations to accelerate user acquisition.",
+      remote: true
     },
     {
-      icon: <TrendingUp className="text-white h-6 w-6" />,
-      title: "Growth",
-      description: "Help us reach more communities and amplify our impact.",
-      openings: ["Growth Marketing Manager", "Community Manager"]
+      title: "Head of Social Media",
+      description:
+        "Own our social strategy end-to-end, lead content programming, and grow our brand presence.",
+      remote: true
     },
     {
-      icon: <Users className="text-white h-6 w-6" />,
-      title: "Operations",
-      description: "Keep our team and company running smoothly as we scale.",
-      openings: ["Operations Manager", "People & Culture Lead"]
+      title: "Community Lead",
+      description:
+        "Build, activate, and support our global community through events, programs, and moderation.",
+      remote: true
+    },
+    {
+      title: "Partnership Manager",
+      description:
+        "Source, negotiate, and manage strategic partnerships to expand reach and impact.",
+      remote: true
     }
   ];
 
@@ -77,7 +62,7 @@ const Careers = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-24 pb-10 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
           <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
@@ -98,72 +83,57 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Values</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              These principles guide everything we do and shape our culture.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div key={value.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full text-center">
-                  <CardContent className="p-6">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink w-12 h-12 flex items-center justify-center mb-4 mx-auto">
-                      {value.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{value.title}</h3>
-                    <p className="text-gray-300">{value.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Values Section removed */}
 
-      {/* Departments Section */}
-      <section className="py-20 relative bg-gray-900/50 backdrop-blur-lg">
+      {/* Open Positions Section */}
+      <section className="py-12 relative bg-gray-900/50 backdrop-blur-lg">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Open Positions</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We're growing fast and looking for talented people across all departments.
+              We're growing fast and looking for talented people to join our mission.
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {departments.map((dept, index) => (
-              <motion.div key={dept.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink w-12 h-12 flex items-center justify-center mr-4">
-                        {dept.icon}
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">{dept.title}</h3>
-                    </div>
-                    <p className="text-gray-300 mb-4">{dept.description}</p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-white">Current Openings:</h4>
-                      {dept.openings.map((opening, i) => (
-                        <div key={i} className="text-sm text-gray-300 bg-gray-700/50 px-3 py-2 rounded-md">
-                          {opening}
+          <div className="max-w-4xl md:max-w-5xl mx-auto">
+            <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
+              <CardContent className="p-8 md:p-10">
+                <ul className="space-y-4">
+                  {openPositions.map((role) => {
+                    const subject = encodeURIComponent(`Application for ${role.title}`);
+                    return (
+                      <li
+                        key={role.title}
+                        className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gray-900/40 border border-gray-700 hover:border-purple-500/40 transition-colors rounded-xl px-6 py-5"
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3">
+                            <span className="text-white text-lg md:text-xl font-semibold">{role.title}</span>
+                            {role.remote && (
+                              <span className="text-green-300 border border-green-500/30 bg-green-500/10 text-[10px] md:text-xs px-2 py-0.5 rounded-full">
+                                Remote
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-gray-300 text-sm md:text-base mt-1">{role.description}</p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                        <a
+                          href={`mailto:careers@pulsenow.app?subject=${subject}`}
+                          className="text-pulse-pink hover:underline shrink-0"
+                        >
+                          Apply
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Apply Section */}
-      <section className="py-20 relative">
+      <section className="py-12 relative">
         <div className="container mx-auto px-4 relative z-10">
           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Join Us?</h2>

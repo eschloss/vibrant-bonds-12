@@ -31,7 +31,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
 
   const resolvedImage =
     imageSrc ||
-    "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20party.png";
+    "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png";
 
   const defaultItems = [
     {
@@ -127,13 +127,14 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                   {richItems.map((it, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-3 bg-gray-800/40 border border-gray-700 rounded-xl p-3 hover:border-accent/40 transition"
+                      className="flex items-center gap-4 bg-gray-800/40 border border-gray-700 rounded-xl p-3 hover:border-accent/40 transition"
                     >
-                      <div className="mt-1 rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                        <div className="rounded-full bg-gray-900 p-1.5">
-                          {it.icon}
-                        </div>
-                      </div>
+                      <div className={`w-12 h-12 shrink-0 rounded-full bg-gradient-to-r flex items-center justify-center ${[
+                        'from-pink-500 to-purple-600',
+                        'from-blue-500 to-cyan-400',
+                        'from-stone-500 to-rose-500',
+                        'from-green-400 to-emerald-500',
+                      ][idx % 4]}`}>{it.icon}</div>
                       <p className="text-gray-200">
                         <span className="font-semibold text-white">{it.title}</span>
                         <span> — {it.text}</span>

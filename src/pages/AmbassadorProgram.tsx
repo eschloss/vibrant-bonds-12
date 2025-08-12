@@ -52,7 +52,7 @@ const AmbassadorProgram = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center max-w-5xl mx-auto">
             <div className="mb-8">
               <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }} className="inline-block">
-                <div className="bg-gradient-to-r from-pulse-pink to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6">
+                <div className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6">
                   🚀 Earn While Making Impact
                 </div>
               </motion.div>
@@ -98,7 +98,7 @@ const AmbassadorProgram = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Who We're Looking For
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">Ambassador Profiles</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Ambassador Profiles</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Connectors, creators, and doers who help people find their circle.
@@ -140,7 +140,7 @@ const AmbassadorProgram = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               The Loneliness Epidemic
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 Needs Your Voice
               </span>
             </h2>
@@ -207,7 +207,7 @@ const AmbassadorProgram = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Real Earning Potential
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 With Real Impact
               </span>
             </h2>
@@ -484,7 +484,7 @@ const AmbassadorProgram = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Turn Your
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 Connections Into Income?
               </span>
             </h2>

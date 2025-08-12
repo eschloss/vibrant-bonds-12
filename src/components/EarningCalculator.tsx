@@ -95,7 +95,7 @@ const EarningCalculator: React.FC = () => {
         >
           <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="h-6 w-6 text-pulse-pink" />
-            <span className="text-pulse-pink font-semibold">EARNING CALCULATOR</span>
+            <span className="text-pulse-pink font-semibold">PARTNER EARNINGS</span>
             <Sparkles className="h-6 w-6 text-pulse-pink" />
           </motion.div>
           
@@ -103,14 +103,14 @@ const EarningCalculator: React.FC = () => {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-3"
           >
-            See Your Earning Potential
+            See Your Potential Earnings with Pulse
           </motion.h2>
           
           <motion.p 
             variants={itemVariants}
             className="text-base text-gray-300 max-w-2xl mx-auto"
           >
-            Pick a tier and how many groups book each month. We’ll estimate revenue using 10 people per group and the tier’s average price.
+            This estimates how much your venue could earn from Pulse‑driven group bookings. Adjust the tier and number of monthly groups. Assumes 10 people per group and the tier’s average ticket price.
           </motion.p>
         </motion.div>
 
@@ -128,7 +128,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-green-400" />
-                    Revenue / group
+                    Earnings per group
                   </div>
                   <div className="text-2xl font-bold text-green-400 mt-1">${revenuePerBooking.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup}</div>
@@ -136,7 +136,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Zap className="h-4 w-4 text-pulse-pink" />
-                    Monthly revenue
+                    Estimated monthly earnings
                   </div>
                   <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${revenuePerBooking.toLocaleString()}</div>
@@ -144,7 +144,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Star className="h-4 w-4 text-yellow-400" />
-                    Annual revenue
+                    Estimated annual earnings
                   </div>
                   <div className="text-3xl font-bold text-yellow-400 mt-1">${annualRevenue.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
@@ -211,7 +211,7 @@ const EarningCalculator: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-4 text-xs text-gray-400">Assumptions: 10 people per group • Price uses average of selected tier.</div>
+                <div className="mt-4 text-xs text-gray-400">Estimates your venue’s gross earnings from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier.</div>
               </div>
             </CardContent>
           </Card>

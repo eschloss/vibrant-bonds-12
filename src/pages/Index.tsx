@@ -18,11 +18,12 @@ const Index = () => {
       
       <main className="flex-grow">
         <Hero />
+        {/* Removed extra headline module; incorporated into HowItWorks */}
         <div id="how-it-works" ref={howItWorksRef}>
           <HowItWorks />
         </div>
         <NeuralNetwork />
-        <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pipmain.png" />
+        <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
         <MissionCountdown />
         <ShareCallout />
       </main>

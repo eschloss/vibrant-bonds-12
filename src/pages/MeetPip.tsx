@@ -96,7 +96,7 @@ const MeetPip = () => {
               <div className="relative">
                 <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-xl opacity-30" />
                 <img
-                  src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip.jpeg"
+                  src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png"
                   alt={t("meet_pip.hero.image_alt", "Pip, your AI friend")}
                   className="relative z-10 w-36 h-36 md:w-52 md:h-52 rounded-full object-cover border border-gray-700 shadow-2xl shadow-purple-500/20 bg-gray-900/30"
                   onError={(e) => {
@@ -194,17 +194,20 @@ const MeetPip = () => {
                   ].map((item, idx) => (
                     <motion.li
                       key={idx}
-                      className="flex items-start gap-3 bg-gray-800/40 border border-gray-700 rounded-xl p-3"
+                      className="flex items-center gap-4 bg-gray-800/40 border border-gray-700 rounded-xl p-3"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: idx * 0.08 }}
                     >
-                      <div className="mt-1 rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px]">
-                        <div className="rounded-full bg-accent p-1">
-                          <CheckCircle className="text-white" size={18} />
-                        </div>
+                      <div className={`w-12 h-12 shrink-0 rounded-full bg-gradient-to-r flex items-center justify-center ${[
+                        'from-pink-500 to-purple-600',
+                        'from-blue-500 to-cyan-400',
+                        'from-stone-500 to-rose-500',
+                        'from-green-400 to-emerald-500',
+                      ][idx % 4]}`}> 
+                        <CheckCircle className="text-white" size={18} />
                       </div>
-                      <p className="text-gray-200">
+                      <p className="text-gray-200 leading-snug flex-1">
                         <span className="font-semibold text-white">{item.title}</span>
                         <span> — {item.text}</span>
                       </p>
@@ -412,27 +415,27 @@ const MeetPip = () => {
                 )}
               </p>
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                    <div className="rounded-full bg-gray-900 p-1"><Database size={18} className="text-accent" /></div>
+                <li className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mt-0.5">
+                    <Database size={18} className="text-white" />
                   </div>
                   <span className="text-gray-200">{t("meet_pip.know.point1", "Has access to millions of local events, venues and IRL experiences.")}</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                    <div className="rounded-full bg-gray-900 p-1"><MessageSquare size={18} className="text-white" /></div>
+                <li className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center mt-0.5">
+                    <MessageSquare size={18} className="text-white" />
                   </div>
                   <span className="text-gray-200">{t("meet_pip.know.point2", "Sees everyone's profile, interests, chat interactions, availability and other group signals.")}</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                    <div className="rounded-full bg-gray-900 p-1"><Zap size={18} className="text-white" /></div>
+                <li className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-stone-500 to-rose-500 flex items-center justify-center mt-0.5">
+                    <Zap size={18} className="text-white" />
                   </div>
                   <span className="text-gray-200">{t("meet_pip.know.point3", "Uses AI for social prediction to suggest what will click.")}</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                    <div className="rounded-full bg-gray-900 p-1"><Users size={18} className="text-white" /></div>
+                <li className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center mt-0.5">
+                    <Users size={18} className="text-white" />
                   </div>
                   <span className="text-gray-200">{t("meet_pip.know.point4", "Learns and adapts to your group dynamic and each person’s style.")}</span>
                 </li>
@@ -456,7 +459,13 @@ const MeetPip = () => {
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
                   <CardContent className="p-6">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink w-12 h-12 flex items-center justify-center mb-4">
+                    <div className={`rounded-full w-12 h-12 flex items-center justify-center mb-4 bg-gradient-to-r ${[
+                      'from-pink-500 to-purple-600',
+                      'from-blue-500 to-cyan-400',
+                      'from-stone-500 to-rose-500',
+                      'from-green-400 to-emerald-500',
+                    ][index % 4]}`}
+                    >
                       {feature.icon}
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
@@ -489,44 +498,44 @@ const MeetPip = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-3">
                   <PartyPopper size={16} className="text-pulse-pink" />
-                  {t("meet_pip.repeat.badge", "Make it a thing")}
+                  {t("meet_pip.repeat.badge", "Crew ritual")}
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-3">
-                  {t("meet_pip.repeat.title", "Turn one great hang into a crew tradition")}
+                <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                  {t("meet_pip.repeat.title", "Make great hangs a weekly ritual")}
                 </h2>
-                <p className="text-gray-300 mb-6 max-w-xl">
+                <p className="text-gray-300 mb-5 max-w-xl">
                   {t(
                     "meet_pip.repeat.copy",
-                    "Pip keeps the momentum going—nudging the chat, lining up the next plan, and celebrating your streaks until seeing each other becomes easy, expected, and fun."
+                    "Pip removes planning pain so your crew keeps meeting—easy, consistent, and fun."
                   )}
                 </p>
 
                 <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                      <div className="rounded-full bg-gray-900 p-1"><Calendar size={18} className="text-white" /></div>
+                  <li className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-stone-500 to-rose-500 flex items-center justify-center mt-0.5">
+                      <Calendar size={18} className="text-white" />
                     </div>
-                    <span className="text-gray-200">{t("meet_pip.repeat.point1", "Smart nudges pick a date that works for everyone—no spreadsheets, no chaos.")}</span>
+                    <span className="text-gray-200">{t("meet_pip.repeat.point1", "Finds a date that works for everyone")}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                      <div className="rounded-full bg-gray-900 p-1"><Repeat size={18} className="text-white" /></div>
+                  <li className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center mt-0.5">
+                      <Repeat size={18} className="text-white" />
                     </div>
-                    <span className="text-gray-200">{t("meet_pip.repeat.point2", "Streaks and traditions turn ‘we should hang’ into ‘see you next week’.")}</span>
+                    <span className="text-gray-200">{t("meet_pip.repeat.point2", "Keeps your streak alive")}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                      <div className="rounded-full bg-gray-900 p-1"><Flame size={18} className="text-white" /></div>
+                  <li className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mt-0.5">
+                      <Flame size={18} className="text-white" />
                     </div>
-                    <span className="text-gray-200">{t("meet_pip.repeat.point3", "When the vibe is hot, Pip drops spontaneous mini-plans to keep the energy alive.")}</span>
+                    <span className="text-gray-200">{t("meet_pip.repeat.point3", "Drops quick mini‑plans when the vibe is high")}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="rounded-full bg-gradient-to-r from-accent to-pulse-pink p-[2px] mt-1">
-                      <div className="rounded-full bg-gray-900 p-1"><Trophy size={18} className="text-white" /></div>
+                  <li className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center mt-0.5">
+                      <Trophy size={18} className="text-white" />
                     </div>
-                    <span className="text-gray-200">{t("meet_pip.repeat.point4", "Celebrate milestones together—first month, five meetups, a new group ritual.")}</span>
+                    <span className="text-gray-200">{t("meet_pip.repeat.point4", "Celebrates milestones and crew rituals")}</span>
                   </li>
                 </ul>
 
@@ -540,7 +549,7 @@ const MeetPip = () => {
                 </div>
               </motion.div>
 
-              {/* Image */}
+              {/* Image collage */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -548,12 +557,42 @@ const MeetPip = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="relative"
               >
-                <div className="relative max-w-xl mx-auto">
+                <div className="relative max-w-xl mx-auto h-[460px] sm:h-[500px]">
                   <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-2xl opacity-30" />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20party.png"
-                    alt={t("meet_pip.repeat.image_alt", "Pip party")}
-                    className="relative z-10 w-full rounded-3xl object-cover border border-gray-700 bg-gray-900/30 shadow-2xl shadow-purple-500/20"
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
+                    alt="Pip cooking with friends"
+                    className="absolute top-2 left-0 w-44 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-3deg]"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
+                    alt="Pip paintball with friends"
+                    className="absolute top-6 right-0 w-44 sm:w-52 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-1"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
+                    alt="Pip bowling with friends"
+                    className="absolute bottom-8 left-4 w-44 sm:w-52 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-1"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/golf%20pip.png"
+                    alt="Pip golfing with friends"
+                    className="absolute bottom-2 right-6 w-40 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-2deg]"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20skiing%20friends.png"
+                    alt="Pip skiing with friends"
+                    className="absolute top-20 left-1/4 w-40 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-2 z-10"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20sailing%20friends.png"
+                    alt="Pip sailing with friends"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-6 w-48 sm:w-56 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-1deg] z-20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                 </div>

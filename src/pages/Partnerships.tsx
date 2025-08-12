@@ -128,6 +128,95 @@ const Partnerships = () => {
         </div>
       </section>
 
+      {/* How Pulse works (compact steps) */}
+      <section className="py-12 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-20 -left-10 w-56 h-56 rounded-full bg-pulse-pink/10 blur-3xl" />
+          <div className="absolute bottom-0 -right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Headline */}
+          <div className="text-center max-w-5xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-accent/10 text-accent border border-accent/20">
+              <span className="w-2 h-2 rounded-full bg-accent" /> How Pulse works
+            </div>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
+              10 like‑minded strangers on a
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day mission </span>
+              to meet IRL
+            </h2>
+            <p className="text-gray-300 mt-3 text-sm md:text-base">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</p>
+          </div>
+
+          <div className="max-w-6xl mx-auto bg-gray-800/40 border border-gray-700 rounded-2xl p-5 md:p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Steps (vertical) */}
+              <div className="space-y-4 md:space-y-5">
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <Users2 className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">Match 10 locals by vibe</div>
+                    <div className="text-gray-400 text-sm md:text-base">Grouped in a shared chat in the same city</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks conversation</div>
+                    <div className="text-gray-400 text-sm md:text-base">Icebreakers + plan ideas tailored to the group</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <Calendar className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">Meet within 7 days</div>
+                    <div className="text-gray-400 text-sm md:text-base">Book a simple, pre‑packaged experience</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Images (small mosaic) */}
+              <div className="flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-md">
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
+                    alt="Pip bowling with friends"
+                    className="absolute -top-2 -left-2 w-48 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg]"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
+                    alt="Pip paintball with friends"
+                    className="relative w-56 md:w-64 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 ml-auto block"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
+                    alt="Pip cooking with friends"
+                    className="absolute -bottom-3 left-10 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-6 text-center">
+              <a href="/meet-pip" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
+                Learn more about Pip
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Venue Types Section (moved up) */}
       <section className="py-12 relative bg-gray-900/50">
         <div className="container mx-auto px-4">
@@ -135,7 +224,7 @@ const Partnerships = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Perfect Partners
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 We're Looking For
               </span>
             </h2>
@@ -267,7 +356,7 @@ const Partnerships = () => {
           </motion.div>
 
           {/* Comparison strip */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8">
             {/* Program 1: Featured in the City */}
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-blue-400/50 hover:shadow-blue-500/20 hover:shadow-xl transition-all duration-300">
@@ -320,7 +409,7 @@ const Partnerships = () => {
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a href="#calculator" className="w-full md:w-auto px-6 py-3 text-base rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2">
-                      See Revenue Estimation
+                      See Earnings Estimate
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
@@ -335,30 +424,38 @@ const Partnerships = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl md:text-2xl font-bold">2</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">Exclusive Group Match</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">Exclusive Group Match for Your Venue</h3>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    Co‑create a branded friend‑group match for your core experience. Turn customers into friends to lift retention and spend.
+                    We create a dedicated, branded group match in Pulse around your core activity (e.g., “Meet Fellow Bowlers”). Pulse continuously forms many compatible friend groups (not just one) and routes them to your venue for recurring sessions — engaging existing customers and attracting new ones.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Match customers with new friends</span>
+                      <span className="text-gray-300">Dedicated, branded group in the Pulse app for your activity</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Co‑promotion: venue + Pulse</span>
+                      <span className="text-gray-300">Pulse matches compatible people and fills your sessions</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Includes citywide featuring</span>
+                      <span className="text-gray-300">Recurring events to keep customers returning</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Co‑promotion (venue + Pulse) and citywide featuring included</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">Scales to dozens or hundreds of micro‑groups as demand grows</span>
                     </li>
                   </ul>
 
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">Bowling</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">Fitness</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">Gaming</div></div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">“Meet Fellow Bowlers”</div></div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">“Find Gym Buddies”</div></div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">“Join Local Gamers”</div></div>
                   </div>
 
                   {/* CTAs */}
@@ -368,7 +465,7 @@ const Partnerships = () => {
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a href="#calculator" className="w-full md:w-auto px-6 py-3 text-base rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2">
-                      See Revenue Estimation
+                      See Earnings Estimate
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
@@ -392,16 +489,17 @@ const Partnerships = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Your Custom Group Match <span className="inline-block">✨</span>
+              Your Exclusive Pulse Group <span className="inline-block">✨</span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
-                What It Could Look Like
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
+                Drive Repeat Visits & New Customers
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We create exclusive group matches tailored to your venue and location. Here are real examples of what your custom group could look like.
+              An exclusive, branded Pulse group match centered on your core activity (e.g., “Meet Fellow Bowlers”). Pulse continuously creates many compatible friend groups and organizes recurring meetups at your venue — driving repeat visits and new customers at scale.
             </p>
           </motion.div>
+
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
@@ -409,7 +507,7 @@ const Partnerships = () => {
                 title: "Meet Fellow Bowlers in Boston",
                 venue: "Boston Bowlers",
                 poweredBy: "New England Bowling Alley",
-                description: "Meet new bowling buddies to play bowling and other fun activities with.",
+                description: "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley.",
                 emoji: "🎳",
                 features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
                 color: "from-blue-500 to-cyan-400"
@@ -418,7 +516,7 @@ const Partnerships = () => {
                 title: "Meet Gym Buddies in Barcelona",
                 venue: "Barcelona Gym Buddies",
                 poweredBy: "BCN Gym Group",
-                description: "Meet new gym buddies you can work out with in your city",
+                description: "Pulse‑matched workout partners. Recurring sessions hosted at your gym.",
                 emoji: "🏋️",
                 features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
                 color: "from-purple-500 to-pink-500"
@@ -427,7 +525,7 @@ const Partnerships = () => {
                 title: "Join Board Game Enthusiasts in Portland",
                 venue: "Portland Board Gamers",
                 poweredBy: "Portland Board Game Cafe",
-                description: "Meet fellow board game enthusiasts and meet to play games together",
+                description: "Curated group for tabletop fans. Weekly game nights at your cafe.",
                 emoji: "🎲",
                 features: ["Game preference matching", "Strategy game nights", "Card game tournaments", "New game discovery"],
                 color: "from-green-500 to-emerald-400"
@@ -436,7 +534,7 @@ const Partnerships = () => {
                 title: "Meet Fellow Aspiring Artists",
                 venue: "Austin Art Collective",
                 poweredBy: "Austin Creative Studios",
-                description: "Meet fellow artists to share your passion with.",
+                description: "Artist community powered by Pulse. Regular workshops hosted at your studio.",
                 emoji: "🎨",
                 features: ["Medium-based matching", "Art workshops", "Gallery visits", "Creative collaborations"],
                 color: "from-orange-500 to-red-500"
@@ -459,6 +557,13 @@ const Partnerships = () => {
                     <div className="mb-4">
                       <h4 className="text-lg font-bold text-white mb-2">{example.title}</h4>
                       <p className="text-gray-300 text-sm leading-relaxed">{example.description}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {example.features.map((feature) => (
+                        <span key={feature} className="text-[11px] text-gray-200 bg-gray-700/50 border border-gray-700 rounded-full px-2.5 py-1">
+                          {feature}
+                        </span>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
@@ -483,7 +588,7 @@ const Partnerships = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Your Custom Group Match <span className="inline-block">✨</span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 What It Could Look Like
               </span>
             </h2>
@@ -580,7 +685,7 @@ const Partnerships = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Turn Customers Into Friends
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink to-pulse-blue">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                   Right at Your Venue
                 </span>
               </h2>
