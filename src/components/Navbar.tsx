@@ -24,7 +24,8 @@ const Navbar = () => {
   const navLinks = [
     { label: t("navbar.home", "Home"), href: "/" },
     { label: t("navbar.how_it_works", "How it works"), href: "/#how-it-works" },
-    { label: t("navbar.communities", "For Communities"), href: "/communities" },
+    { label: t("navbar.partnerships", "Partnerships"), href: "/partners" },
+    { label: t("navbar.meet_pip", "Meet Pip"), href: "/meet-pip" },
     { label: t("navbar.about", "About Us"), href: "/about" },
     { label: t("navbar.contact", "Contact"), href: "/contact" },
   ];
