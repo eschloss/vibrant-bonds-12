@@ -26,7 +26,7 @@ const HowItWorks = () => {
   }, {
     icon: MessageSquare,
     title: t("steps.break_ice.title", "Break the Ice"),
-    description: t("steps.break_ice.description", "Pip serves up quick games and hilarious questions to spark instant connection."),
+    description: t("steps.break_ice.description", "Start the fun early with conversation starters your crew will love."),
     color: "bg-gradient-to-r from-blue-500 to-cyan-400"
   }, {
     icon: CalendarDays,
