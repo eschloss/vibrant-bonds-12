@@ -21,7 +21,7 @@ const HowItWorks = () => {
   const steps = [{
     icon: Users,
     title: t("steps.get_matched.title", "Get Matched"),
-    description: t("steps.get_matched.description", "Pip pairs you with a small crew who shares your vibe and wants to hang out."),
+    description: t("steps.get_matched.description", "We'll match you with a small group of like-minded people."),
     color: "bg-gradient-to-r from-pink-500 to-purple-600"
   }, {
     icon: MessageSquare,

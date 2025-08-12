@@ -8,7 +8,7 @@ export const howItWorks = {
     
     // Steps for main page
     "steps.get_matched.title": "Get Matched",
-    "steps.get_matched.description": "Pip pairs you with a small crew who shares your vibe and wants to hang out.",
+    "steps.get_matched.description": "We'll match you with a small group of like-minded people.",
     "steps.break_ice.title": "Break the Ice",
     "steps.break_ice.description": "Pip serves up quick games and hilarious questions to spark instant connection.",
   "steps.meet_up.title": "Just Show Up",
