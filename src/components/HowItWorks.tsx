@@ -6,9 +6,11 @@ import { Users, MessageSquare, CalendarDays, Sprout, Sparkles, ArrowRight, Repea
 import { Button } from "./ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
+import { useRefParam } from "@/hooks/useRefParam";
 
 const HowItWorks = () => {
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -140,7 +142,7 @@ const HowItWorks = () => {
           }}
           className="flex justify-center mt-12"
         >
-          <Link to="/matchmaking">
+          <Link to={addRefToUrl("/matchmaking")}>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

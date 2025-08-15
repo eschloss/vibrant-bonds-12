@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Text from "@/components/Text";
+import { useRefParam } from "@/hooks/useRefParam";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -80,7 +82,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row gap-4 mt-4 mb-8"
           >
-            <Link to="/cities">
+            <Link to={addRefToUrl("/cities")}>
               <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-500 hover:shadow-[#FF2688]/40 hover:scale-105 rounded-full animate-elegant-scale">
                 <span>{t("hero.cta", "Meet Your Crew")}</span>
               </Button>

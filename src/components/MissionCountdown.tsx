@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useRefParam } from "@/hooks/useRefParam";
 const MissionCountdown = () => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
-  const {
-    t
-  } = useTranslation();
+  const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   const fadeInUp = {
     hidden: {
       opacity: 0,
@@ -75,7 +75,7 @@ const MissionCountdown = () => {
                   <TimerDisplay {...timeLeft} />
                 </div>
                 <div className="mt-6">
-                  <Link to="/cities">
+                  <Link to={addRefToUrl("/cities")}>
                     <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 rounded-full">
                       <span>{t("mission_countdown.get_matched_now", "Get Matched Now")}</span>
                     </Button>  

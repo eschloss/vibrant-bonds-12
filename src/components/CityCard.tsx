@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRefParam } from "@/hooks/useRefParam";
 
 interface CityCardProps {
   name: string;
@@ -14,10 +15,11 @@ interface CityCardProps {
 }
 
 const CityCard: React.FC<CityCardProps> = ({ name, state, description, link, isExternal, disabled }) => {
+  const { addRefToUrl } = useRefParam();
   const Wrapper = isExternal ? "a" : Link;
   const wrapperProps = isExternal
     ? { href: link, target: "_blank", rel: "noopener noreferrer" }
-    : { to: link };
+    : { to: addRefToUrl(link) };
 
   return (
     // @ts-ignore — TypeScript doesn't know that Wrapper can be both Link or "a"

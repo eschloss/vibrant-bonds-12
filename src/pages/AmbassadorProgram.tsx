@@ -7,8 +7,10 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
+import { useRefParam } from "@/hooks/useRefParam";
 
 const AmbassadorProgram = () => {
+  const { addRefToUrl } = useRefParam();
   const { t } = useTranslation();
   
   const seoProps = {
@@ -497,7 +499,7 @@ const AmbassadorProgram = () => {
                 <span>Apply to Join</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
-              <a href="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+              <a href={addRefToUrl("/")} className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
                 <span>Try Pulse First</span>
                 <ArrowRight className="h-5 w-5" />
               </a>

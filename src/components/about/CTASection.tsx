@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useRefParam } from "@/hooks/useRefParam";
 
 const CTASection = () => {
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   
   return (
     <section className="py-16 md:py-20 bg-gray-800/30">
@@ -22,7 +24,7 @@ const CTASection = () => {
             {t("about.cta.description", "Join our community and connect with like-minded people in your city who share your interests")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/cities">
+            <Link to={addRefToUrl("/cities")}>
               <Button size="lg" variant="gradient" className="rounded-full shadow-lg shadow-pink-500/20 w-full sm:w-auto">
                 {t("about.cta.button", "Get Matched into a Friend Group")}
               </Button>

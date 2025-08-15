@@ -8,11 +8,13 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
+import { useRefParam } from "@/hooks/useRefParam";
 
 const PlanIdeasCity = () => {
   const { cityName } = useParams<{ cityName: string }>();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   
   const formattedCityName = cityName ? cityName.charAt(0).toUpperCase() + cityName.slice(1).replace('-', ' ') : 'City';
   
@@ -174,11 +176,11 @@ const PlanIdeasCity = () => {
               {t("plan_ideas_city.cta.description", "Join Pulse to get matched with a friend group and start planning amazing experiences together. Pip will help you find the perfect activities for your crew.")}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="/" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+              <a href={addRefToUrl("/")} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 {t("plan_ideas_city.cta.button", "Join Pulse")}
               </a>
               <button 
-                onClick={() => navigate(`/cities/${cityName}`)}
+                onClick={() => navigate(addRefToUrl(`/cities/${cityName}`))}
                 className="border border-pulse-pink text-pulse-pink hover:bg-pulse-pink hover:text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg"
               >
                 <MapPin size={20} />

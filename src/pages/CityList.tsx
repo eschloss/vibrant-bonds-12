@@ -12,6 +12,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import CityCard from "@/components/CityCard";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useRefParam } from "@/hooks/useRefParam";
 
 type City = {
   en_name: string;
@@ -26,6 +27,7 @@ type City = {
 const CityList = () => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  const { addRefToUrl } = useRefParam();
   const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -302,7 +304,7 @@ const CityList = () => {
                       name={t("citylist.cant_find_city", "Can't find your city?")}
                       state={t("citylist.worldwide", "Worldwide")}
                       description={t("citylist.your_city_next", "Your city's next—Lead the way!")}
-                      link="/matchmaking"
+                      link={addRefToUrl("/matchmaking")}
                     />
                   </motion.div>
                   <Button
