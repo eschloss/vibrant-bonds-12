@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSelector from "../LanguageSelector";
+import { useRefParam } from "@/hooks/useRefParam";
 
 interface HeroSectionProps {
   cityName: string;
@@ -34,10 +35,15 @@ const HeroSection = ({
   peopleImage
 }: HeroSectionProps) => {
   const { t, currentLanguage } = useTranslation();
+  const { addRefToUrl } = useRefParam();
 
   // Get the current full URL for redirect parameter and fix %2F encoding
   const currentUrl = (window.location.pathname + window.location.search + window.location.hash)
     .replace(/%2F/g, '/'); // Convert %2F to /
+  
+  // Extract ref parameter from current URL if it exists
+  const urlParams = new URLSearchParams(window.location.search);
+  const refParam = urlParams.get('ref');
 
   return (
     <section className="relative flex items-center overflow-hidden section-padding bg-white dark:bg-white pt-32 md:pt-36 lg:pt-40">
@@ -134,7 +140,7 @@ const HeroSection = ({
                     {t("city.friends", "Friends ")}<br />
                   </>
                 )}
-                {t("city.in", "in")} <Link to="/cities"><span className="pulse-gradient-text">{cityName}</span></Link>
+                {t("city.in", "in")} <Link to={addRefToUrl("/cities")}><span className="pulse-gradient-text">{cityName}</span></Link>
               </>
             )}
           </h1>
@@ -158,7 +164,7 @@ const HeroSection = ({
           >
             <div className="flex flex-col items-center">
               <Link 
-                to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}
+                to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
               >
                 <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
                   <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />

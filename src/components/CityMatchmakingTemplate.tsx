@@ -56,6 +56,10 @@ const CityMatchmakingTemplate = ({
 
   // Get the current full URL for redirect parameter
   const currentUrl = window.location.href;
+  
+  // Extract ref parameter from current URL if it exists
+  const urlParams = new URLSearchParams(window.location.search);
+  const refParam = urlParams.get('ref');
 
   const peopleOptions: string[] = [
     "https://s.kikiapp.eu/img/people/friends1.avif",
@@ -288,7 +292,7 @@ const CityMatchmakingTemplate = ({
                 
                <div className="flex flex-col items-center">
                 <Link 
-                   to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}
+                   to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                  >
                   <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
                     <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
@@ -369,7 +373,7 @@ const CityMatchmakingTemplate = ({
                 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                   
-                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}>
+                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}>
                     <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                       {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
                       <ArrowRight size={18} />

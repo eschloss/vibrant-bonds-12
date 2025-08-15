@@ -12,7 +12,7 @@ interface MeetPipPromoProps {
   // Deprecated: prefer `items`. If provided, rendered as simple lines.
   points?: string[];
   // Prefer this: richer bullet items with title + body
-  items?: { title: string; text: string }[];
+  items?: { title: string; text: string; icon?: React.ReactNode }[];
   ctaLabel?: string;
   ctaHref?: string;
 }
@@ -134,7 +134,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                         'from-blue-500 to-cyan-400',
                         'from-stone-500 to-rose-500',
                         'from-green-400 to-emerald-500',
-                      ][idx % 4]}`}>{it.icon}</div>
+                      ][idx % 4]}`}>{it.icon || simpleIcons[idx % 4]}</div>
                       <p className="text-gray-200">
                         <span className="font-semibold text-white">{it.title}</span>
                         <span> — {it.text}</span>

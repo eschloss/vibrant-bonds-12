@@ -8,6 +8,7 @@ import MenuButton from "./MenuButton";
 import MobileNavLinks from "./MobileNavLinks";
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
+import { useRefParam } from "@/hooks/useRefParam";
 
 // --- Navigation Link List (for desktop and mobile reuse) ---
 const Navbar = () => {
@@ -19,15 +20,16 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
 
   // Translated nav links
   const navLinks = [
-    { label: t("navbar.home", "Home"), href: "/" },
-    { label: t("navbar.how_it_works", "How it works"), href: "/#how-it-works" },
-    { label: t("navbar.partnerships", "Partnerships"), href: "/partners" },
-    { label: t("navbar.meet_pip", "Meet Pip"), href: "/meet-pip" },
-    { label: t("navbar.about", "About Us"), href: "/about" },
-    { label: t("navbar.contact", "Contact"), href: "/contact" },
+    { label: t("navbar.home", "Home"), href: addRefToUrl("/") },
+    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/#how-it-works") },
+    { label: t("navbar.partnerships", "Partnerships"), href: addRefToUrl("/partners") },
+    { label: t("navbar.meet_pip", "Meet Pip"), href: addRefToUrl("/meet-pip") },
+    { label: t("navbar.about", "About Us"), href: addRefToUrl("/about") },
+    { label: t("navbar.contact", "Contact"), href: addRefToUrl("/contact") },
   ];
 
   useEffect(() => {
@@ -84,7 +86,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 xl:max-w-7xl flex items-left justify-between">
           <Link
-            to="/"
+            to={addRefToUrl("/")}
             className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
           >
             <div className="relative h-6 w-32">
@@ -156,14 +158,14 @@ const Navbar = () => {
           <div className="hidden lg:block">
             {isMatchmakingPage ? (
               <Link
-                to="/cities"
+                to={addRefToUrl("/cities")}
                 className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
                 <span>{t("navbar.see_more_cities", "See More Cities")}</span>
               </Link>
             ) : (
               <Link
-                to="/cities"
+                to={addRefToUrl("/cities")}
                 className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
               >
                 <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>

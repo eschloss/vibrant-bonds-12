@@ -31,6 +31,10 @@ const CallToActionSection = ({
   // Get the current full URL for redirect parameter and fix %2F encoding
   const currentUrl = (window.location.pathname + window.location.search + window.location.hash)
     .replace(/%2F/g, '/'); // Convert %2F to /
+  
+  // Extract ref parameter from current URL if it exists
+  const urlParams = new URLSearchParams(window.location.search);
+  const refParam = urlParams.get('ref');
 
   if (!code) return null;
 
@@ -52,7 +56,7 @@ const CallToActionSection = ({
         </div>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-          <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}`}`}>
+          <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}>
             <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
               {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
               <ArrowRight size={18} />
