@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useRefParam } from "@/hooks/useRefParam";
 import Text from "@/components/Text";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   
   const cities = ["London", "Los Angeles", "New York", "Berlin", "Madrid", "Portland", "Chicago", "Boston"];
   
@@ -67,52 +69,52 @@ const Footer = () => {
               </div>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.home" className="">Home</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/communities" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/communities")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.for_communities" className="">For Communities</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/about")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.about_us" className="">About Us</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/contact" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/contact")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.contact" className="">Contact</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/faq" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/faq")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.faq" className="">FAQ</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/blog" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/blog")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.blog" className="">Blog</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/partners" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/partners")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.partnerships" className="">Partnerships</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/ambassador-program" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/ambassador-program")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.ambassador_program" className="">Ambassador Program</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/careers" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/careers")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.careers" className="">Careers</Text>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/meet-pip" className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                  <Link to={addRefToUrl("/meet-pip")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.meet_pip" className="">Meet Pip</Text>
                   </Link>
                 </li>
@@ -126,13 +128,13 @@ const Footer = () => {
               </div>
               <ul className="grid grid-cols-1 gap-2">
                 {cities.map((city, i) => <li key={i}>
-                    <Link to={`/cities/${city.toLowerCase().replace(' ', '-')}`} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
+                    <Link to={addRefToUrl(`/cities/${city.toLowerCase().replace(' ', '-')}`)} className="text-white/50 hover:text-pulse-pink text-sm transition-colors flex items-center">
                       <MapPin size={12} className="mr-1" />
                       {city}
                     </Link>
                   </li>)}
                 <li className="mt-2">
-                  <Link to="/cities" className=" text-pulse-pink hover:text-pulse-pink-300 text-sm font-medium transition-colors">
+                  <Link to={addRefToUrl("/cities")} className=" text-pulse-pink hover:text-pulse-pink-300 text-sm font-medium transition-colors">
                     <Text id="footer.view_all_cities" className="">View all cities</Text>
                   </Link>
                 </li>

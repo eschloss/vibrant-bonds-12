@@ -7,6 +7,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useRefParam } from "@/hooks/useRefParam";
 
 // Define our unique icebreaker characters with translation keys
 const getIcebreakers = (t) => [{
@@ -87,6 +88,7 @@ interface AiIcebreakersProps {
 
 const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, description }) => {
   const { t } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   const icebreakers = getIcebreakers(t);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -159,7 +161,7 @@ const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, descr
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex justify-center mt-12"
         >
-          <Link to="/matchmaking">
+          <Link to={addRefToUrl("/matchmaking")}>
           </Link>
         </motion.div>
       </div>
