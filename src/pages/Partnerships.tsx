@@ -107,9 +107,7 @@ const Partnerships = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Partner with Pulse to solve loneliness, boost retention, and drive new customers. 
-              <span className="text-pulse-pink font-semibold"> 21 million Americans have zero friends</span> - 
-              help them find community through your venue.
+              Get more prepaid group bookings and loyal regulars — with zero upfront cost. Pulse brings 10 compatible locals to your venue. You host. You keep 75%.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
@@ -122,6 +120,27 @@ const Partnerships = () => {
                 <ArrowRight className="h-5 w-5" />
               </a>
             </div>
+
+            {/* At a glance */}
+            <div className="max-w-5xl mx-auto mt-2 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">What you do</div>
+                <div className="text-gray-300">Approve a simple group package and host prepaid groups.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">What we do</div>
+                <div className="text-gray-300">Match 10 locals, handle chat, bookings, and payments.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">Cost</div>
+                <div className="text-gray-300">Pay‑as‑you‑go fee 25%. No subscription. No minimums.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">Time to start</div>
+                <div className="text-gray-300">2–5 days. We set it up with you.</div>
+              </div>
+            </div>
+            <div className="text-center mt-3 text-xs text-gray-400">Pay‑as‑you‑go fee: 25%. You keep 75%.</div>
 
             {/* Quick Stats removed per design simplification */}
           </motion.div>
@@ -137,18 +156,18 @@ const Partnerships = () => {
         <div className="container mx-auto px-4 relative z-10">
           {/* Headline */}
           <div className="text-center max-w-5xl mx-auto mb-8">
-            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-accent/10 text-accent border border-accent/20">
-              <span className="w-2 h-2 rounded-full bg-accent" /> How Pulse works
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-purple-900/30 text-white border border-purple-700/40">
+              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> How Pulse works
             </div>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              10 like‑minded strangers on a
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day mission </span>
-              to meet IRL
+              10 like‑minded locals on a
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day challenge </span>
+              to meet in person
             </h2>
             <p className="text-gray-300 mt-3 text-sm md:text-base">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</p>
           </div>
 
-          <div className="max-w-6xl mx-auto bg-gray-800/40 border border-gray-700 rounded-2xl p-5 md:p-6">
+          <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Steps (vertical) */}
               <div className="space-y-4 md:space-y-5">
@@ -157,7 +176,7 @@ const Partnerships = () => {
                     <Users2 className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">Match 10 locals by vibe</div>
+                    <div className="text-white text-base md:text-lg font-semibold">We match 10 locals by vibe</div>
                     <div className="text-gray-400 text-sm md:text-base">Grouped in a shared chat in the same city</div>
                   </div>
                 </div>
@@ -166,7 +185,7 @@ const Partnerships = () => {
                     <MessageSquare className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks conversation</div>
+                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks the chat and suggests plans</div>
                     <div className="text-gray-400 text-sm md:text-base">Icebreakers + plan ideas tailored to the group</div>
                   </div>
                 </div>
@@ -175,31 +194,31 @@ const Partnerships = () => {
                     <Calendar className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">Meet within 7 days</div>
-                    <div className="text-gray-400 text-sm md:text-base">Book a simple, pre‑packaged experience</div>
+                    <div className="text-white text-base md:text-lg font-semibold">They meet within 7 days</div>
+                    <div className="text-gray-400 text-sm md:text-base">They book a simple, prepaid experience at a venue</div>
                   </div>
                 </div>
               </div>
 
               {/* Images (small mosaic) */}
               <div className="flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-md">
+                <div className="relative w-full max-w-md h-72 md:h-80">
                   <img
                     src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
                     alt="Pip bowling with friends"
-                    className="absolute -top-2 -left-2 w-48 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg]"
+                    className="absolute top-0 left-0 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg] z-20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
                     src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
                     alt="Pip paintball with friends"
-                    className="relative w-56 md:w-64 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 ml-auto block"
+                    className="absolute top-6 right-0 w-44 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 z-10"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
                     src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
                     alt="Pip cooking with friends"
-                    className="absolute -bottom-3 left-10 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1"
+                    className="absolute bottom-0 left-12 md:left-24 w-36 md:w-44 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1 z-30"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                 </div>
@@ -234,7 +253,7 @@ const Partnerships = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
             {[
               {
                 name: "Bowling Alley",
@@ -242,19 +261,9 @@ const Partnerships = () => {
                 category: "Sports & Recreation"
               },
               {
-                name: "Art Workshop",
-                description: "Creative spaces where people bond over shared artistic interests.",
-                category: "Creative & Arts"
-              },
-              {
                 name: "Cooking Classes",
                 description: "Interactive culinary experiences where people learn and share.",
                 category: "Food & Culinary"
-              },
-              {
-                name: "Paintball",
-                description: "Adrenaline-fueled team activities that build camaraderie.",
-                category: "Adventure & Sports"
               },
               {
                 name: "Laser Tag",
@@ -267,34 +276,14 @@ const Partnerships = () => {
                 category: "Entertainment"
               },
               {
-                name: "Interactive Experiences",
-                description: "Immersive activities like VR gaming and interactive museums.",
-                category: "Technology & Innovation"
-              },
-              {
-                name: "E-Sports Providers",
-                description: "Gaming centers where gamers connect over competitive play.",
-                category: "Gaming & Technology"
-              },
-              {
-                name: "Arcades",
-                description: "Classic gaming spaces where people bond over retro games.",
+                name: "Board Game Cafe",
+                description: "Social gaming spaces where people bond over strategy and laughter.",
                 category: "Entertainment"
               },
               {
                 name: "Concept Bars",
                 description: "Themed bars that create conversation starters and memorable moments.",
                 category: "Food & Beverage"
-              },
-              {
-                name: "Book Stores",
-                description: "Literary havens where book lovers discuss their favorite reads.",
-                category: "Culture & Education"
-              },
-              {
-                name: "Board Game Cafe",
-                description: "Social gaming spaces where people bond over strategy and laughter.",
-                category: "Entertainment"
               }
             ].map((venue, index) => (
               <motion.div key={venue.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
@@ -351,7 +340,7 @@ const Partnerships = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Two Ways to Partner</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Choose between a broad city-wide promotion or an exclusive Group Match that builds a community around your core experience.
+              Choose between city‑wide featuring or your own recurring community built around your core experience.
             </p>
           </motion.div>
 
@@ -366,26 +355,31 @@ const Partnerships = () => {
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center text-white text-xl md:text-2xl font-bold">1</div>
                     <h3 className="text-2xl md:text-3xl font-bold text-white">Get Featured in the City</h3>
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    We promote your venue to relevant friend groups citywide — bringing new customers every week.
+                  <p className="text-gray-300 mb-2">
+                    Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay. You host and keep <span className="text-white font-semibold">75%</span> (we take 25%).
                   </p>
+                  <div className="text-xs text-gray-400 mb-6">Example: $30 × 10 people = $300 booking → You receive $225.</div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Citywide exposure in group feeds</span>
+                      <span className="text-gray-300">Featured as a plan idea in relevant group missions citywide</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Bookings from relevant groups</span>
+                      <span className="text-gray-300">Groups opt in — no commitments or coupons required</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Hands‑off demand; you host</span>
+                      <span className="text-gray-300">Prepaid, packaged bookings handled by Pulse — you just host</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">You keep <span className="text-white font-semibold">75%</span> of the booking (Pulse platform fee: 25%)</span>
                     </li>
                   </ul>
 
                   <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
-                    <div className="text-sm font-semibold mb-4 text-white">Popular price points</div>
+                    <div className="text-sm font-semibold mb-4 text-white">Typical package price points</div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$20–40</div>
@@ -424,10 +418,10 @@ const Partnerships = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl md:text-2xl font-bold">2</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">Exclusive Group Match for Your Venue</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">Your Own Recurring Community</h3>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    We create a dedicated, branded group match in Pulse around your core activity (e.g., “Meet Fellow Bowlers”). Pulse continuously forms many compatible friend groups (not just one) and routes them to your venue for recurring sessions — engaging existing customers and attracting new ones.
+                    We create a branded group in Pulse around your core activity (e.g., “Meet Fellow Bowlers”). We continuously match many small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
@@ -460,8 +454,8 @@ const Partnerships = () => {
 
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
-                    <a href="#apply" className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 transition-all duration-300 inline-flex items-center justify-center gap-2">
-                      Request Details
+                    <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
+                      Apply Now
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a href="#calculator" className="w-full md:w-auto px-6 py-3 text-base rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2">
@@ -474,30 +468,65 @@ const Partnerships = () => {
             </motion.div>
           </div>
 
+          {/* Side-by-side comparison */}
+          <div className="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+              <div className="text-white font-semibold mb-2">Featured in the City</div>
+              <ul className="text-gray-300 space-y-1">
+                <li>Best for: Occasional group bookings</li>
+                <li>What you provide: 1–2 simple packages</li>
+                <li>You get: Citywide discovery + prepaid groups</li>
+                <li>Fee: 25% per booking</li>
+              </ul>
+            </div>
+            <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+              <div className="text-white font-semibold mb-2">Your Recurring Community</div>
+              <ul className="text-gray-300 space-y-1">
+                <li>Best for: Regular sessions (weekly/monthly)</li>
+                <li>What you provide: Time slots & staff</li>
+                <li>You get: Ongoing groups, co‑promotion</li>
+                <li>Fee: 25% per booking</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* How it works for venues */}
+          <div className="max-w-6xl mx-auto mt-6">
+            <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4">
+              <div className="text-center text-white font-semibold mb-3">How it works for venues</div>
+              <ol className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
+                  <div className="font-semibold text-white mb-1">1) Apply</div>
+                  <div className="text-gray-300">Tell us your activity and preferred times.</div>
+                </li>
+                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
+                  <div className="font-semibold text-white mb-1">2) Set your package</div>
+                  <div className="text-gray-300">We craft a simple, prepaid plan (e.g., $25 per person for 10).</div>
+                </li>
+                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
+                  <div className="font-semibold text-white mb-1">3) Host groups</div>
+                  <div className="text-gray-300">We match and book groups. You host and get paid fast.</div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
           {/* Clarifier bar */}
           <div className="max-w-6xl mx-auto mt-6">
             <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
               <span className="text-gray-400">Note:</span>
-              <span>Exclusive Group Match partners also receive full city-wide featuring of their venue and events.</span>
+              <span>Recurring Community partners also receive full city-wide featuring of their venue and events.</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Custom Group Match Examples (moved up) */}
+      {/* Your Recurring Community Examples (trimmed) */}
       <section className="py-12 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Your Exclusive Pulse Group <span className="inline-block">✨</span>
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Drive Repeat Visits & New Customers
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              An exclusive, branded Pulse group match centered on your core activity (e.g., “Meet Fellow Bowlers”). Pulse continuously creates many compatible friend groups and organizes recurring meetups at your venue — driving repeat visits and new customers at scale.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Your Recurring Community</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">We match small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.</p>
           </motion.div>
 
 
@@ -520,24 +549,6 @@ const Partnerships = () => {
                 emoji: "🏋️",
                 features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
                 color: "from-purple-500 to-pink-500"
-              },
-              {
-                title: "Join Board Game Enthusiasts in Portland",
-                venue: "Portland Board Gamers",
-                poweredBy: "Portland Board Game Cafe",
-                description: "Curated group for tabletop fans. Weekly game nights at your cafe.",
-                emoji: "🎲",
-                features: ["Game preference matching", "Strategy game nights", "Card game tournaments", "New game discovery"],
-                color: "from-green-500 to-emerald-400"
-              },
-              {
-                title: "Meet Fellow Aspiring Artists",
-                venue: "Austin Art Collective",
-                poweredBy: "Austin Creative Studios",
-                description: "Artist community powered by Pulse. Regular workshops hosted at your studio.",
-                emoji: "🎨",
-                features: ["Medium-based matching", "Art workshops", "Gallery visits", "Creative collaborations"],
-                color: "from-orange-500 to-red-500"
               }
             ].map((example, index) => (
               <motion.div key={example.venue} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
@@ -579,6 +590,41 @@ const Partnerships = () => {
       <EarningCalculator />
 
       {/* Removed separate Problem Section to merge into bottom CTA */}
+
+      {/* FAQ Section */}
+      <section className="py-12 relative">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Frequently Asked Questions</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">Who pays and when do we get paid?</div>
+                <div className="text-gray-300">Groups prepay in Pulse. You receive 75% shortly after the event.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">Do we need discounts or coupons?</div>
+                <div className="text-gray-300">No. Set a fair package price. No coupons needed.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">How much staff time is required?</div>
+                <div className="text-gray-300">Treat it like any small group booking (≈10 people). We handle the rest.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">What about cancellations and no‑shows?</div>
+                <div className="text-gray-300">We set clear policies and manage communications so you’re protected.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">Any subscription or long‑term contract?</div>
+                <div className="text-gray-300">No. 25% per booking. No subscription. Cancel anytime.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="font-semibold text-white mb-1">How soon can we start?</div>
+                <div className="text-gray-300">Typically 2–5 days after approval.</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Custom Group Match Examples (removed duplicate) */}
       {/*
@@ -721,11 +767,12 @@ const Partnerships = () => {
                   <span>Apply for Partnership</span>
                   <ArrowRight className="h-5 w-5" />
                 </a>
-                <a href="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                  <span>Try Pulse Now</span>
+                <a href="#calculator" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+                  <span>See Earnings Estimate</span>
                   <ArrowRight className="h-5 w-5" />
                 </a>
               </div>
+              <div className="mt-3 text-center text-xs text-gray-400">Prefer to talk? Email partners@usepulse.app</div>
             </div>
           </motion.div>
         </div>

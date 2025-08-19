@@ -166,8 +166,8 @@ const MeetPip = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="order-2"
               >
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-accent/10 text-accent border border-accent/20 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
+                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
                   {t("meet_pip.module.badge", "Built to spark IRL connections")}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -401,8 +401,8 @@ const MeetPip = () => {
               transition={{ duration: 0.6 }}
               className="order-1 lg:order-2"
             >
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-accent/10 text-accent border border-accent/20 mb-4">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
+                <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
                 {t("meet_pip.know.badge", "Personalized by design")}
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">

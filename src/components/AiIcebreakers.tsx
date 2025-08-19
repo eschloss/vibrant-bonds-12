@@ -116,15 +116,15 @@ const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, descr
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm animate-elegant-scale"
+            className="inline-flex items-center gap-2 rounded-full bg-purple-900/30 px-4 py-1.5 mb-4 backdrop-blur-sm border border-purple-700/40 text-white animate-elegant-scale"
           >
             <motion.div
               whileHover={{ rotate: 15, scale: 1.2 }}
               transition={{ duration: 0.3 }}
             >
-              <MessageSquare className="w-4 h-4 text-pulse-purple" />
+              <MessageSquare className="w-4 h-4 text-pulse-pink" />
             </motion.div>
-            <span className="text-sm font-medium text-pulse-purple">{t("icebreakers.title", "AI Icebreakers")}</span>
+            <span className="text-sm font-medium text-white">{t("icebreakers.title", "AI Icebreakers")}</span>
           </motion.div>
           
           <motion.h2 

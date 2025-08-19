@@ -22,7 +22,7 @@ interface PricingTier {
 }
 
 const EarningCalculator: React.FC = () => {
-  const [bookingsPerMonth, setBookingsPerMonth] = useState([4]);
+  const [bookingsPerMonth, setBookingsPerMonth] = useState([50]);
   const [selectedTier, setSelectedTier] = useState(0);
 
   const pricingTiers: PricingTier[] = [
@@ -55,8 +55,10 @@ const EarningCalculator: React.FC = () => {
   const currentTier = pricingTiers[selectedTier];
   const pricePerPerson = (currentTier.minPrice + currentTier.maxPrice) / 2;
   const peoplePerGroup = 10;
-  const revenuePerBooking = pricePerPerson * peoplePerGroup;
-  const monthlyRevenue = revenuePerBooking * bookingsPerMonth[0];
+  const partnerShare = 0.75;
+  const grossPerBooking = pricePerPerson * peoplePerGroup;
+  const earningsPerBooking = grossPerBooking * partnerShare;
+  const monthlyRevenue = earningsPerBooking * bookingsPerMonth[0];
   const annualRevenue = monthlyRevenue * 12;
 
   // Animation variants
@@ -128,23 +130,23 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-green-400" />
-                    Earnings per group
+                    Partner take‑home per group
                   </div>
-                  <div className="text-2xl font-bold text-green-400 mt-1">${revenuePerBooking.toLocaleString()}</div>
-                  <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup}</div>
+                  <div className="text-2xl font-bold text-green-400 mt-1">${earningsPerBooking.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup} × 75%</div>
                 </div>
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Zap className="h-4 w-4 text-pulse-pink" />
-                    Estimated monthly earnings
+                    Estimated monthly take‑home
                   </div>
                   <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
-                  <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${revenuePerBooking.toLocaleString()}</div>
+                  <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${earningsPerBooking.toLocaleString()}</div>
                 </div>
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Star className="h-4 w-4 text-yellow-400" />
-                    Estimated annual earnings
+                    Estimated annual take‑home
                   </div>
                   <div className="text-3xl font-bold text-yellow-400 mt-1">${annualRevenue.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
@@ -211,7 +213,7 @@ const EarningCalculator: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-4 text-xs text-gray-400">Estimates your venue’s gross earnings from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier.</div>
+                <div className="mt-4 text-xs text-gray-400">Estimates your venue’s take‑home from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier • 75% partner share (Pulse platform fee: 25%).</div>
               </div>
             </CardContent>
           </Card>

@@ -1,5 +1,8 @@
 
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { getCurrentPageLabel } from "@/lib/utils";
 import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -7,6 +10,47 @@ import { useRefParam } from "@/hooks/useRefParam";
 import Text from "@/components/Text";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    const isValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim());
+    if (!isValid) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      const { error: insertError } = await supabase
+        .from("newsletter")
+        .insert({
+          email: email.trim(),
+          source: "pulsenow.app",
+          source_details: getCurrentPageLabel(),
+        });
+      if (insertError) {
+        // Helpful debug log for setup issues (RLS/privileges)
+        console.error("Newsletter insert error:", insertError);
+        // Treat duplicate email as success for UX
+        if ((insertError as any).code === "23505") {
+          setSubscribed(true);
+          setEmail("");
+          return;
+        }
+        throw insertError;
+      }
+      setSubscribed(true);
+      setEmail("");
+    } catch (err: any) {
+      setError("Could not subscribe right now. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
@@ -60,6 +104,34 @@ const Footer = () => {
                   <Text id="footer.play_store" className="">Play Store</Text>
                 </a>
               </div>
+
+              {/* Newsletter subscribe */}
+              <div className="mt-5">
+                <form onSubmit={handleSubscribe} className="relative">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Subscribe to our newsletter"
+                    aria-label="Email address"
+                    className="w-full rounded-full bg-gray-800/80 border border-gray-700 text-sm text-white placeholder-white/40 px-4 py-3 pr-32 focus:outline-none focus:ring-2 focus:ring-pulse-pink/30"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="absolute right-1 top-1 bottom-1 rounded-full px-4 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white text-sm font-medium hover:opacity-95 disabled:opacity-60"
+                  >
+                    {isSubmitting ? "Submitting…" : "Subscribe"}
+                  </button>
+                </form>
+                {subscribed ? (
+                  <p className="text-green-400 text-xs mt-2">Thanks — you’re on the list!</p>
+                ) : error ? (
+                  <p className="text-red-400 text-xs mt-2">{error}</p>
+                ) : (
+                  <p className="text-white/50 text-xs mt-2">Occasional updates. No spam.</p>
+                )}
+              </div>
             </div>
 
             {/* Column 2: Company */}
@@ -93,11 +165,7 @@ const Footer = () => {
                     <Text id="footer.faq" className="">FAQ</Text>
                   </Link>
                 </li>
-                <li>
-                  <Link to={addRefToUrl("/blog")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.blog" className="">Blog</Text>
-                  </Link>
-                </li>
+                
                 <li>
                   <Link to={addRefToUrl("/partners")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.partnerships" className="">Partnerships</Text>

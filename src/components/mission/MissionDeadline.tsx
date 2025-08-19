@@ -38,9 +38,9 @@ const MissionDeadline = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section Label and Title */}
           <div className="text-center mb-8 sm:mb-12">
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-950/30 px-4 py-1.5 mb-4 backdrop-blur-sm">
-              <Timer className="w-4 h-4 text-pulse-purple" />
-              <span className="text-sm font-medium text-pulse-purple">
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-900/30 px-4 py-1.5 mb-4 backdrop-blur-sm border border-purple-700/40 text-white">
+              <Timer className="w-4 h-4 text-pulse-pink" />
+              <span className="text-sm font-medium text-white">
                 {translate("mission_deadline.group_mission", "Group Mission")}
               </span>
             </motion.div>

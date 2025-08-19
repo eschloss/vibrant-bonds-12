@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Star, Network, CalendarDays, Sparkles, Trophy, Heart, Zap, Gift, Crown, MessageSquare, Globe, DollarSign, TrendingUp, Target, Award, Share2, Megaphone, Building2, Users2, ArrowRight, CheckCircle, Lightbulb, MapPin, Clock, BarChart3, Palette, Handshake, Headphones } from "lucide-react";
+import { Users, Star, Network, CalendarDays, Sparkles, Trophy, Heart, Zap, Gift, Crown, MessageSquare, Globe, DollarSign, TrendingUp, Target, Award, Share2, Megaphone, Building2, Users2, ArrowRight, CheckCircle, Lightbulb, MapPin, Clock, BarChart3, Palette, Handshake, Headphones, Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -88,8 +88,114 @@ const AmbassadorProgram = () => {
               </a>
             </div>
 
+            {/* At a glance */}
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 text-sm mt-2">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">What you do</div>
+                <div className="text-gray-300">Promote Pulse however you like. Refer users and venues. Earn commission.</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">Earn</div>
+                <div className="text-gray-300">5% of booking revenue for 12 months per referral</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
+                <div className="text-white font-semibold mb-1">Tools</div>
+                <div className="text-gray-300">Personal link, assets, 1:1 support</div>
+              </div>
+            </div>
+            <div className="text-center mt-2 text-xs text-gray-400">No time commitment — it’s entirely up to you.</div>
+
             {/* Quick Stats removed per design simplification */}
           </motion.div>
+        </div>
+      </section>
+
+      {/* How Pulse works (compact) */}
+      <section className="py-12 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-20 -left-10 w-56 h-56 rounded-full bg-pulse-pink/10 blur-3xl" />
+          <div className="absolute bottom-0 -right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Headline */}
+          <div className="text-center max-w-5xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-purple-900/30 text-white border border-purple-700/40">
+              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> How Pulse works
+            </div>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
+              10 like‑minded locals on a
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day challenge </span>
+              to meet in person
+            </h2>
+            <p className="text-gray-300 mt-3 text-sm md:text-base">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Steps (vertical) */}
+              <div className="space-y-4 md:space-y-5">
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <Users2 className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">We match 10 locals by vibe</div>
+                    <div className="text-gray-400 text-sm md:text-base">Grouped in a shared chat in the same city</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks the chat and suggests plans</div>
+                    <div className="text-gray-400 text-sm md:text-base">Icebreakers + plan ideas tailored to the group</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
+                  <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue w-11 h-11 md:w-12 md:h-12 flex items-center justify-center flex-shrink-0">
+                    <Calendar className="text-white" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-white text-base md:text-lg font-semibold">They meet within 7 days</div>
+                    <div className="text-gray-400 text-sm md:text-base">They book a simple, prepaid experience at a venue</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Images (small mosaic) */}
+              <div className="flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-md h-72 md:h-80">
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
+                    alt="Pip bowling with friends"
+                    className="absolute top-0 left-0 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg] z-20"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
+                    alt="Pip paintball with friends"
+                    className="absolute top-6 right-0 w-44 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 z-10"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                  <img
+                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
+                    alt="Pip cooking with friends"
+                    className="absolute bottom-0 left-12 md:left-24 w-36 md:w-44 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1 z-30"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-6 text-center">
+              <a href="/meet-pip" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
+                Learn more about Pip
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -330,6 +436,15 @@ const AmbassadorProgram = () => {
                 </CardContent>
               </Card>
             </motion.div>
+            <div className="mt-6 rounded-xl border border-gray-700 bg-gray-900/50 p-4 text-sm text-gray-300">
+              <div className="text-white font-semibold mb-1">How you earn & payouts</div>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Tracking: referrals via your personal link/code (1‑year attribution)</li>
+                <li>Payouts: monthly to your account (Stripe/PayPal)</li>
+                <li>Rate: 5% of actual booking revenue from your referrals for 12 months</li>
+                <li>No cap. Transparent dashboard coming soon.</li>
+              </ul>
+            </div>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-16">
@@ -391,6 +506,72 @@ const AmbassadorProgram = () => {
               <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
+
+          {/* Examples of how to promote */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="max-w-5xl mx-auto mt-12">
+            <div className="bg-gray-800/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold mb-6 text-center">Ways Ambassadors Promote Pulse</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">💼</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Business Outreach</div>
+                    <div className="text-gray-300 text-sm">Talk to local business owners and venue managers</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">📱</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Social Media</div>
+                    <div className="text-gray-300 text-sm">Post on social media or create short reels</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">✍️</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Content Creation</div>
+                    <div className="text-gray-300 text-sm">Publish a blog post or newsletter feature</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">🎥</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Video & Audio</div>
+                    <div className="text-gray-300 text-sm">Film a YouTube video or podcast mention</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">📰</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Media Relations</div>
+                    <div className="text-gray-300 text-sm">Pitch local media or campus press</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-sm">🤝</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold mb-1">Events</div>
+                    <div className="text-gray-300 text-sm">Host a small info session or meetup</div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-center text-sm text-gray-400">
+                No required actions — you choose what fits your style and schedule.
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -410,74 +591,27 @@ const AmbassadorProgram = () => {
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">Everything you need to win: assets, templates, and real humans backing you.</p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { title: 'Custom Materials', icon: Palette, blurb: 'Posters, flyers, and merch tailored to your community', color: 'from-purple-500 to-pink-500' },
-                { title: 'Digital Support', icon: Share2, blurb: 'Landing pages, social templates, QR codes', color: 'from-blue-500 to-cyan-400' },
-                { title: 'Partner Channels', icon: Handshake, blurb: 'Co‑marketing with venue partners', color: 'from-emerald-500 to-green-400' },
-                { title: 'Personalized Strategy', icon: Target, blurb: '1:1 guidance and a clear plan', color: 'from-amber-500 to-orange-400' },
-                { title: 'Community Tools', icon: Users, blurb: 'Event guides and engagement tips', color: 'from-indigo-500 to-violet-500' },
-                { title: 'Ongoing Support', icon: Headphones, blurb: 'Regular check‑ins and new opportunities', color: 'from-rose-500 to-fuchsia-500' }
-              ].map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 16, scale: 0.98 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pulse-pink/20 via-accent/20 to-pulse-blue/20 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
-                  <div className="relative rounded-2xl border border-gray-700 bg-gray-800/60 p-6 h-full">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform`}>
-                        <item.icon className="h-5 w-5 text-white" />
-                      </div>
-                      <h3 className="text-white font-semibold text-lg">{item.title}</h3>
-                    </div>
-                    <p className="text-sm text-gray-300 leading-relaxed">{item.blurb}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="lg:col-span-1">
-              <div className="sticky top-24">
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-pulse-pink/20 via-accent/20 to-pulse-blue/20 blur-xl opacity-0 group-hover:opacity-100 transition"></div>
-                  <div className="relative rounded-2xl border border-gray-700 bg-gray-800/60 p-6 overflow-hidden">
-                    <div className="absolute right-0 -top-16 w-40 h-40 bg-gradient-to-br from-pulse-pink/20 to-pulse-blue/20 rounded-full blur-3xl" />
-                    <h3 className="text-xl font-bold mb-2">Need something special?</h3>
-                    <p className="text-sm text-gray-300 mb-4">Tell us what would help you win in your city.</p>
-
-                    <div className="space-y-2 mb-5">
-                      {[
-                        { icon: Share2, text: 'Editable social templates' },
-                        { icon: Palette, text: 'Custom posters and flyers' },
-                        { icon: Target, text: 'City‑specific growth plan' },
-                        { icon: Headphones, text: '1:1 support from our team' }
-                      ].map((it) => (
-                        <div key={it.text} className="flex items-center text-sm text-gray-300">
-                          <it.icon size={16} className="mr-2 text-gray-400" />
-                          <span>{it.text}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <a
-                      href="mailto:ambassadors@pulsenow.app?subject=Ambassador Support Request"
-                      className="w-full justify-center bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-5 py-3 rounded-full inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 font-medium text-sm"
-                    >
-                      <span>Request Support</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
+                <div className="text-white font-semibold mb-1">Assets & Templates</div>
+                <div className="text-gray-300">Editable posts, posters, QR codes</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
+                <div className="text-white font-semibold mb-1">Co‑marketing</div>
+                <div className="text-gray-300">Venue partners + Pulse channels</div>
+              </div>
+              <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
+                <div className="text-white font-semibold mb-1">1:1 Support</div>
+                <div className="text-gray-300">Personal guidance to hit your goals</div>
               </div>
             </div>
+            <div className="text-center text-xs text-gray-400 mt-2">Want more? Email ambassadors@pulsenow.app for the full resource list.</div>
           </div>
         </div>
       </section>
+
+      {/* Removed Fit & Getting Started to reduce box count */}
 
       {/* CTA Section */}
       <section id="apply" className="py-20 relative">
@@ -499,8 +633,8 @@ const AmbassadorProgram = () => {
                 <span>Apply to Join</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
-              <a href={addRefToUrl("/")} className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>Try Pulse First</span>
+              <a href="#earnings" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+                <span>See Earnings</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
             </div>
