@@ -1,6 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 // Removed lucide-react icons used only in the Values section
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -25,34 +26,64 @@ const Careers = () => {
 
   const openPositions = [
     {
+      id: "social-growth-intern",
+      title: "Social Growth & Community Intern",
+      description:
+        "Own a niche growth channel and build communities around specific identities. Remote, part-time, unpaid with commission opportunities.",
+      remote: true,
+      partTime: true,
+      unpaid: true,
+      featured: true
+    },
+    {
+      id: "social-media-intern",
       title: "Social Media Intern",
       description:
         "Assist with content creation, scheduling, and community engagement across social platforms.",
-      remote: true
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: false
     },
     {
+      id: "growth-intern",
       title: "Growth Intern",
       description:
         "Support growth experiments, analytics, and channel operations to accelerate user acquisition.",
-      remote: true
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: false
     },
     {
+      id: "head-social-media",
       title: "Head of Social Media",
       description:
         "Own our social strategy end-to-end, lead content programming, and grow our brand presence.",
-      remote: true
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: false
     },
     {
+      id: "community-lead",
       title: "Community Lead",
       description:
         "Build, activate, and support our global community through events, programs, and moderation.",
-      remote: true
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: false
     },
     {
+      id: "partnership-manager",
       title: "Partnership Manager",
       description:
         "Source, negotiate, and manage strategic partnerships to expand reach and impact.",
-      remote: true
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: false
     }
   ];
 
@@ -102,26 +133,54 @@ const Careers = () => {
                     const subject = encodeURIComponent(`Application for ${role.title}`);
                     return (
                       <li
-                        key={role.title}
-                        className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gray-900/40 border border-gray-700 hover:border-purple-500/40 transition-colors rounded-xl px-6 py-5"
+                        key={role.id}
+                        className={`flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gray-900/40 border border-gray-700 hover:border-purple-500/40 transition-colors rounded-xl px-6 py-5 ${
+                          role.featured ? 'ring-2 ring-pulse-pink/30 bg-gradient-to-r from-gray-900/40 to-purple-900/20' : ''
+                        }`}
                       >
                         <div className="flex-1">
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 mb-2">
                             <span className="text-white text-lg md:text-xl font-semibold">{role.title}</span>
+                            {role.featured && (
+                              <span className="text-pulse-pink border border-pulse-pink/30 bg-pulse-pink/10 text-[10px] md:text-xs px-2 py-0.5 rounded-full">
+                                Featured
+                              </span>
+                            )}
                             {role.remote && (
                               <span className="text-green-300 border border-green-500/30 bg-green-500/10 text-[10px] md:text-xs px-2 py-0.5 rounded-full">
                                 Remote
                               </span>
                             )}
+                            {role.partTime && (
+                              <span className="text-blue-300 border border-blue-500/30 bg-blue-500/10 text-[10px] md:text-xs px-2 py-0.5 rounded-full">
+                                Part-Time
+                              </span>
+                            )}
+                            {role.unpaid && (
+                              <span className="text-yellow-300 border border-yellow-500/30 bg-yellow-500/10 text-[10px] md:text-xs px-2 py-0.5 rounded-full">
+                                Unpaid
+                              </span>
+                            )}
                           </div>
-                          <p className="text-gray-300 text-sm md:text-base mt-1">{role.description}</p>
+                          <p className="text-gray-300 text-sm md:text-base">{role.description}</p>
                         </div>
-                        <a
-                          href={`mailto:careers@pulsenow.app?subject=${subject}`}
-                          className="text-pulse-pink hover:underline shrink-0"
-                        >
-                          Apply
-                        </a>
+                        <div className="flex flex-col gap-2 shrink-0">
+                          {role.id === "social-growth-intern" ? (
+                            <Link
+                              to={`/careers/${role.id}`}
+                              className="text-pulse-pink hover:underline text-center"
+                            >
+                              View Details
+                            </Link>
+                          ) : (
+                                                         <a
+                               href={`mailto:careers@pulsenow.app?subject=${subject}`}
+                               className="text-pulse-pink hover:underline text-center"
+                             >
+                               Apply
+                             </a>
+                          )}
+                        </div>
                       </li>
                     );
                   })}

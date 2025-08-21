@@ -24,6 +24,7 @@ import CommunityPage from "@/pages/CommunityPage";
 import Partnerships from "@/pages/Partnerships";
 import AmbassadorProgram from "@/pages/AmbassadorProgram";
 import Careers from "@/pages/Careers";
+import JobOpening from "@/pages/JobOpening";
 import MeetPip from "@/pages/MeetPip";
 import PlanIdeas from "@/pages/PlanIdeas";
 import PlanIdeasCity from "@/pages/PlanIdeasCity";
@@ -60,6 +61,7 @@ function App() {
                 <Route path="partners" element={<Partnerships />} />
                 <Route path="ambassador-program" element={<AmbassadorProgram />} />
                 <Route path="careers" element={<Careers />} />
+                <Route path="careers/:jobId" element={<JobOpening />} />
                 <Route path="meet-pip" element={<MeetPip />} />
                 <Route path="plan-ideas" element={<PlanIdeas />} />
                 <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
