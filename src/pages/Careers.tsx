@@ -39,10 +39,10 @@ const Careers = () => {
       id: "social-media-intern",
       title: "Social Media Intern",
       description:
-        "Assist with content creation, scheduling, and community engagement across social platforms.",
+        "Help shape the voice of a social app rethinking friendship. Remote, part-time, unpaid with commission opportunities.",
       remote: true,
-      partTime: false,
-      unpaid: false,
+      partTime: true,
+      unpaid: true,
       featured: false
     },
     {
@@ -74,6 +74,76 @@ const Careers = () => {
       partTime: false,
       unpaid: false,
       featured: false
+    },
+    {
+      id: "partnership-manager-intern",
+      title: "Partnership Manager Intern",
+      description:
+        "Build real-world connections. Get partners excited about friendship. Remote, part-time, unpaid with commission opportunities.",
+      remote: true,
+      partTime: true,
+      unpaid: true,
+      featured: false
+    },
+    {
+      id: "affiliate-marketing-manager-intern",
+      title: "Affiliate Marketing Manager Intern",
+      description:
+        "Grow our ambassador network. Recruit the right people. Remote, part-time, unpaid with commission opportunities.",
+      remote: true,
+      partTime: true,
+      unpaid: true,
+      featured: false
+    },
+    {
+      id: "social-media-talent-pool",
+      title: "Join Pulse's Social Media Talent Pool",
+      description:
+        "Let's start the conversation now—so we're ready to build together later. Remote opportunities with future roles.",
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: true
+    },
+    {
+      id: "growth-team-talent-pool",
+      title: "Join Pulse's Growth Team Talent Pool",
+      description:
+        "We're assembling our growth dream team. Let's get you on our radar. Remote opportunities with future roles.",
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: true
+    },
+    {
+      id: "technical-talent-pool",
+      title: "Join Pulse's Technical Talent Pool",
+      description:
+        "We're building a world-class team of makers, builders, and AI-first engineers. Remote opportunities with future roles.",
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: true
+    },
+    {
+      id: "partnership-talent-pool",
+      title: "Join Pulse's Partnership Talent Pool",
+      description:
+        "Help us build the real-world engine behind real-life friendships. Remote opportunities with future roles.",
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: true
+    },
+    {
+      id: "community-manager-talent-pool",
+      title: "Join Pulse's Community Manager Talent Pool",
+      description:
+        "Bring people together. Make friendship feel local, creative, and real. Remote opportunities with future roles.",
+      remote: true,
+      partTime: false,
+      unpaid: false,
+      featured: true
     },
     {
       id: "partnership-manager",
@@ -165,7 +235,7 @@ const Careers = () => {
                           <p className="text-gray-300 text-sm md:text-base">{role.description}</p>
                         </div>
                         <div className="flex flex-col gap-2 shrink-0">
-                          {role.id === "social-growth-intern" ? (
+                          {(role.id === "social-growth-intern" || role.id === "social-media-intern" || role.id === "partnership-manager-intern" || role.id === "affiliate-marketing-manager-intern" || role.id === "social-media-talent-pool" || role.id === "growth-team-talent-pool" || role.id === "technical-talent-pool" || role.id === "partnership-talent-pool" || role.id === "community-manager-talent-pool") ? (
                             <Link
                               to={`/careers/${role.id}`}
                               className="text-pulse-pink hover:underline text-center"
