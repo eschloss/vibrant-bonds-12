@@ -107,7 +107,7 @@ const Partnerships = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Get more prepaid group bookings and loyal regulars — with zero upfront cost. Pulse brings 10 compatible locals to your venue. You host. You keep 75%.
+              Get more prepaid group bookings and loyal regulars — with zero upfront cost. Pulse brings groups of compatible locals to your venue.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">

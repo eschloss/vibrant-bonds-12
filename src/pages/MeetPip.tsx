@@ -218,7 +218,7 @@ const MeetPip = () => {
                 <div className="mt-6">
                   <a href="/" className="inline-block">
                     <Button className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-                      {t("meet_pip.module.cta", "Try Pip with your group")}
+                      {t("meet_pip.module.cta", "Meet Your Crew")}
                     </Button>
                   </a>
                 </div>

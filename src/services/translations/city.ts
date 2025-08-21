@@ -28,7 +28,19 @@ export const city = {
     "city.want_it_sooner": "Want it sooner?",
     "city.spread_the_word": "Spread the word",
     "city.every_signup": "Every signup moves your city up the list.\nHelp us launch faster by sharing Pulse.",
-    "city.share_with_friends": "Share Pulse with friends and help grow your local crew."
+    "city.share_with_friends": "Share Pulse with friends and help grow your local crew.",
+    "city_pip.badge": "Your AI wingman",
+    "city_pip.headline": "Meet Pip — Your Social Wingman",
+    "city_pip.subtext": "From awkward silence to IRL plans—Pip energizes your chat and helps make hanging out actually happen.",
+    "city_pip.ice_breakers": "Ice Breakers",
+    "city_pip.ice_breakers_text": "Get everyone talking fast",
+    "city_pip.scheduling": "Smart Scheduling",
+    "city_pip.scheduling_text": "Find time that works for all",
+    "city_pip.local_picks": "Local Picks",
+    "city_pip.local_picks_text": "Great nearby spots for your vibe",
+    "city_pip.cta": "Meet Pip",
+    "city_pip.plan_ideas": "Get Ideas",
+    "city_pip.image_alt": "Pip celebrating with friends"
   },
   es: {
     "city.help_launch": "Ayuda a lanzar Pulse en",
@@ -57,6 +69,18 @@ export const city = {
     "city.want_it_sooner": "¿Lo quieres antes?",
     "city.spread_the_word": "Corre la voz",
     "city.every_signup": "Cada registro mueve tu ciudad más arriba en la lista.\nAyúdanos a lanzar más rápido compartiendo Pulse.",
-    "city.share_with_friends": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local."
+    "city.share_with_friends": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local.",
+    "city_pip.badge": "Tu asistente de IA",
+    "city_pip.headline": "Conoce a Pip — Tu Compañero Social",
+    "city_pip.subtext": "Del silencio incómodo a planes en la vida real—Pip energiza tu chat y ayuda a que quedar realmente suceda.",
+    "city_pip.ice_breakers": "Rompehielos",
+    "city_pip.ice_breakers_text": "Haz que todos hablen rápido",
+    "city_pip.scheduling": "Programación Inteligente",
+    "city_pip.scheduling_text": "Encuentra tiempo que funcione para todos",
+    "city_pip.local_picks": "Recomendaciones Locales",
+    "city_pip.local_picks_text": "Excelentes lugares cercanos para tu estilo",
+    "city_pip.cta": "Conoce a Pip",
+    "city_pip.plan_ideas": "Obtén Ideas",
+    "city_pip.image_alt": "Pip celebrando con amigos"
   }
 };

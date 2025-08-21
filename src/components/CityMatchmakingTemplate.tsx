@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import ShareSection from './ShareSection';
+import CityPipModule from './CityPipModule';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -352,6 +353,9 @@ const CityMatchmakingTemplate = ({
             </div>
           </div>
         </section>
+
+        {/* City Pip Module */}
+        <CityPipModule />
 
         {code && (
           <section className="relative py-20 bg-gray-900/80">
