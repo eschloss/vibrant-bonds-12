@@ -73,7 +73,7 @@ const Hero = () => {
             transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="paragraph text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8"
           >
-            {t("hero.description", "We match like-minded people into group chats with a built-in guide that sparks conversations and plans real-life meetups.")}
+            {t("hero.description", "We match like-minded people into group chats with a guide that sparks conversations and plans real-life meetups.")}
           </motion.p>
           
           <motion.div 
