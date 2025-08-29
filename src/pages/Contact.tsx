@@ -6,12 +6,28 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FAQItem from "@/components/FAQItem";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Seo } from "@/hooks/useSeo";
 
 const Contact = () => {
   const { t } = useTranslation();
   
+  const seoProps = {
+    title: {
+      en: "Contact Us | Get in Touch | Pulse",
+      es: "Contáctanos | Ponte en Contacto | Pulse"
+    },
+    description: {
+      en: "Have questions about Pulse? Get in touch with our team. We're here to help you connect with new friends in your city.",
+      es: "¿Tienes preguntas sobre Pulse? Ponte en contacto con nuestro equipo. Estamos aquí para ayudarte a conectar con nuevos amigos en tu ciudad."
+    },
+    keywords: ["contact", "support", "help", "questions", "pulse app", "customer service"],
+    type: "website"
+  };
+  
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <>
+      <Seo {...seoProps} />
+      <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       
       {/* Hero Section */}
@@ -194,8 +210,9 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </div>
+              <Footer />
+      </div>
+    </>
   );
 };
 

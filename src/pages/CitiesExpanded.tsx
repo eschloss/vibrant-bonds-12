@@ -12,6 +12,7 @@ import CityCard from "@/components/CityCard";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/components/ui/use-toast";
+import { Seo } from "@/hooks/useSeo";
 
 type City = {
   en_name: string;
@@ -33,6 +34,19 @@ const CitiesExpanded = () => {
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
   const [showCantFind, setShowCantFind] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const seoProps = {
+    title: {
+      en: "Find Your City | Meet New Friends Worldwide | Pulse",
+      es: "Encuentra Tu Ciudad | Conoce Nuevos Amigos | Pulse"
+    },
+    description: {
+      en: "Discover cities where Pulse is available and find your perfect friend group. Join communities worldwide and start building meaningful friendships.",
+      es: "Descubre ciudades donde Pulse está disponible y encuentra tu grupo ideal de amigos. Únete a comunidades en todo el mundo y comienza a construir amistades significativas."
+    },
+    keywords: ["cities", "find friends", "worldwide", "communities", "friend groups", "pulse app", "social connections"],
+    type: "website"
+  };
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -149,9 +163,11 @@ const CitiesExpanded = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen dark">
-      <Navbar />
-      <main className="flex-grow">
+    <>
+      <Seo {...seoProps} />
+      <div className="flex flex-col min-h-screen dark">
+        <Navbar />
+        <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
           <div className="absolute inset-0 -z-5">
@@ -312,7 +328,8 @@ const CitiesExpanded = () => {
         </section>
       </main>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

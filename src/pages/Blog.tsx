@@ -17,6 +17,7 @@ const Blog = () => {
       en: "Insights about building meaningful connections and friendships in the digital age",
       es: "Perspectivas sobre la creación de conexiones significativas y amistades en la era digital"
     },
+    keywords: ["friendship blog", "social connections", "digital friendships", "community building", "social networking", "friendship tips"],
     type: "website",
     section: "Blog"
   };

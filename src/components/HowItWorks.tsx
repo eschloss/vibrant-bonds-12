@@ -33,12 +33,12 @@ const HowItWorks = () => {
   }, {
     icon: CalendarDays,
     title: t("steps.meet_up.title", "Just Show Up"),
-    description: t("steps.meet_up.description", "Pip curates fun local experiences that fit your crew’s vibe and schedule."),
+    description: t("steps.meet_up.description", "We curate fun local experiences that fit your crew’s vibe and schedule"),
     color: "bg-gradient-to-r from-stone-500 to-rose-500"
   }, {
     icon: Repeat,
     title: t("steps.grow_friendships.title", "Keep It Going"),
-    description: t("steps.grow_friendships.description", "Keep meeting while Pip drops in with fresh games and hangout ideas."),
+    description: t("steps.grow_friendships.description", "Keep meeting while we drop in with fresh games and hangout ideas."),
     color: "bg-gradient-to-r from-green-400 to-emerald-500"
   }];
   
@@ -78,7 +78,7 @@ const HowItWorks = () => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
           >
-            10 new friends. 7 days to meet in real life.
+            10 new friends.<br />7 days to meet in real life.
           </motion.h2>
         </motion.div>
 

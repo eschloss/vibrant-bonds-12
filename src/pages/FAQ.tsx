@@ -355,7 +355,7 @@ const FAQ: React.FC = () => {
               Join Pulse to get matched with a friend group in your city. Pip will help you plan meetups you actually look forward to.
             </p>
             <a
-              href="/"
+              href="/cities"
               className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
             >
               Get Started with Pulse

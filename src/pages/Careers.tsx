@@ -200,7 +200,18 @@ const Careers = () => {
               <CardContent className="p-8 md:p-10">
                 <ul className="space-y-4">
                   {openPositions.map((role) => {
-                    const subject = encodeURIComponent(`Application for ${role.title}`);
+                    const viewable = (
+                      role.id === "social-growth-intern" ||
+                      role.id === "social-media-intern" ||
+                      role.id === "partnership-manager-intern" ||
+                      role.id === "affiliate-marketing-manager-intern" ||
+                      role.id === "social-media-talent-pool" ||
+                      role.id === "growth-team-talent-pool" ||
+                      role.id === "technical-talent-pool" ||
+                      role.id === "partnership-talent-pool" ||
+                      role.id === "community-manager-talent-pool"
+                    );
+                    if (!viewable) return null; // remove early-stage dummy roles
                     return (
                       <li
                         key={role.id}
@@ -235,21 +246,12 @@ const Careers = () => {
                           <p className="text-gray-300 text-sm md:text-base">{role.description}</p>
                         </div>
                         <div className="flex flex-col gap-2 shrink-0">
-                          {(role.id === "social-growth-intern" || role.id === "social-media-intern" || role.id === "partnership-manager-intern" || role.id === "affiliate-marketing-manager-intern" || role.id === "social-media-talent-pool" || role.id === "growth-team-talent-pool" || role.id === "technical-talent-pool" || role.id === "partnership-talent-pool" || role.id === "community-manager-talent-pool") ? (
-                            <Link
-                              to={`/careers/${role.id}`}
-                              className="text-pulse-pink hover:underline text-center"
-                            >
-                              View Details
-                            </Link>
-                          ) : (
-                                                         <a
-                               href={`mailto:careers@pulsenow.app?subject=${subject}`}
-                               className="text-pulse-pink hover:underline text-center"
-                             >
-                               Apply
-                             </a>
-                          )}
+                          <Link
+                            to={`/careers/${role.id}`}
+                            className="text-pulse-pink hover:underline text-center"
+                          >
+                            View Details
+                          </Link>
                         </div>
                       </li>
                     );

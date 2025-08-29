@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSelector from "../LanguageSelector";
 import { useRefParam } from "@/hooks/useRefParam";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 interface HeroSectionProps {
   cityName: string;
@@ -165,6 +166,10 @@ const HeroSection = ({
             <div className="flex flex-col items-center">
               <Link 
                 to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                onClick={(e) => {
+                  const href = (e.currentTarget as HTMLAnchorElement).href;
+                  trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                }}
               >
                 <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
                   <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />

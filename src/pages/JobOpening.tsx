@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Seo } from "@/hooks/useSeo";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 interface JobOpening {
   id: string;
@@ -541,7 +542,7 @@ const JobOpening = () => {
                 </div>
                 {job.applicationUrl && (
                   <Button asChild className="w-full md:w-auto bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                    <a href={job.applicationUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={job.applicationUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'careers:job_opening', extra: { jobId } })}>
                       Apply Now
                     </a>
                   </Button>

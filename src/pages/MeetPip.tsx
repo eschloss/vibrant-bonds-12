@@ -50,12 +50,18 @@ const MeetPip = () => {
     {
       icon: <Coffee className="text-white h-6 w-6" />,
       title: t("meet_pip.features.curator.title", "Activity Curator"),
-      description: t("meet_pip.features.curator.description", "From coffee chats to adventure outings, Pip finds activities that bring out the best conversations.")
+      description: t(
+        "meet_pip.features.curator.description",
+        "Pip builds the plan itself, step by step: quick coffee at a local café, mini golf, then gelato to recap."
+      )
     },
     {
       icon: <Heart className="text-white h-6 w-6" />,
       title: t("meet_pip.features.coach.title", "Connection Coach"),
-      description: t("meet_pip.features.coach.description", "Pip helps deepen friendships by encouraging meaningful conversations and shared experiences.")
+      description: t(
+        "meet_pip.features.coach.description",
+        "Pip turns small talk into closeness with gentle check-ins, thoughtful callbacks, and little rituals."
+      )
     }
   ];
 
@@ -171,7 +177,9 @@ const MeetPip = () => {
                   {t("meet_pip.module.badge", "Built to spark IRL connections")}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  {t("meet_pip.module.headline", "From “Nice to Meet You” to “See You Next Week”")}
+                  <span>{t("meet_pip.module.headline_prefix", "From “Nice to Meet You”")}</span>
+                  <br />
+                  <span>{t("meet_pip.module.headline_suffix", "To “See You Next Week”")}</span>
                 </h2>
                 <p className="text-gray-300 mb-6">
                   {t(
@@ -189,8 +197,8 @@ const MeetPip = () => {
                   {[
                     { title: t("meet_pip.module.point1.title", "Ice Breakers"), text: t("meet_pip.module.point1", "Pip breaks the ice with fun icebreaker games") },
                     { title: t("meet_pip.module.point2.title", "No Awkward Lulls"), text: t("meet_pip.module.point2", "Removes the awkward silence and creates continous engagements") },
-                    { title: t("meet_pip.module.point3.title", "Perfect Meetups"), text: t("meet_pip.module.point3", "Suggests the perfect meetups for the group to meet and bound over.") },
-                    { title: t("meet_pip.module.point4.title", "See You Again"), text: t("meet_pip.module.point4", "Pushes the group to meet again") },
+                    { title: t("meet_pip.module.point3.title", "Perfect Meetups"), text: t("meet_pip.module.point3", "Suggests the perfect meetups for the group to meet and bond over.") },
+                    { title: t("meet_pip.module.point4.title", "See You Again"), text: t("meet_pip.module.point4", "Pushes the group to meet again so that real friendship can grow.") },
                   ].map((item, idx) => (
                     <motion.li
                       key={idx}
@@ -209,7 +217,7 @@ const MeetPip = () => {
                       </div>
                       <p className="text-gray-200 leading-snug flex-1">
                         <span className="font-semibold text-white">{item.title}</span>
-                        <span> — {item.text}</span>
+                        <span>: {item.text}</span>
                       </p>
                     </motion.li>
                   ))}
@@ -234,7 +242,7 @@ const MeetPip = () => {
         heading2={t("meet_pip.icebreakers.heading2", "")}
         description={t(
           "meet_pip.icebreakers.description",
-          "From awkward silence to inside jokes, these quirky characters drop into your chat with games that get everyone talking — and laughing."
+          "From awkward silence to inside jokes, these quirky characters drop into your chat with games that get everyone talking and laughing."
         )}
       />
 
@@ -303,7 +311,7 @@ const MeetPip = () => {
               <p className="text-gray-300 text-sm">
                 {t(
                   "meet_pip.formula.irl.desc",
-                  "Friendship forms through repeat hangouts—Pip keeps them happening."
+                  "Friendship forms through repeat hangouts, and Pip makes sure they keep happening."
                 )}
               </p>
             </motion.div>
@@ -331,6 +339,39 @@ const MeetPip = () => {
                 )}
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-12 md:py-16 relative">
+        <div className="container mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("meet_pip.features.title", "What Pip Does")}</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              {t("meet_pip.features.description", "Pip is designed to make every group interaction more meaningful and every meetup more memorable.")}
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pipFeatures.map((feature, index) => (
+              <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
+                  <CardContent className="p-6">
+                    <div className={`rounded-full w-12 h-12 flex items-center justify-center mb-4 bg-gradient-to-r ${[
+                      'from-pink-500 to-purple-600',
+                      'from-blue-500 to-cyan-400',
+                      'from-stone-500 to-rose-500',
+                      'from-green-400 to-emerald-500',
+                    ][index % 4]}`}
+                    >
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
+                    <p className="text-gray-300">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -374,14 +415,14 @@ const MeetPip = () => {
                 </div>
                 <div className="absolute top-1/2 -left-6 -translate-y-1/2">
                   <div className="flex items-center gap-2 bg-gray-800/70 border border-gray-700 rounded-full px-3 py-1 text-sm">
-                    <Eye size={16} className="text-pulse-pink" />
-                    <span className="text-gray-200">{t("meet_pip.know.point2.short", "Understands your group signals")}</span>
+                    <Brain size={16} className="text-pulse-blue" />
+                    <span className="text-gray-200">{t("meet_pip.know.point3.short", "AI social prediction")}</span>
                   </div>
                 </div>
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
                   <div className="flex items-center gap-2 bg-gray-800/70 border border-gray-700 rounded-full px-3 py-1 text-sm">
-                    <Brain size={16} className="text-pulse-blue" />
-                    <span className="text-gray-200">{t("meet_pip.know.point3.short", "AI social prediction")}</span>
+                    <Eye size={16} className="text-pulse-pink" />
+                    <span className="text-gray-200">{t("meet_pip.know.point2.short", "Understands your group signals")}</span>
                   </div>
                 </div>
                 <div className="absolute top-1/2 -right-8 -translate-y-1/2">
@@ -411,7 +452,7 @@ const MeetPip = () => {
               <p className="text-gray-300 mb-6 max-w-xl">
                 {t(
                   "meet_pip.know.copy",
-                  "Pip blends real‑world data with your group’s unique rhythm to suggest plans that actually fit—timely, relevant, and full of good energy."
+                  "Pip blends real‑world data with your group’s unique rhythm to suggest plans that actually fit."
                 )}
               </p>
               <ul className="space-y-4">
@@ -419,13 +460,13 @@ const MeetPip = () => {
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mt-0.5">
                     <Database size={18} className="text-white" />
                   </div>
-                  <span className="text-gray-200">{t("meet_pip.know.point1", "Has access to millions of local events, venues and IRL experiences.")}</span>
+                  <span className="text-gray-200">{t("meet_pip.know.point1", "Has access to millions of local events, venues, and IRL experiences.")}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center mt-0.5">
                     <MessageSquare size={18} className="text-white" />
                   </div>
-                  <span className="text-gray-200">{t("meet_pip.know.point2", "Sees everyone's profile, interests, chat interactions, availability and other group signals.")}</span>
+                  <span className="text-gray-200">{t("meet_pip.know.point2", "Sees everyone's public profile, interests, chat interactions, availability and other group signals.")}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-stone-500 to-rose-500 flex items-center justify-center mt-0.5">
@@ -444,43 +485,6 @@ const MeetPip = () => {
           </div>
         </div>
       </section>
-
-      {/* Features Section */}
-      <section className="py-12 md:py-16 relative">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("meet_pip.features.title", "What Pip Does")}</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t("meet_pip.features.description", "Pip is designed to make every group interaction more meaningful and every meetup more memorable.")}
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pipFeatures.map((feature, index) => (
-              <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <div className={`rounded-full w-12 h-12 flex items-center justify-center mb-4 bg-gradient-to-r ${[
-                      'from-pink-500 to-purple-600',
-                      'from-blue-500 to-cyan-400',
-                      'from-stone-500 to-rose-500',
-                      'from-green-400 to-emerald-500',
-                    ][index % 4]}`}
-                    >
-                      {feature.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                    <p className="text-gray-300">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      
-
-      
 
       {/* Repeat Meetups CTA: Make It A Ritual */}
       <section className="py-12 md:py-16 relative overflow-hidden">
@@ -508,7 +512,7 @@ const MeetPip = () => {
                 <p className="text-gray-300 mb-5 max-w-xl">
                   {t(
                     "meet_pip.repeat.copy",
-                    "Pip removes planning pain so your crew keeps meeting—easy, consistent, and fun."
+                    "Pip removes planning pain so your crew keeps meeting with ease."
                   )}
                 </p>
 

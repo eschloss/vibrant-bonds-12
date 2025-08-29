@@ -19,3 +19,37 @@ export function getCurrentPageLabel(): string {
   if (path.startsWith('/contact')) return 'Contact';
   return 'Home';
 }
+
+// Track redirects to Typeform (or intermediary) without altering navigation
+export function trackTypeformRedirect(params: {
+  href: string;
+  cityName?: string;
+  code?: string;
+  source?: string;
+  extra?: Record<string, any>;
+}) {
+  try {
+    const payload = {
+      destination: params.href,
+      city: params.cityName,
+      city_code: params.code,
+      source: params.source || getCurrentPageLabel(),
+      path: typeof window !== 'undefined' ? window.location.pathname : undefined,
+      ...(params.extra || {})
+    };
+    // GA4 gtag support
+    // @ts-ignore
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      // @ts-ignore
+      (window as any).gtag('event', 'typeform_redirect', payload);
+    }
+    // GTM dataLayer support
+    // @ts-ignore
+    if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
+      // @ts-ignore
+      (window as any).dataLayer.push({ event: 'typeform_redirect', ...payload });
+    }
+  } catch (e) {
+    // no-op
+  }
+}

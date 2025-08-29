@@ -12,9 +12,9 @@ export const howItWorks = {
     "steps.break_ice.title": "Break the Ice",
     "steps.break_ice.description": "Start the fun early with conversation starters your crew will love.",
   "steps.meet_up.title": "Just Show Up",
-    "steps.meet_up.description": "Pip curates fun local experiences that fit your crew’s vibe and schedule.",
+    "steps.meet_up.description": "We curate fun local experiences that fit your crew’s vibe and schedule",
     "steps.grow_friendships.title": "Keep It Going",
-    "steps.grow_friendships.description": "Keep meeting while Pip drops in with fresh games and hangout ideas.",
+    "steps.grow_friendships.description": "Keep meeting while we drop in with fresh games and hangout ideas.",
   },
   es: {
     // How it works section

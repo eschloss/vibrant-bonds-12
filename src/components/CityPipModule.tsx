@@ -48,10 +48,10 @@ const CityPipModule: React.FC = () => {
                 {t("city_pip.badge", "Your AI wingman")}
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                {t("city_pip.headline", "Meet Pip — Your Social Wingman")}
+                {t("city_pip.headline", "Meet Pip, Your Social Wingman")}
               </h2>
               <p className="text-gray-300 mb-4 text-sm md:text-base">
-                {t("city_pip.subtext", "From awkward silence to IRL plans—Pip energizes your chat and helps make hanging out actually happen.")}
+                {t("city_pip.subtext", "From awkward silence to IRL plans, Pip energizes your chat and helps make hanging out actually happen.")}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">

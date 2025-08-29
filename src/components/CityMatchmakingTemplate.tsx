@@ -14,6 +14,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "./LanguageSelector";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -294,6 +295,10 @@ const CityMatchmakingTemplate = ({
                <div className="flex flex-col items-center">
                 <Link 
                    to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                   onClick={(e) => {
+                     const href = (e.currentTarget as HTMLAnchorElement).href;
+                     trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                   }}
                  >
                   <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
                     <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
@@ -354,8 +359,7 @@ const CityMatchmakingTemplate = ({
           </div>
         </section>
 
-        {/* City Pip Module */}
-        <CityPipModule />
+        {/* City Pip Module removed per request */}
 
         {code && (
           <section className="relative py-20 bg-gray-900/80">
@@ -377,7 +381,12 @@ const CityMatchmakingTemplate = ({
                 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                   
-                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}>
+                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                    onClick={(e) => {
+                      const href = (e.currentTarget as HTMLAnchorElement).href;
+                      trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
+                    }}
+                  >
                     <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
                       {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
                       <ArrowRight size={18} />

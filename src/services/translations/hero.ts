@@ -4,7 +4,7 @@ export const hero = {
     // Hero section translations
     "hero.title": "Meet New Friends",
     "hero.in_your_city": "in Your City",
-    "hero.description": "We match like-minded people into group chats where AI sparks conversations and plans real-life meetups.",
+    "hero.description": "We match like-minded people into group chats with a guide that sparks conversations and plans real-life meetups.",
     "hero.cta": "Meet Your Crew",
     
     // NeuralNetwork additional translations

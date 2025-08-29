@@ -15,7 +15,9 @@ const Matchmaking = () => {
     description: {
       en: "Find your perfect friend group and plan real-life meetups with Pulse's matchmaking",
       es: "Encuentra tu grupo ideal de amigos y planifica encuentros en la vida real con el emparejamiento de Pulse"
-    }
+    },
+    keywords: ["friend matching", "group matching", "meet new people", "friend finder", "social connections", "meetup planning"],
+    type: "website"
   };
   
   return (

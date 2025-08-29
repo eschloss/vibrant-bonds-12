@@ -38,7 +38,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
       title: t("meet_pippromo.item1.title", "Ice Breakers"),
       text: t(
         "meet_pippromo.item1.text",
-        "Games and prompts that get everyone talking—fast."
+        "Games and prompts that get everyone talking."
       ),
       icon: <MessageSquare size={18} className="text-white" />,
     },
@@ -62,7 +62,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
       title: t("meet_pippromo.item4.title", "Keep It Going"),
       text: t(
         "meet_pippromo.item4.text",
-        "Nudges, streaks, and traditions so hanging out actually happens."
+        "Gentle nudges that guide your group to keep meeting, so casual hangs grow into lasting friendships"
       ),
       icon: <Repeat size={18} className="text-white" />,
     },
@@ -99,13 +99,13 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                 {badgeText || t("meet_pippromo.badge", "Built to spark IRL connections")}
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-3">
-                {headline || t("meet_pippromo.headline", "Meet Pip — Your Social Wingman")}
+                {headline || t("meet_pippromo.headline", "Meet Pip, Your Social Wingman")}
               </h2>
               <p className="text-gray-300 mb-6 max-w-xl">
                 {subtext ||
                   t(
                     "meet_pippromo.subtext",
-                    "From awkward silence to IRL plans—Pip energizes your chat, picks a time, and lines up the perfect spot so hanging out actually happens."
+                    "From awkward silence to IRL plans, Pip energizes your chat, picks a time, and lines up the perfect spot so hanging out actually happens."
                   )}
               </p>
 
@@ -137,7 +137,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
                       ][idx % 4]}`}>{it.icon || simpleIcons[idx % 4]}</div>
                       <p className="text-gray-200">
                         <span className="font-semibold text-white">{it.title}</span>
-                        <span> — {it.text}</span>
+                        <span>: {it.text}</span>
                       </p>
                     </li>
                   ))}

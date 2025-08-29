@@ -27,14 +27,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import EarningCalculator from "@/components/EarningCalculator";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 const Partnerships = () => {
   const { t } = useTranslation();
   
   const seoProps = {
     title: {
-      en: t("partnerships.title", "Venue Partnerships | Drive Revenue & Build Community | Pulse"),
-      es: t("partnerships.title", "Asociaciones de Venues | Impulsa Ingresos y Construye Comunidad | Pulse")
+      en: t("partnerships.title", "Venue Partnerships | Boost Revenue & Community | Pulse"),
+      es: t("partnerships.title", "Asociaciones de Venues | Impulsa Ingresos | Pulse")
     },
     description: {
       en: t("partnerships.description", "Partner with Pulse to solve loneliness, boost retention, and drive new customers to your venue. Create exclusive group matches and get featured in our app."),
@@ -107,11 +108,11 @@ const Partnerships = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Get more prepaid group bookings and loyal regulars — with zero upfront cost. Pulse brings groups of compatible locals to your venue.
+              Get more prepaid group bookings and loyal regulars with zero upfront cost. Pulse brings groups of compatible locals to your venue.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+              <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:hero' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 <span>Apply for Partnership</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
@@ -319,7 +320,7 @@ const Partnerships = () => {
                 We partner with any venue that creates social experiences and brings people together. 
                 If your venue helps people connect, we want to work with you.
               </p>
-              <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
+              <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:venue_types_apply_anyway' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
                 <span>Apply Anyway</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
@@ -356,17 +357,17 @@ const Partnerships = () => {
                     <h3 className="text-2xl md:text-3xl font-bold text-white">Get Featured in the City</h3>
                   </div>
                   <p className="text-gray-300 mb-2">
-                    Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay. You host and keep <span className="text-white font-semibold">75%</span> (we take 25%).
+                    Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay.
                   </p>
                   <div className="text-xs text-gray-400 mb-6">Example: $30 × 10 people = $300 booking → You receive $225.</div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Featured as a plan idea in relevant group missions citywide</span>
+                      <span className="text-gray-300">Featured as a plan idea promoted to relevant groups citywide.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Groups opt in — no commitments or coupons required</span>
+                      <span className="text-gray-300">Groups opt in; no commitments or coupons required</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
@@ -398,7 +399,7 @@ const Partnerships = () => {
 
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
-                    <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
+                    <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:featured_cta' })} className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
                       Apply Now
                       <ArrowRight className="h-4 w-4" />
                     </a>
@@ -421,8 +422,23 @@ const Partnerships = () => {
                     <h3 className="text-2xl md:text-3xl font-bold text-white">Your Own Recurring Community</h3>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    We create a branded group in Pulse around your core activity (e.g., “Meet Fellow Bowlers”). We continuously match many small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.
+                    We create a branded group for your core activity on Pulse so locals meet new friends at your venue. We continuously match many small groups and route them to your venue weekly or monthly, building loyal regulars while attracting new customers.
                   </p>
+                  {/* Example callouts moved above bullets and styled larger/bolder */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center">
+                      <div className="text-2xl mb-1">🎳</div>
+                      <div className="text-sm md:text-base font-semibold text-white">Meet Bowlers in Boston</div>
+                    </div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center">
+                      <div className="text-2xl mb-1">🏋️</div>
+                      <div className="text-sm md:text-base font-semibold text-white">Find Gym Buddies in Barcelona</div>
+                    </div>
+                    <div className="bg-gray-700/40 rounded-lg p-3 text-center">
+                      <div className="text-2xl mb-1">🎲</div>
+                      <div className="text-sm md:text-base font-semibold text-white">Meet Local Gamers in London</div>
+                    </div>
+                  </div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
@@ -446,15 +462,11 @@ const Partnerships = () => {
                     </li>
                   </ul>
 
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎳</div><div className="text-xs text-gray-400">“Meet Fellow Bowlers”</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🏋️</div><div className="text-xs text-gray-400">“Find Gym Buddies”</div></div>
-                    <div className="bg-gray-700/40 rounded-lg p-3 text-center"><div className="text-2xl mb-1">🎮</div><div className="text-xs text-gray-400">“Join Local Gamers”</div></div>
-                  </div>
+                  
 
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
-                    <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
+                    <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:recurring_cta' })} className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
                       Apply Now
                       <ArrowRight className="h-4 w-4" />
                     </a>
@@ -468,46 +480,133 @@ const Partnerships = () => {
             </motion.div>
           </div>
 
-          {/* Side-by-side comparison */}
-          <div className="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-              <div className="text-white font-semibold mb-2">Featured in the City</div>
-              <ul className="text-gray-300 space-y-1">
-                <li>Best for: Occasional group bookings</li>
-                <li>What you provide: 1–2 simple packages</li>
-                <li>You get: Citywide discovery + prepaid groups</li>
-                <li>Fee: 25% per booking</li>
+          {/* Your Recurring Community (examples) moved up below the card */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-10">
+            {[
+              {
+                title: "Meet Fellow Bowlers in Boston",
+                venue: "Boston Bowlers",
+                poweredBy: "New England Bowling Alley",
+                description: "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley.",
+                emoji: "🎳",
+                features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
+                color: "from-blue-500 to-cyan-400"
+              },
+              {
+                title: "Meet Gym Buddies in Barcelona",
+                venue: "Barcelona Gym Buddies",
+                poweredBy: "BCN Gym Group",
+                description: "Pulse‑matched workout partners. Recurring sessions hosted at your gym.",
+                emoji: "🏋️",
+                features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
+                color: "from-purple-500 to-pink-500"
+              }
+            ].map((example, index) => (
+              <motion.div key={example.venue} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full overflow-hidden group">
+                  <div className="relative h-32 overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${example.color} opacity-20`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">{example.emoji}</div>
+                        <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
+                        <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="mb-4">
+                      <h4 className="text-lg font-bold text-white mb-2">{example.title}</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">{example.description}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {example.features.map((feature) => (
+                        <span key={feature} className="text-[11px] text-gray-200 bg-gray-700/50 border border-gray-700 rounded-full px-2.5 py-1">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Side-by-side comparison (polished) */}
+          <div className="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Featured in the City */}
+            <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-blue-400/40 transition-all">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <div className="text-white font-semibold">Featured in the City</div>
+              </div>
+              <ul className="text-gray-300 space-y-2 text-sm">
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Best for:</span> Occasional group bookings</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">You get:</span> Citywide discovery + prepaid groups</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Fee:</span> 25% per booking</span></li>
               </ul>
             </div>
-            <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-              <div className="text-white font-semibold mb-2">Your Recurring Community</div>
-              <ul className="text-gray-300 space-y-1">
-                <li>Best for: Regular sessions (weekly/monthly)</li>
-                <li>What you provide: Time slots & staff</li>
-                <li>You get: Ongoing groups, co‑promotion</li>
-                <li>Fee: 25% per booking</li>
+
+            {/* Your Recurring Community */}
+            <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-purple-400/40 transition-all">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
+                <div className="text-white font-semibold">Your Recurring Community</div>
+              </div>
+              <ul className="text-gray-300 space-y-2 text-sm">
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Best for:</span> Regular sessions (weekly/monthly)</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">You get:</span> Ongoing groups, co‑promotion</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Fee:</span> 25% per booking</span></li>
               </ul>
             </div>
           </div>
 
           {/* How it works for venues */}
-          <div className="max-w-6xl mx-auto mt-6">
-            <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4">
-              <div className="text-center text-white font-semibold mb-3">How it works for venues</div>
-              <ol className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
-                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
-                  <div className="font-semibold text-white mb-1">1) Apply</div>
-                  <div className="text-gray-300">Tell us your activity and preferred times.</div>
+          <div className="max-w-6xl mx-auto mt-10">
+            <div className="rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg p-6 md:p-8 shadow-lg shadow-purple-500/10">
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40">
+                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" /> How it works for venues
+                </div>
+              </div>
+              <ol className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <li className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue p-[1px] rounded-2xl">
+                  <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-pink to-accent flex items-center justify-center text-white">1</div>
+                      <div className="font-semibold text-white text-lg">Apply</div>
+                    </div>
+                    <div className="text-gray-300 text-sm">Tell us your activity and preferred times.</div>
+                  </div>
                 </li>
-                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
-                  <div className="font-semibold text-white mb-1">2) Set your package</div>
-                  <div className="text-gray-300">We craft a simple, prepaid plan (e.g., $25 per person for 10).</div>
+                <li className="bg-gradient-to-r from-accent to-pulse-blue p-[1px] rounded-2xl">
+                  <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-pulse-blue flex items-center justify-center text-white">2</div>
+                      <div className="font-semibold text-white text-lg">Set your package</div>
+                    </div>
+                    <div className="text-gray-300 text-sm">We craft a simple, prepaid plan (e.g., $25 per person for 10).</div>
+                  </div>
                 </li>
-                <li className="rounded-lg border border-gray-700 bg-gray-900/50 p-4">
-                  <div className="font-semibold text-white mb-1">3) Host groups</div>
-                  <div className="text-gray-300">We match and book groups. You host and get paid fast.</div>
+                <li className="bg-gradient-to-r from-pulse-blue to-pulse-pink p-[1px] rounded-2xl">
+                  <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-blue to-pulse-pink flex items-center justify-center text-white">3</div>
+                      <div className="font-semibold text-white text-lg">Host groups</div>
+                    </div>
+                    <div className="text-gray-300 text-sm">We match and book groups. You host and get paid fast.</div>
+                  </div>
                 </li>
               </ol>
+              <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:how_it_works_apply' })} className="px-6 py-3 rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition inline-flex items-center justify-center gap-2">
+                  Apply Now
+                </a>
+                <a href="/contact" className="px-6 py-3 rounded-full border border-gray-600 text-white hover:bg-gray-800/50 transition inline-flex items-center justify-center gap-2">
+                  Contact Us
+                </a>
+              </div>
             </div>
           </div>
 
@@ -621,6 +720,11 @@ const Partnerships = () => {
                 <div className="font-semibold text-white mb-1">How soon can we start?</div>
                 <div className="text-gray-300">Typically 2–5 days after approval.</div>
               </div>
+            </div>
+            <div className="mt-8 text-center">
+              <a href="/faq" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
+                View full FAQ
+              </a>
             </div>
           </motion.div>
         </div>
@@ -763,7 +867,7 @@ const Partnerships = () => {
 
             <div className="text-center">
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+                <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:bottom_cta' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                   <span>Apply for Partnership</span>
                   <ArrowRight className="h-5 w-5" />
                 </a>
@@ -772,7 +876,7 @@ const Partnerships = () => {
                   <ArrowRight className="h-5 w-5" />
                 </a>
               </div>
-              <div className="mt-3 text-center text-xs text-gray-400">Prefer to talk? Email partners@usepulse.app</div>
+              <div className="mt-3 text-center text-xs text-gray-400">Prefer to talk? Email partners@pulsenow.app</div>
             </div>
           </motion.div>
         </div>

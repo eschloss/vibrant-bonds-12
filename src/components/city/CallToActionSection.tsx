@@ -7,6 +7,7 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "../mission/TimerDisplay";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSelector from "../LanguageSelector";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 interface CallToActionSectionProps {
   cityName: string;
@@ -56,7 +57,12 @@ const CallToActionSection = ({
         </div>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-          <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}>
+          <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+            onClick={(e) => {
+              const href = (e.currentTarget as HTMLAnchorElement).href;
+              trackTypeformRedirect({ href, cityName, code, source: 'city:cta_section' });
+            }}
+          >
             <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
               {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
               <ArrowRight size={18} />

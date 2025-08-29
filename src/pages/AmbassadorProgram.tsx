@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import { useRefParam } from "@/hooks/useRefParam";
+import { trackTypeformRedirect } from "@/lib/utils";
 
 const AmbassadorProgram = () => {
   const { addRefToUrl } = useRefParam();
@@ -16,11 +17,11 @@ const AmbassadorProgram = () => {
   const seoProps = {
     title: {
       en: "Ambassador Program | Earn While Making Impact | Pulse",
-      es: "Programa de Embajadores | Gana Mientras Haces Impacto | Pulse"
+      es: "Programa de Embajadores | Gana Haciendo Impacto | Pulse"
     },
     description: {
-      en: "Join the Pulse Ambassador Program and earn 5% commission while helping solve the loneliness epidemic. Community leaders, influencers, and connectors wanted.",
-      es: "Únete al Programa de Embajadores de Pulse y gana 5% de comisión mientras ayudas a resolver la epidemia de soledad. Buscamos líderes comunitarios, influencers y conectores."
+      en: "Join Pulse's Ambassador Program and earn 5% commission while helping solve loneliness. Community leaders and influencers wanted.",
+      es: "Únete al Programa de Embajadores de Pulse y gana 5% de comisión mientras ayudas a resolver la soledad. Líderes comunitarios e influencers buscados."
     },
     keywords: ["ambassador program", "commission", "loneliness epidemic", "community leaders", "referral program", "earn money"],
     type: "website"
@@ -78,7 +79,7 @@ const AmbassadorProgram = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+              <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:hero' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 <span>Apply to Join</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
@@ -501,7 +502,7 @@ const AmbassadorProgram = () => {
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex justify-center mt-10">
-            <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" className="rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300">
+            <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:midpage' })} className="rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300">
               Make Me a Top Ambassador
               <ArrowRight className="h-4 w-4" />
             </a>
@@ -629,7 +630,7 @@ const AmbassadorProgram = () => {
               Limited spots available in select cities.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
+              <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:bottom_cta' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 <span>Apply to Join</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
