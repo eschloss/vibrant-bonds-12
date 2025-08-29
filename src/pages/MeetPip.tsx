@@ -543,12 +543,9 @@ const MeetPip = () => {
                   </li>
                 </ul>
 
-                <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                <div className="mt-7">
                   <a href="/matchmaking" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
                     {t("meet_pip.repeat.cta_primary", "Meet your crew")}
-                  </a>
-                  <a href="/" className="inline-flex items-center justify-center rounded-full px-6 py-3 border border-gray-700 text-white hover:bg-gray-800/50 transition">
-                    {t("meet_pip.repeat.cta_secondary", "Browse ideas")}
                   </a>
                 </div>
               </motion.div>
