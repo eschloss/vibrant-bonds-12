@@ -51,6 +51,16 @@ export const shared = {
     "footer.careers": "Careers",
     "footer.meet_pip": "Meet Pip",
     
+    // Navbar translations
+    "navbar.home": "Home",
+    "navbar.how_it_works": "How it works",
+    "navbar.partnerships": "Partnerships",
+    "navbar.meet_pip": "Meet Pip",
+    "navbar.about": "About Us",
+    "navbar.contact": "Contact",
+    "navbar.see_more_cities": "See More Cities",
+    "navbar.meet_your_crew": "Meet Your Crew",
+    
     // Partnerships page - Updated
     "partnerships.title": "Venue Partnerships | Drive Revenue & Build Community | Pulse",
     "partnerships.description": "Partner with Pulse to solve loneliness, boost retention, and drive new customers to your venue. Create exclusive group matches and get featured in our app.",
@@ -58,6 +68,7 @@ export const shared = {
     "partnerships.hero.title2": "Friendship Factory",
     "partnerships.hero.description": "Get more prepaid group bookings and loyal regulars with zero upfront cost. Pulse brings groups of compatible locals to your venue.",
     "partnerships.hero.cta": "Apply for Partnership",
+    "partnerships.hero.earnings": "See Earnings Estimate",
     "partnerships.hero.what_you_do": "What you do",
     "partnerships.hero.what_you_do_desc": "Approve a simple group package and host prepaid groups.",
     "partnerships.hero.what_we_do": "What we do",
@@ -183,7 +194,8 @@ export const shared = {
     "ambassador.hero.title1": "Turn Your",
     "ambassador.hero.title2": "Connections Into",
     "ambassador.hero.title3": "Commission",
-    "ambassador.hero.description": "Join our Ambassador Program and earn 5% commission while helping solve the loneliness epidemic. Community leaders, influencers, and connectors wanted.",
+    "ambassador.hero.description": "Join our Ambassador Program and earn ",
+    "ambassador.hero.description_2": " while helping solve the loneliness epidemic. Community leaders, influencers, and connectors wanted.",
     "ambassador.hero.cta1": "Apply to Join",
     "ambassador.hero.cta2": "See Earnings",
     "ambassador.hero.what_you_do": "What you do",
@@ -464,7 +476,9 @@ export const shared = {
     "careers.apply.title": "Ready to Join Us?",
     "careers.apply.description": "Don't see the perfect role? We're always looking for exceptional people. Send us your resume and tell us how you'd like to contribute.",
     "careers.apply.cta": "Apply Now",
+    "careers.apply.cta1": "Apply Now",
     "careers.apply.contact": "Get in Touch",
+    "careers.apply.cta2": "Get in Touch",
 
     // Meet Pip Promo module
     "meet_pippromo.badge": "Built to spark IRL connections",
@@ -539,6 +553,16 @@ export const shared = {
     "footer.careers": "Carreras",
     "footer.meet_pip": "Conoce a Pip",
 
+    // Navbar translations - Spanish
+    "navbar.home": "Inicio",
+    "navbar.how_it_works": "Cómo funciona",
+    "navbar.partnerships": "Asociaciones",
+    "navbar.meet_pip": "Conoce a Pip",
+    "navbar.about": "Acerca de Nosotros",
+    "navbar.contact": "Contacto",
+    "navbar.see_more_cities": "Ver Más Ciudades",
+    "navbar.meet_your_crew": "Conoce a Tu Grupo",
+
     // Partnerships page - Updated Spanish
     "partnerships.title": "Asociaciones de Venues | Impulsa Ingresos y Construye Comunidad | Pulse",
     "partnerships.description": "Asóciate con Pulse para resolver la soledad, aumentar la retención e impulsar nuevos clientes a tu venue. Crea matches grupales exclusivos y destácate en nuestra app.",
@@ -546,6 +570,7 @@ export const shared = {
     "partnerships.hero.title2": "Fábrica de Amistades",
     "partnerships.hero.description": "Obtén más reservas grupales prepagadas y clientes regulares leales con costo inicial cero. Pulse trae grupos de locales compatibles a tu venue.",
     "partnerships.hero.cta": "Solicitar Asociación",
+    "partnerships.hero.earnings": "Ver Estimación de Ganancias",
     "partnerships.hero.what_you_do": "Lo que haces",
     "partnerships.hero.what_you_do_desc": "Aprueba un paquete grupal simple y hospeda grupos prepagados.",
     "partnerships.hero.what_we_do": "Lo que hacemos",
@@ -796,7 +821,8 @@ export const shared = {
     "ambassador.hero.title1": "Convierte Tus",
     "ambassador.hero.title2": "Conexiones En",
     "ambassador.hero.title3": "Comisión",
-    "ambassador.hero.description": "Únete a nuestro Programa de Embajadores y gana 5% de comisión mientras ayudas a resolver la epidemia de soledad. Buscamos líderes comunitarios, influencers y conectores.",
+    "ambassador.hero.description": "Únete a nuestro Programa de Embajadores y gana ",
+    "ambassador.hero.description_2": " mientras ayudas a resolver la epidemia de soledad. Buscamos líderes comunitarios, influencers y conectores.",
     "ambassador.hero.cta1": "Solicitar Unirse",
     "ambassador.hero.cta2": "Ver Ganancias",
     "ambassador.hero.what_you_do": "Lo que haces",
@@ -952,7 +978,9 @@ export const shared = {
     "careers.apply.title": "¿Listo para Unirte a Nosotros?",
     "careers.apply.description": "¿No ves el rol perfecto? Siempre estamos buscando personas excepcionales. Envíanos tu currículum y dinos cómo te gustaría contribuir.",
     "careers.apply.cta": "Aplicar Ahora",
+    "careers.apply.cta1": "Aplicar Ahora",
     "careers.apply.contact": "Ponerse en Contacto",
+    "careers.apply.cta2": "Ponerse en Contacto",
 
     // Meet Pip Promo module
     "meet_pippromo.badge": "Construido para generar conexiones IRL",

@@ -28,6 +28,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import EarningCalculator from "@/components/EarningCalculator";
 import { trackTypeformRedirect } from "@/lib/utils";
+import Text from "@/components/Text";
 
 const Partnerships = () => {
   const { t } = useTranslation();
@@ -101,23 +102,23 @@ const Partnerships = () => {
         <div className="container mx-auto px-4 relative z-10 py-[85px]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center max-w-5xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Turn Your Venue Into a
+              <Text id="partnerships.hero.title1">Turn Your Venue Into a</Text>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Friendship Factory
+                <Text id="partnerships.hero.title2">Friendship Factory</Text>
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Get more prepaid group bookings and loyal regulars with zero upfront cost. Pulse brings groups of compatible locals to your venue.
+              <Text id="partnerships.hero.description">Get more prepaid group bookings and loyal regulars with zero upfront cost. Pulse brings groups of compatible locals to your venue.</Text>
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
               <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:hero' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <span>Apply for Partnership</span>
+                <span><Text id="partnerships.hero.cta">Apply for Partnership</Text></span>
                 <ArrowRight className="h-5 w-5" />
               </a>
               <a href="#calculator" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>See Earnings Potential</span>
+                <span><Text id="partnerships.hero.earnings">See Earnings Estimate</Text></span>
                 <ArrowRight className="h-5 w-5" />
               </a>
             </div>
@@ -125,23 +126,23 @@ const Partnerships = () => {
             {/* At a glance */}
             <div className="max-w-5xl mx-auto mt-2 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">What you do</div>
-                <div className="text-gray-300">Approve a simple group package and host prepaid groups.</div>
+                <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.what_you_do">What you do</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.what_you_do_desc">Approve a simple group package and host prepaid groups.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">What we do</div>
-                <div className="text-gray-300">Match 10 locals, handle chat, bookings, and payments.</div>
+                <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.what_we_do">What we do</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.what_we_do_desc">Match 10 locals, handle chat, bookings, and payments.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Cost</div>
-                <div className="text-gray-300">Pay‑as‑you‑go fee 25%. No subscription. No minimums.</div>
+                <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.cost">Cost</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.cost_desc">Pay‑as‑you‑go fee 25%. No subscription. No minimums.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Time to start</div>
-                <div className="text-gray-300">2–5 days. We set it up with you.</div>
+                <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.time">Time to start</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.time_desc">2–5 days. We set it up with you.</Text></div>
               </div>
             </div>
-            <div className="text-center mt-3 text-xs text-gray-400">Pay‑as‑you‑go fee: 25%. You keep 75%.</div>
+            <div className="text-center mt-3 text-xs text-gray-400"><Text id="partnerships.hero.fee_note">Pay‑as‑you‑go fee: 25%. You keep 75%.</Text></div>
 
             {/* Quick Stats removed per design simplification */}
           </motion.div>
@@ -158,14 +159,12 @@ const Partnerships = () => {
           {/* Headline */}
           <div className="text-center max-w-5xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-purple-900/30 text-white border border-purple-700/40">
-              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> How Pulse works
+              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> <Text id="partnerships.how_it_works.badge">How Pulse works</Text>
             </div>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              10 like‑minded locals on a
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day challenge </span>
-              to meet in person
+              <Text id="partnerships.how_it_works.title">10 like‑minded locals on a 7‑day challenge to meet in person</Text>
             </h2>
-            <p className="text-gray-300 mt-3 text-sm md:text-base">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</p>
+            <p className="text-gray-300 mt-3 text-sm md:text-base"><Text id="partnerships.how_it_works.subtitle">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</Text></p>
           </div>
 
           <div className="max-w-6xl mx-auto">
@@ -177,8 +176,8 @@ const Partnerships = () => {
                     <Users2 className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">We match 10 locals by vibe</div>
-                    <div className="text-gray-400 text-sm md:text-base">Grouped in a shared chat in the same city</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step1">We match 10 locals by vibe</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step1_desc">Grouped in a shared chat in the same city</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -186,8 +185,8 @@ const Partnerships = () => {
                     <MessageSquare className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks the chat and suggests plans</div>
-                    <div className="text-gray-400 text-sm md:text-base">Icebreakers + plan ideas tailored to the group</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step2">Pip sparks the chat and suggests plans</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step2_desc">Icebreakers + plan ideas tailored to the group</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -195,8 +194,8 @@ const Partnerships = () => {
                     <Calendar className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">They meet within 7 days</div>
-                    <div className="text-gray-400 text-sm md:text-base">They book a simple, prepaid experience at a venue</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step3">They meet within 7 days</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step3_desc">They book a simple, prepaid experience at a venue</Text></div>
                   </div>
                 </div>
               </div>
@@ -242,48 +241,43 @@ const Partnerships = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Perfect Partners
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                We're Looking For
-              </span>
+              <Text id="partnerships.venues.title">Perfect Partners We're Looking For</Text>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We partner with venues that create social experiences. Your customers already share a passion for your services - 
-              we help them find friends who love the same things.
+              <Text id="partnerships.venues.description">We partner with venues that create social experiences. Your customers already share a passion for your services - we help them find friends who love the same things.</Text>
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
             {[
               {
-                name: "Bowling Alley",
-                description: "Perfect for casual meetups and team building.",
+                name: t("partnerships.venues.bowling", "Bowling Alley"),
+                description: t("partnerships.venues.bowling_desc", "Perfect for casual meetups and team building."),
                 category: "Sports & Recreation"
               },
               {
-                name: "Cooking Classes",
-                description: "Interactive culinary experiences where people learn and share.",
+                name: t("partnerships.venues.cooking", "Cooking Classes"),
+                description: t("partnerships.venues.cooking_desc", "Interactive culinary experiences where people learn and share."),
                 category: "Food & Culinary"
               },
               {
-                name: "Laser Tag",
-                description: "High-energy group activities perfect for team building.",
+                name: t("partnerships.venues.laser_tag", "Laser Tag"),
+                description: t("partnerships.venues.laser_tag_desc", "High-energy group activities perfect for team building."),
                 category: "Entertainment"
               },
               {
-                name: "Escape Rooms",
-                description: "Puzzle-solving experiences that require teamwork.",
+                name: t("partnerships.venues.escape_rooms", "Escape Rooms"),
+                description: t("partnerships.venues.escape_rooms_desc", "Puzzle-solving experiences that require teamwork."),
                 category: "Entertainment"
               },
               {
-                name: "Board Game Cafe",
-                description: "Social gaming spaces where people bond over strategy and laughter.",
+                name: t("partnerships.venues.board_games", "Board Game Cafe"),
+                description: t("partnerships.venues.board_games_desc", "Social gaming spaces where people bond over strategy and laughter."),
                 category: "Entertainment"
               },
               {
-                name: "Concept Bars",
-                description: "Themed bars that create conversation starters and memorable moments.",
+                name: t("partnerships.venues.concept_bars", "Concept Bars"),
+                description: t("partnerships.venues.concept_bars_desc", "Themed bars that create conversation starters and memorable moments."),
                 category: "Food & Beverage"
               }
             ].map((venue, index) => (
@@ -315,13 +309,12 @@ const Partnerships = () => {
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }} className="text-center mt-16">
             <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Don't See Your Venue Type?</h3>
+              <h3 className="text-2xl font-bold mb-4"><Text id="partnerships.venues.apply_anyway_title">Don't See Your Venue Type?</Text></h3>
               <p className="text-gray-300 mb-6">
-                We partner with any venue that creates social experiences and brings people together. 
-                If your venue helps people connect, we want to work with you.
+                <Text id="partnerships.venues.apply_anyway_desc">We partner with any venue that creates social experiences and brings people together. If your venue helps people connect, we want to work with you.</Text>
               </p>
               <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:venue_types_apply_anyway' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
-                <span>Apply Anyway</span>
+                <span><Text id="partnerships.venues.apply_anyway_cta">Apply Anyway</Text></span>
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
@@ -339,9 +332,9 @@ const Partnerships = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Two Ways to Partner</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4"><Text id="partnerships.programs.title">Two Ways to Partner</Text></h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Choose between city‑wide featuring or your own recurring community built around your core experience.
+              <Text id="partnerships.programs.description">Choose between city‑wide featuring or your own recurring community built around your core experience.</Text>
             </p>
           </motion.div>
 
@@ -354,28 +347,30 @@ const Partnerships = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center text-white text-xl md:text-2xl font-bold">1</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">Get Featured in the City</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.featured.title">Get Featured in the City</Text></h3>
                   </div>
                   <p className="text-gray-300 mb-2">
-                    Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay.
+                    <Text id="partnerships.programs.featured.description">Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay.</Text>
                   </p>
-                  <div className="text-xs text-gray-400 mb-6">Example: $30 × 10 people = $300 booking → You receive $225.</div>
+                  <div className="text-xs text-gray-400 mb-6"><Text id="partnerships.programs.featured.example">Example: $30 × 10 people = $300 booking → You receive $225.</Text></div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Featured as a plan idea promoted to relevant groups citywide.</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit1">Featured as a plan idea promoted to relevant groups citywide.</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Groups opt in; no commitments or coupons required</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit2">Groups opt in; no commitments or coupons required</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Prepaid, packaged bookings handled by Pulse — you just host</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit3">Prepaid, packaged bookings handled by Pulse — you just host</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">You keep <span className="text-white font-semibold">75%</span> of the booking (Pulse platform fee: 25%)</span>
+                      <span className="text-gray-300">
+                        <Text id="partnerships.programs.featured.benefit4">You keep 75% of the booking (Pulse platform fee: 25%)</Text>
+                      </span>
                     </li>
                   </ul>
 
@@ -384,15 +379,15 @@ const Partnerships = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$20–40</div>
-                        <div className="text-xs text-pulse-pink">Casual meetups</div>
+                        <div className="text-xs text-pulse-pink"><Text id="partnerships.programs.featured.pricing_casual">Casual</Text></div>
                       </div>
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$50–100</div>
-                        <div className="text-xs text-pulse-pink">Premium nights</div>
+                        <div className="text-xs text-pulse-pink"><Text id="partnerships.programs.featured.pricing_premium">Premium</Text></div>
                       </div>
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$200+</div>
-                        <div className="text-xs text-pulse-pink">Luxury events</div>
+                        <div className="text-xs text-pulse-pink"><Text id="partnerships.programs.featured.pricing_luxury">Luxury</Text></div>
                       </div>
                     </div>
                   </div>
@@ -400,11 +395,11 @@ const Partnerships = () => {
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
                     <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:featured_cta' })} className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
-                      Apply Now
+                      <Text id="partnerships.programs.featured.cta">Apply Now</Text>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a href="#calculator" className="w-full md:w-auto px-6 py-3 text-base rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2">
-                      See Earnings Estimate
+                      <Text id="partnerships.programs.featured.earnings">See Earnings Estimate</Text>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
@@ -419,46 +414,46 @@ const Partnerships = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl md:text-2xl font-bold">2</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">Your Own Recurring Community</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.recurring.title">Your Own Recurring Community</Text></h3>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    We create a branded group for your core activity on Pulse so locals meet new friends at your venue. We continuously match many small groups and route them to your venue weekly or monthly, building loyal regulars while attracting new customers.
+                    <Text id="partnerships.programs.recurring.description">We create a branded group for your core activity on Pulse so locals meet new friends at your venue. We continuously match many small groups and route them to your venue weekly or monthly, building loyal regulars while attracting new customers.</Text>
                   </p>
                   {/* Example callouts moved above bullets and styled larger/bolder */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎳</div>
-                      <div className="text-sm md:text-base font-semibold text-white">Meet Bowlers in Boston</div>
+                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example1">Meet Fellow Bowlers in Boston</Text></div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🏋️</div>
-                      <div className="text-sm md:text-base font-semibold text-white">Find Gym Buddies in Barcelona</div>
+                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example2">Find Gym Buddies in Barcelona</Text></div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎲</div>
-                      <div className="text-sm md:text-base font-semibold text-white">Meet Local Gamers in London</div>
+                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example3">Meet Local Gamers in London</Text></div>
                     </div>
                   </div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Dedicated, branded group in the Pulse app for your activity</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit1">Dedicated, branded group in the Pulse app for your activity</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Pulse matches compatible people and fills your sessions</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit2">Pulse matches compatible people and fills your sessions</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Recurring events to keep customers returning</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit3">Recurring events to keep customers returning</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Co‑promotion (venue + Pulse) and citywide featuring included</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit4">Co‑promotion (venue + Pulse) and citywide featuring included</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">Scales to dozens or hundreds of micro‑groups as demand grows</span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit5">Scales to dozens or hundreds of micro‑groups as demand grows</Text></span>
                     </li>
                   </ul>
 
@@ -467,11 +462,11 @@ const Partnerships = () => {
                   {/* CTAs */}
                   <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
                     <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:recurring_cta' })} className="w-full md:w-auto px-6 py-3 text-base rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300 inline-flex items-center justify-center gap-2">
-                      Apply Now
+                      <Text id="partnerships.programs.recurring.cta">Apply Now</Text>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a href="#calculator" className="w-full md:w-auto px-6 py-3 text-base rounded-full border border-gray-600 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2">
-                      See Earnings Estimate
+                      <Text id="partnerships.programs.recurring.earnings">See Earnings Estimate</Text>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
@@ -484,21 +479,31 @@ const Partnerships = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-10">
             {[
               {
-                title: "Meet Fellow Bowlers in Boston",
-                venue: "Boston Bowlers",
-                poweredBy: "New England Bowling Alley",
-                description: "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley.",
+                title: t("partnerships.examples.boston.title", "Meet Fellow Bowlers in Boston"),
+                venue: t("partnerships.examples.boston.venue", "Boston Bowlers"),
+                poweredBy: t("partnerships.examples.boston.powered_by", "New England Bowling Alley"),
+                description: t("partnerships.examples.boston.description", "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley."),
                 emoji: "🎳",
-                features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
+                features: [
+                  t("partnerships.examples.boston.features.0", "Skill-based matching"),
+                  t("partnerships.examples.boston.features.1", "Weekly league nights"),
+                  t("partnerships.examples.boston.features.2", "Tournament events"),
+                  t("partnerships.examples.boston.features.3", "Social mixers")
+                ],
                 color: "from-blue-500 to-cyan-400"
               },
               {
-                title: "Meet Gym Buddies in Barcelona",
-                venue: "Barcelona Gym Buddies",
-                poweredBy: "BCN Gym Group",
-                description: "Pulse‑matched workout partners. Recurring sessions hosted at your gym.",
+                title: t("partnerships.examples.barcelona.title", "Meet Gym Buddies in Barcelona"),
+                venue: t("partnerships.examples.barcelona.venue", "Barcelona Gym Buddies"),
+                poweredBy: t("partnerships.examples.barcelona.powered_by", "BCN Gym Group"),
+                description: t("partnerships.examples.barcelona.description", "Pulse‑matched workout partners. Recurring sessions hosted at your gym."),
                 emoji: "🏋️",
-                features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
+                features: [
+                  t("partnerships.examples.barcelona.features.0", "Goal-based matching"),
+                  t("partnerships.examples.barcelona.features.1", "Workout partners"),
+                  t("partnerships.examples.barcelona.features.2", "Nutrition sharing"),
+                  t("partnerships.examples.barcelona.features.3", "Fitness challenges")
+                ],
                 color: "from-purple-500 to-pink-500"
               }
             ].map((example, index) => (
@@ -542,9 +547,9 @@ const Partnerships = () => {
                 <div className="text-white font-semibold">Featured in the City</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Best for:</span> Occasional group bookings</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">You get:</span> Citywide discovery + prepaid groups</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Fee:</span> 25% per booking</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Best for:</span> <Text id="partnerships.programs.comparison.featured_best">Occasional group bookings</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">You get:</span> <Text id="partnerships.programs.comparison.featured_you_get">Citywide discovery + prepaid groups</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Fee:</span> <Text id="partnerships.programs.comparison.featured_fee">25% per booking</Text></span></li>
               </ul>
             </div>
 
@@ -555,9 +560,9 @@ const Partnerships = () => {
                 <div className="text-white font-semibold">Your Recurring Community</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Best for:</span> Regular sessions (weekly/monthly)</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">You get:</span> Ongoing groups, co‑promotion</span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Fee:</span> 25% per booking</span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Best for:</span> <Text id="partnerships.programs.comparison.recurring_best">Regular sessions (weekly/monthly)</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">You get:</span> <Text id="partnerships.programs.comparison.recurring_you_get">Ongoing groups, co‑promotion</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Fee:</span> <Text id="partnerships.programs.comparison.recurring_fee">25% per booking</Text></span></li>
               </ul>
             </div>
           </div>
@@ -567,7 +572,7 @@ const Partnerships = () => {
             <div className="rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg p-6 md:p-8 shadow-lg shadow-purple-500/10">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40">
-                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" /> How it works for venues
+                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" /> <Text id="partnerships.how_it_works_venues.title">How it works for venues</Text>
                 </div>
               </div>
               <ol className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -575,36 +580,36 @@ const Partnerships = () => {
                   <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-pink to-accent flex items-center justify-center text-white">1</div>
-                      <div className="font-semibold text-white text-lg">Apply</div>
+                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step1">Apply</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm">Tell us your activity and preferred times.</div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step1_desc">Tell us your activity and preferred times.</Text></div>
                   </div>
                 </li>
                 <li className="bg-gradient-to-r from-accent to-pulse-blue p-[1px] rounded-2xl">
                   <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-pulse-blue flex items-center justify-center text-white">2</div>
-                      <div className="font-semibold text-white text-lg">Set your package</div>
+                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step2">Set your package</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm">We craft a simple, prepaid plan (e.g., $25 per person for 10).</div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step2_desc">We craft a simple, prepaid plan (e.g., $25 per person for 10).</Text></div>
                   </div>
                 </li>
                 <li className="bg-gradient-to-r from-pulse-blue to-pulse-pink p-[1px] rounded-2xl">
                   <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-blue to-pulse-pink flex items-center justify-center text-white">3</div>
-                      <div className="font-semibold text-white text-lg">Host groups</div>
+                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step3">Host groups</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm">We match and book groups. You host and get paid fast.</div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step3_desc">We match and book groups. You host and get paid fast.</Text></div>
                   </div>
                 </li>
               </ol>
               <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:how_it_works_apply' })} className="px-6 py-3 rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition inline-flex items-center justify-center gap-2">
-                  Apply Now
+                  <Text id="partnerships.how_it_works_venues.cta">Apply Now</Text>
                 </a>
                 <a href="/contact" className="px-6 py-3 rounded-full border border-gray-600 text-white hover:bg-gray-800/50 transition inline-flex items-center justify-center gap-2">
-                  Contact Us
+                  <Text id="partnerships.how_it_works_venues.contact">Contact Us</Text>
                 </a>
               </div>
             </div>
@@ -614,7 +619,7 @@ const Partnerships = () => {
           <div className="max-w-6xl mx-auto mt-6">
             <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
               <span className="text-gray-400">Note:</span>
-              <span>Recurring Community partners also receive full city-wide featuring of their venue and events.</span>
+              <span><Text id="partnerships.how_it_works_venues.note">Recurring Community partners also receive full city-wide featuring of their venue and events.</Text></span>
             </div>
           </div>
         </div>
@@ -624,8 +629,8 @@ const Partnerships = () => {
       <section className="py-12 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Your Recurring Community</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">We match small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6"><Text id="partnerships.examples.title">Your Recurring Community</Text></h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto"><Text id="partnerships.examples.description">We match small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.</Text></p>
           </motion.div>
 
 
@@ -694,36 +699,36 @@ const Partnerships = () => {
       <section className="py-12 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6"><Text id="partnerships.faq.title">Frequently Asked Questions</Text></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">Who pays and when do we get paid?</div>
-                <div className="text-gray-300">Groups prepay in Pulse. You receive 75% shortly after the event.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.who_pays">Who pays and when do we get paid?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.who_pays_answer">Groups prepay in Pulse. You receive 75% shortly after the event.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">Do we need discounts or coupons?</div>
-                <div className="text-gray-300">No. Set a fair package price. No coupons needed.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.discounts">Do we need discounts or coupons?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.discounts_answer">No. Set a fair package price. No coupons needed.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">How much staff time is required?</div>
-                <div className="text-gray-300">Treat it like any small group booking (≈10 people). We handle the rest.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.staff_time">How much staff time is required?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.staff_time_answer">Treat it like any small group booking (≈10 people). We handle the rest.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1">What about cancellations and no‑shows?</div>
                 <div className="text-gray-300">We set clear policies and manage communications so you’re protected.</div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">Any subscription or long‑term contract?</div>
-                <div className="text-gray-300">No. 25% per booking. No subscription. Cancel anytime.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.subscription">Any subscription or long‑term contract?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.subscription_answer">No. 25% per booking. No subscription. Cancel anytime.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">How soon can we start?</div>
-                <div className="text-gray-300">Typically 2–5 days after approval.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.how_soon">How soon can we start?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.how_soon_answer">Typically 2–5 days after approval.</Text></div>
               </div>
             </div>
             <div className="mt-8 text-center">
               <a href="/faq" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
-                View full FAQ
+                <Text id="partnerships.faq.view_full">View full FAQ</Text>
               </a>
             </div>
           </motion.div>
@@ -833,34 +838,30 @@ const Partnerships = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-5xl mx-auto">
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Turn Customers Into Friends
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                  Right at Your Venue
-                </span>
+                <Text id="partnerships.cta.title">Turn Customers Into Friends Right at Your Venue</Text>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Loneliness is everywhere — but friendship is the solution. Join the Pulse Partner Program to turn social seekers into loyal regulars.
+                <Text id="partnerships.cta.description">Loneliness is everywhere — but friendship is the solution. Join the Pulse Partner Program to turn social seekers into loyal regulars.</Text>
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
               <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
                 <div className="text-3xl mb-2">😔</div>
-                <h3 className="text-lg font-semibold mb-3">Loneliness Is Everywhere</h3>
+                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.problem_title">Loneliness Is Everywhere</Text></h3>
                 <ul className="space-y-2 text-gray-300 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>21M Americans have zero friends</span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>1/3 unsatisfied with their circle</span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span>Impacts mental health and spend</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point1">21M Americans have zero friends</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point2">1/3 unsatisfied with their circle</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point3">Impacts mental health and spend</Text></span></li>
                 </ul>
               </div>
               <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
                 <div className="text-3xl mb-2">🎉</div>
-                <h3 className="text-lg font-semibold mb-3">The Friendship Solution</h3>
+                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.solution_title">The Friendship Solution</Text></h3>
                 <ul className="space-y-2 text-gray-300 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Friends visit 3× more often</span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Longer stays and higher spend</span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span>Build a loyal community</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point1">Friends visit 3× more often</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point2">Longer stays and higher spend</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point3">Build a loyal community</Text></span></li>
                 </ul>
               </div>
             </div>
@@ -868,15 +869,15 @@ const Partnerships = () => {
             <div className="text-center">
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:bottom_cta' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                  <span>Apply for Partnership</span>
+                  <span><Text id="partnerships.cta.cta1">Apply for Partnership</Text></span>
                   <ArrowRight className="h-5 w-5" />
                 </a>
                 <a href="#calculator" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                  <span>See Earnings Estimate</span>
+                  <span><Text id="partnerships.cta.cta2">See Earnings Estimate</Text></span>
                   <ArrowRight className="h-5 w-5" />
                 </a>
               </div>
-              <div className="mt-3 text-center text-xs text-gray-400">Prefer to talk? Email partners@pulsenow.app</div>
+              <div className="mt-3 text-center text-xs text-gray-400"><Text id="partnerships.cta.email_note">Prefer to talk? Email partners@pulsenow.app</Text></div>
             </div>
           </motion.div>
         </div>

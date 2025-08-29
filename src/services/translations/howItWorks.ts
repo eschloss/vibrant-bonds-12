@@ -4,6 +4,7 @@ export const howItWorks = {
     // How it works section
     "how_it_works.subtitle": "How It Works",
     "how_it_works.title": "Making Friends Shouldn't be Hard",
+    "how_it_works.headline": "10 new friends. 7 days to meet in real life.",
     "how_it_works.cta": "Get Matched Now",
     
     // Steps for main page
@@ -12,7 +13,7 @@ export const howItWorks = {
     "steps.break_ice.title": "Break the Ice",
     "steps.break_ice.description": "Start the fun early with conversation starters your crew will love.",
   "steps.meet_up.title": "Just Show Up",
-    "steps.meet_up.description": "We curate fun local experiences that fit your crew’s vibe and schedule",
+    "steps.meet_up.description": "We curate fun local experiences that fit your crew's vibe and schedule",
     "steps.grow_friendships.title": "Keep It Going",
     "steps.grow_friendships.description": "Keep meeting while we drop in with fresh games and hangout ideas.",
   },
@@ -20,6 +21,7 @@ export const howItWorks = {
     // How it works section
     "how_it_works.subtitle": "Cómo Funciona",
     "how_it_works.title": "Hacer Amigos No Debería Ser Difícil",
+    "how_it_works.headline": "10 nuevos amigos. 7 días para conocerse en la vida real.",
     "how_it_works.cta": "Encuentra Tu Grupo Ahora",
     
     // Steps for main page

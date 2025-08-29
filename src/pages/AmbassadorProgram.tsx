@@ -9,6 +9,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import { useRefParam } from "@/hooks/useRefParam";
 import { trackTypeformRedirect } from "@/lib/utils";
+import Text from "@/components/Text";
 
 const AmbassadorProgram = () => {
   const { addRefToUrl } = useRefParam();
@@ -56,35 +57,34 @@ const AmbassadorProgram = () => {
             <div className="mb-8">
               <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }} className="inline-block">
                 <div className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6">
-                  🚀 Earn While Making Impact
+                  🚀 <Text id="ambassador.hero.badge">Earn While Making Impact</Text>
                 </div>
               </motion.div>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Turn Your
+              <Text id="ambassador.hero.title1">Turn Your</Text>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Connections Into
+                <Text id="ambassador.hero.title2">Connections Into</Text>
               </span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-blue via-accent to-pulse-pink">
-                Commission
+                <Text id="ambassador.hero.title3">Commission</Text>
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
-              Join our Ambassador Program and earn <span className="text-pulse-pink font-bold">5% commission</span> while helping solve the loneliness epidemic. 
-              Community leaders, influencers, and connectors wanted.
+              <Text id="ambassador.hero.description">Join our Ambassador Program and earn </Text><span className="text-pulse-pink font-bold">5% commission</span><Text id="ambassador.hero.description_2"> while helping solve the loneliness epidemic. Community leaders, influencers, and connectors wanted.</Text>
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
               <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:hero' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <span>Apply to Join</span>
+                <span><Text id="ambassador.hero.cta1">Apply to Join</Text></span>
                 <ArrowRight className="h-5 w-5" />
               </a>
               <a href="#earnings" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>See Earnings</span>
+                <span><Text id="ambassador.hero.cta2">See Earnings</Text></span>
                 <DollarSign className="h-5 w-5" />
               </a>
             </div>
@@ -92,19 +92,19 @@ const AmbassadorProgram = () => {
             {/* At a glance */}
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 text-sm mt-2">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">What you do</div>
-                <div className="text-gray-300">Promote Pulse however you like. Refer users and venues. Earn commission.</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.hero.what_you_do">What you do</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.hero.what_you_do_desc">Promote Pulse however you like. Refer users and venues. Earn commission.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Earn</div>
-                <div className="text-gray-300">5% of booking revenue for 12 months per referral</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.hero.earn">Earn</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.hero.earn_desc">5% of booking revenue for 12 months per referral</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Tools</div>
-                <div className="text-gray-300">Personal link, assets, 1:1 support</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.hero.tools">Tools</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.hero.tools_desc">Personal link, assets, 1:1 support</Text></div>
               </div>
             </div>
-            <div className="text-center mt-2 text-xs text-gray-400">No time commitment — it’s entirely up to you.</div>
+            <div className="text-center mt-2 text-xs text-gray-400"><Text id="ambassador.hero.no_commitment">No time commitment — it’s entirely up to you.</Text></div>
 
             {/* Quick Stats removed per design simplification */}
           </motion.div>
@@ -121,14 +121,12 @@ const AmbassadorProgram = () => {
           {/* Headline */}
           <div className="text-center max-w-5xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-purple-900/30 text-white border border-purple-700/40">
-              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> How Pulse works
+              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> <Text id="ambassador.how_it_works.badge">How Pulse works</Text>
             </div>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              10 like‑minded locals on a
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> 7‑day challenge </span>
-              to meet in person
+              <Text id="ambassador.how_it_works.title">10 like‑minded locals on a 7‑day challenge to meet in person</Text>
             </h2>
-            <p className="text-gray-300 mt-3 text-sm md:text-base">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</p>
+            <p className="text-gray-300 mt-3 text-sm md:text-base"><Text id="ambassador.how_it_works.subtitle">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</Text></p>
           </div>
 
           <div className="max-w-6xl mx-auto">
@@ -140,8 +138,8 @@ const AmbassadorProgram = () => {
                     <Users2 className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">We match 10 locals by vibe</div>
-                    <div className="text-gray-400 text-sm md:text-base">Grouped in a shared chat in the same city</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="ambassador.how_it_works.step1">We match 10 locals by vibe</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="ambassador.how_it_works.step1_desc">Grouped in a shared chat in the same city</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -149,8 +147,8 @@ const AmbassadorProgram = () => {
                     <MessageSquare className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">Pip sparks the chat and suggests plans</div>
-                    <div className="text-gray-400 text-sm md:text-base">Icebreakers + plan ideas tailored to the group</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="ambassador.how_it_works.step2">Pip sparks the chat and suggests plans</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="ambassador.how_it_works.step2_desc">Icebreakers + plan ideas tailored to the group</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -158,8 +156,8 @@ const AmbassadorProgram = () => {
                     <Calendar className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold">They meet within 7 days</div>
-                    <div className="text-gray-400 text-sm md:text-base">They book a simple, prepaid experience at a venue</div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="ambassador.how_it_works.step3">They meet within 7 days</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="ambassador.how_it_works.step3_desc">They book a simple, prepaid experience at a venue</Text></div>
                   </div>
                 </div>
               </div>
@@ -192,7 +190,7 @@ const AmbassadorProgram = () => {
             {/* CTA */}
             <div className="mt-6 text-center">
               <a href="/meet-pip" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
-                Learn more about Pip
+                <Text id="ambassador.how_it_works.cta">Learn more about Pip</Text>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </div>
@@ -205,23 +203,23 @@ const AmbassadorProgram = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Who We're Looking For
+              <Text id="ambassador.profiles.title">Who We're Looking For</Text>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Ambassador Profiles</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"><Text id="ambassador.profiles.title_highlight">Ambassador Profiles</Text></span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Connectors, creators, and doers who help people find their circle.
+              <Text id="ambassador.profiles.description">Connectors, creators, and doers who help people find their circle.</Text>
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
             {[
-              { name: "Community Leaders", emoji: "👥", description: "Run clubs and bring people together", tag: "Organizers" },
-              { name: "Influencers & Creators", emoji: "📣", description: "Spark conversations with content", tag: "Creators" },
-              { name: "Network Connectors", emoji: "🤝", description: "Natural connectors with wide circles", tag: "Connectors" },
-              { name: "Business Owners", emoji: "🏢", description: "Venue owners & activity providers", tag: "Partners" },
-              { name: "Passionate Advocates", emoji: "💖", description: "Care deeply about community", tag: "Advocates" },
-              { name: "Students & Young Pros", emoji: "🎓", description: "In transition, eager to build circles", tag: "Emerging" }
+              { name: t("ambassador.profiles.leaders", "Community Leaders"), emoji: "👥", description: t("ambassador.profiles.leaders_desc", "Run clubs and bring people together"), tag: t("ambassador.profiles.leaders_tag", "Organizers") },
+              { name: t("ambassador.profiles.influencers", "Influencers & Creators"), emoji: "📣", description: t("ambassador.profiles.influencers_desc", "Spark conversations with content"), tag: t("ambassador.profiles.influencers_tag", "Creators") },
+              { name: t("ambassador.profiles.connectors", "Network Connectors"), emoji: "🤝", description: t("ambassador.profiles.connectors_desc", "Natural connectors with wide circles"), tag: t("ambassador.profiles.connectors_tag", "Connectors") },
+              { name: t("ambassador.profiles.business", "Business Owners"), emoji: "🏢", description: t("ambassador.profiles.business_desc", "Venue owners & activity providers"), tag: t("ambassador.profiles.business_tag", "Partners") },
+              { name: t("ambassador.profiles.advocates", "Passionate Advocates"), emoji: "💖", description: t("ambassador.profiles.advocates_desc", "Care deeply about community"), tag: t("ambassador.profiles.advocates_tag", "Advocates") },
+              { name: t("ambassador.profiles.students", "Students & Young Pros"), emoji: "🎓", description: t("ambassador.profiles.students_desc", "In transition, eager to build circles"), tag: t("ambassador.profiles.students_tag", "Emerging") }
             ].map((persona, index) => (
               <motion.div key={persona.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
@@ -247,15 +245,10 @@ const AmbassadorProgram = () => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              The Loneliness Epidemic
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Needs Your Voice
-              </span>
+              <Text id="ambassador.problem.title">The Loneliness Epidemic Needs Your Voice</Text>
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-              Millions of people are struggling with loneliness. As an ambassador, you can be part of the solution 
-              while earning meaningful income. Your connections and influence can change lives.
+              <Text id="ambassador.problem.description">Millions of people are struggling with loneliness. As an ambassador, you can be part of the solution while earning meaningful income. Your connections and influence can change lives.</Text>
             </p>
           </motion.div>
 
@@ -265,19 +258,19 @@ const AmbassadorProgram = () => {
                 <div className="w-12 h-12 rounded-full bg-red-500/15 border border-red-400/30 flex items-center justify-center mb-6">
                   <BarChart3 className="h-6 w-6 text-red-300" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">The Problem</h3>
+                <h3 className="text-2xl font-bold mb-4"><Text id="ambassador.problem.problem_title">The Problem</Text></h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>21 million Americans have zero friends</span>
+                    <span><Text id="ambassador.problem.problem_1">21 million Americans have zero friends</Text></span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>1/3 of adults are unsatisfied with their friend circle</span>
+                    <span><Text id="ambassador.problem.problem_2">1/3 of adults are unsatisfied with their friend circle</Text></span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" />
-                    <span>Loneliness impacts mental health and life satisfaction</span>
+                    <span><Text id="ambassador.problem.problem_3">Loneliness impacts mental health and life satisfaction</Text></span>
                   </li>
                 </ul>
               </div>
@@ -288,19 +281,19 @@ const AmbassadorProgram = () => {
                 <div className="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center mb-6">
                   <Users2 className="h-6 w-6 text-emerald-300" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4">Your Solution</h3>
+                <h3 className="text-2xl font-bold mb-4"><Text id="ambassador.problem.solution_title">Your Solution</Text></h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                    <span>Use your network to help people find new friends</span>
+                    <span><Text id="ambassador.problem.solution_1">Use your network to help people find new friends</Text></span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                    <span>Earn 5% commission on every referral</span>
+                    <span><Text id="ambassador.problem.solution_2">Earn 5% commission on every referral</Text></span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                    <span>Build a sustainable income while helping others</span>
+                    <span><Text id="ambassador.problem.solution_3">Build a sustainable income while helping others</Text></span>
                   </li>
                 </ul>
               </div>
@@ -314,19 +307,13 @@ const AmbassadorProgram = () => {
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Real Earning Potential
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                With Real Impact
-              </span>
+              <Text id="ambassador.earnings.title">Real Earning Potential With Real Impact</Text>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Earn 5% commission on all actual booking revenue from your referrals for a full year. 
-              The more people you help connect, the more you earn.
+              <Text id="ambassador.earnings.description">Earn 5% commission on all actual booking revenue from your referrals for a full year. The more people you help connect, the more you earn.</Text>
             </p>
             <p className="text-sm text-gray-400 max-w-4xl mx-auto mt-4">
-              * Commission is based on actual booking values from your referrals, tracked for 1 year. 
-              These calculations use average spending estimates - your actual earnings depend on real booking revenue generated by your referrals.
+              <Text id="ambassador.earnings.note">* Commission is based on actual booking values from your referrals, tracked for 1 year. These calculations use average spending estimates - your actual earnings depend on real booking revenue generated by your referrals.</Text>
             </p>
           </motion.div>
 
@@ -336,8 +323,8 @@ const AmbassadorProgram = () => {
               <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300">
                 <CardContent className="p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold text-white mb-2">Interactive Earnings Calculator</h3>
-                    <p className="text-gray-300">Adjust the sliders to see your potential earnings</p>
+                    <h3 className="text-2xl font-bold text-white mb-2"><Text id="ambassador.earnings.calculator.title">Interactive Earnings Calculator</Text></h3>
+                    <p className="text-gray-300"><Text id="ambassador.earnings.calculator.subtitle">Adjust the sliders to see your potential earnings</Text></p>
                   </div>
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -348,9 +335,9 @@ const AmbassadorProgram = () => {
                           <Users className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <h4 className="text-lg font-bold text-white">User Referrals</h4>
-                          <p className="text-sm text-gray-400">5% of actual booking revenue per user</p>
-                          <p className="text-xs text-gray-500">* Based on average $360/year spending</p>
+                          <h4 className="text-lg font-bold text-white"><Text id="ambassador.earnings.calculator.user.title">User Referrals</Text></h4>
+                          <p className="text-sm text-gray-400"><Text id="ambassador.earnings.calculator.user.description">5% of actual booking revenue per user</Text></p>
+                          <p className="text-xs text-gray-500"><Text id="ambassador.earnings.calculator.user.note">* Based on average $360/year spending</Text></p>
                         </div>
                       </div>
                       
@@ -390,9 +377,9 @@ const AmbassadorProgram = () => {
                           <Building2 className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <h4 className="text-lg font-bold text-white">Venue Referrals</h4>
-                          <p className="text-sm text-gray-400">5% of actual booking revenue per venue</p>
-                          <p className="text-xs text-gray-500">* Based on average $78,000/year revenue</p>
+                          <h4 className="text-lg font-bold text-white"><Text id="ambassador.earnings.calculator.venue.title">Venue Referrals</Text></h4>
+                          <p className="text-sm text-gray-400"><Text id="ambassador.earnings.calculator.venue.description">5% of actual booking revenue per venue</Text></p>
+                          <p className="text-xs text-gray-500"><Text id="ambassador.earnings.calculator.venue.note">* Based on average $78,000/year revenue</Text></p>
                         </div>
                       </div>
                       
@@ -429,35 +416,34 @@ const AmbassadorProgram = () => {
                   {/* Total Earnings Display */}
                   <div className="mt-8 p-6 bg-gradient-to-r from-pulse-pink/10 to-pulse-blue/10 rounded-xl border border-pulse-pink/20">
                     <div className="text-center">
-                      <div className="text-sm text-gray-400 mb-2">Total Estimated Annual Commission</div>
+                      <div className="text-sm text-gray-400 mb-2"><Text id="ambassador.earnings.calculator.total.title">Total Estimated Annual Commission</Text></div>
                       <div className="text-3xl font-bold text-pulse-pink">${totalEarnings.toLocaleString()}</div>
-                      <div className="text-xs text-gray-500 mt-2">* Commission based on actual booking revenue, tracked for 1 year</div>
+                      <div className="text-xs text-gray-500 mt-2"><Text id="ambassador.earnings.calculator.total.note">* Commission based on actual booking revenue, tracked for 1 year</Text></div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
             <div className="mt-6 rounded-xl border border-gray-700 bg-gray-900/50 p-4 text-sm text-gray-300">
-              <div className="text-white font-semibold mb-1">How you earn & payouts</div>
+              <div className="text-white font-semibold mb-1"><Text id="ambassador.earnings.how_earn.title">How you earn & payouts</Text></div>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Tracking: referrals via your personal link/code (1‑year attribution)</li>
-                <li>Payouts: monthly to your account (Stripe/PayPal)</li>
-                <li>Rate: 5% of actual booking revenue from your referrals for 12 months</li>
-                <li>No cap. Transparent dashboard coming soon.</li>
+                <li><Text id="ambassador.earnings.how_earn.tracking">Tracking: referrals via your personal link/code (1‑year attribution)</Text></li>
+                <li><Text id="ambassador.earnings.how_earn.payouts">Payouts: monthly to your account (Stripe/PayPal)</Text></li>
+                <li><Text id="ambassador.earnings.how_earn.rate">Rate: 5% of actual booking revenue from your referrals for 12 months</Text></li>
+                <li><Text id="ambassador.earnings.how_earn.no_cap">No cap. Transparent dashboard coming soon.</Text></li>
               </ul>
             </div>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-16">
             <div className="bg-gray-800/50 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">💡 Pro Tip</h3>
+              <h3 className="text-2xl font-bold mb-4">💡 <Text id="ambassador.earnings.pro_tip.title">Pro Tip</Text></h3>
               <p className="text-gray-300 mb-6">
-                The best ambassadors combine both strategies: they refer both users AND venues. 
-                A single venue referral can generate thousands in commission, while user referrals build your recurring income.
+                <Text id="ambassador.earnings.pro_tip.description">The best ambassadors combine both strategies: they refer both users AND venues. A single venue referral can generate thousands in commission, while user referrals build your recurring income.</Text>
               </p>
               <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
                 <Lightbulb className="h-4 w-4" />
-                <span>Focus on quality connections that last</span>
+                <span><Text id="ambassador.earnings.pro_tip.focus">Focus on quality connections that last</Text></span>
               </div>
             </div>
           </motion.div>
@@ -472,15 +458,15 @@ const AmbassadorProgram = () => {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-3">How to Promote Pulse</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Do these three and you’ll see momentum fast.</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3"><Text id="ambassador.promotion.title">How to Promote Pulse</Text></h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto"><Text id="ambassador.promotion.description">Do these three and you’ll see momentum fast.</Text></p>
           </motion.div>
 
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { emoji: "✨", title: "Create Social Buzz", blurb: "Short reels, authentic stories, real faces" },
-              { emoji: "📍", title: "Show Up Locally", blurb: "Posters, QR codes, campus & cafes" },
-              { emoji: "🤝", title: "Activate Partners", blurb: "Introduce venues that fit Pulse groups" }
+              { emoji: "✨", title: t("ambassador.promotion.card1.title", "Create Social Buzz"), blurb: t("ambassador.promotion.card1.blurb", "Short reels, authentic stories, real faces") },
+              { emoji: "📍", title: t("ambassador.promotion.card2.title", "Show Up Locally"), blurb: t("ambassador.promotion.card2.blurb", "Posters, QR codes, campus & cafes") },
+              { emoji: "🤝", title: t("ambassador.promotion.card3.title", "Activate Partners"), blurb: t("ambassador.promotion.card3.blurb", "Introduce venues that fit Pulse groups") }
             ].map((card, i) => (
               <motion.div
                 key={card.title}
@@ -503,7 +489,7 @@ const AmbassadorProgram = () => {
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex justify-center mt-10">
             <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:midpage' })} className="rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white inline-flex items-center gap-2 shadow-lg shadow-purple-500/20 hover:from-pulse-blue hover:via-accent hover:to-pulse-pink transition-all duration-300">
-              Make Me a Top Ambassador
+              <Text id="ambassador.promotion.cta">Make Me a Top Ambassador</Text>
               <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
@@ -511,15 +497,15 @@ const AmbassadorProgram = () => {
           {/* Examples of how to promote */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="max-w-5xl mx-auto mt-12">
             <div className="bg-gray-800/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-6 text-center">Ways Ambassadors Promote Pulse</h3>
+              <h3 className="text-2xl font-bold mb-6 text-center"><Text id="ambassador.promotion.examples.title">Ways Ambassadors Promote Pulse</Text></h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
                   <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-sm">💼</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Business Outreach</div>
-                    <div className="text-gray-300 text-sm">Talk to local business owners and venue managers</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.business.title">Business Outreach</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.business.description">Talk to local business owners and venue managers</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
@@ -527,8 +513,8 @@ const AmbassadorProgram = () => {
                     <span className="text-white text-sm">📱</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Social Media</div>
-                    <div className="text-gray-300 text-sm">Post on social media or create short reels</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.social.title">Social Media</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.social.description">Post on social media or create short reels</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
@@ -536,8 +522,8 @@ const AmbassadorProgram = () => {
                     <span className="text-white text-sm">✍️</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Content Creation</div>
-                    <div className="text-gray-300 text-sm">Publish a blog post or newsletter feature</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.content.title">Content Creation</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.content.description">Publish a blog post or newsletter feature</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
@@ -545,8 +531,8 @@ const AmbassadorProgram = () => {
                     <span className="text-white text-sm">🎥</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Video & Audio</div>
-                    <div className="text-gray-300 text-sm">Film a YouTube video or podcast mention</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.video.title">Video & Audio</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.video.description">Film a YouTube video or podcast mention</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
@@ -554,8 +540,8 @@ const AmbassadorProgram = () => {
                     <span className="text-white text-sm">📰</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Media Relations</div>
-                    <div className="text-gray-300 text-sm">Pitch local media or campus press</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.media.title">Media Relations</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.media.description">Pitch local media or campus press</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-700/50 bg-gray-800/40">
@@ -563,13 +549,13 @@ const AmbassadorProgram = () => {
                     <span className="text-white text-sm">🤝</span>
                   </div>
                   <div>
-                    <div className="text-white font-semibold mb-1">Events</div>
-                    <div className="text-gray-300 text-sm">Host a small info session or meetup</div>
+                    <div className="text-white font-semibold mb-1"><Text id="ambassador.promotion.examples.events.title">Events</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="ambassador.promotion.examples.events.description">Host a small info session or meetup</Text></div>
                   </div>
                 </div>
               </div>
               <div className="text-center text-sm text-gray-400">
-                No required actions — you choose what fits your style and schedule.
+                <Text id="ambassador.promotion.examples.note">No required actions — you choose what fits your style and schedule.</Text>
               </div>
             </div>
           </motion.div>
@@ -587,27 +573,27 @@ const AmbassadorProgram = () => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-3">
-              We Support Your Success
+              <Text id="ambassador.support.title">We Support Your Success</Text>
             </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">Everything you need to win: assets, templates, and real humans backing you.</p>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto"><Text id="ambassador.support.subtitle">Everything you need to win: assets, templates, and real humans backing you.</Text></p>
           </motion.div>
 
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
-                <div className="text-white font-semibold mb-1">Assets & Templates</div>
-                <div className="text-gray-300">Editable posts, posters, QR codes</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.support.assets.title">Assets & Templates</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.support.assets.description">Editable posts, posters, QR codes</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
-                <div className="text-white font-semibold mb-1">Co‑marketing</div>
-                <div className="text-gray-300">Venue partners + Pulse channels</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.support.comarketing.title">Co‑marketing</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.support.comarketing.description">Venue partners + Pulse channels</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-800/60 p-4">
-                <div className="text-white font-semibold mb-1">1:1 Support</div>
-                <div className="text-gray-300">Personal guidance to hit your goals</div>
+                <div className="text-white font-semibold mb-1"><Text id="ambassador.support.support.title">1:1 Support</Text></div>
+                <div className="text-gray-300"><Text id="ambassador.support.support.description">Personal guidance to hit your goals</Text></div>
               </div>
             </div>
-            <div className="text-center text-xs text-gray-400 mt-2">Want more? Email ambassadors@pulsenow.app for the full resource list.</div>
+            <div className="text-center text-xs text-gray-400 mt-2"><Text id="ambassador.support.email_note">Want more? Email ambassadors@pulsenow.app for the full resource list.</Text></div>
           </div>
         </div>
       </section>
@@ -619,23 +605,18 @@ const AmbassadorProgram = () => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Turn Your
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                Connections Into Income?
-              </span>
+              <Text id="ambassador.final_cta.title">Ready to Turn Your Connections Into Income?</Text>
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join our Ambassador Program and start earning while making a real difference in people's lives. 
-              Limited spots available in select cities.
+              <Text id="ambassador.final_cta.description">Join our Ambassador Program and start earning while making a real difference in people's lives. Limited spots available in select cities.</Text>
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a href="https://482tykjn26x.typeform.com/to/jJAR9IcE" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'ambassador:bottom_cta' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <span>Apply to Join</span>
+                <span><Text id="ambassador.final_cta.cta1">Apply to Join</Text></span>
                 <ArrowRight className="h-5 w-5" />
               </a>
               <a href="#earnings" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>See Earnings</span>
+                <span><Text id="ambassador.final_cta.cta2">See Earnings</Text></span>
                 <ArrowRight className="h-5 w-5" />
               </a>
             </div>
