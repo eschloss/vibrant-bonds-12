@@ -43,35 +43,12 @@ const NeuralNetwork = () => {
     <div ref={ref} className="w-full overflow-hidden bg-gray-950 py-16 md:py-24 relative">
       {/* Neural Network Animation as Background with Parallax */}
       <motion.div 
+        style={{ y: canvasY }}
         className="absolute inset-0 w-full h-full"
-        style={{ 
-          y: canvasY
-        }}
-        onMouseMove={(e) => {
-          const canvas = canvasRef.current;
-          if (!canvas) return;
-          const rect = canvas.getBoundingClientRect();
-          const mouseEvent = new MouseEvent('mousemove', {
-            clientX: e.clientX,
-            clientY: e.clientY
-          });
-          canvas.dispatchEvent(mouseEvent);
-        }}
-        onMouseLeave={(e) => {
-          const canvas = canvasRef.current;
-          if (!canvas) return;
-          const mouseEvent = new MouseEvent('mouseleave');
-          canvas.dispatchEvent(mouseEvent);
-        }}
-        onClick={(e) => {
-          // Allow clicks to pass through to underlying elements
-          e.target !== e.currentTarget && e.stopPropagation();
-        }}
       >
         <canvas 
           ref={canvasRef} 
-          className="w-full h-full" 
-          style={{ pointerEvents: 'none' }}
+          className="w-full h-full cursor-pointer" 
           title="Move your cursor to interact with the neural network"
         ></canvas>
       </motion.div>
