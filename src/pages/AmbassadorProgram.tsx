@@ -453,7 +453,7 @@ const AmbassadorProgram = () => {
       {/* Promotion Methods Section - Animated mosaic */}
       <section className="py-20 relative bg-gray-900/50 overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl animate-ambient-drift"></div>
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl animate-ambient-drift opacity-30"></div>
           <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl animate-sophisticated-float"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">

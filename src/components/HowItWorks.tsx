@@ -47,9 +47,9 @@ const HowItWorks = () => {
         style={{ y: backgroundY }}
         className="absolute inset-0 opacity-10"
       >
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl animate-ambient-drift"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl animate-ambient-drift opacity-30"></div>
         <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-blue-600 blur-3xl animate-sophisticated-float"></div>
-        <div className="absolute -bottom-24 left-1/2 w-96 h-96 rounded-full bg-pink-600 blur-3xl animate-ambient-drift" style={{ animationDelay: '10s' }}></div>
+        <div className="absolute -bottom-24 left-1/2 w-96 h-96 rounded-full bg-pink-600 blur-3xl animate-ambient-drift opacity-30" style={{ animationDelay: '10s' }}></div>
       </motion.div>
 
       <div className="container mx-auto px-4 relative z-10">
