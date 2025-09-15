@@ -241,6 +241,7 @@ html, body, #root {
 .animate-ambient-drift {
   animation: ambient-drift 25s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
   will-change: transform, opacity;
+  animation-fill-mode: backwards;
 }
 
 .animate-stagger-up {
