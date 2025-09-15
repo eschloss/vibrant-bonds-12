@@ -97,7 +97,7 @@ const CityMatchmakingTemplate = ({
   
   const peopleImage = peopleOptions[cityScore(cityName, state, country) % peopleOptions.length];
 
-  const timeLeft = useCountdown();
+  const timeLeft = useCountdown(frequency_days);
 
   // Translate the steps
   const steps = [{

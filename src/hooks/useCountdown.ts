@@ -8,7 +8,7 @@ interface TimeLeft {
   seconds: number;
 }
 
-export const useCountdown = () => {
+export const useCountdown = (frequency_days?: number) => {
   // Calculate time until next Monday 11pm
   const getTimeUntilNextMonday = () => {
     const now = new Date();
@@ -32,7 +32,12 @@ export const useCountdown = () => {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
   
-    return { days, hours, minutes, seconds };
+    let adjustedDays = days;
+    if (frequency_days && frequency_days > 7) {
+      adjustedDays += (frequency_days - 7);
+    }
+    
+    return { days: adjustedDays, hours, minutes, seconds };
   };
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(getTimeUntilNextMonday());
