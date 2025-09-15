@@ -126,14 +126,16 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   return (
     <div className="backdrop-blur-sm bg-white/95 dark:bg-gray-900/95 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-8 shadow-lg max-w-md mx-auto">
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          {t("pre_waitlister.title", "We're almost ready in {cityName}.").replace("{cityName}", cityName)}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 text-sm">
-          {t("pre_waitlister.subtitle", "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group.")}
-        </p>
-      </div>
+      {!showOtherCity && (
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            {t("pre_waitlister.title", "We're almost ready in {cityName}.").replace("{cityName}", cityName)}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">
+            {t("pre_waitlister.subtitle", "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group.")}
+          </p>
+        </div>
+      )}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
