@@ -153,19 +153,19 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-medium text-gray-900 dark:text-white block pl-0">
-                  {t("pre_waitlister.form.other_city", "Which city?")}
-                </FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
-                    {...field} 
-                    className="bg-white/70 dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 focus-visible:ring-pulse-blue placeholder:text-gray-500" 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              <FormItem className="space-y-2">
+  <FormLabel className="block text-left m-0 p-0 leading-none font-medium text-gray-900 dark:text-white">
+    {t("pre_waitlister.form.other_city", "Which city?")}
+  </FormLabel>
+  <FormControl>
+    <Input
+      {...field}
+      className="bg-white/70 dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 focus-visible:ring-pulse-blue placeholder:text-gray-500"
+      placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
+    />
+  </FormControl>
+  <FormMessage />
+</FormItem>
             )} />
           )}
 
