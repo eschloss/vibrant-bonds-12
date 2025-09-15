@@ -18,7 +18,7 @@ export const forms = {
 
     // Pre-Waitlister Form
     "pre_waitlister.title": "We're almost ready in {cityName}.",
-    "pre_waitlister.subtitle": "Sign up now, and as soon as enough locals join, we'll connect you with your best matches.",
+    "pre_waitlister.subtitle": "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group.",
     "pre_waitlister.form.email": "Email",
     "pre_waitlister.form.email_placeholder": "Your email address",
     "pre_waitlister.form.newsletter": "Keep me updated on Pulse news",
@@ -51,7 +51,7 @@ export const forms = {
 
     // Pre-Waitlister Form
     "pre_waitlister.title": "Ya casi estamos listos en {cityName}.",
-    "pre_waitlister.subtitle": "Regístrate ahora, y tan pronto como se unan suficientes locales, te conectaremos con tus mejores coincidencias.",
+    "pre_waitlister.subtitle": "Regístrate ahora, y tan pronto como se unan suficientes locales, te conectaremos con tu nuevo grupo de amigos.",
     "pre_waitlister.form.email": "Email",
     "pre_waitlister.form.email_placeholder": "Tu dirección de email",
     "pre_waitlister.form.newsletter": "Mantenerme actualizado sobre noticias de Pulse",

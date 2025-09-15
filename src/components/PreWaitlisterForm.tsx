@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -128,7 +127,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
           {t("pre_waitlister.title", "We're almost ready in {cityName}.").replace("{cityName}", cityName)}
         </h3>
         <p className="text-gray-600 dark:text-gray-300 text-sm">
-          {t("pre_waitlister.subtitle", "Sign up now, and as soon as enough locals join, we'll connect you with your best matches.")}
+          {t("pre_waitlister.subtitle", "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group.")}
         </p>
       </div>
 
@@ -136,9 +135,6 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField control={form.control} name="email" render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-medium text-gray-900 dark:text-white">
-                {t("pre_waitlister.form.email", "Email")}
-              </FormLabel>
               <FormControl>
                 <Input 
                   placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
@@ -174,12 +170,15 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
               <FormControl>
                 <Checkbox 
                   checked={field.value} 
-                  onCheckedChange={field.onChange} 
-                  className="border-pulse-blue data-[state=checked]:bg-pulse-blue" 
+                  onCheckedChange={field.onChange}
+                  className="border-pulse-blue data-[state=checked]:bg-pulse-blue mt-0.5" 
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel className="text-sm text-gray-700 dark:text-gray-300">
+                <FormLabel 
+                  className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
+                  onClick={() => field.onChange(!field.value)}
+                >
                   {t("pre_waitlister.form.newsletter", "Keep me updated on Pulse news")}
                 </FormLabel>
                 <FormMessage />
@@ -201,10 +200,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                 {t("pre_waitlister.form.sending", "Joining...")}
               </span>
             ) : (
-              <span className="flex items-center gap-2">
-                <Send className="h-4 w-4" />
-                {t("pre_waitlister.form.submit", "Join Waitlist")}
-              </span>
+              t("pre_waitlister.form.submit", "Join Waitlist")
             )}
           </Button>
         </form>
