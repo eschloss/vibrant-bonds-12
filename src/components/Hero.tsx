@@ -42,11 +42,11 @@ const Hero = () => {
       <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-pulse-teal/30 animate-sophisticated-float" style={{ animationDelay: '3s' }}></div>
       
       {/* Additional Ambient Elements */}
-      <div className="absolute top-2/3 left-1/4 w-20 h-20 rounded-full bg-pulse-coral/20 animate-ambient-drift" style={{ animationDelay: '8s' }}></div>
+      <div className="absolute top-2/3 left-1/4 w-20 h-20 rounded-full bg-pulse-coral/20 animate-ambient-drift" style={{ animationDelay: '0s' }}></div>
       <div className="absolute top-1/2 right-1/3 w-8 h-8 rounded-full bg-pulse-blue/20 animate-sophisticated-float" style={{ animationDelay: '12s' }}></div>
-      <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-full bg-pulse-purple/25 animate-ambient-drift" style={{ animationDelay: '5s' }}></div>
+      <div className="absolute bottom-1/3 left-1/3 w-14 h-14 rounded-full bg-pulse-purple/25 animate-ambient-drift" style={{ animationDelay: '0s' }}></div>
       <div className="absolute top-1/6 right-1/6 w-10 h-10 rounded-full bg-pulse-coral/20 animate-sophisticated-float" style={{ animationDelay: '15s' }}></div>
-      <div className="absolute bottom-1/5 left-1/5 w-18 h-18 rounded-full bg-pulse-teal/15 animate-ambient-drift" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute bottom-1/5 left-1/5 w-18 h-18 rounded-full bg-pulse-teal/15 animate-ambient-drift" style={{ animationDelay: '0s' }}></div>
 
       <motion.div 
         style={{ y: contentY }}
