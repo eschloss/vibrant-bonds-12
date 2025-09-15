@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 interface LanguageContextType {
   currentLanguage: string;
   translate: (key: string, fallback: string) => string;
-  translations: Record<string, string>;
+  translations: Record<string, any>;
   isLoading: boolean;
   changeLanguage?: (lang: string) => void; // For future use
 }
@@ -42,7 +42,7 @@ const seoMetadata = {
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
-  const [translations, setTranslations] = useState<Record<string, string>>({});
+  const [translations, setTranslations] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

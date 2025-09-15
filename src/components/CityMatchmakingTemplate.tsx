@@ -28,6 +28,8 @@ interface CityMatchmakingTemplateProps {
   affinityUrl?: string;
   language?: string;
   isCommunity?: boolean;
+  active?: boolean;
+  frequency_days?: number;
   communityData?: {
     title1: string;
     title2: string;
@@ -52,6 +54,8 @@ const CityMatchmakingTemplate = ({
   affinityUrl,
   language,
   isCommunity,
+  active,
+  frequency_days,
   communityData
 }: CityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();

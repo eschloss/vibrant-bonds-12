@@ -22,6 +22,8 @@ const CityPage = () => {
     language?: string;
     lat?: number;
     lng?: number;
+    active?: boolean;
+    frequency_days?: number;
   } | null>(null);
 
 
@@ -82,7 +84,9 @@ const CityPage = () => {
           image: matchedCity.image,
           language: matchedCity.language, // Get language from API
           lat: matchedCity.lat, // Get latitude from API
-          lng: matchedCity.lng  // Get longitude from API
+          lng: matchedCity.lng,  // Get longitude from API
+          active: matchedCity.active, // Get active status from API
+          frequency_days: matchedCity.frequency_days // Get frequency days from API
         });
 
         window.scrollTo(0, 0);
@@ -111,6 +115,8 @@ const CityPage = () => {
         image={cityData.image}
         isQueer={false}
         language={cityData.language}
+        active={cityData.active}
+        frequency_days={cityData.frequency_days}
       />
     </>
   );

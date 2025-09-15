@@ -31,6 +31,8 @@ const QueerAffinityCityPage = () => {
     language?: string;
     lat?: number;
     lng?: number;
+    active?: boolean;
+    frequency_days?: number;
   } | null>(null);
   const [affinityData, setAffinityData] = useState<AffinityData | null>(null);
 
@@ -116,7 +118,9 @@ const QueerAffinityCityPage = () => {
           image: matchedCity.image,
           language: matchedCity.language,
           lat: matchedCity.lat,
-          lng: matchedCity.lng
+          lng: matchedCity.lng,
+          active: matchedCity.active, // Get active status from API
+          frequency_days: matchedCity.frequency_days // Get frequency days from API
         });
 
         setAffinityData(matchedAffinity);
@@ -150,6 +154,8 @@ const QueerAffinityCityPage = () => {
         affinityName={displayAffinityName}
         affinityUrl={affinityData.url}
         language={cityData.language}
+        active={cityData.active}
+        frequency_days={cityData.frequency_days}
       />
     </>
   );
