@@ -377,45 +377,47 @@ const CityMatchmakingTemplate = ({
 
         {/* City Pip Module removed per request */}
 
-        {code && active && (
+        {code && (
           <section className="relative py-20 bg-gray-900/80">
             <div className="max-w-4xl mx-auto text-center">
                 
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                  {t("city.ready_to_meet", "Ready to Meet")}<br/>
-                  {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
-                    {cityName} {t("city.crew", "Crew")}
-                  </span>?
-                </h2>
+                {active ? (
+                  <>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+                      {t("city.ready_to_meet", "Ready to Meet")}<br/>
+                      {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
+                        {cityName} {t("city.crew", "Crew")}
+                      </span>?
+                    </h2>
 
-                <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
-                  <TimerDisplay {...timeLeft} />
-                  <p className="text-sm text-white/70 mt-4 text-center">
-                    {t("city.until_next_match", "until the next friend group match closes")}
-                  </p>
-                </div>
-                
-                {!active ? (
-                  <div className="flex justify-center mt-8">
-                    <PreWaitlisterForm cityName={cityName} city={code} />
-                  </div>
-                ) : (
-                  <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                    <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
+                      <TimerDisplay {...timeLeft} />
+                      <p className="text-sm text-white/70 mt-4 text-center">
+                        {t("city.until_next_match", "until the next friend group match closes")}
+                      </p>
+                    </div>
                     
-                    <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                      onClick={(e) => {
-                        const href = (e.currentTarget as HTMLAnchorElement).href;
-                        trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
-                      }}
-                    >
-                      <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                        {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
-                        <ArrowRight size={18} />
-                      </Button>
-                    </Link>
+                    <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                      
+                      <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                        onClick={(e) => {
+                          const href = (e.currentTarget as HTMLAnchorElement).href;
+                          trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
+                        }}
+                      >
+                        <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                          {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
+                          <ArrowRight size={18} />
+                        </Button>
+                      </Link>
 
-                    {/* Language Selector - Second Location */}
-                     <LanguageSelector language={language} variant="dark" />
+                      {/* Language Selector - Second Location */}
+                       <LanguageSelector language={language} variant="dark" />
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex justify-center">
+                    <PreWaitlisterForm cityName={cityName} city={code} />
                   </div>
                 )}
             </div>

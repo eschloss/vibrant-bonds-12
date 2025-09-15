@@ -25,6 +25,9 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
       message: t("pre_waitlister.validation.email", "Please enter a valid email address")
     }),
     newsletter: z.boolean().default(false),
+    agreeToTerms: z.boolean().refine(val => val === true, {
+      message: t("contact.validation.terms", "You must agree to our terms and privacy policy")
+    }),
     other_city: showOtherCity ? z.string().min(1, {
       message: t("pre_waitlister.validation.other_city", "Please enter your city")
     }) : z.string().optional(),
@@ -38,6 +41,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
     defaultValues: {
       email: "",
       newsletter: false,
+      agreeToTerms: false,
       other_city: "",
     }
   });
@@ -164,6 +168,24 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
               </FormItem>
             )} />
           )}
+
+          <FormField control={form.control} name="agreeToTerms" render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+              <FormControl>
+                <Checkbox 
+                  checked={field.value} 
+                  onCheckedChange={field.onChange}
+                  className="border-pulse-blue data-[state=checked]:bg-pulse-blue mt-0.5" 
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
+                  {t("contact.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("contact.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                </FormLabel>
+                <FormMessage />
+              </div>
+            </FormItem>
+          )} />
 
           <FormField control={form.control} name="newsletter" render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
