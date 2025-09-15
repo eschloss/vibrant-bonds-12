@@ -296,7 +296,7 @@ const CityMatchmakingTemplate = ({
                   duration: 0.5
                 }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
                 
-               <div className="flex flex-col items-center">
+               <div id="button-link1" className="flex flex-col items-center">
                 <Link 
                    to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                    onClick={(e) => {
@@ -383,7 +383,7 @@ const CityMatchmakingTemplate = ({
                   </p>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                   
                   <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                     onClick={(e) => {
