@@ -15,6 +15,7 @@ import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "./LanguageSelector";
 import { trackTypeformRedirect } from "@/lib/utils";
+import PreWaitlisterForm from './PreWaitlisterForm';
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -296,28 +297,39 @@ const CityMatchmakingTemplate = ({
                   duration: 0.5
                 }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
                 
-               <div id="button-link1" className="flex flex-col items-center">
-                <Link 
-                   to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                   onClick={(e) => {
-                     const href = (e.currentTarget as HTMLAnchorElement).href;
-                     trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
-                   }}
-                 >
-                  <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
-                    <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
-                    <span className="relative z-10">
-                      {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
-                    </span>
-                    <ArrowRight size={18} />
-                  </Button>
-                </Link>
-                 {state && (
-                <div className="text-sm text-black/60 mt-2 text-center font-light">
-                  {cityName}, {state}
+               {active === false ? (
+                <div className="flex flex-col items-center">
+                  <PreWaitlisterForm cityName={cityName} city={code} />
+                  {state && (
+                    <div className="text-sm text-black/60 mt-2 text-center font-light">
+                      {cityName}, {state}
+                    </div>
+                  )}
                 </div>
-              )}
-                 </div>
+               ) : (
+                <div id="button-link1" className="flex flex-col items-center">
+                  <Link 
+                     to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                     onClick={(e) => {
+                       const href = (e.currentTarget as HTMLAnchorElement).href;
+                       trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                     }}
+                   >
+                    <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
+                      <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
+                      <span className="relative z-10">
+                        {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+                      </span>
+                      <ArrowRight size={18} />
+                    </Button>
+                  </Link>
+                   {state && (
+                  <div className="text-sm text-black/60 mt-2 text-center font-light">
+                    {cityName}, {state}
+                  </div>
+                )}
+                </div>
+               )}
 
                 {/* Language Selector */}
                 <LanguageSelector language={language} variant="light" />
@@ -383,23 +395,29 @@ const CityMatchmakingTemplate = ({
                   </p>
                 </div>
                 
-                <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-                  
-                  <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                    onClick={(e) => {
-                      const href = (e.currentTarget as HTMLAnchorElement).href;
-                      trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
-                    }}
-                  >
-                    <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                      {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
-                      <ArrowRight size={18} />
-                    </Button>
-                  </Link>
+                {active === false ? (
+                  <div className="flex justify-center mt-8">
+                    <PreWaitlisterForm cityName={cityName} city={code} />
+                  </div>
+                ) : (
+                  <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+                    
+                    <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                      onClick={(e) => {
+                        const href = (e.currentTarget as HTMLAnchorElement).href;
+                        trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
+                      }}
+                    >
+                      <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                        {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
+                        <ArrowRight size={18} />
+                      </Button>
+                    </Link>
 
-                  {/* Language Selector - Second Location */}
-                   <LanguageSelector language={language} variant="dark" />
-                </div>
+                    {/* Language Selector - Second Location */}
+                     <LanguageSelector language={language} variant="dark" />
+                  </div>
+                )}
             </div>
           </section>
         )}
