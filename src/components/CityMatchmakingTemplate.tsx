@@ -297,7 +297,7 @@ const CityMatchmakingTemplate = ({
                   duration: 0.5
                 }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
                 
-               {active === false ? (
+               {!active ? (
                 <div className="flex flex-col items-center">
                   <PreWaitlisterForm cityName={cityName} city={code} />
                   {state && (
@@ -377,7 +377,7 @@ const CityMatchmakingTemplate = ({
 
         {/* City Pip Module removed per request */}
 
-        {code && (
+        {code && active && (
           <section className="relative py-20 bg-gray-900/80">
             <div className="max-w-4xl mx-auto text-center">
                 
@@ -395,7 +395,7 @@ const CityMatchmakingTemplate = ({
                   </p>
                 </div>
                 
-                {active === false ? (
+                {!active ? (
                   <div className="flex justify-center mt-8">
                     <PreWaitlisterForm cityName={cityName} city={code} />
                   </div>

@@ -175,10 +175,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel 
-                  className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
-                  onClick={() => field.onChange(!field.value)}
-                >
+                <FormLabel className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
                   {t("pre_waitlister.form.newsletter", "Keep me updated on Pulse news")}
                 </FormLabel>
                 <FormMessage />
