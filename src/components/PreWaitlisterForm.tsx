@@ -120,7 +120,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
   return (
     <div className="max-w-md mx-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-6 bg-card rounded-xl border border-border shadow-lg">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField control={form.control} name="email" render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -128,7 +128,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                   placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                   type="email" 
                   {...field} 
-                  className="h-12 text-base bg-background border-border focus:border-primary focus:ring-primary/20 transition-colors" 
+                  className="h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-primary focus:ring-primary/20 transition-colors" 
                 />
               </FormControl>
               <FormMessage />
@@ -138,13 +138,13 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-sm font-medium text-foreground">
+                <FormLabel className="text-sm font-medium text-gray-700">
                   {t("pre_waitlister.form.other_city", "Which city?")}
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    className="h-12 text-base bg-background border-border focus:border-primary focus:ring-primary/20 transition-colors"
+                    className="h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-primary focus:ring-primary/20 transition-colors"
                     placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
                   />
                 </FormControl>
