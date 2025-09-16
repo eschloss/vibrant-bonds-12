@@ -118,58 +118,68 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-sm mx-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField control={form.control} name="email" render={({ field }) => (
-            <FormItem>
+            <FormItem className="space-y-2">
               <FormControl>
-                <Input 
-                  placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
-                  type="email" 
-                  {...field} 
-                  className="h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-primary focus:ring-primary/20 transition-colors" 
-                />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-hero rounded-xl p-[1px]">
+                    <Input 
+                      placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
+                      type="email" 
+                      {...field} 
+                      className="h-14 text-base bg-white rounded-[11px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-4" 
+                    />
+                  </div>
+                </div>
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-sm" />
             </FormItem>
           )} />
 
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel className="text-sm font-medium text-gray-700">
+              <FormItem className="space-y-4">
+                <FormLabel className="text-sm font-semibold text-gray-800 tracking-wide">
                   {t("pre_waitlister.form.other_city", "Which city?")}
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    className="h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:border-primary focus:ring-primary/20 transition-colors"
-                    placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
-                  />
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-hero rounded-xl p-[1px]">
+                      <Input
+                        {...field}
+                        className="h-14 text-base bg-white rounded-[11px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-4"
+                        placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
+                      />
+                    </div>
+                  </div>
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-sm" />
               </FormItem>
             )} />
           )}
 
-          <Button 
-            type="submit" 
-            className="w-full h-12 text-base bg-gradient-hero text-white hover:opacity-90 transition-opacity duration-300 font-medium" 
-            disabled={form.formState.isSubmitting}
-          >
-            {form.formState.isSubmitting ? (
-              <span className="flex items-center gap-2">
-                <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                {t("pre_waitlister.form.sending", "Joining...")}
-              </span>
-            ) : (
-              t("pre_waitlister.form.submit", "Join Waitlist")
-            )}
-          </Button>
+          <div className="pt-2">
+            <Button 
+              type="submit" 
+              className="w-full h-14 text-base bg-gradient-hero text-white hover:opacity-90 transition-all duration-300 font-semibold tracking-wide rounded-xl shadow-lg hover:shadow-xl" 
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  {t("pre_waitlister.form.sending", "Joining...")}
+                </span>
+              ) : (
+                t("pre_waitlister.form.submit", "Join Waitlist")
+              )}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
