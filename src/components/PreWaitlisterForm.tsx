@@ -223,11 +223,6 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                 t("pre_waitlister.form.submit", "Join Waitlist")
               )}
             </Button>
-
-            {/* Friendly reassurance */}
-            <p className="mt-3 text-center text-sm text-gray-600">
-              {t("pre_waitlister.form.privacy_note", "We will only message you when your city is ready.")}
-            </p>
           </div>
         </form>
       </Form>
