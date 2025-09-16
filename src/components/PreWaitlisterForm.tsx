@@ -9,7 +9,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -21,10 +20,10 @@ interface PreWaitlisterFormProps {
   city?: string;
 }
 
-/* Clean gradient border shell */
+/** Unified gradient shell for inputs */
 const FieldShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="rounded-3xl p-[1.5px] overflow-hidden bg-[linear-gradient(135deg,#FF2D8D,#8010E0,#00D0C0)] shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
-    <div className="rounded-[20px] bg-white">{children}</div>
+  <div className="rounded-[32px] p-[1.5px] overflow-hidden bg-[linear-gradient(135deg,#FF2D8D,#8010E0,#00D0C0)] shadow-[0_10px_40px_rgba(0,0,0,0.10)]">
+    <div className="rounded-[30px] bg-white">{children}</div>
   </div>
 );
 
@@ -48,42 +47,29 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      other_city: "",
-    },
+    defaultValues: { email: "", other_city: "" },
   });
 
   useEffect(() => {
     const scriptId = "recaptcha-script";
-    const loadReCaptcha = () => {
-      if (document.getElementById(scriptId)) return;
+    if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
       script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
-    };
-
-    loadReCaptcha();
-
+    }
     return () => {
-      const script = document.getElementById(scriptId);
-      if (script) script.remove();
-      const badge = document.querySelector(".grecaptcha-badge");
-      if (badge) badge.remove();
-      if ((window as any).grecaptcha) {
-        delete (window as any).grecaptcha;
-      }
+      document.getElementById(scriptId)?.remove();
+      document.querySelector(".grecaptcha-badge")?.remove();
+      if ((window as any).grecaptcha) delete (window as any).grecaptcha;
     };
   }, []);
 
   const onSubmit = async (data: FormValues) => {
     try {
-      if (!(window as any).grecaptcha) {
-        throw new Error("reCAPTCHA not loaded");
-      }
+      if (!(window as any).grecaptcha) throw new Error("reCAPTCHA not loaded");
 
       const token = await new Promise<string>((resolve, reject) => {
         (window as any).grecaptcha.ready(() => {
@@ -107,21 +93,19 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
       });
 
       const result = await response.json();
-      if (result.success) {
-        toast({
-          title: t("pre_waitlister.form.success.title", "You’re on the waitlist!"),
-          description: t(
-            "pre_waitlister.form.success.description",
-            "We will match you as soon as enough locals join."
-          ),
-        });
-        form.reset();
-      } else {
-        throw new Error(result.message || "Something went wrong");
-      }
+      if (!result.success) throw new Error(result.message || "Something went wrong");
+
+      toast({
+        title: t("pre_waitlister.form.success.title", "You are on the waitlist"),
+        description: t(
+          "pre_waitlister.form.success.description",
+          "We will match you when enough locals join."
+        ),
+      });
+      form.reset();
     } catch (err: any) {
       toast({
-        title: t("pre_waitlister.form.error.title", "Oops!"),
+        title: t("pre_waitlister.form.error.title", "Oops"),
         description:
           err.message ||
           t("pre_waitlister.form.error.description", "We could not add you to the waitlist."),
@@ -132,27 +116,23 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   return (
     <div className="relative mx-auto w-full">
-      {/* Soft spotlight behind the form for contrast over busy photo */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 md:top-10 w-[92%] max-w-4xl h-[520px] rounded-[32px] bg-gradient-to-b from-white/70 via-white/55 to-white/30 backdrop-blur-xl ring-1 ring-white/40 shadow-[0_20px_80px_rgba(0,0,0,0.18)]"></div>
+      {/* Softer frosted panel behind the form */}
+      <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 w-[92%] max-w-3xl md:max-w-4xl h-[540px] rounded-[32px] bg-white/55 backdrop-blur-xl ring-1 ring-white/50 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)]" />
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="relative mx-auto w-full px-4 sm:px-6 max-w-xl md:max-w-2xl space-y-10 md:space-y-12"
+          className="relative mx-auto w-full px-4 sm:px-6 max-w-xl md:max-w-2xl space-y-8 md:space-y-10"
         >
-          {/* Headline and subtitle are assumed to be outside this component on your page.
-              If you keep them here, give them bottom margin that matches the rhythm. */}
-
           {/* Email */}
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem className="space-y-2">
                 <FormControl>
                   <FieldShell>
                     <div className="relative">
-                      {/* Optional icon */}
                       <svg
                         aria-hidden="true"
                         className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
@@ -168,7 +148,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                         type="email"
                         placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                         {...field}
-                        className="h-16 md:h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-base md:text-lg placeholder:text-gray-400 focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
+                        className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
                       />
                     </div>
                   </FieldShell>
@@ -178,20 +158,16 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
             )}
           />
 
-          {/* City (optional based on prop) */}
+          {/* City */}
           {showOtherCity && (
             <FormField
               control={form.control}
               name="other_city"
               render={({ field }) => (
-                <FormItem className="space-y-4">
-                  <FormLabel className="text-base md:text-lg font-semibold text-gray-800 text-center md:text-left">
-                    {t("pre_waitlister.form.other_city", "Which city are you in?")}
-                  </FormLabel>
+                <FormItem className="space-y-2">
                   <FormControl>
                     <FieldShell>
                       <div className="relative">
-                        {/* Optional icon */}
                         <svg
                           aria-hidden="true"
                           className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
@@ -205,8 +181,8 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                         </svg>
                         <Input
                           {...field}
-                          placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
-                          className="h-16 md:h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-base md:text-lg placeholder:text-gray-400 focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
+                          placeholder={t("pre_waitlister.form.other_city_placeholder", "Your city")}
+                          className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
                         />
                       </div>
                     </FieldShell>
@@ -222,7 +198,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
             <Button
               type="submit"
               disabled={form.formState.isSubmitting}
-              className="w-full h-16 md:h-20 text-lg md:text-xl font-semibold tracking-wide rounded-full bg-[linear-gradient(135deg,#FF2D8D,#8010E0,#00D0C0)] text-white shadow-[0_12px_40px_rgba(128,16,224,0.35)] hover:shadow-[0_16px_56px_rgba(128,16,224,0.45)] transition-transform duration-200 active:scale-[0.98] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full h-20 text-[18px] md:text-[20px] font-semibold tracking-wide rounded-[32px] bg-[linear-gradient(135deg,#FF2D8D,#8010E0,#00D0C0)] text-white shadow-[0_16px_60px_rgba(128,16,224,0.38)] hover:shadow-[0_22px_72px_rgba(128,16,224,0.48)] transition-transform duration-150 active:scale-[0.98] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
             >
               {form.formState.isSubmitting ? (
                 <span className="flex items-center gap-2">
@@ -232,14 +208,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                     fill="none"
                     viewBox="0 0 24 24"
                   >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path
                       className="opacity-75"
                       fill="currentColor"
@@ -253,9 +222,9 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
               )}
             </Button>
 
-            {/* Reassurance line */}
-            <p className="mt-3 text-center text-sm text-gray-700">
-              {t("pre_waitlister.form.privacy_note", "No spam. We will only message you about matching in your city.")}
+            {/* Friendly reassurance */}
+            <p className="mt-3 text-center text-sm text-gray-600">
+              {t("pre_waitlister.form.privacy_note", "We will only message you when your city is ready.")}
             </p>
           </div>
         </form>
