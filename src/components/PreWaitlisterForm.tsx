@@ -24,10 +24,6 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
     email: z.string().email({
       message: t("pre_waitlister.validation.email", "Please enter a valid email address")
     }),
-    newsletter: z.boolean().default(false),
-    agreeToTerms: z.boolean().refine(val => val === true, {
-      message: t("contact.validation.terms", "You must agree to our terms and privacy policy")
-    }),
     other_city: showOtherCity ? z.string().min(1, {
       message: t("pre_waitlister.validation.other_city", "Please enter your city")
     }) : z.string().optional(),
@@ -40,8 +36,6 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      newsletter: false,
-      agreeToTerms: false,
       other_city: "",
     }
   });
@@ -98,7 +92,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: data.email,
-          newsletter: data.newsletter,
+          newsletter: false,
           city: city || data.other_city,
           other_city: showOtherCity ? data.other_city : "",
           recaptcha: token,
@@ -109,7 +103,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
       if (result.success) {
         toast({
           title: t("pre_waitlister.form.success.title", "You're on the waitlist!"),
-          description: t("pre_waitlister.form.success.description", "We'll notify you as soon as we're ready to match you with your crew."),
+          description: t("pre_waitlister.form.success.description", "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group."),
         });
         form.reset();
       } else {
@@ -125,18 +119,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
   };
 
   return (
-    <div className="backdrop-blur-sm bg-white/95 dark:bg-gray-900/95 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-8 shadow-lg max-w-md mx-auto">
-      {!showOtherCity && (
-        <div className="text-center mb-6">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            {t("pre_waitlister.title", "We're almost ready in {cityName}.").replace("{cityName}", cityName)}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-sm">
-            {t("pre_waitlister.subtitle", "Sign up now, and as soon as enough locals join, we'll connect you with your new friend group.")}
-          </p>
-        </div>
-      )}
-
+    <div className="max-w-md mx-auto">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField control={form.control} name="email" render={({ field }) => (
@@ -146,7 +129,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                   placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                   type="email" 
                   {...field} 
-                  className="bg-white/70 dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 focus-visible:ring-pulse-blue placeholder:text-gray-500" 
+                  className="focus-visible:ring-pulse-blue" 
                 />
               </FormControl>
               <FormMessage />
@@ -156,57 +139,20 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
               <FormItem className="space-y-2">
-  <FormLabel className="block text-left m-0 p-0 pl-3 -mb-1 leading-none font-medium text-gray-900 dark:text-white">
-    {t("pre_waitlister.form.other_city", "Which city?")}
-  </FormLabel>
-  <FormControl>
-    <Input
-      {...field}
-      className="bg-white/70 dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 focus-visible:ring-pulse-blue placeholder:text-gray-500"
-      placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
-    />
-  </FormControl>
-  <FormMessage />
-</FormItem>
-
+                <FormLabel className="block text-left m-0 p-0 leading-none font-medium">
+                  {t("pre_waitlister.form.other_city", "Which city?")}
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    className="focus-visible:ring-pulse-blue"
+                    placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )} />
           )}
-
-          <FormField control={form.control} name="agreeToTerms" render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-              <FormControl>
-                <Checkbox 
-                  checked={field.value} 
-                  onCheckedChange={field.onChange}
-                  className="border-pulse-blue data-[state=checked]:bg-pulse-blue mt-0.5" 
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
-                  {t("contact.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("contact.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
-                </FormLabel>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )} />
-
-          <FormField control={form.control} name="newsletter" render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-              <FormControl>
-                <Checkbox 
-                  checked={field.value} 
-                  onCheckedChange={field.onChange}
-                  className="border-pulse-blue data-[state=checked]:bg-pulse-blue mt-0.5" 
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
-                  {t("pre_waitlister.form.newsletter", "Keep me updated on Pulse news")}
-                </FormLabel>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )} />
 
           <Button 
             type="submit" 
