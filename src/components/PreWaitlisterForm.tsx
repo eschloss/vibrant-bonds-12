@@ -116,13 +116,15 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   return (
     <div className="relative mx-auto w-full">
-      {/* Softer frosted panel behind the form */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 w-[92%] max-w-3xl md:max-w-4xl h-[540px] rounded-[32px] bg-white/55 backdrop-blur-xl ring-1 ring-white/50 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)]" />
+      {/* Softer frosted panel that wraps content */}
+      <div className="absolute inset-0 flex justify-center">
+        <div className="w-[92%] max-w-3xl md:max-w-4xl rounded-[32px] bg-white/40 backdrop-blur-xl ring-1 ring-white/40 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)]" />
+      </div>
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="relative mx-auto w-full px-4 sm:px-6 max-w-xl md:max-w-2xl space-y-8 md:space-y-10"
+          className="relative mx-auto w-full px-4 sm:px-6 max-w-xl md:max-w-2xl space-y-8 md:space-y-10 py-10 md:py-12"
         >
           {/* Email */}
           <FormField
@@ -148,7 +150,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                         type="email"
                         placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                         {...field}
-                        className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
+                        className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] text-black placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
                       />
                     </div>
                   </FieldShell>
@@ -182,7 +184,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                         <Input
                           {...field}
                           placeholder={t("pre_waitlister.form.other_city_placeholder", "Your city")}
-                          className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
+                          className="h-20 bg-transparent border-0 shadow-none pl-14 pr-6 text-[18px] md:text-[20px] text-black placeholder:text-gray-500 placeholder:font-medium focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
                         />
                       </div>
                     </FieldShell>
