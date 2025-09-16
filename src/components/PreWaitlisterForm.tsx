@@ -6,7 +6,6 @@ import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
 
@@ -121,7 +120,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
   return (
     <div className="max-w-md mx-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-6 bg-card rounded-xl border border-border shadow-lg">
           <FormField control={form.control} name="email" render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -129,7 +128,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                   placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                   type="email" 
                   {...field} 
-                  className="focus-visible:ring-pulse-blue" 
+                  className="h-12 text-base bg-background border-border focus:border-primary focus:ring-primary/20 transition-colors" 
                 />
               </FormControl>
               <FormMessage />
@@ -138,14 +137,14 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="block text-left m-0 p-0 leading-none font-medium">
+              <FormItem className="space-y-3">
+                <FormLabel className="text-sm font-medium text-foreground">
                   {t("pre_waitlister.form.other_city", "Which city?")}
                 </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    className="focus-visible:ring-pulse-blue"
+                    className="h-12 text-base bg-background border-border focus:border-primary focus:ring-primary/20 transition-colors"
                     placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
                   />
                 </FormControl>
@@ -156,7 +155,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
           <Button 
             type="submit" 
-            className="w-full bg-pulse-blue hover:bg-pulse-blue/90 transition-colors duration-300" 
+            className="w-full h-12 text-base bg-gradient-hero text-white hover:opacity-90 transition-opacity duration-300 font-medium" 
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting ? (
