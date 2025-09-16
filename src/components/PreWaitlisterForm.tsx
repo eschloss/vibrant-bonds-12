@@ -116,15 +116,15 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   return (
     <div className="relative mx-auto w-full">
-      {/* Softer frosted panel that wraps content */}
+      {/* Frosted container with even padding on all sides */}
       <div className="absolute inset-0 flex justify-center">
-        <div className="w-[92%] max-w-3xl md:max-w-4xl rounded-[32px] bg-white/40 backdrop-blur-xl ring-1 ring-white/40 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)]" />
+        <div className="w-[92%] max-w-3xl md:max-w-4xl rounded-[32px] bg-white/25 backdrop-blur-xl ring-1 ring-white/30 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)] px-6 md:px-10 py-10 md:py-12" />
       </div>
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="relative mx-auto w-full px-4 sm:px-6 max-w-xl md:max-w-2xl space-y-8 md:space-y-10 py-10 md:py-12"
+          className="relative mx-auto w-full max-w-xl md:max-w-2xl space-y-8 md:space-y-10 px-6 md:px-10 py-10 md:py-12"
         >
           {/* Email */}
           <FormField
