@@ -118,11 +118,11 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-4xl mx-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-16">
           <FormField control={form.control} name="email" render={({ field }) => (
-            <FormItem className="space-y-3">
+            <FormItem className="space-y-4">
               <FormControl>
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-hero rounded-xl p-[3px]">
@@ -130,19 +130,19 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                       placeholder={t("pre_waitlister.form.email_placeholder", "Your email address")}
                       type="email" 
                       {...field} 
-                      className="h-16 text-base bg-white rounded-[9px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-5" 
+                      className="h-20 text-lg bg-white rounded-[9px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-8" 
                     />
                   </div>
                 </div>
               </FormControl>
-              <FormMessage className="text-sm mt-2" />
+              <FormMessage className="text-sm mt-4" />
             </FormItem>
           )} />
 
           {showOtherCity && (
             <FormField control={form.control} name="other_city" render={({ field }) => (
-              <FormItem className="space-y-5">
-                <FormLabel className="text-base font-semibold text-gray-800 tracking-wide block">
+              <FormItem className="space-y-8">
+                <FormLabel className="text-lg font-semibold text-gray-800 tracking-wide block">
                   {t("pre_waitlister.form.other_city", "Which city?")}
                 </FormLabel>
                 <FormControl>
@@ -150,21 +150,21 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                     <div className="absolute inset-0 bg-gradient-hero rounded-xl p-[3px]">
                       <Input
                         {...field}
-                        className="h-16 text-base bg-white rounded-[9px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-5"
+                        className="h-20 text-lg bg-white rounded-[9px] border-0 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all duration-200 px-8"
                         placeholder={t("pre_waitlister.form.other_city_placeholder", "Enter your city")}
                       />
                     </div>
                   </div>
                 </FormControl>
-                <FormMessage className="text-sm mt-2" />
+                <FormMessage className="text-sm mt-4" />
               </FormItem>
             )} />
           )}
 
-          <div className="pt-4">
+          <div className="pt-8">
             <Button 
               type="submit" 
-              className="w-full h-16 text-base bg-gradient-hero text-white hover:opacity-90 transition-all duration-300 font-semibold tracking-wide rounded-xl shadow-lg hover:shadow-xl" 
+              className="w-full h-20 text-lg bg-gradient-hero text-white hover:opacity-90 transition-all duration-300 font-semibold tracking-wide rounded-xl shadow-lg hover:shadow-xl" 
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting ? (
