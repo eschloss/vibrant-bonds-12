@@ -31,7 +31,7 @@ const PreWaitlisterDialog = ({ cityName, city, isCommunity, state }: PreWaitlist
         >
           <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
           <span className="relative z-10">
-            {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+            {isCommunity ? t("city.steps.get_matched.title", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
           </span>
           <ArrowRight size={18} />
         </Button>
@@ -46,7 +46,7 @@ const PreWaitlisterDialog = ({ cityName, city, isCommunity, state }: PreWaitlist
         <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto border-0 bg-white/25 backdrop-blur-xl ring-1 ring-white/30 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)] rounded-[32px]">
           <DialogHeader className="pt-6">
             <DialogTitle className="text-center text-3xl md:text-4xl font-bold mb-8 text-black leading-tight">
-              {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+              {isCommunity ? t("city.steps.get_matched.title", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
             </DialogTitle>
           </DialogHeader>
           <PreWaitlisterForm cityName={cityName} city={city} />
