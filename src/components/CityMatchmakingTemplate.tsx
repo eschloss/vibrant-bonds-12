@@ -15,7 +15,7 @@ import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "./LanguageSelector";
 import { trackTypeformRedirect } from "@/lib/utils";
-import PreWaitlisterForm from './PreWaitlisterForm';
+import PreWaitlisterDialog from './PreWaitlisterDialog';
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -298,14 +298,7 @@ const CityMatchmakingTemplate = ({
                 }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
                 
                {!active ? (
-                <div className="flex flex-col items-center">
-                  <PreWaitlisterForm cityName={cityName} city={code} />
-                  {state && (
-                    <div className="text-sm text-black/60 mt-2 text-center font-light">
-                      {cityName}, {state}
-                    </div>
-                  )}
-                </div>
+                <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
                ) : (
                 <div id="button-link1" className="flex flex-col items-center">
                   <Link 
@@ -417,7 +410,7 @@ const CityMatchmakingTemplate = ({
                   </>
                 ) : (
                   <div className="flex justify-center">
-                    <PreWaitlisterForm cityName={cityName} city={code} />
+                    <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
                   </div>
                 )}
             </div>
