@@ -43,9 +43,9 @@ const PreWaitlisterDialog = ({ cityName, city, isCommunity, state }: PreWaitlist
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-center text-2xl font-bold mb-4">
+        <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto border-0 bg-white/25 backdrop-blur-xl ring-1 ring-white/30 shadow-[0_24px_90px_rgba(0,0,0,0.18)] [box-shadow:inset_0_1px_2px_rgba(255,255,255,0.35)] rounded-[32px]">
+          <DialogHeader className="pt-6">
+            <DialogTitle className="text-center text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-green bg-clip-text text-transparent leading-tight">
               {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
             </DialogTitle>
           </DialogHeader>
