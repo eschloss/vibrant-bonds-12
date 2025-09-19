@@ -116,6 +116,11 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
   return (
     <div className="mx-auto w-full">
+      <div className="text-center mb-6 md:mb-8 px-6 md:px-10">
+        <p className="text-lg md:text-xl text-black/70 font-medium">
+          {t("pre_waitlister.launch_subtitle", "The more people who join, the faster we launch in {cityName}.").replace("{cityName}", cityName)}
+        </p>
+      </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -215,7 +220,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
                   {t("pre_waitlister.form.sending", "Joining...")}
                 </span>
               ) : (
-                t("pre_waitlister.form.submit", "Join Waitlist")
+                t("pre_waitlister.form.submit", "Save My Place")
               )}
             </Button>
           </div>
