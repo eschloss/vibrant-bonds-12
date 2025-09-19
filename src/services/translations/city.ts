@@ -40,7 +40,8 @@ export const city = {
     "city_pip.local_picks_text": "Great nearby spots for your vibe",
     "city_pip.cta": "Meet Pip",
     "city_pip.plan_ideas": "Get Ideas",
-    "city_pip.image_alt": "Pip celebrating with friends"
+    "city_pip.image_alt": "Pip celebrating with friends",
+    "city.your_city": "Your City"
   },
   es: {
     "city.help_launch": "Ayuda a lanzar Pulse en",
@@ -81,6 +82,7 @@ export const city = {
     "city_pip.local_picks_text": "Excelentes lugares cercanos para tu estilo",
     "city_pip.cta": "Conoce a Pip",
     "city_pip.plan_ideas": "Obtén Ideas",
-    "city_pip.image_alt": "Pip celebrando con amigos"
+    "city_pip.image_alt": "Pip celebrando con amigos",
+    "city.your_city": "Tu Ciudad"
   }
 };

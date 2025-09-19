@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Seo } from "@/hooks/useSeo";
 
 const Matchmaking = () => {
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, translate } = useLanguage();
   
   const seoProps = {
     title: {
@@ -24,7 +24,7 @@ const Matchmaking = () => {
     <>
       <Seo {...seoProps} />
       <CityMatchmakingTemplate 
-        cityName="Your City"
+        cityName={translate("city.your_city", "Your City")}
         code=""
         country="Worldwide"
         state=""
