@@ -706,11 +706,11 @@ const LonelinessEpidemic: React.FC = () => {
         </div>
       </section>
 
-      {/* Statistics Table */}
+      {/* Statistics Section - Comprehensive */}
       <section className="py-16 bg-gray-800/30">
         <div className="container mx-auto px-4">
           <motion.div
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -720,121 +720,301 @@ const LonelinessEpidemic: React.FC = () => {
               className="text-4xl font-bold mb-12 text-white text-center"
               variants={fadeInUp}
             >
-              Key Facts, Numbers, and Statistics
+              📊 Loneliness Epidemic: Key Facts, Numbers, and Statistics
             </motion.h2>
 
             <motion.div 
-              className="grid lg:grid-cols-2 gap-8"
+              className="grid lg:grid-cols-2 gap-8 mb-12"
               variants={fadeInUp}
             >
-              {/* Overall Statistics */}
-              <Card className="bg-gray-800/50 border-gray-700/50">
+              {/* Overall Loneliness in the U.S. */}
+              <Card className="bg-gray-800/50 border-red-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <Users className="h-5 w-5 text-pulse-pink" />
-                    Overall Loneliness Statistics
+                    <Users className="h-5 w-5 text-red-400" />
+                    Overall Loneliness in the U.S.
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Americans feeling lonely</span>
-                    <span className="font-semibold text-red-400">50%</span>
+                    <span className="text-gray-300">Adults feeling lonely at least sometimes</span>
+                    <span className="font-semibold text-red-400">50%<sup className="text-blue-400">[2]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Americans with zero close friends</span>
-                    <span className="font-semibold text-red-400">21 million</span>
+                    <span className="font-semibold text-red-400">21 million<sup className="text-blue-400">[3]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Dissatisfied with friendships</span>
-                    <span className="font-semibold text-red-400">33%</span>
+                    <span className="text-gray-300">Adults dissatisfied with friendships</span>
+                    <span className="font-semibold text-red-400">33%<sup className="text-blue-400">[2]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Gen Z reporting frequent loneliness</span>
+                    <span className="font-semibold text-red-400">79%<sup className="text-blue-400">[4]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Millennials feeling lonely often/always</span>
+                    <span className="font-semibold text-red-400">30%<sup className="text-blue-400">[20]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Average close friends (1990 vs today)</span>
-                    <span className="font-semibold text-red-400">4 → 2</span>
+                    <span className="text-gray-300">Boomers (45+) feeling lonely</span>
+                    <span className="font-semibold text-red-400">33%<sup className="text-blue-400">[21]</sup></span>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Health Impact Statistics */}
-              <Card className="bg-gray-800/50 border-gray-700/50">
+              {/* Friendship Networks */}
+              <Card className="bg-gray-800/50 border-orange-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <Heart className="h-5 w-5 text-red-500" />
-                    Health Impact Statistics
+                    <Heart className="h-5 w-5 text-orange-400" />
+                    Friendship Networks
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Average close friends (1990 vs today)</span>
+                    <span className="font-semibold text-orange-400">4 → 2<sup className="text-blue-400">[3]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Americans with no close friends</span>
+                    <span className="font-semibold text-orange-400">12%<sup className="text-blue-400">[3]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Americans with 10+ friends (then vs now)</span>
+                    <span className="font-semibold text-orange-400">33% → 13%<sup className="text-blue-400">[3]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Remote workers citing loneliness as biggest challenge</span>
+                    <span className="font-semibold text-orange-400">25%<sup className="text-blue-400">[18]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Health Impacts */}
+              <Card className="bg-gray-800/50 border-red-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-500" />
+                    Health Impacts
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Increased premature death risk</span>
-                    <span className="font-semibold text-red-400">29%</span>
+                    <span className="font-semibold text-red-400">29%<sup className="text-blue-400">[8]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Higher cardiovascular disease risk</span>
-                    <span className="font-semibold text-red-400">29%</span>
+                    <span className="font-semibold text-red-400">29%<sup className="text-blue-400">[9]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Increased stroke risk</span>
-                    <span className="font-semibold text-red-400">32%</span>
+                    <span className="font-semibold text-red-400">32%<sup className="text-blue-400">[9]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Dementia risk increase (older adults)</span>
+                    <span className="font-semibold text-red-400">50%<sup className="text-blue-400">[19]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">LGBTQ+ youth considering suicide</span>
+                    <span className="font-semibold text-red-400">45%<sup className="text-blue-400">[17]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Dementia risk increase (older adults)</span>
-                    <span className="font-semibold text-red-400">50%</span>
+                    <span className="text-gray-300">Weakened immune response</span>
+                    <span className="font-semibold text-red-400">Confirmed<sup className="text-blue-400">[10]</sup></span>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Workplace Statistics */}
-              <Card className="bg-gray-800/50 border-gray-700/50">
+              {/* COVID-19 & Social Isolation */}
+              <Card className="bg-gray-800/50 border-purple-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-orange-500" />
+                    <Shield className="h-5 w-5 text-purple-400" />
+                    COVID-19 & Social Isolation
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Adults with serious loneliness during lockdown</span>
+                    <span className="font-semibold text-purple-400">36%<sup className="text-blue-400">[14]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Young adults (18-25) serious loneliness</span>
+                    <span className="font-semibold text-purple-400">61%<sup className="text-blue-400">[14]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">UK adults feeling lonely during lockdown</span>
+                    <span className="font-semibold text-purple-400">50%<sup className="text-blue-400">[5]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Second Row of Statistics */}
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-8 mb-12"
+              variants={fadeInUp}
+            >
+              {/* Workplace & Remote Work */}
+              <Card className="bg-gray-800/50 border-yellow-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-yellow-400" />
                     Workplace & Remote Work
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Remote workers feeling lonely</span>
-                    <span className="font-semibold text-orange-400">2x more</span>
+                    <span className="text-gray-300">Remote workers more likely to feel lonely</span>
+                    <span className="font-semibold text-yellow-400">2x<sup className="text-blue-400">[18]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Employees with work best friend</span>
-                    <span className="font-semibold text-orange-400">20%</span>
+                    <span className="font-semibold text-yellow-400">20%<sup className="text-blue-400">[7]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Annual productivity loss</span>
-                    <span className="font-semibold text-orange-400">$406B</span>
+                    <span className="text-gray-300">Annual productivity loss from loneliness</span>
+                    <span className="font-semibold text-yellow-400">$406B<sup className="text-blue-400">[12]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Isolated employees missing work</span>
-                    <span className="font-semibold text-orange-400">5x more</span>
+                    <span className="font-semibold text-yellow-400">5x more<sup className="text-blue-400">[12]</sup></span>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* International Statistics */}
-              <Card className="bg-gray-800/50 border-gray-700/50">
+              {/* Technology & Social Media */}
+              <Card className="bg-gray-800/50 border-blue-500/20">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <TrendingDown className="h-5 w-5 text-purple-500" />
+                    <TrendingDown className="h-5 w-5 text-blue-400" />
+                    Technology & Social Media
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Heavy social media users feeling isolated</span>
+                    <span className="font-semibold text-blue-400">2x more<sup className="text-blue-400">[22]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Millennials/Gen Z daily social media use</span>
+                    <span className="font-semibold text-blue-400">4-5 hours<sup className="text-blue-400">[23]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Generational Differences */}
+              <Card className="bg-gray-800/50 border-green-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="h-5 w-5 text-green-400" />
+                    Generational Differences
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Gen Z with no close friends</span>
+                    <span className="font-semibold text-green-400">25%<sup className="text-blue-400">[3]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Millennials with no friends at all</span>
+                    <span className="font-semibold text-green-400">22%<sup className="text-blue-400">[20]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Gen X with no close friends</span>
+                    <span className="font-semibold text-green-400">15%<sup className="text-blue-400">[3]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Boomers (59+) feeling lonely</span>
+                    <span className="font-semibold text-green-400">33%<sup className="text-blue-400">[21]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Mental Health & Suicide */}
+              <Card className="bg-gray-800/50 border-red-600/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-red-500" />
+                    Mental Health & Suicide
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">U.S. deaths by suicide in 2023</span>
+                    <span className="font-semibold text-red-400">49,000<sup className="text-blue-400">[15]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Suicide risk for isolated older adults</span>
+                    <span className="font-semibold text-red-400">2-3x higher<sup className="text-blue-400">[16]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Loneliness correlation with anxiety/depression</span>
+                    <span className="font-semibold text-red-400">3x higher<sup className="text-blue-400">[15]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Third Row of Statistics */}
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-8"
+              variants={fadeInUp}
+            >
+              {/* Civic Engagement & Community */}
+              <Card className="bg-gray-800/50 border-indigo-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="h-5 w-5 text-indigo-400" />
+                    Civic Engagement & Community
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Civic organization membership decline (1960s-2000s)</span>
+                    <span className="font-semibold text-indigo-400">50%<sup className="text-blue-400">[11]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Americans trusting "most people" (1972 vs 2000)</span>
+                    <span className="font-semibold text-indigo-400">55% → 32%<sup className="text-blue-400">[24]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Religious attendance (1970 vs 2020)</span>
+                    <span className="font-semibold text-indigo-400">45% → 24%<sup className="text-blue-400">[25]</sup></span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Volunteer participation (1970 vs 2020)</span>
+                    <span className="font-semibold text-indigo-400">30% → 20%<sup className="text-blue-400">[26]</sup></span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* International Comparisons */}
+              <Card className="bg-gray-800/50 border-teal-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <TrendingDown className="h-5 w-5 text-teal-400" />
                     International Trends
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Global adults feeling lonely</span>
-                    <span className="font-semibold text-purple-400">25%</span>
+                    <span className="text-gray-300">Global adults feeling lonely regularly</span>
+                    <span className="font-semibold text-teal-400">25%<sup className="text-blue-400">[7]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">UK adults feeling lonely often</span>
-                    <span className="font-semibold text-purple-400">38%</span>
+                    <span className="text-gray-300">UK adults reporting frequent loneliness</span>
+                    <span className="font-semibold text-teal-400">38%<sup className="text-blue-400">[5]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Japan socially isolated adults (40+)</span>
-                    <span className="font-semibold text-purple-400">14%</span>
+                    <span className="font-semibold text-teal-400">14%<sup className="text-blue-400">[27]</sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">OECD countries chronic loneliness</span>
-                    <span className="font-semibold text-purple-400">20-30%</span>
+                    <span className="font-semibold text-teal-400">20-30%<sup className="text-blue-400">[27]</sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -1146,6 +1326,76 @@ const LonelinessEpidemic: React.FC = () => {
                       <a href="https://nap.nationalacademies.org/catalog/25663/social-isolation-and-loneliness-in-older-adults-opportunities-for-the-health-care-system" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
                         Social Isolation and Loneliness in Older Adults, 2020
                       </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[20] YouGov</p>
+                      <a href="https://today.yougov.com/topics/lifestyle/articles-reports/2019/07/23/one-five-millennials-say-they-have-no-friends" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        One-Fifth of Millennials Have No Friends, 2019
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[21] AARP</p>
+                      <a href="https://www.aarp.org/research/topics/life/info-2020/loneliness-coronavirus.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Loneliness and Social Connections in Adults 45+, 2020
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[22] Twenge et al.</p>
+                      <a href="https://psycnet.apa.org/record/2018-21749-001" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Social Media and Loneliness, J Abnorm Psychol, 2018
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[23] Pew Research Center</p>
+                      <a href="https://www.pewresearch.org/internet/2022/04/07/social-media-use-in-2022/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Social Media Use in 2022
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[24] General Social Survey</p>
+                      <a href="https://gss.norc.org/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Trust Data, 2000
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[25] PEW Research</p>
+                      <a href="https://www.pewforum.org/2021/04/07/religion-in-america/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Religion in America, 2021
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[26] Independent Sector</p>
+                      <a href="https://independentsector.org/resource/volunteering-in-the-us/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Volunteering in the U.S., 2020
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[27] OECD</p>
+                      <p className="text-gray-300 text-sm">Loneliness Data, 2021</p>
                     </CardContent>
                   </Card>
                 </div>
