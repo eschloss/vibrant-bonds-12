@@ -14,7 +14,13 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         <MessageSquare className="h-5 w-5 text-accent" />
         {question}
       </h3>
-      <div className="text-gray-300">{answer}</div>
+      <div 
+        className="text-gray-300 faq-answer prose prose-invert" 
+        dangerouslySetInnerHTML={{ __html: typeof answer === 'string' ? answer : '' }}
+      />
+      {typeof answer !== 'string' && (
+        <div className="text-gray-300">{answer}</div>
+      )}
     </div>
   );
 };

@@ -559,5 +559,21 @@ html, body, #root {
     border-color: #38D1BF !important;
     box-shadow: none !important;
   }
+  
+  /* FAQ Answer Link Styles */
+  .faq-answer a {
+    color: hsl(var(--pulse-pink));
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .faq-answer a:hover {
+    color: hsl(var(--accent));
+  }
+  .faq-answer sup {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 1;
+  }
 }
 /* ... keep the rest of index.css the same ... */
