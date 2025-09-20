@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AlertTriangle, Users, Heart, TrendingDown, Clock, Shield, ArrowRight } from "lucide-react";
+import { AlertTriangle, Users, Heart, TrendingDown, Clock, Shield, ArrowRight, Brain, ExternalLink, CheckCircle } from "lucide-react";
+import GenerationalLonelinessChart from '@/components/GenerationalLonelinessChart';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -463,49 +464,42 @@ const LonelinessEpidemic: React.FC = () => {
         </div>
       </section>
 
-      {/* Generational Trends */}
+      {/* Generational Trends - Interactive Visualization */}
       <section className="py-16">
         <div className="container mx-auto px-4">
+          <GenerationalLonelinessChart className="max-w-7xl mx-auto" />
+          
+          {/* Additional Context */}
           <motion.div
-            className="max-w-6xl mx-auto"
+            className="max-w-4xl mx-auto mt-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-             <motion.h2 
-               className="text-4xl font-bold mb-12 text-white text-center"
-               variants={fadeInUp}
-             >
-               Loneliness Statistics by Age: Gen Z, Millennial, Gen X, and Boomer Data
-             </motion.h2>
-            
-            <motion.div 
-              className="space-y-6"
-              variants={fadeInUp}
-            >
-              {generationStats.map((gen, index) => (
-                <Card key={index} className="bg-gray-800/50 border-gray-700/50">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-white mb-2">{gen.generation}</h3>
-                        <p className="text-gray-400">{gen.description}</p>
-                      </div>
-                      <div className="flex gap-6 text-center">
-                        <div>
-                          <div className="text-2xl font-bold text-red-400">{gen.loneliness}</div>
-                          <div className="text-sm text-gray-500">Feel Lonely</div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold text-orange-400">{gen.noFriends}</div>
-                          <div className="text-sm text-gray-500">No Close Friends</div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700/30">
+                <h3 className="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
+                  <Brain className="h-6 w-6 text-purple-400" />
+                  Understanding the Generational Paradox
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                  The data reveals a troubling paradox: <strong>Gen Z — the most digitally connected generation in history — reports the highest rates of loneliness</strong>. 
+                  With a UCLA Loneliness Scale score of 48.3 out of 80<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300">[4]</a></sup>, 
+                  they significantly outpace older generations who score lower despite having fewer digital tools for connection.
+                </p>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, 
+                  while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, 
+                  despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.
+                </p>
+                <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
+                  <p className="text-purple-200 font-medium">
+                    💡 <strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating the right kinds of meaningful, 
+                    in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
