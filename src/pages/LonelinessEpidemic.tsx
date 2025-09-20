@@ -88,9 +88,9 @@ const LonelinessEpidemic: React.FC = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-red-600 blur-3xl"></div>
-          <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-orange-600 blur-3xl"></div>
-          <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-red-500 blur-3xl"></div>
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
+          <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl"></div>
+          <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-blue-600 blur-3xl"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -114,11 +114,11 @@ const LonelinessEpidemic: React.FC = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 The Loneliness
               </span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-red-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-blue via-accent to-pulse-pink">
                 Epidemic
               </span>
             </h1>
@@ -128,7 +128,7 @@ const LonelinessEpidemic: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <a href="#key-stats" className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 hover:from-red-600 hover:via-orange-600 hover:to-red-700 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-red-500/20 transition-all duration-300 hover:shadow-red-500/30 font-medium text-lg">
+              <a href="#key-stats" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                 <span>View Statistics</span>
                 <ArrowRight className="h-5 w-5" />
               </a>
@@ -140,19 +140,19 @@ const LonelinessEpidemic: React.FC = () => {
 
             {/* At a glance - Crisis Stats */}
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
-              <div className="rounded-xl border border-red-400/30 bg-red-900/20 p-4">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1">Scale</div>
                 <div className="text-gray-300">50% of Americans feel lonely regularly</div>
               </div>
-              <div className="rounded-xl border border-orange-400/30 bg-orange-900/20 p-4">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1">Health Impact</div>
                 <div className="text-gray-300">29% higher risk of premature death</div>
               </div>
-              <div className="rounded-xl border border-red-400/30 bg-red-900/20 p-4">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1">Most Affected</div>
                 <div className="text-gray-300">Gen Z reports 79% loneliness rate</div>
               </div>
-              <div className="rounded-xl border border-orange-400/30 bg-orange-900/20 p-4">
+              <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1">Friendless</div>
                 <div className="text-gray-300">21 million have zero close friends</div>
               </div>
