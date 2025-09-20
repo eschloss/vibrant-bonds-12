@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import Navbar from "@/components/Navbar";
@@ -33,43 +34,47 @@ const Activities = () => {
 
   // SEO will be handled by Seo component
 
-  const activities = [
+  // Activity categories for themed sections
+  const activityCategories = [
     {
-      id: "surfing",
-      name: "Beach & Water",
-      image: pipSurfing,
-      vibe: "Adventurous"
+      title: "Outdoor Adventures",
+      description: "Connect through shared challenges and natural beauty",
+      color: "from-green-500 to-blue-500",
+      activities: [
+        { id: "surfing", name: "Beach & Water", image: pipSurfing, vibe: "Adventurous" },
+        { id: "volleyball", name: "Beach Sports", image: pipVolleyball, vibe: "Energetic" },
+        { id: "camping", name: "Outdoor Adventures", image: pipCamping, vibe: "Peaceful" }
+      ]
     },
     {
-      id: "volleyball",
-      name: "Beach Sports",
-      image: pipVolleyball,
-      vibe: "Energetic"
+      title: "Creative & Cultural",
+      description: "Express yourselves and discover hidden talents together",
+      color: "from-purple-500 to-pink-500",
+      activities: [
+        { id: "bookclub", name: "Book Clubs", image: pipBookclub, vibe: "Thoughtful" },
+        { id: "pottery", name: "Arts & Crafts", image: pipPottery, vibe: "Creative" },
+        { id: "escape-room", name: "Problem Solving", image: pipEscapeRoom, vibe: "Strategic" }
+      ]
     },
     {
-      id: "camping",
-      name: "Outdoor Adventures",
-      image: pipCamping,
-      vibe: "Peaceful"
-    },
-    {
-      id: "pilates",
-      name: "Wellness & Fitness",
-      image: pipPilates,
-      vibe: "Mindful"
-    },
-    {
-      id: "bookclub",
-      name: "Creative & Cultural",
-      image: pipBookclub,
-      vibe: "Thoughtful"
-    },
-    {
-      id: "pottery",
-      name: "Arts & Crafts",
-      image: pipPottery,
-      vibe: "Creative"
+      title: "Wellness & Social",
+      description: "Build bonds while taking care of your mind and body",
+      color: "from-pink-500 to-orange-500",
+      activities: [
+        { id: "pilates", name: "Wellness & Fitness", image: pipPilates, vibe: "Mindful" }
+      ]
     }
+  ];
+
+  // All activities for the hero collage
+  const allActivities = [
+    { id: "surfing", name: "Surfing", image: pipSurfing, position: "top-10 left-10", rotation: "-rotate-3", size: "w-32 h-32", zIndex: "z-20" },
+    { id: "volleyball", name: "Volleyball", image: pipVolleyball, position: "top-20 right-20", rotation: "rotate-6", size: "w-28 h-28", zIndex: "z-10" },
+    { id: "camping", name: "Camping", image: pipCamping, position: "top-32 left-1/2 -translate-x-1/2", rotation: "-rotate-2", size: "w-36 h-36", zIndex: "z-30" },
+    { id: "pilates", name: "Pilates", image: pipPilates, position: "bottom-32 left-16", rotation: "rotate-3", size: "w-30 h-30", zIndex: "z-15" },
+    { id: "bookclub", name: "Book Club", image: pipBookclub, position: "bottom-20 right-10", rotation: "-rotate-6", size: "w-32 h-32", zIndex: "z-25" },
+    { id: "pottery", name: "Pottery", image: pipPottery, position: "top-1/2 left-8 -translate-y-1/2", rotation: "rotate-12", size: "w-28 h-28", zIndex: "z-5" },
+    { id: "escape-room", name: "Escape Room", image: pipEscapeRoom, position: "top-1/2 right-8 -translate-y-1/2", rotation: "-rotate-12", size: "w-30 h-30", zIndex: "z-15" }
   ];
 
   return (
@@ -131,8 +136,8 @@ const Activities = () => {
         </div>
       </section>
 
-      {/* Activities Grid */}
-      <section className="py-12 md:py-16 relative">
+      {/* Hero Activity Collage */}
+      <section className="py-16 md:py-24 relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-pulse-pink/20 blur-3xl" />
           <div className="absolute bottom-0 -left-10 w-72 h-72 rounded-full bg-accent/20 blur-3xl" />
@@ -153,50 +158,126 @@ const Activities = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-            {activities.map((activity, index) => (
+          {/* Large Activity Collage */}
+          <div className="relative h-96 md:h-[500px] mb-20 mx-auto max-w-4xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-3xl backdrop-blur-sm border border-gray-700/50" />
+            
+            {allActivities.map((activity, index) => (
               <motion.div
                 key={activity.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className={`absolute ${activity.position} ${activity.size} ${activity.zIndex}`}
+                initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: parseInt(activity.rotation.match(/-?\d+/)?.[0] || "0") }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.1, zIndex: 50 }}
               >
-                <Card className="group overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 bg-gray-800/50 border border-gray-700 backdrop-blur-md hover:border-accent/40">
-                  <div className="aspect-square relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10" />
+                <div className={`${activity.rotation} group cursor-pointer`}>
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-gray-800 border border-gray-600">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20" />
                     <img 
                       src={activity.image} 
                       alt={`Pip enjoying ${activity.name}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="absolute bottom-2 left-2 right-2">
-                      <span className="bg-gray-900/90 text-white px-2 py-1 rounded text-xs font-medium block text-center border border-gray-700">
-                        {activity.vibe}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                    <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="bg-white/90 text-gray-900 px-2 py-1 rounded text-xs font-medium block text-center">
+                        {activity.name}
                       </span>
                     </div>
                   </div>
-                  
-                  <div className="p-3">
-                    <h3 className="font-medium text-sm text-center text-white">
-                      {activity.name}
-                    </h3>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Center testimonial */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="bg-white/95 backdrop-blur-md rounded-2xl p-6 max-w-xs text-center shadow-2xl border border-gray-200">
+                <p className="text-gray-800 text-sm font-medium mb-2">
+                  "Our pottery class turned into weekly coffee dates. Best decision ever!"
+                </p>
+                <p className="text-gray-600 text-xs">— Sarah, matched in Austin</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Activity Categories */}
+          <div className="space-y-12">
+            {activityCategories.map((category, categoryIndex) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: categoryIndex * 0.1 }}
+                className="relative overflow-hidden rounded-3xl bg-gray-800/30 border border-gray-700 backdrop-blur-md p-8"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-5`} />
+                <div className="relative z-10">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-white mb-2">{category.title}</h3>
+                    <p className="text-gray-300">{category.description}</p>
                   </div>
-                </Card>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {category.activities.map((activity, actIndex) => (
+                      <motion.div
+                        key={activity.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: actIndex * 0.1 }}
+                        className="group"
+                      >
+                        <Card className="overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 bg-gray-800/50 border border-gray-600 backdrop-blur-md hover:border-accent/40">
+                          <div className="aspect-square relative overflow-hidden">
+                            <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-10`} />
+                            <img 
+                              src={activity.image} 
+                              alt={`Pip enjoying ${activity.name}`}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute bottom-3 left-3 right-3">
+                              <span className="bg-gray-900/90 text-white px-3 py-1 rounded-full text-xs font-medium block text-center border border-gray-700">
+                                {activity.vibe}
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <div className="p-4">
+                            <h4 className="font-medium text-center text-white">
+                              {activity.name}
+                            </h4>
+                          </div>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            className="text-center"
+            className="text-center mt-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Button variant="outline" size="lg" className="group border-gray-600 text-white hover:bg-gray-800">
+            <Button variant="outline" size="lg" className="group border-gray-600 text-white hover:bg-gray-800 mb-4">
               View All Activities in Your City
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
+            <p className="text-sm text-gray-400">
+              87% of crews meet within 2 weeks of being matched
+            </p>
           </motion.div>
         </div>
       </section>
@@ -274,6 +355,21 @@ const Activities = () => {
                 </p>
               </motion.div>
             </div>
+
+            <motion.div
+              className="text-center mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <Link to="/meet-pip">
+                <Button variant="outline" size="lg" className="group border-gray-600 text-white hover:bg-gray-800">
+                  Learn More About Pip
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
