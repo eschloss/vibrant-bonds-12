@@ -87,6 +87,11 @@ const Hero = () => {
                 <span>{t("hero.cta", "Meet Your Crew")}</span>
               </Button>
             </Link>
+            <Link to="/loneliness-epidemic#key-stats">
+              <Button size="xl" variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 shadow-lg transition-all duration-500 hover:scale-105 rounded-full">
+                <span>View Stats</span>
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </motion.div>
