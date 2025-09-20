@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Users, Sparkles, Heart, Calendar } from "lucide-react";
+import { ArrowRight, Users, Sparkles, Heart, Calendar, Database, Eye, Brain, MessageSquare, Zap } from "lucide-react";
 
 // Import Pip activity images
 import pipSurfing from "@/assets/pip-surfing.png";
