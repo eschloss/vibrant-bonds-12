@@ -90,278 +90,74 @@ const LonelinessEpidemic: React.FC = () => {
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-red-600 blur-3xl"></div>
           <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-orange-600 blur-3xl"></div>
+          <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-red-500 blur-3xl"></div>
         </div>
-        
-        {/* Cool Background Animations */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Floating Crisis Icons */}
-          <motion.div
-            className="absolute top-20 left-10 opacity-20"
-            animate={{ 
-              y: [0, -20, 0], 
-              rotate: [0, 5, -5, 0] 
-            }}
-            transition={{ 
-              duration: 4, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-          >
-            <AlertTriangle className="h-6 w-6 text-red-400" />
-          </motion.div>
-          
-          <motion.div
-            className="absolute top-32 right-20 opacity-10"
-            animate={{ 
-              y: [0, 15, 0], 
-              x: [0, 10, 0] 
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity, 
-              ease: "easeInOut",
-              delay: 2
-            }}
-          >
-            <Heart className="h-8 w-8 text-orange-400" />
-          </motion.div>
-          
-          <motion.div
-            className="absolute bottom-40 left-1/4 opacity-15"
-            animate={{ 
-              y: [0, -10, 0], 
-              scale: [1, 1.1, 1] 
-            }}
-            transition={{ 
-              duration: 5, 
-              repeat: Infinity, 
-              ease: "easeInOut",
-              delay: 1
-            }}
-          >
-            <Users className="h-7 w-7 text-red-300" />
-          </motion.div>
-
-          {/* Subtle Grid Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <motion.div
-              className="w-full h-full"
-              style={{
-                backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)",
-                backgroundSize: "50px 50px"
-              }}
-              animate={{
-                backgroundPosition: ["0px 0px", "50px 50px", "0px 0px"]
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          </div>
-
-          {/* Floating Particles */}
-          {Array.from({ length: 8 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-red-400/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0]
-              }}
-              transition={{
-                duration: 4 + Math.random() * 4,
-                repeat: Infinity,
-                delay: Math.random() * 4,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-
-          {/* Subtle Pulse Rings */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 border border-red-500/10 rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.1, 0.3]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          <motion.div
-            className="absolute top-1/2 left-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 border border-orange-500/10 rounded-full"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.05, 0.2]
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
-        </div>
-        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            className="text-center max-w-6xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="text-center max-w-5xl mx-auto"
           >
-            {/* Crisis Alert with Enhanced Animation */}
-            <motion.div 
-              className="flex items-center justify-center gap-3 mb-6"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-            >
-              <motion.div
-                animate={{ 
-                  rotate: [0, -5, 5, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+            <div className="mb-8">
+              <motion.div 
+                initial={{ scale: 0 }} 
+                animate={{ scale: 1 }} 
+                transition={{ delay: 0.2, type: "spring" }} 
+                className="inline-block"
               >
-                <AlertTriangle className="h-8 w-8 text-red-500" />
+                <div className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4" />
+                  🚨 PUBLIC HEALTH CRISIS
+                </div>
               </motion.div>
-              
-              <motion.div
-                className="relative"
-                animate={{ 
-                  boxShadow: [
-                    "0 0 20px rgba(220, 38, 127, 0.3)",
-                    "0 0 30px rgba(220, 38, 127, 0.6)", 
-                    "0 0 20px rgba(220, 38, 127, 0.3)"
-                  ]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <Badge variant="destructive" className="px-4 py-2 text-sm font-semibold animate-pulse">
-                  PUBLIC HEALTH CRISIS
-                </Badge>
-              </motion.div>
-              
-              <motion.div
-                animate={{ 
-                  rotate: [0, 5, -5, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5
-                }}
-              >
-                <AlertTriangle className="h-8 w-8 text-red-500" />
-              </motion.div>
-            </motion.div>
-
+            </div>
+            
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500">
-                The Loneliness Epidemic
+                The Loneliness
+              </span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-red-600">
+                Epidemic
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
               A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.
             </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+              <a href="#key-stats" className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 hover:from-red-600 hover:via-orange-600 hover:to-red-700 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-red-500/20 transition-all duration-300 hover:shadow-red-500/30 font-medium text-lg">
+                <span>View Statistics</span>
+                <ArrowRight className="h-5 w-5" />
+              </a>
+              <Link to="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
+                <span>Find Connection</span>
+                <Heart className="h-5 w-5" />
+              </Link>
+            </div>
 
-            {/* Enhanced Statistics Cards */}
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.1,
-                    delayChildren: 0.3
-                  }
-                }
-              }}
-            >
-              {keyStats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  variants={{
-                    hidden: { 
-                      opacity: 0, 
-                      y: 30,
-                      scale: 0.9
-                    },
-                    visible: { 
-                      opacity: 1, 
-                      y: 0,
-                      scale: 1,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 12
-                      }
-                    }
-                  }}
-                  whileHover={{ 
-                    y: -5,
-                    scale: 1.05,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="group"
-                >
-                  <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-red-500/50 transition-all duration-300 relative overflow-hidden">
-                    {/* Animated Border Glow */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10 opacity-0 group-hover:opacity-100"
-                      animate={{
-                        x: ["-100%", "100%"]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    />
-                    
-                    <CardContent className="p-4 text-center relative z-10">
-                      <motion.div 
-                        className="text-3xl font-bold text-red-400 mb-2"
-                        animate={{ 
-                          scale: [1, 1.05, 1] 
-                        }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity,
-                          delay: index * 0.2
-                        }}
-                      >
-                        {stat.number}
-                      </motion.div>
-                      <div className="text-sm text-gray-300 mb-1">{stat.text}</div>
-                      <div className="text-xs text-gray-500">{stat.source}</div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
+            {/* At a glance - Crisis Stats */}
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+              <div className="rounded-xl border border-red-400/30 bg-red-900/20 p-4">
+                <div className="text-white font-semibold mb-1">Scale</div>
+                <div className="text-gray-300">50% of Americans feel lonely regularly</div>
+              </div>
+              <div className="rounded-xl border border-orange-400/30 bg-orange-900/20 p-4">
+                <div className="text-white font-semibold mb-1">Health Impact</div>
+                <div className="text-gray-300">29% higher risk of premature death</div>
+              </div>
+              <div className="rounded-xl border border-red-400/30 bg-red-900/20 p-4">
+                <div className="text-white font-semibold mb-1">Most Affected</div>
+                <div className="text-gray-300">Gen Z reports 79% loneliness rate</div>
+              </div>
+              <div className="rounded-xl border border-orange-400/30 bg-orange-900/20 p-4">
+                <div className="text-white font-semibold mb-1">Friendless</div>
+                <div className="text-gray-300">21 million have zero close friends</div>
+              </div>
+            </div>
+            <div className="text-center mt-3 text-xs text-gray-400">Source: U.S. Surgeon General, Cigna Health Survey, Survey Center on American Life</div>
           </motion.div>
         </div>
       </section>
