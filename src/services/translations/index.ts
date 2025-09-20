@@ -11,6 +11,7 @@ import { hero } from './hero';
 import { howItWorks } from './howItWorks';
 import { icebreakers } from './icebreakers';
 import { team } from './team';
+import { lonelinessEpidemic } from './lonelinessEpidemic';
 
 // Combine all translation categories
 export const translations = {
@@ -27,6 +28,7 @@ export const translations = {
     ...howItWorks.en,
     ...icebreakers.en,
     ...team.en,
+    ...lonelinessEpidemic.en,
   },
   es: {
     ...shared.es,
@@ -41,6 +43,7 @@ export const translations = {
     ...howItWorks.es,
     ...icebreakers.es,
     ...team.es,
+    ...lonelinessEpidemic.es,
   }
 };
 

@@ -10,8 +10,12 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQItem from "@/components/FAQItem";
+import Text from "@/components/Text";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const LonelinessEpidemic: React.FC = () => {
+  const { t } = useTranslation();
+  
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 }
@@ -28,36 +32,36 @@ const LonelinessEpidemic: React.FC = () => {
   };
 
   const keyStats = [
-    { number: "50%", text: "of Americans report experiencing loneliness", source: "Cigna, 2023" },
-    { number: "21M", text: "Americans have zero close friends", source: "Survey Center on American Life, 2021" },
-    { number: "79%", text: "of Gen Z reports frequent loneliness", source: "Cigna, 2020" },
-    { number: "29%", text: "increased risk of premature death", source: "PLOS Medicine, 2015" }
+    { number: "50%", text: t("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
+    { number: "21M", text: t("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
+    { number: "79%", text: t("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
+    { number: "29%", text: t("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
   ];
 
   const healthImpacts = [
     {
       icon: <Heart className="h-6 w-6 text-red-500" />,
-      title: "Cardiovascular Disease",
-      stat: "29% higher risk",
-      description: "Loneliness increases risk of heart disease comparable to smoking"
+      title: t("loneliness.health.cardiovascular.title", "Cardiovascular Disease"),
+      stat: t("loneliness.health.cardiovascular.stat", "29% higher risk"),
+      description: t("loneliness.health.cardiovascular.description", "Loneliness increases risk of heart disease comparable to smoking")
     },
     {
       icon: <TrendingDown className="h-6 w-6 text-orange-500" />,
-      title: "Stroke Risk", 
-      stat: "32% increase",
-      description: "Chronic loneliness significantly raises stroke probability"
+      title: t("loneliness.health.stroke.title", "Stroke Risk"), 
+      stat: t("loneliness.health.stroke.stat", "32% increase"),
+      description: t("loneliness.health.stroke.description", "Chronic loneliness significantly raises stroke probability")
     },
     {
       icon: <Shield className="h-6 w-6 text-yellow-500" />,
-      title: "Immune Function",
-      stat: "Weakened response",
-      description: "Lonely individuals show compromised immune systems"
+      title: t("loneliness.health.immune.title", "Immune Function"),
+      stat: t("loneliness.health.immune.stat", "Weakened response"),
+      description: t("loneliness.health.immune.description", "Lonely individuals show compromised immune systems")
     },
     {
       icon: <Clock className="h-6 w-6 text-purple-500" />,
-      title: "Premature Death",
-      stat: "30% higher risk", 
-      description: "Effect comparable to smoking 15 cigarettes daily"
+      title: t("loneliness.health.death.title", "Premature Death"),
+      stat: t("loneliness.health.death.stat", "30% higher risk"), 
+      description: t("loneliness.health.death.description", "Effect comparable to smoking 15 cigarettes daily")
     }
   ];
 
@@ -125,32 +129,32 @@ const LonelinessEpidemic: React.FC = () => {
               >
                 <div className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4" />
-                  🚨 PUBLIC HEALTH CRISIS
+                  <Text id="loneliness.hero.badge">🚨 PUBLIC HEALTH CRISIS</Text>
                 </div>
               </motion.div>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                The Loneliness
+                <Text id="loneliness.hero.title1">The Loneliness</Text>
               </span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-blue via-accent to-pulse-pink">
-                Epidemic
+                <Text id="loneliness.hero.title2">Epidemic</Text>
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
-              A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.
+              <Text id="loneliness.hero.description">A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.</Text>
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
               <a href="#key-stats" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
-                <span>View Statistics</span>
+                <Text id="loneliness.hero.cta_stats">View Statistics</Text>
                 <ArrowRight className="h-5 w-5" />
               </a>
               <Link to="/" className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 font-medium text-lg border border-gray-600">
-                <span>Find Connection</span>
+                <Text id="loneliness.hero.cta_connect">Find Connection</Text>
                 <Heart className="h-5 w-5" />
               </Link>
             </div>
@@ -158,23 +162,41 @@ const LonelinessEpidemic: React.FC = () => {
             {/* At a glance - Crisis Stats */}
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Scale</div>
-                <div className="text-gray-300">50% of Americans feel lonely regularly</div>
+                <div className="text-white font-semibold mb-1">
+                  <Text id="loneliness.stats.scale.label">Scale</Text>
+                </div>
+                <div className="text-gray-300">
+                  <Text id="loneliness.stats.scale.value">50% of Americans feel lonely regularly</Text>
+                </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Health Impact</div>
-                <div className="text-gray-300">29% higher risk of premature death</div>
+                <div className="text-white font-semibold mb-1">
+                  <Text id="loneliness.stats.health.label">Health Impact</Text>
+                </div>
+                <div className="text-gray-300">
+                  <Text id="loneliness.stats.health.value">29% higher risk of premature death</Text>
+                </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Most Affected</div>
-                <div className="text-gray-300">Gen Z reports 79% loneliness rate</div>
+                <div className="text-white font-semibold mb-1">
+                  <Text id="loneliness.stats.affected.label">Most Affected</Text>
+                </div>
+                <div className="text-gray-300">
+                  <Text id="loneliness.stats.affected.value">Gen Z reports 79% loneliness rate</Text>
+                </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="text-white font-semibold mb-1">Friendless</div>
-                <div className="text-gray-300">21 million have zero close friends</div>
+                <div className="text-white font-semibold mb-1">
+                  <Text id="loneliness.stats.friendless.label">Friendless</Text>
+                </div>
+                <div className="text-gray-300">
+                  <Text id="loneliness.stats.friendless.value">21 million have zero close friends</Text>
+                </div>
               </div>
             </div>
-            <div className="text-center mt-3 text-xs text-gray-400">Source: U.S. Surgeon General, Cigna Health Survey, Survey Center on American Life</div>
+            <div className="text-center mt-3 text-xs text-gray-400">
+              <Text id="loneliness.stats.source">Source: U.S. Surgeon General, Cigna Health Survey, Survey Center on American Life</Text>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -195,13 +217,13 @@ const LonelinessEpidemic: React.FC = () => {
           >
             <h2 className="text-4xl font-bold mb-8 text-white flex items-center gap-3">
               <Users className="h-8 w-8 text-pulse-pink" />
-              Loneliness Crisis: Understanding the Public Health Emergency
+              <Text id="loneliness.intro.title">Loneliness Crisis: Understanding the Public Health Emergency</Text>
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              Not long ago, loneliness was thought of as a personal problem — a fleeting feeling you might experience after moving to a new city, going through a breakup, or losing a loved one. Today, it's increasingly recognized as a public health crisis that touches millions of people across every generation, income level, and culture.
+              <Text id="loneliness.intro.paragraph1">Not long ago, loneliness was thought of as a personal problem — a fleeting feeling you might experience after moving to a new city, going through a breakup, or losing a loved one. Today, it's increasingly recognized as a public health crisis that touches millions of people across every generation, income level, and culture.</Text>
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              In 2023, U.S. Surgeon General Dr. Vivek Murthy issued a landmark advisory calling loneliness and social isolation an "epidemic."<sup><a href="#ref-1" className="text-blue-400 hover:text-blue-300 font-semibold">[1]</a></sup> He compared the health impact of disconnection to smoking 15 cigarettes a day, warning that the absence of meaningful social bonds is shortening lives and worsening the nation's mental health crisis. It was one of the clearest signals yet that loneliness is not a fringe issue, but one of the defining challenges of our time.
+              <Text id="loneliness.intro.paragraph2">In 2023, U.S. Surgeon General Dr. Vivek Murthy issued a landmark advisory calling loneliness and social isolation an "epidemic." He compared the health impact of disconnection to smoking 15 cigarettes a day, warning that the absence of meaningful social bonds is shortening lives and worsening the nation's mental health crisis. It was one of the clearest signals yet that loneliness is not a fringe issue, but one of the defining challenges of our time.</Text>
             </p>
           </motion.div>
         </div>
@@ -1397,29 +1419,29 @@ const LonelinessEpidemic: React.FC = () => {
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What makes loneliness different from being alone?"
-                    answer="Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections."
+                    question={t("loneliness.faq.q6", "What makes loneliness different from being alone?")}
+                    answer={t("loneliness.faq.a6", "Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="How does urban living contribute to loneliness?"
-                    answer="Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities."
+                    question={t("loneliness.faq.q7", "How does urban living contribute to loneliness?")}
+                    answer={t("loneliness.faq.a7", "Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What is Pulse and how can it help with loneliness?"
-                    answer="<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>."
+                    question={t("loneliness.faq.q8", "What is Pulse and how can it help with loneliness?")}
+                    answer={t("loneliness.faq.a8", "<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What evidence-based solutions work best for loneliness?"
-                    answer="The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness."
+                    question={t("loneliness.faq.q9", "What evidence-based solutions work best for loneliness?")}
+                    answer={t("loneliness.faq.a9", "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.")}
                   />
                 </motion.div>
               </motion.div>
@@ -1551,19 +1573,16 @@ const LonelinessEpidemic: React.FC = () => {
               >
                  <h2 className="text-4xl md:text-5xl font-bold mb-6">
                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                     Join the Fight Against Loneliness: Connect and Thrive Today
+                     <Text id="loneliness.conclusion.title">Join the Fight Against Loneliness: Connect and Thrive Today</Text>
                    </span>
                  </h2>
                 
                  <p className="text-lg text-gray-300 mb-6 max-w-3xl mx-auto">
-                   Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, 
-                   yet loneliness is not inevitable. Research shows that <Link to="/communities" className="text-pulse-pink hover:text-accent transition-colors underline">strong communities</Link> and 
-                   meaningful social connections can dramatically improve both mental and physical health outcomes.
+                   <Text id="loneliness.conclusion.paragraph1">Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, yet loneliness is not inevitable. Research shows that strong communities and meaningful social connections can dramatically improve both mental and physical health outcomes.</Text>
                  </p>
                  
                  <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
-                   Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. 
-                   That's where innovative solutions like <Link to="/about" className="text-pulse-pink hover:text-accent transition-colors underline">Pulse's AI-powered friend group matching</Link> come in—bridging the gap between online connections and real-world social interaction through <Link to="/plan-ideas" className="text-pulse-pink hover:text-accent transition-colors underline">carefully curated local activities</Link>.
+                   <Text id="loneliness.conclusion.paragraph2">Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. That's where innovative solutions like Pulse's AI-powered friend group matching come in—bridging the gap between online connections and real-world social interaction through carefully curated local activities.</Text>
                  </p>
                 
                  <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
@@ -1572,7 +1591,7 @@ const LonelinessEpidemic: React.FC = () => {
                        size="xl" 
                        className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
                      >
-                       <span>Find Your Friend Group Today</span>
+                       <Text id="loneliness.conclusion.cta1">Find Your Friend Group Today</Text>
                        <ArrowRight className="ml-2 h-5 w-5" />
                      </Button>
                    </Link>
@@ -1583,7 +1602,7 @@ const LonelinessEpidemic: React.FC = () => {
                        variant="outline" 
                        className="border-2 border-gray-300 text-gray-300 hover:bg-gray-700 hover:border-gray-200 shadow-lg transition-all duration-300 hover:scale-105 font-medium text-lg"
                      >
-                       <span>Learn About Our Mission</span>
+                       <Text id="loneliness.conclusion.cta2">Learn About Our Mission</Text>
                      </Button>
                    </Link>
                  </div>
@@ -1594,7 +1613,7 @@ const LonelinessEpidemic: React.FC = () => {
                    whileInView={{ opacity: 1, y: 0 }}
                    transition={{ delay: 0.2, duration: 0.6 }}
                  >
-                   Don't wait. Start connecting today. Your future self will thank you. <Link to="/contact" className="text-pulse-pink hover:text-accent transition-colors underline">Contact us</Link> to learn about partnership opportunities or <Link to="/careers" className="text-pulse-pink hover:text-accent transition-colors underline">join our mission</Link> to combat loneliness.
+                   <Text id="loneliness.conclusion.footer_text">Don't wait. Start connecting today. Your future self will thank you. Contact us to learn about partnership opportunities or join our mission to combat loneliness.</Text>
                  </motion.p>
               </motion.div>
             </div>
