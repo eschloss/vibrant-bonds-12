@@ -67,9 +67,8 @@ const LonelinessEpidemic: React.FC = () => {
   ];
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <Navbar />
-      <div className="min-h-screen bg-gray-900 pt-16">
         <Seo
           title={{
             en: "The Loneliness Epidemic: Statistics, Causes, and Solutions in 2025",
@@ -87,9 +86,11 @@ const LonelinessEpidemic: React.FC = () => {
         />
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-gray-900 to-orange-900/20" />
+      <section className="pt-32 pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-red-600 blur-3xl"></div>
+          <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-orange-600 blur-3xl"></div>
+        </div>
         
         {/* Cool Background Animations */}
         <div className="absolute inset-0 pointer-events-none">
@@ -214,10 +215,10 @@ const LonelinessEpidemic: React.FC = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
+            className="text-center max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
             {/* Crisis Alert with Enhanced Animation */}
             <motion.div 
@@ -275,27 +276,15 @@ const LonelinessEpidemic: React.FC = () => {
               </motion.div>
             </motion.div>
 
-            {/* Clean Title */}
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400"
-              variants={fadeInUp}
-            >
-              The Loneliness Epidemic
-            </motion.h1>
-
-            {/* Subtitle with Fade Effect */}
-            <motion.p
-              className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
-              variants={fadeInUp}
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            >
-              Statistics, Causes, and the Search for Friendship in 2025
-            </motion.p>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500">
+                The Loneliness Epidemic
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+              A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.
+            </p>
 
             {/* Enhanced Statistics Cards */}
             <motion.div
@@ -338,7 +327,7 @@ const LonelinessEpidemic: React.FC = () => {
                   }}
                   className="group"
                 >
-                  <Card className="bg-gray-800/50 border-red-500/20 hover:border-red-500/60 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 relative overflow-hidden">
+                  <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-red-500/50 transition-all duration-300 relative overflow-hidden">
                     {/* Animated Border Glow */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10 opacity-0 group-hover:opacity-100"
@@ -378,14 +367,18 @@ const LonelinessEpidemic: React.FC = () => {
       </section>
 
       {/* Introduction */}
-      <section className="py-16 bg-gray-800/50">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-gray-900/50 relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-20 -left-10 w-56 h-56 rounded-full bg-red-500/10 blur-3xl" />
+          <div className="absolute bottom-0 -right-10 w-72 h-72 rounded-full bg-orange-500/10 blur-3xl" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto prose prose-lg prose-invert"
-            initial="hidden"
-            whileInView="visible"
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={fadeInUp}
+            transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold mb-8 text-white flex items-center gap-3">
               <Users className="h-8 w-8 text-pulse-pink" />
@@ -402,7 +395,7 @@ const LonelinessEpidemic: React.FC = () => {
       </section>
 
       {/* Why Now Section */}
-      <section className="py-16">
+      <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <motion.div
             className="max-w-4xl mx-auto"
@@ -1414,55 +1407,73 @@ const LonelinessEpidemic: React.FC = () => {
         </section>
 
         {/* Conclusion & CTA */}
-      <section className="py-20 bg-gradient-to-br from-pulse-pink/20 via-gray-900 to-pulse-blue/20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"
-              variants={fadeInUp}
-            >
-              Tackling the Loneliness Epidemic
-            </motion.h2>
-            
-            <motion.div className="prose prose-lg prose-invert mb-12" variants={fadeInUp}>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans — from Gen Z to Boomers — experience chronic isolation that harms mental health, physical well-being, and overall life satisfaction. Yet loneliness is not inevitable.
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. That's where tools like Pulse come in. Pulse helps you meet new friends safely, intentionally, and locally, bridging the gap between online connections and real-world social interaction.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-              variants={fadeInUp}
-            >
-              <Link to="/">
-                <Button size="xl" className="pulse-gradient-cta text-white font-semibold px-8 py-4 hover:shadow-lg hover:shadow-pulse-pink/25 transition-all duration-300">
-                  Start Building Connections Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-            </motion.div>
-
-            <motion.p
-              className="text-gray-400 text-sm mt-6"
-              variants={fadeInUp}
-            >
-              Don't wait. Start connecting today. Your future self will thank you.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+        <section className="py-16 relative">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-pulse-pink/20 blur-3xl" />
+            <div className="absolute bottom-0 -left-10 w-72 h-72 rounded-full bg-accent/20 blur-3xl" />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-xl border border-gray-700/70 rounded-3xl p-8 md:p-12 relative overflow-hidden max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="text-center"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
+                    Ready to Break the Cycle?
+                  </span>
+                </h2>
+                
+                <p className="text-lg text-gray-300 mb-6 max-w-3xl mx-auto">
+                  Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, 
+                  yet loneliness is not inevitable.
+                </p>
+                
+                <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
+                  Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. 
+                  That's where tools like Pulse come in—bridging the gap between online connections and real-world social interaction.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                  <Link to="/">
+                    <Button 
+                      size="xl" 
+                      className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
+                    >
+                      <span>Start Building Connections Today</span>
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  
+                  <Link to="/about">
+                    <Button 
+                      size="xl" 
+                      variant="outline" 
+                      className="border-2 border-gray-300 text-gray-300 hover:bg-gray-700 hover:border-gray-200 shadow-lg transition-all duration-300 hover:scale-105 font-medium text-lg"
+                    >
+                      <span>Learn About Pulse</span>
+                    </Button>
+                  </Link>
+                </div>
+                
+                <motion.p
+                  className="text-sm text-gray-400 mt-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  Don't wait. Start connecting today. Your future self will thank you.
+                </motion.p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      
+      <Footer />
     </div>
-    <Footer />
-  </>
   );
 };
 
