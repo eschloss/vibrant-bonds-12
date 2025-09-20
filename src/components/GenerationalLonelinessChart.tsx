@@ -14,9 +14,9 @@ const generationData = [
     lonelinessScore: 48.3,
     lonelinessPercent: 79,
     noFriends: 27,
-    color: "url(#genZ-gradient)",
-    solidColor: "hsl(var(--pulse-fuchsia))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-fuchsia)), hsl(var(--pulse-violet)))",
+    color: "url(#unified-gradient)",
+    solidColor: "hsl(var(--pulse-pink))",
+    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
     citationNumbers: [4, 5, 6],
     insights: [
@@ -31,9 +31,9 @@ const generationData = [
     lonelinessScore: 45.3,
     lonelinessPercent: 71,
     noFriends: 22,
-    color: "url(#millennials-gradient)",
-    solidColor: "hsl(var(--pulse-cyan))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-cyan)), hsl(var(--pulse-blue)))",
+    color: "url(#unified-gradient)",
+    solidColor: "hsl(var(--accent))",
+    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["YouGov 2019"],
     citationNumbers: [20, 3],
     insights: [
@@ -48,9 +48,9 @@ const generationData = [
     lonelinessScore: 40.2,
     lonelinessPercent: 50,
     noFriends: 15,
-    color: "url(#genX-gradient)",
-    solidColor: "hsl(var(--pulse-orange))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-orange)), hsl(var(--pulse-amber)))",
+    color: "url(#unified-gradient)",
+    solidColor: "hsl(var(--pulse-blue))",
+    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["Survey Center on American Life 2021"],
     citationNumbers: [21, 3],
     insights: [
@@ -65,9 +65,9 @@ const generationData = [
     lonelinessScore: 38.5,
     lonelinessPercent: 50,
     noFriends: 9,
-    color: "url(#boomers-gradient)",
-    solidColor: "hsl(var(--pulse-green))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-green)), hsl(var(--pulse-emerald)))",
+    color: "url(#unified-gradient)",
+    solidColor: "hsl(var(--primary))",
+    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["AARP 2020", "National Academies of Sciences 2020"],
     citationNumbers: [21, 22],
     insights: [
@@ -315,21 +315,10 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
                     <defs>
-                      <linearGradient id="genZ-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--pulse-fuchsia))" stopOpacity={0.9} />
-                        <stop offset="100%" stopColor="hsl(var(--pulse-violet))" stopOpacity={0.7} />
-                      </linearGradient>
-                      <linearGradient id="millennials-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--pulse-cyan))" stopOpacity={0.9} />
+                      <linearGradient id="unified-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--pulse-pink))" stopOpacity={0.9} />
+                        <stop offset="50%" stopColor="hsl(var(--accent))" stopOpacity={0.8} />
                         <stop offset="100%" stopColor="hsl(var(--pulse-blue))" stopOpacity={0.7} />
-                      </linearGradient>
-                      <linearGradient id="genX-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--pulse-orange))" stopOpacity={0.9} />
-                        <stop offset="100%" stopColor="hsl(var(--pulse-amber))" stopOpacity={0.7} />
-                      </linearGradient>
-                      <linearGradient id="boomers-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--pulse-green))" stopOpacity={0.9} />
-                        <stop offset="100%" stopColor="hsl(var(--pulse-emerald))" stopOpacity={0.7} />
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" className="opacity-20" />
@@ -361,7 +350,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                         <Cell 
                           key={`cell-${index}`} 
                           fill={entry.color}
-                          className="hover:opacity-80 transition-opacity drop-shadow-lg"
+                          className="hover:opacity-95 transition-opacity drop-shadow-lg"
                         />
                       ))}
                       {/* Animated bars */}
@@ -451,40 +440,40 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
           transition={{ delay: 0.9 }}
           className="space-y-6"
         >
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+          <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700/50">
             <CardHeader>
-              <CardTitle className="text-foreground flex items-center gap-2">
-                <Brain className="h-5 w-5 text-primary" />
+              <CardTitle className="text-white flex items-center gap-2">
+                <Brain className="h-5 w-5 text-purple-400" />
                 Key Findings
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg border border-primary/20">
-                  <TrendingUp className="h-5 w-5 text-primary flex-shrink-0" />
+                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500/10 to-purple-600/5 rounded-lg border border-purple-500/20">
+                  <TrendingUp className="h-5 w-5 text-purple-400 flex-shrink-0" />
                   <div>
-                    <p className="text-foreground font-semibold">Younger = Lonelier</p>
-                    <p className="text-muted-foreground text-sm">Gen Z reports 79% loneliness vs 50% for Boomers</p>
+                    <p className="text-white font-semibold">Younger = Lonelier</p>
+                    <p className="text-gray-300 text-sm">Gen Z reports 79% loneliness vs 50% for Boomers</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-secondary/10 to-secondary/5 rounded-lg border border-secondary/20">
-                  <Activity className="h-5 w-5 text-secondary flex-shrink-0" />
+                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-500/10 to-pink-600/5 rounded-lg border border-pink-500/20">
+                  <Activity className="h-5 w-5 text-pink-400 flex-shrink-0" />
                   <div>
-                    <p className="text-foreground font-semibold">Friendship Decline</p>
-                    <p className="text-muted-foreground text-sm">1 in 4 Gen Z adults have no close friends</p>
+                    <p className="text-white font-semibold">Friendship Decline</p>
+                    <p className="text-gray-300 text-sm">1 in 4 Gen Z adults have no close friends</p>
                   </div>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+          <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700/50">
             <CardContent className="p-6">
               <div className="flex items-start gap-3">
-                <Zap className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                <Zap className="h-6 w-6 text-purple-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-foreground font-semibold mb-2">The Digital Paradox</h4>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <h4 className="text-white font-semibold mb-2">The Digital Paradox</h4>
+                  <p className="text-gray-300 leading-relaxed">
                     Despite being the most connected generation in history, Gen Z shows the highest rates of loneliness, 
                     suggesting that digital connections may not satisfy our fundamental need for meaningful human relationships.
                   </p>
