@@ -362,30 +362,36 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <TrendingDown className="h-8 w-8 text-red-500" />
-              📉 How the Loneliness Epidemic Has Grown Over Time
+              <Text id="loneliness.growth.title">📉 How the Loneliness Epidemic Has Grown Over Time</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.
+                <Text id="loneliness.growth.intro">Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Friendship Statistics: Declining Social Connections Data Over Decades</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.growth.friendship_title">Friendship Statistics: Declining Social Connections Data Over Decades</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%<sup className="text-blue-400 font-semibold">[3]</sup></li>
-                <li>The average number of close friendships per adult has dropped from 4 in 1990 to just 2 today</li>
+                <li><Text id="loneliness.growth.friendship_stat1">In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%</Text><sup className="text-blue-400 font-semibold">[3]</sup></li>
+                <li><Text id="loneliness.growth.friendship_stat2">The average number of close friendships per adult has dropped from 4 in 1990 to just 2 today</Text></li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Remote Work Loneliness Statistics: Technology's Impact on Social Isolation</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.growth.remote_title">Remote Work Loneliness Statistics: Technology's Impact on Social Isolation</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Since 2019, remote work has surged. By 2023, 28% of full-time employees work remotely<sup className="text-blue-400 font-semibold">[13]</sup></li>
-                <li>Digital platforms often replace, rather than supplement, face-to-face relationships</li>
+                <li><Text id="loneliness.growth.remote_stat1">Since 2019, remote work has surged. By 2023, 28% of full-time employees work remotely</Text><sup className="text-blue-400 font-semibold">[13]</sup></li>
+                <li><Text id="loneliness.growth.remote_stat2">Digital platforms often replace, rather than supplement, face-to-face relationships</Text></li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">COVID-19 Loneliness Data: Pandemic's Impact on Social Isolation Rates</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.growth.covid_title">COVID-19 Loneliness Data: Pandemic's Impact on Social Isolation Rates</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>36% of all U.S. adults reported feeling "serious loneliness" during the pandemic<sup className="text-blue-400 font-semibold">[14]</sup></li>
-                <li>61% of young adults and 51% of mothers with young children experienced serious loneliness</li>
+                <li><Text id="loneliness.growth.covid_stat1">36% of all U.S. adults reported feeling "serious loneliness" during the pandemic</Text><sup className="text-blue-400 font-semibold">[14]</sup></li>
+                <li><Text id="loneliness.growth.covid_stat2">61% of young adults and 51% of mothers with young children experienced serious loneliness</Text></li>
               </ul>
             </motion.div>
           </motion.div>
@@ -895,14 +901,16 @@ const LonelinessEpidemic: React.FC = () => {
                 <li>Religious attendance fell from 45% in 1970 to 24% in 2020</li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Social Media and Loneliness Statistics: Digital Connection vs Real Isolation Data</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.social_media.title">Social Media and Loneliness Statistics: Digital Connection vs Real Isolation Data</Text>
+              </h3>
               <p className="text-gray-300 mb-4">
-                The digital age promised more connection, but evidence shows a paradoxical rise in loneliness:
+                <Text id="loneliness.social_media.intro">The digital age promised more connection, but evidence shows a paradoxical rise in loneliness:</Text>
               </p>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Social media overuse correlates with loneliness and depression, particularly in young adults. Heavy users are 2x more likely to feel socially isolated</li>
-                <li>Millennials and Gen Z spend up to 4–5 hours per day on social media, which correlates with increased reports of loneliness</li>
-                <li>While platforms facilitate contact, they often replace in-person experiences with shallow interactions</li>
+                <li><Text id="loneliness.social_media.stat1">Social media overuse correlates with loneliness and depression, particularly in young adults. Heavy users are 2x more likely to feel socially isolated</Text></li>
+                <li><Text id="loneliness.social_media.stat2">Millennials and Gen Z spend up to 4–5 hours per day on social media, which correlates with increased reports of loneliness</Text></li>
+                <li><Text id="loneliness.social_media.stat3">While platforms facilitate contact, they often replace in-person experiences with shallow interactions</Text></li>
               </ul>
             </motion.div>
           </motion.div>
@@ -924,52 +932,72 @@ const LonelinessEpidemic: React.FC = () => {
                variants={fadeInUp}
              >
                <Shield className="h-8 w-8 text-green-500" />
-               Proven Solutions to Combat Loneliness: Evidence-Based Strategies That Work
+               <Text id="loneliness.solutions.title">Proven Solutions to Combat Loneliness: Evidence-Based Strategies That Work</Text>
              </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                While the statistics are sobering, loneliness is not inevitable. Research shows that interventions — both at the individual and community level — can significantly reduce chronic loneliness.
+                <Text id="loneliness.solutions.intro">While the statistics are sobering, loneliness is not inevitable. Research shows that interventions — both at the individual and community level — can significantly reduce chronic loneliness.</Text>
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8 not-prose">
                 <Card className="bg-gray-800/50 border-green-500/20">
                   <CardHeader>
-                    <CardTitle className="text-white">Building Meaningful Friendships</CardTitle>
+                    <CardTitle className="text-white">
+                      <Text id="loneliness.solutions.meaningful_friendships.title">Building Meaningful Friendships</Text>
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="text-gray-300 space-y-3">
-                    <p>Quality over quantity: Having even one or two high-quality friendships can buffer the negative health effects of loneliness</p>
-                    <p>Shared experiences: Joining clubs, volunteering, or taking classes creates lasting bonds</p>
+                    <p><Text id="loneliness.solutions.meaningful_friendships.desc1">Quality over quantity: Having even one or two high-quality friendships can buffer the negative health effects of loneliness</Text></p>
+                    <p><Text id="loneliness.solutions.meaningful_friendships.desc2">Shared experiences: Joining clubs, volunteering, or taking classes creates lasting bonds</Text></p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-gray-800/50 border-green-500/20">
                   <CardHeader>
-                    <CardTitle className="text-white">Leveraging Technology Wisely</CardTitle>
+                    <CardTitle className="text-white">
+                      <Text id="loneliness.solutions.technology.title">Leveraging Technology Wisely</Text>
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="text-gray-300 space-y-3">
-                    <p>Video calls and messaging apps help maintain connections when used intentionally</p>
-                    <p>Passive social media use correlates with increased loneliness and depressive symptoms</p>
+                    <p><Text id="loneliness.solutions.technology.desc1">Video calls and messaging apps help maintain connections when used intentionally</Text></p>
+                    <p><Text id="loneliness.solutions.technology.desc2">Passive social media use correlates with increased loneliness and depressive symptoms</Text></p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-gray-800/50 border-green-500/20">
                   <CardHeader>
-                    <CardTitle className="text-white">Community Engagement</CardTitle>
+                    <CardTitle className="text-white">
+                      <Text id="loneliness.solutions.community.title">Community Engagement</Text>
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="text-gray-300 space-y-3">
-                    <p>Volunteer work significantly reduces loneliness, particularly among older adults</p>
-                    <p>"Third places" — cafés, libraries, community centers — foster casual social connections</p>
+                    <p><Text id="loneliness.solutions.community.desc1">Volunteer work significantly reduces loneliness, particularly among older adults</Text></p>
+                    <p><Text id="loneliness.solutions.community.desc2">"Third places" — cafés, libraries, community centers — foster casual social connections</Text></p>
                   </CardContent>
                 </Card>
 
                  <Card className="bg-gray-800/50 border-green-500/20">
                    <CardHeader>
-                     <CardTitle className="text-white">Apps and Platforms for Friendship</CardTitle>
+                     <CardTitle className="text-white">
+                       <Text id="loneliness.solutions.apps.title">Apps and Platforms for Friendship</Text>
+                     </CardTitle>
                    </CardHeader>
                    <CardContent className="text-gray-300 space-y-3">
-                     <p><Link to="/matchmaking" className="text-pulse-pink hover:text-accent transition-colors underline">Emerging social apps like Pulse</Link> focus on connecting people with shared interests for meaningful in-person interaction</p>
-                     <p>Platforms help users <Link to="/cities" className="text-pulse-pink hover:text-accent transition-colors underline">meet new friends in their city</Link> through safe, structured social settings and <Link to="/plan-ideas" className="text-pulse-pink hover:text-accent transition-colors underline">curated activities</Link></p>
+                     <p>
+                       <Link to="/matchmaking" className="text-pulse-pink hover:text-accent transition-colors underline">Emerging social apps like Pulse</Link>
+                       {" "}
+                       <Text id="loneliness.solutions.apps.desc1">focus on connecting people with shared interests for meaningful in-person interaction</Text>
+                     </p>
+                     <p>
+                       <Text id="loneliness.solutions.apps.desc2">Platforms help users</Text>
+                       {" "}
+                       <Link to="/cities" className="text-pulse-pink hover:text-accent transition-colors underline">meet new friends in their city</Link>
+                       {" "}
+                       <Text id="loneliness.solutions.apps.desc2">through safe, structured social settings and</Text>
+                       {" "}
+                       <Link to="/plan-ideas" className="text-pulse-pink hover:text-accent transition-colors underline">curated activities</Link>
+                     </p>
                    </CardContent>
                  </Card>
               </div>
@@ -992,7 +1020,7 @@ const LonelinessEpidemic: React.FC = () => {
                  className="text-4xl font-bold mb-12 text-white text-center flex items-center justify-center gap-3"
                  variants={fadeInUp}
                >
-                 📚 Research Sources and Data References: Loneliness Epidemic Study Citations
+                 <Text id="loneliness.sources.title">📚 Research Sources and Data References: Loneliness Epidemic Study Citations</Text>
                </motion.h2>
               
               <motion.div 

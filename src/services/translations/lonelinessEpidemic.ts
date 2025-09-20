@@ -127,7 +127,46 @@ export const lonelinessEpidemic = {
     "loneliness.faq.q9": "What evidence-based solutions work best for loneliness?",
     "loneliness.faq.a9": "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.",
 
-    // Conclusion CTA
+      // Solutions Section
+      "loneliness.solutions.title": "Proven Solutions to Combat Loneliness: Evidence-Based Strategies That Work",
+      "loneliness.solutions.intro": "While the statistics are sobering, loneliness is not inevitable. Research shows that interventions — both at the individual and community level — can significantly reduce chronic loneliness.",
+      "loneliness.solutions.meaningful_friendships.title": "Building Meaningful Friendships",
+      "loneliness.solutions.meaningful_friendships.desc1": "Quality over quantity: Having even one or two high-quality friendships can buffer the negative health effects of loneliness",
+      "loneliness.solutions.meaningful_friendships.desc2": "Shared experiences: Joining clubs, volunteering, or taking classes creates lasting bonds",
+      "loneliness.solutions.technology.title": "Leveraging Technology Wisely",
+      "loneliness.solutions.technology.desc1": "Video calls and messaging apps help maintain connections when used intentionally",
+      "loneliness.solutions.technology.desc2": "Passive social media use correlates with increased loneliness and depressive symptoms",
+      "loneliness.solutions.community.title": "Community Engagement",
+      "loneliness.solutions.community.desc1": "Volunteer work significantly reduces loneliness, particularly among older adults",
+      "loneliness.solutions.community.desc2": "\"Third places\" — cafés, libraries, community centers — foster casual social connections",
+      "loneliness.solutions.apps.title": "Apps and Platforms for Friendship",
+      "loneliness.solutions.apps.desc1": "focus on connecting people with shared interests for meaningful in-person interaction",
+      "loneliness.solutions.apps.desc2": "Platforms help users through safe, structured social settings and",
+
+      // Social Media Section
+      "loneliness.social_media.title": "Social Media and Loneliness Statistics: Digital Connection vs Real Isolation Data",
+      "loneliness.social_media.intro": "The digital age promised more connection, but evidence shows a paradoxical rise in loneliness:",
+      "loneliness.social_media.stat1": "Social media overuse correlates with loneliness and depression, particularly in young adults. Heavy users are 2x more likely to feel socially isolated",
+      "loneliness.social_media.stat2": "Millennials and Gen Z spend up to 4–5 hours per day on social media, which correlates with increased reports of loneliness",
+      "loneliness.social_media.stat3": "While platforms facilitate contact, they often replace in-person experiences with shallow interactions",
+
+      // Sources Section
+      "loneliness.sources.title": "📚 Research Sources and Data References: Loneliness Epidemic Study Citations",
+
+      // How the Epidemic Has Grown
+      "loneliness.growth.title": "📉 How the Loneliness Epidemic Has Grown Over Time",
+      "loneliness.growth.intro": "Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.",
+      "loneliness.growth.friendship_title": "Friendship Statistics: Declining Social Connections Data Over Decades",
+      "loneliness.growth.friendship_stat1": "In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%",
+      "loneliness.growth.friendship_stat2": "The average number of close friendships per adult has dropped from 4 in 1990 to just 2 today",
+      "loneliness.growth.remote_title": "Remote Work Loneliness Statistics: Technology's Impact on Social Isolation",
+      "loneliness.growth.remote_stat1": "Since 2019, remote work has surged. By 2023, 28% of full-time employees work remotely",
+      "loneliness.growth.remote_stat2": "Digital platforms often replace, rather than supplement, face-to-face relationships",
+      "loneliness.growth.covid_title": "COVID-19 Loneliness Data: Pandemic's Impact on Social Isolation Rates",
+      "loneliness.growth.covid_stat1": "36% of all U.S. adults reported feeling \"serious loneliness\" during the pandemic",
+      "loneliness.growth.covid_stat2": "61% of young adults and 51% of mothers with young children experienced serious loneliness",
+
+      // Conclusion CTA
     "loneliness.conclusion.title": "Join the Fight Against Loneliness: Connect and Thrive Today",
     "loneliness.conclusion.paragraph1": "Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, yet loneliness is not inevitable. Research shows that strong communities and meaningful social connections can dramatically improve both mental and physical health outcomes.",
     "loneliness.conclusion.paragraph2": "Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. That's where innovative solutions like Pulse's AI-powered friend group matching come in—bridging the gap between online connections and real-world social interaction through carefully curated local activities.",
@@ -225,7 +264,46 @@ export const lonelinessEpidemic = {
     "loneliness.faq.q9": "¿Qué soluciones basadas en evidencia funcionan mejor para la soledad?",
     "loneliness.faq.a9": "Las intervenciones más efectivas se dirigen a la cognición social (abordando pensamientos negativos sobre situaciones sociales), proporcionan apoyo social a través de actividades estructuradas, mejoran las habilidades sociales a través del entrenamiento y aumentan las oportunidades para contacto social significativo. Los programas basados en la comunidad, las actividades grupales con propósito compartido y la interacción cara a cara consistente muestran la evidencia más fuerte para reducir la soledad.",
 
-    // Conclusion CTA
+      // Solutions Section
+      "loneliness.solutions.title": "Soluciones Comprobadas para Combatir la Soledad: Estrategias Basadas en Evidencia que Funcionan",
+      "loneliness.solutions.intro": "Aunque las estadísticas son alarmantes, la soledad no es inevitable. La investigación muestra que las intervenciones — tanto a nivel individual como comunitario — pueden reducir significativamente la soledad crónica.",
+      "loneliness.solutions.meaningful_friendships.title": "Construyendo Amistades Significativas",
+      "loneliness.solutions.meaningful_friendships.desc1": "Calidad sobre cantidad: Tener incluso una o dos amistades de alta calidad puede amortiguar los efectos negativos de la soledad en la salud",
+      "loneliness.solutions.meaningful_friendships.desc2": "Experiencias compartidas: Unirse a clubes, hacer voluntariado o tomar clases crea vínculos duraderos",
+      "loneliness.solutions.technology.title": "Usando la Tecnología Sabiamente",
+      "loneliness.solutions.technology.desc1": "Las videollamadas y aplicaciones de mensajería ayudan a mantener conexiones cuando se usan intencionalmente",
+      "loneliness.solutions.technology.desc2": "El uso pasivo de redes sociales se correlaciona con mayor soledad y síntomas depresivos",
+      "loneliness.solutions.community.title": "Compromiso Comunitario",
+      "loneliness.solutions.community.desc1": "El trabajo voluntario reduce significativamente la soledad, particularmente entre adultos mayores",
+      "loneliness.solutions.community.desc2": "\"Terceros lugares\" — cafés, bibliotecas, centros comunitarios — fomentan conexiones sociales casuales",
+      "loneliness.solutions.apps.title": "Aplicaciones y Plataformas para la Amistad",
+      "loneliness.solutions.apps.desc1": "se enfocan en conectar personas con intereses compartidos para interacción significativa en persona",
+      "loneliness.solutions.apps.desc2": "Las plataformas ayudan a los usuarios a través de entornos sociales seguros y estructurados y",
+
+      // Social Media Section
+      "loneliness.social_media.title": "Estadísticas de Redes Sociales y Soledad: Conexión Digital vs Datos de Aislamiento Real",
+      "loneliness.social_media.intro": "La era digital prometía más conexión, pero la evidencia muestra un aumento paradójico en la soledad:",
+      "loneliness.social_media.stat1": "El uso excesivo de redes sociales se correlaciona con soledad y depresión, particularmente en adultos jóvenes. Los usuarios intensivos tienen 2x más probabilidades de sentirse socialmente aislados",
+      "loneliness.social_media.stat2": "Los millennials y la Generación Z pasan hasta 4–5 horas por día en redes sociales, lo que se correlaciona con mayores reportes de soledad",
+      "loneliness.social_media.stat3": "Aunque las plataformas facilitan el contacto, a menudo reemplazan las experiencias en persona con interacciones superficiales",
+
+      // Sources Section
+      "loneliness.sources.title": "📚 Fuentes de Investigación y Referencias de Datos: Citas de Estudios de la Epidemia de Soledad",
+
+      // How the Epidemic Has Grown
+      "loneliness.growth.title": "📉 Cómo Ha Crecido la Epidemia de Soledad a lo Largo del Tiempo",
+      "loneliness.growth.intro": "La soledad no es un fenómeno nuevo. Pero los datos muestran que ha empeorado dramáticamente en las décadas recientes, convirtiéndola en uno de los desafíos sociales y de salud definitorios del siglo XXI.",
+      "loneliness.growth.friendship_title": "Estadísticas de Amistad: Datos de Conexiones Sociales en Declive Durante Décadas",
+      "loneliness.growth.friendship_stat1": "En 1990, solo el 3% de los estadounidenses dijeron que no tenían amigos cercanos. Para 2021, ese número había subido al 12%",
+      "loneliness.growth.friendship_stat2": "El número promedio de amistades cercanas por adulto ha caído de 4 en 1990 a solo 2 hoy",
+      "loneliness.growth.remote_title": "Estadísticas de Soledad en Trabajo Remoto: Impacto de la Tecnología en el Aislamiento Social",
+      "loneliness.growth.remote_stat1": "Desde 2019, el trabajo remoto ha aumentado. Para 2023, el 28% de los empleados de tiempo completo trabajan remotamente",
+      "loneliness.growth.remote_stat2": "Las plataformas digitales a menudo reemplazan, en lugar de complementar, las relaciones cara a cara",
+      "loneliness.growth.covid_title": "Datos de Soledad por COVID-19: Impacto de la Pandemia en las Tasas de Aislamiento Social",
+      "loneliness.growth.covid_stat1": "El 36% de todos los adultos estadounidenses reportaron sentir \"soledad seria\" durante la pandemia",
+      "loneliness.growth.covid_stat2": "El 61% de los adultos jóvenes y el 51% de las madres con niños pequeños experimentaron soledad seria",
+
+      // Conclusion CTA
     "loneliness.conclusion.title": "Únete a la Lucha Contra la Soledad: Conecta y Prospera Hoy",
     "loneliness.conclusion.paragraph1": "La soledad es uno de los desafíos sociales y de salud pública más urgentes de nuestro tiempo. Millones de estadounidenses experimentan aislamiento crónico, pero la soledad no es inevitable. La investigación muestra que las comunidades fuertes y las conexiones sociales significativas pueden mejorar dramáticamente tanto los resultados de salud mental como física.",
     "loneliness.conclusion.paragraph2": "Crear amistades significativas puede sentirse desalentador, especialmente en un mundo que se ha vuelto más digital y disperso. Ahí es donde entran soluciones innovadoras como el emparejamiento de grupos de amigos impulsado por IA de Pulse, conectando la brecha entre las conexiones en línea y la interacción social del mundo real a través de actividades locales cuidadosamente seleccionadas.",
