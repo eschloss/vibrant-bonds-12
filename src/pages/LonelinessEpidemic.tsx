@@ -91,8 +91,9 @@ const LonelinessEpidemic: React.FC = () => {
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-gray-900 to-orange-900/20" />
         
-        {/* Floating Crisis Icons */}
+        {/* Cool Background Animations */}
         <div className="absolute inset-0 pointer-events-none">
+          {/* Floating Crisis Icons */}
           <motion.div
             className="absolute top-20 left-10 opacity-20"
             animate={{ 
@@ -139,6 +140,76 @@ const LonelinessEpidemic: React.FC = () => {
           >
             <Users className="h-7 w-7 text-red-300" />
           </motion.div>
+
+          {/* Subtle Grid Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <motion.div
+              className="w-full h-full"
+              style={{
+                backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)",
+                backgroundSize: "50px 50px"
+              }}
+              animate={{
+                backgroundPosition: ["0px 0px", "50px 50px", "0px 0px"]
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          </div>
+
+          {/* Floating Particles */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-red-400/30 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 4 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 4,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+
+          {/* Subtle Pulse Rings */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 border border-red-500/10 rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.1, 0.3]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 border border-orange-500/10 rounded-full"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.05, 0.2]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -204,21 +275,10 @@ const LonelinessEpidemic: React.FC = () => {
               </motion.div>
             </motion.div>
 
-            {/* Title with Typewriter Effect */}
+            {/* Clean Title */}
             <motion.h1
               className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400"
               variants={fadeInUp}
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              style={{
-                backgroundSize: "200% 100%"
-              }}
             >
               The Loneliness Epidemic
             </motion.h1>
