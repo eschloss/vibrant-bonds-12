@@ -72,18 +72,33 @@ const LonelinessEpidemic: React.FC = () => {
       <Navbar />
         <Seo
           title={{
-            en: "The Loneliness Epidemic: Statistics, Causes, and Solutions in 2025",
-            es: "La Epidemia de Soledad: Estadísticas, Causas y Soluciones en 2025"
+            en: "Loneliness Epidemic Statistics 2025: Facts, Data & Health Impact",
+            es: "Estadísticas de la Epidemia de Soledad 2025: Datos e Impacto en la Salud"
           }}
           description={{
-            en: "Comprehensive analysis of the loneliness epidemic affecting millions. Statistics, health impacts, generational trends, and solutions for the social isolation crisis.",
-            es: "Análisis completo de la epidemia de soledad que afecta a millones. Estadísticas, impactos en la salud, tendencias generacionales y soluciones para la crisis de aislamiento social."
+            en: "Complete loneliness epidemic statistics 2025: 36% of Americans are lonely, Gen Z most affected (79%), health risks equal to smoking 15 cigarettes daily. Research-backed solutions included.",
+            es: "Estadísticas completas de la epidemia de soledad 2025: 36% de estadounidenses están solos, Gen Z más afectada (79%), riesgos de salud equivalen a fumar 15 cigarrillos diarios. Soluciones respaldadas por investigación."
           }}
-          keywords={["loneliness epidemic", "social isolation", "mental health crisis", "friendship statistics", "Gen Z loneliness", "social connections", "public health"]}
+          keywords={[
+            "loneliness epidemic statistics 2025",
+            "loneliness facts and data", 
+            "social isolation statistics",
+            "Gen Z loneliness statistics",
+            "loneliness health effects",
+            "loneliness epidemic causes",
+            "social connection crisis",
+            "friendship statistics 2025",
+            "loneliness research data",
+            "mental health crisis statistics",
+            "social isolation health risks",
+            "loneliness epidemic solutions"
+          ]}
+          image="https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg"
           type="article"
           publishedTime="2025-01-20T00:00:00Z"
-          modifiedTime="2025-01-20T00:00:00Z"
+          modifiedTime="2025-01-20T12:00:00Z"
           section="Health & Society"
+          pathname="/loneliness-epidemic"
         />
 
       {/* Hero Section */}
@@ -1416,7 +1431,7 @@ const LonelinessEpidemic: React.FC = () => {
               </motion.div>
             </div>
 
-            {/* Structured Data for SEO */}
+            {/* Enhanced Structured Data for SEO */}
             <script type="application/ld+json">
               {JSON.stringify({
                 "@context": "https://schema.org",
@@ -1463,6 +1478,63 @@ const LonelinessEpidemic: React.FC = () => {
                     }
                   }
                 ]
+              })}
+            </script>
+
+            {/* Enhanced Article Structured Data */}
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "Loneliness Epidemic Statistics 2025: Facts, Data & Health Impact",
+                "description": "Complete loneliness epidemic statistics 2025: 36% of Americans are lonely, Gen Z most affected (79%), health risks equal to smoking 15 cigarettes daily.",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Pulse",
+                  "url": "https://pulse.kikiapp.eu"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Pulse",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://s.kikiapp.eu/img/pulse_logo.png"
+                  }
+                },
+                "datePublished": "2025-01-20T00:00:00Z",
+                "dateModified": "2025-01-20T12:00:00Z",
+                "articleSection": "Health & Society",
+                "keywords": ["loneliness epidemic statistics", "social isolation data", "Gen Z loneliness", "health effects loneliness"],
+                "wordCount": "3500",
+                "image": "https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg",
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://pulse.kikiapp.eu/loneliness-epidemic"
+                }
+              })}
+            </script>
+
+            {/* Research Data Structured Data */}
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Dataset",
+                "name": "Loneliness Epidemic Statistics 2025",
+                "description": "Comprehensive dataset on loneliness statistics, health impacts, and demographic breakdowns",
+                "creator": {
+                  "@type": "Organization",
+                  "name": "Pulse"
+                },
+                "distribution": [
+                  {
+                    "@type": "DataDownload",
+                    "encodingFormat": "application/json",
+                    "contentUrl": "https://pulse.kikiapp.eu/loneliness-epidemic"
+                  }
+                ],
+                "temporalCoverage": "2020/2025",
+                "spatialCoverage": "United States",
+                "keywords": ["loneliness statistics", "social isolation data", "health research", "demographic analysis"]
               })}
             </script>
           </div>
