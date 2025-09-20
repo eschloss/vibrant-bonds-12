@@ -966,91 +966,91 @@ const LonelinessEpidemic: React.FC = () => {
                 variants={fadeInUp}
               >
                 <div className="space-y-4">
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[1] U.S. Surgeon General Advisory</p>
-                      <p className="text-gray-300 text-sm">Our Epidemic of Loneliness and Isolation, 2023</p>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-1">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[1] U.S. Surgeon General Advisory</p>
+                       <p className="text-gray-300 text-sm">Our Epidemic of Loneliness and Isolation, 2023</p>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-2">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[2] Cigna U.S. Loneliness Index</p>
+                       <a href="https://www.cigna.com/newsroom/news-releases/2023/loneliness-index" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Cigna 2023 Report
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-3">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[3] Survey Center on American Life</p>
+                       <a href="https://www.americansurveycenter.org/reports/the-state-of-american-friendship/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         The State of American Friendship Report, 2021
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-4">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[4] Cigna Loneliness Factsheet</p>
+                       <a href="https://www.cigna.com/assets/docs/about-us/newsroom/loneliness-factsheet.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Cigna 2020 Report
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-5">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[5] UK Office for National Statistics</p>
+                       <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/articles/coronavirusandlonelinessgreatbritain/2021-04-07" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Coronavirus and Loneliness in Great Britain, 2021
+                       </a>
+                     </CardContent>
+                   </Card>
                   
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[2] Cigna U.S. Loneliness Index</p>
-                      <a href="https://www.cigna.com/newsroom/news-releases/2023/loneliness-index" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Cigna 2023 Report
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[3] Survey Center on American Life</p>
-                      <a href="https://www.americansurveycenter.org/reports/the-state-of-american-friendship/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        The State of American Friendship Report, 2021
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[4] Cigna Loneliness Factsheet</p>
-                      <a href="https://www.cigna.com/assets/docs/about-us/newsroom/loneliness-factsheet.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Cigna 2020 Report
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[5] UK Office for National Statistics</p>
-                      <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/articles/coronavirusandlonelinessgreatbritain/2021-04-07" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Coronavirus and Loneliness in Great Britain, 2021
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[6] The Guardian</p>
-                      <a href="https://www.theguardian.com/world/2021/feb/16/japan-appoints-minister-of-loneliness-to-help-tackle-rising-suicide-rate" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Japan Appoints Minister of Loneliness, 2021
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[7] Gallup</p>
-                      <p className="text-gray-300 text-sm">State of Social Connections Survey, 2022</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[8] Holt-Lunstad et al.</p>
-                      <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        PLOS Medicine, 2015
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[9] European Heart Journal</p>
-                      <a href="https://academic.oup.com/eurheartj/article/37/46/3479/1748921" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Loneliness and Cardiovascular Disease, 2016
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[10] PNAS</p>
-                      <a href="https://www.pnas.org/doi/10.1073/pnas.1514249112" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Loneliness, Immune Function, and Health Outcomes, 2015
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-6">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[6] The Guardian</p>
+                       <a href="https://www.theguardian.com/world/2021/feb/16/japan-appoints-minister-of-loneliness-to-help-tackle-rising-suicide-rate" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Japan Appoints Minister of Loneliness, 2021
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-7">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[7] Gallup</p>
+                       <p className="text-gray-300 text-sm">State of Social Connections Survey, 2022</p>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-8">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[8] Holt-Lunstad et al.</p>
+                       <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         PLOS Medicine, 2015
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-9">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[9] European Heart Journal</p>
+                       <a href="https://academic.oup.com/eurheartj/article/37/46/3479/1748921" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Loneliness and Cardiovascular Disease, 2016
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-10">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[10] PNAS</p>
+                       <a href="https://www.pnas.org/doi/10.1073/pnas.1514249112" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Loneliness, Immune Function, and Health Outcomes, 2015
+                       </a>
+                     </CardContent>
+                   </Card>
                   
                   <Card className="bg-gray-800/50 border-blue-500/20">
                     <CardContent className="p-4">
@@ -1090,113 +1090,113 @@ const LonelinessEpidemic: React.FC = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[15] CDC</p>
-                      <a href="https://www.cdc.gov/suicide/facts/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Suicide Data and Statistics, 2022
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[16] American Foundation for Suicide Prevention</p>
-                      <a href="https://afsp.org/suicide-statistics/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Suicide Statistics
-                      </a>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[17] The Trevor Project</p>
-                      <a href="https://www.thetrevorproject.org/survey-2022/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        National Survey on LGBTQ Youth Mental Health 2022
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-15">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[15] CDC</p>
+                       <a href="https://www.cdc.gov/suicide/facts/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Suicide Data and Statistics, 2022
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-16">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[16] American Foundation for Suicide Prevention</p>
+                       <a href="https://afsp.org/suicide-statistics/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Suicide Statistics
+                       </a>
+                     </CardContent>
+                   </Card>
+                   
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-17">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[17] The Trevor Project</p>
+                       <a href="https://www.thetrevorproject.org/survey-2022/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         National Survey on LGBTQ Youth Mental Health 2022
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[18] Buffer</p>
-                      <a href="https://buffer.com/state-of-remote-work/2023" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        The State of Remote Work 2023
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-18">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[18] Buffer</p>
+                       <a href="https://buffer.com/state-of-remote-work/2023" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         The State of Remote Work 2023
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[19] National Academies of Sciences</p>
-                      <a href="https://nap.nationalacademies.org/catalog/25663/social-isolation-and-loneliness-in-older-adults-opportunities-for-the-health-care-system" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Social Isolation and Loneliness in Older Adults, 2020
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-19">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[19] National Academies of Sciences</p>
+                       <a href="https://nap.nationalacademies.org/catalog/25663/social-isolation-and-loneliness-in-older-adults-opportunities-for-the-health-care-system" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Social Isolation and Loneliness in Older Adults, 2020
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[20] YouGov</p>
-                      <a href="https://today.yougov.com/topics/lifestyle/articles-reports/2019/07/23/one-five-millennials-say-they-have-no-friends" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        One-Fifth of Millennials Have No Friends, 2019
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-20">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[20] YouGov</p>
+                       <a href="https://today.yougov.com/topics/lifestyle/articles-reports/2019/07/23/one-five-millennials-say-they-have-no-friends" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         One-Fifth of Millennials Have No Friends, 2019
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[21] AARP</p>
-                      <a href="https://www.aarp.org/research/topics/life/info-2020/loneliness-coronavirus.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Loneliness and Social Connections in Adults 45+, 2020
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-21">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[21] AARP</p>
+                       <a href="https://www.aarp.org/research/topics/life/info-2020/loneliness-coronavirus.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Loneliness and Social Connections in Adults 45+, 2020
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[22] Twenge et al.</p>
-                      <a href="https://psycnet.apa.org/record/2018-21749-001" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Social Media and Loneliness, J Abnorm Psychol, 2018
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-22">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[22] Twenge et al.</p>
+                       <a href="https://psycnet.apa.org/record/2018-21749-001" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Social Media and Loneliness, J Abnorm Psychol, 2018
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[23] Pew Research Center</p>
-                      <a href="https://www.pewresearch.org/internet/2022/04/07/social-media-use-in-2022/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Social Media Use in 2022
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-23">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[23] Pew Research Center</p>
+                       <a href="https://www.pewresearch.org/internet/2022/04/07/social-media-use-in-2022/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Social Media Use in 2022
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[24] General Social Survey</p>
-                      <a href="https://gss.norc.org/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Trust Data, 2000
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-24">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[24] General Social Survey</p>
+                       <a href="https://gss.norc.org/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Trust Data, 2000
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[25] PEW Research</p>
-                      <a href="https://www.pewforum.org/2021/04/07/religion-in-america/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Religion in America, 2021
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-25">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[25] PEW Research</p>
+                       <a href="https://www.pewforum.org/2021/04/07/religion-in-america/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Religion in America, 2021
+                       </a>
+                     </CardContent>
+                   </Card>
 
-                  <Card className="bg-gray-800/50 border-blue-500/20">
-                    <CardContent className="p-4">
-                      <p className="text-white font-semibold mb-2">[26] Independent Sector</p>
-                      <a href="https://independentsector.org/resource/volunteering-in-the-us/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
-                        Volunteering in the U.S., 2020
-                      </a>
-                    </CardContent>
-                  </Card>
+                   <Card className="bg-gray-800/50 border-blue-500/20" id="ref-26">
+                     <CardContent className="p-4">
+                       <p className="text-white font-semibold mb-2">[26] Independent Sector</p>
+                       <a href="https://independentsector.org/resource/volunteering-in-the-us/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                         Volunteering in the U.S., 2020
+                       </a>
+                     </CardContent>
+                   </Card>
 
                   <Card className="bg-gray-800/50 border-blue-500/20">
                     <CardContent className="p-4">
@@ -1257,35 +1257,35 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="What is the loneliness epidemic?"
-                    answer="The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis."
+                    answer="The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide<sup><a href='#ref-1' className='text-blue-400 hover:text-blue-300 font-semibold'>[1]</a></sup>. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="How many Americans are lonely today?"
-                    answer="About 36% of U.S. adults report serious loneliness, and 21 million Americans have zero close friends according to the Survey Center on American Life (2021). Loneliness affects all age groups but is especially pronounced in young adults and older adults living alone."
+                    answer="About 36% of U.S. adults report serious loneliness<sup><a href='#ref-2' className='text-blue-400 hover:text-blue-300 font-semibold'>[2]</a></sup>, and 21 million Americans have zero close friends<sup><a href='#ref-3' className='text-blue-400 hover:text-blue-300 font-semibold'>[3]</a></sup> according to the Survey Center on American Life (2021). Loneliness affects all age groups but is especially pronounced in young adults and older adults living alone."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="Which generation is the loneliest?"
-                    answer="Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often, and 1 in 4 have no close friends according to Cigna's 2020 study. This generation faces unique challenges including social media comparison, economic uncertainty, and delayed life milestones."
+                    answer="Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often<sup><a href='#ref-4' className='text-blue-400 hover:text-blue-300 font-semibold'>[4]</a></sup>, and 1 in 4 have no close friends according to Cigna's 2020 study. This generation faces unique challenges including social media comparison, economic uncertainty, and delayed life milestones."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="How has the number of close friends changed over time?"
-                    answer="The average adult today has 2 close friends, down from 4 in 1990 according to the Survey Center on American Life (2021). This 50% decline reflects broader social and cultural changes, including reduced civic engagement, increased mobility, and digital communication replacing face-to-face interaction."
+                    answer="The average adult today has 2 close friends, down from 4 in 1990<sup><a href='#ref-3' className='text-blue-400 hover:text-blue-300 font-semibold'>[3]</a></sup> according to the Survey Center on American Life (2021). This 50% decline reflects broader social and cultural changes, including reduced civic engagement, increased mobility, and digital communication replacing face-to-face interaction."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="What are the health effects of loneliness?"
-                    answer="Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%) according to Holt-Lunstad's research published in PLOS Medicine (2015). It also weakens the immune system, slows wound healing, and is equivalent to smoking 15 cigarettes daily in terms of health impact."
+                    answer="Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%)<sup><a href='#ref-8' className='text-blue-400 hover:text-blue-300 font-semibold'>[8]</a></sup><sup><a href='#ref-9' className='text-blue-400 hover:text-blue-300 font-semibold'>[9]</a></sup> according to Holt-Lunstad's research published in PLOS Medicine (2015). It also weakens the immune system<sup><a href='#ref-10' className='text-blue-400 hover:text-blue-300 font-semibold'>[10]</a></sup>, slows wound healing, and is equivalent to smoking 15 cigarettes daily in terms of health impact."
                   />
                 </motion.div>
 
@@ -1313,28 +1313,28 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="How has COVID-19 affected loneliness levels?"
-                    answer="During the pandemic, 36% of adults experienced serious loneliness according to Harvard MCC (2021). Young adults (18–25) were the hardest hit with 61% reporting serious loneliness, and mothers with young children reported 51%. The pandemic accelerated existing loneliness trends through lockdowns and social distancing."
+                    answer="During the pandemic, 36% of adults experienced serious loneliness<sup><a href='#ref-14' className='text-blue-400 hover:text-blue-300 font-semibold'>[14]</a></sup> according to Harvard MCC (2021). Young adults (18–25) were the hardest hit with 61% reporting serious loneliness, and mothers with young children reported 51%. The pandemic accelerated existing loneliness trends through lockdowns and social distancing."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="Does working remotely make people more lonely?"
-                    answer="Yes. Studies show remote employees are twice as likely to report loneliness compared to in-office workers according to Buffer's 2023 State of Remote Work report. Remote work can reduce spontaneous social interactions, water cooler conversations, and the natural community building that happens in shared physical spaces."
+                    answer="Yes. Studies show remote employees are twice as likely to report loneliness compared to in-office workers<sup><a href='#ref-18' className='text-blue-400 hover:text-blue-300 font-semibold'>[18]</a></sup> according to Buffer's 2023 State of Remote Work report. Remote work can reduce spontaneous social interactions, water cooler conversations, and the natural community building that happens in shared physical spaces."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="Can social media increase loneliness?"
-                    answer="Passive social media use, such as scrolling without interacting, is linked to higher feelings of isolation and depression according to Twenge et al. (2018). However, active, intentional digital communication can help maintain connections, especially with distant friends and family. The key is quality over quantity of interaction."
+                    answer="Passive social media use, such as scrolling without interacting, is linked to higher feelings of isolation and depression<sup><a href='#ref-22' className='text-blue-400 hover:text-blue-300 font-semibold'>[22]</a></sup> according to Twenge et al. (2018). However, active, intentional digital communication can help maintain connections, especially with distant friends and family. The key is quality over quantity of interaction."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="How have social and community structures changed over time?"
-                    answer="Civic engagement has declined dramatically. Membership in civic organizations fell 50% between the 1960s and 2000s according to Putnam (2000). Trust in 'most people' dropped from 55% in 1972 to 32% in 2000 (GSS), reflecting broader social fragmentation and declining social capital."
+                    answer="Civic engagement has declined dramatically. Membership in civic organizations fell 50% between the 1960s and 2000s<sup><a href='#ref-11' className='text-blue-400 hover:text-blue-300 font-semibold'>[11]</a></sup> according to Putnam (2000). Trust in 'most people' dropped from 55% in 1972 to 32% in 2000<sup><a href='#ref-24' className='text-blue-400 hover:text-blue-300 font-semibold'>[24]</a></sup> (GSS), reflecting broader social fragmentation and declining social capital."
                   />
                 </motion.div>
 
@@ -1355,7 +1355,7 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="What role does community engagement play in reducing loneliness?"
-                    answer="<Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>Community involvement</Link>, volunteering, and participation in clubs or religious groups significantly reduce loneliness and improve mental health according to the National Academies (2020). These activities provide purpose, regular social interaction, and a sense of belonging that counters isolation. Learn more about <Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>building meaningful communities</Link> in your area."
+                    answer="<Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>Community involvement</Link>, volunteering, and participation in clubs or religious groups significantly reduce loneliness and improve mental health<sup><a href='#ref-19' className='text-blue-400 hover:text-blue-300 font-semibold'>[19]</a></sup> according to the National Academies (2020). These activities provide purpose, regular social interaction, and a sense of belonging that counters isolation. Learn more about <Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>building meaningful communities</Link> in your area."
                   />
                 </motion.div>
 
@@ -1397,7 +1397,7 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="Are there apps or platforms to meet new friends safely?"
-                    answer="Yes. <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>Platforms like Pulse</Link> connect users with local, interest-based social events and small group activities, making it easier to build real-life friendships in structured and safe environments. Other apps focus on hobby-based meetups, professional networking, or activity partnerships rather than dating. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>Find opportunities in your city</Link> to meet like-minded people safely."
+                    answer="Yes. Remote workers are <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>Platforms like Pulse</Link> connect users with local, interest-based social events and small group activities, making it easier to build real-life friendships in structured and safe environments. Other apps focus on hobby-based meetups, professional networking, or activity partnerships rather than dating. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>Find opportunities in your city</Link> to meet like-minded people safely."
                   />
                 </motion.div>
 
