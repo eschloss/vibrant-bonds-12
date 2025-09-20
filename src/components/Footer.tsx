@@ -170,6 +170,11 @@ const Footer = () => {
                     <Text id="footer.faq" className="">FAQ</Text>
                   </Link>
                 </li>
+                <li>
+                  <Link to={addRefToUrl("/activities")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.activities" className="">Activities</Text>
+                  </Link>
+                </li>
                 
                 <li>
                   <Link to={addRefToUrl("/partners")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">

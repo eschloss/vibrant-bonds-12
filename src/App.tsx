@@ -28,6 +28,7 @@ import JobOpening from "@/pages/JobOpening";
 import MeetPip from "@/pages/MeetPip";
 import PlanIdeas from "@/pages/PlanIdeas";
 import PlanIdeasCity from "@/pages/PlanIdeasCity";
+import Activities from "@/pages/Activities";
 import Redirect from "@/pages/Redirect";
 import FAQ from "@/pages/FAQ";
 import LonelinessEpidemic from "@/pages/LonelinessEpidemic";
@@ -66,6 +67,7 @@ function App() {
                 <Route path="meet-pip" element={<MeetPip />} />
                 <Route path="plan-ideas" element={<PlanIdeas />} />
                 <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
+                <Route path="activities" element={<Activities />} />
                 <Route path="faq" element={<FAQ />} />
                 <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
                 
