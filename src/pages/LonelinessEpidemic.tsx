@@ -11,10 +11,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQItem from "@/components/FAQItem";
 import Text from "@/components/Text";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const LonelinessEpidemic: React.FC = () => {
-  const { currentLanguage, translate } = useLanguage();
+  const { t, currentLanguage } = useTranslation();
   
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -32,36 +32,36 @@ const LonelinessEpidemic: React.FC = () => {
   };
 
   const keyStats = [
-    { number: "50%", text: translate("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
-    { number: "21M", text: translate("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
-    { number: "79%", text: translate("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
-    { number: "29%", text: translate("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
+    { number: "50%", text: t("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
+    { number: "21M", text: t("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
+    { number: "79%", text: t("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
+    { number: "29%", text: t("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
   ];
 
   const healthImpacts = [
     {
       icon: <Heart className="h-6 w-6 text-red-500" />,
-      title: translate("loneliness.health.cardiovascular.title", "Cardiovascular Disease"),
-      stat: translate("loneliness.health.cardiovascular.stat", "29% higher risk"),
-      description: translate("loneliness.health.cardiovascular.description", "Loneliness increases risk of heart disease comparable to smoking")
+      title: t("loneliness.health.cardiovascular.title", "Cardiovascular Disease"),
+      stat: t("loneliness.health.cardiovascular.stat", "29% higher risk"),
+      description: t("loneliness.health.cardiovascular.description", "Loneliness increases risk of heart disease comparable to smoking")
     },
     {
       icon: <TrendingDown className="h-6 w-6 text-orange-500" />,
-      title: translate("loneliness.health.stroke.title", "Stroke Risk"), 
-      stat: translate("loneliness.health.stroke.stat", "32% increase"),
-      description: translate("loneliness.health.stroke.description", "Chronic loneliness significantly raises stroke probability")
+      title: t("loneliness.health.stroke.title", "Stroke Risk"), 
+      stat: t("loneliness.health.stroke.stat", "32% increase"),
+      description: t("loneliness.health.stroke.description", "Chronic loneliness significantly raises stroke probability")
     },
     {
       icon: <Shield className="h-6 w-6 text-yellow-500" />,
-      title: translate("loneliness.health.immune.title", "Immune Function"),
-      stat: translate("loneliness.health.immune.stat", "Weakened response"),
-      description: translate("loneliness.health.immune.description", "Lonely individuals show compromised immune systems")
+      title: t("loneliness.health.immune.title", "Immune Function"),
+      stat: t("loneliness.health.immune.stat", "Weakened response"),
+      description: t("loneliness.health.immune.description", "Lonely individuals show compromised immune systems")
     },
     {
       icon: <Clock className="h-6 w-6 text-purple-500" />,
-      title: translate("loneliness.health.death.title", "Premature Death"),
-      stat: translate("loneliness.health.death.stat", "30% higher risk"), 
-      description: translate("loneliness.health.death.description", "Effect comparable to smoking 15 cigarettes daily")
+      title: t("loneliness.health.death.title", "Premature Death"),
+      stat: t("loneliness.health.death.stat", "30% higher risk"), 
+      description: t("loneliness.health.death.description", "Effect comparable to smoking 15 cigarettes daily")
     }
   ];
 
@@ -1465,29 +1465,29 @@ const LonelinessEpidemic: React.FC = () => {
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={translate("loneliness.faq.q6", "What makes loneliness different from being alone?")}
-                    answer={translate("loneliness.faq.a6", "Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections.")}
+                    question={t("loneliness.faq.q6", "What makes loneliness different from being alone?")}
+                    answer={t("loneliness.faq.a6", "Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={translate("loneliness.faq.q7", "How does urban living contribute to loneliness?")}
-                    answer={translate("loneliness.faq.a7", "Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities.")}
+                    question={t("loneliness.faq.q7", "How does urban living contribute to loneliness?")}
+                    answer={t("loneliness.faq.a7", "Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={translate("loneliness.faq.q8", "What is Pulse and how can it help with loneliness?")}
-                    answer={translate("loneliness.faq.a8", "<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>.")}
+                    question={t("loneliness.faq.q8", "What is Pulse and how can it help with loneliness?")}
+                    answer={t("loneliness.faq.a8", "<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={translate("loneliness.faq.q9", "What evidence-based solutions work best for loneliness?")}
-                    answer={translate("loneliness.faq.a9", "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.")}
+                    question={t("loneliness.faq.q9", "What evidence-based solutions work best for loneliness?")}
+                    answer={t("loneliness.faq.a9", "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.")}
                   />
                 </motion.div>
               </motion.div>
