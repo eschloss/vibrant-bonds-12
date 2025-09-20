@@ -30,6 +30,7 @@ import PlanIdeas from "@/pages/PlanIdeas";
 import PlanIdeasCity from "@/pages/PlanIdeasCity";
 import Redirect from "@/pages/Redirect";
 import FAQ from "@/pages/FAQ";
+import LonelinessEpidemic from "@/pages/LonelinessEpidemic";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ function App() {
                 <Route path="plan-ideas" element={<PlanIdeas />} />
                 <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
                 <Route path="faq" element={<FAQ />} />
+                <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
                 
                 {/* Cities routes */}
                 <Route path="cities" element={<CityList />} />

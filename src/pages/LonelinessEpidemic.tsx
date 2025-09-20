@@ -1,0 +1,600 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { AlertTriangle, Users, Heart, TrendingDown, Clock, Shield, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Seo } from "@/hooks/useSeo";
+import { Link } from "react-router-dom";
+
+const LonelinessEpidemic: React.FC = () => {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const keyStats = [
+    { number: "50%", text: "of Americans report experiencing loneliness", source: "Cigna, 2023" },
+    { number: "21M", text: "Americans have zero close friends", source: "Survey Center on American Life, 2021" },
+    { number: "79%", text: "of Gen Z reports frequent loneliness", source: "Cigna, 2020" },
+    { number: "29%", text: "increased risk of premature death", source: "PLOS Medicine, 2015" }
+  ];
+
+  const healthImpacts = [
+    {
+      icon: <Heart className="h-6 w-6 text-red-500" />,
+      title: "Cardiovascular Disease",
+      stat: "29% higher risk",
+      description: "Loneliness increases risk of heart disease comparable to smoking"
+    },
+    {
+      icon: <TrendingDown className="h-6 w-6 text-orange-500" />,
+      title: "Stroke Risk", 
+      stat: "32% increase",
+      description: "Chronic loneliness significantly raises stroke probability"
+    },
+    {
+      icon: <Shield className="h-6 w-6 text-yellow-500" />,
+      title: "Immune Function",
+      stat: "Weakened response",
+      description: "Lonely individuals show compromised immune systems"
+    },
+    {
+      icon: <Clock className="h-6 w-6 text-purple-500" />,
+      title: "Premature Death",
+      stat: "30% higher risk", 
+      description: "Effect comparable to smoking 15 cigarettes daily"
+    }
+  ];
+
+  const generationStats = [
+    { generation: "Gen Z (18-26)", loneliness: "79%", noFriends: "25%", description: "The loneliest generation" },
+    { generation: "Millennials (27-42)", loneliness: "71%", noFriends: "22%", description: "High dissatisfaction with friendships" },
+    { generation: "Gen X (43-58)", loneliness: "50%", noFriends: "15%", description: "Moderate but concerning levels" },
+    { generation: "Boomers (59+)", loneliness: "33%", noFriends: "9%", description: "Often situational loneliness" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-900">
+      <Seo
+        title={{
+          en: "The Loneliness Epidemic: Statistics, Causes, and Solutions in 2025",
+          es: "La Epidemia de Soledad: Estadísticas, Causas y Soluciones en 2025"
+        }}
+        description={{
+          en: "Comprehensive analysis of the loneliness epidemic affecting millions. Statistics, health impacts, generational trends, and solutions for the social isolation crisis.",
+          es: "Análisis completo de la epidemia de soledad que afecta a millones. Estadísticas, impactos en la salud, tendencias generacionales y soluciones para la crisis de aislamiento social."
+        }}
+        keywords={["loneliness epidemic", "social isolation", "mental health crisis", "friendship statistics", "Gen Z loneliness", "social connections", "public health"]}
+        type="article"
+        publishedTime="2025-01-20T00:00:00Z"
+        modifiedTime="2025-01-20T00:00:00Z"
+        section="Health & Society"
+      />
+
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-gray-900 to-orange-900/20" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.div 
+              className="flex items-center justify-center gap-3 mb-6"
+              variants={fadeInUp}
+            >
+              <AlertTriangle className="h-8 w-8 text-red-500 animate-pulse" />
+              <Badge variant="destructive" className="px-4 py-2 text-sm font-semibold">
+                PUBLIC HEALTH CRISIS
+              </Badge>
+              <AlertTriangle className="h-8 w-8 text-red-500 animate-pulse" />
+            </motion.div>
+
+            <motion.h1
+              className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400"
+              variants={fadeInUp}
+            >
+              The Loneliness Epidemic
+            </motion.h1>
+
+            <motion.p
+              className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
+              variants={fadeInUp}
+            >
+              Statistics, Causes, and the Search for Friendship in 2025
+            </motion.p>
+
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+              variants={fadeInUp}
+            >
+              {keyStats.map((stat, index) => (
+                <Card key={index} className="bg-gray-800/50 border-red-500/20 hover:border-red-500/40 transition-all duration-300">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-3xl font-bold text-red-400 mb-2">{stat.number}</div>
+                    <div className="text-sm text-gray-300 mb-1">{stat.text}</div>
+                    <div className="text-xs text-gray-500">{stat.source}</div>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Introduction */}
+      <section className="py-16 bg-gray-800/50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto prose prose-lg prose-invert"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl font-bold mb-8 text-white flex items-center gap-3">
+              <Users className="h-8 w-8 text-pulse-pink" />
+              Introduction
+            </h2>
+            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+              Not long ago, loneliness was thought of as a personal problem — a fleeting feeling you might experience after moving to a new city, going through a breakup, or losing a loved one. Today, it's increasingly recognized as a public health crisis that touches millions of people across every generation, income level, and culture.
+            </p>
+            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+              In 2023, U.S. Surgeon General Dr. Vivek Murthy issued a landmark advisory calling loneliness and social isolation an "epidemic." He compared the health impact of disconnection to smoking 15 cigarettes a day, warning that the absence of meaningful social bonds is shortening lives and worsening the nation's mental health crisis. It was one of the clearest signals yet that loneliness is not a fringe issue, but one of the defining challenges of our time.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Why Now Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <TrendingDown className="h-8 w-8 text-orange-500" />
+              Why Now?
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness. More than 20 million adults say they have no close friends, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness.
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis, with especially high rates among youth.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Health Impact Section */}
+      <section className="py-16 bg-gray-800/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-12 text-white text-center flex items-center justify-center gap-3"
+              variants={fadeInUp}
+            >
+              <Heart className="h-8 w-8 text-red-500" />
+              The Health Toll of Loneliness
+            </motion.h2>
+            
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+              variants={fadeInUp}
+            >
+              {healthImpacts.map((impact, index) => (
+                <Card key={index} className="bg-gray-800/50 border-gray-700/50 hover:border-red-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20">
+                  <CardHeader className="text-center pb-4">
+                    <div className="flex justify-center mb-3">
+                      {impact.icon}
+                    </div>
+                    <CardTitle className="text-lg text-white">{impact.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <div className="text-2xl font-bold text-red-400 mb-2">{impact.stat}</div>
+                    <p className="text-sm text-gray-400">{impact.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <h3 className="text-2xl font-semibold mb-4 text-white">Mental Health Impacts</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Loneliness increases the risk of depression by more than twofold (Journal of Clinical Psychiatry, 2020)</li>
+                <li>Young adults reporting chronic loneliness were 3x more likely to experience severe anxiety and depressive symptoms (CDC, 2022)</li>
+                <li>Teenagers who report feeling lonely are more likely to have self-harm behaviors and suicidal ideation</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Physical Health Impacts</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Loneliness and social isolation increase the risk of premature death by 29% — an effect comparable to smoking 15 cigarettes per day</li>
+                <li>Lonely individuals have a 32% higher risk of stroke and a 29% higher risk of heart disease</li>
+                <li>Chronic loneliness has been linked to weakened immune function, slower wound healing, and higher inflammation markers</li>
+              </ul>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Generational Trends */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-12 text-white text-center"
+              variants={fadeInUp}
+            >
+              Generational Trends: Who Feels Loneliest?
+            </motion.h2>
+            
+            <motion.div 
+              className="space-y-6"
+              variants={fadeInUp}
+            >
+              {generationStats.map((gen, index) => (
+                <Card key={index} className="bg-gray-800/50 border-gray-700/50">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-white mb-2">{gen.generation}</h3>
+                        <p className="text-gray-400">{gen.description}</p>
+                      </div>
+                      <div className="flex gap-6 text-center">
+                        <div>
+                          <div className="text-2xl font-bold text-red-400">{gen.loneliness}</div>
+                          <div className="text-sm text-gray-500">Feel Lonely</div>
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-orange-400">{gen.noFriends}</div>
+                          <div className="text-sm text-gray-500">No Close Friends</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Statistics Table */}
+      <section className="py-16 bg-gray-800/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-12 text-white text-center"
+              variants={fadeInUp}
+            >
+              Key Facts, Numbers, and Statistics
+            </motion.h2>
+
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-8"
+              variants={fadeInUp}
+            >
+              {/* Overall Statistics */}
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="h-5 w-5 text-pulse-pink" />
+                    Overall Loneliness Statistics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Americans feeling lonely</span>
+                    <span className="font-semibold text-red-400">50%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Americans with zero close friends</span>
+                    <span className="font-semibold text-red-400">21 million</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Dissatisfied with friendships</span>
+                    <span className="font-semibold text-red-400">33%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Average close friends (1990 vs today)</span>
+                    <span className="font-semibold text-red-400">4 → 2</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Health Impact Statistics */}
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-red-500" />
+                    Health Impact Statistics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Increased premature death risk</span>
+                    <span className="font-semibold text-red-400">29%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Higher cardiovascular disease risk</span>
+                    <span className="font-semibold text-red-400">29%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Increased stroke risk</span>
+                    <span className="font-semibold text-red-400">32%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Dementia risk increase (older adults)</span>
+                    <span className="font-semibold text-red-400">50%</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Workplace Statistics */}
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-orange-500" />
+                    Workplace & Remote Work
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Remote workers feeling lonely</span>
+                    <span className="font-semibold text-orange-400">2x more</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Employees with work best friend</span>
+                    <span className="font-semibold text-orange-400">20%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Annual productivity loss</span>
+                    <span className="font-semibold text-orange-400">$406B</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">Isolated employees missing work</span>
+                    <span className="font-semibold text-orange-400">5x more</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* International Statistics */}
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <TrendingDown className="h-5 w-5 text-purple-500" />
+                    International Trends
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Global adults feeling lonely</span>
+                    <span className="font-semibold text-purple-400">25%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">UK adults feeling lonely often</span>
+                    <span className="font-semibold text-purple-400">38%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
+                    <span className="text-gray-300">Japan socially isolated adults (40+)</span>
+                    <span className="font-semibold text-purple-400">14%</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-gray-300">OECD countries chronic loneliness</span>
+                    <span className="font-semibold text-purple-400">20-30%</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Cultural Shifts */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white"
+              variants={fadeInUp}
+            >
+              Cultural and Social Shifts: Why Loneliness Is Rising
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Loneliness doesn't occur in a vacuum. It reflects profound changes in how society is structured, how we interact, and the role technology plays in our lives.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">The Decline of Civic Engagement</h3>
+              <p className="text-gray-300 mb-4">
+                Robert Putnam's "Bowling Alone" (2000) documented a sharp decline in American community life over the latter half of the 20th century:
+              </p>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Membership in organizations like PTAs, civic clubs, and unions dropped by nearly 50% between the 1960s and 2000</li>
+                <li>The percentage of Americans who say "most people can be trusted" fell from 55% in 1972 to 32% in 2000</li>
+                <li>Religious attendance fell from 45% in 1970 to 24% in 2020</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Technology: Connection and Isolation</h3>
+              <p className="text-gray-300 mb-4">
+                The digital age promised more connection, but evidence shows a paradoxical rise in loneliness:
+              </p>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Social media overuse correlates with loneliness and depression, particularly in young adults. Heavy users are 2x more likely to feel socially isolated</li>
+                <li>Millennials and Gen Z spend up to 4–5 hours per day on social media, which correlates with increased reports of loneliness</li>
+                <li>While platforms facilitate contact, they often replace in-person experiences with shallow interactions</li>
+              </ul>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Solutions */}
+      <section className="py-16 bg-gray-800/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <Shield className="h-8 w-8 text-green-500" />
+              Solutions and What Works: Combating Loneliness
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                While the statistics are sobering, loneliness is not inevitable. Research shows that interventions — both at the individual and community level — can significantly reduce chronic loneliness.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-8 not-prose">
+                <Card className="bg-gray-800/50 border-green-500/20">
+                  <CardHeader>
+                    <CardTitle className="text-white">Building Meaningful Friendships</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-gray-300 space-y-3">
+                    <p>Quality over quantity: Having even one or two high-quality friendships can buffer the negative health effects of loneliness</p>
+                    <p>Shared experiences: Joining clubs, volunteering, or taking classes creates lasting bonds</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gray-800/50 border-green-500/20">
+                  <CardHeader>
+                    <CardTitle className="text-white">Leveraging Technology Wisely</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-gray-300 space-y-3">
+                    <p>Video calls and messaging apps help maintain connections when used intentionally</p>
+                    <p>Passive social media use correlates with increased loneliness and depressive symptoms</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gray-800/50 border-green-500/20">
+                  <CardHeader>
+                    <CardTitle className="text-white">Community Engagement</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-gray-300 space-y-3">
+                    <p>Volunteer work significantly reduces loneliness, particularly among older adults</p>
+                    <p>"Third places" — cafés, libraries, community centers — foster casual social connections</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gray-800/50 border-green-500/20">
+                  <CardHeader>
+                    <CardTitle className="text-white">Apps and Platforms for Friendship</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-gray-300 space-y-3">
+                    <p>Emerging social apps focus on connecting people with shared interests for meaningful in-person interaction</p>
+                    <p>Platforms help users meet new friends in safe, structured social settings</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Conclusion & CTA */}
+      <section className="py-20 bg-gradient-to-br from-pulse-pink/20 via-gray-900 to-pulse-blue/20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"
+              variants={fadeInUp}
+            >
+              Tackling the Loneliness Epidemic
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert mb-12" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans — from Gen Z to Boomers — experience chronic isolation that harms mental health, physical well-being, and overall life satisfaction. Yet loneliness is not inevitable.
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. That's where tools like Pulse come in. Pulse helps you meet new friends safely, intentionally, and locally, bridging the gap between online connections and real-world social interaction.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              variants={fadeInUp}
+            >
+              <Link to="/">
+                <Button size="xl" className="pulse-gradient-cta text-white font-semibold px-8 py-4 hover:shadow-lg hover:shadow-pulse-pink/25 transition-all duration-300">
+                  Start Building Connections Today
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.p
+              className="text-gray-400 text-sm mt-6"
+              variants={fadeInUp}
+            >
+              Don't wait. Start connecting today. Your future self will thank you.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default LonelinessEpidemic;
