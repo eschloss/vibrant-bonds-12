@@ -14,7 +14,7 @@ const generationData = [
     lonelinessScore: 48.3,
     lonelinessPercent: 79,
     noFriends: 27,
-    color: "url(#unified-gradient)",
+    color: "hsl(var(--pulse-pink))",
     solidColor: "hsl(var(--pulse-pink))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
@@ -31,7 +31,7 @@ const generationData = [
     lonelinessScore: 45.3,
     lonelinessPercent: 71,
     noFriends: 22,
-    color: "url(#unified-gradient)",
+    color: "hsl(var(--accent))",
     solidColor: "hsl(var(--accent))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["YouGov 2019"],
@@ -48,7 +48,7 @@ const generationData = [
     lonelinessScore: 40.2,
     lonelinessPercent: 50,
     noFriends: 15,
-    color: "url(#unified-gradient)",
+    color: "hsl(var(--pulse-blue))",
     solidColor: "hsl(var(--pulse-blue))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["Survey Center on American Life 2021"],
@@ -65,7 +65,7 @@ const generationData = [
     lonelinessScore: 38.5,
     lonelinessPercent: 50,
     noFriends: 9,
-    color: "url(#unified-gradient)",
+    color: "hsl(var(--primary))",
     solidColor: "hsl(var(--primary))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
     citations: ["AARP 2020", "National Academies of Sciences 2020"],
@@ -314,13 +314,6 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-                    <defs>
-                      <linearGradient id="unified-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--pulse-pink))" stopOpacity={0.9} />
-                        <stop offset="50%" stopColor="hsl(var(--accent))" stopOpacity={0.8} />
-                        <stop offset="100%" stopColor="hsl(var(--pulse-blue))" stopOpacity={0.7} />
-                      </linearGradient>
-                    </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" className="opacity-20" />
                     <XAxis 
                       dataKey="name" 
