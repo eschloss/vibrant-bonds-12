@@ -426,6 +426,176 @@ const LonelinessEpidemic: React.FC = () => {
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts<sup className="text-blue-400 font-semibold">[5]</sup>. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly<sup className="text-blue-400 font-semibold">[6]</sup>. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis<sup className="text-blue-400 font-semibold">[7]</sup>, with especially high rates among youth.
               </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                What makes loneliness so urgent now is not just the prevalence of the feeling itself but the social and technological forces accelerating it. Remote work has untethered millions from casual office relationships. COVID-19 lockdowns disrupted in-person gatherings and weakened the everyday "weak ties" — neighbors, coworkers, acquaintances — that form the fabric of social life. Social media, once heralded as a connector, often deepens the sense of isolation through endless comparison and shallow interaction.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What Is the Loneliness Epidemic? */}
+      <section className="py-16 bg-gray-800/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <Users className="h-8 w-8 text-blue-500" />
+              What Is the Loneliness Epidemic?
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                When we talk about the loneliness epidemic, we're talking about more than a temporary feeling of being left out. Loneliness, as researchers define it, is a mismatch between the social connections you want and the ones you have. You can be surrounded by people and still feel lonely if those connections don't meet your emotional needs.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Loneliness vs. Social Isolation</h3>
+              <p className="text-gray-300 mb-4">It's important to distinguish between two related concepts:</p>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li><strong className="text-white">Loneliness:</strong> A subjective experience — the pain of feeling disconnected, unseen, or unsupported.</li>
+                <li><strong className="text-white">Social isolation:</strong> An objective measure — how much contact you have with others, regardless of how you feel about it.</li>
+              </ul>
+              <p className="text-gray-300 mb-6">
+                A person can be socially isolated but not feel lonely if they are content with that level of contact. Others may be socially active yet still feel lonely if they lack close, meaningful ties. The U.S. National Academies of Sciences has warned that social isolation among older adults is associated with a 50% increased risk of dementia<sup className="text-blue-400 font-semibold">[19]</sup>.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">A Growing Problem</h3>
+              <p className="text-gray-300 mb-6">
+                The phrase "loneliness epidemic" was popularized by Harvard political scientist Robert Putnam in his landmark book <em>Bowling Alone</em><sup className="text-blue-400 font-semibold">[11]</sup>. Putnam showed how American social life was fragmenting: fewer bowling leagues, fewer neighborhood gatherings, fewer civic organizations. The decline of these "middle institutions" was already eroding community bonds.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Why Call It an "Epidemic"?</h3>
+              <p className="text-gray-300 mb-6">
+                The term captures something essential: loneliness spreads. When people withdraw from social life, their absence weakens communities for everyone else. A society with fewer gatherings, fewer clubs, and fewer third places doesn't just affect the lonely individual — it leaves everyone with fewer opportunities to connect.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Why It Matters */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <AlertTriangle className="h-8 w-8 text-red-500" />
+              Why It Matters
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Loneliness is not simply an emotional state. Researchers have found it to be as dangerous as many leading risk factors for early death, including obesity, physical inactivity, and smoking<sup className="text-blue-400 font-semibold">[8]</sup>. It increases the likelihood of cardiovascular disease, dementia, and stroke. Perhaps most tragically, loneliness is tightly linked to suicide risk: in 2023, the U.S. recorded 49,000 deaths by suicide, the highest ever<sup className="text-blue-400 font-semibold">[15]</sup>.
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Beyond health, loneliness is also reshaping culture, politics, and the economy. Civic participation has fallen sharply in the U.S., as documented in Robert Putnam's classic <em>Bowling Alone</em><sup className="text-blue-400 font-semibold">[11]</sup>. Voter turnout, union membership, and religious attendance have all declined, leaving fewer built-in communities where people once found connection. Economists estimate that workplace loneliness costs billions annually in lost productivity, absenteeism, and turnover<sup className="text-blue-400 font-semibold">[12]</sup>.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How the Epidemic Has Grown */}
+      <section className="py-16 bg-gray-800/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <TrendingDown className="h-8 w-8 text-red-500" />
+              📉 How the Loneliness Epidemic Has Grown Over Time
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Declining Social Connections Over Decades</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%<sup className="text-blue-400 font-semibold">[3]</sup></li>
+                <li>The average number of close friendships per adult has dropped from 4 in 1990 to just 2 today</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">The Impact of Technology & Remote Work</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Since 2019, remote work has surged. By 2023, 28% of full-time employees work remotely<sup className="text-blue-400 font-semibold">[13]</sup></li>
+                <li>Digital platforms often replace, rather than supplement, face-to-face relationships</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">COVID-19 and the Surge in Isolation</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>36% of all U.S. adults reported feeling "serious loneliness" during the pandemic<sup className="text-blue-400 font-semibold">[14]</sup></li>
+                <li>61% of young adults and 51% of mothers with young children experienced serious loneliness</li>
+              </ul>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Workplace Loneliness Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-8 text-white flex items-center gap-3"
+              variants={fadeInUp}
+            >
+              <Clock className="h-8 w-8 text-orange-500" />
+              💼 Workplace Loneliness and Remote Work
+            </motion.h2>
+            
+            <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                The way we work has undergone a seismic shift in the past decade — and even more since COVID-19. While flexible schedules and remote work bring freedom, they also come at a cost: increased social isolation.
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Remote Work and Isolation</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Remote workers are more than twice as likely to report loneliness compared to in-office employees<sup className="text-blue-400 font-semibold">[18]</sup></li>
+                <li>1 in 4 remote workers say loneliness is their biggest struggle</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">The Decline of Workplace Friendships</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>In 1985, nearly half of Americans had a close friend at work. Today, fewer than 30% say the same</li>
+                <li>Only 2 in 10 employees report having a "best friend at work," yet those who do are 7x more likely to be engaged</li>
+              </ul>
+
+              <h3 className="text-2xl font-semibold mb-4 text-white">Productivity and Retention Costs</h3>
+              <ul className="text-gray-300 space-y-2 mb-6">
+                <li>Companies lose an estimated $406 billion annually due to loneliness and disengagement<sup className="text-blue-400 font-semibold">[12]</sup></li>
+                <li>Isolated employees are 5x more likely to miss work due to stress and illness</li>
+              </ul>
             </motion.div>
           </motion.div>
         </div>
@@ -966,6 +1136,15 @@ const LonelinessEpidemic: React.FC = () => {
                       <p className="text-white font-semibold mb-2">[18] Buffer</p>
                       <a href="https://buffer.com/state-of-remote-work/2023" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
                         The State of Remote Work 2023
+                      </a>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gray-800/50 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <p className="text-white font-semibold mb-2">[19] National Academies of Sciences</p>
+                      <a href="https://nap.nationalacademies.org/catalog/25663/social-isolation-and-loneliness-in-older-adults-opportunities-for-the-health-care-system" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+                        Social Isolation and Loneliness in Older Adults, 2020
                       </a>
                     </CardContent>
                   </Card>
