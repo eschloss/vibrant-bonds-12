@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
+import { trackPreWaitlisterEvent } from "@/lib/utils";
 
 interface PreWaitlisterFormProps {
   cityName: string;
@@ -94,6 +95,12 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
 
       const result = await response.json();
       if (!result.success) throw new Error(result.message || "Something went wrong");
+
+      trackPreWaitlisterEvent('pre_waitlist_popup_submission', {
+        cityName,
+        city: city || data.other_city,
+        extra: { email: data.email }
+      });
 
       toast({
         title: t("pre_waitlister.form.success.title", "You are on the waitlist"),

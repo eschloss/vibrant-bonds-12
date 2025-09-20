@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import PreWaitlisterForm from "./PreWaitlisterForm";
+import { trackPreWaitlisterEvent } from "@/lib/utils";
 
 interface PreWaitlisterDialogProps {
   cityName: string;
@@ -27,7 +28,14 @@ const PreWaitlisterDialog = ({ cityName, city, isCommunity, state }: PreWaitlist
         <Button 
           size="xl" 
           className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110"
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            trackPreWaitlisterEvent('pre_waitlist_popup_open', {
+              cityName,
+              city,
+              isCommunity
+            });
+            setIsOpen(true);
+          }}
         >
           <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
           <span className="relative z-10">

@@ -53,3 +53,36 @@ export function trackTypeformRedirect(params: {
     // no-op
   }
 }
+
+// Track pre-waitlister events
+export function trackPreWaitlisterEvent(eventName: 'pre_waitlist_popup_open' | 'pre_waitlist_popup_submission', params: {
+  cityName?: string;
+  city?: string;
+  isCommunity?: boolean;
+  extra?: Record<string, any>;
+}) {
+  try {
+    const payload = {
+      city: params.cityName,
+      city_code: params.city,
+      is_community: params.isCommunity,
+      source: getCurrentPageLabel(),
+      path: typeof window !== 'undefined' ? window.location.pathname : undefined,
+      ...(params.extra || {})
+    };
+    // GA4 gtag support
+    // @ts-ignore
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      // @ts-ignore
+      (window as any).gtag('event', eventName, payload);
+    }
+    // GTM dataLayer support
+    // @ts-ignore
+    if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
+      // @ts-ignore
+      (window as any).dataLayer.push({ event: eventName, ...payload });
+    }
+  } catch (e) {
+    // no-op
+  }
+}
