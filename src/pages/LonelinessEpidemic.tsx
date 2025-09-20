@@ -407,30 +407,36 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <Clock className="h-8 w-8 text-orange-500" />
-              💼 Workplace Loneliness and Remote Work
+              <Text id="loneliness.workplace.title" className="">💼 Workplace Loneliness and Remote Work</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                The way we work has undergone a seismic shift in the past decade — and even more since COVID-19. While flexible schedules and remote work bring freedom, they also come at a cost: increased social isolation.
+                <Text id="loneliness.workplace.intro" className="">The way we work has undergone a seismic shift in the past decade — and even more since COVID-19. While flexible schedules and remote work bring freedom, they also come at a cost: increased social isolation.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Remote Work Isolation Statistics: Employee Loneliness Data and Trends</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.workplace.isolation_title" className="">Remote Work Isolation Statistics: Employee Loneliness Data and Trends</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Remote workers are more than twice as likely to report loneliness compared to in-office employees<sup className="text-blue-400 font-semibold">[18]</sup></li>
-                <li>1 in 4 remote workers say loneliness is their biggest struggle</li>
+                <li><Text id="loneliness.workplace.isolation_1" className="">Remote workers are more than twice as likely to report loneliness compared to in-office employees</Text><sup className="text-blue-400 font-semibold">[18]</sup></li>
+                <li><Text id="loneliness.workplace.isolation_2" className="">1 in 4 remote workers say loneliness is their biggest struggle</Text></li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Workplace Friendship Statistics: Declining Professional Relationships Data</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.workplace.friendship_title" className="">Workplace Friendship Statistics: Declining Professional Relationships Data</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>In 1985, nearly half of Americans had a close friend at work. Today, fewer than 30% say the same</li>
-                <li>Only 2 in 10 employees report having a "best friend at work," yet those who do are 7x more likely to be engaged</li>
+                <li><Text id="loneliness.workplace.friendship_1" className="">In 1985, nearly half of Americans had a close friend at work. Today, fewer than 30% say the same</Text></li>
+                <li><Text id="loneliness.workplace.friendship_2" className="">Only 2 in 10 employees report having a "best friend at work," yet those who do are 7x more likely to be engaged</Text></li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Loneliness Cost Statistics: Economic Impact Data on Productivity and Retention</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.workplace.cost_title" className="">Loneliness Cost Statistics: Economic Impact Data on Productivity and Retention</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Companies lose an estimated $406 billion annually due to loneliness and disengagement<sup className="text-blue-400 font-semibold">[12]</sup></li>
-                <li>Isolated employees are 5x more likely to miss work due to stress and illness</li>
+                <li><Text id="loneliness.workplace.cost_1" className="">Companies lose an estimated $406 billion annually due to loneliness and disengagement</Text><sup className="text-blue-400 font-semibold">[12]</sup></li>
+                <li><Text id="loneliness.workplace.cost_2" className="">Isolated employees are 5x more likely to miss work due to stress and illness</Text></li>
               </ul>
             </motion.div>
           </motion.div>
@@ -452,7 +458,7 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <Heart className="h-8 w-8 text-red-500" />
-              The Health Toll of Loneliness
+              <Text id="loneliness.health.title" className="">The Health Toll of Loneliness</Text>
             </motion.h2>
             
             <motion.div 
@@ -476,18 +482,22 @@ const LonelinessEpidemic: React.FC = () => {
             </motion.div>
 
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
-              <h3 className="text-2xl font-semibold mb-4 text-white">Mental Health Statistics: Depression and Anxiety Data Linked to Loneliness</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.health.mental_title" className="">Mental Health Statistics: Depression and Anxiety Data Linked to Loneliness</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Loneliness increases the risk of depression by more than twofold (Journal of Clinical Psychiatry, 2020)</li>
-                <li>Young adults reporting chronic loneliness were 3x more likely to experience severe anxiety and depressive symptoms (CDC, 2022)</li>
-                <li>Teenagers who report feeling lonely are more likely to have self-harm behaviors and suicidal ideation</li>
+                <li><Text id="loneliness.health.mental_1" className="">Loneliness increases the risk of depression by more than twofold (Journal of Clinical Psychiatry, 2020)</Text></li>
+                <li><Text id="loneliness.health.mental_2" className="">Young adults reporting chronic loneliness were 3x more likely to experience severe anxiety and depressive symptoms (CDC, 2022)</Text></li>
+                <li><Text id="loneliness.health.mental_3" className="">Teenagers who report feeling lonely are more likely to have self-harm behaviors and suicidal ideation</Text></li>
               </ul>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Physical Health Impact Data: Cardiovascular Disease and Mortality Statistics</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.health.physical_title" className="">Physical Health Impact Data: Cardiovascular Disease and Mortality Statistics</Text>
+              </h3>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Loneliness and social isolation increase the risk of premature death by 29%<sup className="text-blue-400 font-semibold">[8]</sup> — an effect comparable to smoking 15 cigarettes per day</li>
-                <li>Lonely individuals have a 32% higher risk of stroke and a 29% higher risk of heart disease<sup className="text-blue-400 font-semibold">[9]</sup></li>
-                <li>Chronic loneliness has been linked to weakened immune function, slower wound healing, and higher inflammation markers<sup className="text-blue-400 font-semibold">[10]</sup></li>
+                <li><Text id="loneliness.health.physical_1" className="">Loneliness and social isolation increase the risk of premature death by 29% — an effect comparable to smoking 15 cigarettes per day</Text><sup className="text-blue-400 font-semibold">[8]</sup></li>
+                <li><Text id="loneliness.health.physical_2" className="">Lonely individuals have a 32% higher risk of stroke and a 29% higher risk of heart disease</Text><sup className="text-blue-400 font-semibold">[9]</sup></li>
+                <li><Text id="loneliness.health.physical_3" className="">Chronic loneliness has been linked to weakened immune function, slower wound healing, and higher inflammation markers</Text><sup className="text-blue-400 font-semibold">[10]</sup></li>
               </ul>
             </motion.div>
           </motion.div>
@@ -550,7 +560,7 @@ const LonelinessEpidemic: React.FC = () => {
                variants={fadeInUp}
                id="key-stats"
              >
-               📊 Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics
+               <Text id="loneliness.key_stats.title" className="">📊 Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics</Text>
              </motion.h2>
 
             <motion.div 
@@ -562,32 +572,32 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Users className="h-5 w-5 text-red-400" />
-                    Overall Loneliness in the U.S.
+                    <Text id="loneliness.stats.overall_title" className="">Overall Loneliness in the U.S.</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Adults feeling lonely at least sometimes</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.adults_lonely_sometimes" className="">Adults feeling lonely at least sometimes</Text></span>
                     <span className="font-semibold text-red-400">50%<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300">[2]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Americans with zero close friends</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.zero_close_friends" className="">Americans with zero close friends</Text></span>
                     <span className="font-semibold text-red-400">21 million<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Adults dissatisfied with friendships</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.dissatisfied_friendships" className="">Adults dissatisfied with friendships</Text></span>
                     <span className="font-semibold text-red-400">33%<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300">[2]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Gen Z reporting frequent loneliness</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.gen_z_frequent_loneliness" className="">Gen Z reporting frequent loneliness</Text></span>
                     <span className="font-semibold text-red-400">79%<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300">[4]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Millennials feeling lonely often/always</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.millennials_lonely" className="">Millennials feeling lonely often/always</Text></span>
                     <span className="font-semibold text-red-400">30%<sup><a href="#ref-20" className="text-blue-400 hover:text-blue-300">[20]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Boomers (45+) feeling lonely</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.boomers_lonely" className="">Boomers (45+) feeling lonely</Text></span>
                     <span className="font-semibold text-red-400">33%<sup><a href="#ref-21" className="text-blue-400 hover:text-blue-300">[21]</a></sup></span>
                   </div>
                 </CardContent>
@@ -598,24 +608,24 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Heart className="h-5 w-5 text-orange-400" />
-                    Friendship Networks
+                    <Text id="loneliness.stats.friendship_title" className="">Friendship Networks</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Average close friends (1990 vs today)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.avg_close_friends" className="">Average close friends (1990 vs today)</Text></span>
                     <span className="font-semibold text-orange-400">4 → 2<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Americans with no close friends</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.no_close_friends" className="">Americans with no close friends</Text></span>
                     <span className="font-semibold text-orange-400">12%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Americans with 10+ friends (then vs now)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.friends_decline" className="">Americans with 10+ friends (then vs now)</Text></span>
                     <span className="font-semibold text-orange-400">33% → 13%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Remote workers citing loneliness as biggest challenge</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.remote_loneliness" className="">Remote workers citing loneliness as biggest challenge</Text></span>
                     <span className="font-semibold text-orange-400">25%<sup><a href="#ref-18" className="text-blue-400 hover:text-blue-300">[18]</a></sup></span>
                   </div>
                 </CardContent>
