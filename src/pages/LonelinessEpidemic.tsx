@@ -106,7 +106,7 @@ const LonelinessEpidemic: React.FC = () => {
                 transition={{ delay: 0.2, type: "spring" }} 
                 className="inline-block"
               >
-                <div className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 rounded-full text-sm font-medium mb-6 flex items-center gap-2">
+                <div className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4" />
                   🚨 PUBLIC HEALTH CRISIS
                 </div>
