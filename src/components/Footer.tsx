@@ -191,6 +191,11 @@ const Footer = () => {
                     <Text id="footer.meet_pip" className="">Meet Pip</Text>
                   </Link>
                 </li>
+                <li>
+                  <Link to={addRefToUrl("/loneliness-epidemic")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    Loneliness Report
+                  </Link>
+                </li>
               </ul>
             </div>
 
