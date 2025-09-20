@@ -14,9 +14,9 @@ const generationData = [
     lonelinessScore: 48.3,
     lonelinessPercent: 79,
     noFriends: 27,
-    color: "hsl(var(--pulse-pink))",
-    solidColor: "hsl(var(--pulse-pink))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
+    color: "url(#gen-z-gradient)",
+    solidColor: "#FF2688",
+    gradient: "linear-gradient(135deg, #FF2688, #FF4DA6)",
     citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
     citationNumbers: [4, 5, 6],
     insights: [
@@ -31,9 +31,9 @@ const generationData = [
     lonelinessScore: 45.3,
     lonelinessPercent: 71,
     noFriends: 22,
-    color: "hsl(var(--accent))",
-    solidColor: "hsl(var(--accent))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
+    color: "url(#millennials-gradient)",
+    solidColor: "#741ADD",
+    gradient: "linear-gradient(135deg, #741ADD, #9B4DFF)",
     citations: ["YouGov 2019"],
     citationNumbers: [20, 3],
     insights: [
@@ -48,9 +48,9 @@ const generationData = [
     lonelinessScore: 40.2,
     lonelinessPercent: 50,
     noFriends: 15,
-    color: "hsl(var(--pulse-blue))",
-    solidColor: "hsl(var(--pulse-blue))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
+    color: "url(#gen-x-gradient)",
+    solidColor: "#38D1BF",
+    gradient: "linear-gradient(135deg, #38D1BF, #5FDDD0)",
     citations: ["Survey Center on American Life 2021"],
     citationNumbers: [21, 3],
     insights: [
@@ -65,9 +65,9 @@ const generationData = [
     lonelinessScore: 38.5,
     lonelinessPercent: 50,
     noFriends: 9,
-    color: "hsl(var(--primary))",
-    solidColor: "hsl(var(--primary))",
-    gradient: "linear-gradient(135deg, hsl(var(--pulse-pink)), hsl(var(--accent)))",
+    color: "url(#boomers-gradient)",
+    solidColor: "#FFD600",
+    gradient: "linear-gradient(135deg, #FFD600, #FFED4E)",
     citations: ["AARP 2020", "National Academies of Sciences 2020"],
     citationNumbers: [21, 22],
     insights: [
@@ -314,6 +314,24 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                    <defs>
+                      <linearGradient id="gen-z-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FF2688" />
+                        <stop offset="100%" stopColor="#FF4DA6" />
+                      </linearGradient>
+                      <linearGradient id="millennials-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#741ADD" />
+                        <stop offset="100%" stopColor="#9B4DFF" />
+                      </linearGradient>
+                      <linearGradient id="gen-x-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#38D1BF" />
+                        <stop offset="100%" stopColor="#5FDDD0" />
+                      </linearGradient>
+                      <linearGradient id="boomers-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#FFD600" />
+                        <stop offset="100%" stopColor="#FFED4E" />
+                      </linearGradient>
+                    </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" className="opacity-20" />
                     <XAxis 
                       dataKey="name" 
