@@ -36,73 +36,39 @@ const Activities = () => {
   const activities = [
     {
       id: "surfing",
-      name: "Beach & Water Sports",
+      name: "Beach & Water",
       image: pipSurfing,
-      description: "Catch waves, make memories. Perfect for adventurous souls who love the ocean.",
-      vibe: "Adventurous",
-      duration: "Half Day",
-      groupSize: "6-8 people",
-      gradient: "from-blue-500 to-cyan-400"
+      vibe: "Adventurous"
     },
     {
       id: "volleyball",
-      name: "Beach Sports & Games",
+      name: "Beach Sports",
       image: pipVolleyball,
-      description: "Spike, laugh, bond. Team sports that bring out everyone's competitive spirit.",
-      vibe: "Energetic",
-      duration: "2-3 hours",
-      groupSize: "8-12 people",
-      gradient: "from-orange-500 to-yellow-400"
+      vibe: "Energetic"
     },
     {
       id: "camping",
       name: "Outdoor Adventures",
       image: pipCamping,
-      description: "Under the stars, around the fire. Nature experiences that create deep connections.",
-      vibe: "Peaceful",
-      duration: "Weekend",
-      groupSize: "6-10 people",
-      gradient: "from-purple-600 to-indigo-500"
+      vibe: "Peaceful"
     },
     {
       id: "pilates",
       name: "Wellness & Fitness",
       image: pipPilates,
-      description: "Strengthen bodies, build bonds. Group fitness that feels more like fun than work.",
-      vibe: "Mindful",
-      duration: "1-2 hours",
-      groupSize: "6-8 people",
-      gradient: "from-pink-500 to-rose-400"
+      vibe: "Mindful"
     },
     {
       id: "bookclub",
       name: "Creative & Cultural",
       image: pipBookclub,
-      description: "Stories, wine, new perspectives. Intellectual conversations that spark deep friendships.",
-      vibe: "Thoughtful",
-      duration: "2-3 hours",
-      groupSize: "6-8 people",
-      gradient: "from-amber-600 to-orange-500"
+      vibe: "Thoughtful"
     },
     {
       id: "pottery",
       name: "Arts & Crafts",
       image: pipPottery,
-      description: "Create together, laugh together. Hands-on workshops where masterpieces and friendships are made.",
-      vibe: "Creative",
-      duration: "2-4 hours",
-      groupSize: "6-10 people",
-      gradient: "from-teal-500 to-emerald-400"
-    },
-    {
-      id: "escape",
-      name: "Puzzles & Games",
-      image: pipEscapeRoom,
-      description: "Solve mysteries, build trust. Team challenges that reveal everyone's unique strengths.",
-      vibe: "Clever",
-      duration: "1-2 hours",
-      groupSize: "6-8 people",
-      gradient: "from-violet-600 to-purple-500"
+      vibe: "Creative"
     }
   ];
 
@@ -141,7 +107,7 @@ const Activities = () => {
               </span>
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
               Every crew gets a mission: plan an unforgettable real-life experience together. 
               From beach days to creative workshops, Pip curates activities that match your group's vibe and spark lasting friendships.
             </p>
@@ -165,7 +131,7 @@ const Activities = () => {
       </section>
 
       {/* Activities Grid */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center mb-16"
@@ -177,12 +143,12 @@ const Activities = () => {
               Activities That Build 
               <span className="pulse-gradient-text"> Real Bonds</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Each experience is designed to break down barriers, spark conversations, and create the kind of memories that turn strangers into lifelong friends.
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              Each experience is designed to break down barriers, spark conversations, and create memories that turn strangers into lifelong friends.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {activities.map((activity, index) => (
               <motion.div
                 key={activity.id}
@@ -191,44 +157,42 @@ const Activities = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-card/80 backdrop-blur">
+                <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-card/60 backdrop-blur">
                   <div className="aspect-square relative overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${activity.gradient} opacity-20`} />
+                    <div className="absolute inset-0 bg-primary/5" />
                     <img 
                       src={activity.image} 
                       alt={`Pip enjoying ${activity.name}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-background/90 text-foreground px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="absolute bottom-2 left-2 right-2">
+                      <span className="bg-background/90 text-foreground px-2 py-1 rounded text-xs font-medium block text-center">
                         {activity.vibe}
                       </span>
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <h3 className="font-semibold text-lg mb-2 text-foreground">
+                  <div className="p-3">
+                    <h3 className="font-medium text-sm text-center text-foreground">
                       {activity.name}
                     </h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                      {activity.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <Users className="w-4 h-4" />
-                        {activity.groupSize}
-                      </div>
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <Calendar className="w-4 h-4" />
-                        {activity.duration}
-                      </div>
-                    </div>
                   </div>
                 </Card>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Button variant="outline" size="lg" className="group">
+              View All Activities in Your City
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -245,9 +209,9 @@ const Activities = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 <span className="pulse-gradient-text">Pip Knows</span> What You'll Love
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Our AI reads your crew's vibe and suggests the perfect experiences
-              </p>
+            <p className="text-lg text-foreground/70">
+              Our AI reads your crew's vibe and suggests the perfect experiences
+            </p>
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -262,7 +226,7 @@ const Activities = () => {
                   <Users className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Reads Your Profiles</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Analyzes interests, energy levels, and preferences to understand what makes your crew tick.
                 </p>
               </motion.div>
@@ -278,7 +242,7 @@ const Activities = () => {
                   <Heart className="w-8 h-8 text-accent" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Watches Group Chat</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Picks up on conversation themes and shared excitement to suggest activities everyone will love.
                 </p>
               </motion.div>
@@ -294,7 +258,7 @@ const Activities = () => {
                   <Sparkles className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Checks Local Scene</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Finds the best local spots, events, and experiences available in your city right now.
                 </p>
               </motion.div>
@@ -304,7 +268,7 @@ const Activities = () => {
       </section>
 
       {/* Social Proof & Benefits */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-secondary/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -320,28 +284,28 @@ const Activities = () => {
               <div className="grid md:grid-cols-2 gap-8 mt-12">
                 <div className="text-left">
                   <h3 className="font-semibold text-xl mb-3 text-foreground">Break Down Barriers Fast</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     Shared challenges and new experiences dissolve social anxiety. When you're all learning to surf or solving an escape room together, conversation flows naturally.
                   </p>
                 </div>
                 
                 <div className="text-left">
                   <h3 className="font-semibold text-xl mb-3 text-foreground">Create Inside Jokes</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     Those "remember when" moments become the foundation of friendship. Shared memories give you an instant connection and countless future conversations.
                   </p>
                 </div>
                 
                 <div className="text-left">
                   <h3 className="font-semibold text-xl mb-3 text-foreground">See Real Personalities</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     Activities reveal who people really are. You'll discover the problem-solver, the encourager, the comedian—authentic connections form naturally.
                   </p>
                 </div>
                 
                 <div className="text-left">
                   <h3 className="font-semibold text-xl mb-3 text-foreground">Build Future Plans</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-foreground/70 leading-relaxed">
                     Great experiences lead to "we should do this again!" Your first activity becomes the launching pad for ongoing friendships and adventures.
                   </p>
                 </div>
@@ -365,7 +329,7 @@ const Activities = () => {
               <span className="pulse-gradient-text"> Story Together?</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
               Your crew is waiting. Your next favorite memory is one activity away. 
               Let Pip match you with like-minded people who'll become your adventure partners, coffee companions, and lifelong friends.
             </p>
@@ -375,7 +339,7 @@ const Activities = () => {
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm text-foreground/60 mt-4">
               We'll match you when enough compatible people in your city sign up—no endless waitlist.
             </p>
           </motion.div>
