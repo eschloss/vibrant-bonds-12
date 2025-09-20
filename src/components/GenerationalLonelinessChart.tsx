@@ -14,9 +14,11 @@ const generationData = [
     lonelinessScore: 48.3,
     lonelinessPercent: 79,
     noFriends: 27,
-    color: "hsl(var(--pulse-fuchsia))",
+    color: "url(#genZ-gradient)",
+    solidColor: "hsl(var(--pulse-fuchsia))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-fuchsia)), hsl(var(--pulse-violet)))",
-    citations: [4, 5, 6],
+    citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
+    citationNumbers: [4, 5, 6],
     insights: [
       "Highest loneliness scores despite being most connected digitally",
       "Social media paradox: more connections, less meaningful relationships",
@@ -29,9 +31,11 @@ const generationData = [
     lonelinessScore: 45.3,
     lonelinessPercent: 71,
     noFriends: 22,
-    color: "hsl(var(--pulse-cyan))",
+    color: "url(#millennials-gradient)",
+    solidColor: "hsl(var(--pulse-cyan))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-cyan)), hsl(var(--pulse-blue)))",
-    citations: [20, 3],
+    citations: ["YouGov 2019"],
+    citationNumbers: [20, 3],
     insights: [
       "Work-life balance challenges impact social connections",
       "Adulting responsibilities leave less time for friendships",
@@ -44,9 +48,11 @@ const generationData = [
     lonelinessScore: 40.2,
     lonelinessPercent: 50,
     noFriends: 15,
-    color: "hsl(var(--pulse-orange))",
+    color: "url(#genX-gradient)",
+    solidColor: "hsl(var(--pulse-orange))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-orange)), hsl(var(--pulse-amber)))",
-    citations: [21, 3],
+    citations: ["Survey Center on American Life 2021"],
+    citationNumbers: [21, 3],
     insights: [
       "Sandwich generation: caring for parents and children",
       "Career peak years limit social time",
@@ -59,9 +65,11 @@ const generationData = [
     lonelinessScore: 38.5,
     lonelinessPercent: 50,
     noFriends: 9,
-    color: "hsl(var(--pulse-green))",
+    color: "url(#boomers-gradient)",
+    solidColor: "hsl(var(--pulse-green))",
     gradient: "linear-gradient(135deg, hsl(var(--pulse-green)), hsl(var(--pulse-emerald)))",
-    citations: [21, 22],
+    citations: ["AARP 2020", "National Academies of Sciences 2020"],
+    citationNumbers: [21, 22],
     insights: [
       "Retirement and empty nest syndrome create new social challenges",
       "Health issues and mobility impact social engagement",
@@ -211,21 +219,24 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
 
     const data = payload[0].payload;
     return (
-      <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 shadow-xl">
-        <h3 className="font-semibold text-white mb-2">{label}</h3>
-        <p className="text-gray-300 text-sm mb-2">{data.ageRange} years old</p>
+      <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-xl">
+        <h3 className="font-semibold text-foreground mb-2">{label}</h3>
+        <p className="text-muted-foreground text-sm mb-2">{data.ageRange} years old</p>
         <div className="flex items-center gap-2">
           <div 
             className="w-3 h-3 rounded-full" 
-            style={{ backgroundColor: data.color }}
+            style={{ backgroundColor: data.solidColor }}
           />
-          <span className="text-sm text-gray-300">
+          <span className="text-sm text-foreground font-medium">
             {payload[0].value}{currentMetric?.suffix}
           </span>
         </div>
         {data.citations && (
-          <div className="mt-2 text-xs text-blue-400">
-            Sources: {data.citations.map((c: number) => `[${c}]`).join(', ')}
+          <div className="mt-3 pt-2 border-t border-border">
+            <p className="text-xs text-muted-foreground mb-1">Sources:</p>
+            <div className="text-xs text-primary">
+              {data.citations.join(', ')}
+            </div>
           </div>
         )}
       </div>
@@ -303,12 +314,30 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-                    <CartesianGrid strokeDasharray="3 3" className="opacity-20" />
+                    <defs>
+                      <linearGradient id="genZ-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--pulse-fuchsia))" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="hsl(var(--pulse-violet))" stopOpacity={0.7} />
+                      </linearGradient>
+                      <linearGradient id="millennials-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--pulse-cyan))" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="hsl(var(--pulse-blue))" stopOpacity={0.7} />
+                      </linearGradient>
+                      <linearGradient id="genX-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--pulse-orange))" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="hsl(var(--pulse-amber))" stopOpacity={0.7} />
+                      </linearGradient>
+                      <linearGradient id="boomers-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--pulse-green))" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="hsl(var(--pulse-emerald))" stopOpacity={0.7} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" className="opacity-20" />
                     <XAxis 
                       dataKey="name" 
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: '#d1d5db', fontSize: 12 }}
+                      tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                       angle={-45}
                       textAnchor="end"
                       height={80}
@@ -316,7 +345,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                     <YAxis 
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: '#d1d5db', fontSize: 12 }}
+                      tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Bar 
@@ -332,7 +361,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                         <Cell 
                           key={`cell-${index}`} 
                           fill={entry.color}
-                          className="hover:opacity-80 transition-opacity"
+                          className="hover:opacity-80 transition-opacity drop-shadow-lg"
                         />
                       ))}
                       {/* Animated bars */}
@@ -385,7 +414,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                     {gen.generation}
                     <div 
                       className="w-4 h-4 rounded-full"
-                      style={{ backgroundColor: gen.color }}
+                      style={{ backgroundColor: gen.solidColor }}
                     />
                   </CardTitle>
                   <p className="text-gray-400 text-sm">{gen.ageRange} years</p>
@@ -393,7 +422,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300 text-sm">Loneliness Rate</span>
-                    <span className="text-xl font-bold" style={{ color: gen.color }}>
+                    <span className="text-xl font-bold" style={{ color: gen.solidColor }}>
                       <AnimatedCounter value={gen.lonelinessPercent} suffix="%" />
                     </span>
                   </div>
@@ -420,38 +449,46 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.9 }}
+          className="space-y-6"
         >
-          <Card className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 backdrop-blur-sm border-purple-500/20">
+          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Brain className="h-5 w-5 text-purple-400" />
+              <CardTitle className="text-foreground flex items-center gap-2">
+                <Brain className="h-5 w-5 text-primary" />
                 Key Findings
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 p-3 bg-red-900/20 rounded-lg border border-red-500/20">
-                  <TrendingUp className="h-5 w-5 text-red-400 flex-shrink-0" />
+                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-primary/10 to-primary/5 rounded-lg border border-primary/20">
+                  <TrendingUp className="h-5 w-5 text-primary flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Younger = Lonelier</p>
-                    <p className="text-gray-300 text-sm">Gen Z reports 79% loneliness vs 50% for Boomers</p>
+                    <p className="text-foreground font-semibold">Younger = Lonelier</p>
+                    <p className="text-muted-foreground text-sm">Gen Z reports 79% loneliness vs 50% for Boomers</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-orange-900/20 rounded-lg border border-orange-500/20">
-                  <Activity className="h-5 w-5 text-orange-400 flex-shrink-0" />
+                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-secondary/10 to-secondary/5 rounded-lg border border-secondary/20">
+                  <Activity className="h-5 w-5 text-secondary flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Friendship Decline</p>
-                    <p className="text-gray-300 text-sm">1 in 4 Gen Z adults have no close friends</p>
+                    <p className="text-foreground font-semibold">Friendship Decline</p>
+                    <p className="text-muted-foreground text-sm">1 in 4 Gen Z adults have no close friends</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="mt-4 p-4 bg-gray-800/30 rounded-lg">
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  <strong className="text-white">The Digital Paradox:</strong> Despite being the most connected generation in history, 
-                  Gen Z shows the highest rates of loneliness, suggesting that digital connections may not satisfy our fundamental 
-                  need for meaningful human relationships.
-                </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-3">
+                <Zap className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="text-foreground font-semibold mb-2">The Digital Paradox</h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Despite being the most connected generation in history, Gen Z shows the highest rates of loneliness, 
+                    suggesting that digital connections may not satisfy our fundamental need for meaningful human relationships.
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -481,7 +518,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                     <span className="flex items-center gap-3">
                       <div 
                         className="w-6 h-6 rounded-full"
-                        style={{ backgroundColor: selectedGen.color }}
+                        style={{ backgroundColor: selectedGen.solidColor }}
                       />
                       {selectedGen.generation} Deep Dive
                     </span>
@@ -530,9 +567,14 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-blue-400">
-                    <ExternalLink className="h-3 w-3" />
-                    Sources: {selectedGen.citations.map(c => `[${c}]`).join(', ')}
+                  <div className="pt-3 border-t border-border">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                      <ExternalLink className="h-3 w-3" />
+                      Sources:
+                    </div>
+                    <div className="text-xs text-primary">
+                      {selectedGen.citations.join(', ')}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
