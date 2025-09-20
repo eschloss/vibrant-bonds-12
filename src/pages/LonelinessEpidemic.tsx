@@ -395,7 +395,7 @@ const LonelinessEpidemic: React.FC = () => {
               Not long ago, loneliness was thought of as a personal problem — a fleeting feeling you might experience after moving to a new city, going through a breakup, or losing a loved one. Today, it's increasingly recognized as a public health crisis that touches millions of people across every generation, income level, and culture.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              In 2023, U.S. Surgeon General Dr. Vivek Murthy issued a landmark advisory calling loneliness and social isolation an "epidemic."<sup className="text-blue-400 font-semibold">[1]</sup> He compared the health impact of disconnection to smoking 15 cigarettes a day, warning that the absence of meaningful social bonds is shortening lives and worsening the nation's mental health crisis. It was one of the clearest signals yet that loneliness is not a fringe issue, but one of the defining challenges of our time.
+              In 2023, U.S. Surgeon General Dr. Vivek Murthy issued a landmark advisory calling loneliness and social isolation an "epidemic."<sup><a href="#ref-1" className="text-blue-400 hover:text-blue-300 font-semibold">[1]</a></sup> He compared the health impact of disconnection to smoking 15 cigarettes a day, warning that the absence of meaningful social bonds is shortening lives and worsening the nation's mental health crisis. It was one of the clearest signals yet that loneliness is not a fringe issue, but one of the defining challenges of our time.
             </p>
           </motion.div>
         </div>
@@ -421,10 +421,10 @@ const LonelinessEpidemic: React.FC = () => {
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness<sup className="text-blue-400 font-semibold">[2]</sup>. More than 20 million adults say they have no close friends<sup className="text-blue-400 font-semibold">[3]</sup>, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness<sup className="text-blue-400 font-semibold">[4]</sup>.
+                The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300 font-semibold">[2]</a></sup>. More than 20 million adults say they have no close friends<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300 font-semibold">[3]</a></sup>, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300 font-semibold">[4]</a></sup>.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts<sup className="text-blue-400 font-semibold">[5]</sup>. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly<sup className="text-blue-400 font-semibold">[6]</sup>. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis<sup className="text-blue-400 font-semibold">[7]</sup>, with especially high rates among youth.
+                International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300 font-semibold">[5]</a></sup>. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly<sup><a href="#ref-6" className="text-blue-400 hover:text-blue-300 font-semibold">[6]</a></sup>. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300 font-semibold">[7]</a></sup>, with especially high rates among youth.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 What makes loneliness so urgent now is not just the prevalence of the feeling itself but the social and technological forces accelerating it. Remote work has untethered millions from casual office relationships. COVID-19 lockdowns disrupted in-person gatherings and weakened the everyday "weak ties" — neighbors, coworkers, acquaintances — that form the fabric of social life. Social media, once heralded as a connector, often deepens the sense of isolation through endless comparison and shallow interaction.
@@ -738,27 +738,27 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Adults feeling lonely at least sometimes</span>
-                    <span className="font-semibold text-red-400">50%<sup className="text-blue-400">[2]</sup></span>
+                    <span className="font-semibold text-red-400">50%<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300">[2]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Americans with zero close friends</span>
-                    <span className="font-semibold text-red-400">21 million<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-red-400">21 million<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Adults dissatisfied with friendships</span>
-                    <span className="font-semibold text-red-400">33%<sup className="text-blue-400">[2]</sup></span>
+                    <span className="font-semibold text-red-400">33%<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300">[2]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Gen Z reporting frequent loneliness</span>
-                    <span className="font-semibold text-red-400">79%<sup className="text-blue-400">[4]</sup></span>
+                    <span className="font-semibold text-red-400">79%<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300">[4]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Millennials feeling lonely often/always</span>
-                    <span className="font-semibold text-red-400">30%<sup className="text-blue-400">[20]</sup></span>
+                    <span className="font-semibold text-red-400">30%<sup><a href="#ref-20" className="text-blue-400 hover:text-blue-300">[20]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Boomers (45+) feeling lonely</span>
-                    <span className="font-semibold text-red-400">33%<sup className="text-blue-400">[21]</sup></span>
+                    <span className="font-semibold text-red-400">33%<sup><a href="#ref-21" className="text-blue-400 hover:text-blue-300">[21]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -774,19 +774,19 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Average close friends (1990 vs today)</span>
-                    <span className="font-semibold text-orange-400">4 → 2<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-orange-400">4 → 2<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Americans with no close friends</span>
-                    <span className="font-semibold text-orange-400">12%<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-orange-400">12%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Americans with 10+ friends (then vs now)</span>
-                    <span className="font-semibold text-orange-400">33% → 13%<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-orange-400">33% → 13%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Remote workers citing loneliness as biggest challenge</span>
-                    <span className="font-semibold text-orange-400">25%<sup className="text-blue-400">[18]</sup></span>
+                    <span className="font-semibold text-orange-400">25%<sup><a href="#ref-18" className="text-blue-400 hover:text-blue-300">[18]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -802,27 +802,27 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Increased premature death risk</span>
-                    <span className="font-semibold text-red-400">29%<sup className="text-blue-400">[8]</sup></span>
+                    <span className="font-semibold text-red-400">29%<sup><a href="#ref-8" className="text-blue-400 hover:text-blue-300">[8]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Higher cardiovascular disease risk</span>
-                    <span className="font-semibold text-red-400">29%<sup className="text-blue-400">[9]</sup></span>
+                    <span className="font-semibold text-red-400">29%<sup><a href="#ref-9" className="text-blue-400 hover:text-blue-300">[9]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Increased stroke risk</span>
-                    <span className="font-semibold text-red-400">32%<sup className="text-blue-400">[9]</sup></span>
+                    <span className="font-semibold text-red-400">32%<sup><a href="#ref-9" className="text-blue-400 hover:text-blue-300">[9]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Dementia risk increase (older adults)</span>
-                    <span className="font-semibold text-red-400">50%<sup className="text-blue-400">[19]</sup></span>
+                    <span className="font-semibold text-red-400">50%<sup><a href="#ref-19" className="text-blue-400 hover:text-blue-300">[19]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">LGBTQ+ youth considering suicide</span>
-                    <span className="font-semibold text-red-400">45%<sup className="text-blue-400">[17]</sup></span>
+                    <span className="font-semibold text-red-400">45%<sup><a href="#ref-17" className="text-blue-400 hover:text-blue-300">[17]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Weakened immune response</span>
-                    <span className="font-semibold text-red-400">Confirmed<sup className="text-blue-400">[10]</sup></span>
+                    <span className="font-semibold text-red-400">Confirmed<sup><a href="#ref-10" className="text-blue-400 hover:text-blue-300">[10]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -838,15 +838,15 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Adults with serious loneliness during lockdown</span>
-                    <span className="font-semibold text-purple-400">36%<sup className="text-blue-400">[14]</sup></span>
+                    <span className="font-semibold text-purple-400">36%<sup><a href="#ref-14" className="text-blue-400 hover:text-blue-300">[14]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Young adults (18-25) serious loneliness</span>
-                    <span className="font-semibold text-purple-400">61%<sup className="text-blue-400">[14]</sup></span>
+                    <span className="font-semibold text-purple-400">61%<sup><a href="#ref-14" className="text-blue-400 hover:text-blue-300">[14]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">UK adults feeling lonely during lockdown</span>
-                    <span className="font-semibold text-purple-400">50%<sup className="text-blue-400">[5]</sup></span>
+                    <span className="font-semibold text-purple-400">50%<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300">[5]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -868,19 +868,19 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Remote workers more likely to feel lonely</span>
-                    <span className="font-semibold text-yellow-400">2x<sup className="text-blue-400">[18]</sup></span>
+                    <span className="font-semibold text-yellow-400">2x<sup><a href="#ref-18" className="text-blue-400 hover:text-blue-300">[18]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Employees with work best friend</span>
-                    <span className="font-semibold text-yellow-400">20%<sup className="text-blue-400">[7]</sup></span>
+                    <span className="font-semibold text-yellow-400">20%<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300">[7]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Annual productivity loss from loneliness</span>
-                    <span className="font-semibold text-yellow-400">$406B<sup className="text-blue-400">[12]</sup></span>
+                    <span className="font-semibold text-yellow-400">$406B<sup><a href="#ref-12" className="text-blue-400 hover:text-blue-300">[12]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Isolated employees missing work</span>
-                    <span className="font-semibold text-yellow-400">5x more<sup className="text-blue-400">[12]</sup></span>
+                    <span className="font-semibold text-yellow-400">5x more<sup><a href="#ref-12" className="text-blue-400 hover:text-blue-300">[12]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -896,11 +896,11 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Heavy social media users feeling isolated</span>
-                    <span className="font-semibold text-blue-400">2x more<sup className="text-blue-400">[22]</sup></span>
+                    <span className="font-semibold text-blue-400">2x more<sup><a href="#ref-22" className="text-blue-400 hover:text-blue-300">[22]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Millennials/Gen Z daily social media use</span>
-                    <span className="font-semibold text-blue-400">4-5 hours<sup className="text-blue-400">[23]</sup></span>
+                    <span className="font-semibold text-blue-400">4-5 hours<sup><a href="#ref-23" className="text-blue-400 hover:text-blue-300">[23]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -916,19 +916,19 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Gen Z with no close friends</span>
-                    <span className="font-semibold text-green-400">25%<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-green-400">25%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Millennials with no friends at all</span>
-                    <span className="font-semibold text-green-400">22%<sup className="text-blue-400">[20]</sup></span>
+                    <span className="font-semibold text-green-400">22%<sup><a href="#ref-20" className="text-blue-400 hover:text-blue-300">[20]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Gen X with no close friends</span>
-                    <span className="font-semibold text-green-400">15%<sup className="text-blue-400">[3]</sup></span>
+                    <span className="font-semibold text-green-400">15%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Boomers (59+) feeling lonely</span>
-                    <span className="font-semibold text-green-400">33%<sup className="text-blue-400">[21]</sup></span>
+                    <span className="font-semibold text-green-400">33%<sup><a href="#ref-21" className="text-blue-400 hover:text-blue-300">[21]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -944,15 +944,15 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">U.S. deaths by suicide in 2023</span>
-                    <span className="font-semibold text-red-400">49,000<sup className="text-blue-400">[15]</sup></span>
+                    <span className="font-semibold text-red-400">49,000<sup><a href="#ref-15" className="text-blue-400 hover:text-blue-300">[15]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Suicide risk for isolated older adults</span>
-                    <span className="font-semibold text-red-400">2-3x higher<sup className="text-blue-400">[16]</sup></span>
+                    <span className="font-semibold text-red-400">2-3x higher<sup><a href="#ref-16" className="text-blue-400 hover:text-blue-300">[16]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Loneliness correlation with anxiety/depression</span>
-                    <span className="font-semibold text-red-400">3x higher<sup className="text-blue-400">[15]</sup></span>
+                    <span className="font-semibold text-red-400">3x higher<sup><a href="#ref-15" className="text-blue-400 hover:text-blue-300">[15]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -974,19 +974,19 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Civic organization membership decline (1960s-2000s)</span>
-                    <span className="font-semibold text-indigo-400">50%<sup className="text-blue-400">[11]</sup></span>
+                    <span className="font-semibold text-indigo-400">50%<sup><a href="#ref-11" className="text-blue-400 hover:text-blue-300">[11]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Americans trusting "most people" (1972 vs 2000)</span>
-                    <span className="font-semibold text-indigo-400">55% → 32%<sup className="text-blue-400">[24]</sup></span>
+                    <span className="font-semibold text-indigo-400">55% → 32%<sup><a href="#ref-24" className="text-blue-400 hover:text-blue-300">[24]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Religious attendance (1970 vs 2020)</span>
-                    <span className="font-semibold text-indigo-400">45% → 24%<sup className="text-blue-400">[25]</sup></span>
+                    <span className="font-semibold text-indigo-400">45% → 24%<sup><a href="#ref-25" className="text-blue-400 hover:text-blue-300">[25]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">Volunteer participation (1970 vs 2020)</span>
-                    <span className="font-semibold text-indigo-400">30% → 20%<sup className="text-blue-400">[26]</sup></span>
+                    <span className="font-semibold text-indigo-400">30% → 20%<sup><a href="#ref-26" className="text-blue-400 hover:text-blue-300">[26]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
@@ -1002,19 +1002,19 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Global adults feeling lonely regularly</span>
-                    <span className="font-semibold text-teal-400">25%<sup className="text-blue-400">[7]</sup></span>
+                    <span className="font-semibold text-teal-400">25%<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300">[7]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">UK adults reporting frequent loneliness</span>
-                    <span className="font-semibold text-teal-400">38%<sup className="text-blue-400">[5]</sup></span>
+                    <span className="font-semibold text-teal-400">38%<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300">[5]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
                     <span className="text-gray-300">Japan socially isolated adults (40+)</span>
-                    <span className="font-semibold text-teal-400">14%<sup className="text-blue-400">[27]</sup></span>
+                    <span className="font-semibold text-teal-400">14%<sup><a href="#ref-27" className="text-blue-400 hover:text-blue-300">[27]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-gray-300">OECD countries chronic loneliness</span>
-                    <span className="font-semibold text-teal-400">20-30%<sup className="text-blue-400">[27]</sup></span>
+                    <span className="font-semibold text-teal-400">20-30%<sup><a href="#ref-27" className="text-blue-400 hover:text-blue-300">[27]</a></sup></span>
                   </div>
                 </CardContent>
               </Card>
