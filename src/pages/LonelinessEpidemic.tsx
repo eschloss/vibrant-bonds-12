@@ -144,7 +144,7 @@ const LonelinessEpidemic: React.FC = () => {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-300 mb-10 max-w-4xl mx-auto leading-relaxed">
               <Text id="loneliness.hero.description">A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.</Text>
             </p>
             
@@ -288,28 +288,28 @@ const LonelinessEpidemic: React.FC = () => {
               <h3 className="text-2xl font-semibold mb-4 text-white">
                 <Text id="loneliness.what_is.differences_title">Loneliness vs. Social Isolation: Key Differences Explained</Text>
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
                 <Text id="loneliness.what_is.differences_intro">It's important to distinguish between two related concepts:</Text>
               </p>
               <ul className="text-gray-300 space-y-2 mb-6">
                 <li><strong className="text-white"><Text id="loneliness.what_is.loneliness_def">Loneliness: A subjective experience — the pain of feeling disconnected, unseen, or unsupported.</Text></strong></li>
                 <li><strong className="text-white"><Text id="loneliness.what_is.isolation_def">Social isolation: An objective measure — how much contact you have with others, regardless of how you feel about it.</Text></strong></li>
               </ul>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.what_is.differences_note">A person can be socially isolated but not feel lonely if they are content with that level of contact. Others may be socially active yet still feel lonely if they lack close, meaningful ties. The U.S. National Academies of Sciences has warned that social isolation among older adults is associated with a 50% increased risk of dementia.</Text>
               </p>
 
               <h3 className="text-2xl font-semibold mb-4 text-white">
                 <Text id="loneliness.what_is.rising_title">Rising Loneliness Rates: Statistical Evidence of Growing Social Crisis</Text>
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.what_is.bowling_alone">The phrase "loneliness epidemic" was popularized by Harvard political scientist Robert Putnam in his landmark book Bowling Alone. Putnam showed how American social life was fragmenting: fewer bowling leagues, fewer neighborhood gatherings, fewer civic organizations. The decline of these "middle institutions" was already eroding community bonds.</Text>
               </p>
 
               <h3 className="text-2xl font-semibold mb-4 text-white">
                 <Text id="loneliness.what_is.epidemic_title">Why Call It an "Epidemic"?</Text>
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.what_is.epidemic_explanation">The term captures something essential: loneliness spreads. When people withdraw from social life, their absence weakens communities for everyone else. A society with fewer gatherings, fewer clubs, and fewer third places doesn't just affect the lonely individual — it leaves everyone with fewer opportunities to connect.</Text>
               </p>
             </motion.div>
@@ -534,7 +534,7 @@ const LonelinessEpidemic: React.FC = () => {
                   With a UCLA Loneliness Scale score of 48.3 out of 80<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300">[4]</a></sup>, 
                   they significantly outpace older generations who score lower despite having fewer digital tools for connection.
                 </p>
-                <p className="text-gray-300 leading-relaxed mb-4">
+                <p className="text-gray-300 text-lg leading-relaxed mb-4">
                   This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, 
                   while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, 
                   despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.
