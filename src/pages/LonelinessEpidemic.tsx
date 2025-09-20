@@ -88,7 +88,59 @@ const LonelinessEpidemic: React.FC = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
+        {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-gray-900 to-orange-900/20" />
+        
+        {/* Floating Crisis Icons */}
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 opacity-20"
+            animate={{ 
+              y: [0, -20, 0], 
+              rotate: [0, 5, -5, 0] 
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          >
+            <AlertTriangle className="h-6 w-6 text-red-400" />
+          </motion.div>
+          
+          <motion.div
+            className="absolute top-32 right-20 opacity-10"
+            animate={{ 
+              y: [0, 15, 0], 
+              x: [0, 10, 0] 
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 2
+            }}
+          >
+            <Heart className="h-8 w-8 text-orange-400" />
+          </motion.div>
+          
+          <motion.div
+            className="absolute bottom-40 left-1/4 opacity-15"
+            animate={{ 
+              y: [0, -10, 0], 
+              scale: [1, 1.1, 1] 
+            }}
+            transition={{ 
+              duration: 5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 1
+            }}
+          >
+            <Users className="h-7 w-7 text-red-300" />
+          </motion.div>
+        </div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
@@ -96,43 +148,169 @@ const LonelinessEpidemic: React.FC = () => {
             animate="visible"
             variants={staggerContainer}
           >
+            {/* Crisis Alert with Enhanced Animation */}
             <motion.div 
               className="flex items-center justify-center gap-3 mb-6"
               variants={fadeInUp}
+              whileHover={{ scale: 1.02 }}
             >
-              <AlertTriangle className="h-8 w-8 text-red-500 animate-pulse" />
-              <Badge variant="destructive" className="px-4 py-2 text-sm font-semibold">
-                PUBLIC HEALTH CRISIS
-              </Badge>
-              <AlertTriangle className="h-8 w-8 text-red-500 animate-pulse" />
+              <motion.div
+                animate={{ 
+                  rotate: [0, -5, 5, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <AlertTriangle className="h-8 w-8 text-red-500" />
+              </motion.div>
+              
+              <motion.div
+                className="relative"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(220, 38, 127, 0.3)",
+                    "0 0 30px rgba(220, 38, 127, 0.6)", 
+                    "0 0 20px rgba(220, 38, 127, 0.3)"
+                  ]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Badge variant="destructive" className="px-4 py-2 text-sm font-semibold animate-pulse">
+                  PUBLIC HEALTH CRISIS
+                </Badge>
+              </motion.div>
+              
+              <motion.div
+                animate={{ 
+                  rotate: [0, 5, -5, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              >
+                <AlertTriangle className="h-8 w-8 text-red-500" />
+              </motion.div>
             </motion.div>
 
+            {/* Title with Typewriter Effect */}
             <motion.h1
               className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400"
               variants={fadeInUp}
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                backgroundSize: "200% 100%"
+              }}
             >
               The Loneliness Epidemic
             </motion.h1>
 
+            {/* Subtitle with Fade Effect */}
             <motion.p
               className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
               variants={fadeInUp}
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
             >
               Statistics, Causes, and the Search for Friendship in 2025
             </motion.p>
 
+            {/* Enhanced Statistics Cards */}
             <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
-              variants={fadeInUp}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.3
+                  }
+                }
+              }}
             >
               {keyStats.map((stat, index) => (
-                <Card key={index} className="bg-gray-800/50 border-red-500/20 hover:border-red-500/40 transition-all duration-300">
-                  <CardContent className="p-4 text-center">
-                    <div className="text-3xl font-bold text-red-400 mb-2">{stat.number}</div>
-                    <div className="text-sm text-gray-300 mb-1">{stat.text}</div>
-                    <div className="text-xs text-gray-500">{stat.source}</div>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { 
+                      opacity: 0, 
+                      y: 30,
+                      scale: 0.9
+                    },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 12
+                      }
+                    }
+                  }}
+                  whileHover={{ 
+                    y: -5,
+                    scale: 1.05,
+                    transition: { duration: 0.2 }
+                  }}
+                  className="group"
+                >
+                  <Card className="bg-gray-800/50 border-red-500/20 hover:border-red-500/60 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/20 relative overflow-hidden">
+                    {/* Animated Border Glow */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10 opacity-0 group-hover:opacity-100"
+                      animate={{
+                        x: ["-100%", "100%"]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    />
+                    
+                    <CardContent className="p-4 text-center relative z-10">
+                      <motion.div 
+                        className="text-3xl font-bold text-red-400 mb-2"
+                        animate={{ 
+                          scale: [1, 1.05, 1] 
+                        }}
+                        transition={{ 
+                          duration: 2, 
+                          repeat: Infinity,
+                          delay: index * 0.2
+                        }}
+                      >
+                        {stat.number}
+                      </motion.div>
+                      <div className="text-sm text-gray-300 mb-1">{stat.text}</div>
+                      <div className="text-xs text-gray-500">{stat.source}</div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </motion.div>
           </motion.div>
