@@ -1025,9 +1025,7 @@ const LonelinessEpidemic: React.FC = () => {
                       </a>
                     </CardContent>
                   </Card>
-                </div>
-                
-                <div className="space-y-4">
+                  
                   <Card className="bg-gray-800/50 border-blue-500/20">
                     <CardContent className="p-4">
                       <p className="text-white font-semibold mb-2">[10] PNAS</p>
@@ -1072,7 +1070,9 @@ const LonelinessEpidemic: React.FC = () => {
                       </a>
                     </CardContent>
                   </Card>
-                  
+                </div>
+                
+                <div className="space-y-4">
                   <Card className="bg-gray-800/50 border-blue-500/20">
                     <CardContent className="p-4">
                       <p className="text-white font-semibold mb-2">[15] CDC</p>
@@ -1099,7 +1099,7 @@ const LonelinessEpidemic: React.FC = () => {
                       </a>
                     </CardContent>
                   </Card>
-                  
+
                   <Card className="bg-gray-800/50 border-blue-500/20">
                     <CardContent className="p-4">
                       <p className="text-white font-semibold mb-2">[18] Buffer</p>
