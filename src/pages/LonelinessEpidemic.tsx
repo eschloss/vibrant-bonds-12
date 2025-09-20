@@ -929,15 +929,15 @@ const LonelinessEpidemic: React.FC = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gray-800/50 border-green-500/20">
-                  <CardHeader>
-                    <CardTitle className="text-white">Apps and Platforms for Friendship</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-gray-300 space-y-3">
-                    <p>Emerging social apps focus on connecting people with shared interests for meaningful in-person interaction</p>
-                    <p>Platforms help users meet new friends in safe, structured social settings</p>
-                  </CardContent>
-                </Card>
+                 <Card className="bg-gray-800/50 border-green-500/20">
+                   <CardHeader>
+                     <CardTitle className="text-white">Apps and Platforms for Friendship</CardTitle>
+                   </CardHeader>
+                   <CardContent className="text-gray-300 space-y-3">
+                     <p><Link to="/matchmaking" className="text-pulse-pink hover:text-accent transition-colors underline">Emerging social apps like Pulse</Link> focus on connecting people with shared interests for meaningful in-person interaction</p>
+                     <p>Platforms help users <Link to="/cities" className="text-pulse-pink hover:text-accent transition-colors underline">meet new friends in their city</Link> through safe, structured social settings and <Link to="/plan-ideas" className="text-pulse-pink hover:text-accent transition-colors underline">curated activities</Link></p>
+                   </CardContent>
+                 </Card>
               </div>
             </motion.div>
           </motion.div>
@@ -1235,7 +1235,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </span>
               </h2>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Get answers to the most frequently asked questions about loneliness statistics, health impacts, and evidence-based solutions.
+                Get answers to the most frequently asked questions about loneliness statistics, health impacts, and evidence-based solutions. For more questions about connecting with friends, visit our <Link to="/faq" className="text-pulse-pink hover:text-accent transition-colors underline">complete FAQ section</Link>.
               </p>
             </motion.div>
 
@@ -1348,14 +1348,14 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="How can I make meaningful friendships as an adult?"
-                    answer="Focus on quality over quantity: even 1–2 high-quality friendships can buffer loneliness according to Holt-Lunstad (2015). Join clubs, classes, volunteer programs, or community events to foster shared experiences. Consistency and vulnerability in interactions help deepen connections over time."
+                    answer="Focus on quality over quantity: even 1–2 high-quality friendships can buffer loneliness according to Holt-Lunstad (2015). Join clubs, classes, volunteer programs, or <Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>community events</Link> to foster shared experiences. Try <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>activity-based meetups</Link> or explore <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>local connection opportunities</Link> in your city. Consistency and vulnerability in interactions help deepen connections over time."
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="What role does community engagement play in reducing loneliness?"
-                    answer="Community involvement, volunteering, and participation in clubs or religious groups significantly reduce loneliness and improve mental health according to the National Academies (2020). These activities provide purpose, regular social interaction, and a sense of belonging that counters isolation."
+                    answer="<Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>Community involvement</Link>, volunteering, and participation in clubs or religious groups significantly reduce loneliness and improve mental health according to the National Academies (2020). These activities provide purpose, regular social interaction, and a sense of belonging that counters isolation. Learn more about <Link to='/communities' className='text-pulse-pink hover:text-accent transition-colors underline'>building meaningful communities</Link> in your area."
                   />
                 </motion.div>
 
@@ -1397,7 +1397,7 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="Are there apps or platforms to meet new friends safely?"
-                    answer="Yes. Platforms like Pulse connect users with local, interest-based social events and small group activities, making it easier to build real-life friendships in structured and safe environments. Other apps focus on hobby-based meetups, professional networking, or activity partnerships rather than dating."
+                    answer="Yes. <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>Platforms like Pulse</Link> connect users with local, interest-based social events and small group activities, making it easier to build real-life friendships in structured and safe environments. Other apps focus on hobby-based meetups, professional networking, or activity partnerships rather than dating. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>Find opportunities in your city</Link> to meet like-minded people safely."
                   />
                 </motion.div>
 
@@ -1418,7 +1418,7 @@ const LonelinessEpidemic: React.FC = () => {
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
                     question="What is Pulse and how can it help with loneliness?"
-                    answer="Pulse is a friendship-focused platform that helps individuals meet new people in their city through AI-powered group matching and pre-planned activities. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships."
+                    answer="<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>."
                   />
                 </motion.div>
 
@@ -1561,46 +1561,47 @@ const LonelinessEpidemic: React.FC = () => {
                    </span>
                  </h2>
                 
-                <p className="text-lg text-gray-300 mb-6 max-w-3xl mx-auto">
-                  Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, 
-                  yet loneliness is not inevitable.
-                </p>
+                 <p className="text-lg text-gray-300 mb-6 max-w-3xl mx-auto">
+                   Loneliness is one of the most urgent social and public health challenges of our time. Millions of Americans experience chronic isolation, 
+                   yet loneliness is not inevitable. Research shows that <Link to="/communities" className="text-pulse-pink hover:text-accent transition-colors underline">strong communities</Link> and 
+                   meaningful social connections can dramatically improve both mental and physical health outcomes.
+                 </p>
+                 
+                 <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
+                   Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. 
+                   That's where innovative solutions like <Link to="/about" className="text-pulse-pink hover:text-accent transition-colors underline">Pulse's AI-powered friend group matching</Link> come in—bridging the gap between online connections and real-world social interaction through <Link to="/plan-ideas" className="text-pulse-pink hover:text-accent transition-colors underline">carefully curated local activities</Link>.
+                 </p>
                 
-                <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
-                  Creating meaningful friendships may feel daunting, especially in a world that has become more digital and dispersed. 
-                  That's where tools like Pulse come in—bridging the gap between online connections and real-world social interaction.
-                </p>
+                 <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                   <Link to="/matchmaking">
+                     <Button 
+                       size="xl" 
+                       className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
+                     >
+                       <span>Find Your Friend Group Today</span>
+                       <ArrowRight className="ml-2 h-5 w-5" />
+                     </Button>
+                   </Link>
+                   
+                   <Link to="/about">
+                     <Button 
+                       size="xl" 
+                       variant="outline" 
+                       className="border-2 border-gray-300 text-gray-300 hover:bg-gray-700 hover:border-gray-200 shadow-lg transition-all duration-300 hover:scale-105 font-medium text-lg"
+                     >
+                       <span>Learn About Our Mission</span>
+                     </Button>
+                   </Link>
+                 </div>
                 
-                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-                  <Link to="/">
-                    <Button 
-                      size="xl" 
-                      className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
-                    >
-                      <span>Start Building Connections Today</span>
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
-                  
-                  <Link to="/about">
-                    <Button 
-                      size="xl" 
-                      variant="outline" 
-                      className="border-2 border-gray-300 text-gray-300 hover:bg-gray-700 hover:border-gray-200 shadow-lg transition-all duration-300 hover:scale-105 font-medium text-lg"
-                    >
-                      <span>Learn About Pulse</span>
-                    </Button>
-                  </Link>
-                </div>
-                
-                <motion.p
-                  className="text-sm text-gray-400 mt-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                >
-                  Don't wait. Start connecting today. Your future self will thank you.
-                </motion.p>
+                 <motion.p
+                   className="text-sm text-gray-400 mt-4"
+                   initial={{ opacity: 0, y: 10 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ delay: 0.2, duration: 0.6 }}
+                 >
+                   Don't wait. Start connecting today. Your future self will thank you. <Link to="/contact" className="text-pulse-pink hover:text-accent transition-colors underline">Contact us</Link> to learn about partnership opportunities or <Link to="/careers" className="text-pulse-pink hover:text-accent transition-colors underline">join our mission</Link> to combat loneliness.
+                 </motion.p>
               </motion.div>
             </div>
           </div>
