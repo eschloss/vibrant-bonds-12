@@ -45,16 +45,54 @@ export const lonelinessEpidemic = {
 
     // Why it matters section
     "loneliness.why_matters.title": "Why It Matters",
+    "loneliness.why_matters.paragraph1": "Loneliness is not simply an emotional state. Researchers have found it to be as dangerous as many leading risk factors for early death, including obesity, physical inactivity, and smoking. It increases the likelihood of cardiovascular disease, dementia, and stroke. Perhaps most tragically, loneliness is tightly linked to suicide risk: in 2023, the U.S. recorded 49,000 deaths by suicide, the highest ever.",
+    "loneliness.why_matters.paragraph2": "Beyond health, loneliness is also reshaping culture, politics, and the economy. Civic participation has fallen sharply in the U.S., as documented in Robert Putnam's classic Bowling Alone. Voter turnout, union membership, and religious attendance have all declined, leaving fewer built-in communities where people once found connection. Economists estimate that workplace loneliness costs billions annually in lost productivity, absenteeism, and turnover.",
+
+    // How epidemic has grown section
+    "loneliness.epidemic_growth.title": "📉 How the Loneliness Epidemic Has Grown Over Time",
+    "loneliness.epidemic_growth.intro": "Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.",
+    "loneliness.epidemic_growth.friendship_title": "Friendship Statistics: Declining Social Connections Data Over Decades",
+    "loneliness.epidemic_growth.friendship_1": "In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%",
+    "loneliness.epidemic_growth.friendship_2": "The average number of close friendships per adult has dropped from 4 in 1990 to just 2 today",
+    "loneliness.epidemic_growth.remote_title": "Remote Work Loneliness Statistics: Technology's Impact on Social Isolation",
+    "loneliness.epidemic_growth.remote_1": "Since 2019, remote work has surged. By 2023, 28% of full-time employees work remotely",
+    "loneliness.epidemic_growth.remote_2": "Digital platforms often replace, rather than supplement, face-to-face relationships",
+    "loneliness.epidemic_growth.covid_title": "COVID-19 Loneliness Data: Pandemic's Impact on Social Isolation Rates",
+    "loneliness.epidemic_growth.covid_1": "36% of all U.S. adults reported feeling \"serious loneliness\" during the pandemic",
+    "loneliness.epidemic_growth.covid_2": "61% of young adults and 51% of mothers with young children experienced serious loneliness",
+
+    // Workplace loneliness section
+    "loneliness.workplace.title": "💼 Workplace Loneliness and Remote Work",
+    "loneliness.workplace.intro": "The way we work has undergone a seismic shift in the past decade — and even more since COVID-19. While flexible schedules and remote work bring freedom, they also come at a cost: increased social isolation.",
+    "loneliness.workplace.isolation_title": "Remote Work Isolation Statistics: Employee Loneliness Data and Trends",
+    "loneliness.workplace.isolation_1": "Remote workers are more than twice as likely to report loneliness compared to in-office employees",
+    "loneliness.workplace.isolation_2": "1 in 4 remote workers say loneliness is their biggest struggle",
+    "loneliness.workplace.friendship_title": "Workplace Friendship Statistics: Declining Professional Relationships Data",
+    "loneliness.workplace.friendship_1": "In 1985, nearly half of Americans had a close friend at work. Today, fewer than 30% say the same",
+    "loneliness.workplace.friendship_2": "Only 2 in 10 employees report having a \"best friend at work,\" yet those who do are 7x more likely to be engaged",
+    "loneliness.workplace.cost_title": "Loneliness Cost Statistics: Economic Impact Data on Productivity and Retention",
+    "loneliness.workplace.cost_1": "Companies lose an estimated $406 billion annually due to loneliness and disengagement",
+    "loneliness.workplace.cost_2": "Isolated employees are 5x more likely to miss work due to stress and illness",
+
+    // Health impact section
+    "loneliness.health.title": "The Health Toll of Loneliness",
+    "loneliness.health.mental_title": "Mental Health Statistics: Depression and Anxiety Data Linked to Loneliness",
+    "loneliness.health.mental_1": "Loneliness increases the risk of depression by more than twofold (Journal of Clinical Psychiatry, 2020)",
+    "loneliness.health.mental_2": "Young adults reporting chronic loneliness were 3x more likely to experience severe anxiety and depressive symptoms (CDC, 2022)",
+    "loneliness.health.mental_3": "Teenagers who report feeling lonely are more likely to have self-harm behaviors and suicidal ideation",
+    "loneliness.health.physical_title": "Physical Health Impact Data: Cardiovascular Disease and Mortality Statistics",
+    "loneliness.health.physical_1": "Loneliness and social isolation increase the risk of premature death by 29% — an effect comparable to smoking 15 cigarettes per day",
+    "loneliness.health.physical_2": "Lonely individuals have a 32% higher risk of stroke and a 29% higher risk of heart disease",
+    "loneliness.health.physical_3": "Chronic loneliness has been linked to weakened immune function, slower wound healing, and higher inflammation markers",
 
     // Key statistics
-    "loneliness.key_stats.title": "Key Loneliness Statistics That Reveal the Scale of Social Isolation",
+    "loneliness.key_stats.title": "📊 Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics",
     "loneliness.key_stats.stat1": "50% of Americans report experiencing loneliness",
     "loneliness.key_stats.stat2": "21M Americans have zero close friends", 
     "loneliness.key_stats.stat3": "79% of Gen Z reports frequent loneliness",
     "loneliness.key_stats.stat4": "29% increased risk of premature death",
 
     // Health impacts
-    "loneliness.health.title": "Health Impact of Chronic Loneliness",
     "loneliness.health.cardiovascular.title": "Cardiovascular Disease",
     "loneliness.health.cardiovascular.stat": "29% higher risk",
     "loneliness.health.cardiovascular.description": "Loneliness increases risk of heart disease comparable to smoking",

@@ -11,10 +11,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQItem from "@/components/FAQItem";
 import Text from "@/components/Text";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const LonelinessEpidemic: React.FC = () => {
-  const { t } = useTranslation();
+  const { currentLanguage, translate } = useLanguage();
   
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -32,36 +32,36 @@ const LonelinessEpidemic: React.FC = () => {
   };
 
   const keyStats = [
-    { number: "50%", text: t("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
-    { number: "21M", text: t("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
-    { number: "79%", text: t("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
-    { number: "29%", text: t("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
+    { number: "50%", text: translate("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
+    { number: "21M", text: translate("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
+    { number: "79%", text: translate("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
+    { number: "29%", text: translate("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
   ];
 
   const healthImpacts = [
     {
       icon: <Heart className="h-6 w-6 text-red-500" />,
-      title: t("loneliness.health.cardiovascular.title", "Cardiovascular Disease"),
-      stat: t("loneliness.health.cardiovascular.stat", "29% higher risk"),
-      description: t("loneliness.health.cardiovascular.description", "Loneliness increases risk of heart disease comparable to smoking")
+      title: translate("loneliness.health.cardiovascular.title", "Cardiovascular Disease"),
+      stat: translate("loneliness.health.cardiovascular.stat", "29% higher risk"),
+      description: translate("loneliness.health.cardiovascular.description", "Loneliness increases risk of heart disease comparable to smoking")
     },
     {
       icon: <TrendingDown className="h-6 w-6 text-orange-500" />,
-      title: t("loneliness.health.stroke.title", "Stroke Risk"), 
-      stat: t("loneliness.health.stroke.stat", "32% increase"),
-      description: t("loneliness.health.stroke.description", "Chronic loneliness significantly raises stroke probability")
+      title: translate("loneliness.health.stroke.title", "Stroke Risk"), 
+      stat: translate("loneliness.health.stroke.stat", "32% increase"),
+      description: translate("loneliness.health.stroke.description", "Chronic loneliness significantly raises stroke probability")
     },
     {
       icon: <Shield className="h-6 w-6 text-yellow-500" />,
-      title: t("loneliness.health.immune.title", "Immune Function"),
-      stat: t("loneliness.health.immune.stat", "Weakened response"),
-      description: t("loneliness.health.immune.description", "Lonely individuals show compromised immune systems")
+      title: translate("loneliness.health.immune.title", "Immune Function"),
+      stat: translate("loneliness.health.immune.stat", "Weakened response"),
+      description: translate("loneliness.health.immune.description", "Lonely individuals show compromised immune systems")
     },
     {
       icon: <Clock className="h-6 w-6 text-purple-500" />,
-      title: t("loneliness.health.death.title", "Premature Death"),
-      stat: t("loneliness.health.death.stat", "30% higher risk"), 
-      description: t("loneliness.health.death.description", "Effect comparable to smoking 15 cigarettes daily")
+      title: translate("loneliness.health.death.title", "Premature Death"),
+      stat: translate("loneliness.health.death.stat", "30% higher risk"), 
+      description: translate("loneliness.health.death.description", "Effect comparable to smoking 15 cigarettes daily")
     }
   ];
 
@@ -73,7 +73,7 @@ const LonelinessEpidemic: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <Navbar />
         <Seo
           title={{
@@ -244,18 +244,18 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <TrendingDown className="h-8 w-8 text-orange-500" />
-              Loneliness Statistics 2025: Why Social Isolation Is Reaching Crisis Levels
+              <Text id="loneliness.why_now.title">Loneliness Statistics 2025: Why Social Isolation Is Reaching Crisis Levels</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness<sup><a href="#ref-2" className="text-blue-400 hover:text-blue-300 font-semibold">[2]</a></sup>. More than 20 million adults say they have no close friends<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300 font-semibold">[3]</a></sup>, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300 font-semibold">[4]</a></sup>.
+                <Text id="loneliness.why_now.paragraph1">The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness. More than 20 million adults say they have no close friends, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness.</Text>
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300 font-semibold">[5]</a></sup>. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly<sup><a href="#ref-6" className="text-blue-400 hover:text-blue-300 font-semibold">[6]</a></sup>. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300 font-semibold">[7]</a></sup>, with especially high rates among youth.
+                <Text id="loneliness.why_now.paragraph2">International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis, with especially high rates among youth.</Text>
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                What makes loneliness so urgent now is not just the prevalence of the feeling itself but the social and technological forces accelerating it. Remote work has untethered millions from casual office relationships. COVID-19 lockdowns disrupted in-person gatherings and weakened the everyday "weak ties" — neighbors, coworkers, acquaintances — that form the fabric of social life. Social media, once heralded as a connector, often deepens the sense of isolation through endless comparison and shallow interaction.
+                <Text id="loneliness.why_now.paragraph3">What makes loneliness so urgent now is not just the prevalence of the feeling itself but the social and technological forces accelerating it. Remote work has untethered millions from casual office relationships. COVID-19 lockdowns disrupted in-person gatherings and weakened the everyday "weak ties" — neighbors, coworkers, acquaintances — that form the fabric of social life. Social media, once heralded as a connector, often deepens the sense of isolation through endless comparison and shallow interaction.</Text>
               </p>
             </motion.div>
           </motion.div>
@@ -277,32 +277,40 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <Users className="h-8 w-8 text-blue-500" />
-              What Is the Loneliness Epidemic?
+              <Text id="loneliness.what_is.title">What Is the Loneliness Epidemic?</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                When we talk about the loneliness epidemic, we're talking about more than a temporary feeling of being left out. Loneliness, as researchers define it, is a mismatch between the social connections you want and the ones you have. You can be surrounded by people and still feel lonely if those connections don't meet your emotional needs.
+                <Text id="loneliness.what_is.paragraph1">When we talk about the loneliness epidemic, we're talking about more than a temporary feeling of being left out. Loneliness, as researchers define it, is a mismatch between the social connections you want and the ones you have. You can be surrounded by people and still feel lonely if those connections don't meet your emotional needs.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Loneliness vs. Social Isolation: Key Differences Explained</h3>
-              <p className="text-gray-300 mb-4">It's important to distinguish between two related concepts:</p>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.what_is.differences_title">Loneliness vs. Social Isolation: Key Differences Explained</Text>
+              </h3>
+              <p className="text-gray-300 mb-4">
+                <Text id="loneliness.what_is.differences_intro">It's important to distinguish between two related concepts:</Text>
+              </p>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li><strong className="text-white">Loneliness:</strong> A subjective experience — the pain of feeling disconnected, unseen, or unsupported.</li>
-                <li><strong className="text-white">Social isolation:</strong> An objective measure — how much contact you have with others, regardless of how you feel about it.</li>
+                <li><strong className="text-white"><Text id="loneliness.what_is.loneliness_def">Loneliness: A subjective experience — the pain of feeling disconnected, unseen, or unsupported.</Text></strong></li>
+                <li><strong className="text-white"><Text id="loneliness.what_is.isolation_def">Social isolation: An objective measure — how much contact you have with others, regardless of how you feel about it.</Text></strong></li>
               </ul>
               <p className="text-gray-300 mb-6">
-                A person can be socially isolated but not feel lonely if they are content with that level of contact. Others may be socially active yet still feel lonely if they lack close, meaningful ties. The U.S. National Academies of Sciences has warned that social isolation among older adults is associated with a 50% increased risk of dementia<sup className="text-blue-400 font-semibold">[19]</sup>.
+                <Text id="loneliness.what_is.differences_note">A person can be socially isolated but not feel lonely if they are content with that level of contact. Others may be socially active yet still feel lonely if they lack close, meaningful ties. The U.S. National Academies of Sciences has warned that social isolation among older adults is associated with a 50% increased risk of dementia.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Rising Loneliness Rates: Statistical Evidence of Growing Social Crisis</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.what_is.rising_title">Rising Loneliness Rates: Statistical Evidence of Growing Social Crisis</Text>
+              </h3>
               <p className="text-gray-300 mb-6">
-                The phrase "loneliness epidemic" was popularized by Harvard political scientist Robert Putnam in his landmark book <em>Bowling Alone</em><sup className="text-blue-400 font-semibold">[11]</sup>. Putnam showed how American social life was fragmenting: fewer bowling leagues, fewer neighborhood gatherings, fewer civic organizations. The decline of these "middle institutions" was already eroding community bonds.
+                <Text id="loneliness.what_is.bowling_alone">The phrase "loneliness epidemic" was popularized by Harvard political scientist Robert Putnam in his landmark book Bowling Alone. Putnam showed how American social life was fragmenting: fewer bowling leagues, fewer neighborhood gatherings, fewer civic organizations. The decline of these "middle institutions" was already eroding community bonds.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Why Call It an "Epidemic"?</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white">
+                <Text id="loneliness.what_is.epidemic_title">Why Call It an "Epidemic"?</Text>
+              </h3>
               <p className="text-gray-300 mb-6">
-                The term captures something essential: loneliness spreads. When people withdraw from social life, their absence weakens communities for everyone else. A society with fewer gatherings, fewer clubs, and fewer third places doesn't just affect the lonely individual — it leaves everyone with fewer opportunities to connect.
+                <Text id="loneliness.what_is.epidemic_explanation">The term captures something essential: loneliness spreads. When people withdraw from social life, their absence weakens communities for everyone else. A society with fewer gatherings, fewer clubs, and fewer third places doesn't just affect the lonely individual — it leaves everyone with fewer opportunities to connect.</Text>
               </p>
             </motion.div>
           </motion.div>
@@ -324,15 +332,15 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <AlertTriangle className="h-8 w-8 text-red-500" />
-              Why It Matters
+              <Text id="loneliness.why_matters.title">Why It Matters</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Loneliness is not simply an emotional state. Researchers have found it to be as dangerous as many leading risk factors for early death, including obesity, physical inactivity, and smoking<sup className="text-blue-400 font-semibold">[8]</sup>. It increases the likelihood of cardiovascular disease, dementia, and stroke. Perhaps most tragically, loneliness is tightly linked to suicide risk: in 2023, the U.S. recorded 49,000 deaths by suicide, the highest ever<sup className="text-blue-400 font-semibold">[15]</sup>.
+                <Text id="loneliness.why_matters.paragraph1">Loneliness is not simply an emotional state. Researchers have found it to be as dangerous as many leading risk factors for early death, including obesity, physical inactivity, and smoking. It increases the likelihood of cardiovascular disease, dementia, and stroke. Perhaps most tragically, loneliness is tightly linked to suicide risk: in 2023, the U.S. recorded 49,000 deaths by suicide, the highest ever.</Text>
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Beyond health, loneliness is also reshaping culture, politics, and the economy. Civic participation has fallen sharply in the U.S., as documented in Robert Putnam's classic <em>Bowling Alone</em><sup className="text-blue-400 font-semibold">[11]</sup>. Voter turnout, union membership, and religious attendance have all declined, leaving fewer built-in communities where people once found connection. Economists estimate that workplace loneliness costs billions annually in lost productivity, absenteeism, and turnover<sup className="text-blue-400 font-semibold">[12]</sup>.
+                <Text id="loneliness.why_matters.paragraph2">Beyond health, loneliness is also reshaping culture, politics, and the economy. Civic participation has fallen sharply in the U.S., as documented in Robert Putnam's classic Bowling Alone. Voter turnout, union membership, and religious attendance have all declined, leaving fewer built-in communities where people once found connection. Economists estimate that workplace loneliness costs billions annually in lost productivity, absenteeism, and turnover.</Text>
               </p>
             </motion.div>
           </motion.div>
@@ -1419,29 +1427,29 @@ const LonelinessEpidemic: React.FC = () => {
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={t("loneliness.faq.q6", "What makes loneliness different from being alone?")}
-                    answer={t("loneliness.faq.a6", "Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections.")}
+                    question={translate("loneliness.faq.q6", "What makes loneliness different from being alone?")}
+                    answer={translate("loneliness.faq.a6", "Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={t("loneliness.faq.q7", "How does urban living contribute to loneliness?")}
-                    answer={t("loneliness.faq.a7", "Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities.")}
+                    question={translate("loneliness.faq.q7", "How does urban living contribute to loneliness?")}
+                    answer={translate("loneliness.faq.a7", "Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={t("loneliness.faq.q8", "What is Pulse and how can it help with loneliness?")}
-                    answer={t("loneliness.faq.a8", "<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>.")}
+                    question={translate("loneliness.faq.q8", "What is Pulse and how can it help with loneliness?")}
+                    answer={translate("loneliness.faq.a8", "<Link to='/about' className='text-pulse-pink hover:text-accent transition-colors underline'>Pulse is a friendship-focused platform</Link> that helps individuals meet new people in their city through <Link to='/matchmaking' className='text-pulse-pink hover:text-accent transition-colors underline'>AI-powered group matching</Link> and <Link to='/plan-ideas' className='text-pulse-pink hover:text-accent transition-colors underline'>pre-planned activities</Link>. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships. <Link to='/cities' className='text-pulse-pink hover:text-accent transition-colors underline'>See if Pulse is available in your city</Link>.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question={t("loneliness.faq.q9", "What evidence-based solutions work best for loneliness?")}
-                    answer={t("loneliness.faq.a9", "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.")}
+                    question={translate("loneliness.faq.q9", "What evidence-based solutions work best for loneliness?")}
+                    answer={translate("loneliness.faq.a9", "The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness.")}
                   />
                 </motion.div>
               </motion.div>
