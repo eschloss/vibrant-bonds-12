@@ -8,6 +8,7 @@ import { Seo } from "@/hooks/useSeo";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FAQItem from "@/components/FAQItem";
 
 const LonelinessEpidemic: React.FC = () => {
   const fadeInUp = {
@@ -1200,6 +1201,270 @@ const LonelinessEpidemic: React.FC = () => {
                 </p>
               </motion.div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Comprehensive FAQ Section */}
+        <section className="py-16 relative">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
+                  Loneliness Epidemic: Complete FAQ Guide
+                </span>
+              </h2>
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+                Get answers to the most frequently asked questions about loneliness statistics, health impacts, and evidence-based solutions.
+              </p>
+            </motion.div>
+
+            <div className="grid gap-6 max-w-5xl mx-auto">
+              <motion.div
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1
+                    }
+                  }
+                }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What is the loneliness epidemic?"
+                    answer="The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How many Americans are lonely today?"
+                    answer="About 36% of U.S. adults report serious loneliness, and 21 million Americans have zero close friends according to the Survey Center on American Life (2021). Loneliness affects all age groups but is especially pronounced in young adults and older adults living alone."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Which generation is the loneliest?"
+                    answer="Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often, and 1 in 4 have no close friends according to Cigna's 2020 study. This generation faces unique challenges including social media comparison, economic uncertainty, and delayed life milestones."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How has the number of close friends changed over time?"
+                    answer="The average adult today has 2 close friends, down from 4 in 1990 according to the Survey Center on American Life (2021). This 50% decline reflects broader social and cultural changes, including reduced civic engagement, increased mobility, and digital communication replacing face-to-face interaction."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What are the health effects of loneliness?"
+                    answer="Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%) according to Holt-Lunstad's research published in PLOS Medicine (2015). It also weakens the immune system, slows wound healing, and is equivalent to smoking 15 cigarettes daily in terms of health impact."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What are the mental health consequences of loneliness?"
+                    answer="Chronic loneliness is strongly linked to depression, anxiety, suicidal ideation, and higher stress levels. Lonely adolescents are more likely to engage in self-harm according to research published in The Lancet Child & Adolescent Health (2020). It can also lead to cognitive decline and increased risk of dementia."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Can loneliness increase the risk of premature death or suicide?"
+                    answer="Yes. Social isolation is associated with 2–3x higher suicide risk among older adults according to the American Foundation for Suicide Prevention. Loneliness contributes to rising U.S. suicide rates, currently around 49,000 deaths per year (CDC, 2022), and increases premature death risk by 29%."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Are certain groups more at risk of chronic loneliness?"
+                    answer="Yes. Remote workers, LGBTQ+ youth, single adults, older adults living alone, mothers with young children, immigrants, and people with disabilities are particularly vulnerable according to Harvard's Making Caring Common (2021). Each group faces unique social barriers and isolation challenges."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How has COVID-19 affected loneliness levels?"
+                    answer="During the pandemic, 36% of adults experienced serious loneliness according to Harvard MCC (2021). Young adults (18–25) were the hardest hit with 61% reporting serious loneliness, and mothers with young children reported 51%. The pandemic accelerated existing loneliness trends through lockdowns and social distancing."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Does working remotely make people more lonely?"
+                    answer="Yes. Studies show remote employees are twice as likely to report loneliness compared to in-office workers according to Buffer's 2023 State of Remote Work report. Remote work can reduce spontaneous social interactions, water cooler conversations, and the natural community building that happens in shared physical spaces."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Can social media increase loneliness?"
+                    answer="Passive social media use, such as scrolling without interacting, is linked to higher feelings of isolation and depression according to Twenge et al. (2018). However, active, intentional digital communication can help maintain connections, especially with distant friends and family. The key is quality over quantity of interaction."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How have social and community structures changed over time?"
+                    answer="Civic engagement has declined dramatically. Membership in civic organizations fell 50% between the 1960s and 2000s according to Putnam (2000). Trust in 'most people' dropped from 55% in 1972 to 32% in 2000 (GSS), reflecting broader social fragmentation and declining social capital."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Why is workplace loneliness increasing?"
+                    answer="Workplace loneliness is rising due to remote work, reduced face-to-face collaboration, competitive rather than collaborative cultures, and lack of meaningful relationships at work. Only 30% of employees have a best friend at work, yet those who do are 7x more engaged according to Gallup (2022)."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How can I make meaningful friendships as an adult?"
+                    answer="Focus on quality over quantity: even 1–2 high-quality friendships can buffer loneliness according to Holt-Lunstad (2015). Join clubs, classes, volunteer programs, or community events to foster shared experiences. Consistency and vulnerability in interactions help deepen connections over time."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What role does community engagement play in reducing loneliness?"
+                    answer="Community involvement, volunteering, and participation in clubs or religious groups significantly reduce loneliness and improve mental health according to the National Academies (2020). These activities provide purpose, regular social interaction, and a sense of belonging that counters isolation."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Are there therapies or exercises that help with loneliness?"
+                    answer="Yes. Cognitive-behavioral therapy (CBT) targeting social cognition and mindfulness/self-compassion exercises are effective at reducing chronic loneliness according to Masi et al. (2011). Social skills training, group therapy, and interventions that address negative thought patterns about social situations also show promising results."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How can workplaces help reduce employee loneliness?"
+                    answer="Employers can implement team-building programs, mentorship, social events, and create spaces for informal interaction. Employees with friends at work are 7x more engaged and less likely to miss work according to Gallup (2022). Hybrid work models that balance remote flexibility with in-person connection are increasingly effective."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Is loneliness a global issue or mostly in the U.S.?"
+                    answer="Loneliness is a global crisis. About 25% of adults worldwide report being lonely most of the time according to Gallup (2022). High rates are documented in the U.S., UK (38% report frequent loneliness per ONS 2021), Japan (1 in 7 adults over 40 are socially isolated per OECD 2021), and many developed nations."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How has loneliness changed over the last few decades?"
+                    answer="Loneliness has increased steadily due to declining civic engagement, reduced social networks, and cultural shifts toward individualism. Average close friendships dropped from 4 in 1990 to 2 today according to the Survey Center on American Life (2021). Digital communication has partially replaced but not fully compensated for in-person interaction."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What government initiatives exist to address loneliness?"
+                    answer="Several countries have appointed Ministers of Loneliness, including the UK (2018) and Japan (2021). The U.S. Surgeon General declared loneliness a public health epidemic in 2023. Initiatives include community programs, public awareness campaigns, and funding for social connection research and interventions."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="Are there apps or platforms to meet new friends safely?"
+                    answer="Yes. Platforms like Pulse connect users with local, interest-based social events and small group activities, making it easier to build real-life friendships in structured and safe environments. Other apps focus on hobby-based meetups, professional networking, or activity partnerships rather than dating."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What makes loneliness different from being alone?"
+                    answer="Loneliness is the subjective feeling of isolation or disconnection regardless of how many people are around, while being alone is simply the physical state of solitude. Many people enjoy solitude and aren't lonely, while others feel lonely in crowded rooms. Loneliness occurs when there's a mismatch between desired and actual social connections."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="How does urban living contribute to loneliness?"
+                    answer="Urban environments can paradoxically increase loneliness despite population density. Factors include anonymity, fast-paced lifestyles, limited green spaces, expensive housing leading to social isolation, and reduced community cohesion. However, cities also offer more opportunities for connection through diverse activities and communities."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What is Pulse and how can it help with loneliness?"
+                    answer="Pulse is a friendship-focused platform that helps individuals meet new people in their city through AI-powered group matching and pre-planned activities. It bridges the gap between digital interaction and real-world connections by facilitating small group meetups (6-12 people) based on shared interests and compatibility, making it easier to form lasting friendships."
+                  />
+                </motion.div>
+
+                <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                  <FAQItem
+                    question="What evidence-based solutions work best for loneliness?"
+                    answer="The most effective interventions target social cognition (addressing negative thoughts about social situations), provide social support through structured activities, enhance social skills through training, and increase opportunities for meaningful social contact. Community-based programs, group activities with shared purpose, and consistent face-to-face interaction show the strongest evidence for reducing loneliness."
+                  />
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Structured Data for SEO */}
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "What is the loneliness epidemic?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How many Americans are lonely today?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "About 36% of U.S. adults report serious loneliness, and 21 million Americans have zero close friends according to the Survey Center on American Life (2021)."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Which generation is the loneliest?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often, and 1 in 4 have no close friends according to Cigna's 2020 study."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What are the health effects of loneliness?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%). It also weakens the immune system and is equivalent to smoking 15 cigarettes daily in terms of health impact."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can loneliness increase the risk of premature death or suicide?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes. Social isolation is associated with 2–3x higher suicide risk among older adults and increases premature death risk by 29%. Loneliness contributes to rising U.S. suicide rates, currently around 49,000 deaths per year."
+                    }
+                  }
+                ]
+              })}
+            </script>
           </div>
         </section>
 
