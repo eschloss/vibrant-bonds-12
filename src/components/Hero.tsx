@@ -80,16 +80,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-4 mt-4 mb-8"
+            className="flex justify-center mt-4 mb-8"
           >
             <Link to={addRefToUrl("/cities")}>
               <Button size="xl" className="bg-[#FF2688] hover:bg-[#FF2688]/90 text-white shadow-lg shadow-[#FF2688]/20 transition-all duration-500 hover:shadow-[#FF2688]/40 hover:scale-105 rounded-full animate-elegant-scale">
                 <span>{t("hero.cta", "Meet Your Crew")}</span>
-              </Button>
-            </Link>
-            <Link to="/loneliness-epidemic#key-stats">
-              <Button size="xl" variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 shadow-lg transition-all duration-500 hover:scale-105 rounded-full">
-                <span>View Stats</span>
               </Button>
             </Link>
           </motion.div>
