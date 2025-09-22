@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import NeuralNetwork from "@/components/NeuralNetwork";
 import MeetPipPromo from "@/components/MeetPipPromo";
 import MissionCountdown from "@/components/MissionCountdown";
+import ActivitiesTeaser from "@/components/ActivitiesTeaser";
 import Footer from "@/components/Footer";
 import ShareCallout from "@/components/ShareCallout";
 import { Seo } from "@/hooks/useSeo";
@@ -41,6 +42,7 @@ const Index = () => {
           <div id="how-it-works" ref={howItWorksRef}>
             <HowItWorks />
           </div>
+          <ActivitiesTeaser />
           <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
           <NeuralNetwork />
           <MissionCountdown />

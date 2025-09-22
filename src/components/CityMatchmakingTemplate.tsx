@@ -10,6 +10,7 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
 import ShareSection from './ShareSection';
 import CityPipModule from './CityPipModule';
+import ActivitiesTeaser from './ActivitiesTeaser';
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -416,6 +417,9 @@ const CityMatchmakingTemplate = ({
             </div>
           </section>
         )}
+
+        {/* Activities teaser placed between Ready to Meet and Spread the word */}
+        <ActivitiesTeaser />
 
         <section className="relative py-20 bg-gray-900 dark:bg-gray-950">
           <div className="container mx-auto px-4 relative z-10">
