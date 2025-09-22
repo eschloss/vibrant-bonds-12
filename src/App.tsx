@@ -32,6 +32,7 @@ import Activities from "@/pages/Activities";
 import Redirect from "@/pages/Redirect";
 import FAQ from "@/pages/FAQ";
 import LonelinessEpidemic from "@/pages/LonelinessEpidemic";
+import RealLifeMagic from "@/pages/RealLifeMagic";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ function App() {
                 <Route path="activities" element={<Activities />} />
                 <Route path="faq" element={<FAQ />} />
                 <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
+                <Route path="real-life-magic" element={<RealLifeMagic />} />
                 
                 {/* Cities routes */}
                 <Route path="cities" element={<CityList />} />

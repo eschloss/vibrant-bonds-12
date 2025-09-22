@@ -201,6 +201,11 @@ const Footer = () => {
                     Loneliness Report
                   </Link>
                 </li>
+                <li>
+                  <Link to={addRefToUrl("/real-life-magic")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    Real-Life Magic
+                  </Link>
+                </li>
               </ul>
             </div>
 

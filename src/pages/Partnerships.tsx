@@ -24,6 +24,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import ActivitiesTeaser from "@/components/ActivitiesTeaser";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import EarningCalculator from "@/components/EarningCalculator";
@@ -236,89 +237,40 @@ const Partnerships = () => {
         </div>
       </section>
 
-      {/* Venue Types Section (moved up) */}
+      {/* Partner Venue Examples (teaser with shuffle) */}
       <section className="py-12 relative bg-gray-900/50">
         <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <Text id="partnerships.venues.title">Perfect Partners We're Looking For</Text>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              <Text id="partnerships.venues.description">We partner with venues that create social experiences. Your customers already share a passion for your services - we help them find friends who love the same things.</Text>
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 max-w-7xl mx-auto">
-            {[
-              {
-                name: t("partnerships.venues.bowling", "Bowling Alley"),
-                description: t("partnerships.venues.bowling_desc", "Perfect for casual meetups and team building."),
-                category: "Sports & Recreation"
-              },
-              {
-                name: t("partnerships.venues.cooking", "Cooking Classes"),
-                description: t("partnerships.venues.cooking_desc", "Interactive culinary experiences where people learn and share."),
-                category: "Food & Culinary"
-              },
-              {
-                name: t("partnerships.venues.laser_tag", "Laser Tag"),
-                description: t("partnerships.venues.laser_tag_desc", "High-energy group activities perfect for team building."),
-                category: "Entertainment"
-              },
-              {
-                name: t("partnerships.venues.escape_rooms", "Escape Rooms"),
-                description: t("partnerships.venues.escape_rooms_desc", "Puzzle-solving experiences that require teamwork."),
-                category: "Entertainment"
-              },
-              {
-                name: t("partnerships.venues.board_games", "Board Game Cafe"),
-                description: t("partnerships.venues.board_games_desc", "Social gaming spaces where people bond over strategy and laughter."),
-                category: "Entertainment"
-              },
-              {
-                name: t("partnerships.venues.concept_bars", "Concept Bars"),
-                description: t("partnerships.venues.concept_bars_desc", "Themed bars that create conversation starters and memorable moments."),
-                category: "Food & Beverage"
-              }
-            ].map((venue, index) => (
-              <motion.div key={venue.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group">
-                  <CardContent className="p-4 text-center">
-                    <div className="text-3xl mb-3">
-                      {venue.name === "Bowling Alley" && "🎳"}
-                      {venue.name === "Art Workshop" && "🎨"}
-                      {venue.name === "Cooking Classes" && "👨‍🍳"}
-                      {venue.name === "Paintball" && "🔫"}
-                      {venue.name === "Laser Tag" && "🎯"}
-                      {venue.name === "Escape Rooms" && "🔐"}
-                      {venue.name === "Interactive Experiences" && "🎮"}
-                      {venue.name === "E-Sports Providers" && "🏆"}
-                      {venue.name === "Arcades" && "🕹️"}
-                      {venue.name === "Concept Bars" && "🍸"}
-                      {venue.name === "Book Stores" && "📚"}
-                      {venue.name === "Board Game Cafe" && "🎲"}
-                    </div>
-                    <h3 className="text-sm font-bold text-white mb-2">{venue.name}</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{venue.description}</p>
-                    <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded-full">{venue.category}</span>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }} className="text-center mt-16">
-            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4"><Text id="partnerships.venues.apply_anyway_title">Don't See Your Venue Type?</Text></h3>
-              <p className="text-gray-300 mb-6">
-                <Text id="partnerships.venues.apply_anyway_desc">We partner with any venue that creates social experiences and brings people together. If your venue helps people connect, we want to work with you.</Text>
-              </p>
-              <a href="https://482tykjn26x.typeform.com/to/e4yibguB" target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'partnerships:venue_types_apply_anyway' })} className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium">
-                <span><Text id="partnerships.venues.apply_anyway_cta">Apply Anyway</Text></span>
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </motion.div>
+          {(() => {
+            const partnerVenueItems = [
+              { id: 'arcade', name: 'Arcade', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png' },
+              { id: 'pottery-studio', name: 'Pottery Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png' },
+              { id: 'surf-club', name: 'Surf Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png' },
+              { id: 'outdoor-club', name: 'Outdoor Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/hiking.png' },
+              { id: 'wine-bar', name: 'Wine Bar', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/wine_tasting.png' },
+              { id: 'pilates-studio', name: 'Pilates Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Pilates.png' },
+              { id: 'climbing-gym', name: 'Climbing Gym', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/rock_climbing.png' },
+              { id: 'tennis-club', name: 'Tennis Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/tennis.png' },
+              { id: 'community-garden', name: 'Community Garden', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/gardening.png' },
+              { id: 'escape-room', name: 'Escape Room', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/escape_rooms.png' },
+              { id: 'cycling-club', name: 'Cycling Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cycling.png' },
+              { id: 'yoga-studio', name: 'Yoga Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga.png' },
+              { id: 'board-game-cafe', name: 'Board Game Cafe', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png' },
+              { id: 'laser-tag', name: 'Laser Tag Arena', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/escape_rooms.png' },
+              { id: 'sailing-club', name: 'Sailing Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png' },
+              { id: 'art-studio', name: 'Art Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png' }
+            ];
+            return (
+              <ActivitiesTeaser
+                title="Examples of Partner Venues We Love"
+                subtitle="Shuffle to explore the kinds of venues and experiences we feature — from climbing gyms and board game cafes to cooking schools and wine bars. If you create social experiences, we want to work with you."
+                ctaHref="https://482tykjn26x.typeform.com/to/e4yibguB"
+                ctaLabel="Apply to partner"
+                itemsCount={16}
+                items={partnerVenueItems}
+                onCtaClick={(href) => trackTypeformRedirect({ href, source: 'partnerships:venues_teaser' })}
+              />
+            );
+          })()}
         </div>
       </section>
 

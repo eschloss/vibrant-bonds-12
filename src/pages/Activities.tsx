@@ -186,13 +186,17 @@ const Activities = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-                  Get Matched to Your Crew
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="lg" className="border-gray-600 text-white hover:bg-gray-800">
-                  See How It Works
-                </Button>
+                <Link to="/cities">
+                  <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+                    Meet Your Crew
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/meet-pip">
+                  <Button variant="outline" size="lg" className="border-gray-600 text-white hover:bg-gray-800">
+                    Meet Pip
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -241,6 +245,8 @@ const Activities = () => {
                       alt={`Pip enjoying ${activity.name}`}
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      decoding="async"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     <div className="absolute bottom-2 left-2 right-2">
@@ -415,115 +421,42 @@ const Activities = () => {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> Lasting Bonds</span>
               </h2>
               <p className="text-gray-300 max-w-3xl mx-auto">
-                When people do something meaningful together, walls drop, stories emerge, and momentum builds.
+                Face‑to‑face experiences trigger the brain’s social chemistry, heighten memory through shared attention, and create synchrony that bonds groups fast.
               </p>
             </motion.div>
-
-            {/* Stats strip */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mt-8">
-              {[{
-                kpi: '2.1×', label: 'faster sense of closeness'
-              }, {
-                kpi: '78%', label: 'plan a second hangout'
-              }, {
-                kpi: '94%', label: 'feel more comfortable IRL'
-              }].map((s, i) => (
-                <motion.div key={s.label} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                  className="rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 text-center">
-                  <div className="text-2xl md:text-3xl font-extrabold text-white">{s.kpi}</div>
-                  <div className="text-gray-400 text-sm">{s.label}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Benefits cards */}
+            {/* Teaser bullets from Real-Life Magic */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8">
-              {[{
-                title: 'Break Down Barriers Fast',
-                copy: "Shared challenges and new experiences dissolve social anxiety so conversation flows naturally.",
-                icon: <Sparkles className="text-white" size={18} />,
-                gradient: 'from-pink-500 to-purple-600'
-              }, {
-                title: 'Create Inside Jokes',
-                copy: 'Those “remember when” moments become the foundation of friendship and future plans.',
-                icon: <Heart className="text-white" size={18} />,
-                gradient: 'from-blue-500 to-cyan-400'
-              }, {
-                title: 'See Real Personalities',
-                copy: 'Activities reveal the problem-solver, the encourager, the comedian—authentic connection forms.',
-                icon: <MessageSquare className="text-white" size={18} />,
-                gradient: 'from-green-400 to-emerald-500'
-              }].map((c, i) => (
-                <motion.div
-                  key={c.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 + i * 0.08 }}
-                  className="group rounded-2xl border border-gray-700 bg-gray-900/40 p-6 hover:border-accent/40 transition-all hover:shadow-2xl hover:shadow-purple-500/10"
-                >
-                  <div className={`mb-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r ${c.gradient} p-[2px]`}> 
-                    <div className="rounded-full bg-gray-900 p-2">
-                      {c.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{c.title}</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">{c.copy}</p>
-                </motion.div>
-              ))}
+              <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
+                <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-purple-600 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Heart className="text-white" size={18} /></div></div>
+                <h3 className="text-white font-semibold mb-1">Oxytocin & Stress</h3>
+                <p className="text-gray-300 text-sm">Close‑friend interactions can boost oxytocin and support emotional regulation—making connection feel safe and rewarding.</p>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.12 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
+                <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Brain className="text-white" size={18} /></div></div>
+                <h3 className="text-white font-semibold mb-1">Shared Experience Amplifier</h3>
+                <p className="text-gray-300 text-sm">Doing something together heightens attention and memory, making moments more vivid—and bonds more durable.</p>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.19 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
+                <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-emerald-500 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Users className="text-white" size={18} /></div></div>
+                <h3 className="text-white font-semibold mb-1">Synchrony = Connection</h3>
+                <p className="text-gray-300 text-sm">Group movement and challenge raise endorphins and create synchrony—one reason team activities bond people so quickly.</p>
+              </motion.div>
             </div>
 
-            {/* Testimonial */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.35 }}
-              className="mt-8 md:mt-10 rounded-2xl border border-gray-700 bg-gray-900/50 p-5 text-center"
-            >
-              <p className="text-gray-200 text-sm md:text-base max-w-3xl mx-auto">
-                “Our pottery night turned into weekly coffee. Doing something together made it effortless to keep meeting.”
-              </p>
-              <div className="text-gray-400 text-xs mt-2">— Sarah, matched in Austin</div>
-            </motion.div>
+            {/* CTA to Real-Life Magic */}
+            <div className="text-center mt-10">
+              <Link to="/real-life-magic">
+                <Button size="lg" className="group bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+                  Learn the science behind real‑life magic
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-10 md:py-14 relative">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-pulse-pink/20 blur-3xl" />
-          <div className="absolute bottom-0 -left-10 w-72 h-72 rounded-full bg-accent/20 blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Create Your
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> Story Together?</span>
-            </h2>
-            
-            <p className="text-gray-300 mb-6">
-              Your crew is waiting. Your next favorite memory is one activity away. 
-              Let Pip match you with like-minded people who'll become your adventure partners, coffee companions, and lifelong friends.
-            </p>
-            
-            <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-              Find Your Crew & Start Planning
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            
-            <p className="text-sm text-gray-400 mt-4">
-              We'll match you when enough compatible people in your city sign up—no endless waitlist.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* 7 Day Mission to Meet in Real Life (shared component for exact parity) */}
       <MissionCountdown />

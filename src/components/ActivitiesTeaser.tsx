@@ -30,9 +30,28 @@ function pickRandom<T>(arr: T[], n: number): T[] {
   return copy.slice(0, n);
 }
 
-export default function ActivitiesTeaser() {
+type ActivitiesTeaserProps = {
+  title?: string;
+  subtitle?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+  itemsCount?: number; // default 8
+  items?: { id: string; name: string; image: string }[];
+  onCtaClick?: (href: string, e: any) => void;
+};
+
+export default function ActivitiesTeaser({
+  title = "Discover Your Next Adventure",
+  subtitle = "Tiny preview of what your crew could do together. Shuffle for ideas, then explore the full list.",
+  ctaHref = "/activities",
+  ctaLabel = "Discover activities near you",
+  itemsCount = 8,
+  items: providedItems,
+  onCtaClick,
+}: ActivitiesTeaserProps) {
   const [seed, setSeed] = useState(0);
-  const items = useMemo(() => pickRandom(ALL_ITEMS, 8), [seed]);
+  const sourceItems = useMemo(() => (providedItems && providedItems.length ? providedItems : ALL_ITEMS), [providedItems]);
+  const itemsToShow = useMemo(() => pickRandom(sourceItems, Math.max(1, Math.min(itemsCount, sourceItems.length))), [seed, itemsCount, sourceItems]);
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden">
@@ -42,8 +61,8 @@ export default function ActivitiesTeaser() {
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Discover Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Adventure</span></h2>
-          <p className="text-gray-300">Tiny preview of what your crew could do together. Shuffle for ideas, then explore the full list.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">{title.includes("Adventure") ? (<>{title.split("Adventure")[0]}<span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Adventure</span></>) : title}</h2>
+          <p className="text-gray-300">{subtitle}</p>
         </div>
 
         <div className="flex items-center justify-center mb-4">
@@ -53,7 +72,7 @@ export default function ActivitiesTeaser() {
         </div>
 
         <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-3 max-w-5xl mx-auto">
-          {items.map((it, i) => (
+          {itemsToShow.map((it, i) => (
             <motion.div
               key={it.id + i}
               initial={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -63,7 +82,7 @@ export default function ActivitiesTeaser() {
               className="group relative rounded-xl overflow-hidden border border-gray-700 bg-gray-900/30"
               style={{ aspectRatio: "1 / 1" }}
             >
-              <img src={it.image} alt={it.name} className="w-full h-full object-cover" loading="lazy" />
+              <img src={it.image} alt={it.name} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors" />
               <div className="absolute bottom-1 left-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="inline-block bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded border border-white/10 text-center w-full">{it.name}</span>
@@ -73,11 +92,19 @@ export default function ActivitiesTeaser() {
         </div>
 
         <div className="text-center mt-8">
-          <Link to="/activities">
-            <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-              Discover activities near you <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
+          {/^https?:\/\//.test(ctaHref) ? (
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer" onClick={(e) => { try { onCtaClick && onCtaClick(ctaHref, e); } catch (_) {} }}>
+              <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+                {ctaLabel} <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </a>
+          ) : (
+            <Link to={ctaHref} onClick={(e) => { try { onCtaClick && onCtaClick(ctaHref, e); } catch (_) {} }}>
+              <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+                {ctaLabel} <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </section>
