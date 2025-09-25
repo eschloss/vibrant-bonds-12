@@ -251,11 +251,11 @@ const Partnerships = () => {
               { id: 'climbing-gym', name: 'Climbing Gym', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/rock_climbing.png' },
               { id: 'tennis-club', name: 'Tennis Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/tennis.png' },
               { id: 'community-garden', name: 'Community Garden', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/gardening.png' },
-              { id: 'escape-room', name: 'Escape Room', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/escape_rooms.png' },
+              { id: 'escape-room', name: 'Escape Room', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png' },
               { id: 'cycling-club', name: 'Cycling Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cycling.png' },
-              { id: 'yoga-studio', name: 'Yoga Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga.png' },
+              { id: 'yoga-studio', name: 'Yoga Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga%20outdoors.png' },
               { id: 'board-game-cafe', name: 'Board Game Cafe', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png' },
-              { id: 'laser-tag', name: 'Laser Tag Arena', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/escape_rooms.png' },
+              { id: 'laser-tag', name: 'Laser Tag Arena', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png' },
               { id: 'sailing-club', name: 'Sailing Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png' },
               { id: 'art-studio', name: 'Art Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png' }
             ];

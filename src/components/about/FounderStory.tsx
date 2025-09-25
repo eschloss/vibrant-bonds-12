@@ -34,8 +34,11 @@ const FounderStory = () => {
           >
             <h2 className="text-3xl font-bold">{t("founder.journey_title", "The Journey")}</h2>
             <div className="h-1 w-20 bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] rounded-full"></div>
-            <p className="text-gray-300 text-lg">
-              {t("founder.journey_description", "After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.")}
+            <p className="text-gray-300 text-lg whitespace-pre-line">
+              {t(
+                "founder.journey_description",
+                "After moving 10+ times across 5 continents, Eric became good at making friends from scratch — and saw how hard it is for most people. Even with endless social apps, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the joy of connection and the quiet reality of isolation.\n\nWhile working in research, a suicide risk study landed on his desk. Reading first-hand accounts of loneliness and hopelessness made something snap. He left the lab to work on the problem directly — building products that help people form real friendships."
+              )}
             </p>
             <blockquote className="my-8 px-8 py-6 bg-gradient-to-r from-pulse-purple/10 to-pulse-blue/10 rounded-2xl border-l-4 border-pulse-pink relative">
               <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-pulse-pink rounded-full flex items-center justify-center">
@@ -45,8 +48,11 @@ const FounderStory = () => {
                 {t("founder.quote", "What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared interests, repeated time together, and someone willing to say, \"Let's do this again next week!\"")}
               </p>
             </blockquote>
-            <p className="text-gray-300 text-lg">
-              {t("founder.conclusion", "Those lessons became Pulse: a new kind of social platform that helps people turn strangers into real friends, in real life.")}
+            <p className="text-gray-300 text-lg whitespace-pre-line">
+              {t(
+                "founder.conclusion",
+                "Those lessons became the Pulse Friendship Formula — shared interests, repeated IRL time, and a gentle nudge to keep momentum.\n\nPulse is a new kind of social platform that turns strangers into real friends, in real life."
+              )}
             </p>
           </motion.div>
         </div>

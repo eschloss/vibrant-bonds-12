@@ -17,7 +17,8 @@ import pipCamping from "@/assets/pip-camping.png";
 import pipPilates from "@/assets/pip-pilates.png";
 import pipBookclub from "@/assets/pip-bookclub.png";
 import pipPottery from "@/assets/pip-pottery.png";
-import pipEscapeRoom from "@/assets/pip-escape-room.png";
+// Replaced local escape room asset with provided remote image URL
+const pipEscapeRoom = "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png";
 
 // Additional activity images (added by user in public/lovable-uploads)
 // Using public paths so bundler doesn't need imports
@@ -36,12 +37,12 @@ const Activities = () => {
 
   const seoProps = {
     title: {
-      en: "Group Activities & Experiences | Pulse - Find Your Crew",
-      es: "Actividades Grupales y Experiencias | Pulse - Encuentra Tu Grupo"
+      en: t("activities.seo.title", "Group Activities & Experiences | Pulse - Find Your Crew"),
+      es: t("activities.seo.title", "Actividades Grupales y Experiencias | Pulse - Encuentra Tu Grupo")
     },
     description: {
-      en: "Discover amazing group activities curated by Pip. From surfing to book clubs, join matched crews for unforgettable experiences that build lasting friendships.",
-      es: "Descubre increíbles actividades grupales curadas por Pip. Desde surf hasta clubes de lectura, únete a grupos compatibles para experiencias inolvidables."
+      en: t("activities.seo.description", "Discover amazing group activities curated by Pip. From surfing to book clubs, join matched crews for unforgettable experiences that build lasting friendships."),
+      es: t("activities.seo.description", "Descubre increíbles actividades grupales curadas por Pip. Desde surf hasta clubes de lectura, únete a grupos compatibles para experiencias inolvidables.")
     },
     keywords: ["group activities", "social experiences", "friendship building", "outdoor adventures", "creative workshops", "team activities"]
   };
@@ -103,7 +104,7 @@ const Activities = () => {
     { id: "arcade", name: "Arcade", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png" },
     { id: "board-games", name: "Board Games", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/board_game.png" },
     { id: "cycling", name: "Cycling", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cycling.png" },
-    { id: "escape-rooms", name: "Escape Rooms", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/escape_rooms.png" },
+    { id: "escape-rooms", name: "Escape Rooms", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png" },
     { id: "gardening", name: "Gardening", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/gardening.png" },
     { id: "golf", name: "Golf", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/golf.png" },
     { id: "hiking", name: "Hiking", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/hiking.png" },
@@ -114,7 +115,28 @@ const Activities = () => {
     { id: "surfing", name: "Surfing", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png" },
     { id: "tennis", name: "Tennis", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/tennis.png" },
     { id: "wine-tasting", name: "Wine Tasting", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/wine_tasting.png" },
-    { id: "yoga", name: "Yoga", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga.png" },
+    { id: "yoga", name: "Yoga", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga%20outdoors.png" },
+    // Newly added items to expand grid
+    { id: "music", name: "Music", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Music.png" },
+    { id: "soccer", name: "Soccer", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Soccer.png" },
+    { id: "basketball", name: "Basketball", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Basketball.png" },
+    { id: "karaoke", name: "Karaoke", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Karaoke.png" },
+    { id: "food-walking-tour", name: "Food Walking Tour", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/food%20walking%20tour.png" },
+    { id: "painting-class", name: "Painting Class", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Painting%20Class.png" },
+    { id: "brewery", name: "Brewery", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Brewery.png" },
+    { id: "trivia", name: "Trivia", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Trivia.png" },
+    { id: "pool", name: "Pool", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pool.png" },
+    { id: "poker", name: "Poker", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/poker%20(1).png" },
+    { id: "cocktail-bar", name: "Cocktail Bar", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Cocktail%20Bar.png" },
+    { id: "day-tour", name: "Day Tour", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Day%20Tour.png" },
+    { id: "gay-bar", name: "Gay Bar", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Gay%20Bar.png" },
+    { id: "photography", name: "Photography", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Photography.png" },
+    { id: "picnic", name: "Picnic", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/picnic.png" },
+    { id: "coffee", name: "Coffee", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cafe.png" },
+    { id: "dancing", name: "Dancing", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Dancing.png" },
+    { id: "camping", name: "Camping", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Camping.png" },
+    { id: "beach-activities", name: "Beach Activities", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Beach%20Volleyball.png" },
+    { id: "boat", name: "Boat", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Boat.png" },
   ];
 
   return (
@@ -157,27 +179,16 @@ const Activities = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <motion.div
-                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-6"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                Curated by Pip
-              </motion.div>
-
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
-                Your Crew's Next
+                {t("activities.hero.headline_prefix", "Your Crew's Next")}
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                  Epic Adventure
+                  {t("activities.hero.headline_focus", "Epic Adventure")}
                 </span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-2xl mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
-                Every crew gets a 7‑day mission: plan an unforgettable experience together. 
-                From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.
+                {t("activities.hero.copy", "Every crew gets a 7‑day mission: plan an unforgettable experience together. From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.")}
               </p>
 
               <motion.div
@@ -188,13 +199,13 @@ const Activities = () => {
               >
                 <Link to="/cities">
                   <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-                    Meet Your Crew
+                    {t("navbar.meet_your_crew", "Meet Your Crew")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
                 <Link to="/meet-pip">
                   <Button variant="outline" size="lg" className="border-gray-600 text-white hover:bg-gray-800">
-                    Meet Pip
+                    {t("navbar.meet_pip", "Meet Pip")}
                   </Button>
                 </Link>
               </motion.div>
@@ -217,32 +228,32 @@ const Activities = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Activities That Build 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> Real Bonds</span>
+              {t("activities.grid.title_prefix", "Activities That Build")}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">{t("activities.grid.title_focus", " Real Bonds")}</span>
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              A few favorites from millions of events worldwide—find even more in your city.
+              {t("activities.grid.subtitle", "A few favorites from millions of events worldwide—find even more in your city.")}
             </p>
           </motion.div>
 
           {/* Removed the temporary static grid collage for a cleaner hero experience */}
 
           {/* Unified activities gallery (no category wrappers) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 md:gap-6">
             {activitiesList.map((activity, idx) => (
               <motion.div
                 key={`${activity.id}-${idx}`}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: (idx % 5) * 0.06 }}
+                transition={{ delay: (idx % 7) * 0.06 }}
                 className="group"
               >
                 <div className="overflow-hidden rounded-xl border border-gray-700 bg-gray-900/30 hover:border-accent/40 transition-colors">
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={activity.image}
-                      alt={`Pip enjoying ${activity.name}`}
+                      alt={`Pip enjoying ${t(`activity.${activity.id}` as any, activity.name)}`}
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
@@ -251,7 +262,7 @@ const Activities = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     <div className="absolute bottom-2 left-2 right-2">
                       <span className="inline-block bg-black/60 text-white px-2 py-1 rounded text-[11px] font-medium border border-white/10">
-                        {activity.name}
+                        {t(`activity.${activity.id}` as any, activity.name)}
                       </span>
                     </div>
                   </div>
@@ -268,13 +279,11 @@ const Activities = () => {
           >
             <Link to="/cities">
               <Button size="lg" className="group bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90 mb-4">
-                Meet Your Crew
+                {t("navbar.meet_your_crew", "Meet Your Crew")}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <p className="text-sm text-gray-400">
-              87% of crews meet within 2 weeks of being matched
-            </p>
+            {/* Removed note under CTA per request */}
           </motion.div>
         </div>
       </section>
@@ -412,42 +421,38 @@ const Activities = () => {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
-                <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                Built for real connection
-              </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-3">
-                Why Shared Experiences Create
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue"> Lasting Bonds</span>
+                {t("activities.science.title_prefix", "Why Doing Things Together Builds")}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">{t("activities.science.title_focus", " Real Bonds")}</span>
               </h2>
               <p className="text-gray-300 max-w-3xl mx-auto">
-                Face‑to‑face experiences trigger the brain’s social chemistry, heighten memory through shared attention, and create synchrony that bonds groups fast.
+                {t("activities.science.description", "In‑person time makes moments feel bigger and more memorable. Laugh, move, and try new things together—it’s the easiest way to turn acquaintances into friends.")}
               </p>
             </motion.div>
             {/* Teaser bullets from Real-Life Magic */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8">
               <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
                 <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-purple-600 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Heart className="text-white" size={18} /></div></div>
-                <h3 className="text-white font-semibold mb-1">Oxytocin & Stress</h3>
-                <p className="text-gray-300 text-sm">Close‑friend interactions can boost oxytocin and support emotional regulation—making connection feel safe and rewarding.</p>
+                <h3 className="text-white font-semibold mb-1">{t("activities.science.tile1.title", "Feel Good Together")}</h3>
+                <p className="text-gray-300 text-sm">{t("activities.science.tile1.text", "Face‑to‑face time eases stress and makes connection feel natural.")}</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.12 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
                 <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Brain className="text-white" size={18} /></div></div>
-                <h3 className="text-white font-semibold mb-1">Shared Experience Amplifier</h3>
-                <p className="text-gray-300 text-sm">Doing something together heightens attention and memory, making moments more vivid—and bonds more durable.</p>
+                <h3 className="text-white font-semibold mb-1">{t("activities.science.tile2.title", "Make Moments Memorable")}</h3>
+                <p className="text-gray-300 text-sm">{t("activities.science.tile2.text", "Doing things together turns small moments into stories you’ll remember.")}</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.19 }} className="rounded-2xl border border-gray-700 bg-gray-900/40 p-6">
                 <div className="mb-3 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-emerald-500 p-[2px]"><div className="rounded-full bg-gray-900 p-2"><Users className="text-white" size={18} /></div></div>
-                <h3 className="text-white font-semibold mb-1">Synchrony = Connection</h3>
-                <p className="text-gray-300 text-sm">Group movement and challenge raise endorphins and create synchrony—one reason team activities bond people so quickly.</p>
+                <h3 className="text-white font-semibold mb-1">{t("activities.science.tile3.title", "Move As a Team")}</h3>
+                <p className="text-gray-300 text-sm">{t("activities.science.tile3.text", "Games, hikes, or shared challenges build quick trust and closeness.")}</p>
               </motion.div>
             </div>
 
             {/* CTA to Real-Life Magic */}
             <div className="text-center mt-10">
-              <Link to="/real-life-magic">
+              <Link to="/cities">
                 <Button size="lg" className="group bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
-                  Learn the science behind real‑life magic
+                  {t("activities.science.cta_signup", "Sign up Now")}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

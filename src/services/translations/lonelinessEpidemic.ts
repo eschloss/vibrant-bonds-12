@@ -1,7 +1,7 @@
 export const lonelinessEpidemic = {
   en: {
     // Hero section
-    "loneliness.hero.badge": "🚨 PUBLIC HEALTH CRISIS",
+    "loneliness.hero.badge": "Public Health Crisis",
     "loneliness.hero.title1": "The Loneliness",
     "loneliness.hero.title2": "Epidemic",
     "loneliness.hero.description": "A public health crisis affecting millions worldwide. Understanding the scale, impact, and solutions to combat social isolation in modern society.",
@@ -49,7 +49,7 @@ export const lonelinessEpidemic = {
     "loneliness.why_matters.paragraph2": "Beyond health, loneliness is also reshaping culture, politics, and the economy. Civic participation has fallen sharply in the U.S., as documented in Robert Putnam's classic Bowling Alone. Voter turnout, union membership, and religious attendance have all declined, leaving fewer built-in communities where people once found connection. Economists estimate that workplace loneliness costs billions annually in lost productivity, absenteeism, and turnover.",
 
     // How epidemic has grown section
-    "loneliness.epidemic_growth.title": "📉 How the Loneliness Epidemic Has Grown Over Time",
+    "loneliness.epidemic_growth.title": "How the Loneliness Epidemic Has Grown Over Time",
     "loneliness.epidemic_growth.intro": "Loneliness is not a new phenomenon. But data shows it has worsened dramatically in recent decades — making it one of the defining social and health challenges of the 21st century.",
     "loneliness.epidemic_growth.friendship_title": "Friendship Statistics: Declining Social Connections Data Over Decades",
     "loneliness.epidemic_growth.friendship_1": "In 1990, only 3% of Americans said they had no close friends. By 2021, that number had risen to 12%",
@@ -62,7 +62,7 @@ export const lonelinessEpidemic = {
     "loneliness.epidemic_growth.covid_2": "61% of young adults and 51% of mothers with young children experienced serious loneliness",
 
     // Workplace loneliness section
-    "loneliness.workplace.title": "💼 Workplace Loneliness and Remote Work",
+    "loneliness.workplace.title": "Workplace Loneliness and Remote Work",
     "loneliness.workplace.intro": "The way we work has undergone a seismic shift in the past decade — and even more since COVID-19. While flexible schedules and remote work bring freedom, they also come at a cost: increased social isolation.",
     "loneliness.workplace.isolation_title": "Remote Work Isolation Statistics: Employee Loneliness Data and Trends",
     "loneliness.workplace.isolation_1": "Remote workers are more than twice as likely to report loneliness compared to in-office employees",
@@ -86,7 +86,7 @@ export const lonelinessEpidemic = {
     "loneliness.health.physical_3": "Chronic loneliness has been linked to weakened immune function, slower wound healing, and higher inflammation markers",
 
     // Key statistics
-    "loneliness.key_stats.title": "📊 Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics",
+    "loneliness.key_stats.title": "Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics",
     "loneliness.key_stats.stat1": "50% of Americans report experiencing loneliness",
     "loneliness.key_stats.stat2": "21M Americans have zero close friends", 
     "loneliness.key_stats.stat3": "79% of Gen Z reports frequent loneliness",
@@ -151,7 +151,7 @@ export const lonelinessEpidemic = {
       "loneliness.social_media.stat3": "While platforms facilitate contact, they often replace in-person experiences with shallow interactions",
 
       // Sources Section
-      "loneliness.sources.title": "📚 Research Sources and Data References: Loneliness Epidemic Study Citations",
+      "loneliness.sources.title": "Research Sources and Data References: Loneliness Epidemic Study Citations",
 
       // How the Epidemic Has Grown
       "loneliness.growth.title": "📉 How the Loneliness Epidemic Has Grown Over Time",
@@ -176,7 +176,7 @@ export const lonelinessEpidemic = {
   },
   es: {
     // Hero section
-    "loneliness.hero.badge": "🚨 CRISIS DE SALUD PÚBLICA",
+    "loneliness.hero.badge": "Crisis de Salud Pública",
     "loneliness.hero.title1": "La Epidemia de",
     "loneliness.hero.title2": "Soledad",
     "loneliness.hero.description": "Una crisis de salud pública que afecta a millones en todo el mundo. Entendiendo la escala, el impacto y las soluciones para combatir el aislamiento social en la sociedad moderna.",
@@ -288,10 +288,10 @@ export const lonelinessEpidemic = {
       "loneliness.social_media.stat3": "Aunque las plataformas facilitan el contacto, a menudo reemplazan las experiencias en persona con interacciones superficiales",
 
       // Sources Section
-      "loneliness.sources.title": "📚 Fuentes de Investigación y Referencias de Datos: Citas de Estudios de la Epidemia de Soledad",
+      "loneliness.sources.title": "Fuentes de Investigación y Referencias de Datos: Citas de Estudios de la Epidemia de Soledad",
 
       // How the Epidemic Has Grown
-      "loneliness.growth.title": "📉 Cómo Ha Crecido la Epidemia de Soledad a lo Largo del Tiempo",
+      "loneliness.growth.title": "Cómo Ha Crecido la Epidemia de Soledad a lo Largo del Tiempo",
       "loneliness.growth.intro": "La soledad no es un fenómeno nuevo. Pero los datos muestran que ha empeorado dramáticamente en las décadas recientes, convirtiéndola en uno de los desafíos sociales y de salud definitorios del siglo XXI.",
       "loneliness.growth.friendship_title": "Estadísticas de Amistad: Datos de Conexiones Sociales en Declive Durante Décadas",
       "loneliness.growth.friendship_stat1": "En 1990, solo el 3% de los estadounidenses dijeron que no tenían amigos cercanos. Para 2021, ese número había subido al 12%",

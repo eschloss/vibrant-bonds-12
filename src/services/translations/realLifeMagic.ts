@@ -1,0 +1,372 @@
+export const realLifeMagic = {
+  en: {
+    // Info Gap & Digital Paradox
+    "rlm.info_gap.heading": "The Information Gap: What Screens Can't Capture",
+    "rlm.info_gap.p1": "Face‑to‑face provides rich sensory data—tone, micro‑expressions, body language, pheromones, spatial dynamics—crucial for trust and empathy.",
+    "rlm.info_gap.covid_note": "During COVID‑19, a large 2023 study found face‑to‑face contact was 32% more strongly associated with positive mental health than digital communication—even after controls.",
+    "rlm.digital_paradox.heading": "The Digital Paradox: More Connected, More Isolated",
+    "rlm.digital_paradox.p1": "Research from 2025 and related work paint a nuanced picture. Some digital channels help; others fall short:",
+    "rlm.digital_paradox.li1": "Phone calls can approach (and in some contexts even exceed) face‑to‑face interaction quality.",
+    "rlm.digital_paradox.li2": "Text‑based interactions are consistently lower quality than in‑person conversation.",
+    "rlm.digital_paradox.li3": "Social media shows the lowest correlation with positive mental health outcomes.",
+    "rlm.digital_paradox.p2": "Key insight: the more sensory channels available during communication, the more effective it is for building real connection and supporting mental health.",
+
+    // Physical Health
+    "rlm.phys.heading": "Physical Health Benefits of Social Connection",
+    "rlm.phys.card1.title": "Enhanced Immunity",
+    "rlm.phys.card1.text": "Social networks correlate with higher NK cells, IgA, and CD4 T cells—and lower inflammatory neutrophils.",
+    "rlm.phys.card2.title": "Longevity",
+    "rlm.phys.card2.text": "Strong social ties reduce all‑cause mortality risk by up to 50%, rivaling top medical interventions.",
+    "rlm.phys.card3.title": "Stress & Heart",
+    "rlm.phys.card3.text": "Connection lowers systemic inflammation and cardiovascular risk through neuroendocrine regulation.",
+    "rlm.phys.p1": "Isolated individuals show elevated inflammatory markers and higher cardiovascular risk, while strong connection buffers through biological and behavioral pathways.",
+
+    // Mirror Neurons
+    "rlm.mirror.heading": "Mirror Neurons and Empathy: How We \"Feel\" Each Other",
+    "rlm.mirror.p1": "Mirror neurons fire both when we act and when we observe others, enabling embodied simulation. This neural resonance supports empathy, social learning, and group coordination—systems strengthened through rich, in‑person interaction.",
+    "rlm.mirror.p2": "Social learning depends on these systems to interpret context, predict behavior, and coordinate action, highlighting the importance of in‑person interaction for developing and maintaining social cognition.",
+    "rlm.mirror.sub1": "How Mirror Neurons Create Connection",
+    "rlm.mirror.sub2": "The Social Learning Advantage",
+    "rlm.mirror.sub1.p": "Concentrated in the premotor cortex and inferior parietal lobule, mirror neurons enable embodied simulation—our brains partially reproduce what we witness in others, creating an automatic, pre‑reflective empathic response.",
+    "rlm.mirror.sub1.p.cont": "fMRI studies show these regions also respond during pain observation and prosocial acts, and individuals with stronger mirroring responses tend to report higher empathy and better social skills.",
+    "rlm.mirror.sub2.p": "Mirror systems form a neurobiological basis for social learning and cultural transmission. Presence amplifies mirroring, making face‑to‑face interaction essential practice across the lifespan.",
+    // SEO
+    "rlm.seo.title": "The Science Behind Real-Life Magic: Health, Happiness, Longevity",
+    "rlm.seo.description": "Face-to-face connection improves longevity, immunity, and mental health. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions.",
+
+    // Hero
+    "rlm.hero.badge": "SCIENCE OF CONNECTION",
+    "rlm.hero.title_prefix": "The Science Behind",
+    "rlm.hero.title_focus": "Real‑Life Magic",
+    "rlm.hero.subtitle": "What single habit improves survival odds by 50%, boosts immunity like quitting smoking, and even makes food taste better? Genuine, face‑to‑face human connection.",
+    "rlm.hero.cta_explore": "Explore the Science",
+    "rlm.hero.cta_find": "Find Connection",
+
+    // Top Stats
+    "rlm.stats.mortality.label": "Mortality Risk",
+    "rlm.stats.mortality.text": "lower with strong social ties",
+    "rlm.stats.immunity.label": "Immune Function",
+    "rlm.stats.immunity.text": "Group activities boost IgA and CD4 T cells",
+    "rlm.stats.meals.label": "Shared Meals",
+    "rlm.stats.meals.text": "lower taste thresholds with friends",
+    "rlm.stats.chart_helper": "Higher is better",
+    "rlm.stats.all_methods_title": "All Methods at a Glance",
+    "rlm.stats.effectiveness_label": "Effectiveness for Bonding",
+    // Digital vs Real section
+    "rlm.digital.heading": "Face‑to‑Face vs Digital: Why Screens Can't Replace Real Connection",
+    "rlm.digital.blurb": "Communication effectiveness scales with sensory bandwidth. More channels → better trust, empathy, and wellbeing. Explore the difference:",
+
+    // Deep Dives titles
+    "rlm.deep.oxytocin.title": "Oxytocin: The Master Conductor",
+    "rlm.deep.dopamine.title": "Dopamine: Social Reward",
+    "rlm.deep.shared.title": "Shared Experience Amplifier",
+
+    // Methods (Digital vs Real buttons)
+    "rlm.methods.in_person": "Face-to-Face",
+    "rlm.methods.in_person.desc": "Richest sensory data: tone, micro‑expressions, touch, pheromones, spatial dynamics.",
+    "rlm.methods.phone": "Phone Call",
+    "rlm.methods.phone.desc": "Vocal tone and synchrony; strong substitute when in-person isn't possible.",
+    "rlm.methods.video": "Video Call",
+    "rlm.methods.video.desc": "Visual channel adds value, but lacks presence, smell, and shared environment.",
+    "rlm.methods.text": "Text / DM",
+    "rlm.methods.text.desc": "Low bandwidth; easy to misread; maintains contact but rarely deepens bonds.",
+    "rlm.methods.social": "Social Media",
+    "rlm.methods.social.desc": "Broadcast over bonding; lowest correlation with mental health benefits.",
+
+    // Introduction
+    "rlm.intro.heading": "Why In‑Person Connection Changes Everything",
+    "rlm.intro.p1": "What if there were a single intervention that could improve survival odds by 50%, boost your immune system like quitting smoking, and even make food taste better? It isn't a new drug—it's the scientifically‑proven magic of meaningful, face‑to‑face human connection.",
+    "rlm.intro.p2.part1": "In a world overflowing with digital contact, we face a paradox: record levels of loneliness and its consequences. The WHO estimates loneliness contributes to 871,000 deaths annually—about 100 every hour.",
+    "rlm.intro.p2.link": "Loneliness Epidemic report",
+    "rlm.intro.p2.part2": "The flip side? Face‑to‑face relationships are one of the most potent interventions for human flourishing.",
+    "rlm.intro.info": "Mortality risk changes associated with social isolation versus connection are striking: strong relationships are linked with up to 50% lower all‑cause mortality risk. Explore the full context in the Loneliness Epidemic.",
+    "rlm.intro.p3": "From the neurochemical cascades that flood the brain during authentic encounters to measurable immune shifts after group activities, the science shows that real‑world interactions rewire neural circuits, regulate stress, and extend life. This guide distills those findings and shows how to harness them.",
+
+    // Neurobiology
+    "rlm.neuro.heading": "Neurobiology of Social Connection: Oxytocin, Dopamine, Endorphins",
+    "rlm.neuro.blurb": "Meaningful interaction triggers a precise cocktail of neurochemicals—creating a measurable social high and durable changes in stress regulation, empathy, and trust.",
+    "rlm.neuro.oxytocin.title": "Oxytocin",
+    "rlm.neuro.oxytocin.text1": "Context‑sensitive bonding hormone—up to ~40% higher with close friends.",
+    "rlm.neuro.oxytocin.text2": "Enhances hypothalamus and insula activity → lower anxiety and higher trust.",
+    "rlm.neuro.dopamine.title": "Dopamine",
+    "rlm.neuro.dopamine.text1": "Encodes social hunger in dorsal raphe; relief on reconnection reinforces seeking.",
+    "rlm.neuro.dopamine.text2": "Drives motivation and reward during shared novelty.",
+    "rlm.neuro.serotonin.title": "Serotonin",
+    "rlm.neuro.serotonin.text1": "Stabilizes mood and social confidence; modulated by meaningful connection.",
+    "rlm.neuro.endorphins.title": "Endorphins",
+    "rlm.neuro.endorphins.text1": "Released in laughter and synchronized movement; increases pain tolerance and bonding.",
+
+    // Shared Meals
+    "rlm.meals.heading": "Shared Meals: Why Food Tastes Better with Friends",
+    "rlm.meals.p1": "One of social neuroscience's most delightful findings: food can literally taste better together. Multiple studies show social context alters taste perception in measurable ways.",
+    "rlm.meals.sub1": "The Electrical Taste Threshold Discovery",
+    "rlm.meals.sub1.p": "Dining with close friends decreased electrical taste thresholds by about 9%—participants detected weaker tastes when eating socially. This reflects a physiological change in sensory sensitivity and appears with familiar companions, consistent with parasympathetic activation.",
+    "rlm.meals.sub2": "The Evolutionary Logic of Social Eating",
+    "rlm.meals.sub2.p": "Shared meals helped humans evaluate food safety, distribute resources, and strengthen bonds—rituals still visible across cultures today. People are about 50% more likely to try new foods when dining in groups than alone.",
+    "rlm.meals.li1": "Familiar companions amplify the effect more than strangers or very large groups.",
+    "rlm.meals.li2": "Calm, phone‑free tables promote parasympathetic tone and sharper perception.",
+    "rlm.meals.li3": "Small‑to‑medium group size (2–6) balances conversation, safety, and attention.",
+    "rlm.meals.li4": "Shared novelty (a new cuisine or dish) encodes stronger, longer‑lasting memories.",
+    "rlm.meals.bottom": "Bottom line: with trusted friends at the table, the nervous system shifts toward safety and openness—heightening flavor, curiosity, and connection in the process.",
+
+    // Group Adventures
+    "rlm.group.heading": "Group Adventures: Bonding, Memory, and Motivation",
+    "rlm.group.card1.title": "Novelty + Challenge",
+    "rlm.group.card1.text": "Adventure activates dopamine and endorphins; shared exertion creates behavioral synchrony and stronger ties.",
+    "rlm.group.card2.title": "Memory Amplifier",
+    "rlm.group.card2.text": "Shared novelty encodes deeper memories, associating companions with positive arousal for years.",
+    "rlm.group.sub1": "The Shared Adventure Amplifier",
+    "rlm.group.sub1.p": "Novel, challenging experiences reliably create stronger memories and deeper emotional connections when shared. Reward pathways are most active in social contexts, linking companions to positive arousal.",
+    "rlm.group.sub2": "The Biochemistry of Shared Challenge",
+    "rlm.group.sub2.p": "Physical challenge increases endorphins (raising pain tolerance), while novelty and controlled stress engage dopamine systems. In groups, signals associate with companions, strengthening bonds beyond typical hangouts.",
+    "rlm.group.p_end": "Group workouts improve pain tolerance, performance, and connection via synchronized effort and shared challenge.",
+
+    // Social Capital
+    "rlm.social.heading": "Rebuilding Social Capital: Beyond Bowling Alone",
+    "rlm.social.card1.title": "Bonding Capital",
+    "rlm.social.card1.text": "Deep ties with similar others provide emotional support and identity. Vital, but can be insular.",
+    "rlm.social.card2.title": "Bridging Capital",
+    "rlm.social.card2.text": "Connections across diverse groups unlock opportunity, resilience, and collective problem‑solving.",
+    "rlm.social.sub1": "The Great Disconnection",
+    "rlm.social.sub1.p": "Putnam documented decades‑long declines in civic participation across the U.S.—from clubs and unions to PTA involvement, religious attendance, volunteering, and neighborliness. He cited screen time, suburbanization, time pressures, and generational turnover.",
+    "rlm.social.sub2": "Core Findings",
+    "rlm.social.sub2.p": "Social capital links to lower crime, better health, higher educational attainment, and stronger local economies—yet league participation, club membership, and public meeting attendance have declined steeply since the mid‑20th century.",
+    "rlm.social.sub3": "Bonding vs Bridging",
+    "rlm.social.sub3.p": "Bonding capital is tight‑knit and homophilous; bridging capital crosses difference. Healthy communities cultivate both; bridging is especially powerful for resilience, innovation, and opportunity flow.",
+    "rlm.social.sub4": "Into the Digital Age",
+    "rlm.social.sub4.p": "Some digital communities can substitute or complement in‑person ties, yet many interactions remain thinner than co‑present ones, leaving gaps in trust, empathy, and local problem‑solving. Activity‑based groups convert interests into recurring, face‑to‑face bridging ties.",
+
+    // Action Steps
+    "rlm.actions.heading": "Your Roadmap to Real‑Life Magic",
+    "rlm.actions.card1.title": "Prioritize Face‑to‑Face",
+    "rlm.actions.card1.text": "Treat meetups like medical appointments. Even brief in‑person time pays outsized dividends.",
+    "rlm.actions.card2.title": "Share Meals Mindfully",
+    "rlm.actions.card2.text": "Phone‑free dining amplifies flavor and bonding for everyone at the table.",
+    "rlm.actions.card3.title": "Try Adventures",
+    "rlm.actions.card3.text": "Join hikes, sports, or classes that combine novelty with people.",
+    "rlm.actions.card4.title": "Use Tech to Meet",
+    "rlm.actions.card4.text": "Prefer calls or video over text. Use apps to facilitate real‑world plans, not replace them.",
+    "rlm.actions.card5.title": "Move Together",
+    "rlm.actions.card5.text": "Choose group workouts. Synchronized effort boosts mood, resilience, and commitment.",
+    "rlm.actions.card6.title": "Compound the Gains",
+    "rlm.actions.card6.text": "Connection begets connection. Skills, empathy, and rewards grow with practice.",
+    "rlm.actions.p1": "Each positive interaction increases the likelihood and payoff of the next. Empathic circuits strengthen with use, and your brain more readily associates people and places with positive outcomes.",
+
+    // FAQ
+    "rlm.faq.heading": "Real‑Life Magic: FAQ",
+    "rlm.faq.sub": "Answers to the most common questions about why in‑person connection outperforms digital—and how to apply the science.",
+    "rlm.faq.q1": "How much face‑to‑face interaction do I need for health benefits?",
+    "rlm.faq.a1": "Even minimal in‑person contact confers significant benefits. Seeing one close friend regularly delivers many protective effects; diverse networks provide the strongest gains.",
+    "rlm.faq.q2": "Can video calls substitute for in‑person interaction?",
+    "rlm.faq.a2": "Video calls help and are superior to text, but they lack key sensory information—like scent, subtle body language, and shared spatial context—necessary for deep bonding.",
+    "rlm.faq.q3": "Do introverts benefit as much as extraverts?",
+    "rlm.faq.a3": "Yes. Quality over quantity. Many introverts prefer smaller groups or one‑on‑one time and still achieve full health gains from meaningful, regular contact.",
+    "rlm.faq.q4": "Which ages benefit most?",
+    "rlm.faq.a4": "Benefits apply across the lifespan; effects are pronounced for older adults and during developmental windows for youth. Some studies estimate social connection slows biological aging by 1–2 years in older adults.",
+    "rlm.faq.q5": "Are group adventures better than routine hangouts?",
+    "rlm.faq.a5": "Novel, challenging experiences reliably forge stronger bonds than routine meetups, via dopamine/endorphin responses and shared arousal linked to companions.",
+    "rlm.faq.q6": "What's the minimum group size?",
+    "rlm.faq.a6": "Two people suffice for many benefits. For adventures, groups of ~6–10 often maximize participation, cohesion, and memory effects.",
+    "rlm.faq.q7": "Do workplace relationships count?",
+    "rlm.faq.a7": "Meaningful workplace ties matter—especially when they extend beyond tasks to mutual support and informal connection.",
+    "rlm.faq.q8": "How quickly can I feel better?",
+    "rlm.faq.a8": "Positive interactions can lift mood immediately. Sustained improvements typically appear over 4–12 weeks of consistent in‑person contact.",
+
+    // Sources
+    "rlm.sources.heading": "📚 Research Sources and Data References",
+    "rlm.sources.note_title": "Research Note:",
+    "rlm.sources.note_text": "Citations include peer‑reviewed studies, institutional reports, and expert commentary. Inline markers link to the corresponding references above.",
+
+    // Closing CTA
+    "rlm.closing.heading": "Choose Connection",
+    "rlm.closing.p1": "The most powerful intervention for health and happiness is free and available today. Step away from screens, gather your people, and experience real‑life magic.",
+    "rlm.closing.cta.activities": "Plan Something Fun",
+    "rlm.closing.cta.home": "Find People Near You",
+  },
+  es: {
+    // Info Gap & Digital Paradox
+    "rlm.info_gap.heading": "La brecha de información: lo que las pantallas no capturan",
+    "rlm.info_gap.p1": "El cara a cara ofrece datos sensoriales ricos—tono, microexpresiones, lenguaje corporal, feromonas, dinámica espacial—cruciales para la confianza y la empatía.",
+    "rlm.info_gap.covid_note": "Durante la COVID‑19, un gran estudio de 2023 halló que el contacto cara a cara se asoció 32% más con salud mental positiva que la comunicación digital—aun tras controles.",
+    "rlm.digital_paradox.heading": "La paradoja digital: más conectados, más aislados",
+    "rlm.digital_paradox.p1": "Investigaciones de 2025 y trabajos relacionados muestran un panorama matizado. Algunos canales digitales ayudan; otros se quedan cortos:",
+    "rlm.digital_paradox.li1": "Las llamadas telefónicas pueden acercarse (y en algunos contextos incluso superar) la calidad de la interacción cara a cara.",
+    "rlm.digital_paradox.li2": "Las interacciones basadas en texto son consistentemente de menor calidad que la conversación en persona.",
+    "rlm.digital_paradox.li3": "Las redes sociales muestran la menor correlación con resultados positivos de salud mental.",
+    "rlm.digital_paradox.p2": "Idea clave: cuanto más canales sensoriales hay durante la comunicación, más efectiva es para construir conexión real y apoyar la salud mental.",
+
+    // Physical Health
+    "rlm.phys.heading": "Beneficios para la salud física de la conexión social",
+    "rlm.phys.card1.title": "Inmunidad Mejorada",
+    "rlm.phys.card1.text": "Las redes sociales se correlacionan con más células NK, IgA y CD4—y menos neutrófilos inflamatorios.",
+    "rlm.phys.card2.title": "Longevidad",
+    "rlm.phys.card2.text": "Los lazos sociales fuertes reducen el riesgo de mortalidad por todas las causas hasta en un 50%, a la par de intervenciones médicas de primer nivel.",
+    "rlm.phys.card3.title": "Estrés y Corazón",
+    "rlm.phys.card3.text": "La conexión reduce la inflamación sistémica y el riesgo cardiovascular mediante regulación neuroendocrina.",
+    "rlm.phys.p1": "Las personas aisladas muestran marcadores inflamatorios elevados y mayor riesgo cardiovascular, mientras que la conexión fuerte amortigua a través de vías biológicas y conductuales.",
+
+    // Mirror Neurons
+    "rlm.mirror.heading": "Neuronas espejo y empatía: cómo \"nos sentimos\"",
+    "rlm.mirror.p1": "Las neuronas espejo se activan tanto cuando actuamos como cuando observamos, permitiendo la simulación encarnada. Esta resonancia neural sustenta la empatía, el aprendizaje social y la coordinación grupal—sistemas que se fortalecen con la interacción presencial rica.",
+    "rlm.mirror.p2": "El aprendizaje social depende de estos sistemas para interpretar el contexto, predecir el comportamiento y coordinar la acción, destacando la importancia de la interacción en persona para desarrollar y mantener la cognición social.",
+    "rlm.mirror.sub1": "Cómo crean conexión las neuronas espejo",
+    "rlm.mirror.sub2": "La ventaja del aprendizaje social",
+    "rlm.mirror.sub1.p": "Concentradas en la corteza premotora y el lóbulo parietal inferior, las neuronas espejo permiten la simulación encarnada—nuestro cerebro reproduce parcialmente lo que atestigua en otros, generando una respuesta empática automática y prereflexiva.",
+    "rlm.mirror.sub1.p.cont": "Estudios de fMRI muestran respuesta durante observación de dolor y actos prosociales; quienes tienen mayor espejado reportan más empatía y mejores habilidades sociales.",
+    "rlm.mirror.sub2.p": "Los sistemas de espejado forman una base neurobiológica para el aprendizaje social y la transmisión cultural. La presencia amplifica el espejado, haciendo de la interacción cara a cara una práctica esencial a lo largo de la vida.",
+    // SEO
+    "rlm.seo.title": "La ciencia de la conexión real: salud, felicidad y longevidad",
+    "rlm.seo.description": "La conexión cara a cara mejora longevidad, inmunidad y salud mental. Explora oxitocina, dopamina, neuronas espejo, comidas compartidas y aventuras grupales con acciones basadas en evidencia.",
+
+    // Hero
+    "rlm.hero.badge": "CIENCIA DE LA CONEXIÓN",
+    "rlm.hero.title_prefix": "La Ciencia Detrás de",
+    "rlm.hero.title_focus": "la Magia de la Vida Real",
+    "rlm.hero.subtitle": "¿Qué hábito único mejora las probabilidades de supervivencia en un 50%, fortalece la inmunidad como dejar de fumar y hasta hace que la comida sepa mejor? La conexión humana genuina, cara a cara.",
+    "rlm.hero.cta_explore": "Explorar la Ciencia",
+    "rlm.hero.cta_find": "Encontrar Conexión",
+
+    // Top Stats
+    "rlm.stats.mortality.label": "Riesgo de Mortalidad",
+    "rlm.stats.mortality.text": "más bajo con lazos sociales fuertes",
+    "rlm.stats.immunity.label": "Función Inmunitaria",
+    "rlm.stats.immunity.text": "Las actividades en grupo aumentan IgA y células T CD4",
+    "rlm.stats.meals.label": "Comidas Compartidas",
+    "rlm.stats.meals.text": "umbrales de sabor más bajos con amigos",
+    "rlm.stats.chart_helper": "Más alto es mejor",
+    "rlm.stats.all_methods_title": "Todos los Métodos de un Vistazo",
+    "rlm.stats.effectiveness_label": "Efectividad para Vincular",
+    // Digital vs Real section
+    "rlm.digital.heading": "Cara a cara vs Digital: por qué las pantallas no reemplazan la conexión real",
+    "rlm.digital.blurb": "La efectividad de la comunicación escala con el ancho de banda sensorial. Más canales → mayor confianza, empatía y bienestar. Explora la diferencia:",
+
+    // Deep Dives titles
+    "rlm.deep.oxytocin.title": "Oxitocina: la directora de orquesta",
+    "rlm.deep.dopamine.title": "Dopamina: recompensa social",
+    "rlm.deep.shared.title": "Amplificador de experiencias compartidas",
+
+    // Methods (Digital vs Real buttons)
+    "rlm.methods.in_person": "Cara a cara",
+    "rlm.methods.in_person.desc": "Datos sensoriales más ricos: tono, microexpresiones, tacto, feromonas, dinámica espacial.",
+    "rlm.methods.phone": "Llamada Telefónica",
+    "rlm.methods.phone.desc": "Tono vocal y sincronía; buen sustituto cuando lo presencial no es posible.",
+    "rlm.methods.video": "Videollamada",
+    "rlm.methods.video.desc": "El canal visual aporta, pero carece de presencia, olor y entorno compartido.",
+    "rlm.methods.text": "Texto / DM",
+    "rlm.methods.text.desc": "Bajo ancho de banda; fácil de malinterpretar; mantiene contacto pero rara vez profundiza vínculos.",
+    "rlm.methods.social": "Redes Sociales",
+    "rlm.methods.social.desc": "Difusión en lugar de vínculo; menor correlación con beneficios para la salud mental.",
+
+    // Introduction
+    "rlm.intro.heading": "Por qué la conexión en persona lo cambia todo",
+    "rlm.intro.p1": "¿Y si hubiera una sola intervención que pudiera mejorar las probabilidades de supervivencia en un 50%, fortalecer tu sistema inmunitario como dejar de fumar e incluso hacer que la comida sepa mejor? No es un fármaco nuevo—es la magia comprobada científicamente de la conexión humana significativa, cara a cara.",
+    "rlm.intro.p2.part1": "En un mundo saturado de contacto digital, enfrentamos una paradoja: niveles récord de soledad y sus consecuencias. La OMS estima que la soledad contribuye a 871.000 muertes anuales—unas 100 cada hora.",
+    "rlm.intro.p2.link": "Informe sobre la Epidemia de Soledad",
+    "rlm.intro.p2.part2": "¿La otra cara? Las relaciones cara a cara son una de las intervenciones más potentes para el florecimiento humano.",
+    "rlm.intro.info": "Las diferencias en riesgo de mortalidad asociadas con el aislamiento social frente a la conexión son contundentes: las relaciones sólidas se vinculan con hasta un 50% menos de riesgo de mortalidad por todas las causas. Explora el contexto completo en la Epidemia de Soledad.",
+    "rlm.intro.p3": "Desde las cascadas neuroquímicas que inundan el cerebro durante encuentros auténticos hasta cambios inmunitarios medibles tras actividades grupales, la ciencia muestra que las interacciones reales reconfiguran circuitos neuronales, regulan el estrés y prolongan la vida. Esta guía destila esos hallazgos y muestra cómo aprovecharlos.",
+
+    // Neurobiology
+    "rlm.neuro.heading": "Neurobiología de la Conexión Social: Oxitocina, Dopamina, Endorfinas",
+    "rlm.neuro.blurb": "La interacción significativa activa un cóctel preciso de neuroquímicos—creando un subidón social medible y cambios duraderos en la regulación del estrés, la empatía y la confianza.",
+    "rlm.neuro.oxytocin.title": "Oxitocina",
+    "rlm.neuro.oxytocin.text1": "Hormona de vínculo sensible al contexto—hasta ~40% más alta con amigos cercanos.",
+    "rlm.neuro.oxytocin.text2": "Aumenta actividad en hipotálamo e ínsula → menor ansiedad y mayor confianza.",
+    "rlm.neuro.dopamine.title": "Dopamina",
+    "rlm.neuro.dopamine.text1": "Codifica hambre social en el rafe dorsal; el alivio al reconectar refuerza la búsqueda.",
+    "rlm.neuro.dopamine.text2": "Impulsa motivación y recompensa durante la novedad compartida.",
+    "rlm.neuro.serotonin.title": "Serotonina",
+    "rlm.neuro.serotonin.text1": "Estabiliza el estado de ánimo y la confianza social; modulada por conexión significativa.",
+    "rlm.neuro.endorphins.title": "Endorfinas",
+    "rlm.neuro.endorphins.text1": "Liberadas en la risa y el movimiento sincronizado; aumentan tolerancia al dolor y vínculo.",
+
+    // Shared Meals
+    "rlm.meals.heading": "Comidas compartidas: por qué la comida sabe mejor con amigos",
+    "rlm.meals.p1": "Uno de los hallazgos más encantadores de la neurociencia social: la comida puede literalmente saber mejor juntos. Varios estudios muestran que el contexto social altera la percepción del sabor de manera medible.",
+    "rlm.meals.sub1": "El descubrimiento del umbral eléctrico del gusto",
+    "rlm.meals.sub1.p": "Comer con amigos cercanos disminuyó los umbrales eléctricos del gusto ~9%. Refleja un cambio fisiológico en la sensibilidad sensorial y aparece con compañeros familiares, coherente con la activación parasimpática.",
+    "rlm.meals.sub2": "La lógica evolutiva de comer en grupo",
+    "rlm.meals.sub2.p": "Las comidas compartidas ayudaron a evaluar seguridad de alimentos, distribuir recursos y fortalecer vínculos—rituales visibles hoy. La gente es ~50% más propensa a probar nuevos alimentos en grupo que sola.",
+    "rlm.meals.li1": "Los compañeros familiares amplifican el efecto más que extraños o grupos muy grandes.",
+    "rlm.meals.li2": "Mesas tranquilas y sin móviles promueven tono parasimpático y percepción más nítida.",
+    "rlm.meals.li3": "Tamaño pequeño‑mediano (2–6) equilibra conversación, seguridad y atención.",
+    "rlm.meals.li4": "La novedad compartida (una cocina o plato nuevo) codifica recuerdos más fuertes y duraderos.",
+    "rlm.meals.bottom": "En resumen: con amigos de confianza en la mesa, el sistema nervioso se orienta a seguridad y apertura—potenciando sabor, curiosidad y conexión.",
+
+    // Group Adventures
+    "rlm.group.heading": "Aventuras en grupo: vínculo, memoria y motivación",
+    "rlm.group.card1.title": "Novedad + Desafío",
+    "rlm.group.card1.text": "La aventura activa dopamina y endorfinas; el esfuerzo compartido crea sincronía conductual y lazos más fuertes.",
+    "rlm.group.card2.title": "Amplificador de memoria",
+    "rlm.group.card2.text": "La novedad compartida codifica recuerdos más profundos, asociando compañeros con activación positiva por años.",
+    "rlm.group.sub1": "El amplificador de la aventura compartida",
+    "rlm.group.sub1.p": "Las experiencias nuevas y desafiantes crean recuerdos más fuertes y conexiones más profundas cuando se comparten. Las vías de recompensa se activan más en contextos sociales.",
+    "rlm.group.sub2": "La bioquímica del desafío compartido",
+    "rlm.group.sub2.p": "El desafío físico aumenta endorfinas; la novedad y el estrés controlado activan dopamina. En grupo, las señales se asocian con los compañeros, fortaleciendo vínculos más allá de lo habitual.",
+    "rlm.group.p_end": "Los entrenamientos en grupo mejoran tolerancia al dolor, rendimiento y conexión mediante esfuerzo sincronizado y desafío compartido.",
+
+    // Social Capital
+    "rlm.social.heading": "Reconstruir el capital social: más allá de Bowling Alone",
+    "rlm.social.card1.title": "Capital de unión",
+    "rlm.social.card1.text": "Lazos profundos con personas similares brindan apoyo emocional e identidad. Vital, pero puede ser insular.",
+    "rlm.social.card2.title": "Capital de puente",
+    "rlm.social.card2.text": "Conexiones entre grupos diversos desbloquean oportunidad, resiliencia y resolución colectiva de problemas.",
+    "rlm.social.sub1": "La gran desconexión",
+    "rlm.social.sub1.p": "Putnam documentó décadas de descenso en la participación cívica en EE. UU.—de clubes y sindicatos a PTA, asistencia religiosa, voluntariado y vecindad. Señaló tiempo de pantalla, suburbanización, presiones de tiempo y recambio generacional.",
+    "rlm.social.sub2": "Hallazgos clave",
+    "rlm.social.sub2.p": "El capital social se vincula a menor crimen, mejor salud, mayor educación y economías locales más fuertes—pero han caído las ligas, membresías y reuniones públicas desde mediados del siglo XX.",
+    "rlm.social.sub3": "Unión vs puente",
+    "rlm.social.sub3.p": "La unión es cerrada y homófila; el puente cruza diferencias. Las comunidades sanas cultivan ambos; el puente es crucial para resiliencia, innovación y flujo de oportunidades.",
+    "rlm.social.sub4": "A la era digital",
+    "rlm.social.sub4.p": "Algunas comunidades digitales sustituyen o complementan vínculos presenciales, pero muchas interacciones siguen siendo más delgadas que las co‑presentes. Grupos basados en actividades convierten intereses en lazos presenciales recurrentes.",
+
+    // Action Steps
+    "rlm.actions.heading": "Tu hoja de ruta hacia la magia de la vida real",
+    "rlm.actions.card1.title": "Prioriza el cara a cara",
+    "rlm.actions.card1.text": "Trata los encuentros como citas médicas. Incluso tiempos breves presenciales rinden dividendos desproporcionados.",
+    "rlm.actions.card2.title": "Comparte comidas con intención",
+    "rlm.actions.card2.text": "Mesas sin móviles amplifican sabor y vínculo para todos.",
+    "rlm.actions.card3.title": "Prueba aventuras",
+    "rlm.actions.card3.text": "Únete a caminatas, deportes o clases que combinen novedad con personas.",
+    "rlm.actions.card4.title": "Usa tecnología para quedar",
+    "rlm.actions.card4.text": "Prefiere llamadas o video sobre texto. Usa apps para facilitar planes reales, no para reemplazarlos.",
+    "rlm.actions.card5.title": "Muévanse juntos",
+    "rlm.actions.card5.text": "El esfuerzo sincronizado eleva ánimo, resiliencia y compromiso.",
+    "rlm.actions.card6.title": "Compón las ganancias",
+    "rlm.actions.card6.text": "La conexión engendra conexión. Habilidades, empatía y recompensas crecen con la práctica.",
+    "rlm.actions.p1": "Cada interacción positiva aumenta la probabilidad y el rendimiento de la siguiente. Los circuitos empáticos se fortalecen con el uso.",
+
+    // FAQ
+    "rlm.faq.heading": "Magia de la Vida Real: Preguntas Frecuentes",
+    "rlm.faq.sub": "Respuestas a preguntas comunes sobre por qué lo presencial supera a lo digital—y cómo aplicar la ciencia.",
+    "rlm.faq.q1": "¿Cuánta interacción cara a cara necesito para beneficios de salud?",
+    "rlm.faq.a1": "Incluso el contacto presencial mínimo aporta beneficios. Ver a un amigo cercano regularmente ofrece efectos protectores; redes diversas brindan los mayores beneficios.",
+    "rlm.faq.q2": "¿Las videollamadas sustituyen lo presencial?",
+    "rlm.faq.a2": "Ayudan y superan al texto, pero carecen de información sensorial clave—como olor, lenguaje corporal sutil y contexto espacial compartido—necesaria para vínculos profundos.",
+    "rlm.faq.q3": "¿Los introvertidos se benefician tanto como los extrovertidos?",
+    "rlm.faq.a3": "Sí. Calidad sobre cantidad. Muchos introvertidos prefieren grupos pequeños o uno a uno y logran beneficios completos con contacto significativo y regular.",
+    "rlm.faq.q4": "¿Qué edades se benefician más?",
+    "rlm.faq.a4": "En toda la vida; efectos marcados en mayores y en ventanas de desarrollo en jóvenes. Algunas estimaciones indican enlentecimiento del envejecimiento biológico 1–2 años en mayores.",
+    "rlm.faq.q5": "¿Las aventuras en grupo superan a los planes rutinarios?",
+    "rlm.faq.a5": "Las experiencias novedosas y desafiantes forjan vínculos más fuertes que las reuniones rutinarias, vía dopamina/endorfinas y activación compartida.",
+    "rlm.faq.q6": "¿Tamaño mínimo de grupo?",
+    "rlm.faq.a6": "Dos personas bastan para muchos beneficios. Para aventuras, grupos de ~6–10 suelen maximizar participación, cohesión y memoria.",
+    "rlm.faq.q7": "¿Cuentan las relaciones laborales?",
+    "rlm.faq.a7": "Sí, especialmente cuando trascienden tareas hacia apoyo mutuo y conexión informal.",
+    "rlm.faq.q8": "¿Qué tan rápido puedo sentirme mejor?",
+    "rlm.faq.a8": "Interacciones positivas elevan el ánimo de inmediato. Mejoras sostenidas suelen aparecer en 4–12 semanas de contacto presencial constante.",
+
+    // Sources
+    "rlm.sources.heading": "📚 Fuentes de investigación y referencias de datos",
+    "rlm.sources.note_title": "Nota de investigación:",
+    "rlm.sources.note_text": "Las citas incluyen estudios revisados por pares, informes institucionales y comentarios expertos. Los marcadores enlazan a las referencias de arriba.",
+
+    // Closing CTA
+    "rlm.closing.heading": "Elige la conexión",
+    "rlm.closing.p1": "La intervención más poderosa para salud y felicidad es gratuita y está disponible hoy. Aléjate de las pantallas, reúne a tu gente y vive la magia real.",
+    "rlm.closing.cta.activities": "Planea algo divertido",
+    "rlm.closing.cta.home": "Encuentra gente cerca de ti",
+  }
+};
+
+

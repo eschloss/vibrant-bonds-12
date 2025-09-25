@@ -12,6 +12,8 @@ import { howItWorks } from './howItWorks';
 import { icebreakers } from './icebreakers';
 import { team } from './team';
 import { lonelinessEpidemic } from './lonelinessEpidemic';
+import { activities } from './activities';
+import { realLifeMagic } from './realLifeMagic';
 
 // Combine all translation categories
 export const translations = {
@@ -19,6 +21,8 @@ export const translations = {
     ...shared.en,
     ...about.en,
     ...mission.en,
+    ...activities.en,
+    ...realLifeMagic.en,
     ...city.en,
     ...citylist.en,
     ...communities.en,
@@ -34,6 +38,8 @@ export const translations = {
     ...shared.es,
     ...about.es,
     ...mission.es,
+    ...activities.es,
+    ...realLifeMagic.es,
     ...city.es,
     ...citylist.es,
     ...communities.es,

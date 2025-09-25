@@ -129,7 +129,7 @@ const LonelinessEpidemic: React.FC = () => {
               >
                 <div className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white px-6 py-3 rounded-full text-sm font-medium mb-6 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4" />
-                  <Text id="loneliness.hero.badge">🚨 PUBLIC HEALTH CRISIS</Text>
+                  <Text id="loneliness.hero.badge">Public Health Crisis</Text>
                 </div>
               </motion.div>
             </div>
@@ -167,6 +167,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </div>
                 <div className="text-gray-300">
                   <Text id="loneliness.stats.scale.value">50% of Americans feel lonely regularly</Text>
+                  <sup className="text-blue-400 font-semibold"> <a href="#ref-2" className="hover:text-blue-300">[2]</a></sup>
                 </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
@@ -175,6 +176,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </div>
                 <div className="text-gray-300">
                   <Text id="loneliness.stats.health.value">29% higher risk of premature death</Text>
+                  <sup className="text-blue-400 font-semibold"> <a href="#ref-1" className="hover:text-blue-300">[1]</a></sup>
                 </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
@@ -183,6 +185,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </div>
                 <div className="text-gray-300">
                   <Text id="loneliness.stats.affected.value">Gen Z reports 79% loneliness rate</Text>
+                  <sup className="text-blue-400 font-semibold"> <a href="#ref-4" className="hover:text-blue-300">[4]</a></sup>
                 </div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
@@ -191,6 +194,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </div>
                 <div className="text-gray-300">
                   <Text id="loneliness.stats.friendless.value">21 million have zero close friends</Text>
+                  <sup className="text-blue-400 font-semibold"> <a href="#ref-3" className="hover:text-blue-300">[3]</a></sup>
                 </div>
               </div>
             </div>
@@ -250,9 +254,11 @@ const LonelinessEpidemic: React.FC = () => {
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.why_now.paragraph1">The numbers tell a sobering story. Roughly one in two Americans reports experiencing loneliness. More than 20 million adults say they have no close friends, a figure that has quadrupled since the 1990s. Among young people, the problem is even more acute: Gen Z has been described as the loneliest generation, with surveys showing nearly three out of four reporting frequent loneliness.</Text>
+                <sup className="text-blue-400 font-semibold"> <a href="#ref-2" className="hover:text-blue-300">[2]</a>, <a href="#ref-3" className="hover:text-blue-300">[3]</a>, <a href="#ref-4" className="hover:text-blue-300">[4]</a></sup>
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.why_now.paragraph2">International data echo these patterns. The United Kingdom has appointed a Minister of Loneliness to coordinate national response efforts. In Japan, where suicide and social withdrawal (hikikomori) are rising concerns, lawmakers passed a 2024 law requiring local governments to address loneliness directly. Global surveys from Gallup and the OECD show that 25% of adults worldwide feel lonely on a regular basis, with especially high rates among youth.</Text>
+                <sup className="text-blue-400 font-semibold"> <a href="#ref-5" className="hover:text-blue-300">[5]</a>, <a href="#ref-6" className="hover:text-blue-300">[6]</a></sup>
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 <Text id="loneliness.why_now.paragraph3">What makes loneliness so urgent now is not just the prevalence of the feeling itself but the social and technological forces accelerating it. Remote work has untethered millions from casual office relationships. COVID-19 lockdowns disrupted in-person gatherings and weakened the everyday "weak ties" — neighbors, coworkers, acquaintances — that form the fabric of social life. Social media, once heralded as a connector, often deepens the sense of isolation through endless comparison and shallow interaction.</Text>
@@ -362,7 +368,7 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <TrendingDown className="h-8 w-8 text-red-500" />
-              <Text id="loneliness.growth.title">📉 How the Loneliness Epidemic Has Grown Over Time</Text>
+              <Text id="loneliness.growth.title">How the Loneliness Epidemic Has Grown Over Time</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
@@ -413,7 +419,7 @@ const LonelinessEpidemic: React.FC = () => {
               variants={fadeInUp}
             >
               <Clock className="h-8 w-8 text-orange-500" />
-              <Text id="loneliness.workplace.title" className="">💼 Workplace Loneliness and Remote Work</Text>
+              <Text id="loneliness.workplace.title" className="">Workplace Loneliness and Remote Work</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
@@ -541,8 +547,7 @@ const LonelinessEpidemic: React.FC = () => {
                 </p>
                 <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <p className="text-purple-200 font-medium">
-                    💡 <strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating the right kinds of meaningful, 
-                    in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.
+                    <strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating meaningful, in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.
                   </p>
                 </div>
               </div>
@@ -566,7 +571,7 @@ const LonelinessEpidemic: React.FC = () => {
                variants={fadeInUp}
                id="key-stats"
              >
-               <Text id="loneliness.key_stats.title" className="">📊 Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics</Text>
+               <Text id="loneliness.key_stats.title" className="">Loneliness Epidemic Statistics 2025: Complete Data on Social Isolation by Demographics</Text>
              </motion.h2>
 
             <motion.div 
@@ -1020,7 +1025,7 @@ const LonelinessEpidemic: React.FC = () => {
                  className="text-4xl font-bold mb-12 text-white text-center flex items-center justify-center gap-3"
                  variants={fadeInUp}
                >
-                 <Text id="loneliness.sources.title">📚 Research Sources and Data References: Loneliness Epidemic Study Citations</Text>
+                 <Text id="loneliness.sources.title">Research Sources and Data References: Loneliness Epidemic Study Citations</Text>
                </motion.h2>
               
               <motion.div 

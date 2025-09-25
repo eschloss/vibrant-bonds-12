@@ -4,9 +4,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/about/HeroSection";
 import FounderStory from "@/components/about/FounderStory";
+import FoundersMap from "@/components/about/FoundersMap";
 import TeamSection from "@/components/about/TeamSection";
 import FriendshipFormula from "@/components/about/FriendshipFormula";
 import MissionSection from "@/components/about/MissionSection";
+import BusinessModelSection from "@/components/about/BusinessModelSection";
+import OperaPerformance from "@/components/about/OperaPerformance";
+import JourneyTimeline from "@/components/about/JourneyTimeline";
+import LonelinessTeaser from "@/components/about/LonelinessTeaser";
+import PulseAppPromo from "@/components/about/PulseAppPromo";
+import Journey from "@/components/about/Journey";
 import CTASection from "@/components/about/CTASection";
 import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -44,10 +51,13 @@ const About = () => {
       <div className="min-h-screen bg-gray-900 text-white">
         <Navbar />
         <HeroSection />
-        <FounderStory />
-        <FriendshipFormula />
-        <TeamSection />
+        <LonelinessTeaser />
         <MissionSection />
+        <FriendshipFormula />
+        <PulseAppPromo />
+        <BusinessModelSection />
+        <Journey />
+        <TeamSection />
         <CTASection />
         <Footer />
       </div>

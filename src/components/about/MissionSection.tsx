@@ -1,13 +1,15 @@
 
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const MissionSection = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-16 md:py-20">
+    <section className="pt-10 pb-16 md:pt-14 md:pb-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -21,17 +23,23 @@ const MissionSection = () => {
         </motion.div>
         
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-8 md:p-12 rounded-3xl border border-purple-700/30 shadow-xl shadow-purple-500/10"
+          className="text-center"
         >
-          <blockquote className="text-xl md:text-2xl font-light italic text-gray-200 border-l-4 border-pulse-pink pl-4 py-2 bg-gray-800/30 rounded-r-xl">
-            {t("about.mission.quote", "To create a world where growing meaningful friendships is effortless.")}
-          </blockquote>
-          <div className="flex justify-center">
-            <p className="text-lg font-medium">{t("about.mission.founder", "— Eric, Founder")}</p>
+          <h3 className="text-3xl md:text-5xl font-extrabold leading-tight uppercase tracking-wide md:tracking-wider">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF]">
+              {t("about.mission.statement", "Making it effortless to meet new friends and create lasting memories together.")}
+            </span>
+          </h3>
+          <div className="mt-6">
+            <Link to="/cities">
+              <Button size="lg" variant="gradient" className="rounded-full">
+                {t("about.mission.cta", "Meet Your Crew")}
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>
