@@ -6,7 +6,7 @@ export const activities = {
     "activities.hero.badge": "Curated by Pip",
     "activities.hero.headline_prefix": "Your Crew's Next",
     "activities.hero.headline_focus": "Epic Adventure",
-    "activities.hero.copy": "Every crew gets a 7‑day mission: plan an unforgettable experience together. From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.",
+    "activities.hero.copy": "Every crew gets a 10‑day mission: plan an unforgettable experience together. From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.",
     "activities.hero.cta_primary": "Meet Your Crew",
     "activities.hero.cta_secondary": "Meet Pip",
     "activities.grid.title_prefix": "Activities That Build",

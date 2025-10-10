@@ -79,7 +79,7 @@ const DownloadCTA = () => {
                   <div className="bg-pulse-purple/20 p-3 rounded-lg mb-3">
                     <span className="text-xl font-bold text-pulse-purple">2</span>
                   </div>
-                  <p className="text-white/90">Plan an activity together within 7 days</p>
+                  <p className="text-white/90">Plan an activity together within 10 days</p>
                 </div>
                 
                 <div className="flex flex-col items-center text-center bg-white/10 backdrop-blur-sm p-4 rounded-xl">

@@ -125,13 +125,13 @@ const FAQ: React.FC = () => {
     {
       q: "Step-by-step: How does the Pulse app work?",
       answerText:
-        "Take the personality test to join the waitlist. When enough compatible people sign up in your city, you’re invited to a group. Answer a starter prompt to unlock chat. You have 7 days to meet. If 60%+ RSVP, the mission continues weekly.",
+        "Take the personality test to join the waitlist. When enough compatible people sign up in your city, you’re invited to a group. Answer a starter prompt to unlock chat. You have 10 days to meet. If 60%+ RSVP, the mission continues weekly.",
       a: (
         <ol className="list-decimal list-inside space-y-2 text-gray-300">
           <li>Take our personality test to join the waitlist.</li>
           <li>When enough compatible people sign up in your city, you’ll be invited to join a group.</li>
           <li>Answer a fun starter prompt to unlock your group chat.</li>
-          <li>You have 7 days to meet in person.</li>
+          <li>You have 10 days to meet in person.</li>
           <li>If at least 60% RSVP to a plan, the mission continues for another week — and keeps going as long as you keep meeting.</li>
         </ol>
       ),

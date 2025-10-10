@@ -7,7 +7,7 @@ interface FAQItemProps {
   answer: React.ReactNode;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
+const FAQItem: React.FC<FAQItemProps> = React.memo(({ question, answer }) => {
   return (
     <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50">
       <h3 className="text-xl font-medium mb-3 flex items-center gap-2">
@@ -23,6 +23,6 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       )}
     </div>
   );
-};
+});
 
 export default FAQItem;

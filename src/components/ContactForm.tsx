@@ -138,7 +138,7 @@ const ContactForm = () => {
               <Input 
                 placeholder={t("contact.form.name_placeholder", "Your name")}
                 {...field} 
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+                className="bg-transparent border-0 border-b border-white/30 rounded-none px-0 text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:border-pulse-pink/70" 
               />
             </FormControl>
             <FormMessage />
@@ -155,7 +155,7 @@ const ContactForm = () => {
                 placeholder={t("contact.form.email_placeholder", "Your email address")}
                 type="email" 
                 {...field} 
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+                className="bg-transparent border-0 border-b border-white/30 rounded-none px-0 text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:border-pulse-pink/70" 
               />
             </FormControl>
             <FormMessage />
@@ -172,7 +172,7 @@ const ContactForm = () => {
                 placeholder={t("contact.form.phone_placeholder", "Your phone number")}
                 type="tel" 
                 {...field} 
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500" 
+                className="bg-transparent border-0 border-b border-white/30 rounded-none px-0 text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:border-pulse-pink/70" 
               />
             </FormControl>
             <FormMessage />
@@ -188,7 +188,7 @@ const ContactForm = () => {
               <Textarea 
                 placeholder={t("contact.form.message_placeholder", "What would you like to tell us?")}
                 {...field} 
-                className="bg-gray-700/50 border-gray-600 focus-visible:ring-purple-500 placeholder:text-gray-500 min-h-[120px]" 
+                className="bg-transparent border-0 border-b border-white/30 rounded-none px-0 text-white placeholder:text-white/80 focus-visible:ring-0 focus-visible:border-pulse-pink/70 min-h-[120px]" 
               />
             </FormControl>
             <FormMessage />
@@ -200,12 +200,12 @@ const ContactForm = () => {
               <Checkbox 
                 checked={field.value} 
                 onCheckedChange={field.onChange} 
-                className="border-pulse-blue data-[state=checked]:bg-pulse-blue" 
+                className="border-white/30 data-[state=checked]:bg-pulse-pink data-[state=checked]:border-pulse-pink" 
               />
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                {t("contact.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("contact.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                {t("contact.form.agree_terms", "I agree to the")} <a target="_blank" href="/terms" className="text-pulse-blue hover:underline">{t("legal.terms.link_text", "terms of service")}</a> {t("contact.form.and", "and")} <a target="_blank" href="/privacy" className="text-pulse-blue hover:underline">{t("legal.privacy.link_text", "privacy policy")}</a>
               </FormLabel>
               <FormMessage />
             </div>
@@ -213,7 +213,9 @@ const ContactForm = () => {
         )} />
         <Button 
           type="submit" 
-          className="w-full bg-pulse-blue hover:bg-pulse-blue/90 transition-colors duration-300" 
+          variant="gradient"
+          size="xl"
+          className="w-full rounded-full shadow-lg hover:shadow-xl transition-all duration-300" 
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? (

@@ -188,7 +188,7 @@ const Activities = () => {
               </h1>
 
               <p className="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-2xl mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
-                {t("activities.hero.copy", "Every crew gets a 7‑day mission: plan an unforgettable experience together. From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.")}
+                {t("activities.hero.copy", "Every crew gets a 10‑day mission: plan an unforgettable experience together. From beach days to workshops, Pip curates activities that fit your vibe and spark friendships.")}
               </p>
 
               <motion.div

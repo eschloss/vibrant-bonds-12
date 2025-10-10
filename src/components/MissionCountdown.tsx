@@ -2,13 +2,15 @@ import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./mission/TimerDisplay";
+import { MISSION_DAYS } from "@/lib/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
-const MissionCountdown = () => {
+type MissionCountdownProps = { showLabel?: boolean };
+const MissionCountdown = ({ showLabel = true }: MissionCountdownProps) => {
   const timeLeft = useCountdown();
   const isMobile = useIsMobile();
   const { t } = useTranslation();
@@ -39,21 +41,23 @@ const MissionCountdown = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section Label and Title */}
           <div className="text-center mb-8 sm:mb-12">
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-900/30 px-4 py-1.5 mb-4 backdrop-blur-sm border border-purple-700/40 text-white">
-              <Timer className="w-4 h-4 text-pulse-pink" />
-              <span className="text-sm font-medium text-white">
-                {t("mission_countdown.group_mission", "Group Mission")}
-              </span>
-            </motion.div>
+            {showLabel && (
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-purple-900/30 px-4 py-1.5 mb-4 backdrop-blur-sm border border-purple-700/40 text-white">
+                <Timer className="w-4 h-4 text-pulse-pink" />
+                <span className="text-sm font-medium text-white">
+                  {t("mission_countdown.group_mission", "Group Mission")}
+                </span>
+              </motion.div>
+            )}
             
             <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
-              {t("mission_countdown.seven_day_mission", "7 Day Mission")}<br />
+              {t("mission_countdown.seven_day_mission", `${MISSION_DAYS} Day Mission`)}<br />
               {t("mission_countdown.to", "to")} <span className="pulse-gradient-text">
                 {t("mission_countdown.meet_in_real_life", "Meet in Real Life")}
               </span>
             </h2>
             <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">
-              {t("mission_countdown.description", "Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your crew!")}
+              {t("mission_countdown.description", `Every crew has the same mission: connect and plan a real-life activity within the ${MISSION_DAYS}-day deadline. Start by taking our personality quiz to find your crew!`)}
             </p>
           </div>
 

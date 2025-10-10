@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, MessageSquare } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Sparkles, HeartHandshake, CalendarCheck, Bug } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import FAQItem from "@/components/FAQItem";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
+import MissionCountdown from "@/components/MissionCountdown";
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -31,27 +32,31 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden opacity-20">
-          <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
-          <div className="absolute top-1/2 -right-24 w-72 h-72 rounded-full bg-blue-600 blur-3xl"></div>
-          <div className="absolute top-1/4 -left-24 w-72 h-72 rounded-full bg-pink-600 blur-3xl"></div>
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden opacity-30">
+          <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-pulse-purple blur-3xl"></div>
+          <div className="absolute top-1/2 -right-24 w-72 h-72 rounded-full bg-pulse-blue blur-3xl"></div>
+          <div className="absolute top-1/4 -left-24 w-72 h-72 rounded-full bg-pulse-pink blur-3xl"></div>
         </div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.5
-          }} className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">{t("contact.hero.title", "Get in Touch")}</h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white/90 mb-5">
+              <Sparkles className="h-4 w-4 text-pulse-pink" />
+              <span className="text-sm">{t("contact.hero.badge", "We're real humans — say hi!")}</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">{t("contact.hero.title", "Get in Touch")}</h1>
+            <p className="text-lg md:text-xl text-gray-300 mb-6">
               {t("contact.hero.description", "We'd love to hear from you. Send us a message and we'll respond as soon as possible.")}
             </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <a href="mailto:contact@pulsenow.app" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-white/90 transition-colors">
+                {t("contact.hero.quick_email", "Email us: contact@pulsenow.app")}
+              </a>
+              <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-full bg-gradient-to-r from-pulse-pink via-pulse-purple to-pulse-blue text-white hover:opacity-95 transition-opacity">
+                {t("contact.hero.quick_ig", "DM us on Instagram")}
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -59,93 +64,71 @@ const Contact = () => {
       {/* Contact Form Section */}
       <section className="py-16 md:py-24 relative">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <motion.div initial={{
-              opacity: 0,
-              x: -20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6
-            }} className="bg-gray-800/30 p-8 md:p-10 rounded-2xl border border-gray-700/50">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("contact.info.title", "Contact Information")}</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-pulse-pink/20 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-pulse-pink" />
+          <div className="relative bg-white/5 backdrop-blur-md ring-1 ring-white/10 rounded-3xl overflow-hidden">
+            {/* Decorative gradient background */}
+            <div className="absolute inset-0 -z-10 opacity-20">
+              <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pulse-purple blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-pulse-blue blur-3xl"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Left: Contact info gradient panel */}
+              <div className="p-8 md:p-10 bg-gradient-to-br from-pulse-purple/30 via-pulse-blue/20 to-transparent border-r border-white/10">
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">{t("contact.info.title", "Contact Information")}</h2>
+                <p className="text-white/70 mb-8 max-w-sm">{t("contact.info.subtitle", "We’ll get back within 1-2 business days. For press or partnerships, mention it in your message.")}</p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-pulse-pink/20 p-3 rounded-full">
+                      <Mail className="h-6 w-6 text-pulse-pink" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">{t("contact.info.email.title", "Email Us")}</h3>
+                      <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-pulse-pink transition-colors">contact@pulsenow.app</a>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-medium mb-1">{t("contact.info.email.title", "Email Us")}</h3>
-                    <a href="mailto:contact@pulsenow.app" className="text-gray-300 hover:text-pulse-pink transition-colors">
-                      contact@pulsenow.app
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-pulse-pink/20 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-pulse-pink" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-1">{t("contact.info.visit.title", "Visit Us")}</h3>
-                    <address className="text-gray-300 not-italic">
-                      The Roux Institute<br/>
-                      100 Fore St<br />
-                      Portland, ME 04101
-                    </address>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-pulse-pink/20 p-3 rounded-full">
+                      <MapPin className="h-6 w-6 text-pulse-pink" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">{t("contact.info.visit.title", "Visit Us")}</h3>
+                      <address className="text-gray-300 not-italic">The Roux Institute<br/>100 Fore St<br/>Portland, ME 04101</address>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-10">
-                <h3 className="text-xl font-bold mb-4">{t("contact.info.follow.title", "Follow Us")}</h3>
-                <div className="flex gap-4">
-                  <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-pink-600 p-3 rounded-full transition-colors" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                  </a>
-                  <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-700 p-3 rounded-full transition-colors" aria-label="Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                  </a>
-                  <a href="https://www.linkedin.com/company/pulse-plans/" target="_blank" rel="noopener noreferrer" className="bg-gray-700/50 hover:bg-blue-800 p-3 rounded-full transition-colors" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                      <rect x="2" y="9" width="4" height="12"></rect>
-                      <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                  </a>
+
+                {/* Reasons to reach out */}
+                <div className="mt-10 grid grid-cols-1 gap-3">
+                  {[{
+                    icon: <HeartHandshake className="h-5 w-5 text-pulse-pink" />, title: t("contact.reasons.partnerships.title", "Partnerships & Press"), desc: t("contact.reasons.partnerships.desc", "Collaborations and media")
+                  }, {
+                    icon: <Bug className="h-5 w-5 text-pulse-pink" />, title: t("contact.reasons.issues.title", "Issues & Feedback"), desc: t("contact.reasons.issues.desc", "Spotted a bug or idea")
+                  }, {
+                    icon: <CalendarCheck className="h-5 w-5 text-pulse-pink" />, title: t("contact.reasons.events.title", "Host or Join Events"), desc: t("contact.reasons.events.desc", "Run an activity or join")
+                  }].map((card, i) => (
+                    <div key={(card.title as string) + i} className="rounded-xl bg-white/5 ring-1 ring-white/10 p-3 flex items-start gap-3">
+                      <div className="bg-pulse-pink/15 p-2 rounded-lg">{card.icon}</div>
+                      <div>
+                        <div className="font-semibold leading-tight">{card.title}</div>
+                        <div className="text-xs text-white/70">{card.desc}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-            <motion.div initial={{
-              opacity: 0,
-              x: 20
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.6,
-              delay: 0.2
-            }}>
-              <div className="bg-gray-800/30 p-8 md:p-10 rounded-2xl border border-gray-700/50">
+
+              {/* Right: Form */}
+              <div className="p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-bold mb-6">{t("contact.form.title", "Send a Message")}</h2>
                 <ContactForm />
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-gray-800/30">
+      <section id="faq" className="py-16 md:py-24 bg-gray-800/30">
         <div className="container mx-auto px-4">
           <motion.div initial={{
             opacity: 0,
@@ -210,6 +193,10 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Closing CTA: 10 Day Mission with Countdown */}
+      <MissionCountdown />
+
               <Footer />
       </div>
     </>

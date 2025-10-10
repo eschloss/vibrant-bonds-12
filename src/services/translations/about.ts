@@ -12,6 +12,10 @@ export const about = {
     "about.cta.title": "Ready to Meet New Friends?",
     "about.cta.description": "Join our community and connect with like-minded people in your city who share your interests",
     "about.cta.button": "Get Matched into a Friend Group",
+    // Hero chips
+    "about.hero.chip_less_scroll": "Less Scroll",
+    "about.hero.chip_more_face_time": "More Face Time",
+    "about.hero.chip_real_friends": "Real Friends",
     
     // Map Section
     "about.map.title": "Where We've Lived",
@@ -101,6 +105,10 @@ export const about = {
     "about.cta.title": "¿Listo para Conocer Nuevos Amigos?",
     "about.cta.description": "Únete a nuestra comunidad y conéctate con personas afines en tu ciudad que comparten tus intereses",
     "about.cta.button": "Encuentra tu Grupo de Amigos",
+    // Hero chips
+    "about.hero.chip_less_scroll": "Menos Scroll",
+    "about.hero.chip_more_face_time": "Más Cara a Cara",
+    "about.hero.chip_real_friends": "Amigos Reales",
     
     // Map Section
     "about.map.title": "Dónde Hemos Vivido",

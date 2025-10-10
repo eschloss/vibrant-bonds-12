@@ -3,6 +3,7 @@ import React from "react";
 import { Timer } from "lucide-react";
 import { useCountdown } from "@/hooks/useCountdown";
 import { TimerDisplay } from "./TimerDisplay";
+import { MISSION_DAYS } from "@/lib/constants";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
@@ -46,13 +47,13 @@ const MissionDeadline = () => {
             </motion.div>
             
             <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
-              {translate("mission_deadline.seven_day_mission", "7 Day Mission")}<br/>
+              {translate("mission_deadline.seven_day_mission", `${MISSION_DAYS} Day Mission`)}<br/>
               {translate("mission_deadline.to", "to")} <span className="pulse-gradient-text">
                 {translate("mission_deadline.meet_in_real_life", "Meet in Real Life")}
               </span>
             </h2>
             <p className="text-lg text-white/70 max-w-2xl mx-auto text-center">
-              {translate("mission_deadline.description", "Every crew has the same mission: connect and plan a real-life activity within the 7-day deadline. Start by taking our personality quiz to find your crew!")}
+              {translate("mission_deadline.description", `Every crew has the same mission: connect and plan a real-life activity within the ${MISSION_DAYS}-day deadline. Start by taking our personality quiz to find your crew!`)}
             </p>
           </div>
 
@@ -90,7 +91,7 @@ const MissionDeadline = () => {
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-center">
-                  <TimerDisplay days={7} hours={0} minutes={0} seconds={0} isStatic={true} />
+                  <TimerDisplay days={MISSION_DAYS} hours={0} minutes={0} seconds={0} isStatic={true} />
                 </div>
               </div>
             </div>

@@ -227,7 +227,7 @@ const CommunitySignupForm = () => {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                {t("community.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">terms of service</a> {t("community.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">privacy policy</a>
+                {t("community.form.agree_terms", "I agree to the")} <a target="_blank" href="https://legal.pulsenow.app/terms.html" className="text-pulse-blue hover:underline">{t("legal.terms.link_text", "terms of service")}</a> {t("community.form.and", "and")} <a target="_blank" href="https://legal.pulsenow.app/privacy.html" className="text-pulse-blue hover:underline">{t("legal.privacy.link_text", "privacy policy")}</a>
               </FormLabel>
               <FormMessage />
             </div>

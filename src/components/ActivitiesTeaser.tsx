@@ -62,6 +62,7 @@ type ActivitiesTeaserProps = {
   itemsCount?: number; // default 8
   items?: { id: string; name: string; image: string }[];
   onCtaClick?: (href: string, e: any) => void;
+  headlineClassName?: string;
 };
 
 export default function ActivitiesTeaser({
@@ -72,6 +73,7 @@ export default function ActivitiesTeaser({
   itemsCount = 8,
   items: providedItems,
   onCtaClick,
+  headlineClassName,
 }: ActivitiesTeaserProps) {
   const { t } = useTranslation();
   const [startIndex, setStartIndex] = useState(0);
@@ -89,7 +91,7 @@ export default function ActivitiesTeaser({
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">{t(title, "Discover Your Next Adventure")}</h2>
+          <h2 className={headlineClassName || "text-3xl md:text-4xl font-bold mb-3"}>{t(title, "Discover Your Next Adventure")}</h2>
           <p className="text-gray-300">{t(subtitle, "Tiny preview of what your crew could do together. Shuffle for ideas, then explore the full list.")}</p>
         </div>
 
@@ -98,13 +100,18 @@ export default function ActivitiesTeaser({
             variant="outline"
             size="sm"
             className="border-gray-600 text-white hover:bg-gray-800"
-            onClick={() => setStartIndex((i) => (i + itemsCount) % sourceItems.length)}
+            onClick={() => setStartIndex((i) => {
+              const total = sourceItems.length;
+              if (total <= 1) return 0;
+              const shift = Math.floor(Math.random() * (total - 1)) + 1;
+              return (i + shift) % total;
+            })}
           >
             <Shuffle className="w-4 h-4 mr-2" /> {t("teaser.shuffle", "Shuffle")}
           </Button>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-3 max-w-5xl mx-auto">
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-3 max-w-[73.6rem] mx-auto">
           {itemsToShow.map((it, i) => (
             <motion.div
               key={it.id + i}
@@ -115,7 +122,7 @@ export default function ActivitiesTeaser({
               className="group relative rounded-xl overflow-hidden border border-gray-700 bg-gray-900/30"
               style={{ aspectRatio: "1 / 1" }}
             >
-              <img src={it.image} alt={t(it.name, it.name)} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} />
+              <img src={it.image} alt={t(it.name, it.name)} className="w-full h-full object-cover" loading="lazy" decoding="async" sizes="(max-width: 768px) 50vw, 12vw" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors" />
               <div className="absolute bottom-1 left-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="inline-block bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded border border-white/10 text-center w-full">{t(it.name, it.name)}</span>
@@ -127,13 +134,13 @@ export default function ActivitiesTeaser({
         <div className="text-center mt-8">
           {/^https?:\/\//.test(ctaHref) ? (
             <a href={ctaHref} target="_blank" rel="noopener noreferrer" onClick={(e) => { try { onCtaClick && onCtaClick(ctaHref, e); } catch (_) {} }}>
-              <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+              <Button size="lg" className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                 {t(ctaLabel, "Find Your Next Adventure")} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </a>
           ) : (
             <Link to={ctaHref} onClick={(e) => { try { onCtaClick && onCtaClick(ctaHref, e); } catch (_) {} }}>
-              <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
+              <Button size="lg" className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                 {t(ctaLabel, "Find Your Next Adventure")} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

@@ -29,9 +29,9 @@ const HeroSection = () => {
             {t("about.hero.description", "We're on a mission to solve loneliness by making it easy for anyone to build real friendships—together, in real life.")}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-purple/40 bg-pulse-purple/10 px-3 py-1">Less Scroll</span>
-            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-blue/40 bg-pulse-blue/10 px-3 py-1">More Face Time</span>
-            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-pink/40 bg-pulse-pink/10 px-3 py-1">Real Friends</span>
+            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-purple/40 bg-pulse-purple/10 px-3 py-1">{t("about.hero.chip_less_scroll", "Less Scroll")}</span>
+            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-blue/40 bg-pulse-blue/10 px-3 py-1">{t("about.hero.chip_more_face_time", "More Face Time")}</span>
+            <span className="text-xs uppercase tracking-wider rounded-full border border-pulse-pink/40 bg-pulse-pink/10 px-3 py-1">{t("about.hero.chip_real_friends", "Real Friends")}</span>
           </div>
         </motion.div>
       </div>

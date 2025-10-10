@@ -24,7 +24,7 @@ const Navbar = () => {
 
   // Translated nav links
   const navLinks = [
-    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/#how-it-works") },
+    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/how-it-works") },
     { label: t("navbar.activities", "Adventures"), href: addRefToUrl("/activities") },
     { label: t("navbar.partnerships", "Partnerships"), href: addRefToUrl("/partners") },
     { label: t("navbar.meet_pip", "Meet Pip"), href: addRefToUrl("/meet-pip") },
@@ -107,52 +107,15 @@ const Navbar = () => {
 
           </Link>
           <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map(({ label, href }) => {
-              const isHashLink = href.includes("#");
-
-              if (isHashLink) {
-                if (isHomePage) {
-                  return (
-                    <a
-                      key={label}
-                      href={href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection(href.replace(/^.*#/, ""));
-                      }}
-                      className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all cursor-pointer"
-                    >
-                      {label}
-                    </a>
-                  ); 
-                }
-
-                return (
-                <Link
-                  key={label}
-                  to={href}
-                  onClick={(e) => {
-                        //e.preventDefault();
-                        scrollToSection(href.replace(/^.*#/, ""));
-                  }}
-                  className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-                >
-                  {label}
-                </Link>
-              );
-                
-              }
-
-              return (
-                <Link
-                  key={label}
-                  to={href}
-                  className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
-                >
-                  {label}
-                </Link>
-              );
-            })}
+            {navLinks.map(({ label, href }) => (
+              <Link
+                key={label}
+                to={href}
+                className="transition-colors duration-300 ease-in-out hover:text-[#FF2688] font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF2688] after:transition-all"
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
           <div className="hidden lg:block">
             {isMatchmakingPage ? (

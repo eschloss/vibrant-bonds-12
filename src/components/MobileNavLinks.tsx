@@ -21,7 +21,7 @@ const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: Mobil
   // Translated nav links
   const navLinks = [
     { label: t("navbar.home", "Home"), href: addRefToUrl("/") },
-    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/#how-it-works") },
+    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/how-it-works") },
     { label: t("navbar.activities", "Adventures"), href: addRefToUrl("/activities") },
     { label: t("navbar.partnerships", "Partnerships"), href: addRefToUrl("/partners") },
     { label: t("navbar.meet_pip", "Meet Pip"), href: addRefToUrl("/meet-pip") },
@@ -32,44 +32,16 @@ const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: Mobil
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col space-y-6">
-        {navLinks.map(({ label, href }, idx) => {
-          const isHashLink = href.includes("#");
-
-          if (isHashLink && isHomePage) {
-            return (
-              <a
-                key={idx}
-                href={href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  closeMenu();
-                  const sectionId = href.replace(/^.*#/, "");
-                  scrollToSection(sectionId);
-                }}
-                className="text-xl font-semibold hover:text-pulse-pink"
-              >
-                {label}
-              </a>
-            );
-          }
-
-          return (
-            <Link
-              key={idx}
-              to={href}
-              onClick={() => {
-                closeMenu();
-                if (isHashLink) {
-                  const sectionId = href.replace(/^.*#/, "");
-                  scrollToSection(sectionId);
-                }
-              }}
-              className="text-xl font-semibold hover:text-pulse-pink"
-            >
-              {label}
-            </Link>
-          );
-        })}
+        {navLinks.map(({ label, href }, idx) => (
+          <Link
+            key={idx}
+            to={href}
+            onClick={() => closeMenu()}
+            className="text-xl font-semibold hover:text-pulse-pink"
+          >
+            {label}
+          </Link>
+        ))}
 
         <div className="pt-6">
           {isMatchmakingPage ? (

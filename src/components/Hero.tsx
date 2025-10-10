@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
+import ScrollIndicator from "@/components/ui/ScrollIndicator";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -88,30 +89,14 @@ const Hero = () => {
               </Button>
             </Link>
           </motion.div>
-          {/* Scroll Down Indicator (mouse + chevron) */}
-          <motion.a
-            href={addRefToUrl("/#how-it-works")}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="group mt-2 inline-flex flex-col items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors"
-            aria-label={t("hero.scroll_down", "Scroll down to see how it works")}
-          >
-            {/* Mouse outline */}
-            <span className="relative inline-block h-8 w-5 rounded-full border-2 border-gray-300/80 group-hover:border-gray-500/80 transition-colors">
-              <motion.span
-                className="absolute left-1/2 top-2 -translate-x-1/2 h-1.5 w-1 rounded bg-gray-400"
-                animate={{ y: [0, 6, 0], opacity: [1, 0.6, 1] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </span>
-            {/* Chevron */}
-            <motion.span
-              className="w-4 h-4 border-b-2 border-r-2 border-gray-300/80 group-hover:border-gray-500/80 rotate-45"
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
+          {/* Scroll Down Indicator */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1 }}>
+            <ScrollIndicator
+              href={addRefToUrl("/#how-it-works")}
+              label={t("hero.scroll_down", "Scroll down to see how it works")}
+              className="mt-2"
             />
-          </motion.a>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

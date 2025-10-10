@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
 import Text from "@/components/Text";
+import { useRef, useEffect } from "react";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -52,6 +53,16 @@ const Footer = () => {
     }
   };
   const currentYear = new Date().getFullYear();
+  const openCookieSettingsRef = useRef<(() => void) | null>(null);
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (e?.detail && typeof e.detail === 'function') {
+        openCookieSettingsRef.current = e.detail;
+      }
+    };
+    window.addEventListener('pulseSetManageConsent', handler as EventListener);
+    return () => window.removeEventListener('pulseSetManageConsent', handler as EventListener);
+  }, []);
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   
@@ -151,26 +162,6 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={addRefToUrl("/communities")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.for_communities" className="">For Communities</Text>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={addRefToUrl("/about")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.about_us" className="">About Us</Text>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={addRefToUrl("/contact")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.contact" className="">Contact</Text>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={addRefToUrl("/faq")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.faq" className="">FAQ</Text>
-                  </Link>
-                </li>
-                <li>
                   <Link to={addRefToUrl("/activities")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.activities" className="">Activities</Text>
                   </Link>
@@ -234,7 +225,26 @@ const Footer = () => {
               <div className="text-white text-lg font-bold mb-4">
                 <Text id="footer.contact_title" className="">Contact</Text>
               </div>
-              <ul className="space-y-3">
+              {/* Quick Links */}
+              <ul className="mt-4 space-y-2">
+                <li>
+                  <Link to={addRefToUrl("/contact")} className="text-white/70 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.contact" className="">Contact</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={addRefToUrl("/about")} className="text-white/70 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.about_us" className="">About Us</Text>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={addRefToUrl("/faq")} className="text-white/70 hover:text-pulse-pink text-sm transition-colors">
+                    <Text id="footer.faq" className="">FAQ</Text>
+                  </Link>
+                </li>
+              </ul>
+
+              <ul className="mt-4 space-y-3">
                 <li className="flex items-start">
                   <Mail size={16} className="text-pulse-pink mt-1 mr-2" />
                   <a href="mailto:contact@pulsenow.app" className="text-white/70 text-sm hover:text-pulse-pink transition-colors">contact@pulsenow.app</a>
@@ -290,12 +300,15 @@ const Footer = () => {
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="https://legal.pulsenow.app/privacy.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+              <Link to="/privacy" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.privacy_policy" className="">Privacy Policy</Text>
               </Link>
-              <Link to="https://legal.pulsenow.app/terms.html" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+              <Link to="/terms" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.terms_of_service" className="">Terms of Service</Text>
               </Link>
+              <button onClick={() => openCookieSettingsRef.current && openCookieSettingsRef.current()} className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+                Cookie Settings
+              </button>
             </div>
           </motion.div>
         </div>

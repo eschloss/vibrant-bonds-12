@@ -124,7 +124,7 @@ const AmbassadorProgram = () => {
               <span className="w-2 h-2 rounded-full bg-pulse-pink" /> <Text id="ambassador.how_it_works.badge">How Pulse works</Text>
             </div>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              <Text id="ambassador.how_it_works.title">10 like‑minded locals on a 7‑day challenge to meet in person</Text>
+              <Text id="ambassador.how_it_works.title">10 like‑minded locals on a 10‑day challenge to meet in person</Text>
             </h2>
             <p className="text-gray-300 mt-3 text-sm md:text-base"><Text id="ambassador.how_it_works.subtitle">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</Text></p>
           </div>
@@ -156,7 +156,7 @@ const AmbassadorProgram = () => {
                     <Calendar className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold"><Text id="ambassador.how_it_works.step3">They meet within 7 days</Text></div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="ambassador.how_it_works.step3">They meet within 10 days</Text></div>
                     <div className="text-gray-400 text-sm md:text-base"><Text id="ambassador.how_it_works.step3_desc">They book a simple, prepaid experience at a venue</Text></div>
                   </div>
                 </div>
