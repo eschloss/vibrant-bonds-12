@@ -11,12 +11,12 @@ import { Seo } from "@/hooks/useSeo";
 const Events = () => {
   const seoProps = {
     title: {
-      en: "Group Events by City | Find Activities | Pulse",
-      es: "Eventos Grupales por Ciudad | Encuentra Actividades | Pulse"
+      en: "Group Events by City | Find Activities for Your Crew | Pulse",
+      es: "Eventos Grupales por Ciudad | Actividades para Tu Grupo | Pulse"
     },
     description: {
-      en: "Explore group events and activities in cities worldwide. Discover the perfect plans for your friend group, from coffee meetups to outdoor adventures.",
-      es: "Explora eventos grupales y actividades en ciudades de todo el mundo. Descubre los planes perfectos para tu grupo de amigos, desde reuniones de café hasta aventuras al aire libre."
+      en: "Explore curated group activities in cities worldwide—from coffee meetups to outdoor adventures. Pick a city to find plans your friend group will love.",
+      es: "Explora actividades grupales en ciudades de todo el mundo—desde cafés hasta aventuras al aire libre. Elige una ciudad para encontrar planes que tu grupo amará."
     },
     keywords: ["group events", "city activities", "meetups", "friend groups", "social activities", "events by city"],
     type: "website"

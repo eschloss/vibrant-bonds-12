@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { Seo } from "@/hooks/useSeo";
 
 const Redirect = () => {
   const [searchParams] = useSearchParams();
@@ -39,6 +40,17 @@ const Redirect = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Seo
+        title={{
+          en: "Redirecting… | Pulse",
+          es: "Redirigiendo… | Pulse"
+        }}
+        description={{
+          en: "Secure redirect page for leaving pulsenow.app. If this takes too long, return to the home page.",
+          es: "Página de redirección segura al salir de pulsenow.app. Si tarda demasiado, vuelve al inicio."
+        }}
+        type="website"
+      />
       <div className="text-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600 mx-auto"></div>
         <p className="mt-4 text-gray-600">Redirecting...</p>

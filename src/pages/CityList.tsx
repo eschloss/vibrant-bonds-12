@@ -13,6 +13,7 @@ import CityCard from "@/components/CityCard";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRefParam } from "@/hooks/useRefParam";
+import { Seo } from "@/hooks/useSeo";
 
 type City = {
   en_name: string;
@@ -34,6 +35,27 @@ const CityList = () => {
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const seoProps = {
+    title: {
+      en: "Browse Cities | Meet New Friends Near You | Pulse",
+      es: "Explora Ciudades | Conoce Nuevos Amigues | Pulse"
+    },
+    description: {
+      en: "Search and browse all cities where Pulse is active. Filter by country, explore local options, and join a friend group near you.",
+      es: "Busca y explora todas las ciudades donde Pulse está activo. Filtra por país, descubre opciones locales y únete a un grupo cerca de ti."
+    },
+    keywords: [
+      "cities",
+      "find friends",
+      "meet people",
+      "social groups",
+      "friend groups",
+      "pulse app",
+      "city directory"
+    ],
+    type: "website"
+  };
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -143,6 +165,7 @@ const CityList = () => {
 
   return (
     <div className="flex flex-col min-h-screen dark">
+      <Seo {...seoProps} />
       <Navbar />
       <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">

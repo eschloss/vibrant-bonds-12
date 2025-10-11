@@ -37,12 +37,12 @@ const CitiesExpanded = () => {
 
   const seoProps = {
     title: {
-      en: "Find Your City | Meet New Friends Worldwide | Pulse",
-      es: "Encuentra Tu Ciudad | Conoce Nuevos Amigos | Pulse"
+      en: "All Cities Directory | Meet New Friends Worldwide | Pulse",
+      es: "Directorio de Ciudades | Conoce Nuevos Amigues | Pulse"
     },
     description: {
-      en: "Discover cities where Pulse is available and find your perfect friend group. Join communities worldwide and start building meaningful friendships.",
-      es: "Descubre ciudades donde Pulse está disponible y encuentra tu grupo ideal de amigos. Únete a comunidades en todo el mundo y comienza a construir amistades significativas."
+      en: "Browse every city where Pulse operates. Filter by country, search by name, and join a local friend group to plan real-life meetups.",
+      es: "Explora todas las ciudades donde opera Pulse. Filtra por país, busca por nombre y únete a un grupo local para planear quedadas reales."
     },
     keywords: ["cities", "find friends", "worldwide", "communities", "friend groups", "pulse app", "social connections"],
     type: "website"

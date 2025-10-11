@@ -18,10 +18,17 @@ const Communities = () => {
       es: "Plataforma de Conexión Comunitaria | Fortalece Vínculos | Pulse"
     },
     description: {
-      en: "Transform your community with Pulse's AI-powered group matching. Create meaningful connections between members through curated small groups and facilitated meetups.",
-      es: "Transforma tu comunidad con el emparejamiento grupal de Pulse. Crea conexiones significativas entre miembros a través de grupos pequeños y encuentros facilitados."
+      en: "Match members into small groups, break the ice with AI, and spark IRL meetups. Keep your community active, connected, and coming back.",
+      es: "Empareja miembros en grupos pequeños, rompe el hielo con IA y activa quedadas presenciales. Mantén tu comunidad activa y conectada."
     },
-    keywords: ["community platform", "group matching", "member engagement", "community building", "friendship groups", "AI community matching"],
+    keywords: [
+      "community platform",
+      "group matching",
+      "member engagement",
+      "community building",
+      "friendship groups",
+      "AI community matching"
+    ],
     type: "website"
   };
   

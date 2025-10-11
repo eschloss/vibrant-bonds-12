@@ -10,12 +10,12 @@ const Blog = () => {
   
   const seoProps = {
     title: {
-      en: "Blog | Pulse App",
-      es: "Blog | Pulse App"
+      en: "Pulse Blog | Building Real-Life Friendships",
+      es: "Blog de Pulse | Construyendo Amistades Reales"
     },
     description: {
-      en: "Insights about building meaningful connections and friendships in the digital age",
-      es: "Perspectivas sobre la creación de conexiones significativas y amistades en la era digital"
+      en: "Ideas on meeting people, making real friends, and planning IRL experiences—backed by product, community, and AI.",
+      es: "Ideas para conocer gente, hacer amistades reales y planear experiencias presenciales—con producto, comunidad e IA."
     },
     keywords: ["friendship blog", "social connections", "digital friendships", "community building", "social networking", "friendship tips"],
     type: "website",
