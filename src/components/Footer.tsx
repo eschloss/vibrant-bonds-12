@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
 import Text from "@/components/Text";
-import { useRef, useEffect } from "react";
+ 
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -53,16 +53,7 @@ const Footer = () => {
     }
   };
   const currentYear = new Date().getFullYear();
-  const openCookieSettingsRef = useRef<(() => void) | null>(null);
-  useEffect(() => {
-    const handler = (e: any) => {
-      if (e?.detail && typeof e.detail === 'function') {
-        openCookieSettingsRef.current = e.detail;
-      }
-    };
-    window.addEventListener('pulseSetManageConsent', handler as EventListener);
-    return () => window.removeEventListener('pulseSetManageConsent', handler as EventListener);
-  }, []);
+  
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   
@@ -306,9 +297,7 @@ const Footer = () => {
               <Link to="/terms" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.terms_of_service" className="">Terms of Service</Text>
               </Link>
-              <button onClick={() => openCookieSettingsRef.current && openCookieSettingsRef.current()} className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
-                Cookie Settings
-              </button>
+              
             </div>
           </motion.div>
         </div>
