@@ -67,11 +67,12 @@ export const Seo = ({
   };
 
   const baseUrl = getBaseUrl();
-  const currentUrl = canonicalUrl || `${baseUrl}${pathname}`;
   const alternateUrls = {
     en: `${baseUrl}${pathname}`,
     es: `${baseUrl.replace('://', '://es.')}${pathname}`
   };
+  // Self-canonical per language (with hreflang alternates)
+  const currentUrl = canonicalUrl || alternateUrls[(currentLanguage as 'en' | 'es') || 'en'];
 
   const organizationData = {
     "@context": "https://schema.org",
@@ -141,7 +142,7 @@ export const Seo = ({
       <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content={type} />
-      {image && typeof image === "string" && <meta property="og:image" content={image} />}
+      <meta property="og:image" content={(typeof image === "string" && image) || `https://s.kikiapp.eu/img/pulse_logo.png`} />
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {section && <meta property="article:section" content={section} />}
@@ -149,7 +150,7 @@ export const Seo = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
-      {image && typeof image === "string" && <meta name="twitter:image" content={image} />}
+      <meta name="twitter:image" content={(typeof image === "string" && image) || `https://s.kikiapp.eu/img/pulse_logo.png`} />
 
       {/* Stringify JSON for structured data */}
       <script type="application/ld+json">
