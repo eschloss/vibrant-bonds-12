@@ -77,7 +77,10 @@ const HowItWorks = () => {
         />
         {/* Color overlays for readability */}
         <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_20%_10%,rgba(116,26,221,0.35),transparent),radial-gradient(50%_40%_at_90%_60%,rgba(56,209,191,0.25),transparent)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
+        {/* Strengthened readability overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        {/* Centered vignette behind headline for extra contrast */}
+        <div className="absolute inset-0 bg-[radial-gradient(45%_35%_at_50%_30%,rgba(0,0,0,0.45),transparent)]" />
         {/* Mouse-follow spotlight overlay */}
         <motion.div style={{ backgroundImage: spotlight }} className="absolute inset-0 pointer-events-none mix-blend-overlay" />
 
@@ -90,14 +93,14 @@ const HowItWorks = () => {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Removed hero pill badge */}
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-3">
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-3 drop-shadow-[0_3px_10px_rgba(0,0,0,0.6)]">
               <span>{t("hiw.hero.title.prefix", "How to ")}</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 {t("hiw.hero.title.gradient", "Meet New Friends")}
               </span>
               <span>{t("hiw.hero.title.suffix", " with Pulse")}</span>
             </h1>
-            <p className="text-xl text-gray-200 mb-6 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-200 mb-6 max-w-2xl mx-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
               {t(
                 "how_it_works_page.hero.subtitle",
                 "A clear path from strangers in a chat to friends you see every week."
@@ -139,10 +142,7 @@ const HowItWorks = () => {
                 transition={{ duration: 0.6 }}
                 className="order-1"
               >
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                  <span className="text-sm">{t("hiw.matched.badge", "Like‑minded by design")}</span>
-                </div>
+                {/* removed badge per request */}
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
                   {t("hiw.matched.title", "Get Matched")}
                 </h2>
@@ -260,10 +260,7 @@ const HowItWorks = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="order-1 lg:order-2"
             >
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-blue-900/30 text-white border border-blue-700/40 mb-4">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>{t("hiw.break.badge", "Smart conversation flow")}</span>
-              </div>
+              {/* removed badge per request */}
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {t("steps.break_ice.title", "Break the Ice")}
               </h2>
@@ -357,10 +354,7 @@ const HowItWorks = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="order-2"
               >
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-indigo-900/30 text-white border border-indigo-700/40 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-                  <span>{t("hiw.repeat.badge", "Build lasting friendships")}</span>
-                </div>
+                {/* removed badge per request */}
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
                   {t("steps.grow_friendships.title", "Keep It Going")}
                 </h2>

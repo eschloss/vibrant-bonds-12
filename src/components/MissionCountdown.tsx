@@ -50,7 +50,7 @@ const MissionCountdown = ({ showLabel = true }: MissionCountdownProps) => {
               </motion.div>
             )}
             
-            <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl">
+            <h2 className="text-3xl font-bold text-white mb-4 text-center md:text-5xl leading-tight md:leading-[1.15]">
               {t("mission_countdown.seven_day_mission", `${MISSION_DAYS} Day Mission`)}<br />
               {t("mission_countdown.to", "to")} <span className="pulse-gradient-text">
                 {t("mission_countdown.meet_in_real_life", "Meet in Real Life")}

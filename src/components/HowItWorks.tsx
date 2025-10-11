@@ -8,7 +8,12 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
 
-const HowItWorks = () => {
+type HowItWorksProps = {
+  ctaHref?: string;
+  ctaLabel?: string;
+};
+
+const HowItWorks = ({ ctaHref, ctaLabel }: HowItWorksProps) => {
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   const ref = useRef(null);
@@ -76,7 +81,7 @@ const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl"
+            className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl whitespace-pre-line"
           >
             <Text id="how_it_works.headline">From Matched to Meetup</Text>
           </motion.h2>
@@ -142,14 +147,18 @@ const HowItWorks = () => {
           }}
           className="flex justify-center mt-12"
         >
-          <Link to={addRefToUrl("/matchmaking")}>
+          <Link to={addRefToUrl(ctaHref || "/matchmaking")}>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
               <Button size="lg" variant="default" className="rounded-full shadow-lg shadow-primary/20 transition-all duration-500 hover:shadow-primary/40 animate-elegant-scale">
-                <Text id="how_it_works.cta" className="">Get Matched Now</Text>
+                {ctaLabel ? (
+                  <span>{ctaLabel}</span>
+                ) : (
+                  <Text id="how_it_works.cta" className="">Get Matched Now</Text>
+                )}
                 <ArrowRight size={16} className="ml-2" />
               </Button>
             </motion.div>

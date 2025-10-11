@@ -9,7 +9,7 @@ export const howItWorks = {
     // How it works section
     "how_it_works.subtitle": "How It Works",
     "how_it_works.title": "Making Friends Shouldn't be Hard",
-    "how_it_works.headline": "10 new friends. 10 days to meet in real life.",
+    "how_it_works.headline": "10 new friends.\n10 days to meet in real life.",
     "how_it_works.cta": "Get Matched Now",
     // Page-specific meta and hero
     "how_it_works_page.title": "How Pulse Works | Meet Your Crew, Make It A Ritual",
@@ -27,7 +27,7 @@ export const howItWorks = {
     "hiw.matched.subtitle": "Take a 1‑minute vibe test and we’ll spin up a small group chat with local people in your city who fit your interests and schedule.",
     "hiw.matched.point1": "Interests, availability, neighborhoods and budget",
     "hiw.matched.point2": "Crew of 10 locals with shared vibes",
-    "hiw.matched.point3": "Group chat opens instantly to plan",
+    "hiw.matched.point3": "Group Chat to get to know the group and plan the adventure",
     "hiw.matched.badge": "Like‑minded by design",
     // Pip stat cards
     "hiw.pip.stat1.title": "Light nudges",
@@ -96,7 +96,7 @@ export const howItWorks = {
     "hiw.break.point3": "Quick polls and time suggestions to lock plans",
 
     // Just Show Up (adventures teaser framing)
-    "hiw.justshow.subtitle": "Your crew meets up this week to do something fun. Here are a few ideas—pick one and just show up.",
+    "hiw.justshow.subtitle": "Your crew meets up this week to do something fun.\nHere are a few ideas—pick one and just show up.",
     
     // Steps for main page
     "steps.get_matched.title": "Get Matched",
@@ -123,7 +123,7 @@ export const howItWorks = {
     // How it works section
     "how_it_works.subtitle": "Cómo Funciona",
     "how_it_works.title": "Hacer Amigos No Debería Ser Difícil",
-    "how_it_works.headline": "10 nuevos amigos. 10 días para conocerse en la vida real.",
+    "how_it_works.headline": "10 nuevos amigos.\n10 días para conocerse en la vida real.",
     "how_it_works.cta": "Encuentra Tu Grupo Ahora",
     // Page-specific meta and hero
     "how_it_works_page.title": "Cómo funciona Pulse | Conoce tu grupo, hazlo ritual",
@@ -141,7 +141,7 @@ export const howItWorks = {
     "hiw.matched.subtitle": "Haz un test de vibra de 1 minuto y crearemos un chat con personas locales de tu ciudad que encajen con tus intereses y horario.",
     "hiw.matched.point1": "Intereses, disponibilidad, barrios y presupuesto",
     "hiw.matched.point2": "Grupo de 10 locales con vibra compartida",
-    "hiw.matched.point3": "El chat del grupo se abre al instante para planear",
+    "hiw.matched.point3": "Chat de grupo para conocerse y planear la aventura",
     "hiw.matched.badge": "Personas afines por diseño",
     // Pip stat cards
     "hiw.pip.stat1.title": "Impulsos ligeros",
@@ -210,7 +210,7 @@ export const howItWorks = {
     "hiw.break.point3": "Encuestas rápidas y horarios para concretar",
 
     // Just Show Up (adventures teaser framing)
-    "hiw.justshow.subtitle": "Su grupo queda esta semana para hacer algo divertido. Aquí hay ideas: elijan una y solo preséntense.",
+    "hiw.justshow.subtitle": "Su grupo queda esta semana para hacer algo divertido.\nAquí hay ideas: elijan una y solo preséntense.",
     
     // Steps for main page
     "steps.get_matched.title": "Encuentra tu Grupo",

@@ -40,7 +40,7 @@ const Index = () => {
           <Hero />
           {/* Removed extra headline module; incorporated into HowItWorks */}
           <div id="how-it-works" ref={howItWorksRef}>
-            <HowItWorks />
+            <HowItWorks ctaHref="/how-it-works" ctaLabel="How It Works" />
           </div>
           <ActivitiesTeaser />
           <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />

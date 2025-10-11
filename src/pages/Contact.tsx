@@ -41,10 +41,7 @@ const Contact = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white/90 mb-5">
-              <Sparkles className="h-4 w-4 text-pulse-pink" />
-              <span className="text-sm">{t("contact.hero.badge", "We're real humans — say hi!")}</span>
-            </div>
+            {/* removed hero pill badge per request */}
             <h1 className="text-4xl md:text-6xl font-bold mb-4">{t("contact.hero.title", "Get in Touch")}</h1>
             <p className="text-lg md:text-xl text-gray-300 mb-6">
               {t("contact.hero.description", "We'd love to hear from you. Send us a message and we'll respond as soon as possible.")}

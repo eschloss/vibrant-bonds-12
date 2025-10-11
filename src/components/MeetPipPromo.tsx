@@ -94,11 +94,8 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40 mb-4">
-                <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                {badgeText || t("meet_pippromo.badge", "Built to spark IRL connections")}
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-3">
+              {/* removed pill badge to avoid overlap above heading */}
+              <h2 className="text-3xl md:text-5xl font-bold mb-3 leading-tight md:leading-[1.15]">
                 {headline || t("meet_pippromo.headline", "Meet Pip, Your Social Wingman")}
               </h2>
               <p className="text-gray-300 mb-6 max-w-xl">

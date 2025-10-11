@@ -154,7 +154,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to={addRefToUrl("/activities")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    <Text id="footer.activities" className="">Activities</Text>
+                    <Text id="footer.activities" className="">Adventures</Text>
                   </Link>
                 </li>
                 

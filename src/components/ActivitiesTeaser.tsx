@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shuffle } from "lucide-react";
@@ -77,11 +77,26 @@ export default function ActivitiesTeaser({
 }: ActivitiesTeaserProps) {
   const { t } = useTranslation();
   const [startIndex, setStartIndex] = useState(0);
+  const [columnCount, setColumnCount] = useState(8);
+
+  // Keep a single row by matching the number of items to current breakpoint columns
+  useEffect(() => {
+    const computeCols = () => {
+      const w = window.innerWidth;
+      if (w < 640) return 4; // base
+      if (w < 1024) return 6; // sm and md
+      return 8; // lg+
+    };
+    const onResize = () => setColumnCount(computeCols());
+    setColumnCount(computeCols());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   const sourceItems = useMemo(() => (providedItems && providedItems.length ? providedItems : ALL_ITEMS), [providedItems]);
-  const itemsToShow = useMemo(
-    () => selectWindow(sourceItems, startIndex, Math.max(1, Math.min(itemsCount, sourceItems.length))),
-    [sourceItems, startIndex, itemsCount]
-  );
+  const itemsToShow = useMemo(() => {
+    const maxItems = Math.max(1, Math.min(itemsCount, sourceItems.length, columnCount));
+    return selectWindow(sourceItems, startIndex, maxItems);
+  }, [sourceItems, startIndex, itemsCount, columnCount]);
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden">
@@ -92,7 +107,7 @@ export default function ActivitiesTeaser({
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className={headlineClassName || "text-3xl md:text-4xl font-bold mb-3"}>{t(title, "Discover Your Next Adventure")}</h2>
-          <p className="text-gray-300">{t(subtitle, "Tiny preview of what your crew could do together. Shuffle for ideas, then explore the full list.")}</p>
+          <p className="text-gray-300 whitespace-pre-line">{t(subtitle, "Tiny preview of what your crew could do together. Shuffle for ideas, then explore the full list.")}</p>
         </div>
 
         <div className="flex items-center justify-center mb-4">
@@ -111,7 +126,10 @@ export default function ActivitiesTeaser({
           </Button>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-3 max-w-[73.6rem] mx-auto">
+        <div
+          className="grid gap-2 md:gap-3 max-w-[73.6rem] mx-auto"
+          style={{ gridTemplateColumns: `repeat(${itemsToShow.length}, minmax(0, 1fr))` }}
+        >
           {itemsToShow.map((it, i) => (
             <motion.div
               key={it.id + i}
