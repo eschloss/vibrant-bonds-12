@@ -415,38 +415,62 @@ const HowItWorks = () => {
             <p className="text-gray-300">{t("hiw.faq.subtitle", "Everything you need to know to start meeting new friends.")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FAQItem 
-              question={t("hiw.faq.what_is_pulse.q", "What is Pulse?")}
-              answer={t("hiw.faq.what_is_pulse.a", "Pulse is a free mobile app that matches you with 10 local people and puts you in a group chat with Pip, our friendly AI host, who helps everyone break the ice and suggests plans so you can meet in real life.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.mission.q", "How does the 10‑day mission work?")}
-              answer={t("hiw.faq.mission.a", "Your crew has 10 days to pick a plan and meet in real life. When at least 50% RSVP and the group meets, the mission extends so you can keep planning the next hang while momentum stays high.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.rsvp.q", "What does 50% RSVP mean?")}
-              answer={t("hiw.faq.rsvp.a", "A mission is considered active when at least half the group commits to a time. This keeps chats focused and ensures plans actually happen.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.cost.q", "Is Pulse free? What about activity costs?")}
-              answer={t("hiw.faq.cost.a", "Pulse is completely free. Many crews choose free activities (walks, picnics, beach), while others do paid experiences (bowling, karaoke, museums). Your budget preference is set in the vibe test.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.vibe.q", "What is the vibe/personality test?")}
-              answer={t("hiw.faq.vibe.a", "A 1‑minute quiz covering interests, availability, neighborhoods, and budget. We use it to match you with locals who share your vibe.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.pip.q", "Who is Pip?")}
-              answer={t("hiw.faq.pip.a", "Pip is your AI group host. Pip breaks the ice, keeps the chat lively, suggests activities and times, and celebrates wins so friendships can grow.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.safety.q", "How do you keep Pulse safe?")}
-              answer={t("hiw.faq.safety.a", "We focus on small group meetups in public places. You control your schedule and can leave a crew anytime. Report tools and community guidelines keep experiences positive.")}
-            />
-            <FAQItem 
-              question={t("hiw.faq.keep_going.q", "What happens after the first meetup?")}
-              answer={t("hiw.faq.keep_going.a", "When most of the crew meets, the chat stays open and the mission extends. Pip keeps suggesting new plans so you can turn it into a weekly ritual.")}
-            />
+            {[
+              {
+                q: "What is Pulse?",
+                a: "Pulse is a free mobile app that helps you make real-life friends in your city. It matches you with a small group of locals who share your vibe and brings everyone together in a group chat hosted by Pip, our friendly AI penguin.",
+              },
+              {
+                q: "How does Pulse work?",
+                a: "Pulse helps you make real-life friends in your city. You’ll take a quick vibe test, get matched with up to 10 locals who share your interests, and join a group chat hosted by Pip, our friendly AI penguin. Your crew starts a 10-day mission to plan a meetup. Once half the group RSVP, the mission activates — and every time you meet, it automatically extends, keeping your momentum high.",
+              },
+              {
+                q: "What kinds of activities do crews do together?",
+                a: "Every crew is different — some meet for coffee, brunch, or trivia nights, while others go kayaking, hiking, pottery painting, or karaoke. Pip suggests ideas that fit your group’s shared vibe, schedule, and budget — from low-key hangs to more adventurous plans.",
+              },
+              {
+                q: "What’s the vibe test?",
+                a: "It’s a one-minute quiz about your interests, personality, schedule, and budget. It helps us understand your social vibe — so we can match you with people who click naturally, not randomly.",
+              },
+              {
+                q: "How does matching work?",
+                a: "Pulse uses a mathematical matching algorithm to find the people you’re statistically closest to in vibe and lifestyle. It’s social chemistry, powered by data. Every week, new crews form based on who’s active in your city and who fits your profile best.",
+              },
+              {
+                q: "Do you match people based on identity or interests?",
+                a: "Yes — Pulse creates sub-communities in each city. Depending on the city, we currently offer specific matches for Queer People and Expats. As our userbase grows, we intend to include more subgroups to make it even easier for you to find people you click with.",
+              },
+              {
+                q: "How does the 10 day mission work?",
+                a: "Each crew gets a 10-day countdown to plan and commit to one real-life hangout. Once 50% RSVP, the mission is successful and automatically extends so you can keep planning the next hang while everyone’s still excited. Many crews evolve into weekly or biweekly rituals.",
+              },
+              {
+                q: "What if my crew doesn’t click?",
+                a: "No stress. Pip will keep the chat lively, suggest activities, and help things move along — but if the vibe feels off to you, you don’t need to show up for the meetup. You can always join another group after the initial 10 day mission is over.",
+              },
+              {
+                q: "Who is Pip?",
+                a: "Pip is your AI host and ice-breaker. Pip introduces everyone, sparks conversation, suggests fun local plans, and celebrates wins when your crew meets. Think of Pip as the friendly organizer who keeps everyone connected.",
+              },
+              {
+                q: "How does Pulse keep things safe?",
+                a: "We focus on small-group meetups in public places. You control what you share and can leave a crew anytime. Our community guidelines, report tools, and quick moderation keep spaces safe, positive, and inclusive.",
+              },
+              {
+                q: "Is Pulse free?",
+                a: "Yes — completely free to use. Many crews choose free plans like hikes, picnics, or trivia nights. Others explore local partner activities like bowling, pottery, or paddle-boarding. Your vibe test budget ensures you’re matched with people who spend like you.",
+              },
+              {
+                q: "Is this a dating app?",
+                a: "Not really — Pulse is about community, friendship, and shared experiences. Most people join to make new friends or find their crowd. But real life is full of surprises, and sometimes connections turn into something more.",
+              },
+              {
+                q: "What happens after the first meetup?",
+                a: "When your crew meets, Pip keeps the chat open and your mission extends. New plans appear, the group energy stays high, and hangouts often turn into regular meetups. That’s when strangers start feeling like friends.",
+              },
+            ].map((faq, idx) => (
+              <FAQItem key={idx} question={faq.q} answer={faq.a} />
+            ))}
           </div>
         </div>
       </section>
