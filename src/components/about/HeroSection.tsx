@@ -22,7 +22,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 whitespace-pre-line bg-clip-text text-transparent bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF]">
+          <h1 className="text-4xl md:text-6xl font-extrabold md:leading-tight mb-4 whitespace-pre-line bg-clip-text text-transparent bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF]">
             {t("about.hero.title", "Making Meaningful Friendships Effortless")}
           </h1>
           <p className="text-xl text-gray-300 mb-6">
