@@ -1,0 +1,172 @@
+code,name,country,state,slug
+houst,Houston,United States,Texas,/houston
+sanfm,Sanford  ME,United States,Maine,/sanford-me
+ancho,Anchorage,,Alaska,/anchorage
+bari,Bari,Italy,,/bari
+augme,Augusta  ME,United States,Maine,/augusta-me
+stut,Stuttgart,Germany,Baden-Württemberg,/stuttgart
+melb,Melbourne,Australia,,/melbourne
+bcn,Barcelona,Spain,Cataluña,/barcelona
+indin,Indianapolis,United States,Indiana,/indianapolis
+suva,Suva,Fiji,,/suva
+chasc,Charleston,United States,South Carolina,/charleston
+cluj,Cluj-Napoca,Romania,,/cluj-napoca
+orlan,Orlando,United States,Florida,/orlando
+tulsa,Tulsa,United States,Oklahoma,/tulsa
+sanjo,San Jose,United States,California,/san-jose
+denv,Denver,United States,Colorado,/denver
+hhsc,Hilton Head Island,United States,South Carolina,/hilton-head-island
+birm,Birmingham,United Kingdom,England,/birmingham
+arltx,Arlington,United States,Texas,/arlington
+linco,Lincoln,United States,Nebraska,/lincoln
+mun,Munich,Germany,Bavaria,/munchen
+milwa,Milwaukee,United States,Wisconsin,/milwaukee
+istan,Istanbul,Türkiye,,/istanbul
+colum,Columbus,United States,Ohio,/columbus
+port,Portland,United States,Maine,/portland
+nure,Nuremberg,Germany,Bavaria,/nuremberg
+ber,Berlin,Germany,,/berlin
+was,Washington DC,United States,,/washington-dc
+live,Liverpool,United Kingdom,England,/liverpool
+hano,Hanover,Germany,Niedersachsen,/hanover
+biggm,Biddeford  ME,United States,Maine,/biddeford-me
+brisb,Brisbane,Australia,,/brisbane
+jacks,Jacksonville,United States,Florida,/jacksonville
+leic,Leicester,United Kingdom,England,/leicester
+aubur,Auburn  ME,United States,Maine,/auburn-me
+lbca,Long Beach,United States,California,/long-beach
+genov,Genova,Italy,,/genova
+oklc,Oklahoma City,United States,Oklahoma,/oklahoma-city
+cleve,Cleveland,United States,Ohio,/cleveland
+dalla,Dallas,United States,Texas,/dallas
+louky,Louisville,United States,Kentucky,/louisville
+sev,Sevilla,Spain,Andalucía,/sevilla
+vancb,Vancouver,Canada,British Columbia,/vancouver
+wichi,Wichita,United States,Kansas,/wichita
+paler,Palermo,Italy,,/palermo
+bango,Bangor  ME,United States,Maine,/bangor-me
+wien,Vienna,Austria,,/wien
+lodz,Łódź,Poland,,/lodz
+hogwa,Hogwarts,,,/hogwarts
+mex,Mexico City,Mexico,,/mexico-city
+wyomi,Wyoming,United States,,/wyoming
+tor,Toronto,Canada,Ontario,/toronto
+bucha,Bucharest,Romania,,/bucharest
+fresn,Fresno,United States,California,/fresno
+erfu,Erfurt,Germany,Thüringen,/erfurt
+memph,Memphis,United States,Tennessee,/memphis
+flore,Firenze,Italy,,/firenze
+anahe,Anaheim,United States,California,/anaheim
+cork,Cork,Ireland,,/cork
+lyon,Lyon,France,,/lyon
+kanci,Kansas City,United States,Missouri,/kansas-city
+portl,Portland,United States,Oregon,/portland-oregon
+murc,Murcia,Spain,,/murcia
+colsp,Colorado Springs,United States,Colorado,/colorado-springs
+wei,Weimar,Germany,Thüringen,/weimar
+hamb,Hamburg,Germany,,/hamburg
+fra,Frankfurt,Germany,,/frankfurt
+nashu,Nashua  NH,United States,New Hampshire,/nashua-nh
+edin,Edinburgh,United Kingdom,Scotland,/edinburgh
+bolog,Bologna,Italy,,/bologna
+mannh,Manchester  NH,United States,New Hampshire,/manchester-nh
+nyc,New York,United States,New York State,/new-york
+detro,Detroit,United States,Michigan,/detroit
+milan,Milano,Italy,,/milano
+dres,Dresden,Germany,Saxony,/dresden
+bost,Boston,United States,Massachusetts,/boston
+mal,Málaga,Spain,Andalucía,/malaga
+newar,Newark,United States,New Jersey,/newark
+mad,Madrid,Spain,Community of Madrid,/madrid
+tene,Tenerife,,Canarias,/tenerife
+man,Manchester,United Kingdom,England,/manchester
+lario,La Rioja,Spain,,/la-rioja
+phila,Philadelphia,United States,Pennsylvania,/philadelphia
+pitts,Pittsburgh,United States,Pennsylvania,/pittsburgh
+fortw,Fort Worth,United States,Texas,/fort-worth
+warsa,Warsaw,Poland,,/warsaw
+bilb,Bilbao,Spain,País Vasco,/bilbao
+sanf,San Francisco,United States,California,/san-francisco
+monte,Monterrey,Mexico,,/monterrey
+austi,Austin,United States,Texas,/austin
+gal,Galicia,Spain,,/galicia
+mon,Montreal,Canada,Quebec,/montreal
+zar,Zaragoza,Spain,Aragón,/zaragoza
+shef,Sheffield,United Kingdom,England,/sheffield
+paris,Paris,France,,/paris
+balti,Baltimore,United States,Maryland,/baltimore
+alic,Alicante,Spain,Comunidad Valenciana,/alicante
+stoca,Stockton,United States,California,/stockton
+esse,Essen,Germany,Nordrhein-Westfalen,/essen
+glas,Glasgow,United Kingdom,Scotland,/glasgow
+kyiv,Kyiv,Ukraine,,/kyiv
+leed,Leeds,United Kingdom,England,/leeds
+dub,Dublin,Ireland,,/dublin
+car,Cardiff,United Kingdom,Wales,/cardiff
+guada,Guadalajara,Mexico,,/guadalajara
+chi,Chicago,United States,Illinois,/chicago
+phoen,Phoenix,United States,Arizona,/phoenix
+bksfi,Bakersfield,United States,California,/bakersfield
+nashv,Nashville,United States,Tennessee,/nashville
+lon,London,United Kingdom,England,/london
+spmn,Saint Paul,United States,Minnesota,/saint-paul
+gran,Granada,Spain,Andalucía,/granada
+pozna,Poznań,Poland,,/poznan
+bris,Bristol,United Kingdom,England,/bristol
+navar,Navarra,Spain,,/navarra
+omaha,Omaha,United States,Nebraska,/omaha
+astu,Asturias,Spain,,/asturias
+napol,Napoli,Italy,,/napoli
+bour,Bournemouth,United Kingdom,England,/bournemouth
+seatt,Seattle,United States,Washington State,/seattle
+brig,Brighton,United Kingdom,England,/brighton
+eugen,Eugene,United States,Oregon,/eugene
+galwa,Galway,Ireland,,/galway
+sacrc,Sacramento,United States,California,/sacramento
+sacme,Saco  ME,United States,Maine,/saco-me
+dort,Dortmund,Germany,Nordrhein-Westfalen,/dortmund
+iasir,Iași,Romania,,/iasi
+hende,Henderson,United States,Nevada,/henderson
+lepz,Leipzig,Germany,Saxony,/leipzig
+krako,Kraków,Poland,,/krakow
+mesa,Mesa,United States,Arizona,/mesa
+syd,Sydney,Australia,,/sydney
+charl,Charlotte,United States,North Carolina,/charlotte
+tijua,Tijuana,Mexico,,/tijuana
+limer,Limerick,Ireland,,/limerick
+tusco,Tuscon,United States,Arizona,/tuscon
+val,Valencia,Spain,Comunidad Valenciana,/valencia
+lvega,Las Vegas,United States,Nevada,/las-vegas
+nott,Nottingham,United Kingdom,England,/nottingham
+savge,Savannah,United States,Georgia,/savannah
+la,Los Angeles,United States,California,/los-angeles
+pton,Princeton,United States,New Jersey,/princeton
+westb,Westbrook  ME,United States,Maine,/westbrook-me
+norle,New Orleans,United States,Louisiana,/new-orleans
+rome,Roma,Italy,,/roma
+sanan,San Antonio,United States,Texas,/san-antonio
+minnp,Minneapolis,United States,Minnesota,/minneapolis
+newc,Newcastle,United Kingdom,England,/newcastle
+marse,Marseille,France,,/marseille
+albuq,Albuquerque,United States,New Mexico,/albuquerque
+cordo,Córdoba,Spain,Andalucía,/cordoba
+lewis,Lewiston  ME,United States,Maine,/lewiston-me
+palm,Las Palmas,,Canarias,/las-palmas
+duss,Düsseldorf,Germany,Nordrhein-Westfalen,/dusseldorf
+elpas,El Paso,United States,Texas,/el-paso
+wrocl,Wrocław,Poland,,/wroclaw
+belf,Belfast,United Kingdom,Northern Ireland,/belfast
+tampa,Tampa,United States,Florida,/tampa
+ralei,Raleigh,United States,North Carolina,/raleigh
+jena,Jena,Germany,Thüringen,/jena
+atlan,Atlanta,United States,Georgia,/atlanta
+sand,San Diego,United States,California,/san-diego
+connh,Concord  NH,United States,New Hampshire,/concord-nh
+torin,Torino,Italy,,/torino
+colo,Cologne,Germany,Nordrhein-Westfalen,/koln
+vabea,Virginia Beach,United States,Virginia,/virginia-beach
+lxton,Lexington,United States,Kentucky,/lexington
+honol,Honolulu,United States,,/honolulu
+extre,Extremadura,Spain,,/extremadura
+miami,Miami,United States,Florida,/miami
+toulo,Toulouse,France,,/toulouse

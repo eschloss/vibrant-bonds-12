@@ -10,13 +10,20 @@ import { ArrowRight, Users, Sparkles, Heart, Calendar, Database, Eye, Brain, Mes
 import MissionCountdown from "@/components/MissionCountdown";
 import FloatingActivityCollage from "@/components/FloatingActivityCollage";
 
-// Import Pip activity images
-import pipSurfing from "@/assets/pip-surfing.png";
-import pipVolleyball from "@/assets/pip-volleyball.png";
-import pipCamping from "@/assets/pip-camping.png";
-import pipPilates from "@/assets/pip-pilates.png";
-import pipBookclub from "@/assets/pip-bookclub.png";
-import pipPottery from "@/assets/pip-pottery.png";
+// Optimized Pip activity images (via vite-imagetools)
+// Generates WebP + PNG at multiple widths and returns a picture-like object
+// @ts-expect-error imagetools virtual import
+import pipSurfing from "@/assets/pip-surfing.png?format=webp;png&as=picture&width=160;240;320";
+// @ts-expect-error imagetools virtual import
+import pipVolleyball from "@/assets/pip-volleyball.png?format=webp;png&as=picture&width=160;240;320";
+// @ts-expect-error imagetools virtual import
+import pipCamping from "@/assets/pip-camping.png?format=webp;png&as=picture&width=160;240;320";
+// @ts-expect-error imagetools virtual import
+import pipPilates from "@/assets/pip-pilates.png?format=webp;png&as=picture&width=160;240;320";
+// @ts-expect-error imagetools virtual import
+import pipBookclub from "@/assets/pip-bookclub.png?format=webp;png&as=picture&width=160;240;320";
+// @ts-expect-error imagetools virtual import
+import pipPottery from "@/assets/pip-pottery.png?format=webp;png&as=picture&width=160;240;320";
 // Replaced local escape room asset with provided remote image URL
 const pipEscapeRoom = "https://s.kikiapp.eu/img/pip/escaperoom.png";
 
@@ -155,16 +162,16 @@ const Activities = () => {
           className="absolute inset-0 z-10 pointer-events-none"
           style={{ WebkitMaskImage: 'radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 0, rgba(0,0,0,0) 220px, rgba(0,0,0,1) 500px)', maskImage: 'radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 0, rgba(0,0,0,0) 220px, rgba(0,0,0,1) 500px)' }}
         >
-          <FloatingActivityCollage
-            items={[
-              { id: "surfing", img: pipSurfing, alt: "Pip surfing" },
-              { id: "volleyball", img: pipVolleyball, alt: "Pip playing beach volleyball" },
-              { id: "camping", img: pipCamping, alt: "Pip camping" },
-              { id: "pilates", img: pipPilates, alt: "Pip pilates" },
-              { id: "bookclub", img: pipBookclub, alt: "Pip book club" },
-              { id: "pottery", img: pipPottery, alt: "Pip pottery" },
-              { id: "escape-room", img: pipEscapeRoom, alt: "Pip escape room" },
-            ]}
+              <FloatingActivityCollage
+              items={[
+              { id: "surfing", img: pipSurfing, alt: t("activities.alt.surfing", "Pip surfing") },
+              { id: "volleyball", img: pipVolleyball, alt: t("activities.alt.volleyball", "Pip playing beach volleyball") },
+              { id: "camping", img: pipCamping, alt: t("activities.alt.camping", "Pip camping") },
+              { id: "pilates", img: pipPilates, alt: t("activities.alt.pilates", "Pip pilates") },
+              { id: "bookclub", img: pipBookclub, alt: t("activities.alt.bookclub", "Pip book club") },
+              { id: "pottery", img: pipPottery, alt: t("activities.alt.pottery", "Pip pottery") },
+              { id: "escape-room", img: pipEscapeRoom, alt: t("activities.alt.escape_room", "Pip escape room") },
+              ]}
             density={7}
             floatRange={6}
             stagger={0.14}
@@ -253,10 +260,11 @@ const Activities = () => {
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={activity.image}
-                      alt={`Pip enjoying ${t(`activity.${activity.id}` as any, activity.name)}`}
+                      alt={`Meet New ${t(`activity.${activity.id}` as any, activity.name)} Friends`}
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
+                      sizes="(min-width:1024px) 12vw, (min-width:640px) 28vw, 44vw"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />

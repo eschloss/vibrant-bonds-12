@@ -1,0 +1,171 @@
+Houston, Texas, United States (houst) - //houston
+Sanford, ME, Maine, United States (sanfm) - //sanford-me
+Anchorage, Alaska,  (ancho) - //anchorage
+Bari, Italy (bari) - //bari
+Augusta, ME, Maine, United States (augme) - //augusta-me
+Stuttgart, Baden-Württemberg, Germany (stut) - //stuttgart
+Melbourne, Australia (melb) - //melbourne
+Barcelona, Cataluña, Spain (bcn) - //barcelona
+Indianapolis, Indiana, United States (indin) - //indianapolis
+Suva, Fiji (suva) - //suva
+Charleston, South Carolina, United States (chasc) - //charleston
+Cluj-Napoca, Romania (cluj) - //cluj-napoca
+Orlando, Florida, United States (orlan) - //orlando
+Tulsa, Oklahoma, United States (tulsa) - //tulsa
+San Jose, California, United States (sanjo) - //san-jose
+Denver, Colorado, United States (denv) - //denver
+Hilton Head Island, South Carolina, United States (hhsc) - //hilton-head-island
+Birmingham, England, United Kingdom (birm) - //birmingham
+Arlington, Texas, United States (arltx) - //arlington
+Lincoln, Nebraska, United States (linco) - //lincoln
+Munich, Bavaria, Germany (mun) - //munchen
+Milwaukee, Wisconsin, United States (milwa) - //milwaukee
+Istanbul, Türkiye (istan) - //istanbul
+Columbus, Ohio, United States (colum) - //columbus
+Portland, Maine, United States (port) - //portland
+Nuremberg, Bavaria, Germany (nure) - //nuremberg
+Berlin, Germany (ber) - //berlin
+Washington DC, United States (was) - //washington-dc
+Liverpool, England, United Kingdom (live) - //liverpool
+Hanover, Niedersachsen, Germany (hano) - //hanover
+Biddeford, ME, Maine, United States (biggm) - //biddeford-me
+Brisbane, Australia (brisb) - //brisbane
+Jacksonville, Florida, United States (jacks) - //jacksonville
+Leicester, England, United Kingdom (leic) - //leicester
+Auburn, ME, Maine, United States (aubur) - //auburn-me
+Long Beach, California, United States (lbca) - //long-beach
+Genova, Italy (genov) - //genova
+Oklahoma City, Oklahoma, United States (oklc) - //oklahoma-city
+Cleveland, Ohio, United States (cleve) - //cleveland
+Dallas, Texas, United States (dalla) - //dallas
+Louisville, Kentucky, United States (louky) - //louisville
+Sevilla, Andalucía, Spain (sev) - //sevilla
+Vancouver, British Columbia, Canada (vancb) - //vancouver
+Wichita, Kansas, United States (wichi) - //wichita
+Palermo, Italy (paler) - //palermo
+Bangor, ME, Maine, United States (bango) - //bangor-me
+Vienna, Austria (wien) - //wien
+Łódź, Poland (lodz) - //lodz
+Hogwarts,  (hogwa) - //hogwarts
+Mexico City, Mexico (mex) - //mexico-city
+Wyoming, United States (wyomi) - //wyoming
+Toronto, Ontario, Canada (tor) - //toronto
+Bucharest, Romania (bucha) - //bucharest
+Fresno, California, United States (fresn) - //fresno
+Erfurt, Thüringen, Germany (erfu) - //erfurt
+Memphis, Tennessee, United States (memph) - //memphis
+Firenze, Italy (flore) - //firenze
+Anaheim, California, United States (anahe) - //anaheim
+Cork, Ireland (cork) - //cork
+Lyon, France (lyon) - //lyon
+Kansas City, Missouri, United States (kanci) - //kansas-city
+Portland, Oregon, United States (portl) - //portland-oregon
+Murcia, Spain (murc) - //murcia
+Colorado Springs, Colorado, United States (colsp) - //colorado-springs
+Weimar, Thüringen, Germany (wei) - //weimar
+Hamburg, Germany (hamb) - //hamburg
+Frankfurt, Germany (fra) - //frankfurt
+Nashua, NH, New Hampshire, United States (nashu) - //nashua-nh
+Edinburgh, Scotland, United Kingdom (edin) - //edinburgh
+Bologna, Italy (bolog) - //bologna
+Manchester, NH, New Hampshire, United States (mannh) - //manchester-nh
+New York, New York State, United States (nyc) - //new-york
+Detroit, Michigan, United States (detro) - //detroit
+Milano, Italy (milan) - //milano
+Dresden, Saxony, Germany (dres) - //dresden
+Boston, Massachusetts, United States (bost) - //boston
+Málaga, Andalucía, Spain (mal) - //malaga
+Newark, New Jersey, United States (newar) - //newark
+Madrid, Community of Madrid, Spain (mad) - //madrid
+Tenerife, Canarias,  (tene) - //tenerife
+Manchester, England, United Kingdom (man) - //manchester
+La Rioja, Spain (lario) - //la-rioja
+Philadelphia, Pennsylvania, United States (phila) - //philadelphia
+Pittsburgh, Pennsylvania, United States (pitts) - //pittsburgh
+Fort Worth, Texas, United States (fortw) - //fort-worth
+Warsaw, Poland (warsa) - //warsaw
+Bilbao, País Vasco, Spain (bilb) - //bilbao
+San Francisco, California, United States (sanf) - //san-francisco
+Monterrey, Mexico (monte) - //monterrey
+Austin, Texas, United States (austi) - //austin
+Galicia, Spain (gal) - //galicia
+Montreal, Quebec, Canada (mon) - //montreal
+Zaragoza, Aragón, Spain (zar) - //zaragoza
+Sheffield, England, United Kingdom (shef) - //sheffield
+Paris, France (paris) - //paris
+Baltimore, Maryland, United States (balti) - //baltimore
+Alicante, Comunidad Valenciana, Spain (alic) - //alicante
+Stockton, California, United States (stoca) - //stockton
+Essen, Nordrhein-Westfalen, Germany (esse) - //essen
+Glasgow, Scotland, United Kingdom (glas) - //glasgow
+Kyiv, Ukraine (kyiv) - //kyiv
+Leeds, England, United Kingdom (leed) - //leeds
+Dublin, Ireland (dub) - //dublin
+Cardiff, Wales, United Kingdom (car) - //cardiff
+Guadalajara, Mexico (guada) - //guadalajara
+Chicago, Illinois, United States (chi) - //chicago
+Phoenix, Arizona, United States (phoen) - //phoenix
+Bakersfield, California, United States (bksfi) - //bakersfield
+Nashville, Tennessee, United States (nashv) - //nashville
+London, England, United Kingdom (lon) - //london
+Saint Paul, Minnesota, United States (spmn) - //saint-paul
+Granada, Andalucía, Spain (gran) - //granada
+Poznań, Poland (pozna) - //poznan
+Bristol, England, United Kingdom (bris) - //bristol
+Navarra, Spain (navar) - //navarra
+Omaha, Nebraska, United States (omaha) - //omaha
+Asturias, Spain (astu) - //asturias
+Napoli, Italy (napol) - //napoli
+Bournemouth, England, United Kingdom (bour) - //bournemouth
+Seattle, Washington State, United States (seatt) - //seattle
+Brighton, England, United Kingdom (brig) - //brighton
+Eugene, Oregon, United States (eugen) - //eugene
+Galway, Ireland (galwa) - //galway
+Sacramento, California, United States (sacrc) - //sacramento
+Saco, ME, Maine, United States (sacme) - //saco-me
+Dortmund, Nordrhein-Westfalen, Germany (dort) - //dortmund
+Iași, Romania (iasir) - //iasi
+Henderson, Nevada, United States (hende) - //henderson
+Leipzig, Saxony, Germany (lepz) - //leipzig
+Kraków, Poland (krako) - //krakow
+Mesa, Arizona, United States (mesa) - //mesa
+Sydney, Australia (syd) - //sydney
+Charlotte, North Carolina, United States (charl) - //charlotte
+Tijuana, Mexico (tijua) - //tijuana
+Limerick, Ireland (limer) - //limerick
+Tuscon, Arizona, United States (tusco) - //tuscon
+Valencia, Comunidad Valenciana, Spain (val) - //valencia
+Las Vegas, Nevada, United States (lvega) - //las-vegas
+Nottingham, England, United Kingdom (nott) - //nottingham
+Savannah, Georgia, United States (savge) - //savannah
+Los Angeles, California, United States (la) - //los-angeles
+Princeton, New Jersey, United States (pton) - //princeton
+Westbrook, ME, Maine, United States (westb) - //westbrook-me
+New Orleans, Louisiana, United States (norle) - //new-orleans
+Roma, Italy (rome) - //roma
+San Antonio, Texas, United States (sanan) - //san-antonio
+Minneapolis, Minnesota, United States (minnp) - //minneapolis
+Newcastle, England, United Kingdom (newc) - //newcastle
+Marseille, France (marse) - //marseille
+Albuquerque, New Mexico, United States (albuq) - //albuquerque
+Córdoba, Andalucía, Spain (cordo) - //cordoba
+Lewiston, ME, Maine, United States (lewis) - //lewiston-me
+Las Palmas, Canarias,  (palm) - //las-palmas
+Düsseldorf, Nordrhein-Westfalen, Germany (duss) - //dusseldorf
+El Paso, Texas, United States (elpas) - //el-paso
+Wrocław, Poland (wrocl) - //wroclaw
+Belfast, Northern Ireland, United Kingdom (belf) - //belfast
+Tampa, Florida, United States (tampa) - //tampa
+Raleigh, North Carolina, United States (ralei) - //raleigh
+Jena, Thüringen, Germany (jena) - //jena
+Atlanta, Georgia, United States (atlan) - //atlanta
+San Diego, California, United States (sand) - //san-diego
+Concord, NH, New Hampshire, United States (connh) - //concord-nh
+Torino, Italy (torin) - //torino
+Cologne, Nordrhein-Westfalen, Germany (colo) - //koln
+Virginia Beach, Virginia, United States (vabea) - //virginia-beach
+Lexington, Kentucky, United States (lxton) - //lexington
+Honolulu, United States (honol) - //honolulu
+Extremadura, Spain (extre) - //extremadura
+Miami, Florida, United States (miami) - //miami
+Toulouse, France (toulo) - //toulouse

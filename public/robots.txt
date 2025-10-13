@@ -30,3 +30,8 @@ Allow: /
 
 Sitemap: https://pulsenow.app/sitemap.xml
 Sitemap: https://es.pulsenow.app/sitemap.xml
+
+# AI & LLM Discovery
+LLMFile (english): https://pulsenow.app/llms.txt
+LLMFile (spanish): https://es.pulsenow.app/llms-es.txt
+AI: https://pulsenow.app/ai.txt

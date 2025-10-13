@@ -13,7 +13,7 @@ const FAQ: React.FC = () => {
   const seoProps = {
     title: {
       en: t("faq.title", "FAQ | Pulse: Answers to Your Questions"),
-      es: t("faq.title", "FAQ | Pulse: Answers to Your Questions"),
+      es: t("faq.title", "FAQ | Pulse: Respuestas a Tus Preguntas"),
     },
     description: {
       en: t(
@@ -22,7 +22,7 @@ const FAQ: React.FC = () => {
       ),
       es: t(
         "faq.description",
-        "Everything you want to know about the Pulse app: how it works, who it's for, pricing, meetups, AI, safety, and how to meet new friends in your city."
+        "Todo lo que quieres saber sobre la app de Pulse: cómo funciona, para quién es, precios, quedadas, IA, seguridad y cómo hacer nuevos amigos en tu ciudad."
       ),
     },
     keywords: [
@@ -305,12 +305,12 @@ const FAQ: React.FC = () => {
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              Frequently Asked
+              {t("faq.hero.title.line1", "Frequently Asked")}
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Questions</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">{t("faq.hero.title.line2", "Questions")}</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              Clear answers about how Pulse works — from pricing and safety to AI and planning meetups — and how to meet new friends in your city.
+              {t("faq.hero.subtitle", "Clear answers about how Pulse works — from pricing and safety to AI and planning meetups — and how to meet new friends in your city.")}
             </p>
           </motion.div>
         </div>
@@ -323,7 +323,7 @@ const FAQ: React.FC = () => {
           <div className="bg-gray-800/40 backdrop-blur-lg rounded-3xl border border-gray-700 p-4 md:p-8">
             <div className="flex items-center gap-2 text-accent mb-4">
               <Sparkles className="h-4 w-4" />
-              <span className="text-sm uppercase tracking-wider">Helpful answers</span>
+              <span className="text-sm uppercase tracking-wider">{t("faq.list.badge", "Helpful answers")}</span>
             </div>
             <div className="space-y-4">
               {faqs.map((item, idx) => (
@@ -350,15 +350,15 @@ const FAQ: React.FC = () => {
       <section className="pb-24">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to make new friends?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("faq.cta.title", "Ready to make new friends?")}</h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join Pulse to get matched with a friend group in your city. Pip will help you plan meetups you actually look forward to.
+              {t("faq.cta.subtitle", "Join Pulse to get matched with a friend group in your city. Pip will help you plan meetups you actually look forward to.")}
             </p>
             <a
               href="/cities"
               className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full inline-flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg"
             >
-              Get Started with Pulse
+              {t("faq.cta.button", "Get Started with Pulse")}
             </a>
           </div>
         </div>
@@ -368,13 +368,13 @@ const FAQ: React.FC = () => {
       <section className="pb-24 -mt-12">
         <div className="container mx-auto px-4">
           <div className="bg-gray-800/50 backdrop-blur-lg rounded-2xl border border-gray-700 p-6 md:p-8 max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-2">Didn’t find your answer?</h3>
-            <p className="text-gray-300 mb-6">We're here to help. Reach out and we’ll get back to you quickly.</p>
+            <h3 className="text-2xl font-bold mb-2">{t("faq.contact.title", "Didn’t find your answer?")}</h3>
+            <p className="text-gray-300 mb-6">{t("faq.contact.subtitle", "We're here to help. Reach out and we’ll get back to you quickly.")}</p>
             <a
               href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#38D1BF] text-[#38D1BF] hover:bg-[#38D1BF]/10 transition-colors"
             >
-              <Mail className="h-5 w-5" /> Contact Us
+              <Mail className="h-5 w-5" /> {t("faq.contact.button", "Contact Us")}
             </a>
           </div>
         </div>

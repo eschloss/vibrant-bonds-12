@@ -32,10 +32,10 @@ const LonelinessEpidemic: React.FC = () => {
   };
 
   const keyStats = [
-    { number: "50%", text: t("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: "Cigna, 2023" },
-    { number: "21M", text: t("loneliness.key_stats.stat2", "Americans have zero close friends"), source: "Survey Center on American Life, 2021" },
-    { number: "79%", text: t("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: "Cigna, 2020" },
-    { number: "29%", text: t("loneliness.key_stats.stat4", "increased risk of premature death"), source: "PLOS Medicine, 2015" }
+    { number: "50%", text: t("loneliness.key_stats.stat1", "of Americans report experiencing loneliness"), source: t("loneliness.key_stats.source1", "Cigna, 2023") },
+    { number: "21M", text: t("loneliness.key_stats.stat2", "Americans have zero close friends"), source: t("loneliness.key_stats.source2", "Survey Center on American Life, 2021") },
+    { number: "79%", text: t("loneliness.key_stats.stat3", "of Gen Z reports frequent loneliness"), source: t("loneliness.key_stats.source3", "Cigna, 2020") },
+    { number: "29%", text: t("loneliness.key_stats.stat4", "increased risk of premature death"), source: t("loneliness.key_stats.source4", "PLOS Medicine, 2015") }
   ];
 
   const healthImpacts = [
@@ -1330,43 +1330,43 @@ const LonelinessEpidemic: React.FC = () => {
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="How many Americans are lonely today?"
-                    answer="About 36% of U.S. adults report serious loneliness<sup><a href='#ref-2' className='text-blue-400 hover:text-blue-300 font-semibold'>[2]</a></sup>, and 21 million Americans have zero close friends<sup><a href='#ref-3' className='text-blue-400 hover:text-blue-300 font-semibold'>[3]</a></sup> according to the Survey Center on American Life (2021). Loneliness affects all age groups but is especially pronounced in young adults and older adults living alone."
+                    question={t("loneliness.faq.q2", "How many Americans are lonely today?")}
+                    answer={t("loneliness.faq.a2", "About 36% of U.S. adults report serious loneliness, and 21 million Americans have zero close friends according to the Survey Center on American Life (2021).")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="Which generation is the loneliest?"
-                    answer="Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often<sup><a href='#ref-4' className='text-blue-400 hover:text-blue-300 font-semibold'>[4]</a></sup>, and 1 in 4 have no close friends according to Cigna's 2020 study. This generation faces unique challenges including social media comparison, economic uncertainty, and delayed life milestones."
+                    question={t("loneliness.faq.q3", "Which generation is the loneliest?")}
+                    answer={t("loneliness.faq.a3", "Generation Z (ages 18–25) is currently the loneliest generation. 79% report feeling lonely often, and 1 in 4 have no close friends according to Cigna's 2020 study.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="How has the number of close friends changed over time?"
-                    answer="The average adult today has 2 close friends, down from 4 in 1990<sup><a href='#ref-3' className='text-blue-400 hover:text-blue-300 font-semibold'>[3]</a></sup> according to the Survey Center on American Life (2021). This 50% decline reflects broader social and cultural changes, including reduced civic engagement, increased mobility, and digital communication replacing face-to-face interaction."
+                    question={t("loneliness.faq.friends_change.q", "How has the number of close friends changed over time?")}
+                    answer={t("loneliness.faq.friends_change.a", "The average adult today has 2 close friends, down from 4 in 1990 according to the Survey Center on American Life (2021). This 50% decline reflects broader social and cultural changes, including reduced civic engagement, increased mobility, and digital communication replacing face-to-face interaction.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What are the health effects of loneliness?"
-                    answer="Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%)<sup><a href='#ref-8' className='text-blue-400 hover:text-blue-300 font-semibold'>[8]</a></sup><sup><a href='#ref-9' className='text-blue-400 hover:text-blue-300 font-semibold'>[9]</a></sup> according to Holt-Lunstad's research published in PLOS Medicine (2015). It also weakens the immune system<sup><a href='#ref-10' className='text-blue-400 hover:text-blue-300 font-semibold'>[10]</a></sup>, slows wound healing, and is equivalent to smoking 15 cigarettes daily in terms of health impact."
+                    question={t("loneliness.faq.q4", "What are the health effects of loneliness?")}
+                    answer={t("loneliness.faq.a4", "Loneliness increases risk of heart disease (29%), stroke (32%), inflammation, and premature death (29%). It also weakens the immune system and is equivalent to smoking 15 cigarettes daily in terms of health impact.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What are the mental health consequences of loneliness?"
-                    answer="Chronic loneliness is strongly linked to depression, anxiety, suicidal ideation, and higher stress levels. Lonely adolescents are more likely to engage in self-harm according to research published in The Lancet Child & Adolescent Health (2020). It can also lead to cognitive decline and increased risk of dementia."
+                    question={t("loneliness.faq.mental.q", "What are the mental health consequences of loneliness?")}
+                    answer={t("loneliness.faq.mental.a", "Chronic loneliness is strongly linked to depression, anxiety, suicidal ideation, and higher stress levels. Lonely adolescents are more likely to engage in self-harm according to research published in The Lancet Child & Adolescent Health (2020). It can also lead to cognitive decline and increased risk of dementia.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="Can loneliness increase the risk of premature death or suicide?"
-                    answer="Yes. Social isolation is associated with 2–3x higher suicide risk among older adults according to the American Foundation for Suicide Prevention. Loneliness contributes to rising U.S. suicide rates, currently around 49,000 deaths per year (CDC, 2022), and increases premature death risk by 29%."
+                    question={t("loneliness.faq.q5", "Can loneliness increase the risk of premature death or suicide?")}
+                    answer={t("loneliness.faq.a5", "Yes. Social isolation is associated with 2–3x higher suicide risk among older adults and increases premature death risk by 29%. Loneliness contributes to rising U.S. suicide rates, currently around 49,000 deaths per year.")}
                   />
                 </motion.div>
 

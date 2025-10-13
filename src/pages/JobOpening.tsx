@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Seo } from "@/hooks/useSeo";
 import { trackTypeformRedirect } from "@/lib/utils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface JobOpening {
   id: string;
@@ -28,6 +29,7 @@ interface JobOpening {
 
 const JobOpening = () => {
   const { jobId } = useParams<{ jobId: string }>();
+  const { t } = useTranslation();
 
   // Job openings data - in a real app, this would come from an API
   const jobOpenings: Record<string, JobOpening> = {
@@ -416,11 +418,11 @@ const JobOpening = () => {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-[85px]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl mx-auto">
-            <div className="mb-6">
-              <Link to="/careers" className="text-pulse-pink hover:underline text-sm">
-                ← Back to Careers
-              </Link>
-            </div>
+          <div className="mb-6">
+            <Link to="/careers" className="text-pulse-pink hover:underline text-sm">
+              {t("careers.job.back_to_careers", "← Back to Careers")}
+            </Link>
+          </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
               {job.title}
             </h1>
@@ -430,17 +432,17 @@ const JobOpening = () => {
               </span>
               {job.isRemote && (
                 <span className="bg-green-500/20 border border-green-500/30 text-green-300 px-3 py-1 rounded-full text-sm">
-                  Remote
+                  {t("careers.positions.remote", "Remote")}
                 </span>
               )}
               {job.isPartTime && (
                 <span className="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-3 py-1 rounded-full text-sm">
-                  Part-Time
+                  {t("careers.positions.part_time", "Part-Time")}
                 </span>
               )}
               {job.isUnpaid && (
                 <span className="bg-yellow-500/20 border border-yellow-500/30 text-yellow-300 px-3 py-1 rounded-full text-sm">
-                  Unpaid
+                  {t("careers.positions.unpaid", "Unpaid")}
                 </span>
               )}
             </div>
@@ -459,7 +461,7 @@ const JobOpening = () => {
             {/* TL;DR Section */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-t-none">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-pulse-pink">TL;DR</h2>
+                <h2 className="text-2xl font-bold mb-4 text-pulse-pink">{t("careers.job.tldr", "TL;DR")}</h2>
                 <div className="text-gray-300 space-y-4">
                   {job.tldr.split('\n\n').map((paragraph, index) => (
                     <p key={index} className="leading-relaxed">
@@ -473,7 +475,7 @@ const JobOpening = () => {
             {/* About Pulse */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-none border-t-0">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-white">About Pulse</h2>
+                <h2 className="text-2xl font-bold mb-4 text-white">{t("careers.job.about", "About Pulse")}</h2>
                 <div className="text-gray-300 space-y-4">
                   {job.about.split('\n\n').map((paragraph, index) => (
                     <p key={index} className="leading-relaxed">
@@ -487,7 +489,7 @@ const JobOpening = () => {
             {/* What You'll Do */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-none border-t-0">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-white">What You'll Do</h2>
+                <h2 className="text-2xl font-bold mb-4 text-white">{t("careers.job.what_you_do", "What You'll Do")}</h2>
                 <ul className="text-gray-300 space-y-3">
                   {job.responsibilities.map((responsibility, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -502,7 +504,7 @@ const JobOpening = () => {
             {/* Who You Are */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-none border-t-0">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-white">Who You Are</h2>
+                <h2 className="text-2xl font-bold mb-4 text-white">{t("careers.job.who_you_are", "Who You Are")}</h2>
                 <ul className="text-gray-300 space-y-3">
                   {job.requirements.map((requirement, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -517,7 +519,7 @@ const JobOpening = () => {
             {/* Why Join */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-none border-t-0">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-white">Why Join?</h2>
+                <h2 className="text-2xl font-bold mb-4 text-white">{t("careers.job.why_join", "Why Join?")}</h2>
                 <ul className="text-gray-300 space-y-3">
                   {job.benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -532,7 +534,7 @@ const JobOpening = () => {
             {/* How to Apply */}
             <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 rounded-none border-t-0">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 text-white">How to Apply</h2>
+                <h2 className="text-2xl font-bold mb-4 text-white">{t("careers.job.how_to_apply", "How to Apply")}</h2>
                 <div className="text-gray-300 space-y-4 mb-6">
                   {job.howToApply.split('\n\n').map((paragraph, index) => (
                     <p key={index} className="leading-relaxed">
@@ -543,7 +545,7 @@ const JobOpening = () => {
                 {job.applicationUrl && (
                   <Button asChild className="w-full md:w-auto bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-8 py-4 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 font-medium text-lg">
                     <a href={job.applicationUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => trackTypeformRedirect({ href: (e.currentTarget as HTMLAnchorElement).href, source: 'careers:job_opening', extra: { jobId } })}>
-                      Apply Now
+                      {t("careers.job.apply_now", "Apply Now")}
                     </a>
                   </Button>
                 )}
@@ -557,7 +559,7 @@ const JobOpening = () => {
       <section className="py-12 relative">
         <div className="container mx-auto px-4 text-center">
           <Link to="/careers" className="text-pulse-pink hover:underline text-lg">
-            ← Back to All Openings
+            {t("careers.job.back_to_all", "← Back to All Openings")}
           </Link>
         </div>
       </section>

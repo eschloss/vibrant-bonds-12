@@ -55,6 +55,7 @@ export const shared = {
     // Navbar translations
     "navbar.home": "Home",
     "navbar.how_it_works": "How it works",
+    "navbar.activities": "Adventures",
     "navbar.partnerships": "Partnerships",
     "navbar.meet_pip": "Meet Pip",
     "navbar.about": "About Us",
@@ -481,6 +482,17 @@ export const shared = {
     "careers.apply.contact": "Get in Touch",
     "careers.apply.cta2": "Get in Touch",
 
+    // Job Opening page
+    "careers.job.tldr": "TL;DR",
+    "careers.job.about": "About Pulse",
+    "careers.job.what_you_do": "What You'll Do",
+    "careers.job.who_you_are": "Who You Are",
+    "careers.job.why_join": "Why Join?",
+    "careers.job.how_to_apply": "How to Apply",
+    "careers.job.apply_now": "Apply Now",
+    "careers.job.back_to_careers": "← Back to Careers",
+    "careers.job.back_to_all": "← Back to All Openings",
+
     // Meet Pip Promo module
     "meet_pippromo.badge": "Built to spark IRL connections",
     "meet_pippromo.headline": "Meet Pip, Your Social Wingman",
@@ -495,6 +507,10 @@ export const shared = {
     "meet_pippromo.item4.text": "Gentle nudges that guide your group to keep meeting, so casual hangs grow into lasting friendships",
     "meet_pippromo.cta": "Meet Pip",
     "meet_pippromo.image_alt": "Pip celebrating with friends",
+
+    // Share Callout module
+    "share_callout.title": "Spread the word",
+    "share_callout.description": "Share Pulse with friends and help grow your local crew.",
 
     // Common elements
     "common.join_pulse": "Join Pulse",
@@ -558,6 +574,7 @@ export const shared = {
     // Navbar translations - Spanish
     "navbar.home": "Inicio",
     "navbar.how_it_works": "Cómo funciona",
+    "navbar.activities": "Aventuras",
     "navbar.partnerships": "Asociaciones",
     "navbar.meet_pip": "Conoce a Pip",
     "navbar.about": "Acerca de Nosotros",
@@ -984,6 +1001,17 @@ export const shared = {
     "careers.apply.contact": "Ponerse en Contacto",
     "careers.apply.cta2": "Ponerse en Contacto",
 
+    // Job Opening page (Spanish)
+    "careers.job.tldr": "Resumen",
+    "careers.job.about": "Sobre Pulse",
+    "careers.job.what_you_do": "Lo que Harás",
+    "careers.job.who_you_are": "Quién Eres",
+    "careers.job.why_join": "Por Qué Unirte",
+    "careers.job.how_to_apply": "Cómo Postular",
+    "careers.job.apply_now": "Postular Ahora",
+    "careers.job.back_to_careers": "← Volver a Carreras",
+    "careers.job.back_to_all": "← Volver a Todas las Vacantes",
+
     // Meet Pip Promo module
     "meet_pippromo.badge": "Construido para generar conexiones IRL",
     "meet_pippromo.headline": "Conoce a Pip, Tu Ala Social",
@@ -998,6 +1026,10 @@ export const shared = {
     "meet_pippromo.item4.text": "Indicaciones suaves que guían a tu grupo a seguir reuniéndose, para que las reuniones casuales se conviertan en amistades duraderas",
     "meet_pippromo.cta": "Conoce a Pip",
     "meet_pippromo.image_alt": "Pip celebrando con amigos",
+
+    // Share Callout module
+    "share_callout.title": "Corre la voz",
+    "share_callout.description": "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local.",
 
     // Common elements
     "common.join_pulse": "Unirse a Pulse",

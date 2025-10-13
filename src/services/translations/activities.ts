@@ -32,6 +32,15 @@ export const activities = {
     "teaser.cta": "Find Your Next Adventure",
     "teaser.shuffle": "Shuffle",
 
+    // Alt text
+    "activities.alt.surfing": "Pip surfing",
+    "activities.alt.volleyball": "Pip playing beach volleyball",
+    "activities.alt.camping": "Pip camping",
+    "activities.alt.pilates": "Pip pilates",
+    "activities.alt.bookclub": "Pip book club",
+    "activities.alt.pottery": "Pip pottery",
+    "activities.alt.escape_room": "Pip escape room",
+
     // Category and activity names (used in lists and alt text)
     "activity.arcade": "Arcade",
     "activity.pottery": "Pottery",
@@ -110,6 +119,15 @@ export const activities = {
     "teaser.subtitle": "Una mini vista previa de lo que su grupo podría hacer juntos. Mezcla para ideas y explora la lista completa.",
     "teaser.cta": "Descubre actividades cerca de ti",
     "teaser.shuffle": "Mezclar",
+
+    // Alt text (Spanish)
+    "activities.alt.surfing": "Pip haciendo surf",
+    "activities.alt.volleyball": "Pip jugando voleibol de playa",
+    "activities.alt.camping": "Pip acampando",
+    "activities.alt.pilates": "Pip haciendo pilates",
+    "activities.alt.bookclub": "Pip en club de lectura",
+    "activities.alt.pottery": "Pip en cerámica",
+    "activities.alt.escape_room": "Pip en sala de escape",
 
     // Category and activity names
     "activity.arcade": "Arcade",

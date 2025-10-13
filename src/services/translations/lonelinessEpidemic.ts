@@ -1,5 +1,15 @@
 export const lonelinessEpidemic = {
   en: {
+    "loneliness.cultural.title": "Cultural and Social Shifts: Why Loneliness Is Rising",
+    "loneliness.cultural.intro": "Loneliness doesn't occur in a vacuum. It reflects profound changes in how society is structured, how we interact, and the role technology plays in our lives.",
+    "loneliness.civic.title": "Civic Engagement Decline Statistics: Community Participation Data Over Decades",
+    "loneliness.civic.intro": "Robert Putnam's \"Bowling Alone\" (2000) documented a sharp decline in American community life over the latter half of the 20th century:",
+    "loneliness.civic.li1": "Membership in organizations like PTAs, civic clubs, and unions dropped by nearly 50% between the 1960s and 2000",
+    "loneliness.civic.li2": "The percentage of Americans who say \"most people can be trusted\" fell from 55% in 1972 to 32% in 2000",
+    "loneliness.civic.li3": "Religious attendance fell from 45% in 1970 to 24% in 2020",
+    "loneliness.tech_social.title": "Technology & Social Media",
+    "loneliness.tech_social.li1": "Heavy social media users feeling isolated",
+    "loneliness.tech_social.li2": "Millennials/Gen Z daily social media use",
     // Hero section
     "loneliness.hero.badge": "Public Health Crisis",
     "loneliness.hero.title1": "The Loneliness",
@@ -91,6 +101,10 @@ export const lonelinessEpidemic = {
     "loneliness.key_stats.stat2": "21M Americans have zero close friends", 
     "loneliness.key_stats.stat3": "79% of Gen Z reports frequent loneliness",
     "loneliness.key_stats.stat4": "29% increased risk of premature death",
+    "loneliness.key_stats.source1": "Cigna, 2023",
+    "loneliness.key_stats.source2": "Survey Center on American Life, 2021",
+    "loneliness.key_stats.source3": "Cigna, 2020",
+    "loneliness.key_stats.source4": "PLOS Medicine, 2015",
 
     // Health impacts
     "loneliness.health.cardiovascular.title": "Cardiovascular Disease",
@@ -175,6 +189,16 @@ export const lonelinessEpidemic = {
     "loneliness.conclusion.footer_text": "Don't wait. Start connecting today. Your future self will thank you. Contact us to learn about partnership opportunities or join our mission to combat loneliness.",
   },
   es: {
+    "loneliness.cultural.title": "Cambios Culturales y Sociales: Por Qué Aumenta la Soledad",
+    "loneliness.cultural.intro": "La soledad no ocurre en el vacío. Refleja cambios profundos en cómo se estructura la sociedad, cómo interactuamos y el papel que juega la tecnología en nuestras vidas.",
+    "loneliness.civic.title": "Descenso del Compromiso Cívico: Datos de Participación Comunitaria por Décadas",
+    "loneliness.civic.intro": "Robert Putnam, en \"Bowling Alone\" (2000), documentó una fuerte caída de la vida comunitaria estadounidense en la segunda mitad del siglo XX:",
+    "loneliness.civic.li1": "La membresía en organizaciones como PTAs, clubes cívicos y sindicatos cayó ~50% entre los 60s y 2000",
+    "loneliness.civic.li2": "El porcentaje que dice \"se puede confiar en la mayoría\" bajó de 55% (1972) a 32% (2000)",
+    "loneliness.civic.li3": "La asistencia religiosa cayó de 45% (1970) a 24% (2020)",
+    "loneliness.tech_social.title": "Tecnología y Redes Sociales",
+    "loneliness.tech_social.li1": "Usuarios intensivos de redes sociales que se sienten aislados",
+    "loneliness.tech_social.li2": "Uso diario de redes sociales en Millennials/Gen Z",
     // Hero section
     "loneliness.hero.badge": "Crisis de Salud Pública",
     "loneliness.hero.title1": "La Epidemia de",
@@ -227,6 +251,10 @@ export const lonelinessEpidemic = {
     "loneliness.key_stats.stat2": "21M de estadounidenses no tienen amigos cercanos",
     "loneliness.key_stats.stat3": "79% de Gen Z reporta soledad frecuente",
     "loneliness.key_stats.stat4": "29% mayor riesgo de muerte prematura",
+    "loneliness.key_stats.source1": "Cigna, 2023",
+    "loneliness.key_stats.source2": "Survey Center on American Life, 2021",
+    "loneliness.key_stats.source3": "Cigna, 2020",
+    "loneliness.key_stats.source4": "PLOS Medicine, 2015",
 
     // Health impacts
     "loneliness.health.title": "Impacto en la Salud de la Soledad Crónica",

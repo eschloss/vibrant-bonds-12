@@ -666,8 +666,8 @@ const Partnerships = () => {
                 <div className="text-gray-300"><Text id="partnerships.faq.staff_time_answer">Treat it like any small group booking (≈10 people). We handle the rest.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
-                <div className="font-semibold text-white mb-1">What about cancellations and no‑shows?</div>
-                <div className="text-gray-300">We set clear policies and manage communications so you’re protected.</div>
+                <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.cancellations">What about cancellations and no‑shows?</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.cancellations_answer">We set clear policies and manage communications so you’re protected.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.subscription">Any subscription or long‑term contract?</Text></div>

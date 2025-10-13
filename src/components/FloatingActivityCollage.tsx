@@ -1,7 +1,12 @@
 import React from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-type CollageItem = { id: string; img: string; alt: string };
+type PictureLike = {
+  sources: { type: string; srcset: string }[];
+  img: { src: string; w?: number; h?: number };
+};
+
+type CollageItem = { id: string; img: string | PictureLike; alt: string };
 
 type SizeProp = number | { base: number; md: number };
 
@@ -92,12 +97,32 @@ export const FloatingActivityCollage: React.FC<FloatingActivityCollageProps> = (
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10" />
-              <img
-                src={it.img}
-                alt={it.alt}
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
+              {typeof it.img === "string" ? (
+                <img
+                  src={it.img}
+                  alt={it.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <picture>
+                  {Array.isArray((it.img as any).sources)
+                    ? ((it.img as any).sources as { type: string; srcset: string }[]).map((src, i) => (
+                        <source key={i} type={src.type} srcSet={src.srcset} sizes="(min-width: 1024px) 200px, 120px" />
+                      ))
+                    : null}
+                  <img
+                    src={it.img.img.src}
+                    width={it.img.img.w}
+                    height={it.img.img.h}
+                    alt={it.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
+                </picture>
+              )}
             </div>
           </motion.div>
         );

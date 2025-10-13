@@ -247,9 +247,7 @@ const RealLifeMagic: React.FC = () => {
             </motion.p>
 
             <motion.div className="prose prose-invert max-w-none mb-6 text-gray-300" variants={fadeInUp}>
-              <p>
-                Researchers often highlight four core neurochemicals that shape social bonding—oxytocin, dopamine, serotonin, and endorphins—each with distinct roles that together generate what many describe as a "social high."
-              </p>
+              <p>{t("rlm.deep.intro", "Researchers often highlight four core neurochemicals that shape social bonding—oxytocin, dopamine, serotonin, and endorphins—each with distinct roles that together generate what many describe as a \"social high.\"")}</p>
             </motion.div>
 
             <motion.div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4" variants={fadeInUp}>
@@ -298,23 +296,17 @@ const RealLifeMagic: React.FC = () => {
           <div className="max-w-4xl mx-auto space-y-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
               <h3 className="text-2xl font-semibold mb-3 text-white flex items-center gap-2"><Heart className="h-5 w-5 text-pink-400" />{t("rlm.deep.oxytocin.title", "Oxytocin: The Master Conductor")}</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Often mislabeled the "love hormone," oxytocin is better understood as a context‑sensitive <em>social switch</em>. In familiar, trusting interactions its release increases substantially—by roughly <span className="text-white font-semibold">40%</span> with close friends compared to strangers—tuning brain systems for connection<sup><a href="#rlm-ref-1" className="text-blue-400 hover:text-blue-300 font-semibold">[1]</a>, <a href="#rlm-ref-10" className="text-blue-400 hover:text-blue-300 font-semibold">[10]</a></sup>. Beyond warm feelings, oxytocin modulates activity in the hypothalamus and anterior insula—regions central to stress regulation and interoception—supporting lower anxiety, greater resilience, and a higher capacity for empathy and trust<sup><a href="#rlm-ref-10" className="text-blue-400 hover:text-blue-300 font-semibold">[10]</a></sup>. Converging evidence (including UC Berkeley's vole studies) indicates oxytocin is as critical for <em>friendship formation</em> as it is for romantic bonding, suggesting a shared neurobiological foundation across human relationships<sup><a href="#rlm-ref-7" className="text-blue-400 hover:text-blue-300 font-semibold">[7]</a></sup>.
-              </p>
+              <p className="text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: t("rlm.deep.oxytocin.html", "Often mislabeled the \"love hormone,\" oxytocin is better understood as a context‑sensitive <em>social switch</em>. In familiar, trusting interactions its release increases substantially—by roughly <span class='text-white font-semibold'>40%</span> with close friends compared to strangers—tuning brain systems for connection<sup><a href='#rlm-ref-1' class='text-blue-400 hover:text-blue-300 font-semibold'>[1]</a>, <a href='#rlm-ref-10' class='text-blue-400 hover:text-blue-300 font-semibold'>[10]</a></sup>. Beyond warm feelings, oxytocin modulates activity in the hypothalamus and anterior insula—regions central to stress regulation and interoception—supporting lower anxiety, greater resilience, and a higher capacity for empathy and trust<sup><a href='#rlm-ref-10' class='text-blue-400 hover:text-blue-300 font-semibold'>[10]</a></sup>. Converging evidence (including UC Berkeley's vole studies) indicates oxytocin is as critical for <em>friendship formation</em> as it is for romantic bonding, suggesting a shared neurobiological foundation across human relationships<sup><a href='#rlm-ref-7' class='text-blue-400 hover:text-blue-300 font-semibold'>[7]</a></sup>.") }} />
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
               <h3 className="text-2xl font-semibold mb-3 text-white flex items-center gap-2"><Zap className="h-5 w-5 text-yellow-400" />{t("rlm.deep.dopamine.title", "Dopamine: Social Reward")}</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Dopamine doesn't just respond to pleasure—it encodes <em>social need</em>. Work from Kay Tye's lab shows dorsal raphe dopamine neurons track isolation, producing a loneliness‑like state that motivates seeking others—essentially a form of social hunger<sup><a href="#rlm-ref-5" className="text-blue-400 hover:text-blue-300 font-semibold">[5]</a></sup>. Reconnection then delivers dopaminergic relief that reinforces prosocial behaviors, much like eating resolves physiological hunger. This mechanism helps explain both the discomfort of isolation and the powerful "ahh" of a good hang with friends.
-              </p>
+              <p className="text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: t("rlm.deep.dopamine.html", "Dopamine doesn't just respond to pleasure—it encodes <em>social need</em>. Work from Kay Tye's lab shows dorsal raphe dopamine neurons track isolation, producing a loneliness‑like state that motivates seeking others—essentially a form of social hunger<sup><a href='#rlm-ref-5' class='text-blue-400 hover:text-blue-300 font-semibold'>[5]</a></sup>. Reconnection then delivers dopaminergic relief that reinforces prosocial behaviors, much like eating resolves physiological hunger. This mechanism helps explain both the discomfort of isolation and the powerful \"ahh\" of a good hang with friends.") }} />
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
               <h3 className="text-2xl font-semibold mb-3 text-white flex items-center gap-2"><UtensilsCrossed className="h-5 w-5 text-purple-400" />{t("rlm.deep.shared.title", "Shared Experience Amplifier")}</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Experiences intensify when shared. A Yale study found chocolate tasted better when eaten at the same time as another person—even without speaking<sup><a href="#rlm-ref-23" className="text-blue-400 hover:text-blue-300 font-semibold">[23]</a></sup>. The effect isn't limited to flavor; pleasant and unpleasant experiences alike become more intense together. The likely mechanism is heightened attention and enhanced memory encoding under joint attention, creating more vivid, longer‑lasting impressions that strengthen bonds.
-              </p>
+              <p className="text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: t("rlm.deep.shared.html", "Experiences intensify when shared. A Yale study found chocolate tasted better when eaten at the same time as another person—even without speaking<sup><a href='#rlm-ref-23' class='text-blue-400 hover:text-blue-300 font-semibold'>[23]</a></sup>. The effect isn't limited to flavor; pleasant and unpleasant experiences alike become more intense together. The likely mechanism is heightened attention and enhanced memory encoding under joint attention, creating more vivid, longer‑lasting impressions that strengthen bonds.") }} />
             </motion.div>
           </div>
         </div>

@@ -1,0 +1,43 @@
+# AI Discovery File for Pulse
+version: 1.0
+maintainer: Pulse Meet New Friends, Inc.
+developer: Pulse Meet New Friends, Inc.
+website: https://pulsenow.app
+contact: mailto:contact@pulsenow.app
+location: Portland, Maine, USA
+country: US
+ai_canonical_domain: pulsenow.app
+
+description: Pulse is an AI-powered friendship app that helps people form real-life social circles through small-group matching, shared activities, and local meetups.
+
+# Structured Knowledge Files (English + Spanish)
+llm_file_en: https://pulsenow.app/llms.txt
+llm_file_es: https://es.pulsenow.app/llms.txt
+
+# Legal & Attribution
+license: proprietary – content licensed for AI summarization and factual attribution with credit to Pulse Meet New Friends.
+privacy_policy: https://legal.pulsenow.app/privacy.html
+terms_of_service: https://legal.pulsenow.app/terms.html
+
+# --------------------------------------------------------------------
+# 🇪🇸 Versión en Español — Archivo de Descubrimiento de IA para Pulse
+# --------------------------------------------------------------------
+version: 1.0
+mantenedor: Pulse Meet New Friends, Inc.
+desarrollador: Pulse Meet New Friends, Inc.
+sitio_web: https://es.pulsenow.app
+contacto: mailto:contacto@pulsenow.app
+ubicacion: Portland, Maine, EE.UU.
+pais: EE.UU.
+dominio_canonico_ia: pulsenow.app
+
+descripcion: Pulse es una aplicación de amistad impulsada por IA que ayuda a las personas a crear círculos sociales reales mediante grupos pequeños y actividades locales.
+
+# Archivos de Conocimiento Estructurado
+archivo_llm_en: https://pulsenow.app/llms.txt
+archivo_llm_es: https://es.pulsenow.app/llms-es.txt
+
+# Legal y Atribución
+licencia: propietario – contenido autorizado para resumen factual y atribución a Pulse Meet New Friends.
+politica_de_privacidad: https://legal.pulsenow.app/privacy.html
+terminos_de_servicio: https://legal.pulsenow.app/terms.html

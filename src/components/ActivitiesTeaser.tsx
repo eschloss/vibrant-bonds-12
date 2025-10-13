@@ -140,7 +140,7 @@ export default function ActivitiesTeaser({
               className="group relative rounded-xl overflow-hidden border border-gray-700 bg-gray-900/30"
               style={{ aspectRatio: "1 / 1" }}
             >
-              <img src={it.image} alt={t(it.name, it.name)} className="w-full h-full object-cover" loading="lazy" decoding="async" sizes="(max-width: 768px) 50vw, 12vw" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} />
+              <img src={it.image} alt={`Meet New ${t(it.name, it.name)} Friends`} className="w-full h-full object-cover" loading="lazy" decoding="async" sizes="(max-width: 768px) 50vw, 12vw" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }} />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors" />
               <div className="absolute bottom-1 left-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="inline-block bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded border border-white/10 text-center w-full">{t(it.name, it.name)}</span>

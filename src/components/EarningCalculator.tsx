@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface PricingTier {
   name: string;
@@ -22,12 +23,13 @@ interface PricingTier {
 }
 
 const EarningCalculator: React.FC = () => {
+  const { t } = useTranslation();
   const [bookingsPerMonth, setBookingsPerMonth] = useState([50]);
   const [selectedTier, setSelectedTier] = useState(0);
 
   const pricingTiers: PricingTier[] = [
     {
-      name: "Casual Meetups",
+      name: t("partnerships.calculator.tier.casual", "Casual Meetups"),
       minPrice: 20,
       maxPrice: 40,
       color: "from-blue-500 to-cyan-400",
@@ -35,7 +37,7 @@ const EarningCalculator: React.FC = () => {
       description: "Great for driving regular foot traffic"
     },
     {
-      name: "Premium Nights",
+      name: t("partnerships.calculator.tier.premium", "Premium Nights"),
       minPrice: 50,
       maxPrice: 100,
       color: "from-purple-500 to-pink-500",
@@ -43,7 +45,7 @@ const EarningCalculator: React.FC = () => {
       description: "Higher value experiences for engaged customers"
     },
     {
-      name: "Luxury Events",
+      name: t("partnerships.calculator.tier.luxury", "Luxury Events"),
       minPrice: 200,
       maxPrice: 500,
       color: "from-yellow-500 to-orange-500",
@@ -97,7 +99,7 @@ const EarningCalculator: React.FC = () => {
         >
           <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="h-6 w-6 text-pulse-pink" />
-            <span className="text-pulse-pink font-semibold">PARTNER EARNINGS</span>
+            <span className="text-pulse-pink font-semibold">{t("partnerships.calculator.badge", "PARTNER EARNINGS")}</span>
             <Sparkles className="h-6 w-6 text-pulse-pink" />
           </motion.div>
           
@@ -105,14 +107,14 @@ const EarningCalculator: React.FC = () => {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-3"
           >
-            See Your Potential Earnings with Pulse
+            {t("partnerships.calculator.title", "See Your Potential Earnings with Pulse")}
           </motion.h2>
           
           <motion.p 
             variants={itemVariants}
             className="text-base text-gray-300 max-w-2xl mx-auto"
           >
-            This estimates how much your venue could earn from Pulse‑driven group bookings. Adjust the tier and number of monthly groups. Assumes 10 people per group and the tier’s average ticket price.
+            {t("partnerships.calculator.description", "This estimates how much your venue could earn from Pulse‑driven group bookings. Adjust the tier and number of monthly groups. Assumes 10 people per group and the tier’s average ticket price.")}
           </motion.p>
         </motion.div>
 
@@ -130,7 +132,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-green-400" />
-                    Partner take‑home per group
+                    {t("partnerships.calculator.metric.per_group", "Partner take‑home per group")}
                   </div>
                   <div className="text-2xl font-bold text-green-400 mt-1">${earningsPerBooking.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">${pricePerPerson} × {peoplePerGroup} × 75%</div>
@@ -138,7 +140,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Zap className="h-4 w-4 text-pulse-pink" />
-                    Estimated monthly take‑home
+                    {t("partnerships.calculator.metric.monthly", "Estimated monthly take‑home")}
                   </div>
                   <div className="text-3xl font-bold text-pulse-pink mt-1">${monthlyRevenue.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">{bookingsPerMonth[0]} groups × ${earningsPerBooking.toLocaleString()}</div>
@@ -146,7 +148,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="rounded-lg bg-gray-900/40 border border-gray-700 p-4">
                   <div className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2">
                     <Star className="h-4 w-4 text-yellow-400" />
-                    Estimated annual take‑home
+                    {t("partnerships.calculator.metric.annual", "Estimated annual take‑home")}
                   </div>
                   <div className="text-3xl font-bold text-yellow-400 mt-1">${annualRevenue.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 mt-1">${monthlyRevenue.toLocaleString()} × 12</div>
@@ -157,7 +159,7 @@ const EarningCalculator: React.FC = () => {
               <div>
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <DollarSign className="h-5 w-5 text-pulse-pink" />
-                  Choose Your Pricing Tier
+                  {t("partnerships.calculator.choose_tier", "Choose Your Pricing Tier")}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                   {pricingTiers.map((tier, index) => (
@@ -185,35 +187,35 @@ const EarningCalculator: React.FC = () => {
                 <div className="mt-6">
                   <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-pulse-blue" />
-                    Number of Bookings
+                    {t("partnerships.calculator.bookings.title", "Number of Bookings")}
                   </h4>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <label className="text-xs font-medium text-gray-300">Groups per month</label>
+                      <label className="text-xs font-medium text-gray-300">{t("partnerships.calculator.bookings.per_month", "Groups per month")}</label>
                       <span className="text-pulse-blue font-bold">{bookingsPerMonth[0]}</span>
                     </div>
                     <Slider value={bookingsPerMonth} onValueChange={setBookingsPerMonth} min={1} max={100} step={1} className="w-full" />
                     <div className="flex justify-between text-[11px] text-gray-400">
-                      <span>1 group</span>
-                      <span>100 groups</span>
+                      <span>{t("partnerships.calculator.bookings.min_label", "1 group")}</span>
+                      <span>{t("partnerships.calculator.bookings.max_label", "100 groups")}</span>
                     </div>
                   </div>
 
                   <div className="mt-2 p-3 bg-gray-700/30 rounded-lg">
                     <div className="text-sm text-gray-300">
                       <div className="flex justify-between mb-1">
-                        <span>People per group:</span>
+                        <span>{t("partnerships.calculator.people_per_group", "People per group:")}</span>
                         <span className="text-pulse-blue">{peoplePerGroup}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Total people per month:</span>
+                        <span>{t("partnerships.calculator.total_people_per_month", "Total people per month:")}</span>
                         <span className="text-pulse-blue">{bookingsPerMonth[0] * peoplePerGroup}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 text-xs text-gray-400">Estimates your venue’s take‑home from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier • 75% partner share (Pulse platform fee: 25%).</div>
+                <div className="mt-4 text-xs text-gray-400">{t("partnerships.calculator.disclaimer", "Estimates your venue’s take‑home from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier • 75% partner share (Pulse platform fee: 25%).")}</div>
               </div>
             </CardContent>
           </Card>

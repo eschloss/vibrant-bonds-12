@@ -1,0 +1,171 @@
+Houston, Texas, United States (houst) - https://pulsenow.app/cities/houston
+Sanford, ME, Maine, United States (sanfm) - https://pulsenow.app/cities/sanford-me
+Anchorage, Alaska,  (ancho) - https://pulsenow.app/cities/anchorage
+Bari, Italy (bari) - https://pulsenow.app/cities/bari
+Augusta, ME, Maine, United States (augme) - https://pulsenow.app/cities/augusta-me
+Stuttgart, Baden-Württemberg, Germany (stut) - https://pulsenow.app/cities/stuttgart
+Melbourne, Australia (melb) - https://pulsenow.app/cities/melbourne
+Barcelona, Cataluña, Spain (bcn) - https://pulsenow.app/cities/barcelona
+Indianapolis, Indiana, United States (indin) - https://pulsenow.app/cities/indianapolis
+Suva, Fiji (suva) - https://pulsenow.app/cities/suva
+Charleston, South Carolina, United States (chasc) - https://pulsenow.app/cities/charleston
+Cluj-Napoca, Romania (cluj) - https://pulsenow.app/cities/cluj-napoca
+Orlando, Florida, United States (orlan) - https://pulsenow.app/cities/orlando
+Tulsa, Oklahoma, United States (tulsa) - https://pulsenow.app/cities/tulsa
+San Jose, California, United States (sanjo) - https://pulsenow.app/cities/san-jose
+Denver, Colorado, United States (denv) - https://pulsenow.app/cities/denver
+Hilton Head Island, South Carolina, United States (hhsc) - https://pulsenow.app/cities/hilton-head-island
+Birmingham, England, United Kingdom (birm) - https://pulsenow.app/cities/birmingham
+Arlington, Texas, United States (arltx) - https://pulsenow.app/cities/arlington
+Lincoln, Nebraska, United States (linco) - https://pulsenow.app/cities/lincoln
+Munich, Bavaria, Germany (mun) - https://pulsenow.app/cities/munchen
+Milwaukee, Wisconsin, United States (milwa) - https://pulsenow.app/cities/milwaukee
+Istanbul, Türkiye (istan) - https://pulsenow.app/cities/istanbul
+Columbus, Ohio, United States (colum) - https://pulsenow.app/cities/columbus
+Portland, Maine, United States (port) - https://pulsenow.app/cities/portland
+Nuremberg, Bavaria, Germany (nure) - https://pulsenow.app/cities/nuremberg
+Berlin, Germany (ber) - https://pulsenow.app/cities/berlin
+Washington DC, United States (was) - https://pulsenow.app/cities/washington-dc
+Liverpool, England, United Kingdom (live) - https://pulsenow.app/cities/liverpool
+Hanover, Niedersachsen, Germany (hano) - https://pulsenow.app/cities/hanover
+Biddeford, ME, Maine, United States (biggm) - https://pulsenow.app/cities/biddeford-me
+Brisbane, Australia (brisb) - https://pulsenow.app/cities/brisbane
+Jacksonville, Florida, United States (jacks) - https://pulsenow.app/cities/jacksonville
+Leicester, England, United Kingdom (leic) - https://pulsenow.app/cities/leicester
+Auburn, ME, Maine, United States (aubur) - https://pulsenow.app/cities/auburn-me
+Long Beach, California, United States (lbca) - https://pulsenow.app/cities/long-beach
+Genova, Italy (genov) - https://pulsenow.app/cities/genova
+Oklahoma City, Oklahoma, United States (oklc) - https://pulsenow.app/cities/oklahoma-city
+Cleveland, Ohio, United States (cleve) - https://pulsenow.app/cities/cleveland
+Dallas, Texas, United States (dalla) - https://pulsenow.app/cities/dallas
+Louisville, Kentucky, United States (louky) - https://pulsenow.app/cities/louisville
+Sevilla, Andalucía, Spain (sev) - https://pulsenow.app/cities/sevilla
+Vancouver, British Columbia, Canada (vancb) - https://pulsenow.app/cities/vancouver
+Wichita, Kansas, United States (wichi) - https://pulsenow.app/cities/wichita
+Palermo, Italy (paler) - https://pulsenow.app/cities/palermo
+Bangor, ME, Maine, United States (bango) - https://pulsenow.app/cities/bangor-me
+Vienna, Austria (wien) - https://pulsenow.app/cities/wien
+Łódź, Poland (lodz) - https://pulsenow.app/cities/lodz
+Hogwarts,  (hogwa) - https://pulsenow.app/cities/hogwarts
+Mexico City, Mexico (mex) - https://pulsenow.app/cities/mexico-city
+Wyoming, United States (wyomi) - https://pulsenow.app/cities/wyoming
+Toronto, Ontario, Canada (tor) - https://pulsenow.app/cities/toronto
+Bucharest, Romania (bucha) - https://pulsenow.app/cities/bucharest
+Fresno, California, United States (fresn) - https://pulsenow.app/cities/fresno
+Erfurt, Thüringen, Germany (erfu) - https://pulsenow.app/cities/erfurt
+Memphis, Tennessee, United States (memph) - https://pulsenow.app/cities/memphis
+Firenze, Italy (flore) - https://pulsenow.app/cities/firenze
+Anaheim, California, United States (anahe) - https://pulsenow.app/cities/anaheim
+Cork, Ireland (cork) - https://pulsenow.app/cities/cork
+Lyon, France (lyon) - https://pulsenow.app/cities/lyon
+Kansas City, Missouri, United States (kanci) - https://pulsenow.app/cities/kansas-city
+Portland, Oregon, United States (portl) - https://pulsenow.app/cities/portland-oregon
+Murcia, Spain (murc) - https://pulsenow.app/cities/murcia
+Colorado Springs, Colorado, United States (colsp) - https://pulsenow.app/cities/colorado-springs
+Weimar, Thüringen, Germany (wei) - https://pulsenow.app/cities/weimar
+Hamburg, Germany (hamb) - https://pulsenow.app/cities/hamburg
+Frankfurt, Germany (fra) - https://pulsenow.app/cities/frankfurt
+Nashua, NH, New Hampshire, United States (nashu) - https://pulsenow.app/cities/nashua-nh
+Edinburgh, Scotland, United Kingdom (edin) - https://pulsenow.app/cities/edinburgh
+Bologna, Italy (bolog) - https://pulsenow.app/cities/bologna
+Manchester, NH, New Hampshire, United States (mannh) - https://pulsenow.app/cities/manchester-nh
+New York, New York State, United States (nyc) - https://pulsenow.app/cities/new-york
+Detroit, Michigan, United States (detro) - https://pulsenow.app/cities/detroit
+Milano, Italy (milan) - https://pulsenow.app/cities/milano
+Dresden, Saxony, Germany (dres) - https://pulsenow.app/cities/dresden
+Boston, Massachusetts, United States (bost) - https://pulsenow.app/cities/boston
+Málaga, Andalucía, Spain (mal) - https://pulsenow.app/cities/malaga
+Newark, New Jersey, United States (newar) - https://pulsenow.app/cities/newark
+Madrid, Community of Madrid, Spain (mad) - https://pulsenow.app/cities/madrid
+Tenerife, Canarias,  (tene) - https://pulsenow.app/cities/tenerife
+Manchester, England, United Kingdom (man) - https://pulsenow.app/cities/manchester
+La Rioja, Spain (lario) - https://pulsenow.app/cities/la-rioja
+Philadelphia, Pennsylvania, United States (phila) - https://pulsenow.app/cities/philadelphia
+Pittsburgh, Pennsylvania, United States (pitts) - https://pulsenow.app/cities/pittsburgh
+Fort Worth, Texas, United States (fortw) - https://pulsenow.app/cities/fort-worth
+Warsaw, Poland (warsa) - https://pulsenow.app/cities/warsaw
+Bilbao, País Vasco, Spain (bilb) - https://pulsenow.app/cities/bilbao
+San Francisco, California, United States (sanf) - https://pulsenow.app/cities/san-francisco
+Monterrey, Mexico (monte) - https://pulsenow.app/cities/monterrey
+Austin, Texas, United States (austi) - https://pulsenow.app/cities/austin
+Galicia, Spain (gal) - https://pulsenow.app/cities/galicia
+Montreal, Quebec, Canada (mon) - https://pulsenow.app/cities/montreal
+Zaragoza, Aragón, Spain (zar) - https://pulsenow.app/cities/zaragoza
+Sheffield, England, United Kingdom (shef) - https://pulsenow.app/cities/sheffield
+Paris, France (paris) - https://pulsenow.app/cities/paris
+Baltimore, Maryland, United States (balti) - https://pulsenow.app/cities/baltimore
+Alicante, Comunidad Valenciana, Spain (alic) - https://pulsenow.app/cities/alicante
+Stockton, California, United States (stoca) - https://pulsenow.app/cities/stockton
+Essen, Nordrhein-Westfalen, Germany (esse) - https://pulsenow.app/cities/essen
+Glasgow, Scotland, United Kingdom (glas) - https://pulsenow.app/cities/glasgow
+Kyiv, Ukraine (kyiv) - https://pulsenow.app/cities/kyiv
+Leeds, England, United Kingdom (leed) - https://pulsenow.app/cities/leeds
+Dublin, Ireland (dub) - https://pulsenow.app/cities/dublin
+Cardiff, Wales, United Kingdom (car) - https://pulsenow.app/cities/cardiff
+Guadalajara, Mexico (guada) - https://pulsenow.app/cities/guadalajara
+Chicago, Illinois, United States (chi) - https://pulsenow.app/cities/chicago
+Phoenix, Arizona, United States (phoen) - https://pulsenow.app/cities/phoenix
+Bakersfield, California, United States (bksfi) - https://pulsenow.app/cities/bakersfield
+Nashville, Tennessee, United States (nashv) - https://pulsenow.app/cities/nashville
+London, England, United Kingdom (lon) - https://pulsenow.app/cities/london
+Saint Paul, Minnesota, United States (spmn) - https://pulsenow.app/cities/saint-paul
+Granada, Andalucía, Spain (gran) - https://pulsenow.app/cities/granada
+Poznań, Poland (pozna) - https://pulsenow.app/cities/poznan
+Bristol, England, United Kingdom (bris) - https://pulsenow.app/cities/bristol
+Navarra, Spain (navar) - https://pulsenow.app/cities/navarra
+Omaha, Nebraska, United States (omaha) - https://pulsenow.app/cities/omaha
+Asturias, Spain (astu) - https://pulsenow.app/cities/asturias
+Napoli, Italy (napol) - https://pulsenow.app/cities/napoli
+Bournemouth, England, United Kingdom (bour) - https://pulsenow.app/cities/bournemouth
+Seattle, Washington State, United States (seatt) - https://pulsenow.app/cities/seattle
+Brighton, England, United Kingdom (brig) - https://pulsenow.app/cities/brighton
+Eugene, Oregon, United States (eugen) - https://pulsenow.app/cities/eugene
+Galway, Ireland (galwa) - https://pulsenow.app/cities/galway
+Sacramento, California, United States (sacrc) - https://pulsenow.app/cities/sacramento
+Saco, ME, Maine, United States (sacme) - https://pulsenow.app/cities/saco-me
+Dortmund, Nordrhein-Westfalen, Germany (dort) - https://pulsenow.app/cities/dortmund
+Iași, Romania (iasir) - https://pulsenow.app/cities/iasi
+Henderson, Nevada, United States (hende) - https://pulsenow.app/cities/henderson
+Leipzig, Saxony, Germany (lepz) - https://pulsenow.app/cities/leipzig
+Kraków, Poland (krako) - https://pulsenow.app/cities/krakow
+Mesa, Arizona, United States (mesa) - https://pulsenow.app/cities/mesa
+Sydney, Australia (syd) - https://pulsenow.app/cities/sydney
+Charlotte, North Carolina, United States (charl) - https://pulsenow.app/cities/charlotte
+Tijuana, Mexico (tijua) - https://pulsenow.app/cities/tijuana
+Limerick, Ireland (limer) - https://pulsenow.app/cities/limerick
+Tuscon, Arizona, United States (tusco) - https://pulsenow.app/cities/tuscon
+Valencia, Comunidad Valenciana, Spain (val) - https://pulsenow.app/cities/valencia
+Las Vegas, Nevada, United States (lvega) - https://pulsenow.app/cities/las-vegas
+Nottingham, England, United Kingdom (nott) - https://pulsenow.app/cities/nottingham
+Savannah, Georgia, United States (savge) - https://pulsenow.app/cities/savannah
+Los Angeles, California, United States (la) - https://pulsenow.app/cities/los-angeles
+Princeton, New Jersey, United States (pton) - https://pulsenow.app/cities/princeton
+Westbrook, ME, Maine, United States (westb) - https://pulsenow.app/cities/westbrook-me
+New Orleans, Louisiana, United States (norle) - https://pulsenow.app/cities/new-orleans
+Roma, Italy (rome) - https://pulsenow.app/cities/roma
+San Antonio, Texas, United States (sanan) - https://pulsenow.app/cities/san-antonio
+Minneapolis, Minnesota, United States (minnp) - https://pulsenow.app/cities/minneapolis
+Newcastle, England, United Kingdom (newc) - https://pulsenow.app/cities/newcastle
+Marseille, France (marse) - https://pulsenow.app/cities/marseille
+Albuquerque, New Mexico, United States (albuq) - https://pulsenow.app/cities/albuquerque
+Córdoba, Andalucía, Spain (cordo) - https://pulsenow.app/cities/cordoba
+Lewiston, ME, Maine, United States (lewis) - https://pulsenow.app/cities/lewiston-me
+Las Palmas, Canarias,  (palm) - https://pulsenow.app/cities/las-palmas
+Düsseldorf, Nordrhein-Westfalen, Germany (duss) - https://pulsenow.app/cities/dusseldorf
+El Paso, Texas, United States (elpas) - https://pulsenow.app/cities/el-paso
+Wrocław, Poland (wrocl) - https://pulsenow.app/cities/wroclaw
+Belfast, Northern Ireland, United Kingdom (belf) - https://pulsenow.app/cities/belfast
+Tampa, Florida, United States (tampa) - https://pulsenow.app/cities/tampa
+Raleigh, North Carolina, United States (ralei) - https://pulsenow.app/cities/raleigh
+Jena, Thüringen, Germany (jena) - https://pulsenow.app/cities/jena
+Atlanta, Georgia, United States (atlan) - https://pulsenow.app/cities/atlanta
+San Diego, California, United States (sand) - https://pulsenow.app/cities/san-diego
+Concord, NH, New Hampshire, United States (connh) - https://pulsenow.app/cities/concord-nh
+Torino, Italy (torin) - https://pulsenow.app/cities/torino
+Cologne, Nordrhein-Westfalen, Germany (colo) - https://pulsenow.app/cities/koln
+Virginia Beach, Virginia, United States (vabea) - https://pulsenow.app/cities/virginia-beach
+Lexington, Kentucky, United States (lxton) - https://pulsenow.app/cities/lexington
+Honolulu, United States (honol) - https://pulsenow.app/cities/honolulu
+Extremadura, Spain (extre) - https://pulsenow.app/cities/extremadura
+Miami, Florida, United States (miami) - https://pulsenow.app/cities/miami
+Toulouse, France (toulo) - https://pulsenow.app/cities/toulouse
