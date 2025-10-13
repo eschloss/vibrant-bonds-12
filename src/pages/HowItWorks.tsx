@@ -93,7 +93,7 @@ const HowItWorks = () => {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Removed hero pill badge */}
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-3 drop-shadow-[0_3px_10px_rgba(0,0,0,0.6)]">
+            <h1 className="text-5xl md:text-6xl font-bold leading-none md:leading-tight mb-3 drop-shadow-[0_3px_10px_rgba(0,0,0,0.6)]">
               <span>{t("hiw.hero.title.prefix", "How to ")}</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 {t("hiw.hero.title.gradient", "Meet New Friends")}

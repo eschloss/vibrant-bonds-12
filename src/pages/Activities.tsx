@@ -18,7 +18,7 @@ import pipPilates from "@/assets/pip-pilates.png";
 import pipBookclub from "@/assets/pip-bookclub.png";
 import pipPottery from "@/assets/pip-pottery.png";
 // Replaced local escape room asset with provided remote image URL
-const pipEscapeRoom = "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png";
+const pipEscapeRoom = "https://s.kikiapp.eu/img/pip/escaperoom.png";
 
 // Additional activity images (added by user in public/lovable-uploads)
 // Using public paths so bundler doesn't need imports
@@ -101,42 +101,42 @@ const Activities = () => {
   ];
   // Flattened list for unified gallery (no categories) – using provided Supabase image URLs
   const activitiesList = [
-    { id: "arcade", name: "Arcade", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png" },
-    { id: "board-games", name: "Board Games", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/board_game.png" },
-    { id: "cycling", name: "Cycling", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cycling.png" },
-    { id: "escape-rooms", name: "Escape Rooms", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png" },
-    { id: "gardening", name: "Gardening", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/gardening.png" },
-    { id: "golf", name: "Golf", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/golf.png" },
-    { id: "hiking", name: "Hiking", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/hiking.png" },
-    { id: "pilates", name: "Pilates", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Pilates.png" },
-    { id: "pottery", name: "Pottery", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png" },
-    { id: "rock-climbing", name: "Rock Climbing", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/rock_climbing.png" },
-    { id: "scavenger-hunt", name: "Scavenger Hunt", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/scavenger_hunt.png" },
-    { id: "surfing", name: "Surfing", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png" },
-    { id: "tennis", name: "Tennis", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/tennis.png" },
-    { id: "wine-tasting", name: "Wine Tasting", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/wine_tasting.png" },
-    { id: "yoga", name: "Yoga", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga%20outdoors.png" },
+    { id: "arcade", name: "Arcade", image: "https://s.kikiapp.eu/img/pip/arcade.png" },
+    { id: "board-games", name: "Board Games", image: "https://s.kikiapp.eu/img/pip/boardgames.png" },
+    { id: "cycling", name: "Cycling", image: "https://s.kikiapp.eu/img/pip/cycling.png" },
+    { id: "escape-rooms", name: "Escape Rooms", image: "https://s.kikiapp.eu/img/pip/escaperoom.png" },
+    { id: "gardening", name: "Gardening", image: "https://s.kikiapp.eu/img/pip/gardening.png" },
+    { id: "golf", name: "Golf", image: "https://s.kikiapp.eu/img/pip/golf.png" },
+    { id: "hiking", name: "Hiking", image: "https://s.kikiapp.eu/img/pip/hiking.png" },
+    { id: "pilates", name: "Pilates", image: "https://s.kikiapp.eu/img/pip/pilates.png" },
+    { id: "pottery", name: "Pottery", image: "https://s.kikiapp.eu/img/pip/pottery.png" },
+    { id: "rock-climbing", name: "Rock Climbing", image: "https://s.kikiapp.eu/img/pip/rockclimbing.png" },
+    { id: "scavenger-hunt", name: "Scavenger Hunt", image: "https://s.kikiapp.eu/img/pip/scavengerhunt.png" },
+    { id: "surfing", name: "Surfing", image: "https://s.kikiapp.eu/img/pip/surfing.png" },
+    { id: "tennis", name: "Tennis", image: "https://s.kikiapp.eu/img/pip/tennis.png" },
+    { id: "wine-tasting", name: "Wine Tasting", image: "https://s.kikiapp.eu/img/pip/winetasting.png" },
+    { id: "yoga", name: "Yoga", image: "https://s.kikiapp.eu/img/pip/yogaoutdoors.png" },
     // Newly added items to expand grid
-    { id: "music", name: "Music", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Music.png" },
-    { id: "soccer", name: "Soccer", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Soccer.png" },
-    { id: "basketball", name: "Basketball", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Basketball.png" },
-    { id: "karaoke", name: "Karaoke", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Karaoke.png" },
-    { id: "food-walking-tour", name: "Food Walking Tour", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/food%20walking%20tour.png" },
-    { id: "painting-class", name: "Painting Class", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Painting%20Class.png" },
-    { id: "brewery", name: "Brewery", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Brewery.png" },
-    { id: "trivia", name: "Trivia", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Trivia.png" },
-    { id: "pool", name: "Pool", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pool.png" },
-    { id: "poker", name: "Poker", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/poker%20(1).png" },
-    { id: "cocktail-bar", name: "Cocktail Bar", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Cocktail%20Bar.png" },
-    { id: "day-tour", name: "Day Tour", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Day%20Tour.png" },
-    { id: "gay-bar", name: "Gay Bar", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Gay%20Bar.png" },
-    { id: "photography", name: "Photography", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Photography.png" },
-    { id: "picnic", name: "Picnic", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/picnic.png" },
-    { id: "coffee", name: "Coffee", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cafe.png" },
-    { id: "dancing", name: "Dancing", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Dancing.png" },
-    { id: "camping", name: "Camping", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Camping.png" },
-    { id: "beach-activities", name: "Beach Activities", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Beach%20Volleyball.png" },
-    { id: "boat", name: "Boat", image: "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Boat.png" },
+    { id: "music", name: "Music", image: "https://s.kikiapp.eu/img/pip/music.png" },
+    { id: "soccer", name: "Soccer", image: "https://s.kikiapp.eu/img/pip/soccer.png" },
+    { id: "basketball", name: "Basketball", image: "https://s.kikiapp.eu/img/pip/basketball.png" },
+    { id: "karaoke", name: "Karaoke", image: "https://s.kikiapp.eu/img/pip/karaoke.png" },
+    { id: "food-walking-tour", name: "Food Walking Tour", image: "https://s.kikiapp.eu/img/pip/foodwalkingtour.png" },
+    { id: "painting-class", name: "Painting Class", image: "https://s.kikiapp.eu/img/pip/paintingclass.png" },
+    { id: "brewery", name: "Brewery", image: "https://s.kikiapp.eu/img/pip/brewery.png" },
+    { id: "trivia", name: "Trivia", image: "https://s.kikiapp.eu/img/pip/trivia.png" },
+    { id: "pool", name: "Pool", image: "https://s.kikiapp.eu/img/pip/pool.png" },
+    { id: "poker", name: "Poker", image: "https://s.kikiapp.eu/img/pip/poker.png" },
+    { id: "cocktail-bar", name: "Cocktail Bar", image: "https://s.kikiapp.eu/img/pip/cocktailbar.png" },
+    { id: "day-tour", name: "Day Tour", image: "https://s.kikiapp.eu/img/pip/tour.png" },
+    { id: "gay-bar", name: "Gay Bar", image: "https://s.kikiapp.eu/img/pip/gaybar.png" },
+    { id: "photography", name: "Photography", image: "https://s.kikiapp.eu/img/pip/photography.png" },
+    { id: "picnic", name: "Picnic", image: "https://s.kikiapp.eu/img/pip/picnic.png" },
+    { id: "coffee", name: "Coffee", image: "https://s.kikiapp.eu/img/pip/cafe.png" },
+    { id: "dancing", name: "Dancing", image: "https://s.kikiapp.eu/img/pip/dancing.png" },
+    { id: "camping", name: "Camping", image: "https://s.kikiapp.eu/img/pip/camping.png" },
+    { id: "beach-activities", name: "Beach Activities", image: "https://s.kikiapp.eu/img/pip/beachvolleyball.png" },
+    { id: "boat", name: "Boat", image: "https://s.kikiapp.eu/img/pip/boat.png" },
   ];
 
   return (
