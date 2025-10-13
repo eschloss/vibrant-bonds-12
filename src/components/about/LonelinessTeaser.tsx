@@ -9,8 +9,9 @@ const LonelinessTeaser = () => {
 
   // Helper to remove any leading numeric/stat prefix from translated strings to avoid duplication
   const stripLeadingStat = (s: string): string => {
-    // Matches optional ~ or ≈, then digits with separators, optional %/M/m/million/millones, then optional punctuation and spaces
-    const cleaned = s.replace(/^\s*[~≈]?\d+[\d.,]*\s*(%|[Mm]|million|millones)?\s*[-–—:]?\s*/u, "");
+    // Matches optional ~ or ≈, then digits with separators, optional unit (million/millones/%/m/M), then optional punctuation and spaces
+    // Order matters: match full word million before single-letter m/M to avoid leaving "illion" behind
+    const cleaned = s.replace(/^\s*[~≈]?\d+[\d.,]*\s*(million|millones|%|[Mm])?\s*[-–—:]?\s*/iu, "");
     return cleaned.trim();
   };
 
@@ -35,7 +36,7 @@ const LonelinessTeaser = () => {
     },
     {
       icon: <TrendingDown size={18} className="text-white" />,
-      number: "21M",
+      number: "21 Million",
       text: stripLeadingStat(t("loneliness.stats.friendless.value", "21 million have zero close friends")),
       colors: "from-rose-500 to-orange-500",
     },
