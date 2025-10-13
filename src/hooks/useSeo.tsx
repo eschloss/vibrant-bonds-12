@@ -125,6 +125,8 @@ export const Seo = ({
     <Helmet>
       <html lang={currentLanguage} />
       <title>{finalTitle}</title>
+      {/* Provide an explicit meta title tag for crawlers/tools that look for it */}
+      <meta name="title" content={finalTitle} />
       <meta name="description" content={finalDescription} />
 
       <meta property="og:locale" content={currentLanguage === "es" ? "es_ES" : "en_US"} />
