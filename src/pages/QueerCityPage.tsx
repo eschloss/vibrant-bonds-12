@@ -36,12 +36,18 @@ const QueerCityPage = () => {
     },
     description: {
       en: cityData
-        ? `Join the gay, lesbian, queer & LGBTQ+ community in ${cityData.name}. Use Pulse to spark real friendships and plan fun in-person meetups.`
-        : `Pulse helps you meet gay, lesbian, queer & LGBTQ+ people nearby. Make real friends and plan IRL hangouts that actually happen.`,
+        ? `Meet LGBTQ+ friends in ${cityData.name}. Join queer friend groups, plan IRL meetups, and make real connections in ${cityData.name} with Pulse.`
+        : `Meet LGBTQ+ friends near you. Join queer friend groups, plan IRL meetups, and build real connections with Pulse.`,
       es: cityData
-        ? `Únete a la comunidad gay, lesbiana, queer y LGBTQ+ en ${cityData.name}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`
-        : `Pulse te ayuda a conocer personas gay, lesbianas, queer y LGBTQ+ cerca de ti. Haz amistades reales y queda en la vida real.`
+        ? `Conoce amigues LGBTQ+ en ${cityData.name}. Únete a grupos queer, planifica quedadas en persona y crea conexiones reales en ${cityData.name} con Pulse.`
+        : `Conoce amigues LGBTQ+ cerca de ti. Únete a grupos queer, planifica quedadas en persona y crea conexiones reales con Pulse.`
     },
+    keywords: cityData ? [
+      `${cityData.name} LGBTQ+ friends`,
+      `meet queer friends in ${cityData.name}`,
+      `${cityData.name} queer community`,
+      `gay friends ${cityData.name}`
+    ] : ['LGBTQ+ friends', 'queer community'],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
     geoData: {
       name: cityData

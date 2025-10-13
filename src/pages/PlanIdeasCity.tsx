@@ -24,10 +24,10 @@ const PlanIdeasCity = () => {
       es: `Ideas de Planes Grupales en ${formattedCityName} | Pulse`
     },
     description: {
-      en: `Discover amazing group activity ideas and experiences in ${formattedCityName}. From coffee hangouts to outdoor adventures, find the perfect plans for your friend group.`,
-      es: `Descubre increíbles ideas de actividades grupales y experiencias en ${formattedCityName}. Desde reuniones de café hasta aventuras al aire libre, encuentra los planes perfectos para tu grupo de amigos.`
+      en: `Group plan ideas in ${formattedCityName}: coffee, hikes, trivia, pottery, picnics and more. Meet friends and plan IRL activities in ${formattedCityName}.`,
+      es: `Ideas de planes grupales en ${formattedCityName}: café, rutas, trivia, cerámica, picnic y más. Conoce amigues y planifica actividades en persona en ${formattedCityName}.`
     },
-    keywords: ["group plan ideas", "activities", cityName, "friend group experiences", "hangout ideas", "group activities"],
+    keywords: ["group plan ideas", "activities", formattedCityName, "friend group experiences", "hangout ideas", "group activities"],
     type: "website"
   };
 

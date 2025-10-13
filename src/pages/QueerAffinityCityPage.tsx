@@ -51,12 +51,17 @@ const QueerAffinityCityPage = () => {
     },
     description: {
       en: cityData && affinityData
-        ? `Join the queer ${affinityData.name_en.toLowerCase()} community in ${cityData.name}. Use Pulse to spark real friendships and plan fun in-person meetups.`
-        : `Pulse helps you meet queer people who share your interests. Make real friends and plan IRL hangouts that actually happen.`,
+        ? `Meet queer ${affinityData.name_en.toLowerCase()} friends in ${cityData.name}. Join groups, plan IRL meetups, and make real connections in ${cityData.name} with Pulse.`
+        : `Meet queer friends near you. Join groups, plan IRL meetups, and build real connections with Pulse.`,
       es: cityData && affinityData
-        ? `Únete a la comunidad queer de ${affinityData.name_es.toLowerCase()} en ${cityData.name}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`
-        : `Pulse te ayuda a conocer personas queer que comparten tus intereses. Haz amistades reales y queda en la vida real.`
+        ? `Conoce amigues queer de ${affinityData.name_es.toLowerCase()} en ${cityData.name}. Únete a grupos, planifica quedadas en persona y crea conexiones reales en ${cityData.name} con Pulse.`
+        : `Conoce amigues queer cerca de ti. Únete a grupos, planifica quedadas en persona y crea conexiones reales con Pulse.`
     },
+    keywords: cityData && affinityData ? [
+      `${cityData.name} ${affinityData.name_en} friends`,
+      `meet ${affinityData.name_en.toLowerCase()} friends in ${cityData.name}`,
+      `${cityData.name} ${affinityData.name_en.toLowerCase()} community`
+    ] : ['queer friends', 'affinity groups'],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
     geoData: {
       name: cityData

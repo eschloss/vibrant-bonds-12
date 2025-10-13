@@ -22,10 +22,10 @@ const EventsCity = () => {
       es: `Eventos Grupales en ${formattedCityName} | Pulse`
     },
     description: {
-      en: `Discover amazing group activities and events in ${formattedCityName}. From coffee meetups to outdoor adventures, find the perfect plans for your friend group.`,
-      es: `Descubre increíbles actividades grupales y eventos en ${formattedCityName}. Desde reuniones de café hasta aventuras al aire libre, encuentra los planes perfectos para tu grupo de amigos.`
+      en: `Group events in ${formattedCityName}: meet friends, join groups, and plan IRL activities. Coffee, hikes, trivia, and more in ${formattedCityName}.`,
+      es: `Eventos grupales en ${formattedCityName}: conoce amigues, únete a grupos y planifica actividades en persona. Café, rutas, trivia y más en ${formattedCityName}.`
     },
-    keywords: ["group events", "activities", cityName, "meetups", "friend groups", "social activities"],
+    keywords: ["group events", "activities", formattedCityName, "meetups", "friend groups", "social activities"],
     type: "website"
   };
 

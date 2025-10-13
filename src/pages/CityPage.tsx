@@ -38,12 +38,19 @@ const CityPage = () => {
     },
     description: {
       en: cityData
-        ? `Connect with like-minded people in ${String(cityData.name)} and plan real-life meetups with Pulse`
-        : 'Pulse matches you with like-minded people to form meaningful friendships',
+        ? `Meet new friends in ${String(cityData.name)}. Join local friend groups, plan IRL meetups, and make real connections in ${String(cityData.name)} with Pulse.`
+        : 'Meet new friends near you. Join local friend groups, plan IRL meetups, and build real connections with Pulse.',
       es: cityData
-        ? `Conecta con personas afines en ${String(cityData.name)} y planifica encuentros en la vida real con Pulse`
-        : 'Pulse te conecta con personas afines para formar amistades significativas'
+        ? `Haz nuevos amigues en ${String(cityData.name)}. Únete a grupos de amistades, planifica quedadas en persona y crea conexiones reales en ${String(cityData.name)} con Pulse.`
+        : 'Haz nuevos amigues cerca de ti. Únete a grupos, planifica quedadas en persona y crea conexiones reales con Pulse.'
     },
+    keywords: cityData ? [
+      `${String(cityData.name)} friends`,
+      `meet friends in ${String(cityData.name)}`,
+      `${String(cityData.name)} friend groups`,
+      `make friends ${String(cityData.name)}`,
+      `meet people in ${String(cityData.name)}`
+    ] : ['meet friends', 'friend groups', 'make friends'],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
     geoData: {
       name: cityData
