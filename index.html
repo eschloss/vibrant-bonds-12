@@ -5,10 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
-    
-    
-    <title>Pulse: New Friends and IRL Plans</title>
-    <meta name="title" content="Pulse: New Friends and IRL Plans" />
+    <!-- Title and meta tags are dynamically set by each page using React Helmet -->
 
     <link rel="icon" type="image/png" href="https://s.kikiapp.eu/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="https://s.kikiapp.eu/img/favicon/favicon.svg" />
@@ -18,15 +15,9 @@
 
     
     <meta name="author" content="Pulse Now Co." />
-    
-    <meta property="og:title" content="Pulse: New Friends and IRL Plans" />
-    <meta name="twitter:title" content="Pulse: New Friends and IRL Plans" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://s.kikiapp.eu/img/favicon/icon_v2.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@pulse_app_" />
-    <meta name="twitter:image" content="https://s.kikiapp.eu/img/favicon/icon_v2.png" />
+    
+    <!-- Open Graph and Twitter meta tags are dynamically set by each page using React Helmet -->
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,38 +35,17 @@
     <script type="module" src="/src/main.tsx"></script>
     
     <script>
-      // Script to handle dynamic SEO metadata based on language
+      // Script to handle language detection from subdomain
       (function() {
-        // This will be replaced by a more robust detection when the app loads
         const hostname = window.location.hostname;
         const subdomainParts = hostname.split(".");
         const isSpanish = subdomainParts.length > 1 && subdomainParts[0].toLowerCase() === "es";
         
-        // Update meta tags if Spanish is detected from subdomain
+        // Update HTML lang attribute if Spanish is detected
         if (isSpanish) {
-          // Update HTML lang attribute
           document.documentElement.lang = "es";
-          
-          // Update title and meta descriptions
-          document.title = "Pulse: Nuevos Amigos y Planes en la Vida Real";
-          
-          const metaDescription = document.querySelector('meta[name="description"]');
-          if (metaDescription) {
-            metaDescription.content = "Pulse: Nuevos Amigos y Planes en la Vida Real";
-          }
-          
-          // Update Open Graph metadata
-          const ogTitle = document.querySelector('meta[property="og:title"]');
-          const ogDesc = document.querySelector('meta[property="og:description"]');
-          
-          if (ogTitle) {
-            ogTitle.content = "Pulse: Nuevos Amigos y Planes en la Vida Real";
-          }
-          
-          if (ogDesc) {
-            ogDesc.content = "Conecta con personas afines y planifica encuentros en la vida real con Pulse";
-          }
         }
+        // Note: All meta tags including title are dynamically set by React Helmet in each page component
       })();
     </script>
   </body>
