@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Users, Zap, Activity, Brain, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useTranslation } from '@/hooks/useTranslation';
-import { Text } from '@/components/Text';
+import Text from '@/components/Text';
 
 // Data with citations - will be defined inside component with translation support
 
