@@ -8,77 +8,7 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from '@/hooks/useTranslation';
 import { Text } from '@/components/Text';
 
-// Data with citations
-const generationData = [
-  {
-    generation: "Gen Z",
-    ageRange: "18-27",
-    lonelinessScore: 48.3,
-    lonelinessPercent: 79,
-    noFriends: 27,
-    color: "url(#gen-z-gradient)",
-    solidColor: "#FF2688",
-    gradient: "linear-gradient(135deg, #FF2688, #FF4DA6)",
-    citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
-    citationNumbers: [4, 5, 6],
-    insights: [
-      "Highest loneliness scores despite being most connected digitally",
-      "Social media paradox: more connections, less meaningful relationships",
-      "Financial stress and career uncertainty compound isolation"
-    ]
-  },
-  {
-    generation: "Millennials",
-    ageRange: "28-43",
-    lonelinessScore: 45.3,
-    lonelinessPercent: 71,
-    noFriends: 22,
-    color: "url(#millennials-gradient)",
-    solidColor: "#741ADD",
-    gradient: "linear-gradient(135deg, #741ADD, #9B4DFF)",
-    citations: ["YouGov 2019"],
-    citationNumbers: [20, 3],
-    insights: [
-      "Work-life balance challenges impact social connections",
-      "Adulting responsibilities leave less time for friendships",
-      "Higher friendship maintenance expectations vs reality"
-    ]
-  },
-  {
-    generation: "Gen X",
-    ageRange: "44-59",
-    lonelinessScore: 40.2,
-    lonelinessPercent: 50,
-    noFriends: 15,
-    color: "url(#gen-x-gradient)",
-    solidColor: "#38D1BF",
-    gradient: "linear-gradient(135deg, #38D1BF, #5FDDD0)",
-    citations: ["Survey Center on American Life 2021"],
-    citationNumbers: [21, 3],
-    insights: [
-      "Sandwich generation: caring for parents and children",
-      "Career peak years limit social time",
-      "More selective about deep vs surface relationships"
-    ]
-  },
-  {
-    generation: "Boomers",
-    ageRange: "60+",
-    lonelinessScore: 38.5,
-    lonelinessPercent: 50,
-    noFriends: 9,
-    color: "url(#boomers-gradient)",
-    solidColor: "#FFD600",
-    gradient: "linear-gradient(135deg, #FFD600, #FFED4E)",
-    citations: ["AARP 2020", "National Academies of Sciences 2020"],
-    citationNumbers: [21, 22],
-    insights: [
-      "Retirement and empty nest syndrome create new social challenges",
-      "Health issues and mobility impact social engagement",
-      "Lifetime relationship skills help maintain existing connections"
-    ]
-  }
-];
+// Data with citations - will be defined inside component with translation support
 
 const getMetrics = (t: any) => [
   { key: 'lonelinessPercent', label: t('loneliness.chart.loneliness_rate', 'Loneliness Rate (%)'), icon: Users, suffix: '%' },
@@ -133,6 +63,78 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
   const [showInsights, setShowInsights] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
+  // Data with citations - now with translation support
+  const generationData = [
+    {
+      generation: t("loneliness.chart.gen_z", "Gen Z"),
+      ageRange: "18-27",
+      lonelinessScore: 48.3,
+      lonelinessPercent: 79,
+      noFriends: 27,
+      color: "url(#gen-z-gradient)",
+      solidColor: "#FF2688",
+      gradient: "linear-gradient(135deg, #FF2688, #FF4DA6)",
+      citations: ["Cigna 2019", "Cigna 2020", "Survey Center on American Life 2021"],
+      citationNumbers: [4, 5, 6],
+      insights: [
+        t("loneliness.chart.gen_z_insight1", "Highest loneliness scores despite being most connected digitally"),
+        t("loneliness.chart.gen_z_insight2", "Social media paradox: more connections, less meaningful relationships"),
+        t("loneliness.chart.gen_z_insight3", "Financial stress and career uncertainty compound isolation")
+      ]
+    },
+    {
+      generation: t("loneliness.chart.millennials", "Millennials"),
+      ageRange: "28-43",
+      lonelinessScore: 45.3,
+      lonelinessPercent: 71,
+      noFriends: 22,
+      color: "url(#millennials-gradient)",
+      solidColor: "#741ADD",
+      gradient: "linear-gradient(135deg, #741ADD, #9B4DFF)",
+      citations: ["YouGov 2019"],
+      citationNumbers: [20, 3],
+      insights: [
+        t("loneliness.chart.millennials_insight1", "Work-life balance challenges impact social connections"),
+        t("loneliness.chart.millennials_insight2", "Adulting responsibilities leave less time for friendships"),
+        t("loneliness.chart.millennials_insight3", "Higher friendship maintenance expectations vs reality")
+      ]
+    },
+    {
+      generation: t("loneliness.chart.gen_x", "Gen X"),
+      ageRange: "44-59",
+      lonelinessScore: 40.2,
+      lonelinessPercent: 50,
+      noFriends: 15,
+      color: "url(#gen-x-gradient)",
+      solidColor: "#38D1BF",
+      gradient: "linear-gradient(135deg, #38D1BF, #5FDDD0)",
+      citations: ["Survey Center on American Life 2021"],
+      citationNumbers: [21, 3],
+      insights: [
+        t("loneliness.chart.gen_x_insight1", "Sandwich generation: caring for parents and children"),
+        t("loneliness.chart.gen_x_insight2", "Career peak years limit social time"),
+        t("loneliness.chart.gen_x_insight3", "More selective about deep vs surface relationships")
+      ]
+    },
+    {
+      generation: t("loneliness.chart.boomers", "Boomers"),
+      ageRange: "60+",
+      lonelinessScore: 38.5,
+      lonelinessPercent: 50,
+      noFriends: 9,
+      color: "url(#boomers-gradient)",
+      solidColor: "#FFD600",
+      gradient: "linear-gradient(135deg, #FFD600, #FFED4E)",
+      citations: ["AARP 2020", "National Academies of Sciences 2020"],
+      citationNumbers: [21, 22],
+      insights: [
+        t("loneliness.chart.boomers_insight1", "Retirement and empty nest syndrome create new social challenges"),
+        t("loneliness.chart.boomers_insight2", "Health issues and mobility impact social engagement"),
+        t("loneliness.chart.boomers_insight3", "Lifetime relationship skills help maintain existing connections")
+      ]
+    }
+  ];
 
   const currentData = generationData.map(gen => ({
     ...gen,

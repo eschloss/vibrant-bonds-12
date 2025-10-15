@@ -85,24 +85,24 @@ const LonelinessEpidemic: React.FC = () => {
             es: "Estadísticas completas de la epidemia de soledad 2025: 36% de estadounidenses están solos, Gen Z más afectada (79%), riesgos de salud equivalen a fumar 15 cigarrillos diarios. Soluciones respaldadas por investigación."
           }}
           keywords={[
-            "loneliness epidemic statistics 2025",
-            "loneliness facts and data", 
-            "social isolation statistics",
-            "Gen Z loneliness statistics",
-            "loneliness health effects",
-            "loneliness epidemic causes",
-            "social connection crisis",
-            "friendship statistics 2025",
-            "loneliness research data",
-            "mental health crisis statistics",
-            "social isolation health risks",
-            "loneliness epidemic solutions"
+            t("loneliness.seo.keyword1", "loneliness epidemic statistics 2025"),
+            t("loneliness.seo.keyword2", "loneliness facts and data"), 
+            t("loneliness.seo.keyword3", "social isolation statistics"),
+            t("loneliness.seo.keyword4", "Gen Z loneliness statistics"),
+            t("loneliness.seo.keyword5", "loneliness health effects"),
+            t("loneliness.seo.keyword6", "loneliness epidemic causes"),
+            t("loneliness.seo.keyword7", "social connection crisis"),
+            t("loneliness.seo.keyword8", "friendship statistics 2025"),
+            t("loneliness.seo.keyword9", "loneliness research data"),
+            t("loneliness.seo.keyword10", "mental health crisis statistics"),
+            t("loneliness.seo.keyword11", "social isolation health risks"),
+            t("loneliness.seo.keyword12", "loneliness epidemic solutions")
           ]}
           image="https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg"
           type="article"
           publishedTime="2025-01-20T00:00:00Z"
           modifiedTime="2025-01-20T12:00:00Z"
-          section="Health & Society"
+          section={t("loneliness.seo.section", "Health & Society")}
           pathname="/loneliness-epidemic"
         />
 
@@ -1549,8 +1549,8 @@ const LonelinessEpidemic: React.FC = () => {
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Article",
-                "headline": "Loneliness Epidemic Statistics 2025: Facts, Data & Health Impact",
-                "description": "Complete loneliness epidemic statistics 2025: 36% of Americans are lonely, Gen Z most affected (79%), health risks equal to smoking 15 cigarettes daily.",
+                "headline": t("loneliness.seo.headline", "Loneliness Epidemic Statistics 2025: Facts, Data & Health Impact"),
+                "description": t("loneliness.seo.description", "Complete loneliness epidemic statistics 2025: 36% of Americans are lonely, Gen Z most affected (79%), health risks equal to smoking 15 cigarettes daily."),
                 "author": {
                   "@type": "Organization",
                   "name": "Pulse",
@@ -1566,8 +1566,8 @@ const LonelinessEpidemic: React.FC = () => {
                 },
                 "datePublished": "2025-01-20T00:00:00Z",
                 "dateModified": "2025-01-20T12:00:00Z",
-                "articleSection": "Health & Society",
-                "keywords": ["loneliness epidemic statistics", "social isolation data", "Gen Z loneliness", "health effects loneliness"],
+                "articleSection": t("loneliness.seo.section", "Health & Society"),
+                "keywords": [t("loneliness.seo.keyword1", "loneliness epidemic statistics"), t("loneliness.seo.keyword3", "social isolation data"), t("loneliness.seo.keyword4", "Gen Z loneliness"), t("loneliness.seo.keyword5", "health effects loneliness")],
                 "wordCount": "3500",
                 "image": "https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg",
                 "mainEntityOfPage": {
@@ -1582,8 +1582,8 @@ const LonelinessEpidemic: React.FC = () => {
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Dataset",
-                "name": "Loneliness Epidemic Statistics 2025",
-                "description": "Comprehensive dataset on loneliness statistics, health impacts, and demographic breakdowns",
+                "name": t("loneliness.seo.dataset_name", "Loneliness Epidemic Statistics 2025"),
+                "description": t("loneliness.seo.dataset_description", "Comprehensive dataset on loneliness statistics, health impacts, and demographic breakdowns"),
                 "creator": {
                   "@type": "Organization",
                   "name": "Pulse"
@@ -1596,8 +1596,8 @@ const LonelinessEpidemic: React.FC = () => {
                   }
                 ],
                 "temporalCoverage": "2020/2025",
-                "spatialCoverage": "United States",
-                "keywords": ["loneliness statistics", "social isolation data", "health research", "demographic analysis"]
+                "spatialCoverage": t("loneliness.seo.spatial_coverage", "United States"),
+                "keywords": [t("loneliness.seo.keyword1", "loneliness statistics"), t("loneliness.seo.keyword3", "social isolation data"), t("loneliness.seo.keyword13", "health research"), t("loneliness.seo.keyword14", "demographic analysis")]
               })}
             </script>
           </div>
