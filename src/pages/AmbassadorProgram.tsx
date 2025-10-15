@@ -343,7 +343,7 @@ const AmbassadorProgram = () => {
                       
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-400">Number of Users:</span>
+                          <span className="text-gray-400">{t("ambassador.earnings.calculator.user.number_label", "Number of Users:")}</span>
                           <span className="text-pulse-pink font-bold">{userReferrals}</span>
                         </div>
                         <input
@@ -364,9 +364,9 @@ const AmbassadorProgram = () => {
                       </div>
                       
                       <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
-                        <div className="text-sm text-gray-400 mb-1">Estimated Annual Commission:</div>
+                        <div className="text-sm text-gray-400 mb-1">{t("ambassador.earnings.calculator.user.commission_label", "Estimated Annual Commission:")}</div>
                         <div className="text-blue-400 font-bold text-xl">${userEarningsPerYear.toLocaleString()}</div>
-                        <div className="text-xs text-gray-500 mt-1">* Based on average user spending</div>
+                        <div className="text-xs text-gray-500 mt-1">{t("ambassador.earnings.calculator.user.commission_note", "* Based on average user spending")}</div>
                       </div>
                     </div>
                     
@@ -385,7 +385,7 @@ const AmbassadorProgram = () => {
                       
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-400">Number of Venues:</span>
+                          <span className="text-gray-400">{t("ambassador.earnings.calculator.venue.number_label", "Number of Venues:")}</span>
                           <span className="text-pulse-pink font-bold">{venueReferrals}</span>
                         </div>
                         <input
@@ -406,9 +406,9 @@ const AmbassadorProgram = () => {
                       </div>
                       
                       <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
-                        <div className="text-sm text-gray-400 mb-1">Estimated Annual Commission:</div>
+                        <div className="text-sm text-gray-400 mb-1">{t("ambassador.earnings.calculator.venue.commission_label", "Estimated Annual Commission:")}</div>
                         <div className="text-purple-400 font-bold text-xl">${venueEarningsPerYear.toLocaleString()}</div>
-                        <div className="text-xs text-gray-500 mt-1">* Based on average venue revenue</div>
+                        <div className="text-xs text-gray-500 mt-1">{t("ambassador.earnings.calculator.venue.commission_note", "* Based on average venue revenue")}</div>
                       </div>
                     </div>
                   </div>
