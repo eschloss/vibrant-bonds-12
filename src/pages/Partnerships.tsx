@@ -229,7 +229,7 @@ const Partnerships = () => {
             {/* CTA */}
             <div className="mt-6 text-center">
               <a href="/meet-pip" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
-                Learn more about Pip
+                <Text id="partnerships.how_it_works.learn_more_pip">Learn more about Pip</Text>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </div>
@@ -261,10 +261,10 @@ const Partnerships = () => {
             ];
             return (
               <ActivitiesTeaser
-                title="Examples of Partner Venues We Love"
-                subtitle="Shuffle to explore the kinds of venues and experiences we feature — from climbing gyms and board game cafes to cooking schools and wine bars. If you create social experiences, we want to work with you."
+                title="partnerships.venues_teaser.title"
+                subtitle="partnerships.venues_teaser.subtitle"
                 ctaHref="https://482tykjn26x.typeform.com/to/e4yibguB"
-                ctaLabel="Apply to partner"
+                ctaLabel="partnerships.venues_teaser.cta"
                 itemsCount={16}
                 items={partnerVenueItems}
                 onCtaClick={(href) => trackTypeformRedirect({ href, source: 'partnerships:venues_teaser' })}
@@ -589,21 +589,31 @@ const Partnerships = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                title: "Meet Fellow Bowlers in Boston",
-                venue: "Boston Bowlers",
-                poweredBy: "New England Bowling Alley",
-                description: "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley.",
+                title: t("partnerships.examples.boston.title", "Meet Fellow Bowlers in Boston"),
+                venue: t("partnerships.examples.boston.venue", "Boston Bowlers"),
+                poweredBy: t("partnerships.examples.boston.powered_by", "New England Bowling Alley"),
+                description: t("partnerships.examples.boston.description", "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley."),
                 emoji: "🎳",
-                features: ["Skill-based matching", "Weekly league nights", "Tournament events", "Social mixers"],
+                features: [
+                  t("partnerships.examples.boston.features.0", "Skill-based matching"),
+                  t("partnerships.examples.boston.features.1", "Weekly league nights"),
+                  t("partnerships.examples.boston.features.2", "Tournament events"),
+                  t("partnerships.examples.boston.features.3", "Social mixers")
+                ],
                 color: "from-blue-500 to-cyan-400"
               },
               {
-                title: "Meet Gym Buddies in Barcelona",
-                venue: "Barcelona Gym Buddies",
-                poweredBy: "BCN Gym Group",
-                description: "Pulse‑matched workout partners. Recurring sessions hosted at your gym.",
+                title: t("partnerships.examples.barcelona.title", "Meet Gym Buddies in Barcelona"),
+                venue: t("partnerships.examples.barcelona.venue", "Barcelona Gym Buddies"),
+                poweredBy: t("partnerships.examples.barcelona.powered_by", "BCN Gym Group"),
+                description: t("partnerships.examples.barcelona.description", "Pulse‑matched workout partners. Recurring sessions hosted at your gym."),
                 emoji: "🏋️",
-                features: ["Goal-based matching", "Workout partners", "Nutrition sharing", "Fitness challenges"],
+                features: [
+                  t("partnerships.examples.barcelona.features.0", "Goal-based matching"),
+                  t("partnerships.examples.barcelona.features.1", "Workout partners"),
+                  t("partnerships.examples.barcelona.features.2", "Nutrition sharing"),
+                  t("partnerships.examples.barcelona.features.3", "Fitness challenges")
+                ],
                 color: "from-purple-500 to-pink-500"
               }
             ].map((example, index) => (
