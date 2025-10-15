@@ -33,24 +33,36 @@ const EarningCalculator: React.FC = () => {
       minPrice: 20,
       maxPrice: 40,
       color: "from-blue-500 to-cyan-400",
-      examples: ["Bowling + Beer", "Laser Tag", "Football"],
-      description: "Great for driving regular foot traffic"
+      examples: [
+        t("partnerships.calculator.examples.casual.0", "Bowling + Beer"),
+        t("partnerships.calculator.examples.casual.1", "Laser Tag"),
+        t("partnerships.calculator.examples.casual.2", "Football")
+      ],
+      description: t("partnerships.calculator.tier.casual.description", "Great for driving regular foot traffic")
     },
     {
       name: t("partnerships.calculator.tier.premium", "Premium Nights"),
       minPrice: 50,
       maxPrice: 100,
       color: "from-purple-500 to-pink-500",
-      examples: ["Wine Tasting", "Sailing", "Art Classes"],
-      description: "Higher value experiences for engaged customers"
+      examples: [
+        t("partnerships.calculator.examples.premium.0", "Wine Tasting"),
+        t("partnerships.calculator.examples.premium.1", "Sailing"),
+        t("partnerships.calculator.examples.premium.2", "Art Classes")
+      ],
+      description: t("partnerships.calculator.tier.premium.description", "Higher value experiences for engaged customers")
     },
     {
       name: t("partnerships.calculator.tier.luxury", "Luxury Events"),
       minPrice: 200,
       maxPrice: 500,
       color: "from-yellow-500 to-orange-500",
-      examples: ["Hot Air Balloon", "Private Chef", "Helicopter Tours"],
-      description: "Exclusive experiences for your VIP customers"
+      examples: [
+        t("partnerships.calculator.examples.luxury.0", "Hot Air Balloon"),
+        t("partnerships.calculator.examples.luxury.1", "Private Chef"),
+        t("partnerships.calculator.examples.luxury.2", "Helicopter Tours")
+      ],
+      description: t("partnerships.calculator.tier.luxury.description", "Exclusive experiences for your VIP customers")
     }
   ];
 

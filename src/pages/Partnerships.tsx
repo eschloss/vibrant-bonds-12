@@ -375,15 +375,15 @@ const Partnerships = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎳</div>
-                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example1">Meet Fellow Bowlers in Boston</Text></div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example1", "Meet Fellow Bowlers in Boston")}</div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🏋️</div>
-                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example2">Find Gym Buddies in Barcelona</Text></div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example2", "Find Gym Buddies in Barcelona")}</div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎲</div>
-                      <div className="text-sm md:text-base font-semibold text-white"><Text id="partnerships.programs.recurring.example3">Meet Local Gamers in London</Text></div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example3", "Meet Local Gamers in London")}</div>
                     </div>
                   </div>
                   <ul className="space-y-3 mb-6">
@@ -468,7 +468,7 @@ const Partnerships = () => {
                       <div className="text-center">
                         <div className="text-4xl mb-2">{example.emoji}</div>
                         <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
-                        <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
+                        <div className="text-sm text-gray-300">{t("partnerships.examples.powered_by", "powered by")} {example.poweredBy}</div>
                       </div>
                     </div>
                   </div>
@@ -496,12 +496,12 @@ const Partnerships = () => {
             <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-blue-400/40 transition-all">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                <div className="text-white font-semibold">Featured in the City</div>
+                <div className="text-white font-semibold">{t("partnerships.programs.comparison.featured_title", "Featured in the City")}</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Best for:</span> <Text id="partnerships.programs.comparison.featured_best">Occasional group bookings</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">You get:</span> <Text id="partnerships.programs.comparison.featured_you_get">Citywide discovery + prepaid groups</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">Fee:</span> <Text id="partnerships.programs.comparison.featured_fee">25% per booking</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.featured_best">Occasional group bookings</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.featured_you_get">Citywide discovery + prepaid groups</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.featured_fee">25% per booking</Text></span></li>
               </ul>
             </div>
 
@@ -509,12 +509,12 @@ const Partnerships = () => {
             <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-purple-400/40 transition-all">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                <div className="text-white font-semibold">Your Recurring Community</div>
+                <div className="text-white font-semibold">{t("partnerships.programs.comparison.recurring_title", "Your Recurring Community")}</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Best for:</span> <Text id="partnerships.programs.comparison.recurring_best">Regular sessions (weekly/monthly)</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">You get:</span> <Text id="partnerships.programs.comparison.recurring_you_get">Ongoing groups, co‑promotion</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">Fee:</span> <Text id="partnerships.programs.comparison.recurring_fee">25% per booking</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.recurring_best">Regular sessions (weekly/monthly)</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.recurring_you_get">Ongoing groups, co‑promotion</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.recurring_fee">25% per booking</Text></span></li>
               </ul>
             </div>
           </div>
@@ -626,7 +626,7 @@ const Partnerships = () => {
                       <div className="text-center">
                         <div className="text-4xl mb-2">{example.emoji}</div>
                         <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
-                        <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
+                        <div className="text-sm text-gray-300">{t("partnerships.examples.powered_by", "powered by")} {example.poweredBy}</div>
                       </div>
                     </div>
                   </div>
@@ -757,7 +757,7 @@ const Partnerships = () => {
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
                         <h3 className="text-2xl font-bold text-white mb-2">{example.venue}</h3>
-                        <div className="text-sm text-gray-300">powered by {example.poweredBy}</div>
+                        <div className="text-sm text-gray-300">{t("partnerships.examples.powered_by", "powered by")} {example.poweredBy}</div>
                       </div>
                     </div>
                   </div>
