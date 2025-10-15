@@ -66,10 +66,10 @@ const LonelinessEpidemic: React.FC = () => {
   ];
 
   const generationStats = [
-    { generation: "Gen Z (18-26)", loneliness: "79%", noFriends: "25%", description: "The loneliest generation" },
-    { generation: "Millennials (27-42)", loneliness: "71%", noFriends: "22%", description: "High dissatisfaction with friendships" },
-    { generation: "Gen X (43-58)", loneliness: "50%", noFriends: "15%", description: "Moderate but concerning levels" },
-    { generation: "Boomers (59+)", loneliness: "33%", noFriends: "9%", description: "Often situational loneliness" }
+    { generation: t("loneliness.generations.gen_z", "Gen Z (18-26)"), loneliness: "79%", noFriends: "25%", description: t("loneliness.generations.gen_z_desc", "The loneliest generation") },
+    { generation: t("loneliness.generations.millennials", "Millennials (27-42)"), loneliness: "71%", noFriends: "22%", description: t("loneliness.generations.millennials_desc", "High dissatisfaction with friendships") },
+    { generation: t("loneliness.generations.gen_x", "Gen X (43-58)"), loneliness: "50%", noFriends: "15%", description: t("loneliness.generations.gen_x_desc", "Moderate but concerning levels") },
+    { generation: t("loneliness.generations.boomers", "Boomers (59+)"), loneliness: "33%", noFriends: "9%", description: t("loneliness.generations.boomers_desc", "Often situational loneliness") }
   ];
 
   return (
@@ -533,21 +533,17 @@ const LonelinessEpidemic: React.FC = () => {
               <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700/30">
                 <h3 className="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
                   <Brain className="h-6 w-6 text-purple-400" />
-                  Understanding the Generational Paradox
+                  <Text id="loneliness.paradox.title">Understanding the Generational Paradox</Text>
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  The data reveals a troubling paradox: <strong>Gen Z — the most digitally connected generation in history — reports the highest rates of loneliness</strong>. 
-                  With a UCLA Loneliness Scale score of 48.3 out of 80<sup><a href="#ref-4" className="text-blue-400 hover:text-blue-300">[4]</a></sup>, 
-                  they significantly outpace older generations who score lower despite having fewer digital tools for connection.
+                  <Text id="loneliness.paradox.paragraph1">The data reveals a troubling paradox: <strong>Gen Z — the most digitally connected generation in history — reports the highest rates of loneliness</strong>. With a UCLA Loneliness Scale score of 48.3 out of 80[4], they significantly outpace older generations who score lower despite having fewer digital tools for connection.</Text>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, 
-                  while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, 
-                  despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.
+                  <Text id="loneliness.paradox.paragraph2">This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.</Text>
                 </p>
                 <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <p className="text-purple-200 font-medium">
-                    <strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating meaningful, in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.
+                    <Text id="loneliness.paradox.insight"><strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating meaningful, in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.</Text>
                   </p>
                 </div>
               </div>
@@ -647,32 +643,32 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5 text-red-500" />
-                    Health Impacts
+                    <Text id="loneliness.stats.health_title">Health Impacts</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Increased premature death risk</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.premature_death">Increased premature death risk</Text></span>
                     <span className="font-semibold text-red-400">29%<sup><a href="#ref-8" className="text-blue-400 hover:text-blue-300">[8]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Higher cardiovascular disease risk</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.cardiovascular_risk">Higher cardiovascular disease risk</Text></span>
                     <span className="font-semibold text-red-400">29%<sup><a href="#ref-9" className="text-blue-400 hover:text-blue-300">[9]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Increased stroke risk</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.stroke_risk">Increased stroke risk</Text></span>
                     <span className="font-semibold text-red-400">32%<sup><a href="#ref-9" className="text-blue-400 hover:text-blue-300">[9]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Dementia risk increase (older adults)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.dementia_risk">Dementia risk increase (older adults)</Text></span>
                     <span className="font-semibold text-red-400">50%<sup><a href="#ref-19" className="text-blue-400 hover:text-blue-300">[19]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">LGBTQ+ youth considering suicide</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.lgbtq_suicide">LGBTQ+ youth considering suicide</Text></span>
                     <span className="font-semibold text-red-400">45%<sup><a href="#ref-17" className="text-blue-400 hover:text-blue-300">[17]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Weakened immune response</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.immune_response">Weakened immune response</Text></span>
                     <span className="font-semibold text-red-400">Confirmed<sup><a href="#ref-10" className="text-blue-400 hover:text-blue-300">[10]</a></sup></span>
                   </div>
                 </CardContent>
@@ -683,20 +679,20 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Shield className="h-5 w-5 text-purple-400" />
-                    COVID-19 & Social Isolation
+                    <Text id="loneliness.stats.covid_title">COVID-19 & Social Isolation</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Adults with serious loneliness during lockdown</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.lockdown_loneliness">Adults with serious loneliness during lockdown</Text></span>
                     <span className="font-semibold text-purple-400">36%<sup><a href="#ref-14" className="text-blue-400 hover:text-blue-300">[14]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Young adults (18-25) serious loneliness</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.young_adults_loneliness">Young adults (18-25) serious loneliness</Text></span>
                     <span className="font-semibold text-purple-400">61%<sup><a href="#ref-14" className="text-blue-400 hover:text-blue-300">[14]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">UK adults feeling lonely during lockdown</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.uk_loneliness">UK adults feeling lonely during lockdown</Text></span>
                     <span className="font-semibold text-purple-400">50%<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300">[5]</a></sup></span>
                   </div>
                 </CardContent>
@@ -713,24 +709,24 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Clock className="h-5 w-5 text-yellow-400" />
-                    Workplace & Remote Work
+                    <Text id="loneliness.stats.workplace_title">Workplace & Remote Work</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Remote workers more likely to feel lonely</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.remote_workers_lonely">Remote workers more likely to feel lonely</Text></span>
                     <span className="font-semibold text-yellow-400">2x<sup><a href="#ref-18" className="text-blue-400 hover:text-blue-300">[18]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Employees with work best friend</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.work_best_friend">Employees with work best friend</Text></span>
                     <span className="font-semibold text-yellow-400">20%<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300">[7]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Annual productivity loss from loneliness</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.productivity_loss">Annual productivity loss from loneliness</Text></span>
                     <span className="font-semibold text-yellow-400">$406B<sup><a href="#ref-12" className="text-blue-400 hover:text-blue-300">[12]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Isolated employees missing work</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.isolated_missing_work">Isolated employees missing work</Text></span>
                     <span className="font-semibold text-yellow-400">5x more<sup><a href="#ref-12" className="text-blue-400 hover:text-blue-300">[12]</a></sup></span>
                   </div>
                 </CardContent>
@@ -741,16 +737,16 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <TrendingDown className="h-5 w-5 text-blue-400" />
-                    Technology & Social Media
+                    <Text id="loneliness.stats.technology_title">Technology & Social Media</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Heavy social media users feeling isolated</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.social_media_isolated">Heavy social media users feeling isolated</Text></span>
                     <span className="font-semibold text-blue-400">2x more<sup><a href="#ref-22" className="text-blue-400 hover:text-blue-300">[22]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Millennials/Gen Z daily social media use</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.social_media_use">Millennials/Gen Z daily social media use</Text></span>
                     <span className="font-semibold text-blue-400">4-5 hours<sup><a href="#ref-23" className="text-blue-400 hover:text-blue-300">[23]</a></sup></span>
                   </div>
                 </CardContent>
@@ -761,24 +757,24 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Users className="h-5 w-5 text-green-400" />
-                    Generational Differences
+                    <Text id="loneliness.stats.generational_title">Generational Differences</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Gen Z with no close friends</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.gen_z_no_friends">Gen Z with no close friends</Text></span>
                     <span className="font-semibold text-green-400">25%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Millennials with no friends at all</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.millennials_no_friends">Millennials with no friends at all</Text></span>
                     <span className="font-semibold text-green-400">22%<sup><a href="#ref-20" className="text-blue-400 hover:text-blue-300">[20]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Gen X with no close friends</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.gen_x_no_friends">Gen X with no close friends</Text></span>
                     <span className="font-semibold text-green-400">15%<sup><a href="#ref-3" className="text-blue-400 hover:text-blue-300">[3]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Boomers (59+) feeling lonely</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.boomers_lonely">Boomers (59+) feeling lonely</Text></span>
                     <span className="font-semibold text-green-400">33%<sup><a href="#ref-21" className="text-blue-400 hover:text-blue-300">[21]</a></sup></span>
                   </div>
                 </CardContent>
@@ -789,20 +785,20 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Heart className="h-5 w-5 text-red-500" />
-                    Mental Health & Suicide
+                    <Text id="loneliness.stats.mental_health_title">Mental Health & Suicide</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">U.S. deaths by suicide in 2023</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.suicide_deaths">U.S. deaths by suicide in 2023</Text></span>
                     <span className="font-semibold text-red-400">49,000<sup><a href="#ref-15" className="text-blue-400 hover:text-blue-300">[15]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Suicide risk for isolated older adults</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.suicide_risk_elderly">Suicide risk for isolated older adults</Text></span>
                     <span className="font-semibold text-red-400">2-3x higher<sup><a href="#ref-16" className="text-blue-400 hover:text-blue-300">[16]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Loneliness correlation with anxiety/depression</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.anxiety_depression">Loneliness correlation with anxiety/depression</Text></span>
                     <span className="font-semibold text-red-400">3x higher<sup><a href="#ref-15" className="text-blue-400 hover:text-blue-300">[15]</a></sup></span>
                   </div>
                 </CardContent>
@@ -819,24 +815,24 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Users className="h-5 w-5 text-indigo-400" />
-                    Civic Engagement & Community
+                    <Text id="loneliness.stats.civic_title">Civic Engagement & Community</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Civic organization membership decline (1960s-2000s)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.civic_membership_decline">Civic organization membership decline (1960s-2000s)</Text></span>
                     <span className="font-semibold text-indigo-400">50%<sup><a href="#ref-11" className="text-blue-400 hover:text-blue-300">[11]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Americans trusting "most people" (1972 vs 2000)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.trust_decline">Americans trusting "most people" (1972 vs 2000)</Text></span>
                     <span className="font-semibold text-indigo-400">55% → 32%<sup><a href="#ref-24" className="text-blue-400 hover:text-blue-300">[24]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Religious attendance (1970 vs 2020)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.religious_attendance">Religious attendance (1970 vs 2020)</Text></span>
                     <span className="font-semibold text-indigo-400">45% → 24%<sup><a href="#ref-25" className="text-blue-400 hover:text-blue-300">[25]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">Volunteer participation (1970 vs 2020)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.volunteer_participation">Volunteer participation (1970 vs 2020)</Text></span>
                     <span className="font-semibold text-indigo-400">30% → 20%<sup><a href="#ref-26" className="text-blue-400 hover:text-blue-300">[26]</a></sup></span>
                   </div>
                 </CardContent>
@@ -847,24 +843,24 @@ const LonelinessEpidemic: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <TrendingDown className="h-5 w-5 text-teal-400" />
-                    International Trends
+                    <Text id="loneliness.stats.international_title">International Trends</Text>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Global adults feeling lonely regularly</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.global_lonely">Global adults feeling lonely regularly</Text></span>
                     <span className="font-semibold text-teal-400">25%<sup><a href="#ref-7" className="text-blue-400 hover:text-blue-300">[7]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">UK adults reporting frequent loneliness</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.uk_frequent_loneliness">UK adults reporting frequent loneliness</Text></span>
                     <span className="font-semibold text-teal-400">38%<sup><a href="#ref-5" className="text-blue-400 hover:text-blue-300">[5]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-gray-700/50">
-                    <span className="text-gray-300">Japan socially isolated adults (40+)</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.japan_isolated">Japan socially isolated adults (40+)</Text></span>
                     <span className="font-semibold text-teal-400">14%<sup><a href="#ref-27" className="text-blue-400 hover:text-blue-300">[27]</a></sup></span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-300">OECD countries chronic loneliness</span>
+                    <span className="text-gray-300"><Text id="loneliness.stats.oecd_loneliness">OECD countries chronic loneliness</Text></span>
                     <span className="font-semibold text-teal-400">20-30%<sup><a href="#ref-27" className="text-blue-400 hover:text-blue-300">[27]</a></sup></span>
                   </div>
                 </CardContent>
@@ -888,22 +884,22 @@ const LonelinessEpidemic: React.FC = () => {
               className="text-4xl font-bold mb-8 text-white"
               variants={fadeInUp}
             >
-              Cultural and Social Shifts: Why Loneliness Is Rising
+              <Text id="loneliness.social_shifts.title">Cultural and Social Shifts: Why Loneliness Is Rising</Text>
             </motion.h2>
             
             <motion.div className="prose prose-lg prose-invert" variants={fadeInUp}>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Loneliness doesn't occur in a vacuum. It reflects profound changes in how society is structured, how we interact, and the role technology plays in our lives.
+                <Text id="loneliness.social_shifts.intro">Loneliness doesn't occur in a vacuum. It reflects profound changes in how society is structured, how we interact, and the role technology plays in our lives.</Text>
               </p>
 
-              <h3 className="text-2xl font-semibold mb-4 text-white">Civic Engagement Decline Statistics: Community Participation Data Over Decades</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-white"><Text id="loneliness.civic.title">Civic Engagement Decline Statistics: Community Participation Data Over Decades</Text></h3>
               <p className="text-gray-300 mb-4">
-                Robert Putnam's "Bowling Alone" (2000) documented a sharp decline in American community life over the latter half of the 20th century:
+                <Text id="loneliness.civic.intro">Robert Putnam's "Bowling Alone" (2000) documented a sharp decline in American community life over the latter half of the 20th century:</Text>
               </p>
               <ul className="text-gray-300 space-y-2 mb-6">
-                <li>Membership in organizations like PTAs, civic clubs, and unions dropped by nearly 50% between the 1960s and 2000</li>
-                <li>The percentage of Americans who say "most people can be trusted" fell from 55% in 1972 to 32% in 2000</li>
-                <li>Religious attendance fell from 45% in 1970 to 24% in 2020</li>
+                <li><Text id="loneliness.civic.stat1">Membership in organizations like PTAs, civic clubs, and unions dropped by nearly 50% between the 1960s and 2000</Text></li>
+                <li><Text id="loneliness.civic.stat2">The percentage of Americans who say "most people can be trusted" fell from 55% in 1972 to 32% in 2000</Text></li>
+                <li><Text id="loneliness.civic.stat3">Religious attendance fell from 45% in 1970 to 24% in 2020</Text></li>
               </ul>
 
               <h3 className="text-2xl font-semibold mb-4 text-white">
@@ -1298,11 +1294,11 @@ const LonelinessEpidemic: React.FC = () => {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                  Loneliness Epidemic: Complete FAQ Guide
+                  <Text id="loneliness.faq.title">Loneliness Epidemic: Complete FAQ Guide</Text>
                 </span>
               </h2>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Get answers to the most frequently asked questions about loneliness statistics, health impacts, and evidence-based solutions. For more questions about connecting with friends, visit our <Link to="/faq" className="text-pulse-pink hover:text-accent transition-colors underline">complete FAQ section</Link>.
+                <Text id="loneliness.faq.description">Get answers to the most frequently asked questions about loneliness statistics, health impacts, and evidence-based solutions. For more questions about connecting with friends, visit our </Text><Link to="/faq" className="text-pulse-pink hover:text-accent transition-colors underline"><Text id="loneliness.faq.link">complete FAQ section</Text></Link>.
               </p>
             </motion.div>
 
@@ -1323,8 +1319,8 @@ const LonelinessEpidemic: React.FC = () => {
               >
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="What is the loneliness epidemic?"
-                    answer="The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide<sup><a href='#ref-1' className='text-blue-400 hover:text-blue-300 font-semibold'>[1]</a></sup>. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis."
+                    question={t("loneliness.faq.epidemic.q", "What is the loneliness epidemic?")}
+                    answer={t("loneliness.faq.epidemic.a", "The loneliness epidemic refers to the widespread prevalence of chronic loneliness and social isolation affecting millions of people worldwide[1]. It's characterized by a significant increase in reported loneliness rates, declining social connections, and associated health consequences that public health experts now consider a major crisis.")}
                   />
                 </motion.div>
 
@@ -1372,22 +1368,22 @@ const LonelinessEpidemic: React.FC = () => {
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="Are certain groups more at risk of chronic loneliness?"
-                    answer="Yes. Remote workers, LGBTQ+ youth, single adults, older adults living alone, mothers with young children, immigrants, and people with disabilities are particularly vulnerable according to Harvard's Making Caring Common (2021). Each group faces unique social barriers and isolation challenges."
+                    question={t("loneliness.faq.groups.q", "Are certain groups more at risk of chronic loneliness?")}
+                    answer={t("loneliness.faq.groups.a", "Yes. Remote workers, LGBTQ+ youth, single adults, older adults living alone, mothers with young children, immigrants, and people with disabilities are particularly vulnerable according to Harvard's Making Caring Common (2021). Each group faces unique social barriers and isolation challenges.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="How has COVID-19 affected loneliness levels?"
-                    answer="During the pandemic, 36% of adults experienced serious loneliness<sup><a href='#ref-14' className='text-blue-400 hover:text-blue-300 font-semibold'>[14]</a></sup> according to Harvard MCC (2021). Young adults (18–25) were the hardest hit with 61% reporting serious loneliness, and mothers with young children reported 51%. The pandemic accelerated existing loneliness trends through lockdowns and social distancing."
+                    question={t("loneliness.faq.covid.q", "How has COVID-19 affected loneliness levels?")}
+                    answer={t("loneliness.faq.covid.a", "During the pandemic, 36% of adults experienced serious loneliness[14] according to Harvard MCC (2021). Young adults (18–25) were the hardest hit with 61% reporting serious loneliness, and mothers with young children reported 51%. The pandemic accelerated existing loneliness trends through lockdowns and social distancing.")}
                   />
                 </motion.div>
 
                 <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                   <FAQItem
-                    question="Does working remotely make people more lonely?"
-                    answer="Yes. Studies show remote employees are twice as likely to report loneliness compared to in-office workers<sup><a href='#ref-18' className='text-blue-400 hover:text-blue-300 font-semibold'>[18]</a></sup> according to Buffer's 2023 State of Remote Work report. Remote work can reduce spontaneous social interactions, water cooler conversations, and the natural community building that happens in shared physical spaces."
+                    question={t("loneliness.faq.remote.q", "Does working remotely make people more lonely?")}
+                    answer={t("loneliness.faq.remote.a", "Yes. Studies show remote employees are twice as likely to report loneliness compared to in-office workers[18] according to Buffer's 2023 State of Remote Work report. Remote work can reduce spontaneous social interactions, water cooler conversations, and the natural community building that happens in shared physical spaces.")}
                   />
                 </motion.div>
 

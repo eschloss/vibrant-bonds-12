@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Zap, Activity, Brain, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react';
 import { cn } from "@/lib/utils";
+import { useTranslation } from '@/hooks/useTranslation';
+import { Text } from '@/components/Text';
 
 // Data with citations
 const generationData = [
@@ -78,10 +80,10 @@ const generationData = [
   }
 ];
 
-const metrics = [
-  { key: 'lonelinessPercent', label: 'Loneliness Rate (%)', icon: Users, suffix: '%' },
-  { key: 'lonelinessScore', label: 'UCLA Loneliness Score', icon: Brain, suffix: '/80' },
-  { key: 'noFriends', label: 'No Close Friends (%)', icon: TrendingDown, suffix: '%' }
+const getMetrics = (t: any) => [
+  { key: 'lonelinessPercent', label: t('loneliness.chart.loneliness_rate', 'Loneliness Rate (%)'), icon: Users, suffix: '%' },
+  { key: 'lonelinessScore', label: t('loneliness.chart.ucla_score', 'UCLA Loneliness Score'), icon: Brain, suffix: '/80' },
+  { key: 'noFriends', label: t('loneliness.chart.no_close_friends', 'No Close Friends (%)'), icon: TrendingDown, suffix: '%' }
 ];
 
 interface AnimatedCounterProps {
@@ -125,6 +127,7 @@ interface GenerationalLonelinessChartProps {
 }
 
 const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = ({ className }) => {
+  const { t } = useTranslation();
   const [activeMetric, setActiveMetric] = useState<string>('lonelinessPercent');
   const [selectedGeneration, setSelectedGeneration] = useState<string | null>(null);
   const [showInsights, setShowInsights] = useState(false);
@@ -138,6 +141,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
   }));
 
   const selectedGen = selectedGeneration ? generationData.find(g => g.generation === selectedGeneration) : null;
+  const metrics = getMetrics(t);
   const currentMetric = metrics.find(m => m.key === activeMetric);
 
   // Neural network background animation
@@ -221,7 +225,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
     return (
       <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-xl">
         <h3 className="font-semibold text-foreground mb-2">{label}</h3>
-        <p className="text-muted-foreground text-sm mb-2">{data.ageRange} years old</p>
+        <p className="text-muted-foreground text-sm mb-2">{data.ageRange} {t('loneliness.chart.years_old', 'years old')}</p>
         <div className="flex items-center gap-2">
           <div 
             className="w-3 h-3 rounded-full" 
@@ -233,7 +237,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
         </div>
         {data.citations && (
           <div className="mt-3 pt-2 border-t border-border">
-            <p className="text-xs text-muted-foreground mb-1">Sources:</p>
+            <p className="text-xs text-muted-foreground mb-1">{t('loneliness.chart.sources', 'Sources:')}</p>
             <div className="text-xs text-primary">
               {data.citations.join(', ')}
             </div>
@@ -262,7 +266,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.2 }}
           >
-            Loneliness Across Generations
+            <Text id="loneliness.chart.title">Loneliness Across Generations</Text>
           </motion.h2>
           <motion.p 
             className="text-gray-300 text-lg max-w-3xl mx-auto"
@@ -270,7 +274,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.3 }}
           >
-            Interactive data visualization revealing how loneliness affects different age groups
+            <Text id="loneliness.chart.subtitle">Interactive data visualization revealing how loneliness affects different age groups</Text>
           </motion.p>
         </div>
 
@@ -417,23 +421,23 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                       style={{ backgroundColor: gen.solidColor }}
                     />
                   </CardTitle>
-                  <p className="text-gray-400 text-sm">{gen.ageRange} years</p>
+                  <p className="text-gray-400 text-sm">{gen.ageRange} {t('loneliness.chart.years', 'years')}</p>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-sm">Loneliness Rate</span>
+                    <span className="text-gray-300 text-sm">{t('loneliness.chart.loneliness_rate_label', 'Loneliness Rate')}</span>
                     <span className="text-xl font-bold" style={{ color: gen.solidColor }}>
                       <AnimatedCounter value={gen.lonelinessPercent} suffix="%" />
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-sm">No Close Friends</span>
+                    <span className="text-gray-300 text-sm">{t('loneliness.chart.no_close_friends_label', 'No Close Friends')}</span>
                     <span className="text-lg font-semibold text-gray-300">
                       <AnimatedCounter value={gen.noFriends} suffix="%" />
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300 text-sm">UCLA Score</span>
+                    <span className="text-gray-300 text-sm">{t('loneliness.chart.ucla_score_label', 'UCLA Score')}</span>
                     <span className="text-lg font-semibold text-gray-300">
                       <AnimatedCounter value={gen.lonelinessScore} suffix="/80" />
                     </span>
@@ -455,7 +459,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Brain className="h-5 w-5 text-purple-400" />
-                Key Findings
+<Text id="loneliness.chart.key_findings">Key Findings</Text>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -463,15 +467,15 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                 <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500/10 to-purple-600/5 rounded-lg border border-purple-500/20">
                   <TrendingUp className="h-5 w-5 text-purple-400 flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Younger = Lonelier</p>
-                    <p className="text-gray-300 text-sm">Gen Z reports 79% loneliness vs 50% for Boomers</p>
+                    <p className="text-white font-semibold">{t('loneliness.chart.younger_lonelier', 'Younger = Lonelier')}</p>
+                    <p className="text-gray-300 text-sm">{t('loneliness.chart.gen_z_vs_boomers', 'Gen Z reports 79% loneliness vs 50% for Boomers')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-pink-500/10 to-pink-600/5 rounded-lg border border-pink-500/20">
                   <Activity className="h-5 w-5 text-pink-400 flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Friendship Decline</p>
-                    <p className="text-gray-300 text-sm">1 in 4 Gen Z adults have no close friends</p>
+                    <p className="text-white font-semibold">{t('loneliness.chart.friendship_decline', 'Friendship Decline')}</p>
+                    <p className="text-gray-300 text-sm">{t('loneliness.chart.gen_z_no_friends', '1 in 4 Gen Z adults have no close friends')}</p>
                   </div>
                 </div>
               </div>
@@ -483,10 +487,9 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
               <div className="flex items-start gap-3">
                 <Zap className="h-6 w-6 text-purple-400 flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-white font-semibold mb-2">The Digital Paradox</h4>
+                  <h4 className="text-white font-semibold mb-2">{t('loneliness.chart.digital_paradox', 'The Digital Paradox')}</h4>
                   <p className="text-gray-300 leading-relaxed">
-                    Despite being the most connected generation in history, Gen Z shows the highest rates of loneliness, 
-                    suggesting that digital connections may not satisfy our fundamental need for meaningful human relationships.
+                    {t('loneliness.chart.digital_paradox_description', 'Despite being the most connected generation in history, Gen Z shows the highest rates of loneliness, suggesting that digital connections may not satisfy our fundamental need for meaningful human relationships.')}
                   </p>
                 </div>
               </div>
@@ -520,7 +523,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                         className="w-6 h-6 rounded-full"
                         style={{ backgroundColor: selectedGen.solidColor }}
                       />
-                      {selectedGen.generation} Deep Dive
+{selectedGen.generation} {t('loneliness.chart.deep_dive', 'Deep Dive')}
                     </span>
                     <Button
                       variant="ghost"
@@ -531,7 +534,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                       ✕
                     </Button>
                   </CardTitle>
-                  <p className="text-gray-400">{selectedGen.ageRange} years old</p>
+                  <p className="text-gray-400">{selectedGen.ageRange} {t('loneliness.chart.years_old', 'years old')}</p>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-3 gap-4 text-center">
@@ -539,24 +542,24 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                       <div className="text-2xl font-bold text-white">
                         <AnimatedCounter value={selectedGen.lonelinessPercent} suffix="%" />
                       </div>
-                      <div className="text-sm text-gray-400">Feel Lonely</div>
+                      <div className="text-sm text-gray-400">{t('loneliness.chart.feel_lonely', 'Feel Lonely')}</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-white">
                         <AnimatedCounter value={selectedGen.noFriends} suffix="%" />
                       </div>
-                      <div className="text-sm text-gray-400">No Close Friends</div>
+                      <div className="text-sm text-gray-400">{t('loneliness.chart.no_close_friends', 'No Close Friends')}</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-white">
                         <AnimatedCounter value={selectedGen.lonelinessScore} suffix="/80" />
                       </div>
-                      <div className="text-sm text-gray-400">UCLA Score</div>
+                      <div className="text-sm text-gray-400">{t('loneliness.chart.ucla_score', 'UCLA Score')}</div>
                     </div>
                   </div>
 
                   <div>
-                    <h4 className="text-white font-semibold mb-3">Key Insights:</h4>
+                    <h4 className="text-white font-semibold mb-3">{t('loneliness.chart.key_insights', 'Key Insights:')}</h4>
                     <div className="space-y-2">
                       {selectedGen.insights.map((insight, index) => (
                         <div key={index} className="flex items-start gap-2 text-gray-300 text-sm">
@@ -570,7 +573,7 @@ const GenerationalLonelinessChart: React.FC<GenerationalLonelinessChartProps> = 
                   <div className="pt-3 border-t border-border">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
                       <ExternalLink className="h-3 w-3" />
-                      Sources:
+{t('loneliness.chart.sources', 'Sources:')}
                     </div>
                     <div className="text-xs text-primary">
                       {selectedGen.citations.join(', ')}
