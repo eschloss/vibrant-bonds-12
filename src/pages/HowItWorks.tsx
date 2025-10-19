@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -43,6 +43,19 @@ const HowItWorks = () => {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const spotlight = useMotionTemplate`radial-gradient(260px 260px at ${mx}px ${my}px, rgba(255,255,255,0.12), transparent 60%)`;
+
+  // Handle hash navigation (e.g., /how-it-works#faq)
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -404,7 +417,7 @@ const HowItWorks = () => {
       {/* Removed Your 7‑day journey timeline per request */}
 
       {/* How It Works – FAQ */}
-      <section className="py-16 md:py-20 relative overflow-hidden">
+      <section id="faq" className="py-16 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-24 left-1/3 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl" />
           <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full bg-pink-600/10 blur-3xl" />

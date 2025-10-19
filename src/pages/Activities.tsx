@@ -261,7 +261,7 @@ const Activities = () => {
                     <img
                       src={activity.image}
                       alt={`Meet New ${t(`activity.${activity.id}` as any, activity.name)} Friends`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       loading="lazy"
                       decoding="async"
                       sizes="(min-width:1024px) 12vw, (min-width:640px) 28vw, 44vw"
