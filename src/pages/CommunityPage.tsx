@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
+import CommunityMatchmakingTemplate from "@/components/CommunityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Seo } from "@/hooks/useSeo";
 
@@ -13,6 +13,8 @@ interface CommunityData {
   url: string;
   title1: string;
   title2: string;
+  subtitle?: string;
+  title2_part2?: string;
   powered_by: string;
   business_name: string;
   business_image: string;
@@ -81,17 +83,17 @@ const CommunityPage = () => {
   return (
     <>
       <Seo {...seoProps} />
-      <CityMatchmakingTemplate 
+      <CommunityMatchmakingTemplate 
         cityName={communityData.title2}
         code={communityData.city}
         country=""
         state=""
         image={communityData.background_image}
-        isQueer={false}
-        isCommunity={true}
         communityData={{
           title1: communityData.title1,
           title2: communityData.title2,
+          subtitle: communityData.subtitle,
+          title2_part2: communityData.title2_part2,
           powered_by: communityData.powered_by,
           business_name: communityData.business_name,
           business_image: communityData.business_image,

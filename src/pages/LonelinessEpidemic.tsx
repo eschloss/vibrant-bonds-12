@@ -536,14 +536,14 @@ const LonelinessEpidemic: React.FC = () => {
                   <Text id="loneliness.paradox.title">Understanding the Generational Paradox</Text>
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  <Text id="loneliness.paradox.paragraph1">The data reveals a troubling paradox: <strong>Gen Z — the most digitally connected generation in history — reports the highest rates of loneliness</strong>. With a UCLA Loneliness Scale score of 48.3 out of 80[4], they significantly outpace older generations who score lower despite having fewer digital tools for connection.</Text>
+                  The data reveals a troubling paradox: <strong>Gen Z — the most digitally connected generation in history — reports the highest rates of loneliness</strong>. With a UCLA Loneliness Scale score of 48.3 out of 80[4], they significantly outpace older generations who score lower despite having fewer digital tools for connection.
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed mb-4">
-                  <Text id="loneliness.paradox.paragraph2">This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.</Text>
+                  This suggests that <em>quantity of connections doesn't equal quality of relationships</em>. Social media interactions, while numerous, may not satisfy our fundamental human need for deep, meaningful bonds. Meanwhile, older generations, despite facing physical isolation challenges, often maintain stronger relationship skills developed over decades.
                 </p>
                 <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <p className="text-purple-200 font-medium">
-                    <Text id="loneliness.paradox.insight"><strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating meaningful, in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.</Text>
+                    <strong>Key Insight:</strong> The solution isn't just more social opportunities — it's creating meaningful, in-person connections that lead to lasting friendships. This is exactly what <a href="/matchmaking" className="text-purple-300 hover:text-purple-200 underline">Pulse's friend-group matching</a> aims to address.
                   </p>
                 </div>
               </div>

@@ -19,7 +19,7 @@ export const ConsentScriptLoader: React.FC = () => {
       if (consent.analytics) {
         loadScript("https://www.googletagmanager.com/gtag/js?id=G-J591H7VFMV");
         (window as any).dataLayer = (window as any).dataLayer || [];
-        function gtag(){(window as any).dataLayer.push(arguments);}
+        function gtag(...args: any[]){(window as any).dataLayer.push(args);}
         (window as any).gtag = gtag;
         gtag('js', new Date());
         gtag('config', 'G-J591H7VFMV');
@@ -27,8 +27,8 @@ export const ConsentScriptLoader: React.FC = () => {
 
       // Meta Pixel
       if (consent.marketing) {
-        if (!(window as any).fbq) {
-          !(function(f:any,b:any,e:any,v:any,n?:any,t?:any,s?:any){
+        if (typeof (window as any).fbq === 'undefined') {
+          (function(f:any,b:any,e:any,v:any,n?:any,t?:any,s?:any){
             if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -40,9 +40,6 @@ export const ConsentScriptLoader: React.FC = () => {
         (window as any).fbq('init', '1935826830293991');
         (window as any).fbq('track', 'PageView');
       }
-
-      // Other marketing/analytics vendor example (commented placeholders)
-      // if (consent.marketing) loadScript('https://r2.leadsy.ai/tag.js', { id: 'vtag-ai-js', 'data-pid': 'Zd1Rijad0ASVw65K', 'data-version': '062024' });
     };
 
     maybeLoad();
@@ -55,5 +52,3 @@ export const ConsentScriptLoader: React.FC = () => {
 };
 
 export default ConsentScriptLoader;
-
-
