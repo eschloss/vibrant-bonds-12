@@ -44,16 +44,34 @@ const HowItWorks = () => {
   const my = useMotionValue(0);
   const spotlight = useMotionTemplate`radial-gradient(260px 260px at ${mx}px ${my}px, rgba(255,255,255,0.12), transparent 60%)`;
 
-  // Handle hash navigation (e.g., /how-it-works#faq)
+  // Handle hash navigation with retry logic for reliable scrolling
   useEffect(() => {
     if (window.location.hash) {
       const hash = window.location.hash.substring(1);
-      setTimeout(() => {
+      let attempts = 0;
+      const maxAttempts = 15;
+      
+      const scrollToElement = () => {
         const element = document.getElementById(hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return true;
         }
-      }, 100);
+        return false;
+      };
+
+      const tryScroll = () => {
+        if (scrollToElement()) {
+          return;
+        }
+        
+        attempts++;
+        if (attempts < maxAttempts) {
+          setTimeout(tryScroll, attempts < 5 ? 200 : 300);
+        }
+      };
+
+      setTimeout(tryScroll, 100);
     }
   }, []);
 
