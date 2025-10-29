@@ -175,7 +175,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to={addRefToUrl("/press")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Press
+                    <Text id="footer.press" className="">Press</Text>
                   </Link>
                 </li>
                 <li>
@@ -185,12 +185,12 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link to={addRefToUrl("/loneliness-epidemic")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Loneliness Report
+                    <Text id="footer.loneliness_report" className="">Loneliness Report</Text>
                   </Link>
                 </li>
                 <li>
                   <Link to={addRefToUrl("/real-life-magic")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
-                    Real-Life Magic
+                    <Text id="footer.real_life_magic" className="">Real-Life Magic</Text>
                   </Link>
                 </li>
               </ul>
@@ -303,7 +303,7 @@ const Footer = () => {
                 <Text id="footer.terms_of_service" className="">Terms of Service</Text>
               </Link>
               <Link to="/do-not-share" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
-                Do Not Share My Data
+                <Text id="footer.do_not_share" className="">Do Not Share My Data</Text>
               </Link>
               
             </div>

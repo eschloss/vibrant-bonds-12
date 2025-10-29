@@ -5,22 +5,25 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, Download, Image as ImageIcon, Newspaper } from "lucide-react";
 import { Seo } from "@/hooks/useSeo";
+import { useTranslation } from "@/hooks/useTranslation";
 import { downloadAsset, getFilenameFromUrl } from "@/lib/download";
 
 const MEDIA_KIT_URL = "https://drive.google.com/drive/folders/1EvnYL_LHB0-J28DlWNa0Gt5uoSg9yZ9A";
 const PRESS_RELEASES_URL = "https://drive.google.com/drive/folders/1Bb8YS4g2Mi3i-5iMVCIWTv8XfXkJVr02?usp=drive_link";
 
 // Grouped brand assets (categories provided by user)
-const brandCategories: Array<{ name: string; assets: string[] }> = [
+const brandCategories: Array<{ id: string; defaultName: string; assets: string[] }> = [
   {
-    name: "App Logo",
+    id: "app_logo",
+    defaultName: "App Logo",
     assets: [
       "https://s.kikiapp.eu/img/press/1024x.png",
       "https://s.kikiapp.eu/img/press/1024x2.png",
     ],
   },
   {
-    name: "Full Logo Horizontal",
+    id: "full_logo_horizontal",
+    defaultName: "Full Logo Horizontal",
     assets: [
       "https://s.kikiapp.eu/img/press/CMHorizontal-1.png",
       "https://s.kikiapp.eu/img/press/CMHorizontal-2.png",
@@ -30,7 +33,8 @@ const brandCategories: Array<{ name: string; assets: string[] }> = [
     ],
   },
   {
-    name: "Full Logo Vertical",
+    id: "full_logo_vertical",
+    defaultName: "Full Logo Vertical",
     assets: [
       "https://s.kikiapp.eu/img/press/CMVertical-1.png",
       "https://s.kikiapp.eu/img/press/CMVertical-2.png",
@@ -40,7 +44,8 @@ const brandCategories: Array<{ name: string; assets: string[] }> = [
     ],
   },
   {
-    name: "Logo Icon Only",
+    id: "logo_icon_only",
+    defaultName: "Logo Icon Only",
     assets: [
       "https://s.kikiapp.eu/img/press/Icon-1.png",
       "https://s.kikiapp.eu/img/press/Icon-2.png",
@@ -50,7 +55,8 @@ const brandCategories: Array<{ name: string; assets: string[] }> = [
     ],
   },
   {
-    name: "Logo Name Only",
+    id: "logo_name_only",
+    defaultName: "Logo Name Only",
     assets: [
       "https://s.kikiapp.eu/img/press/Logo-1.png",
       "https://s.kikiapp.eu/img/press/Logo-2.png",
@@ -60,7 +66,8 @@ const brandCategories: Array<{ name: string; assets: string[] }> = [
     ],
   },
   {
-    name: "Round Profile",
+    id: "round_profile",
+    defaultName: "Round Profile",
     assets: ["https://s.kikiapp.eu/img/press/Logo-blend.jpeg"],
   },
 ];
@@ -105,6 +112,7 @@ const pipActivityImages = [
 ];
 
 const Press: React.FC = () => {
+  const { t } = useTranslation();
   const seoProps = {
     title: {
       en: "Press & Media – Pulse",
@@ -150,25 +158,23 @@ const Press: React.FC = () => {
 
                 <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-white/5 border border-white/10 mb-4">
                   <ImageIcon size={16} className="text-pulse-pink" />
-                  <span>Press & Media</span>
+                  <span>{t("press.badge", "Press & Media")}</span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">Brand Assets</span>{" "}
-                  <span className="text-white">and Press Resources</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">{t("press.hero.title_highlight", "Brand Assets")}</span>{" "}
+                  <span className="text-white">{t("press.hero.title_suffix", "and Press Resources")}</span>
                 </h1>
-                <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                  Download official logos and Pip images, or open our media kit and the latest press releases.
-                </p>
+                <p className="text-gray-300 mb-6 max-w-2xl mx-auto">{t("press.hero.subtitle", "Download official logos and Pip images, or open our media kit and the latest press releases.")}</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href={MEDIA_KIT_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
                     <Button variant="gradient" size="xl" className="rounded-full">
-                      Open Media Kit
+                      {t("press.cta.media_kit", "Open Media Kit")}
                       <ExternalLink className="ml-2" />
                     </Button>
                   </a>
                   <a href={PRESS_RELEASES_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
                     <Button variant="coral" size="xl" className="rounded-full">
-                      Press Releases
+                      {t("press.cta.press_releases", "Press Releases")}
                       <Newspaper className="ml-2" />
                     </Button>
                   </a>
@@ -183,50 +189,50 @@ const Press: React.FC = () => {
       <section className="py-8 md:py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Brand Assets</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">{t("press.assets.title", "Brand Assets")}</h2>
             <a href={MEDIA_KIT_URL} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-block">
               <Button variant="ghost" className="text-white/90">
-                Full Media Kit
+                {t("press.assets.full_media_kit", "Full Media Kit")}
                 <ExternalLink className="ml-2" />
               </Button>
             </a>
           </div>
-          <p className="text-gray-300 mb-6">Our official logos for editorial and press use.</p>
+          <p className="text-gray-300 mb-6">{t("press.assets.subtitle", "Our official logos for editorial and press use.")}</p>
 
           <div className="space-y-6">
             {brandCategories.map((category) => (
-              <div key={category.name}>
-                <h3 className="text-xl font-semibold mb-3">{category.name}</h3>
+              <div key={category.id}>
+                <h3 className="text-xl font-semibold mb-3">{t(`press.category.${category.id}`, category.defaultName)}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {category.assets.map((url, idx) => (
-                    <Card key={`${category.name}-${idx}`} className="bg-gray-800/50 border-gray-700 rounded-2xl overflow-hidden">
+                    <Card key={`${category.id}-${idx}`} className="bg-gray-800/50 border-gray-700 rounded-2xl overflow-hidden">
                       <CardContent className="p-0">
                         <div className="h-48 flex items-center justify-center bg-gray-900/60">
                           <img
                             src={url}
-                            alt={`${category.name} ${idx + 1}`}
+                            alt={`${category.defaultName} ${idx + 1}`}
                             className="max-h-28 object-contain"
                             onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                           />
                         </div>
                         <div className="p-4 flex items-center justify-between">
                           <div>
-                            <div className="font-semibold text-white">{category.name} {idx + 1}</div>
+                            <div className="font-semibold text-white">{t(`press.category.${category.id}`, category.defaultName)} {idx + 1}</div>
                             <div className="text-xs text-gray-400">PNG/JPEG</div>
                           </div>
                           <div className="flex items-center gap-2">
                             <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex">
                               <Button size="sm" variant="secondary" className="rounded-full">
-                                Open
+                                {t("press.assets.open", "Open")}
                                 <ExternalLink className="ml-2" />
                               </Button>
                             </a>
                             <Button
                               size="sm"
                               className="rounded-full"
-                              onClick={() => downloadAsset(url, `${category.name.replace(/\s+/g, '-').toLowerCase()}-${idx + 1}-${getFilenameFromUrl(url)}`)}
+                              onClick={() => downloadAsset(url, `${category.id}-${idx + 1}-${getFilenameFromUrl(url)}`)}
                             >
-                              <Download className="mr-2" />Download
+                              <Download className="mr-2" />{t("press.assets.download", "Download")}
                             </Button>
                           </div>
                         </div>
@@ -243,8 +249,8 @@ const Press: React.FC = () => {
       {/* Pip Images */}
       <section className="py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Pip Images</h2>
-          <p className="text-gray-300 mb-6">Download approved images of Pip for editorial use.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">{t("press.pip.title", "Pip Images")}</h2>
+          <p className="text-gray-300 mb-6">{t("press.pip.subtitle", "Download approved images of Pip for editorial use.")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {pipActivityImages.map((img, idx) => (
               <Card key={`${img.id}-${idx}`} className="bg-gray-800/50 border-gray-700 rounded-2xl overflow-hidden">
@@ -261,19 +267,19 @@ const Press: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                       <div className="absolute bottom-2 left-2 right-2">
                         <span className="inline-block bg-black/60 text-white px-2 py-1 rounded text-[12px] font-medium border border-white/10">
-                          {img.name}
+                          {t(`activity.${img.id}` as any, img.name)}
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="p-4 flex items-center justify-between">
-                    <div className="font-medium text-white">{img.name}</div>
+                    <div className="font-medium text-white">{t(`activity.${img.id}` as any, img.name)}</div>
                     <Button
                       size="sm"
                       className="rounded-full"
                       onClick={() => downloadAsset(img.image, `${img.id}-${getFilenameFromUrl(img.image)}`)}
                     >
-                      <Download className="mr-2" />Download
+                      <Download className="mr-2" />{t("press.assets.download", "Download")}
                     </Button>
                   </div>
                 </CardContent>
