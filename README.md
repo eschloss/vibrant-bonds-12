@@ -60,6 +60,16 @@ This project is built with .
 - shadcn-ui
 - Tailwind CSS
 
+## Google Analytics
+
+GA4 is loaded unconditionally via `index.html` and SPA page views are tracked on route changes.
+
+- Set the measurement ID via an environment replacement in `index.html`:
+  - Define `VITE_GA_MEASUREMENT_ID` at build time (Vite replaces `%VITE_GA_MEASUREMENT_ID%` in HTML).
+  - If not provided, it falls back to `G-J591H7VFMV`.
+
+Custom events (e.g., `trackTypeformRedirect`) will work consistently since `gtag` is always available.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/0c576028-a39d-4aae-bfbf-bba881377ee0) and click on Share -> Publish.

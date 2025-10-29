@@ -3,6 +3,7 @@ export type ConsentCategories = {
   analytics: boolean;
   marketing: boolean;
   performance: boolean;
+  doNotShare?: boolean; // CPRA opt-out flag
 };
 
 const STORAGE_KEY = "pulse_cookie_consent_v1";
@@ -12,6 +13,7 @@ const defaultConsent: ConsentCategories = {
   analytics: false,
   marketing: false,
   performance: false,
+  doNotShare: false,
 };
 
 export function getStoredConsent(): ConsentCategories | null {
@@ -55,6 +57,10 @@ export function acceptAll(): ConsentCategories {
 
 export function rejectNonEssential(): ConsentCategories {
   return setConsent({ analytics: false, marketing: false, performance: false });
+}
+
+export function setDoNotShare(value: boolean): ConsentCategories {
+  return setConsent({ doNotShare: Boolean(value) });
 }
 
 

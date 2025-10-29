@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { acceptAll, getConsent, hasUserSetConsent, rejectNonEssential, setConsent, type ConsentCategories } from "@/lib/consent";
+import { isInEeaUk } from "@/lib/region";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -17,9 +18,15 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({ manageRef }) => {
   const [prefs, setPrefs] = useState<ConsentCategories>(getConsent());
 
   useEffect(() => {
-    if (!hasUserSetConsent()) {
-      setVisible(true);
-    }
+    if (hasUserSetConsent()) return;
+    // Show banner only in EU/UK. On failure, show (compliance-first)
+    isInEeaUk()
+      .then((inRegion) => {
+        if (inRegion) setVisible(true);
+      })
+      .catch(() => {
+        setVisible(true);
+      });
   }, []);
 
   useEffect(() => {

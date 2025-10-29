@@ -27,6 +27,7 @@ const AmbassadorProgram = lazy(() => import("@/pages/AmbassadorProgram"));
 const Careers = lazy(() => import("@/pages/Careers"));
 const JobOpening = lazy(() => import("@/pages/JobOpening"));
 const MeetPip = lazy(() => import("@/pages/MeetPip"));
+const Press = lazy(() => import("@/pages/Press"));
 const PlanIdeas = lazy(() => import("@/pages/PlanIdeas"));
 const PlanIdeasCity = lazy(() => import("@/pages/PlanIdeasCity"));
 const Activities = lazy(() => import("@/pages/Activities"));
@@ -37,6 +38,7 @@ const RealLifeMagic = lazy(() => import("@/pages/RealLifeMagic"));
 const HowItWorksPage = lazy(() => import("@/pages/HowItWorks"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
+const DoNotShare = lazy(() => import("@/pages/DoNotShare"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -75,11 +77,13 @@ function App() {
                   <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
                   <Route path="activities" element={<Activities />} />
                   <Route path="how-it-works" element={<HowItWorksPage />} />
+                  <Route path="press" element={<Press />} />
                   <Route path="faq" element={<FAQ />} />
                   <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
                   <Route path="real-life-magic" element={<RealLifeMagic />} />
                   <Route path="terms" element={<Terms />} />
                   <Route path="privacy" element={<Privacy />} />
+                  <Route path="do-not-share" element={<DoNotShare />} />
                   
                   {/* Cities routes */}
                   <Route path="cities" element={<CityList />} />

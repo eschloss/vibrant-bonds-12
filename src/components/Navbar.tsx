@@ -27,6 +27,7 @@ const Navbar = () => {
     { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/how-it-works") },
     { label: t("navbar.activities", "Adventures"), href: addRefToUrl("/activities") },
     { label: t("navbar.partnerships", "Partnerships"), href: addRefToUrl("/partners") },
+    { label: t("navbar.press", "Press"), href: addRefToUrl("/press") },
     { label: t("navbar.meet_pip", "Meet Pip"), href: addRefToUrl("/meet-pip") },
     { label: t("navbar.contact", "Contact"), href: addRefToUrl("/contact") },
   ];

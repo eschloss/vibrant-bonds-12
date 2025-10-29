@@ -174,6 +174,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to={addRefToUrl("/press")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
+                    Press
+                  </Link>
+                </li>
+                <li>
                   <Link to={addRefToUrl("/meet-pip")} className="text-white/50 hover:text-pulse-pink text-sm transition-colors">
                     <Text id="footer.meet_pip" className="">Meet Pip</Text>
                   </Link>
@@ -296,6 +301,9 @@ const Footer = () => {
               </Link>
               <Link to="/terms" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.terms_of_service" className="">Terms of Service</Text>
+              </Link>
+              <Link to="/do-not-share" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
+                Do Not Share My Data
               </Link>
               
             </div>

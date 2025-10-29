@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
+import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 
 const AppLayout = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -17,6 +18,7 @@ const AppLayout = () => {
         <div className="w-full">
           <Outlet />
         </div>
+        <GaPageViewTracker />
         <ConsentScriptLoader />
         <CookieConsent manageRef={manageRef} />
       </ScrollArea>
