@@ -665,7 +665,7 @@ export const shared = {
     "donotshare.note.u16": "No vendemos ni compartimos conscientemente la información personal de consumidores menores de 16 años sin autorización afirmativa. Más información en nuestra",
     "donotshare.privacy_policy": "Política de Privacidad",
     "donotshare.note.gpc": "También puedes ejercer tu derecho usando un navegador o extensión que envíe una señal Global Privacy Control (GPC). Cuando detectemos GPC, lo trataremos como una solicitud válida de no compartir para este navegador.",
-    "donotshare.note.contact": "Si tienes preguntas o deseas ejercer tus derechos por otro método, contáctanos en"
+    "donotshare.note.contact": "Si tienes preguntas o deseas ejercer tus derechos por otro método, contáctanos en",
 
     // Navbar translations - Spanish
     "navbar.home": "Inicio",
