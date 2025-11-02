@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { getCurrentPageLabel } from "@/lib/utils";
-import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles, Apple, Play } from "lucide-react";
+import { Heart, Instagram, Twitter, Facebook, Linkedin, Mail, MapPin, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
@@ -100,15 +100,13 @@ const Footer = () => {
                 </a>
               </div>
               
-              {/* App Download Links */}
+              {/* App Download Badges */}
               <div className="flex space-x-2">
-                <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded-md text-xs">
-                  <Apple size={12} className="mr-1" />
-                  <Text id="footer.app_store" className="">App Store</Text>
+                <a href="https://apple.pulsenow.app" target="_blank" rel="noopener noreferrer">
+                  <img src="https://s.kikiapp.eu/img/apple.png" alt="Download on the App Store" className="h-12 md:h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=eu.kikiapp.kiki" target="_blank" rel="noopener noreferrer" className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors py-1 px-2 rounded-md text-xs">
-                  <Play size={12} className="mr-1" />
-                  <Text id="footer.play_store" className="">Play Store</Text>
+                <a href="https://google.pulsenow.app" target="_blank" rel="noopener noreferrer">
+                  <img src="https://s.kikiapp.eu/img/google.png" alt="Get it on Google Play" className="h-12 md:h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
               </div>
 
@@ -251,29 +249,13 @@ const Footer = () => {
                 </li>
               </ul>
 
-              {/* App Download Buttons */}
-              <div className="mt-4 flex flex-col space-y-2">
-                <a href="https://apps.apple.com/us/app/pulse-spontaneous-plans/id6472660833" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
-                  <Apple size={18} className="text-white" />
-                  <div className="flex flex-col">
-                    <span className="text-xs text-white/70">
-                      <Text id="footer.download_on" className="">Download on the</Text>
-                    </span>
-                    <span className="text-sm font-medium">
-                      <Text id="footer.app_store_full" className="">App Store</Text>
-                    </span>
-                  </div>
+              {/* App Download Badges (Contact column) */}
+              <div className="mt-4 grid grid-cols-1 gap-2">
+                <a href="https://apple.pulsenow.app" target="_blank" rel="noopener noreferrer">
+                  <img src="https://s.kikiapp.eu/img/apple.png" alt="Download on the App Store" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=eu.kikiapp.kiki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors py-2 px-3 rounded-md">
-                  <Play size={18} className="text-white" />
-                  <div className="flex flex-col">
-                    <span className="text-xs text-white/70">
-                      <Text id="footer.get_it_on" className="">Get it on</Text>
-                    </span>
-                    <span className="text-sm font-medium">
-                      <Text id="footer.google_play" className="">Google Play</Text>
-                    </span>
-                  </div>
+                <a href="https://google.pulsenow.app" target="_blank" rel="noopener noreferrer">
+                  <img src="https://s.kikiapp.eu/img/google.png" alt="Get it on Google Play" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
               </div>
             </div>

@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, Users, Sparkles, Heart, Calendar, Database, Eye, Brain, MessageSquare, Zap, Timer } from "lucide-react";
 import MissionCountdown from "@/components/MissionCountdown";
 import FloatingActivityCollage from "@/components/FloatingActivityCollage";
+import { isIOS } from "@/lib/isIOS";
 
 // Optimized Pip activity images (via vite-imagetools)
 // Generates WebP + PNG at multiple widths and returns a picture-like object
@@ -262,8 +263,9 @@ const Activities = () => {
                       src={activity.image}
                       alt={`Meet New ${t(`activity.${activity.id}` as any, activity.name)} Friends`}
                       className="w-full h-full object-contain"
-                      loading="lazy"
-                      decoding="async"
+                      loading={isIOS() ? "eager" : "lazy"}
+                      {...(isIOS() ? {} : { decoding: "async" })}
+                      fetchPriority={isIOS() ? "high" : "auto"}
                       sizes="(min-width:1024px) 12vw, (min-width:640px) 28vw, 44vw"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                     />

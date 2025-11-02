@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
-import { useCountdown } from "@/hooks/useCountdown";
-import { TimerDisplay } from "./mission/TimerDisplay";
+ 
 import ShareSection from './ShareSection';
 import ActivitiesTeaser from './ActivitiesTeaser';
 import { useTranslation } from "@/hooks/useTranslation";
@@ -45,7 +44,7 @@ const CommunityMatchmakingTemplate = ({
   state,
   image,
   active,
-  frequency_days,
+  frequency_days: _frequency_days,
   communityData
 }: CommunityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();
@@ -87,7 +86,7 @@ const CommunityMatchmakingTemplate = ({
   
   const peopleImage = peopleOptions[cityScore(cityName, state, country) % peopleOptions.length];
 
-  const timeLeft = useCountdown(frequency_days);
+  
 
   // Translate the steps
   const steps = [{
@@ -312,64 +311,7 @@ const CommunityMatchmakingTemplate = ({
           </div>
         </section>
 
-        {code && (
-          <section className="relative py-20 bg-gray-900/80">
-            <div className="max-w-4xl mx-auto text-center">
-                
-                {active ? (
-                  <>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                      {t("city.ready_to_meet", "Ready to Meet")}<br/>
-                      {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
-                        {cityName} {t("city.crew", "Crew")}
-                      </span>?
-                    </h2>
-
-                    <div className="backdrop-blur-sm bg-white/5 dark:bg-black/20 border border-primary/20 rounded-2xl p-8 md:p-10 shadow-lg text-center">
-                      <TimerDisplay {...timeLeft} />
-                      <p className="text-sm text-white/70 mt-4 text-center">
-                        {t("city.until_next_match", "until the next friend group match closes")}
-                      </p>
-                    </div>
-                    
-                    <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-                      <Link 
-                        to={`https://pu1.se/233?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}
-                        onClick={(e) => {
-                          const href = (e.currentTarget as HTMLAnchorElement).href;
-                          trackTypeformRedirect({ href, cityName, code, source: 'community:cta_section' });
-                        }}
-                      >
-                        <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110 group">
-                          <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90 group-hover:opacity-100 transition-opacity" />
-                          <span className="relative z-10 flex items-center gap-2">
-                            {t("city.get_matched", "Get Matched")}
-                            <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                          </span>
-                        </Button>
-                      </Link>
-
-                      <LanguageSelector variant="dark" />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                      {t("city.be_first", "Be the First to Match")}<br/>
-                      {t("city.in", "in")} <span className="pulse-gradient-text">{cityName}</span>
-                    </h2>
-                    <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                      {t("city.signup_first", "Sign up now and you'll be first in line when we launch in your city.")}
-                    </p>
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                      <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={true} state={state} />
-                      <LanguageSelector variant="dark" />
-                    </div>
-                  </>
-                )}
-            </div>
-          </section>
-        )}
+        
 
         <ActivitiesTeaser />
 

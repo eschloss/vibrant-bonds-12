@@ -20,6 +20,7 @@ const baseRoutes = [
   { path: '/plan-ideas', changefreq: 'monthly', priority: '0.7' },
   { path: '/activities', changefreq: 'weekly', priority: '0.8' },
   { path: '/how-it-works', changefreq: 'monthly', priority: '0.7' },
+  { path: '/download', changefreq: 'monthly', priority: '0.8' },
   { path: '/faq', changefreq: 'monthly', priority: '0.7' },
   { path: '/loneliness-epidemic', changefreq: 'monthly', priority: '0.7' },
   { path: '/real-life-magic', changefreq: 'monthly', priority: '0.7' },
