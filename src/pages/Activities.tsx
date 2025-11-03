@@ -258,11 +258,11 @@ const Activities = () => {
                 className="group"
               >
                 <div className="overflow-hidden rounded-xl border border-gray-700 bg-gray-900/30 hover:border-accent/40 transition-colors">
-                  <div className="aspect-square relative overflow-hidden">
+                  <div className="relative overflow-hidden" style={{ paddingTop: "100%" }}>
                     <img
                       src={activity.image}
                       alt={`Meet New ${t(`activity.${activity.id}` as any, activity.name)} Friends`}
-                      className="w-full h-full object-contain"
+                      className="absolute inset-0 block w-full h-full object-contain"
                       loading={isIOS() ? "eager" : "lazy"}
                       {...(isIOS() ? {} : { decoding: "async" })}
                       fetchPriority={isIOS() ? "high" : "auto"}

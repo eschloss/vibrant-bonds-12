@@ -139,12 +139,12 @@ export default function ActivitiesTeaser({
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
               className="group relative rounded-xl overflow-hidden border border-gray-700 bg-gray-900/30"
-              style={{ aspectRatio: "1 / 1" }}
+              style={{ paddingTop: "100%" }}
             >
               <img
                 src={it.image}
                 alt={`Meet New ${t(it.name, it.name)} Friends`}
-                className="w-full h-full object-contain"
+                className="absolute inset-0 block w-full h-full object-contain"
                 loading={isIOS() ? "eager" : "lazy"}
                 {...(isIOS() ? {} : { decoding: "async" })}
                 fetchPriority={isIOS() ? "high" : "auto"}

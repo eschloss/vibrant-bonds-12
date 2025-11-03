@@ -31,7 +31,6 @@ const Press = lazy(() => import("@/pages/Press"));
 const PlanIdeas = lazy(() => import("@/pages/PlanIdeas"));
 const PlanIdeasCity = lazy(() => import("@/pages/PlanIdeasCity"));
 const Activities = lazy(() => import("@/pages/Activities"));
-const Download = lazy(() => import("@/pages/Download"));
 const Redirect = lazy(() => import("@/pages/Redirect"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 const LonelinessEpidemic = lazy(() => import("@/pages/LonelinessEpidemic"));
@@ -79,7 +78,6 @@ function App() {
                   <Route path="activities" element={<Activities />} />
                   <Route path="how-it-works" element={<HowItWorksPage />} />
                   <Route path="press" element={<Press />} />
-                  <Route path="download" element={<Download />} />
                   <Route path="faq" element={<FAQ />} />
                   <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
                   <Route path="real-life-magic" element={<RealLifeMagic />} />

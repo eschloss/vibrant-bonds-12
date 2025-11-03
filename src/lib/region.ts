@@ -40,8 +40,8 @@ export async function fetchRegion(): Promise<{ country: string; in_eea_uk: boole
     writeCache({ country, in_eea_uk });
     return { country, in_eea_uk };
   } catch {
-    // Failure: return sentinel
-    return { country: 'XX', in_eea_uk: false };
+    // Failure: propagate so callers can apply compliance-first fallbacks
+    throw new Error('geo lookup failed');
   }
 }
 
