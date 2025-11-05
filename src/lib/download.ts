@@ -13,7 +13,7 @@ export async function downloadAsset(url: string, suggestedName?: string): Promis
   try {
     // Prefer serverless proxy when available (avoids CORS issues on cross-origin assets)
     const filename = suggestedName || getFilenameFromUrl(url);
-    const proxy = `/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
+    const proxy = `/api/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
 
     // In production (Cloudflare Pages), this path will be handled by a function.
     // In local Vite dev, fallback to direct fetch+blob.

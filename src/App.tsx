@@ -31,6 +31,7 @@ const Press = lazy(() => import("@/pages/Press"));
 const PlanIdeas = lazy(() => import("@/pages/PlanIdeas"));
 const PlanIdeasCity = lazy(() => import("@/pages/PlanIdeasCity"));
 const Activities = lazy(() => import("@/pages/Activities"));
+const Download = lazy(() => import("@/pages/Download"));
 const Redirect = lazy(() => import("@/pages/Redirect"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 const LonelinessEpidemic = lazy(() => import("@/pages/LonelinessEpidemic"));
@@ -44,13 +45,7 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const queryClient = new QueryClient();
 
 function App() {
-  // Handle www to non-www redirect
-  useEffect(() => {
-    if (window.location.hostname.startsWith('www.')) {
-      const newUrl = window.location.href.replace('://www.', '://');
-      window.location.replace(newUrl);
-    }
-  }, []);
+  
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -76,6 +71,7 @@ function App() {
                   <Route path="plan-ideas" element={<PlanIdeas />} />
                   <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
                   <Route path="activities" element={<Activities />} />
+                  <Route path="download" element={<Download />} />
                   <Route path="how-it-works" element={<HowItWorksPage />} />
                   <Route path="press" element={<Press />} />
                   <Route path="faq" element={<FAQ />} />

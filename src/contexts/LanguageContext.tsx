@@ -49,17 +49,36 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     const detectLanguage = () => {
       const hostname = window.location.hostname;
       const subdomainParts = hostname.split(".");
-      
+      const firstLabel = (subdomainParts[0] || "").toLowerCase();
+
       // Check if subdomain is a 2-letter language code
-      if (subdomainParts.length > 1 && subdomainParts[0].length === 2) {
-        const lang = subdomainParts[0].toLowerCase();
+      if (subdomainParts.length > 1 && firstLabel.length === 2) {
         // Only set if it's a supported language
-        if (["en", "es"].includes(lang)) {
-          setCurrentLanguage(lang);
+        if (["en", "es"].includes(firstLabel)) {
+          setCurrentLanguage(firstLabel);
           return;
         }
       }
-      
+
+      // If subdomain is www, detect from browser languages
+      if (firstLabel === "www") {
+        const rawLangs = (navigator.languages && navigator.languages.length
+          ? navigator.languages
+          : [navigator.language || ""]) as string[];
+        const langs = rawLangs.map(l => l.toLowerCase());
+
+        if (langs.some(l => l.startsWith("es"))) {
+          setCurrentLanguage("es");
+          return;
+        }
+        if (langs.some(l => l.startsWith("en"))) {
+          setCurrentLanguage("en");
+          return;
+        }
+        setCurrentLanguage("en");
+        return;
+      }
+
       // Default to English if no valid lang subdomain found
       setCurrentLanguage("en");
     };
@@ -96,13 +115,14 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   // Get base URL without language subdomain
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
-    const hostParts = url.hostname.split('.');
-    
-    // Remove language subdomain if it exists
-    if (hostParts.length > 2 && hostParts[0].length === 2) {
-      url.hostname = hostParts.slice(1).join('.');
+    let hostParts = url.hostname.split('.');
+
+    // Remove language subdomain (2-letter) and/or www if present at the start
+    while (hostParts.length > 2 && (hostParts[0].length === 2 || hostParts[0].toLowerCase() === 'www')) {
+      hostParts = hostParts.slice(1);
     }
-    
+    url.hostname = hostParts.join('.');
+
     return url.origin;
   };
   
