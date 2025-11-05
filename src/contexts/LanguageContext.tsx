@@ -60,8 +60,8 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         }
       }
 
-      // If subdomain is www, detect from browser languages
-      if (firstLabel === "www") {
+      // If subdomain is friends, detect from browser languages
+      if (firstLabel === "friends") {
         const rawLangs = (navigator.languages && navigator.languages.length
           ? navigator.languages
           : [navigator.language || ""]) as string[];

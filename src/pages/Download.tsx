@@ -27,7 +27,7 @@ const Download = () => {
       "make friends"
     ],
     type: "website"
-  } as const;
+  };
 
   return (
     <>
