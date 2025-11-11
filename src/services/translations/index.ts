@@ -3,7 +3,7 @@
 export const fetchTranslations = async (lang: string) => {
   const locale = ["en", "es"].includes(lang) ? lang : "en";
   if (locale === "es") {
-    const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq] = await Promise.all([
+    const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere] = await Promise.all([
       import("./shared").then(m => m.shared.es),
       import("./about").then(m => m.about.es),
       import("./mission").then(m => m.mission.es),
@@ -21,6 +21,8 @@ export const fetchTranslations = async (lang: string) => {
       import("./lonelinessEpidemic").then(m => m.lonelinessEpidemic.es),
       import("./legal").then(m => m.legal.es),
       import("./faq").then(m => m.faq.es),
+      import("./download").then(m => m.download.es),
+      import("./almostThere").then(m => m.almostThere.es),
     ]);
     return {
       ...shared,
@@ -40,10 +42,12 @@ export const fetchTranslations = async (lang: string) => {
       ...lonelinessEpidemic,
       ...legal,
       ...faq,
+      ...download,
+      ...almostThere,
     };
   }
 
-  const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq] = await Promise.all([
+  const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere] = await Promise.all([
     import("./shared").then(m => m.shared.en),
     import("./about").then(m => m.about.en),
     import("./mission").then(m => m.mission.en),
@@ -61,6 +65,8 @@ export const fetchTranslations = async (lang: string) => {
     import("./lonelinessEpidemic").then(m => m.lonelinessEpidemic.en),
     import("./legal").then(m => m.legal.en),
     import("./faq").then(m => m.faq.en),
+    import("./download").then(m => m.download.en),
+    import("./almostThere").then(m => m.almostThere.en),
   ]);
   return {
     ...shared,
@@ -80,5 +86,7 @@ export const fetchTranslations = async (lang: string) => {
     ...lonelinessEpidemic,
     ...legal,
     ...faq,
+    ...download,
+    ...almostThere,
   };
 };
