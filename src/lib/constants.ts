@@ -2,7 +2,7 @@
 export const RECAPTCHA_SITE_KEY = "6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
 
 // API endpoints
-export const API_BASE_URL = "https://api.kikiapp.eu";
+export const API_BASE_URL = "https://api3-us.kikiapp.eu";
 
 // Supabase configuration (public anon key is safe to expose in client)
 export const SUPABASE_URL = "https://mckbdmxblzjdsvjxgsnn.supabase.co";
