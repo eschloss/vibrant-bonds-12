@@ -17,6 +17,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "./LanguageSelector";
 import { trackTypeformRedirect } from "@/lib/utils";
 import PreWaitlisterDialog from './PreWaitlisterDialog';
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -252,19 +253,29 @@ const CityMatchmakingTemplate = ({
                   <span className="text-base text-gray-600 font-medium">{communityData.powered_by}</span>
                   {communityData.business_image && (
                     communityData.business_url ? (
-                      <a href={communityData.business_url} target="_blank" rel="noopener noreferrer">
-                        <img 
-                          src={`https://${communityData.business_image}`} 
-                          alt={communityData.business_name}
-                          className="h-10 max-w-20 object-contain cursor-pointer"
-                        />
+                      <a href={communityData.business_url} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                        <div className="relative h-10 w-20">
+                          <ProgressiveImage
+                            src={`https://${communityData.business_image}`}
+                            alt={communityData.business_name}
+                            className="h-10 w-20"
+                            objectFit="contain"
+                            decoding="async"
+                            fetchPriority="auto"
+                          />
+                        </div>
                       </a>
                     ) : (
-                      <img 
-                        src={`https://${communityData.business_image}`} 
-                        alt={communityData.business_name}
-                        className="h-10 max-w-20 object-contain"
-                      />
+                      <div className="relative h-10 w-20">
+                        <ProgressiveImage
+                          src={`https://${communityData.business_image}`}
+                          alt={communityData.business_name}
+                          className="h-10 w-20"
+                          objectFit="contain"
+                          decoding="async"
+                          fetchPriority="auto"
+                        />
+                      </div>
                     )
                   )}
                   {communityData.business_url ? (

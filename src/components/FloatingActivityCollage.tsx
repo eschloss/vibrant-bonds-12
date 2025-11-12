@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 type PictureLike = {
   sources: { type: string; srcset: string }[];
@@ -50,7 +51,8 @@ export const FloatingActivityCollage: React.FC<FloatingActivityCollageProps> = (
   const shouldReduce = useReducedMotion();
   const { base, md } = resolveSize(size);
 
-  const { scrollYProgress } = useScroll();
+  const scrollContainer = useScrollContainer();
+  const { scrollYProgress } = useScroll(scrollContainer ? { container: scrollContainer } : undefined);
   const drift = useTransform(scrollYProgress, [0, 1], [0, parallax ? -8 : 0]);
 
   const renderItems = items.slice(0, Math.min(density, SLOTS.length));

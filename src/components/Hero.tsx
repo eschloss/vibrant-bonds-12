@@ -8,14 +8,17 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   const ref = useRef(null);
+  const scrollContainer = useScrollContainer();
   const { scrollYProgress } = useScroll({
     target: ref,
+    container: scrollContainer || undefined,
     offset: ["start start", "end start"]
   });
   

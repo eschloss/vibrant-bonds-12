@@ -5,6 +5,7 @@ import { Brain, ArrowRight } from "lucide-react";
 import { useNeuralNetworkAnimation } from "@/utils/neuralNetworkAnimation";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 // Configuration for neural network visualization
 const TOTAL_DOTS = 150; // Increased for better coverage with 5 clusters
@@ -13,8 +14,10 @@ const CLUSTERS = 5; // Updated to 5 clusters
 const NeuralNetwork = () => {
   const { t } = useTranslation();
   const ref = useRef(null);
+  const scrollContainer = useScrollContainer();
   const { scrollYProgress } = useScroll({
     target: ref,
+    container: scrollContainer || undefined,
     offset: ["start end", "end start"]
   });
   

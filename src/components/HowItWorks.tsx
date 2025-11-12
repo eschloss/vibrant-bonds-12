@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 type HowItWorksProps = {
   ctaHref?: string;
@@ -17,8 +18,10 @@ const HowItWorks = ({ ctaHref, ctaLabel }: HowItWorksProps) => {
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   const ref = useRef(null);
+  const scrollContainer = useScrollContainer();
   const { scrollYProgress } = useScroll({
     target: ref,
+    container: scrollContainer || undefined,
     offset: ["start end", "end start"]
   });
   

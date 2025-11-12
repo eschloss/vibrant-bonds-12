@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Calendar, MapPin, Repeat, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 interface MeetPipPromoProps {
   imageSrc?: string;
@@ -170,14 +171,19 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
             >
               <div className="relative max-w-xl mx-auto">
                 <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-2xl opacity-30" />
-                <img
-                  src={resolvedImage}
-                  alt={t("meet_pippromo.image_alt", "Pip celebrating with friends")}
-                  className="relative z-10 w-full rounded-3xl object-cover border border-gray-700 bg-gray-900/30 shadow-2xl shadow-purple-500/20"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
-                  }}
-                />
+                <div className="relative z-10 rounded-3xl overflow-hidden border border-gray-700 bg-gray-900/30 shadow-2xl shadow-purple-500/20">
+                  <ProgressiveImage
+                    src={resolvedImage}
+                    alt={t("meet_pippromo.image_alt", "Pip celebrating with friends")}
+                    eager={false}
+                    decoding="async"
+                    fetchPriority="auto"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 40vw"
+                    objectFit="contain"
+                    width={1024}
+                    height={1024}
+                  />
+                </div>
               </div>
             </motion.div>
           </div>

@@ -5,6 +5,7 @@ import { ArrowRight, Shuffle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import { isIOS } from "@/lib/isIOS";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 type Item = { id: string; name: string; image: string };
 
@@ -82,6 +83,8 @@ export default function ActivitiesTeaser({
 
   // Keep a single row by matching the number of items to current breakpoint columns
   useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("[ActivitiesTeaser] mount");
     const computeCols = () => {
       const w = window.innerWidth;
       if (w < 640) return 4; // base
@@ -98,6 +101,16 @@ export default function ActivitiesTeaser({
     const maxItems = Math.max(1, Math.min(itemsCount, sourceItems.length, columnCount));
     return selectWindow(sourceItems, startIndex, maxItems);
   }, [sourceItems, startIndex, itemsCount, columnCount]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("[ActivitiesTeaser] state", {
+      startIndex,
+      columnCount,
+      sourceCount: sourceItems.length,
+      showing: itemsToShow.map((x) => x.id)
+    });
+  }, [startIndex, columnCount, sourceItems.length, itemsToShow]);
 
   return (
     <section className="py-12 md:py-16 relative overflow-hidden">
@@ -120,7 +133,10 @@ export default function ActivitiesTeaser({
               const total = sourceItems.length;
               if (total <= 1) return 0;
               const shift = Math.floor(Math.random() * (total - 1)) + 1;
-              return (i + shift) % total;
+              const next = (i + shift) % total;
+              // eslint-disable-next-line no-console
+              console.log("[ActivitiesTeaser] shuffle click", { prev: i, shift, next, total });
+              return next;
             })}
           >
             <Shuffle className="w-4 h-4 mr-2" /> {t("teaser.shuffle", "Shuffle")}
@@ -141,15 +157,20 @@ export default function ActivitiesTeaser({
               className="group relative rounded-xl overflow-hidden border border-gray-700 bg-gray-900/30"
               style={{ paddingTop: "100%" }}
             >
-              <img
+              {(() => {
+                // eslint-disable-next-line no-console
+                console.log("[ActivitiesTeaser] render item", { idx: i, id: it.id, image: it.image });
+                return null;
+              })()}
+              <ProgressiveImage
                 src={it.image}
                 alt={`Meet New ${t(it.name, it.name)} Friends`}
-                className="absolute inset-0 block w-full h-full object-contain"
-                loading={isIOS() ? "eager" : "lazy"}
-                {...(isIOS() ? {} : { decoding: "async" })}
+                className="absolute inset-0"
+                eager={isIOS()}
+                decoding={isIOS() ? "sync" : "async"}
                 fetchPriority={isIOS() ? "high" : "auto"}
                 sizes="(max-width: 768px) 50vw, 12vw"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                objectFit="contain"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors" />
               <div className="absolute bottom-1 left-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">

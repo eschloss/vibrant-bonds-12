@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 // Define our unique icebreaker characters with translation keys
 const getIcebreakers = (t) => [{
@@ -91,8 +92,10 @@ const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, descr
   const { addRefToUrl } = useRefParam();
   const icebreakers = getIcebreakers(t);
   const ref = useRef(null);
+  const scrollContainer = useScrollContainer();
   const { scrollYProgress } = useScroll({
     target: ref,
+    container: scrollContainer || undefined,
     offset: ["start end", "end start"]
   });
   

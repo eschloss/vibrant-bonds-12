@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -10,6 +11,7 @@ import { ArrowRight, Users, Sparkles, Heart, Calendar, Database, Eye, Brain, Mes
 import MissionCountdown from "@/components/MissionCountdown";
 import FloatingActivityCollage from "@/components/FloatingActivityCollage";
 import { isIOS } from "@/lib/isIOS";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 // Optimized Pip activity images (via vite-imagetools)
 // Generates WebP + PNG at multiple widths and returns a picture-like object
@@ -42,6 +44,12 @@ const pipClimbing = "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png";
 
 const Activities = () => {
   const { t } = useTranslation();
+
+  // Debug: component mount
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("[Activities] mount");
+  }, []);
 
   const seoProps = {
     title: {
@@ -147,6 +155,15 @@ const Activities = () => {
     { id: "boat", name: "Boat", image: "https://s.kikiapp.eu/img/pip/boat.png" },
   ];
 
+  // Debug: list stats
+  React.useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log("[Activities] activitiesList ready", {
+      count: activitiesList.length,
+      sample: activitiesList.slice(0, 3)
+    });
+  }, [activitiesList.length]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <Seo {...seoProps} />
@@ -247,10 +264,11 @@ const Activities = () => {
           {/* Removed the temporary static grid collage for a cleaner hero experience */}
 
           {/* Unified activities gallery (no category wrappers) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 md:gap-6" style={{ contentVisibility: "auto" }}>
             {activitiesList.map((activity, idx) => (
               <motion.div
                 key={`${activity.id}-${idx}`}
+                data-activity-id={activity.id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -259,15 +277,21 @@ const Activities = () => {
               >
                 <div className="overflow-hidden rounded-xl border border-gray-700 bg-gray-900/30 hover:border-accent/40 transition-colors">
                   <div className="relative overflow-hidden" style={{ paddingTop: "100%" }}>
-                    <img
+                    {/* Debug: log per-render of item */}
+                    {(() => {
+                      // eslint-disable-next-line no-console
+                      console.log("[Activities] render item", { idx, id: activity.id, image: activity.image });
+                      return null;
+                    })()}
+                    <ProgressiveImage
                       src={activity.image}
                       alt={`Meet New ${t(`activity.${activity.id}` as any, activity.name)} Friends`}
-                      className="absolute inset-0 block w-full h-full object-contain"
-                      loading={isIOS() ? "eager" : "lazy"}
-                      {...(isIOS() ? {} : { decoding: "async" })}
+                      className="absolute inset-0"
+                      eager={isIOS()}
+                      decoding={isIOS() ? "sync" : "async"}
                       fetchPriority={isIOS() ? "high" : "auto"}
                       sizes="(min-width:1024px) 12vw, (min-width:640px) 28vw, 44vw"
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
+                      objectFit="contain"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     <div className="absolute bottom-2 left-2 right-2">
