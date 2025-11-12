@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CommunityMatchmakingTemplate from "@/components/CommunityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Seo } from "@/hooks/useSeo";
+import { useApiJson } from "@/hooks/useApiJson";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 
 type CommunityParam = {
   community_url: string;
@@ -27,7 +29,33 @@ const CommunityPage = () => {
   const { community_url } = useParams<CommunityParam>();
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
-  const [communityData, setCommunityData] = useState<CommunityData | null>(null);
+  const fallbackTitle = useMemo(() => {
+    if (!community_url) return "";
+    return community_url.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  }, [community_url]);
+  const [communityData, setCommunityData] = useState<CommunityData>({
+    id: "",
+    url: community_url || "",
+    title1: "",
+    title2: fallbackTitle,
+    subtitle: "",
+    title2_part2: "",
+    powered_by: "",
+    business_name: "",
+    business_image: "",
+    business_url: "",
+    background_image: "",
+    city: ""
+  });
+
+  const endpoint = useMemo(() => {
+    if (!community_url) return null;
+    return `/match/get_community?slag=${encodeURIComponent(community_url)}`;
+  }, [community_url]);
+  const { data, loading, error } = useApiJson<CommunityData>(endpoint || "", {
+    initialData: undefined,
+    enabled: !!endpoint
+  });
 
   const seoProps = {
     title: {
@@ -50,38 +78,25 @@ const CommunityPage = () => {
   };
 
   useEffect(() => {
-    const fetchCommunity = async () => {
-      try {
-        const response = await fetch(`https://api.kikiapp.eu/match/get_community?slag=${community_url}`);
-        
-        if (!response.ok) {
-          navigate("/communities");
-          return;
-        }
-
-        const data = await response.json();
-        setCommunityData(data);
-
-        window.scrollTo(0, 0);
-        document.documentElement.classList.add('dark');
-      } catch (err) {
-        console.error("Failed to fetch community:", err);
-        navigate("/communities");
-      }
-    };
-
-    if (community_url) {
-      fetchCommunity();
+    if (error) {
+      console.error("Failed to fetch community:", error);
+      navigate("/communities");
     }
-  }, [community_url, navigate]);
+  }, [error, navigate]);
 
-  if (!communityData) return null;
+  useEffect(() => {
+    if (!data) return;
+    setCommunityData(data);
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('dark');
+  }, [data]);
 
   // Use title2 directly without encoding - it will be encoded in the template
   const urlizedTitle2 = communityData.title2;
 
   return (
     <>
+      <PageLoadingOverlay show={loading} />
       <Seo {...seoProps} />
       <CommunityMatchmakingTemplate 
         cityName={communityData.title2}

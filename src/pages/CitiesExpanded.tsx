@@ -13,6 +13,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/components/ui/use-toast";
 import { Seo } from "@/hooks/useSeo";
+import { useApiJson } from "@/hooks/useApiJson";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 
 type City = {
   en_name: string;
@@ -48,26 +50,15 @@ const CitiesExpanded = () => {
     type: "website"
   };
 
+  const { data: cities, loading } = useApiJson<City[]>("/auth/get_all_cities_expanded", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        // Using the expanded API endpoint
-        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities_expanded");
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data: City[] = await response.json();
-        setAllCities(data);
-        setFilteredCities(data);
-      } catch (error) {
-        console.error("Failed to fetch cities:", error);
-        toast({
-          title: t("citylist.error", "Error"),
-          description: t("citylist.fetch_error", "Failed to fetch cities. Please try again later."),
-          variant: "destructive",
-        });
-      }
-    };
-    fetchCities();
-  }, [t]);
+    if (!cities) return;
+    setAllCities(cities);
+    setFilteredCities(cities);
+  }, [cities]);
 
   const getLocalizedField = (city: City, field: 'name' | 'country' | 'state') => {
     if (currentLanguage === 'es') {
@@ -166,6 +157,7 @@ const CitiesExpanded = () => {
     <>
       <Seo {...seoProps} />
       <div className="flex flex-col min-h-screen dark">
+        <PageLoadingOverlay show={loading} />
         <Navbar />
         <main className="flex-grow">
         <section className="relative py-24 overflow-hidden">

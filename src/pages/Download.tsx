@@ -144,7 +144,7 @@ const Download = () => {
                 )}
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 justify-center">
-                <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors py-3 px-4" aria-label="Instagram">
+                <a href="https://instagram.pulsenow.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors py-3 px-4" aria-label="Instagram">
                   <Instagram size={20} className="text-white" />
                   <span className="text-sm font-medium">Instagram</span>
                 </a>

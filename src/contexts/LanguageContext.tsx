@@ -41,51 +41,33 @@ const seoMetadata = {
 };
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
-  const [currentLanguage, setCurrentLanguage] = useState<string>("en");
+  const detectInitialLanguage = (): string => {
+    const hostname = window.location.hostname;
+    const subdomainParts = hostname.split(".");
+    const firstLabel = (subdomainParts[0] || "").toLowerCase();
+
+    if (subdomainParts.length > 1 && firstLabel.length === 2 && ["en", "es"].includes(firstLabel)) {
+      return firstLabel;
+    }
+
+    if (firstLabel === "friends") {
+      const rawLangs = (navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || ""]) as string[];
+      const langs = rawLangs.map(l => l.toLowerCase());
+
+      if (langs.some(l => l.startsWith("es"))) return "es";
+      if (langs.some(l => l.startsWith("en"))) return "en";
+    }
+
+    return "en";
+  };
+
+  const [currentLanguage, setCurrentLanguage] = useState<string>(detectInitialLanguage());
   const [translations, setTranslations] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
-  useEffect(() => {
-    const detectLanguage = () => {
-      const hostname = window.location.hostname;
-      const subdomainParts = hostname.split(".");
-      const firstLabel = (subdomainParts[0] || "").toLowerCase();
-
-      // Check if subdomain is a 2-letter language code
-      if (subdomainParts.length > 1 && firstLabel.length === 2) {
-        // Only set if it's a supported language
-        if (["en", "es"].includes(firstLabel)) {
-          setCurrentLanguage(firstLabel);
-          return;
-        }
-      }
-
-      // If subdomain is friends, detect from browser languages
-      if (firstLabel === "friends") {
-        const rawLangs = (navigator.languages && navigator.languages.length
-          ? navigator.languages
-          : [navigator.language || ""]) as string[];
-        const langs = rawLangs.map(l => l.toLowerCase());
-
-        if (langs.some(l => l.startsWith("es"))) {
-          setCurrentLanguage("es");
-          return;
-        }
-        if (langs.some(l => l.startsWith("en"))) {
-          setCurrentLanguage("en");
-          return;
-        }
-        setCurrentLanguage("en");
-        return;
-      }
-
-      // Default to English if no valid lang subdomain found
-      setCurrentLanguage("en");
-    };
-    
-    detectLanguage();
-  }, []);
-  
   useEffect(() => {
     const loadTranslations = async () => {
       setIsLoading(true);
@@ -104,6 +86,12 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     // Update HTML lang attribute
     document.documentElement.lang = currentLanguage;
   }, [currentLanguage]);
+  
+  useEffect(() => {
+    if (!hasLoadedOnce && !isLoading && Object.keys(translations).length > 0) {
+      setHasLoadedOnce(true);
+    }
+  }, [hasLoadedOnce, isLoading, translations]);
 
   const translate = (key: string, fallback: string): string => {
     return translations[key] || fallback;
@@ -133,6 +121,10 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     en: `${baseUrl}${currentPath}`,
     es: `${baseUrl.replace('://', '://es.')}${currentPath}`
   };
+
+  if (!hasLoadedOnce) {
+    return null;
+  }
 
   return (
     <LanguageContext.Provider

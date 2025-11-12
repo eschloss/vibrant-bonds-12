@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Seo } from "@/hooks/useSeo";
+import { useApiJson } from "@/hooks/useApiJson";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 
 type CityParam = {
   cityName: string;
@@ -12,6 +14,10 @@ const QueerCityPage = () => {
   const { cityName } = useParams<CityParam>();
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
+  const fallbackCityName = useMemo(() => {
+    if (!cityName) return "";
+    return cityName.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  }, [cityName]);
   const [cityData, setCityData] = useState<{ 
     name: string; 
     country: string; 
@@ -23,7 +29,23 @@ const QueerCityPage = () => {
     lng?: number;
     active?: boolean;
     frequency_days?: number;
-  } | null>(null);
+  }>({
+    name: fallbackCityName,
+    country: "",
+    state: "",
+    code: "",
+    image: undefined,
+    language: currentLanguage,
+    lat: 0,
+    lng: 0,
+    active: false,
+    frequency_days: undefined
+  });
+
+  const { data: cities, loading } = useApiJson<any[]>("/auth/get_all_cities_expanded", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
 
   const seoProps = {
     title: {
@@ -59,55 +81,42 @@ const QueerCityPage = () => {
   };
 
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities_expanded");
-        const data = await response.json();
-
-        const matchedCity = data.find((city: any) => {
-          const citySlug = city.url2.replace(/^\//, '').toLowerCase(); // strip leading slash
-          return citySlug === cityName?.toLowerCase();
-        });
-
-        if (!matchedCity) {
-          navigate("/cities");
-          return;
-        }
-
-        const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
-        const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
-        const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
-
-        setCityData({
-          name: matchedCity[nameField] || matchedCity.en_name, // Fallback to English if Spanish not available
-          country: matchedCity[countryField] || matchedCity.en_country,
-          state: matchedCity[stateField] || matchedCity.en_state,
-          code: matchedCity.code,
-          image: matchedCity.image,
-          language: matchedCity.language, // Get language from API
-          lat: matchedCity.lat, // Get latitude from API  
-          lng: matchedCity.lng,  // Get longitude from API
-          active: matchedCity.active, // Get active status from API
-          frequency_days: matchedCity.frequency_days // Get frequency days from API
-        });
-
-        window.scrollTo(0, 0);
-        document.documentElement.classList.add('dark');
-      } catch (err) {
-        console.error("Failed to fetch cities:", err);
+    if (!cityName || !cities || cities.length === 0) return;
+    try {
+      const matchedCity = cities.find((city: any) => {
+        const citySlug = city.url2.replace(/^\//, '').toLowerCase();
+        return citySlug === cityName.toLowerCase();
+      });
+      if (!matchedCity) {
         navigate("/cities");
+        return;
       }
-    };
-
-    if (cityName) {
-      fetchCities();
+      const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
+      const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
+      const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
+      setCityData({
+        name: matchedCity[nameField] || matchedCity.en_name,
+        country: matchedCity[countryField] || matchedCity.en_country,
+        state: matchedCity[stateField] || matchedCity.en_state,
+        code: matchedCity.code,
+        image: matchedCity.image,
+        language: matchedCity.language,
+        lat: matchedCity.lat,
+        lng: matchedCity.lng,
+        active: matchedCity.active,
+        frequency_days: matchedCity.frequency_days
+      });
+      window.scrollTo(0, 0);
+      document.documentElement.classList.add('dark');
+    } catch (err) {
+      console.error("Failed to process cities:", err);
+      navigate("/cities");
     }
-  }, [cityName, navigate, currentLanguage]);
-
-  if (!cityData) return null;
+  }, [cityName, cities, navigate, currentLanguage]);
 
   return (
     <>
+      <PageLoadingOverlay show={loading} />
       <Seo {...seoProps} />
       <CityMatchmakingTemplate 
         cityName={cityData.name}
