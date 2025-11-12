@@ -14,6 +14,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRefParam } from "@/hooks/useRefParam";
 import { Seo } from "@/hooks/useSeo";
+import { useApiJson } from "@/hooks/useApiJson";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 
 type City = {
   en_name: string;
@@ -57,20 +59,17 @@ const CityList = () => {
     type: "website"
   };
 
+  const { data: cities, loading } = useApiJson<City[]>("/auth/get_all_cities", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
+
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const response = await fetch("https://api.kikiapp.eu/auth/get_all_cities");
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data: City[] = await response.json();
-        setAllCities(data);
-        setFilteredCities(data);
-      } catch (error) {
-        console.error("Failed to fetch cities:", error);
-      }
-    };
-    fetchCities();
-  }, []);
+    if (cities && cities.length >= 0) {
+      setAllCities(cities);
+      setFilteredCities(cities);
+    }
+  }, [cities]);
 
   // Helper function to get the correct name, country, or state based on the current language
   const getLocalizedField = (city: City, field: 'name' | 'country' | 'state') => {
@@ -165,6 +164,7 @@ const CityList = () => {
 
   return (
     <div className="flex flex-col min-h-screen dark">
+      <PageLoadingOverlay show={loading} />
       <Seo {...seoProps} />
       <Navbar />
       <main className="flex-grow">
