@@ -84,7 +84,7 @@ const Footer = () => {
                 <Text id="footer.about_description" className="">Reimagining how we make friends by turning digital connection into effortless Real-Life community.</Text>
               </p>
               <div className="flex space-x-3 mb-4">
-                <a href="https://instagram.com/pulse_app_" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
+                <a href="https://instagram.pulsenow.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Instagram size={18} />
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
