@@ -200,8 +200,12 @@ const CityMatchmakingTemplate = ({
                   </>
                 ) : !code ? (
                   <>
-                    {t("city.help_launch", "Help Launch Pulse in")}{" "}
-                    <span className="pulse-gradient-text">{cityName}</span>
+                    {t("city.meet_new", "Meet New")} {t("city.friends", "Friends")}
+                    <br />
+                    {t("city.in", "in")}{" "}
+                    <Link to="/cities">
+                      <span className="pulse-gradient-text">{cityName}</span>
+                    </Link>
                   </>
                 ) : (
                   <>

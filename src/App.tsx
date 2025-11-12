@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
@@ -51,7 +50,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <LanguageProvider>
           <Suspense fallback={null}>
             <Router>
               <Routes>
@@ -104,7 +102,6 @@ function App() {
             </Router>
           </Suspense>
           <Toaster />
-        </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
