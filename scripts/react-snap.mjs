@@ -47,7 +47,7 @@ await run({
   destination: 'dist',
   include,
   concurrency: 1,
-  skipThirdPartyRequests: false,
+  skipThirdPartyRequests: true,
   puppeteerArgs: ['--no-sandbox'],
   removeBlobs: true,
   cacheAjaxRequests: false,

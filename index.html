@@ -15,7 +15,7 @@
 
     
     <meta name="author" content="Pulse Now Co." />
-    <meta name="twitter:site" content="@pulse_app_" />
+    <meta name="twitter:site" content="@pulsefriendsirl" />
     
     <!-- Open Graph and Twitter meta tags are dynamically set by each page using React Helmet -->
     
@@ -24,23 +24,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="/placeholder.svg" imagesrcset="/placeholder.svg" imagesizes="100vw" />
     
-    <!-- Google Analytics: always load, SPA will handle page_view events -->
+    <!-- Google Analytics: load on idle; SPA handles page_view events -->
     <script>
       (function() {
         var GA_ID = 'G-J591H7VFMV';
-        // Load gtag with the GA ID
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-        document.head.appendChild(s);
-
-        // Initialize dataLayer / gtag
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        // Disable automatic page_view; SPA sends manual page_view on route changes
-        gtag('config', GA_ID, { send_page_view: false });
+        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
+        if (isPrerender) return;
+        function initGA() {
+          // Load gtag with the GA ID
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+          document.head.appendChild(s);
+          // Initialize dataLayer / gtag
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          // Disable automatic page_view; SPA sends manual page_view on route changes
+          gtag('config', GA_ID, { send_page_view: false });
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(initGA);
+        } else {
+          setTimeout(initGA, 0);
+        }
       })();
     </script>
     

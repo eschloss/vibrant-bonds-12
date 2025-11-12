@@ -1,9 +1,10 @@
 
-import { useRef } from "react";
+import { Suspense, lazy, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
-import NeuralNetwork from "@/components/NeuralNetwork";
+import Viewport from "@/components/Viewport";
+const NeuralNetworkLazy = lazy(() => import("@/components/NeuralNetwork"));
 import MeetPipPromo from "@/components/MeetPipPromo";
 import MissionCountdown from "@/components/MissionCountdown";
 import ActivitiesTeaser from "@/components/ActivitiesTeaser";
@@ -44,7 +45,11 @@ const Index = () => {
           </div>
           <ActivitiesTeaser />
           <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
-          <NeuralNetwork />
+          <Viewport rootMargin="300px 0px" threshold={0}>
+            <Suspense fallback={null}>
+              <NeuralNetworkLazy />
+            </Suspense>
+          </Viewport>
           <MissionCountdown />
           <ShareCallout />
         </main>
