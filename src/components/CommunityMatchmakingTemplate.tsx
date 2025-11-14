@@ -243,9 +243,9 @@ const CommunityMatchmakingTemplate = ({
                {!active ? (
                 <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={true} state={state} />
                ) : (
-                <div id="button-link1" className="flex flex-col items-center">
+                 <div id="button-link1" className="flex flex-col items-center">
                   <Link 
-                     to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                     to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                      onClick={(e) => {
                        const href = (e.currentTarget as HTMLAnchorElement).href;
                        trackTypeformRedirect({ href, cityName, code, source: 'community:hero_cta' });

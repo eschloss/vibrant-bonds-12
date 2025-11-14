@@ -67,7 +67,7 @@ const CallToActionSection = ({
                 exit={{ opacity: 0, y: 8, scale: 0.98 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <Link to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                   onClick={(e) => {
                     const href = (e.currentTarget as HTMLAnchorElement).href;
                     trackTypeformRedirect({ href, cityName, code, source: 'city:cta_section' });
