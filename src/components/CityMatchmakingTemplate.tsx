@@ -1,5 +1,5 @@
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Users, MessageSquare, CalendarDays, Sprout, ArrowRight, Zap, Timer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -33,6 +33,7 @@ interface CityMatchmakingTemplateProps {
   isCommunity?: boolean;
   active?: boolean;
   frequency_days?: number;
+  isLoading?: boolean;
   communityData?: {
     title1: string;
     title2: string;
@@ -59,6 +60,7 @@ const CityMatchmakingTemplate = ({
   isCommunity,
   active,
   frequency_days,
+  isLoading,
   communityData
 }: CityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();
@@ -316,28 +318,39 @@ const CityMatchmakingTemplate = ({
                {!active ? (
                 <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
                ) : (
-                <div id="button-link1" className="flex flex-col items-center">
-                  <Link 
-                     to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                     onClick={(e) => {
-                       const href = (e.currentTarget as HTMLAnchorElement).href;
-                       trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
-                     }}
-                   >
-                    <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
-                      <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
-                      <span className="relative z-10">
-                        {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
-                      </span>
-                      <ArrowRight size={18} />
-                    </Button>
-                  </Link>
-                   {state && (
-                  <div className="text-sm text-black/60 mt-2 text-center font-light">
-                    {cityName}, {state}
-                  </div>
-                )}
-                </div>
+               <div id="button-link1" className="flex flex-col items-center">
+                 <AnimatePresence initial={false}>
+                   {!isLoading && (
+                     <motion.div
+                       initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                       animate={{ opacity: 1, y: 0, scale: 1 }}
+                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                       transition={{ duration: 0.4, ease: "easeOut" }}
+                     >
+                       <Link 
+                          to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                          onClick={(e) => {
+                            const href = (e.currentTarget as HTMLAnchorElement).href;
+                            trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                          }}
+                        >
+                         <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
+                           <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
+                           <span className="relative z-10">
+                             {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+                           </span>
+                           <ArrowRight size={18} />
+                         </Button>
+                       </Link>
+                     </motion.div>
+                   )}
+                 </AnimatePresence>
+                 {state && (
+                   <div className="text-sm text-black/60 mt-2 text-center font-light">
+                     {cityName}, {state}
+                   </div>
+                 )}
+               </div>
                )}
 
                 {/* Language Selector */}
@@ -408,17 +421,28 @@ const CityMatchmakingTemplate = ({
                     
                     <div id="button-link2" className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
                       
-                      <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                        onClick={(e) => {
-                          const href = (e.currentTarget as HTMLAnchorElement).href;
-                          trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
-                        }}
-                      >
-                        <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-                          {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
-                          <ArrowRight size={18} />
-                        </Button>
-                      </Link>
+                      <AnimatePresence initial={false}>
+                        {!isLoading && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                          >
+                            <Link to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                              onClick={(e) => {
+                                const href = (e.currentTarget as HTMLAnchorElement).href;
+                                trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
+                              }}
+                            >
+                              <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                                {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in_now", "Get Matched in")} ${cityName} ${t("city.now", "Now")}`}
+                                <ArrowRight size={18} />
+                              </Button>
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       {/* Language Selector - Second Location */}
                        <LanguageSelector language={language} variant="dark" />

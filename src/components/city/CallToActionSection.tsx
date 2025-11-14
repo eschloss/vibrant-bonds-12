@@ -1,5 +1,5 @@
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ interface CallToActionSectionProps {
   isAffinity?: boolean;
   affinityUrl?: string;
   language?: string;
+  isLoading?: boolean;
 }
 
 const CallToActionSection = ({
@@ -24,7 +25,8 @@ const CallToActionSection = ({
   isQueer,
   isAffinity,
   affinityUrl,
-  language
+  language,
+  isLoading
 }: CallToActionSectionProps) => {
   const { t, currentLanguage } = useTranslation();
   const timeLeft = useCountdown();
@@ -57,17 +59,28 @@ const CallToActionSection = ({
         </div>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
-          <Link to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-            onClick={(e) => {
-              const href = (e.currentTarget as HTMLAnchorElement).href;
-              trackTypeformRedirect({ href, cityName, code, source: 'city:cta_section' });
-            }}
-          >
-            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
-              {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
-              <ArrowRight size={18} />
-            </Button>
-          </Link>
+          <AnimatePresence initial={false}>
+            {!isLoading && (
+              <motion.div
+                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <Link to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                  onClick={(e) => {
+                    const href = (e.currentTarget as HTMLAnchorElement).href;
+                    trackTypeformRedirect({ href, cityName, code, source: 'city:cta_section' });
+                  }}
+                >
+                  <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                    {t("city.get_matched_in_now", "Get Matched in")} {cityName} {t("city.now", "Now")}
+                    <ArrowRight size={18} />
+                  </Button>
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Language Selector - Second Location */}
           <LanguageSelector language={language} variant="dark" />

@@ -1,5 +1,5 @@
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ interface HeroSectionProps {
   affinityUrl?: string;
   language?: string;
   peopleImage: string;
+  isLoading?: boolean;
 }
 
 const HeroSection = ({
@@ -34,7 +35,8 @@ const HeroSection = ({
   affinityName,
   affinityUrl,
   language,
-  peopleImage
+  peopleImage,
+  isLoading
 }: HeroSectionProps) => {
   const { t, currentLanguage } = useTranslation();
   const { addRefToUrl } = useRefParam();
@@ -159,21 +161,32 @@ const HeroSection = ({
             className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center"
           >
             <div className="flex flex-col items-center">
-              <Link 
-                to={`https://pu1.se/233${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                onClick={(e) => {
-                  const href = (e.currentTarget as HTMLAnchorElement).href;
-                  trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
-                }}
-              >
-                <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
-                  <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
-                  <span className="relative z-10">
-                    {t("city.get_matched_in", "Get Matched in")} {cityName}
-                  </span>
-                  <ArrowRight size={18} />
-                </Button>
-              </Link>
+              <AnimatePresence initial={false}>
+                {!isLoading && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                  >
+                    <Link 
+                      to={`https://form.pulsenow.app${code ? `?city=${code}&cityLabel=${encodeURIComponent(cityName)}${isQueer ? '&queer=true' : ''}${isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                      onClick={(e) => {
+                        const href = (e.currentTarget as HTMLAnchorElement).href;
+                        trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                      }}
+                    >
+                      <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
+                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
+                        <span className="relative z-10">
+                          {t("city.get_matched_in", "Get Matched in")} {cityName}
+                        </span>
+                        <ArrowRight size={18} />
+                      </Button>
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               {state && (
                 <div className="text-sm text-black/60 mt-2 text-center font-light">
                   {cityName}, {state}

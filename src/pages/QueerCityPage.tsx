@@ -128,6 +128,7 @@ const QueerCityPage = () => {
         language={cityData.language}
         active={cityData.active}
         frequency_days={cityData.frequency_days}
+        isLoading={loading}
       />
     </>
   );
