@@ -104,6 +104,7 @@ const CommunityPage = () => {
         country=""
         state=""
         image={communityData.background_image}
+        isLoading={loading}
         communityData={{
           title1: communityData.title1,
           title2: communityData.title2,

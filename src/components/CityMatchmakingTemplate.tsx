@@ -315,43 +315,45 @@ const CityMatchmakingTemplate = ({
                   duration: 0.5
                 }} className="flex flex-col sm:flex-row gap-4 sm:items-start items-center justify-center">
                 
-               {!active ? (
-                <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
-               ) : (
-               <div id="button-link1" className="flex flex-col items-center">
-                 <AnimatePresence initial={false}>
-                   {!isLoading && (
-                     <motion.div
-                       initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                       transition={{ duration: 0.4, ease: "easeOut" }}
-                     >
-                      <Link 
-                         to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                          onClick={(e) => {
-                            const href = (e.currentTarget as HTMLAnchorElement).href;
-                            trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
-                          }}
-                        >
-                         <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
-                           <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
-                           <span className="relative z-10">
-                             {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
-                           </span>
-                           <ArrowRight size={18} />
-                         </Button>
-                       </Link>
-                     </motion.div>
-                   )}
-                 </AnimatePresence>
-                 {state && (
-                   <div className="text-sm text-black/60 mt-2 text-center font-light">
-                     {cityName}, {state}
-                   </div>
-                 )}
-               </div>
-               )}
+               <AnimatePresence initial={false}>
+                 {!isLoading && (
+                   <>
+                     {!active ? (
+                       <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
+                     ) : (
+                       <div id="button-link1" className="flex flex-col items-center">
+                         <motion.div
+                           initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                           animate={{ opacity: 1, y: 0, scale: 1 }}
+                           exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                           transition={{ duration: 0.4, ease: "easeOut" }}
+                         >
+                           <Link 
+                              to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                               onClick={(e) => {
+                                 const href = (e.currentTarget as HTMLAnchorElement).href;
+                                 trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
+                               }}
+                             >
+                            <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
+                              <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
+                              <span className="relative z-10">
+                                {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+                              </span>
+                              <ArrowRight size={18} />
+                            </Button>
+                          </Link>
+                        </motion.div>
+                        {state && (
+                          <div className="text-sm text-black/60 mt-2 text-center font-light">
+                            {cityName}, {state}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </AnimatePresence>
 
                 {/* Language Selector */}
                 <LanguageSelector language={language} variant="light" />
@@ -449,9 +451,13 @@ const CityMatchmakingTemplate = ({
                     </div>
                   </>
                 ) : (
-                  <div className="flex justify-center">
-                    <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
-                  </div>
+                  <AnimatePresence initial={false}>
+                    {!isLoading && (
+                      <div className="flex justify-center">
+                        <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
+                      </div>
+                    )}
+                  </AnimatePresence>
                 )}
             </div>
           </section>
