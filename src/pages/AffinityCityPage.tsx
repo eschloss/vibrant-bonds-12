@@ -40,6 +40,7 @@ const AffinityCityPage = () => {
     lng?: number;
     active?: boolean;
     frequency_days?: number;
+    bq?: boolean;
   }>({
     name: fallbackCityName,
     country: "",
@@ -50,7 +51,8 @@ const AffinityCityPage = () => {
     lat: 0,
     lng: 0,
     active: false,
-    frequency_days: undefined
+    frequency_days: undefined,
+    bq: undefined
   });
   const [affinityData, setAffinityData] = useState<AffinityData>({
     name_en: fallbackAffinityUrl.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
@@ -61,6 +63,11 @@ const AffinityCityPage = () => {
   });
 
   const { data: cities, loading: loadingCities } = useApiJson<any[]>("/auth/get_all_cities_expanded", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
+  // Also fetch compact cities to get `bq`
+  const { data: citiesCompact } = useApiJson<any[]>("/auth/get_all_cities", {
     initialData: [],
     staleTime: 5 * 60 * 1000
   });
@@ -119,6 +126,10 @@ const AffinityCityPage = () => {
         navigate("/cities");
         return;
       }
+      const matchedCompact = Array.isArray(citiesCompact)
+        ? citiesCompact.find((c: any) => c.code === matchedCity.code)
+        : undefined;
+      const bq: boolean | undefined = typeof matchedCompact?.bq === 'boolean' ? matchedCompact.bq : undefined;
       const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
       const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
       const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
@@ -132,7 +143,8 @@ const AffinityCityPage = () => {
         lat: matchedCity.lat,
         lng: matchedCity.lng,
         active: matchedCity.active,
-        frequency_days: matchedCity.frequency_days
+        frequency_days: matchedCity.frequency_days,
+        bq
       });
       setAffinityData(matchedAffinity);
       window.scrollTo(0, 0);
@@ -141,7 +153,7 @@ const AffinityCityPage = () => {
       console.error("Failed to process data:", err);
       navigate("/cities");
     }
-  }, [cityName, affinityName, cities, affinities, navigate, currentLanguage]);
+  }, [cityName, affinityName, cities, citiesCompact, affinities, navigate, currentLanguage]);
 
   return (
     <>
@@ -160,6 +172,7 @@ const AffinityCityPage = () => {
         language={cityData.language}
         active={cityData.active}
         frequency_days={cityData.frequency_days}
+        bq={cityData.bq}
         isLoading={loadingCities || loadingAffinities}
       />
     </>

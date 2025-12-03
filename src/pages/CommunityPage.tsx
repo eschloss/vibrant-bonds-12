@@ -57,6 +57,12 @@ const CommunityPage = () => {
     enabled: !!endpoint
   });
 
+  // Fetch cities to derive `bq` by code
+  const { data: citiesCompact } = useApiJson<any[]>("/auth/get_all_cities", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
+
   const seoProps = {
     title: {
       en: communityData
@@ -93,6 +99,9 @@ const CommunityPage = () => {
 
   // Use title2 directly without encoding - it will be encoded in the template
   const urlizedTitle2 = communityData.title2;
+  const derivedBq: boolean | undefined = Array.isArray(citiesCompact)
+    ? (citiesCompact.find((c: any) => c.code === communityData.city)?.bq ?? undefined)
+    : undefined;
 
   return (
     <>
@@ -105,6 +114,7 @@ const CommunityPage = () => {
         state=""
         image={communityData.background_image}
         isLoading={loading}
+        bq={derivedBq}
         communityData={{
           title1: communityData.title1,
           title2: communityData.title2,

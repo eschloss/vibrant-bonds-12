@@ -24,6 +24,7 @@ interface CommunityMatchmakingTemplateProps {
   isLoading?: boolean;
   active?: boolean;
   frequency_days?: number;
+  bq?: boolean;
   communityData: {
     title1: string;
     title2: string;
@@ -47,6 +48,7 @@ const CommunityMatchmakingTemplate = ({
   isLoading,
   active,
   frequency_days: _frequency_days,
+  bq,
   communityData
 }: CommunityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();
@@ -249,8 +251,8 @@ const CommunityMatchmakingTemplate = ({
                        <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={true} state={state} />
                      ) : (
                        <div id="button-link1" className="flex flex-col items-center">
-                         <Link 
-                            to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                        <Link 
+                           to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                             onClick={(e) => {
                               const href = (e.currentTarget as HTMLAnchorElement).href;
                               trackTypeformRedirect({ href, cityName, code, source: 'community:hero_cta' });

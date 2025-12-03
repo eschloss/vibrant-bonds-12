@@ -29,6 +29,7 @@ const QueerCityPage = () => {
     lng?: number;
     active?: boolean;
     frequency_days?: number;
+    bq?: boolean;
   }>({
     name: fallbackCityName,
     country: "",
@@ -39,10 +40,16 @@ const QueerCityPage = () => {
     lat: 0,
     lng: 0,
     active: false,
-    frequency_days: undefined
+    frequency_days: undefined,
+    bq: undefined
   });
 
   const { data: cities, loading } = useApiJson<any[]>("/auth/get_all_cities_expanded", {
+    initialData: [],
+    staleTime: 5 * 60 * 1000
+  });
+  // fetch compact cities to read `bq`
+  const { data: citiesCompact } = useApiJson<any[]>("/auth/get_all_cities", {
     initialData: [],
     staleTime: 5 * 60 * 1000
   });
@@ -91,6 +98,10 @@ const QueerCityPage = () => {
         navigate("/cities");
         return;
       }
+      const matchedCompact = Array.isArray(citiesCompact)
+        ? citiesCompact.find((c: any) => c.code === matchedCity.code)
+        : undefined;
+      const bq: boolean | undefined = typeof matchedCompact?.bq === 'boolean' ? matchedCompact.bq : undefined;
       const nameField = currentLanguage === 'es' ? 'es_name' : 'en_name';
       const countryField = currentLanguage === 'es' ? 'es_country' : 'en_country';
       const stateField = currentLanguage === 'es' ? 'es_state' : 'en_state';
@@ -104,7 +115,8 @@ const QueerCityPage = () => {
         lat: matchedCity.lat,
         lng: matchedCity.lng,
         active: matchedCity.active,
-        frequency_days: matchedCity.frequency_days
+        frequency_days: matchedCity.frequency_days,
+        bq
       });
       window.scrollTo(0, 0);
       document.documentElement.classList.add('dark');
@@ -112,7 +124,7 @@ const QueerCityPage = () => {
       console.error("Failed to process cities:", err);
       navigate("/cities");
     }
-  }, [cityName, cities, navigate, currentLanguage]);
+  }, [cityName, cities, citiesCompact, navigate, currentLanguage]);
 
   return (
     <>
@@ -128,6 +140,7 @@ const QueerCityPage = () => {
         language={cityData.language}
         active={cityData.active}
         frequency_days={cityData.frequency_days}
+        bq={cityData.bq}
         isLoading={loading}
       />
     </>
