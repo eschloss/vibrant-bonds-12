@@ -37,6 +37,33 @@ export function trackTypeformRedirect(params: {
       path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       ...(params.extra || {})
     };
+    let destinationHost: string | undefined;
+    let destinationPath: string | undefined;
+    let isSignupClick = false;
+    if (typeof window !== 'undefined' && params.href) {
+      try {
+        const targetUrl = new URL(params.href, window.location.origin);
+        destinationHost = targetUrl.hostname;
+        destinationPath = targetUrl.pathname;
+        isSignupClick = targetUrl.pathname.startsWith('/signup');
+      } catch {
+        isSignupClick = params.href.includes('/signup');
+      }
+    }
+    const metaPayload = {
+      destination: payload.destination,
+      city: payload.city,
+      city_code: payload.city_code,
+      source: payload.source,
+      path: payload.path,
+      destination_host: destinationHost,
+      destination_path: destinationPath,
+    };
+    trackMetaPixelEvent(
+      isSignupClick ? 'signup_cta_click' : 'typeform_redirect_click',
+      metaPayload,
+      { custom: true }
+    );
     // GA4 gtag support
     // @ts-ignore
     if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
@@ -70,6 +97,14 @@ export function trackPreWaitlisterEvent(eventName: 'pre_waitlist_popup_open' | '
       path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       ...(params.extra || {})
     };
+    const sanitizedMetaPayload = {
+      city: payload.city,
+      city_code: payload.city_code,
+      is_community: payload.is_community,
+      source: payload.source,
+      path: payload.path,
+    };
+    trackMetaPixelEvent(eventName, sanitizedMetaPayload, { custom: true });
     // GA4 gtag support
     // @ts-ignore
     if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
@@ -88,12 +123,21 @@ export function trackPreWaitlisterEvent(eventName: 'pre_waitlist_popup_open' | '
 }
 
 // Track Meta Pixel events
-export function trackMetaPixelEvent(eventName: string, params?: Record<string, any>) {
+export function trackMetaPixelEvent(
+  eventName: string,
+  params?: Record<string, any>,
+  options?: { custom?: boolean }
+) {
   try {
     // @ts-ignore
     if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
       // @ts-ignore
-      (window as any).fbq('track', eventName, params || {});
+      const fbq = (window as any).fbq as (...args: any[]) => void;
+      if (options?.custom) {
+        fbq('trackCustom', eventName, params || {});
+      } else {
+        fbq('track', eventName, params || {});
+      }
     }
   } catch (e) {
     // no-op
