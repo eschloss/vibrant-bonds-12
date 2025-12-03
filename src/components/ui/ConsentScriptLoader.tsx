@@ -45,19 +45,23 @@ export const ConsentScriptLoader: React.FC = () => {
       } catch {}
 
       // Meta Pixel (disabled if CPRA doNotShare or ad consent denied)
+      // Script is loaded in index.html; initialize only when consent is granted
+      const fbq = (window as any).fbq as undefined | ((...args: any[]) => void);
       if (consent.marketing && !consent.doNotShare && adGranted) {
-        if (!(window as any).fbq) {
-          (function(f:any,b:any,e:any,v:any,n?:any,t?:any,s?:any){
-            if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)
-          })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        if (typeof fbq === 'function') {
+          // Initialize pixel if not already initialized
+          try {
+            fbq('init', '1935826830293991');
+            // Initial page view will be tracked by MetaPixelPageViewTracker on route changes
+            // Only track initial page view here if this is the first consent grant
+            if (!(window as any)._fbPixelInitialized) {
+              fbq('track', 'PageView');
+              (window as any)._fbPixelInitialized = true;
+            }
+          } catch (e) {
+            // Pixel initialization failed, ignore
+          }
         }
-        (window as any).fbq('init', '1935826830293991');
-        (window as any).fbq('track', 'PageView');
       }
 
       // Other marketing/analytics vendor example (commented placeholders)

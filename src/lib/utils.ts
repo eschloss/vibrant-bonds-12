@@ -86,3 +86,16 @@ export function trackPreWaitlisterEvent(eventName: 'pre_waitlist_popup_open' | '
     // no-op
   }
 }
+
+// Track Meta Pixel events
+export function trackMetaPixelEvent(eventName: string, params?: Record<string, any>) {
+  try {
+    // @ts-ignore
+    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+      // @ts-ignore
+      (window as any).fbq('track', eventName, params || {});
+    }
+  } catch (e) {
+    // no-op
+  }
+}

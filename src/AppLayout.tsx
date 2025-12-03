@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
+import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 
 const AppLayout = () => {
@@ -21,6 +22,7 @@ const AppLayout = () => {
             <Outlet />
           </div>
           <GaPageViewTracker />
+          <MetaPixelPageViewTracker />
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
         </ScrollContainerProvider>
