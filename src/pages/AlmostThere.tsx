@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { Seo } from "@/hooks/useSeo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { trackMetaPixelEvent } from "@/lib/utils";
 
 const AlmostThere = () => {
   const location = useLocation();
@@ -64,6 +65,26 @@ const AlmostThere = () => {
 
   const afterInstallEmail = email || t("almost_there.after_install_hint", "the same email you used here");
 
+  // Track signup_complete event when page loads
+  useEffect(() => {
+    const metaPayload = {
+      city: cityLabel,
+      is_queer: isQueer,
+      path: location.pathname + location.search,
+    };
+    trackMetaPixelEvent('signup_complete', metaPayload, { custom: true });
+  }, []); // Only run once on mount
+
+  const handleAppStoreClick = (store: 'apple' | 'google') => {
+    const metaPayload = {
+      store,
+      city: cityLabel,
+      is_queer: isQueer,
+      path: location.pathname + location.search,
+    };
+    trackMetaPixelEvent('signup_complete_app_stores_redirect', metaPayload, { custom: true });
+  };
+
   return (
     <>
       <Seo {...seoProps} />
@@ -118,6 +139,7 @@ const AlmostThere = () => {
                   href="https://apple.pulsenow.app"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => handleAppStoreClick('apple')}
                   className="inline-flex items-center justify-center rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors mx-auto p-2 md:p-3"
                 >
                   <img
@@ -136,6 +158,7 @@ const AlmostThere = () => {
                   href="https://google.pulsenow.app"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => handleAppStoreClick('google')}
                   className="inline-flex items-center justify-center rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors mx-auto p-2 md:p-3"
                 >
                   <img
