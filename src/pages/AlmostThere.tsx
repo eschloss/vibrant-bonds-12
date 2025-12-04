@@ -67,12 +67,17 @@ const AlmostThere = () => {
 
   // Track signup_complete event when page loads
   useEffect(() => {
-    const metaPayload = {
-      city: cityLabel,
-      is_queer: isQueer,
-      path: location.pathname + location.search,
-    };
-    trackMetaPixelEvent('signup_complete', metaPayload, { custom: true });
+    // Add a small delay to ensure Meta Pixel is initialized
+    const timeoutId = setTimeout(() => {
+      const metaPayload = {
+        city: cityLabel,
+        is_queer: isQueer,
+        path: location.pathname + location.search,
+      };
+      trackMetaPixelEvent('signup_complete', metaPayload, { custom: true });
+    }, 100); // Small delay to ensure pixel is ready
+
+    return () => clearTimeout(timeoutId);
   }, []); // Only run once on mount
 
   const handleAppStoreClick = (store: 'apple' | 'google') => {

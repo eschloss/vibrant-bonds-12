@@ -44,25 +44,8 @@ export const ConsentScriptLoader: React.FC = () => {
         }
       } catch {}
 
-      // Meta Pixel (disabled if CPRA doNotShare or ad consent denied)
-      // Script is loaded in index.html; initialize only when consent is granted
-      const fbq = (window as any).fbq as undefined | ((...args: any[]) => void);
-      if (consent.marketing && !consent.doNotShare && adGranted) {
-        if (typeof fbq === 'function') {
-          // Initialize pixel if not already initialized
-          try {
-            fbq('init', '1935826830293991');
-            // Initial page view will be tracked by MetaPixelPageViewTracker on route changes
-            // Only track initial page view here if this is the first consent grant
-            if (!(window as any)._fbPixelInitialized) {
-              fbq('track', 'PageView');
-              (window as any)._fbPixelInitialized = true;
-            }
-          } catch (e) {
-            // Pixel initialization failed, ignore
-          }
-        }
-      }
+      // Meta Pixel now loads unconditionally in index.html
+      // No consent-based initialization needed
 
       // Other marketing/analytics vendor example (commented placeholders)
       // if (consent.marketing && !consent.doNotShare && adGranted) loadScript('https://r2.leadsy.ai/tag.js', { id: 'vtag-ai-js', 'data-pid': 'Zd1Rijad0ASVw65K', 'data-version': '062024' });

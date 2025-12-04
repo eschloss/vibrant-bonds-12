@@ -62,7 +62,10 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      // Pixel initialization will be handled by ConsentScriptLoader based on consent
+      // Initialize pixel for everyone
+      fbq('init', '1935826830293991');
+      // Disable automatic page_view; SPA sends manual page_view on route changes
+      fbq('track', 'PageView');
     </script>
     <!-- End Meta Pixel Code -->
     
