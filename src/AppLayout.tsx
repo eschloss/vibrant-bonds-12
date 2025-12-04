@@ -7,6 +7,7 @@ import CookieConsent from "@/components/ui/CookieConsent";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
+import CitiesPreloader from "@/components/CitiesPreloader";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 
 const AppLayout = () => {
@@ -23,6 +24,7 @@ const AppLayout = () => {
           </div>
           <GaPageViewTracker />
           <MetaPixelPageViewTracker />
+          <CitiesPreloader />
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
         </ScrollContainerProvider>
