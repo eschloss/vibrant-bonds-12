@@ -136,6 +136,9 @@ const QueerCityPage = () => {
         country={cityData.country}
         state={cityData.state}
         image={cityData.image}
+        citySlug={cityName}
+        showNeighborhoodsSection={true}
+        neighborhoodsSectionCityName={cityData.name}
         isQueer={true}
         language={cityData.language}
         active={cityData.active}

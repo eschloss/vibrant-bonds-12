@@ -18,6 +18,8 @@ import LanguageSelector from "./LanguageSelector";
 import { trackTypeformRedirect } from "@/lib/utils";
 import PreWaitlisterDialog from './PreWaitlisterDialog';
 import ProgressiveImage from "@/components/ProgressiveImage";
+import { useApiJson } from "@/hooks/useApiJson";
+import { useRefParam } from "@/hooks/useRefParam";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -25,6 +27,11 @@ interface CityMatchmakingTemplateProps {
   country: string;
   state?: string;
   image?: string;
+  placeDescription?: string;
+  neighborhoodName?: string;
+  citySlug?: string;
+  showNeighborhoodsSection?: boolean;
+  neighborhoodsSectionCityName?: string;
   isQueer?: boolean;
   isAffinity?: boolean;
   affinityName?: string;
@@ -53,6 +60,11 @@ const CityMatchmakingTemplate = ({
   country,
   state,
   image,
+  placeDescription,
+  neighborhoodName,
+  citySlug,
+  showNeighborhoodsSection = false,
+  neighborhoodsSectionCityName,
   isQueer,
   isAffinity,
   affinityName,
@@ -66,6 +78,7 @@ const CityMatchmakingTemplate = ({
   communityData
 }: CityMatchmakingTemplateProps) => {
   const { t, currentLanguage } = useTranslation();
+  const { addRefToUrl } = useRefParam();
 
   // Get the current full URL for redirect parameter
   const currentUrl = window.location.href;
@@ -73,6 +86,33 @@ const CityMatchmakingTemplate = ({
   // Extract ref parameter from current URL if it exists
   const urlParams = new URLSearchParams(window.location.search);
   const refParam = urlParams.get('ref');
+  const neighborhoodParam = neighborhoodName ? `&neighborhood=${encodeURIComponent(neighborhoodName)}` : '';
+
+  type Neighborhood = {
+    name: string;
+    name_urlized: string;
+    description?: string;
+    lat?: number;
+    lng?: number;
+    image?: string;
+  };
+
+  const { data: neighborhoods } = useApiJson<Neighborhood[]>(
+    code ? `/auth/get_neighborhoods/${code}` : "/auth/get_neighborhoods/_",
+    {
+      initialData: [],
+      staleTime: 5 * 60 * 1000,
+      enabled: Boolean(showNeighborhoodsSection && code)
+    }
+  );
+
+  const neighborhoodsList = Array.isArray(neighborhoods) ? neighborhoods : [];
+  const shouldShowNeighborhoods =
+    showNeighborhoodsSection &&
+    neighborhoodsList.length > 0 &&
+    Boolean(citySlug) &&
+    typeof neighborhoodsSectionCityName === "string" &&
+    neighborhoodsSectionCityName.length > 0;
 
   const peopleOptions: string[] = [
     "https://s.kikiapp.eu/img/people/friends1.avif",
@@ -251,6 +291,17 @@ const CityMatchmakingTemplate = ({
                 )}
               </h1>
 
+              {placeDescription && (
+                <motion.p
+                  className="text-lg md:text-xl text-gray-700 font-normal mb-4"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15, duration: 0.45 }}
+                >
+                  {placeDescription}
+                </motion.p>
+              )}
+
               {/* Business branding line for communities */}
               {isCommunity && communityData && communityData.business_name && (
                 <div className="flex items-center justify-center gap-3 mb-8 mt-2">
@@ -331,7 +382,7 @@ const CityMatchmakingTemplate = ({
                            transition={{ duration: 0.4, ease: "easeOut" }}
                          >
                           <Link 
-                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                                onClick={(e) => {
                                  const href = (e.currentTarget as HTMLAnchorElement).href;
                                  trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
@@ -433,7 +484,7 @@ const CityMatchmakingTemplate = ({
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
                           >
-                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                               onClick={(e) => {
                                 const href = (e.currentTarget as HTMLAnchorElement).href;
                                 trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
@@ -501,6 +552,76 @@ const CityMatchmakingTemplate = ({
             </motion.div>
           </div>
         </section>
+
+        {shouldShowNeighborhoods && (
+          <section className="relative py-16 bg-gray-900 dark:bg-gray-950 border-t border-white/10">
+            <div className="container mx-auto px-4 relative z-10">
+              <motion.div
+                className="max-w-5xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="text-center mb-10">
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                    <span className="pulse-gradient-text">
+                      <Text id="city.neighborhoods.title">
+                        {t(
+                          "city.neighborhoods.title_in_city",
+                          "Neighborhoods we’re in in {city}"
+                        ).replace("{city}", neighborhoodsSectionCityName || "")}
+                      </Text>
+                    </span>
+                  </h3>
+                  <p className="text-white/80 text-lg md:text-xl">
+                    <Text id="city.neighborhoods.subtitle">
+                      {t(
+                        "city.neighborhoods.subtitle",
+                        "Pick your neighborhood for a more local match."
+                      )}
+                    </Text>
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {neighborhoodsList.map((n) => {
+                    const base = `/neighborhoods/${citySlug}/${n.name_urlized}`;
+                    const neighborhoodPath = isQueer
+                      ? isAffinity && affinityUrl
+                        ? `${base}/queer/${affinityUrl}`
+                        : `${base}/queer`
+                      : isAffinity && affinityUrl
+                        ? `${base}/${affinityUrl}`
+                        : base;
+
+                    return (
+                      <Link
+                        key={`${n.name_urlized}`}
+                        to={addRefToUrl(neighborhoodPath)}
+                        className="group rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors p-5"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="text-white font-semibold text-lg truncate">
+                              {n.name}
+                            </div>
+                            {n.description && (
+                              <div className="text-white/70 text-sm mt-1 line-clamp-2">
+                                {n.description}
+                              </div>
+                            )}
+                          </div>
+                          <ArrowRight className="text-white/70 group-hover:text-white transition-colors shrink-0" size={18} />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

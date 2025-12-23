@@ -20,6 +20,10 @@ const CityPage = lazy(() => import("@/pages/CityPage"));
 const QueerCityPage = lazy(() => import("@/pages/QueerCityPage"));
 const AffinityCityPage = lazy(() => import("@/pages/AffinityCityPage"));
 const QueerAffinityCityPage = lazy(() => import("@/pages/QueerAffinityCityPage"));
+const NeighborhoodPage = lazy(() => import("@/pages/NeighborhoodPage"));
+const QueerNeighborhoodPage = lazy(() => import("@/pages/QueerNeighborhoodPage"));
+const AffinityNeighborhoodPage = lazy(() => import("@/pages/AffinityNeighborhoodPage"));
+const QueerAffinityNeighborhoodPage = lazy(() => import("@/pages/QueerAffinityNeighborhoodPage"));
 const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
 const Partnerships = lazy(() => import("@/pages/Partnerships"));
 const AmbassadorProgram = lazy(() => import("@/pages/AmbassadorProgram"));
@@ -90,6 +94,12 @@ function App() {
                   <Route path="cities/:cityName/queer" element={<QueerCityPage />} />
                   <Route path="cities/:cityName/:affinityName" element={<AffinityCityPage />} />
                   <Route path="cities/:cityName/queer/:affinityName" element={<QueerAffinityCityPage />} />
+
+                  {/* Neighborhood routes */}
+                  <Route path="neighborhoods/:cityName/:neighborhoodName" element={<NeighborhoodPage />} />
+                  <Route path="neighborhoods/:cityName/:neighborhoodName/queer" element={<QueerNeighborhoodPage />} />
+                  <Route path="neighborhoods/:cityName/:neighborhoodName/:affinityName" element={<AffinityNeighborhoodPage />} />
+                  <Route path="neighborhoods/:cityName/:neighborhoodName/queer/:affinityName" element={<QueerAffinityNeighborhoodPage />} />
                   
                   {/* Community route */}
                   <Route path="communities/:community_url" element={<CommunityPage />} />

@@ -158,6 +158,9 @@ const QueerAffinityCityPage = () => {
         country={cityData.country}
         state={cityData.state}
         image={cityData.image}
+        citySlug={cityName}
+        showNeighborhoodsSection={true}
+        neighborhoodsSectionCityName={cityData.name}
         isQueer={true}
         isAffinity={true}
         affinityName={displayAffinityName}
