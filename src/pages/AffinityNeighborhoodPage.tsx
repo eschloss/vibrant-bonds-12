@@ -239,7 +239,9 @@ const AffinityNeighborhoodPage = () => {
         ? `Únete a la comunidad de ${affinityData.name_es.toLowerCase()} en ${String(neighborhoodData.name)}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`
         : "Pulse te ayuda a conocer personas que comparten tus intereses. Haz amistades reales y queda en la vida real."
     },
-    image: typeof neighborhoodData?.image === "string" ? neighborhoodData.image : undefined,
+    image:
+      (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+      (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined),
     geoData: {
       name: `${String(neighborhoodData.name)}${cityMeta.cityDisplayName ? `, ${String(cityMeta.cityDisplayName)}` : ""}${
         cityMeta.state ? `, ${String(cityMeta.state)}` : ""
@@ -250,6 +252,9 @@ const AffinityNeighborhoodPage = () => {
   };
 
   const isLoading = loadingCities || loadingCitiesCompact || loadingAffinities || loadingNeighborhoods;
+  const effectiveImage =
+    (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+    (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined);
 
   return (
     <>
@@ -262,7 +267,7 @@ const AffinityNeighborhoodPage = () => {
         code={cityCode}
         country={cityMeta.country}
         state={cityMeta.state}
-        image={neighborhoodData.image}
+        image={effectiveImage}
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}

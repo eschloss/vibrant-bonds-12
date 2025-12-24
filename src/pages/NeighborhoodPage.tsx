@@ -210,7 +210,9 @@ const NeighborhoodPage = () => {
           `meet people in ${String(neighborhoodData.name)}`
         ]
       : ["meet friends", "friend groups", "make friends"],
-    image: typeof neighborhoodData?.image === "string" ? neighborhoodData.image : undefined,
+    image:
+      (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+      (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined),
     geoData: {
       name: `${String(neighborhoodData.name)}${cityMeta.cityDisplayName ? `, ${String(cityMeta.cityDisplayName)}` : ""}${
         cityMeta.state ? `, ${String(cityMeta.state)}` : ""
@@ -221,6 +223,9 @@ const NeighborhoodPage = () => {
   };
 
   const isLoading = loadingCities || loadingCitiesCompact || loadingNeighborhoods;
+  const effectiveImage =
+    (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+    (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined);
 
   return (
     <>
@@ -233,7 +238,7 @@ const NeighborhoodPage = () => {
         code={cityCode}
         country={cityMeta.country}
         state={cityMeta.state}
-        image={neighborhoodData.image}
+        image={effectiveImage}
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}

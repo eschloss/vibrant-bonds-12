@@ -208,7 +208,9 @@ const QueerNeighborhoodPage = () => {
           `gay friends ${String(neighborhoodData.name)}`
         ]
       : ["LGBTQ+ friends", "queer community"],
-    image: typeof neighborhoodData?.image === "string" ? neighborhoodData.image : undefined,
+    image:
+      (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+      (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined),
     geoData: {
       name: `${String(neighborhoodData.name)}${cityMeta.cityDisplayName ? `, ${String(cityMeta.cityDisplayName)}` : ""}${
         cityMeta.state ? `, ${String(cityMeta.state)}` : ""
@@ -219,6 +221,9 @@ const QueerNeighborhoodPage = () => {
   };
 
   const isLoading = loadingCities || loadingCitiesCompact || loadingNeighborhoods;
+  const effectiveImage =
+    (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+    (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined);
 
   return (
     <>
@@ -231,7 +236,7 @@ const QueerNeighborhoodPage = () => {
         code={cityCode}
         country={cityMeta.country}
         state={cityMeta.state}
-        image={neighborhoodData.image}
+        image={effectiveImage}
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}

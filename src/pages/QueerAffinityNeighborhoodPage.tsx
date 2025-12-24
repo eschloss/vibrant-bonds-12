@@ -233,7 +233,9 @@ const QueerAffinityNeighborhoodPage = () => {
       `meet ${affinityData.name_en.toLowerCase()} friends in ${String(neighborhoodData.name)}`,
       `${String(neighborhoodData.name)} ${affinityData.name_en.toLowerCase()} community`
     ] : ["queer friends", "affinity groups"],
-    image: typeof neighborhoodData?.image === "string" ? neighborhoodData.image : undefined,
+    image:
+      (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+      (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined),
     geoData: {
       name: `${String(neighborhoodData.name)}${cityMeta.cityDisplayName ? `, ${String(cityMeta.cityDisplayName)}` : ""}${
         cityMeta.state ? `, ${String(cityMeta.state)}` : ""
@@ -244,6 +246,9 @@ const QueerAffinityNeighborhoodPage = () => {
   };
 
   const isLoading = loadingCities || loadingAffinities || loadingNeighborhoods;
+  const effectiveImage =
+    (typeof neighborhoodData?.image === "string" && neighborhoodData.image) ||
+    (typeof matchedCity?.image === "string" ? normalizeImage(matchedCity.image) : undefined);
 
   return (
     <>
@@ -256,7 +261,7 @@ const QueerAffinityNeighborhoodPage = () => {
         code={cityCode}
         country={cityMeta.country}
         state={cityMeta.state}
-        image={neighborhoodData.image}
+        image={effectiveImage}
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}
