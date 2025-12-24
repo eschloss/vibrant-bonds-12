@@ -16,6 +16,7 @@ type UseApiJsonReturn<T> = {
   error: Error | undefined;
   refetch: () => Promise<void>;
   isStale: boolean;
+  hasFetched: boolean;
   url: string;
 };
 
@@ -43,7 +44,14 @@ export function useApiJson<T = unknown>(
   const [loading, setLoading] = useState<boolean>(enabled);
   const [error, setError] = useState<Error | undefined>(undefined);
   const [isStale, setIsStale] = useState<boolean>(false);
+  const [hasFetched, setHasFetched] = useState<boolean>(false);
   const abortRef = useRef<AbortController | null>(null);
+  const isNeighborhoodRequest = useMemo(() => url.includes("/auth/get_neighborhoods/"), [url]);
+
+  useEffect(() => {
+    // URL changed => new request lifecycle
+    setHasFetched(false);
+  }, [url]);
 
   const setData = useCallback((updater: T | ((prev: T | undefined) => T)) => {
     setDataState(prev => (typeof updater === "function" ? (updater as (p: T | undefined) => T)(prev) : updater));
@@ -52,6 +60,9 @@ export function useApiJson<T = unknown>(
   const doFetch = useCallback(async () => {
     if (!enabled) {
       setLoading(false);
+      if (isNeighborhoodRequest) {
+        console.log("[useApiJson][neighborhoods]", { url, enabled, stage: "disabled" });
+      }
       return;
     }
 
@@ -65,6 +76,9 @@ export function useApiJson<T = unknown>(
     try {
       setError(undefined);
       setLoading(true);
+      if (isNeighborhoodRequest) {
+        console.log("[useApiJson][neighborhoods]", { url, enabled, stage: "start" });
+      }
 
       // Serve from cache if fresh
       if (cache && urlCache.has(url)) {
@@ -74,11 +88,30 @@ export function useApiJson<T = unknown>(
           setDataState(entry.data);
           setIsStale(false);
           setLoading(false);
+          setHasFetched(true);
+          if (isNeighborhoodRequest) {
+            console.log("[useApiJson][neighborhoods]", {
+              url,
+              enabled,
+              stage: "cache_hit_fresh",
+              age,
+              staleTime
+            });
+          }
           return;
         } else {
           // serve cached data as stale immediately while revalidating
           setDataState(entry.data);
           setIsStale(true);
+          if (isNeighborhoodRequest) {
+            console.log("[useApiJson][neighborhoods]", {
+              url,
+              enabled,
+              stage: "cache_hit_stale_revalidate",
+              age,
+              staleTime
+            });
+          }
         }
       }
 
@@ -99,9 +132,23 @@ export function useApiJson<T = unknown>(
         urlCache.set(url, { data: json, timestamp: Date.now() });
       }
       setIsStale(false);
+      setHasFetched(true);
+      if (isNeighborhoodRequest) {
+        const len = Array.isArray(json) ? json.length : undefined;
+        console.log("[useApiJson][neighborhoods]", { url, enabled, stage: "success", len });
+      }
     } catch (err: any) {
       if (err?.name === "AbortError") return;
       setError(err instanceof Error ? err : new Error(String(err)));
+      setHasFetched(true);
+      if (isNeighborhoodRequest) {
+        console.log("[useApiJson][neighborhoods]", {
+          url,
+          enabled,
+          stage: "error",
+          message: err instanceof Error ? err.message : String(err)
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -122,7 +169,7 @@ export function useApiJson<T = unknown>(
     await doFetch();
   }, [doFetch, url, cache]);
 
-  return { data, setData, loading, error, refetch, isStale, url };
+  return { data, setData, loading, error, refetch, isStale, hasFetched, url };
 }
 
 

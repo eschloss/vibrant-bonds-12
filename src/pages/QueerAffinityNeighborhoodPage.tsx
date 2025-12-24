@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
@@ -76,7 +76,13 @@ const QueerAffinityNeighborhoodPage = () => {
 
   const cityCode: string = matchedCity?.code || "";
 
-  const { data: neighborhoods, loading: loadingNeighborhoods } = useApiJson<NeighborhoodData[]>(
+  const {
+    data: neighborhoods,
+    loading: loadingNeighborhoods,
+    hasFetched: neighborhoodsFetched,
+    url: neighborhoodsUrl,
+    error: neighborhoodsError
+  } = useApiJson<NeighborhoodData[]>(
     cityCode ? `/auth/get_neighborhoods/${cityCode}` : "/auth/get_neighborhoods/_",
     {
       initialData: [],
@@ -84,10 +90,6 @@ const QueerAffinityNeighborhoodPage = () => {
       enabled: Boolean(cityCode)
     }
   );
-
-  // Prevent premature redirects: only consider "not found" after we've observed a full fetch cycle
-  const sawNeighborhoodsLoadingRef = useRef(false);
-  const [neighborhoodsFetchFinished, setNeighborhoodsFetchFinished] = useState(false);
 
   const [neighborhoodData, setNeighborhoodData] = useState<NeighborhoodData>({
     name: fallbackNeighborhoodDisplayName,
@@ -115,21 +117,28 @@ const QueerAffinityNeighborhoodPage = () => {
   });
 
   useEffect(() => {
-    // Reset tracking whenever the city changes
-    sawNeighborhoodsLoadingRef.current = false;
-    setNeighborhoodsFetchFinished(false);
-  }, [cityCode]);
-
-  useEffect(() => {
-    if (!cityCode) return;
-    if (loadingNeighborhoods) {
-      sawNeighborhoodsLoadingRef.current = true;
-      return;
-    }
-    if (sawNeighborhoodsLoadingRef.current && !loadingNeighborhoods) {
-      setNeighborhoodsFetchFinished(true);
-    }
-  }, [cityCode, loadingNeighborhoods]);
+    console.log("[QueerAffinityNeighborhoodPage]", {
+      cityName,
+      neighborhoodName,
+      affinityName,
+      cityCode,
+      neighborhoodsUrl,
+      neighborhoodsFetched,
+      loadingNeighborhoods,
+      neighborhoodsLen: Array.isArray(neighborhoods) ? neighborhoods.length : undefined,
+      neighborhoodsError: neighborhoodsError?.message
+    });
+  }, [
+    cityName,
+    neighborhoodName,
+    affinityName,
+    cityCode,
+    neighborhoodsUrl,
+    neighborhoodsFetched,
+    loadingNeighborhoods,
+    neighborhoods,
+    neighborhoodsError
+  ]);
 
   // Step 1: match city and affinity, validate availability
   useEffect(() => {
@@ -168,16 +177,30 @@ const QueerAffinityNeighborhoodPage = () => {
     if (!cityName || !neighborhoodName || !affinityName) return;
     if (!matchedCity) return;
     if (!Array.isArray(neighborhoods)) return;
-    if (!neighborhoodsFetchFinished) return;
+    if (!neighborhoodsFetched) return;
 
     const foundNeighborhood = neighborhoods.find(
       (n) => String(n.name_urlized || "").toLowerCase() === neighborhoodName.toLowerCase()
     );
     if (!foundNeighborhood) {
+      console.log("[QueerAffinityNeighborhoodPage] redirect:not_found", {
+        cityName,
+        neighborhoodName,
+        affinityName,
+        cityCode,
+        neighborhoodsLen: neighborhoods.length
+      });
       navigate(`/cities/${cityName}/queer/${affinityName}`);
       return;
     }
 
+    console.log("[QueerAffinityNeighborhoodPage] match:found", {
+      cityName,
+      neighborhoodName,
+      affinityName,
+      cityCode,
+      found: foundNeighborhood.name_urlized
+    });
     setNeighborhoodData({
       name: foundNeighborhood.name,
       name_urlized: foundNeighborhood.name_urlized,
@@ -186,7 +209,7 @@ const QueerAffinityNeighborhoodPage = () => {
       lng: foundNeighborhood.lng,
       image: normalizeImage(foundNeighborhood.image)
     });
-  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, neighborhoodsFetchFinished, navigate]);
+  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, neighborhoodsFetched, cityCode, navigate]);
 
   const seoProps = {
     title: {
