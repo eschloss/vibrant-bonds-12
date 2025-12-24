@@ -163,7 +163,10 @@ const AffinityNeighborhoodPage = () => {
     const foundNeighborhood = neighborhoods.find(
       (n) => String(n.name_urlized || "").toLowerCase() === neighborhoodName.toLowerCase()
     );
-    if (!foundNeighborhood) return;
+    if (!foundNeighborhood) {
+      navigate(`/cities/${cityName}/${affinityName}`);
+      return;
+    }
 
     setNeighborhoodData({
       name: foundNeighborhood.name,
@@ -173,7 +176,7 @@ const AffinityNeighborhoodPage = () => {
       lng: foundNeighborhood.lng,
       image: normalizeImage(foundNeighborhood.image)
     });
-  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, loadingNeighborhoods]);
+  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, loadingNeighborhoods, navigate]);
 
   const seoProps = {
     title: {
@@ -219,6 +222,7 @@ const AffinityNeighborhoodPage = () => {
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}
+        headlinePlaceLinkTo={cityName ? `/cities/${cityName}` : "/cities"}
         isQueer={false}
         isAffinity={true}
         affinityName={displayAffinityName}

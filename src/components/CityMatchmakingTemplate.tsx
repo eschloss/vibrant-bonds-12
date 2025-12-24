@@ -32,6 +32,7 @@ interface CityMatchmakingTemplateProps {
   citySlug?: string;
   showNeighborhoodsSection?: boolean;
   neighborhoodsSectionCityName?: string;
+  headlinePlaceLinkTo?: string;
   isQueer?: boolean;
   isAffinity?: boolean;
   affinityName?: string;
@@ -65,6 +66,7 @@ const CityMatchmakingTemplate = ({
   citySlug,
   showNeighborhoodsSection = false,
   neighborhoodsSectionCityName,
+  headlinePlaceLinkTo,
   isQueer,
   isAffinity,
   affinityName,
@@ -87,6 +89,7 @@ const CityMatchmakingTemplate = ({
   const urlParams = new URLSearchParams(window.location.search);
   const refParam = urlParams.get('ref');
   const neighborhoodParam = neighborhoodName ? `&neighborhood=${encodeURIComponent(neighborhoodName)}` : '';
+  const headlinePlaceHref = headlinePlaceLinkTo || "/cities";
 
   type Neighborhood = {
     name: string;
@@ -248,7 +251,7 @@ const CityMatchmakingTemplate = ({
                     {t("city.meet_new", "Meet New")} {t("city.friends", "Friends")}
                     <br />
                     {t("city.in", "in")}{" "}
-                    <Link to="/cities">
+                    <Link to={headlinePlaceHref}>
                       <span className="pulse-gradient-text">{cityName}</span>
                     </Link>
                   </>
@@ -285,7 +288,7 @@ const CityMatchmakingTemplate = ({
                         {t("city.friends", "Friends ")}<br />
                       </>
                     )}
-                    {t("city.in", "in")} <Link to="/cities"><span className="pulse-gradient-text">{cityName}</span>
+                    {t("city.in", "in")} <Link to={headlinePlaceHref}><span className="pulse-gradient-text">{cityName}</span>
                     </Link>
                   </>
                 )}
