@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CityMatchmakingTemplate from "@/components/CityMatchmakingTemplate";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
@@ -85,6 +85,10 @@ const QueerAffinityNeighborhoodPage = () => {
     }
   );
 
+  // Prevent premature redirects: only consider "not found" after we've observed a full fetch cycle
+  const sawNeighborhoodsLoadingRef = useRef(false);
+  const [neighborhoodsFetchFinished, setNeighborhoodsFetchFinished] = useState(false);
+
   const [neighborhoodData, setNeighborhoodData] = useState<NeighborhoodData>({
     name: fallbackNeighborhoodDisplayName,
     name_urlized: neighborhoodName || "",
@@ -109,6 +113,23 @@ const QueerAffinityNeighborhoodPage = () => {
     active: false,
     frequency_days: undefined
   });
+
+  useEffect(() => {
+    // Reset tracking whenever the city changes
+    sawNeighborhoodsLoadingRef.current = false;
+    setNeighborhoodsFetchFinished(false);
+  }, [cityCode]);
+
+  useEffect(() => {
+    if (!cityCode) return;
+    if (loadingNeighborhoods) {
+      sawNeighborhoodsLoadingRef.current = true;
+      return;
+    }
+    if (sawNeighborhoodsLoadingRef.current && !loadingNeighborhoods) {
+      setNeighborhoodsFetchFinished(true);
+    }
+  }, [cityCode, loadingNeighborhoods]);
 
   // Step 1: match city and affinity, validate availability
   useEffect(() => {
@@ -147,7 +168,7 @@ const QueerAffinityNeighborhoodPage = () => {
     if (!cityName || !neighborhoodName || !affinityName) return;
     if (!matchedCity) return;
     if (!Array.isArray(neighborhoods)) return;
-    if (loadingNeighborhoods) return;
+    if (!neighborhoodsFetchFinished) return;
 
     const foundNeighborhood = neighborhoods.find(
       (n) => String(n.name_urlized || "").toLowerCase() === neighborhoodName.toLowerCase()
@@ -165,7 +186,7 @@ const QueerAffinityNeighborhoodPage = () => {
       lng: foundNeighborhood.lng,
       image: normalizeImage(foundNeighborhood.image)
     });
-  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, loadingNeighborhoods, navigate]);
+  }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, neighborhoodsFetchFinished, navigate]);
 
   const seoProps = {
     title: {
