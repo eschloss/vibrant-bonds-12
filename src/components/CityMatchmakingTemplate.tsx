@@ -606,11 +606,6 @@ const CityMatchmakingTemplate = ({
                             <div className="text-white font-semibold text-lg truncate">
                               {n.name}
                             </div>
-                            {n.description && (
-                              <div className="text-white/70 text-sm mt-1 line-clamp-2">
-                                {n.description}
-                              </div>
-                            )}
                           </div>
                           <ArrowRight className="text-white/70 group-hover:text-white transition-colors shrink-0" size={18} />
                         </div>

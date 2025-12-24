@@ -92,10 +92,7 @@ const NeighborhoodPage = () => {
     const found = cities.find(
       (city: any) => city.url2?.replace(/^\//, "").toLowerCase() === cityName.toLowerCase()
     );
-    if (!found) {
-      navigate("/cities");
-      return;
-    }
+    if (!found) return;
     setMatchedCity(found);
 
     const matchedCompact = Array.isArray(citiesCompact)
@@ -132,10 +129,7 @@ const NeighborhoodPage = () => {
       (n) => String(n.name_urlized || "").toLowerCase() === neighborhoodName.toLowerCase()
     );
 
-    if (!foundNeighborhood) {
-      navigate(`/cities/${cityName}`);
-      return;
-    }
+    if (!foundNeighborhood) return;
 
     setNeighborhoodData({
       name: foundNeighborhood.name,
@@ -145,7 +139,7 @@ const NeighborhoodPage = () => {
       lng: foundNeighborhood.lng,
       image: normalizeImage(foundNeighborhood.image)
     });
-  }, [cityName, neighborhoodName, matchedCity, neighborhoods, loadingNeighborhoods, navigate]);
+  }, [cityName, neighborhoodName, matchedCity, neighborhoods, loadingNeighborhoods]);
 
   const seoProps = {
     title: {
