@@ -569,12 +569,10 @@ const CityMatchmakingTemplate = ({
                 <div className="text-center mb-10">
                   <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
                     <span className="pulse-gradient-text">
-                      <Text id="city.neighborhoods.title">
-                        {t(
-                          "city.neighborhoods.title_in_city",
-                          "Neighborhoods we’re in in {city}"
-                        ).replace("{city}", neighborhoodsSectionCityName || "")}
-                      </Text>
+                      {t(
+                        "city.neighborhoods.title_in_city",
+                        "{city} Neighborhoods we’re in"
+                      ).replace("{city}", neighborhoodsSectionCityName || "")}
                     </span>
                   </h3>
                   <p className="text-white/80 text-lg md:text-xl">
