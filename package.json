@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "analyze": "vite build --mode analyze && (open dist/stats.html || xdg-open dist/stats.html || true)",
-    "postbuild": "node scripts/react-snap.mjs",
+    "prerender": "node scripts/react-snap.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
