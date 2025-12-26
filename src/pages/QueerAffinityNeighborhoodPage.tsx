@@ -74,6 +74,7 @@ const QueerAffinityNeighborhoodPage = () => {
       ? affinityData.name_es
       : affinityData.name_en
     : "";
+  const faqAffinity = affinityData?.name_en ? affinityData.name_en.toLowerCase() : null;
 
   const cityCode: string = matchedCity?.code || "";
 
@@ -270,6 +271,8 @@ const QueerAffinityNeighborhoodPage = () => {
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}
         headlinePlaceLinkTo={cityName ? `/cities/${cityName}` : "/cities"}
+        identity="queer"
+        affinity={faqAffinity}
         isQueer={true}
         isAffinity={true}
         affinityName={displayAffinityName}

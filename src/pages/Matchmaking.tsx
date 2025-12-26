@@ -29,6 +29,8 @@ const Matchmaking = () => {
         country="Worldwide"
         state=""
         image=""
+        identity={null}
+        affinity={null}
         language={currentLanguage !== "en" ? currentLanguage : undefined}
       />
     </>

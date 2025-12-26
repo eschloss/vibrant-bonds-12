@@ -247,6 +247,8 @@ const NeighborhoodPage = () => {
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityMeta.cityDisplayName}
         headlinePlaceLinkTo={cityName ? `/cities/${cityName}` : "/cities"}
+        identity={null}
+        affinity={null}
         isQueer={false}
         language={cityMeta.language}
         active={cityMeta.active}

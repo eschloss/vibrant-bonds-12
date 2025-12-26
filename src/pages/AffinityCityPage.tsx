@@ -79,6 +79,7 @@ const AffinityCityPage = () => {
   const displayAffinityName = affinityData ? 
     (currentLanguage === 'es' ? affinityData.name_es : affinityData.name_en) : 
     '';
+  const faqAffinity = affinityData?.name_en ? affinityData.name_en.toLowerCase() : null;
 
   const seoProps = {
     title: {
@@ -168,6 +169,8 @@ const AffinityCityPage = () => {
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityData.name}
+        identity={null}
+        affinity={faqAffinity}
         isQueer={false}
         isAffinity={true}
         affinityName={displayAffinityName}

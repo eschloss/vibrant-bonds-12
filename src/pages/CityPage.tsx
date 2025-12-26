@@ -146,6 +146,8 @@ const CityPage = () => {
         citySlug={cityName}
         showNeighborhoodsSection={true}
         neighborhoodsSectionCityName={cityData.name}
+        identity={null}
+        affinity={null}
         isQueer={false}
         language={cityData.language}
         active={cityData.active}

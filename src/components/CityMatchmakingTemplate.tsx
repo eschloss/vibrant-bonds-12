@@ -20,6 +20,7 @@ import PreWaitlisterDialog from './PreWaitlisterDialog';
 import ProgressiveImage from "@/components/ProgressiveImage";
 import { useApiJson } from "@/hooks/useApiJson";
 import { useRefParam } from "@/hooks/useRefParam";
+import CityFaqSection from "@/components/city/CityFaqSection";
 
 interface CityMatchmakingTemplateProps {
   cityName: string;
@@ -34,6 +35,8 @@ interface CityMatchmakingTemplateProps {
   showNeighborhoodsSection?: boolean;
   neighborhoodsSectionCityName?: string;
   headlinePlaceLinkTo?: string;
+  identity?: string | null;
+  affinity?: string | null;
   isQueer?: boolean;
   isAffinity?: boolean;
   affinityName?: string;
@@ -69,6 +72,8 @@ const CityMatchmakingTemplate = ({
   showNeighborhoodsSection = false,
   neighborhoodsSectionCityName,
   headlinePlaceLinkTo,
+  identity,
+  affinity,
   isQueer,
   isAffinity,
   affinityName,
@@ -559,6 +564,12 @@ const CityMatchmakingTemplate = ({
             </motion.div>
           </div>
         </section>
+
+        <CityFaqSection
+          city={cityName}
+          identity={identity ?? (isQueer ? "queer" : null)}
+          affinity={affinity ?? (isAffinity ? (affinityName ?? null) : null)}
+        />
 
         {shouldShowNeighborhoods && (
           <section className="relative py-16 bg-gray-900 dark:bg-gray-950 border-t border-white/10">
