@@ -19,6 +19,7 @@ type NeighborhoodData = {
   lat?: number;
   lng?: number;
   image?: string;
+  is_gen?: boolean;
 };
 
 interface AffinityData {
@@ -97,7 +98,8 @@ const QueerAffinityNeighborhoodPage = () => {
     description: "",
     lat: 0,
     lng: 0,
-    image: undefined
+    image: undefined,
+    is_gen: false
   });
 
   const [cityMeta, setCityMeta] = useState<{
@@ -207,7 +209,8 @@ const QueerAffinityNeighborhoodPage = () => {
       description: foundNeighborhood.description,
       lat: foundNeighborhood.lat,
       lng: foundNeighborhood.lng,
-      image: normalizeImage(foundNeighborhood.image)
+      image: normalizeImage(foundNeighborhood.image),
+      is_gen: Boolean((foundNeighborhood as any)?.is_gen)
     });
   }, [cityName, neighborhoodName, affinityName, matchedCity, neighborhoods, neighborhoodsFetched, cityCode, navigate]);
 
@@ -257,6 +260,7 @@ const QueerAffinityNeighborhoodPage = () => {
       <CityMatchmakingTemplate
         cityName={neighborhoodData.name}
         neighborhoodName={neighborhoodData.name}
+        isGen={Boolean(neighborhoodData.is_gen)}
         placeDescription={neighborhoodData.description}
         code={cityCode}
         country={cityMeta.country}

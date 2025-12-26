@@ -29,6 +29,7 @@ interface CityMatchmakingTemplateProps {
   image?: string;
   placeDescription?: string;
   neighborhoodName?: string;
+  isGen?: boolean;
   citySlug?: string;
   showNeighborhoodsSection?: boolean;
   neighborhoodsSectionCityName?: string;
@@ -63,6 +64,7 @@ const CityMatchmakingTemplate = ({
   image,
   placeDescription,
   neighborhoodName,
+  isGen,
   citySlug,
   showNeighborhoodsSection = false,
   neighborhoodsSectionCityName,
@@ -89,6 +91,7 @@ const CityMatchmakingTemplate = ({
   const urlParams = new URLSearchParams(window.location.search);
   const refParam = urlParams.get('ref');
   const neighborhoodParam = neighborhoodName ? `&neighborhood=${encodeURIComponent(neighborhoodName)}` : '';
+  const isGenParam = isGen ? `&is_gen=True` : "";
   const headlinePlaceHref = headlinePlaceLinkTo || "/cities";
 
   type Neighborhood = {
@@ -98,6 +101,7 @@ const CityMatchmakingTemplate = ({
     lat?: number;
     lng?: number;
     image?: string;
+    is_gen?: boolean;
   };
 
   const { data: neighborhoods } = useApiJson<Neighborhood[]>(
@@ -385,7 +389,7 @@ const CityMatchmakingTemplate = ({
                            transition={{ duration: 0.4, ease: "easeOut" }}
                          >
                           <Link 
-                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                                onClick={(e) => {
                                  const href = (e.currentTarget as HTMLAnchorElement).href;
                                  trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
@@ -487,7 +491,7 @@ const CityMatchmakingTemplate = ({
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
                           >
-                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : cityName)}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                               onClick={(e) => {
                                 const href = (e.currentTarget as HTMLAnchorElement).href;
                                 trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
