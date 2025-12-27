@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import FAQItem from "@/components/FAQItem";
 import { buildCityFaqs } from "@/lib/cityFaq";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type CityFaqSectionProps = {
   city: string;
@@ -9,7 +10,13 @@ type CityFaqSectionProps = {
 };
 
 export default function CityFaqSection({ city, identity, affinity }: CityFaqSectionProps) {
-  const faqs = buildCityFaqs({ city, identity, affinity });
+  const { currentLanguage } = useTranslation();
+  const faqs = buildCityFaqs({
+    city,
+    identity,
+    affinity,
+    language: currentLanguage === "es" ? "es" : "en"
+  });
 
   const faqStructuredData = {
     "@context": "https://schema.org",
@@ -41,7 +48,9 @@ export default function CityFaqSection({ city, identity, affinity }: CityFaqSect
               <span className="pulse-gradient-text">FAQ</span>
             </h2>
             <p className="text-white/80 text-lg md:text-xl">
-              Answers to common questions about meeting friends in {city} with Pulse.
+              {currentLanguage === "es"
+                ? `Respuestas a preguntas comunes sobre cómo conocer amigues en ${city} con Pulse.`
+                : `Answers to common questions about meeting friends in ${city} with Pulse.`}
             </p>
           </div>
 

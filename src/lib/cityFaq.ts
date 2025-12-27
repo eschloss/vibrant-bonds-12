@@ -2,6 +2,7 @@ export type CityFaqContext = {
   city: string;
   identity?: string | null;
   affinity?: string | null;
+  language?: "en" | "es";
 };
 
 /**
@@ -25,7 +26,7 @@ type CityFaqTemplate = {
 };
 
 // IMPORTANT: Do not change this copy; only interpolate {{descriptor}} and {{city}}.
-const FAQ_TEMPLATES: CityFaqTemplate[] = [
+const FAQ_TEMPLATES_EN: CityFaqTemplate[] = [
   {
     question: "How can I meet new {{descriptor}} friends in {{city}} with Pulse?",
     answer:
@@ -53,6 +54,35 @@ const FAQ_TEMPLATES: CityFaqTemplate[] = [
   }
 ];
 
+// Spanish translations of the same 5 FAQs (copy is a translation; still only interpolates {{descriptor}} and {{city}}).
+const FAQ_TEMPLATES_ES: CityFaqTemplate[] = [
+  {
+    question: "¿Cómo puedo conocer nuevos amigues {{descriptor}} en {{city}} con Pulse?",
+    answer:
+      "Pulse te ayuda a conocer nuevos amigues {{descriptor}} en {{city}} al emparejarte con un grupo pequeño de personas que viven en {{city}} y que están buscando activamente construir amistades reales. En lugar de chatear sin parar, Pulse se enfoca en juntar a la gente para que se conozca en la vida real a través de planes y experiencias compartidas en {{city}}."
+  },
+  {
+    question: "¿Es Pulse la mejor app para hacer amigues {{descriptor}} en {{city}}?",
+    answer:
+      "Pulse está diseñado específicamente para crear amistades {{descriptor}} reales en {{city}}, no para citas ni para “scrollear” socialmente sin intención. A diferencia de las apps sociales tradicionales, Pulse forma pequeños grupos locales en {{city}} y les guía para que se conozcan en persona, lo que lo convierte en una de las maneras más efectivas de construir amistades significativas en {{city}}."
+  },
+  {
+    question: "¿Cuáles son las mejores formas de hacer amigues {{descriptor}} en {{city}}?",
+    answer:
+      "Las mejores formas de hacer amigues {{descriptor}} en {{city}} son conocer a personas que viven cerca, compartir actividades y verse con regularidad. Pulse lo hace más fácil en {{city}} al emparejar a personas que quieren el mismo tipo de conexión y al fomentar quedadas en el mundo real, en lugar de quedarse online."
+  },
+  {
+    question: "¿Cómo funciona Pulse para conocer amigues {{descriptor}} en {{city}}?",
+    answer:
+      "Cuando te registras en Pulse en {{city}}, completas un Vibe Test corto y entras en un pool local de matching. Cuando se han unido suficientes personas en {{city}}, Pulse forma pequeños grupos de amigues {{descriptor}}, abre un chat grupal y ayuda al grupo a planear una quedada en persona en {{city}}."
+  },
+  {
+    question: "¿Cómo me registro para conocer amigues {{descriptor}} en {{city}} con Pulse?",
+    answer:
+      "Para conocer amigues {{descriptor}} en {{city}} con Pulse, elige {{city}} durante el registro, completa el Vibe Test y entra en el pool local de matching. Pulse te avisará cuando tu grupo en {{city}} esté listo, y podrás empezar a chatear y planear tu primera quedada."
+  }
+];
+
 function inject(text: string, descriptor: string, city: string): string {
   // Keep copy identical except placeholder substitution and whitespace normalization.
   const replaced = text
@@ -74,7 +104,9 @@ export function buildCityFaqs(ctx: CityFaqContext): Array<{
 }> {
   const city = String(ctx.city || "").trim();
   const descriptor = getDescriptor(ctx.identity, ctx.affinity);
-  return FAQ_TEMPLATES.map((t) => ({
+  const language = ctx.language === "es" ? "es" : "en";
+  const templates = language === "es" ? FAQ_TEMPLATES_ES : FAQ_TEMPLATES_EN;
+  return templates.map((t) => ({
     question: inject(t.question, descriptor, city),
     answer: inject(t.answer, descriptor, city),
     descriptor,

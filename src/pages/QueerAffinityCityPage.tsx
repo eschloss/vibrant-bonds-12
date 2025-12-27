@@ -72,7 +72,9 @@ const QueerAffinityCityPage = () => {
   const displayAffinityName = affinityData ? 
     (currentLanguage === 'es' ? affinityData.name_es : affinityData.name_en) : 
     '';
-  const faqAffinity = affinityData?.name_en ? affinityData.name_en.toLowerCase() : null;
+  const faqAffinity = affinityData
+    ? (currentLanguage === "es" ? affinityData.name_es : affinityData.name_en).toLowerCase()
+    : null;
 
   const seoProps = {
     title: {
