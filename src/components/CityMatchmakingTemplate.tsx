@@ -440,7 +440,7 @@ const CityMatchmakingTemplate = ({
             <div className="max-w-4xl mx-auto">
               {placeDescription && placeDescriptionPlacement === "belowHero" && (
                 <motion.h2
-                  className="text-center text-3xl md:text-4xl font-bold text-white mb-12"
+                  className="text-center text-base md:text-lg font-normal text-white/80 mb-10 leading-relaxed"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
