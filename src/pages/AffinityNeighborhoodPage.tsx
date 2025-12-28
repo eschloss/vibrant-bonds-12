@@ -267,7 +267,7 @@ const AffinityNeighborhoodPage = () => {
       <PageLoadingOverlay show={isLoading} />
       <Seo {...seoProps} />
       <CityMatchmakingTemplate
-        cityName={neighborhoodData.name}
+        cityName={cityMeta.cityDisplayName}
         neighborhoodName={neighborhoodData.name}
         isGen={Boolean(neighborhoodData.is_gen)}
         placeDescription={neighborhoodData.description}
