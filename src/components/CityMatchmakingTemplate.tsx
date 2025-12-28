@@ -580,6 +580,8 @@ const CityMatchmakingTemplate = ({
 
         <CityFaqSection
           city={cityName}
+          neighborhood={neighborhoodName || null}
+          cityName={neighborhoodName ? (neighborhoodsSectionCityName || cityName) : cityName}
           identity={identity ?? (isQueer ? "queer" : null)}
           affinity={affinity ?? (isAffinity ? (affinityName ?? null) : null)}
         />

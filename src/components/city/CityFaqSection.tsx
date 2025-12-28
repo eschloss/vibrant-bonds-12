@@ -5,14 +5,18 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 type CityFaqSectionProps = {
   city: string;
+  neighborhood?: string | null;
+  cityName?: string | null;
   identity?: string | null;
   affinity?: string | null;
 };
 
-export default function CityFaqSection({ city, identity, affinity }: CityFaqSectionProps) {
+export default function CityFaqSection({ city, neighborhood, cityName, identity, affinity }: CityFaqSectionProps) {
   const { currentLanguage } = useTranslation();
   const faqs = buildCityFaqs({
     city,
+    neighborhood,
+    cityName,
     identity,
     affinity,
     language: currentLanguage === "es" ? "es" : "en"
