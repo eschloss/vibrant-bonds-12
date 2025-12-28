@@ -396,7 +396,7 @@ const CityMatchmakingTemplate = ({
                            transition={{ duration: 0.4, ease: "easeOut" }}
                          >
                           <Link 
-                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : (citySlug || cityName))}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                             to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : (neighborhoodsSectionCityName || cityName))}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                                onClick={(e) => {
                                  const href = (e.currentTarget as HTMLAnchorElement).href;
                                  trackTypeformRedirect({ href, cityName, code, source: 'city:hero_cta' });
@@ -509,7 +509,7 @@ const CityMatchmakingTemplate = ({
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
                           >
-                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : (citySlug || cityName))}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                            <Link to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : (neighborhoodsSectionCityName || cityName))}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
                               onClick={(e) => {
                                 const href = (e.currentTarget as HTMLAnchorElement).href;
                                 trackTypeformRedirect({ href, cityName, code, source: 'city:timer_cta' });
@@ -599,7 +599,7 @@ const CityMatchmakingTemplate = ({
                     <span className="pulse-gradient-text">
                       {t(
                         "city.neighborhoods.title_in_city",
-                        "{city} Neighborhoods we’re in"
+                        "{city} Neighborhoods we're in"
                       ).replace("{city}", neighborhoodsSectionCityName || "")}
                     </span>
                   </h3>
@@ -646,6 +646,61 @@ const CityMatchmakingTemplate = ({
             </div>
           </section>
         )}
+
+        {/* Bottom CTA Section */}
+        <section className="relative py-20 bg-gray-900 dark:bg-gray-950 border-t border-white/10">
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">
+                {t("city.ready_to_meet", "Ready to Meet")}<br/>
+                {t("city.your_crew", "Your")} <span className="pulse-gradient-text">
+                  {cityName} {t("city.crew", "Crew")}
+                </span>?
+              </h2>
+
+              <div id="button-link3" className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <AnimatePresence initial={false}>
+                  {!isLoading && (
+                    <>
+                      {!active ? (
+                        <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={isCommunity} state={state} />
+                      ) : (
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        >
+                          <Link 
+                            to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(isCommunity && communityData ? communityData.cityLabel : (neighborhoodsSectionCityName || cityName))}${neighborhoodParam}${isGenParam}${isQueer ? '&queer=true' : ''}${isCommunity && communityData ? `&submatch=${communityData.submatchId}` : isAffinity && affinityUrl ? `&submatch=${affinityUrl}` : ''}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                            onClick={(e) => {
+                              const href = (e.currentTarget as HTMLAnchorElement).href;
+                              trackTypeformRedirect({ href, cityName, code, source: 'city:bottom_cta' });
+                            }}
+                          >
+                            <Button size="xl" variant="gradient" className="rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 w-full sm:w-auto">
+                              {isCommunity ? t("city.get_matched", "Get Matched") : `${t("city.get_matched_in", "Get Matched in")} ${cityName}`}
+                              <ArrowRight size={18} />
+                            </Button>
+                          </Link>
+                        </motion.div>
+                      )}
+                    </>
+                  )}
+                </AnimatePresence>
+
+                {/* Language Selector */}
+                <LanguageSelector language={language} variant="dark" />
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </main>
 
       <Footer />
