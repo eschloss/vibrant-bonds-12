@@ -29,6 +29,7 @@ interface CityMatchmakingTemplateProps {
   state?: string;
   image?: string;
   placeDescription?: string;
+  placeDescriptionPlacement?: "hero" | "belowHero";
   neighborhoodName?: string;
   isGen?: boolean;
   citySlug?: string;
@@ -66,6 +67,7 @@ const CityMatchmakingTemplate = ({
   state,
   image,
   placeDescription,
+  placeDescriptionPlacement = "hero",
   neighborhoodName,
   isGen,
   citySlug,
@@ -303,7 +305,7 @@ const CityMatchmakingTemplate = ({
                 )}
               </h1>
 
-              {placeDescription && (
+              {placeDescription && placeDescriptionPlacement === "hero" && (
                 <motion.p
                   className="text-lg md:text-xl text-gray-700 font-normal mb-4"
                   initial={{ opacity: 0, y: 8 }}
@@ -436,6 +438,17 @@ const CityMatchmakingTemplate = ({
           </div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto">
+              {placeDescription && placeDescriptionPlacement === "belowHero" && (
+                <motion.h2
+                  className="text-center text-3xl md:text-4xl font-bold text-white mb-12"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  {placeDescription}
+                </motion.h2>
+              )}
               {steps.map((step, index) => (
                 <motion.div key={index} initial={{
                   opacity: 0,

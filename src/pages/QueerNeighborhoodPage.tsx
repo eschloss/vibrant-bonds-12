@@ -237,6 +237,7 @@ const QueerNeighborhoodPage = () => {
         neighborhoodName={neighborhoodData.name}
         isGen={Boolean(neighborhoodData.is_gen)}
         placeDescription={neighborhoodData.description}
+        placeDescriptionPlacement="belowHero"
         code={cityCode}
         country={cityMeta.country}
         state={cityMeta.state}
