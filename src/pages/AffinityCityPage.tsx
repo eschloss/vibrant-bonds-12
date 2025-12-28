@@ -111,7 +111,12 @@ const AffinityCityPage = () => {
   };
 
   useEffect(() => {
+    // Wait for data to finish loading before checking
+    if (loadingCities || loadingAffinities) return;
     if (!cityName || !affinityName || !cities || !affinities) return;
+    // Also check if arrays are empty (data hasn't loaded yet)
+    if (cities.length === 0 || affinities.length === 0) return;
+    
     try {
       const matchedCity = cities.find((city: any) => {
         const citySlug = city.url2.replace(/^\//, '').toLowerCase();
@@ -156,7 +161,7 @@ const AffinityCityPage = () => {
       console.error("Failed to process data:", err);
       navigate("/cities");
     }
-  }, [cityName, affinityName, cities, citiesCompact, affinities, navigate, currentLanguage]);
+  }, [cityName, affinityName, cities, citiesCompact, affinities, navigate, currentLanguage, loadingCities, loadingAffinities]);
 
   return (
     <>
