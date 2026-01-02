@@ -15,6 +15,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Seo } from "@/hooks/useSeo";
 import { useApiJson } from "@/hooks/useApiJson";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 
 type City = {
   en_name: string;
@@ -29,6 +30,7 @@ type City = {
 const CitiesExpanded = () => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  const scrollContainer = useScrollContainer();
   const [allCities, setAllCities] = useState<City[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -139,13 +141,37 @@ const CitiesExpanded = () => {
       hasScrolledRef.current = true;
       // Use setTimeout to ensure the scroll happens after the input is focused
       setTimeout(() => {
-        searchContainerRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
+        const container = searchContainerRef.current;
+        if (!container) return;
+        
+        // Get navbar height dynamically
+        const navbar = document.querySelector('header');
+        const navbarHeight = navbar ? navbar.offsetHeight : 80;
+        
+        // Use scroll container if available, otherwise use window
+        if (scrollContainer?.current) {
+          // Scroll container case
+          const containerRect = container.getBoundingClientRect();
+          const scrollContainerRect = scrollContainer.current.getBoundingClientRect();
+          const scrollPosition = scrollContainer.current.scrollTop + containerRect.top - scrollContainerRect.top - navbarHeight;
+          
+          scrollContainer.current.scrollTo({
+            top: Math.max(0, scrollPosition),
+            behavior: 'smooth'
+          });
+        } else {
+          // Window scroll case
+          const containerRect = container.getBoundingClientRect();
+          const scrollPosition = window.scrollY + containerRect.top - navbarHeight;
+          
+          window.scrollTo({
+            top: Math.max(0, scrollPosition),
+            behavior: 'smooth'
+          });
+        }
       }, 100);
     }
-  }, [searchTerm]);
+  }, [searchTerm, scrollContainer]);
 
   // Reset scroll flag when search is cleared
   useEffect(() => {
