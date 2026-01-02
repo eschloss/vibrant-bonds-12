@@ -16,8 +16,58 @@
     
     <meta name="author" content="Pulse Now Co." />
     <meta name="twitter:site" content="@pulsefriendsirl" />
+    <meta name="twitter:card" content="summary_large_image" />
     
     <!-- Open Graph and Twitter meta tags are dynamically set by each page using React Helmet -->
+    
+    <!-- Dynamic social graph images based on current path -->
+    <script>
+      (function() {
+        function setSocialGraphImages() {
+          var path = window.location.pathname;
+          // Normalize path: root path maps to "index", otherwise remove leading slash
+          var normalizedPath = path === '/' ? 'index' : path.replace(/^\//, '');
+          var imageUrl = 'https://pulsenow.app/sg/' + normalizedPath + '.png';
+          
+          // Set or update og:image
+          var ogImage = document.querySelector('meta[property="og:image"]');
+          if (!ogImage) {
+            ogImage = document.createElement('meta');
+            ogImage.setAttribute('property', 'og:image');
+            document.head.appendChild(ogImage);
+          }
+          ogImage.setAttribute('content', imageUrl);
+          
+          // Set or update twitter:image
+          var twitterImage = document.querySelector('meta[name="twitter:image"]');
+          if (!twitterImage) {
+            twitterImage = document.createElement('meta');
+            twitterImage.setAttribute('name', 'twitter:image');
+            document.head.appendChild(twitterImage);
+          }
+          twitterImage.setAttribute('content', imageUrl);
+        }
+        
+        // Set on initial load
+        setSocialGraphImages();
+        
+        // Update on navigation (for SPA)
+        var originalPushState = history.pushState;
+        var originalReplaceState = history.replaceState;
+        
+        history.pushState = function() {
+          originalPushState.apply(history, arguments);
+          setSocialGraphImages();
+        };
+        
+        history.replaceState = function() {
+          originalReplaceState.apply(history, arguments);
+          setSocialGraphImages();
+        };
+        
+        window.addEventListener('popstate', setSocialGraphImages);
+      })();
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
