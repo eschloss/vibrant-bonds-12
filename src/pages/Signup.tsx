@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState, useRef } from "react";
+import { Seo } from "@/hooks/useSeo";
 
 const Signup = () => {
   const location = useLocation();
@@ -70,8 +71,20 @@ const Signup = () => {
   }, []);
 
   return (
-    <div className="flex flex-col bg-white">
-      <main className="w-full">
+    <>
+      <Seo
+        title={{
+          en: "Sign Up | Pulse",
+          es: "Regístrate | Pulse"
+        }}
+        description={{
+          en: "Join Pulse to meet like-minded people and plan real-life meetups",
+          es: "Únete a Pulse para conocer personas afines y planificar encuentros reales"
+        }}
+        pathname="/signup"
+      />
+      <div className="flex flex-col bg-white">
+        <main className="w-full">
         <div className="w-full">
           <iframe
             src={iframeSrc}
@@ -96,6 +109,7 @@ const Signup = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

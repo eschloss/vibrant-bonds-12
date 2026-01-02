@@ -74,6 +74,16 @@ export const Seo = ({
   // Self-canonical per language (with hreflang alternates)
   const currentUrl = canonicalUrl || alternateUrls[(currentLanguage as 'en' | 'es') || 'en'];
 
+  // Generate social graph image URL from pathname
+  const getSocialGraphImageUrl = () => {
+    // Normalize path: root path maps to "index", otherwise remove leading slash
+    const normalizedPath = pathname === '/' ? 'index' : pathname.replace(/^\//, '');
+    return `https://api.kikiapp.eu/sg/${normalizedPath}.png`;
+  };
+
+  // Use provided image prop, or fall back to social graph image URL
+  const finalImage = image || getSocialGraphImageUrl();
+
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -88,7 +98,7 @@ export const Seo = ({
     "@type": type === "article" ? "Article" : "WebPage",
     "headline": finalTitle,
     "description": finalDescription,
-    "image": image || `https://s.kikiapp.eu/img/pulse_logo.png`,
+    "image": finalImage,
     "url": currentUrl,
     "inLanguage": currentLanguage,
     ...(publishedTime && { "datePublished": publishedTime }),
@@ -144,7 +154,7 @@ export const Seo = ({
       <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content={type} />
-      <meta property="og:image" content={(typeof image === "string" && image) || `https://s.kikiapp.eu/img/pulse_logo.png`} />
+      <meta property="og:image" content={finalImage} />
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {section && <meta property="article:section" content={section} />}
@@ -152,7 +162,7 @@ export const Seo = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
-      <meta name="twitter:image" content={(typeof image === "string" && image) || `https://s.kikiapp.eu/img/pulse_logo.png`} />
+      <meta name="twitter:image" content={finalImage} />
 
       {/* Stringify JSON for structured data */}
       <script type="application/ld+json">
