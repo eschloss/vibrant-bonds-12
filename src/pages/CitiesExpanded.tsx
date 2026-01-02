@@ -36,6 +36,8 @@ const CitiesExpanded = () => {
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
   const [showCantFind, setShowCantFind] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const hasScrolledRef = useRef(false);
 
   const seoProps = {
     title: {
@@ -125,6 +127,33 @@ const CitiesExpanded = () => {
     });
   }, [searchTerm, selectedCountry, allCities, currentLanguage]);
 
+  // Scroll input to top on mobile when user starts typing
+  useEffect(() => {
+    // Only scroll when user first starts typing (searchTerm goes from empty to non-empty)
+    if (!searchTerm || !searchContainerRef.current || hasScrolledRef.current) return;
+    
+    // Check if mobile (viewport width < 768px, which is Tailwind's md breakpoint)
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      hasScrolledRef.current = true;
+      // Use setTimeout to ensure the scroll happens after the input is focused
+      setTimeout(() => {
+        searchContainerRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 100);
+    }
+  }, [searchTerm]);
+
+  // Reset scroll flag when search is cleared
+  useEffect(() => {
+    if (!searchTerm) {
+      hasScrolledRef.current = false;
+    }
+  }, [searchTerm]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add('dark');
@@ -198,6 +227,7 @@ const CitiesExpanded = () => {
               animate={{ opacity: 1, y: 0 }} 
               transition={{ duration: 0.5, delay: 0.2 }} 
               className="max-w-4xl mx-auto mb-10 space-y-4"
+              ref={searchContainerRef}
             >
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
