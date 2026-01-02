@@ -27,7 +27,7 @@
           var path = window.location.pathname;
           // Normalize path: root path maps to "index", otherwise remove leading slash
           var normalizedPath = path === '/' ? 'index' : path.replace(/^\//, '');
-          var imageUrl = 'https://pulsenow.app/sg/' + normalizedPath + '.png';
+          var imageUrl = 'https://api.kikiapp.eu/sg/' + normalizedPath + '.png';
           
           // Set or update og:image
           var ogImage = document.querySelector('meta[property="og:image"]');
