@@ -46,6 +46,8 @@ const Privacy = lazy(() => import("@/pages/Privacy"));
 const DoNotShare = lazy(() => import("@/pages/DoNotShare"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Signup = lazy(() => import("@/pages/Signup"));
+const SupportUs = lazy(() => import("@/pages/SupportUs"));
+const ThankYou = lazy(() => import("@/pages/ThankYou"));
 
 const queryClient = new QueryClient();
 
@@ -78,6 +80,8 @@ function App() {
                   <Route path="download" element={<Download />} />
                   <Route path="almost-there" element={<AlmostThere />} />
                   <Route path="signup" element={<Signup />} />
+                  <Route path="support-us/:city_code" element={<SupportUs />} />
+                  <Route path="thank-you" element={<ThankYou />} />
                   <Route path="how-it-works" element={<HowItWorksPage />} />
                   <Route path="press" element={<Press />} />
                   <Route path="faq" element={<FAQ />} />
