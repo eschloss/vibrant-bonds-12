@@ -1,24 +1,53 @@
 import Footer from "@/components/Footer";
 import { useParams, useLocation } from "react-router-dom";
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Seo } from "@/hooks/useSeo";
 
 const SupportUs = () => {
   const { city_code } = useParams<{ city_code: string }>();
   const location = useLocation();
   const [iframeHeight, setIframeHeight] = useState('100vh');
+  const [iframeSrc, setIframeSrc] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const updateTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Build the iframe source URL with city code and preserve query params
-  const iframeSrc = useMemo(() => {
-    const baseUrl = `https://api.kikiapp.eu/support-us?city=${city_code || ''}`;
-    const queryParams = location.search;
-    // If there are additional query params, append them with &
-    if (queryParams && queryParams.length > 1) {
-      // Remove the leading ? from location.search and append with &
-      return `${baseUrl}&${queryParams.substring(1)}`;
-    }
-    return baseUrl;
+  // Fetch the embed URL from the API
+  useEffect(() => {
+    const fetchEmbedUrl = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        // Build API URL with city code and preserve query params
+        const apiUrl = `https://api.kikiapp.eu/auth/support-us?city=${city_code || ''}`;
+        const queryParams = location.search;
+        const fullApiUrl = queryParams && queryParams.length > 1
+          ? `${apiUrl}&${queryParams.substring(1)}`
+          : apiUrl;
+        
+        const response = await fetch(fullApiUrl);
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch support URL: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.url && typeof data.url === 'string') {
+          setIframeSrc(data.url);
+        } else {
+          throw new Error('Invalid response format: missing url field');
+        }
+      } catch (err) {
+        console.error('Error fetching support URL:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load support form');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEmbedUrl();
   }, [city_code, location.search]);
 
   // Calculate actual visible viewport height (excludes browser chrome on mobile)
@@ -93,27 +122,45 @@ const SupportUs = () => {
       />
       <div className="flex flex-col bg-white">
         <main className="w-full">
-        <div className="w-full">
-          <iframe
-            src={iframeSrc}
-            className="w-full"
-            style={{ 
-              border: "none",
-              height: iframeHeight,
-              minHeight: iframeHeight,
-              // Use CSS dvh as fallback for initial render
-              maxHeight: '100dvh'
-            }}
-            loading="eager"
-            // Allow top-level navigation when triggered by a user (e.g., submit/cta)
-            sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-            title="Pulse Support Us"
-          />
-        </div>
-        {/* Accessible fallback link in case embedding is blocked by headers */}
-        <div className="sr-only">
-          <a href={iframeSrc}>Open the support form directly</a>
-        </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center" style={{ height: iframeHeight }}>
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading support form...</p>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="flex items-center justify-center" style={{ height: iframeHeight }}>
+            <div className="text-center px-6">
+              <p className="text-red-600 mb-4">{error}</p>
+              <p className="text-gray-600">Please try again later.</p>
+            </div>
+          </div>
+        ) : iframeSrc ? (
+          <>
+            <div className="w-full">
+              <iframe
+                src={iframeSrc}
+                className="w-full"
+                style={{ 
+                  border: "none",
+                  height: iframeHeight,
+                  minHeight: iframeHeight,
+                  // Use CSS dvh as fallback for initial render
+                  maxHeight: '100dvh'
+                }}
+                loading="eager"
+                // Allow top-level navigation when triggered by a user (e.g., submit/cta)
+                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+                title="Pulse Support Us"
+              />
+            </div>
+            {/* Accessible fallback link in case embedding is blocked by headers */}
+            <div className="sr-only">
+              <a href={iframeSrc}>Open the support form directly</a>
+            </div>
+          </>
+        ) : null}
       </main>
       <Footer />
     </div>
