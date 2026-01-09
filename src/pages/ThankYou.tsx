@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
 
 const ThankYou = () => {
   const { currentLanguage } = useLanguage();
@@ -50,56 +50,62 @@ const ThankYou = () => {
         }}
         pathname="/thank-you"
       />
-      <div className="flex flex-col min-h-screen bg-white">
-        <main className="flex-1 w-full">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                {t.title}
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                {t.subtitle}
-              </p>
+      <div className="min-h-screen bg-gray-900 text-white">
+        <Navbar />
+        
+        <main className="w-full">
+          <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden opacity-30">
+              <div className="absolute -bottom-24 left-1/3 w-96 h-96 rounded-full bg-pulse-purple blur-3xl"></div>
+              <div className="absolute top-1/2 -right-24 w-72 h-72 rounded-full bg-pulse-blue blur-3xl"></div>
+              <div className="absolute top-1/4 -left-24 w-72 h-72 rounded-full bg-pulse-pink blur-3xl"></div>
             </div>
 
-            <div className="mt-16 space-y-8">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
-                  {t.whereItGoes}
-                </h2>
-                <p className="text-lg text-gray-700 mb-6">
-                  {t.whereItGoesDescription}
-                </p>
-                <ul className="space-y-4">
-                  {t.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-primary mr-3 mt-1">•</span>
-                      <span className="text-gray-700 text-lg">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-gray-200">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
-                  {t.multiplyImpact}
-                </h2>
-                <p className="text-lg text-gray-700">
-                  {t.multiplyImpactDescription}
+            <div className="container mx-auto px-4 relative z-10">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                  {t.title}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                  {t.subtitle}
                 </p>
               </div>
             </div>
+          </section>
 
-            <div className="mt-12 text-center">
-              <Link
-                to="/"
-                className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-              >
-                {currentLanguage === 'es' ? 'Volver al inicio' : 'Back to Home'}
-              </Link>
+          <section className="py-16 md:py-24 relative">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto space-y-12">
+                <div className="bg-white/5 backdrop-blur-md ring-1 ring-white/10 rounded-3xl p-8 md:p-10">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                    {t.whereItGoes}
+                  </h2>
+                  <p className="text-lg text-gray-300 mb-6">
+                    {t.whereItGoesDescription}
+                  </p>
+                  <ul className="space-y-4">
+                    {t.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-pulse-pink mr-3 mt-1 text-xl">•</span>
+                        <span className="text-gray-300 text-lg">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-md ring-1 ring-white/10 rounded-3xl p-8 md:p-10">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                    {t.multiplyImpact}
+                  </h2>
+                  <p className="text-lg text-gray-300">
+                    {t.multiplyImpactDescription}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </main>
+        
         <Footer />
       </div>
     </>
