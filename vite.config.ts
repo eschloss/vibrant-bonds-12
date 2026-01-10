@@ -10,6 +10,64 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      "/api/legal/privacy": {
+        target: "https://api.kikiapp.eu",
+        changeOrigin: true,
+        secure: true,
+        // Dynamically route to the correct upstream doc based on ?lang=...
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req) => {
+            try {
+              const url = new URL(req.url || "", "http://localhost");
+              const lang = (url.searchParams.get("lang") || "en").toLowerCase();
+              const upstreamPath =
+                lang === "es" ? "/auth/legal/es/privacy.html" : "/auth/legal/en/privacy.html";
+
+              // Preserve querystring (though upstream doesn't need it), but ensure the path is correct.
+              proxyReq.path = upstreamPath;
+            } catch {
+              proxyReq.path = "/auth/legal/en/privacy.html";
+            }
+          });
+        },
+      },
+      "/api/legal/cookie-policy": {
+        target: "https://api.kikiapp.eu",
+        changeOrigin: true,
+        secure: true,
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req) => {
+            try {
+              const url = new URL(req.url || "", "http://localhost");
+              const lang = (url.searchParams.get("lang") || "en").toLowerCase();
+              proxyReq.path =
+                lang === "es"
+                  ? "/auth/legal/es/cookie-policy.html"
+                  : "/auth/legal/en/cookie-policy.html";
+            } catch {
+              proxyReq.path = "/auth/legal/en/cookie-policy.html";
+            }
+          });
+        },
+      },
+      "/api/legal/terms": {
+        target: "https://api.kikiapp.eu",
+        changeOrigin: true,
+        secure: true,
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req) => {
+            try {
+              const url = new URL(req.url || "", "http://localhost");
+              const lang = (url.searchParams.get("lang") || "en").toLowerCase();
+              proxyReq.path = lang === "es" ? "/auth/legal/es/terms.html" : "/auth/legal/en/terms.html";
+            } catch {
+              proxyReq.path = "/auth/legal/en/terms.html";
+            }
+          });
+        },
+      },
+    },
   },
   plugins: [
     react(),

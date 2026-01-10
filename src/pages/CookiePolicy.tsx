@@ -4,16 +4,16 @@ import Footer from "@/components/Footer";
 import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Shield } from "lucide-react";
+import { Cookie } from "lucide-react";
 
-const PRIVACY_POLICY_URLS = {
-  en: "https://api.kikiapp.eu/auth/legal/en/privacy.html",
-  es: "https://api.kikiapp.eu/auth/legal/es/privacy.html",
+const COOKIE_POLICY_URLS = {
+  en: "https://api.kikiapp.eu/auth/legal/en/cookie-policy.html",
+  es: "https://api.kikiapp.eu/auth/legal/es/cookie-policy.html",
 } as const;
 
-const PRIVACY_POLICY_PROXY_URLS = {
-  en: "/api/legal/privacy?lang=en",
-  es: "/api/legal/privacy?lang=es",
+const COOKIE_POLICY_PROXY_URLS = {
+  en: "/api/legal/cookie-policy?lang=en",
+  es: "/api/legal/cookie-policy?lang=es",
 } as const;
 
 function stripScripts(html: string) {
@@ -21,8 +21,6 @@ function stripScripts(html: string) {
 }
 
 function decodeCloudflareEmail(cfemail: string) {
-  // Cloudflare email protection encoding:
-  // first byte = key, subsequent bytes xor key -> char codes
   const key = parseInt(cfemail.slice(0, 2), 16);
   let out = "";
   for (let i = 2; i < cfemail.length; i += 2) {
@@ -33,7 +31,6 @@ function decodeCloudflareEmail(cfemail: string) {
 }
 
 function decodeCloudflareEmailsInHtml(html: string) {
-  // Runs in browser only; during SSR this app won't execute this codepath.
   try {
     if (typeof window === "undefined" || typeof DOMParser === "undefined") return html;
 
@@ -54,15 +51,6 @@ function decodeCloudflareEmailsInHtml(html: string) {
       }
     });
 
-    // Some variants may not have data-cfemail on the inner span.
-    root.querySelectorAll<HTMLAnchorElement>('a[href*="/cdn-cgi/l/email-protection"]').forEach((a) => {
-      const span = a.querySelector<HTMLElement>("[data-cfemail]");
-      if (span) return; // already handled
-      // If Cloudflare ever changes markup, keep the link readable rather than broken.
-      a.setAttribute("target", "_blank");
-      a.setAttribute("rel", "noreferrer");
-    });
-
     return root.innerHTML;
   } catch {
     return html;
@@ -76,34 +64,33 @@ function extractBodyHtml(html: string) {
 }
 
 function looksLikeSpaIndexHtml(html: string) {
-  // Vite dev server will serve index.html for unknown /api/* routes.
-  // That "works" (200) but produces a blank embed (just <div id="root"></div>).
   return /\/@react-refresh|vite\/client/i.test(html) || /<div[^>]+id=["']root["']/i.test(html);
 }
 
-const Privacy: React.FC = () => {
+const CookiePolicy: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { t } = useTranslation();
+
   const seoProps = {
     title: {
-      en: "Privacy & Cookie Policy | Pulse",
-      es: "Política de Privacidad y Cookies | Pulse"
+      en: "Cookie & Tracking Policy | Pulse",
+      es: "Política de Cookies y Seguimiento | Pulse",
     },
     description: {
-      en: "Learn how Pulse collects, uses, and protects your data on our Website.",
-      es: "Conoce cómo Pulse recopila, usa y protege tus datos en nuestro sitio."
+      en: "Learn how Pulse uses cookies and tracking technologies.",
+      es: "Conoce cómo Pulse utiliza cookies y tecnologías de seguimiento.",
     },
-    pathname: "/privacy",
+    pathname: "/cookie-policy",
     type: "website",
-    section: "Legal"
+    section: "Legal",
   };
 
   const url = useMemo(() => {
-    return currentLanguage === "es" ? PRIVACY_POLICY_URLS.es : PRIVACY_POLICY_URLS.en;
+    return currentLanguage === "es" ? COOKIE_POLICY_URLS.es : COOKIE_POLICY_URLS.en;
   }, [currentLanguage]);
 
   const proxyUrl = useMemo(() => {
-    return currentLanguage === "es" ? PRIVACY_POLICY_PROXY_URLS.es : PRIVACY_POLICY_PROXY_URLS.en;
+    return currentLanguage === "es" ? COOKIE_POLICY_PROXY_URLS.es : COOKIE_POLICY_PROXY_URLS.en;
   }, [currentLanguage]);
 
   const [state, setState] = useState<
@@ -168,14 +155,18 @@ const Privacy: React.FC = () => {
           <div className="text-center max-w-4xl mx-auto">
             <div className="mb-6 flex justify-center">
               <div className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue p-4">
-                <Shield size={56} className="text-white" />
+                <Cookie size={56} className="text-white" />
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              {t("legal.privacy.title", "Privacy & Cookie Policy")}
+              {currentLanguage === "es"
+                ? t("legal.cookie.title", "Política de Cookies y Seguimiento")
+                : t("legal.cookie.title", "Cookie & Tracking Policy")}
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              {currentLanguage === "es" ? `${t("legal.effective_date", "Fecha de vigencia")}: Octubre 2025 · ${t("legal.last_updated", "Última actualización")}: 10 de octubre de 2025` : `${t("legal.effective_date", "Effective Date")}: October 2025 · ${t("legal.last_updated", "Last Updated")}: October 10, 2025`}
+              {currentLanguage === "es"
+                ? `${t("legal.effective_date", "Fecha de vigencia")}: Octubre 2025`
+                : `${t("legal.effective_date", "Effective Date")}: October 2025`}
             </p>
           </div>
         </div>
@@ -219,13 +210,6 @@ const Privacy: React.FC = () => {
                     {t("legal.open_in_new_tab", "Open the policy in a new tab")}
                   </a>
                 </p>
-                <div className="pt-2">
-                  <iframe
-                    title={t("legal.privacy.embed_title", "Privacy Policy")}
-                    src={url}
-                    className="w-full min-h-[75vh] rounded-xl border border-gray-700 bg-black"
-                  />
-                </div>
               </div>
             )}
           </div>
@@ -237,6 +221,5 @@ const Privacy: React.FC = () => {
   );
 };
 
-export default Privacy;
-
+export default CookiePolicy;
 

@@ -71,7 +71,7 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({ manageRef }) => {
                     <p className="font-medium text-white mb-1 text-sm md:text-base">{t("cookie.banner.headline", "We use cookies to make friendship sweeter.")}</p>
                     <p className="text-gray-400 text-xs md:text-sm">
                       {t("cookie.banner.description", "We use essential cookies and, with your OK, analytics and marketing to improve Pulse. See our {privacy_link}.").split("{privacy_link}")[0]}
-                      <a href="/privacy" className="text-[#38D1BF] hover:underline">{t("cookie.banner.privacy_link_text", "Privacy & Cookie Policy")}</a>
+                      <a href="/cookie-policy" className="text-[#38D1BF] hover:underline">{t("cookie.banner.privacy_link_text", "Privacy & Cookie Policy")}</a>
                       {t("cookie.banner.description", "We use essential cookies and, with your OK, analytics and marketing to improve Pulse. See our {privacy_link}.").split("{privacy_link}")[1]}
                     </p>
                   </div>
