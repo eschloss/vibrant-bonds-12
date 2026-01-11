@@ -163,11 +163,6 @@ const CookiePolicy: React.FC = () => {
                 ? t("legal.cookie.title", "Política de Cookies y Seguimiento")
                 : t("legal.cookie.title", "Cookie & Tracking Policy")}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              {currentLanguage === "es"
-                ? `${t("legal.effective_date", "Fecha de vigencia")}: Octubre 2025`
-                : `${t("legal.effective_date", "Effective Date")}: October 2025`}
-            </p>
           </div>
         </div>
       </section>

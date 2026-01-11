@@ -86,8 +86,8 @@ const Privacy: React.FC = () => {
   const { t } = useTranslation();
   const seoProps = {
     title: {
-      en: "Privacy & Cookie Policy | Pulse",
-      es: "Política de Privacidad y Cookies | Pulse"
+      en: "Privacy Policy | Pulse",
+      es: "Política de Privacidad | Pulse"
     },
     description: {
       en: "Learn how Pulse collects, uses, and protects your data on our Website.",
@@ -172,11 +172,8 @@ const Privacy: React.FC = () => {
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              {t("legal.privacy.title", "Privacy & Cookie Policy")}
+              {t("legal.privacy.title", "Privacy Policy")}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              {currentLanguage === "es" ? `${t("legal.effective_date", "Fecha de vigencia")}: Octubre 2025 · ${t("legal.last_updated", "Última actualización")}: 10 de octubre de 2025` : `${t("legal.effective_date", "Effective Date")}: October 2025 · ${t("legal.last_updated", "Last Updated")}: October 10, 2025`}
-            </p>
           </div>
         </div>
       </section>

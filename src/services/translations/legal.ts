@@ -25,7 +25,7 @@ export const legal = {
     "legal.last_updated": "Last Updated",
     "legal.section.legal": "Legal",
     "legal.terms.title": "Terms of Service",
-    "legal.privacy.title": "Privacy & Cookie Policy",
+    "legal.privacy.title": "Privacy Policy",
     "legal.terms.link_text": "terms of service",
     "legal.privacy.link_text": "privacy policy",
   },
@@ -55,7 +55,7 @@ export const legal = {
     "legal.last_updated": "Última actualización",
     "legal.section.legal": "Legal",
     "legal.terms.title": "Términos de Servicio",
-    "legal.privacy.title": "Política de Privacidad y Cookies",
+    "legal.privacy.title": "Política de Privacidad",
     "legal.terms.link_text": "términos de servicio",
     "legal.privacy.link_text": "política de privacidad",
   }

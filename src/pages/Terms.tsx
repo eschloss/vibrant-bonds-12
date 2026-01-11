@@ -160,9 +160,6 @@ const Terms: React.FC = () => {
             <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
               {t("legal.terms.title", "Terms of Service")}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              {t("legal.effective_date", "Effective Date")}: October 2025
-            </p>
           </div>
         </div>
       </section>
