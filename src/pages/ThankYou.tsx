@@ -4,7 +4,6 @@ import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import ShareSection from "@/components/ShareSection";
-import { Users } from "lucide-react";
 
 const ThankYou = () => {
   const { currentLanguage } = useLanguage();
@@ -14,17 +13,13 @@ const ThankYou = () => {
       title: "You just helped keep Pulse going. Thank you.",
       subtitle: "Your donation goes straight into making Pulse better and helps keep it free for the community. We're grateful you're here.",
       multiplyImpact: "If you want to multiply the impact",
-      multiplyImpactDescription: "The biggest help is simply inviting one person you'd actually want to hang out with. Pulse works best when good people bring good people.",
-      spreadTheWord: "Spread the word",
-      spreadTheWordDescription: "Share Pulse with friends and help grow your local crew."
+      multiplyImpactDescription: "The biggest help is simply inviting one person you'd actually want to hang out with. Pulse works best when good people bring good people."
     },
     es: {
       title: "Acabas de ayudar a mantener Pulse funcionando. Gracias.",
       subtitle: "Tu donación va directamente a mejorar Pulse y ayuda a mantenerlo gratis para la comunidad. Estamos agradecidos de que estés aquí.",
       multiplyImpact: "Si quieres multiplicar el impacto",
-      multiplyImpactDescription: "La mayor ayuda es simplemente invitar a una persona con la que realmente querrías pasar el rato. Pulse funciona mejor cuando las buenas personas traen buenas personas.",
-      spreadTheWord: "Difunde la palabra",
-      spreadTheWordDescription: "Comparte Pulse con amigos y ayuda a hacer crecer tu grupo local."
+      multiplyImpactDescription: "La mayor ayuda es simplemente invitar a una persona con la que realmente querrías pasar el rato. Pulse funciona mejor cuando las buenas personas traen buenas personas."
     }
   };
 
@@ -74,7 +69,7 @@ const ThankYou = () => {
             </div>
             
             <div className="container mx-auto px-4 relative z-10">
-              <div className="max-w-3xl mx-auto space-y-12">
+              <div className="max-w-3xl mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -87,12 +82,6 @@ const ThankYou = () => {
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-pulse-pink/20 via-pulse-purple/20 to-pulse-blue/20 opacity-50 blur-xl -z-10" />
                     
                     <div className="relative z-10">
-                      <div className="flex items-center justify-center mb-6">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pulse-pink/20 via-pulse-purple/20 to-pulse-blue/20 flex items-center justify-center ring-2 ring-white/10">
-                          <Users className="w-8 h-8 text-pulse-pink" />
-                        </div>
-                      </div>
-                      
                       <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-clip-text">
                         <span className="pulse-gradient-text">
                           {t.multiplyImpact}
@@ -102,7 +91,7 @@ const ThankYou = () => {
                       <div className="w-24 h-1 mx-auto mb-8 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue rounded-full animate-glow-bar" />
                       
                       <motion.p
-                        className="text-lg md:text-xl text-gray-300 text-center font-medium leading-relaxed"
+                        className="text-lg md:text-xl text-gray-300 text-center font-medium leading-relaxed mb-8"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -110,35 +99,18 @@ const ThankYou = () => {
                       >
                         {t.multiplyImpactDescription}
                       </motion.p>
+                      
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                      >
+                        <ShareSection />
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>
-
-                <div className="bg-white/5 backdrop-blur-md ring-1 ring-white/10 rounded-3xl p-8 md:p-10">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7 }}
-                    className="text-center"
-                  >
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text">
-                      <span className="pulse-gradient-text">
-                        {t.spreadTheWord}
-                      </span>
-                    </h2>
-                    <div className="w-32 h-1 mx-auto mb-6 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue rounded-full animate-glow-bar" />
-                    <motion.p
-                      className="text-lg md:text-xl text-gray-300 font-medium mb-6"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2, duration: 0.6 }}
-                    >
-                      {t.spreadTheWordDescription}
-                    </motion.p>
-                    <ShareSection />
-                  </motion.div>
-                </div>
               </div>
             </div>
           </section>
