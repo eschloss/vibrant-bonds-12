@@ -20,7 +20,7 @@ const SupportUs = () => {
         setError(null);
         
         // Build API URL with city code and preserve query params
-        const apiUrl = `https://api.kikiapp.eu/auth/support-us?city=${city_code || ''}`;
+        const apiUrl = `https://api.kikiapp.eu/auth/support-us/external?city=${city_code || ''}`;
         const queryParams = location.search;
         const fullApiUrl = queryParams && queryParams.length > 1
           ? `${apiUrl}&${queryParams.substring(1)}`
