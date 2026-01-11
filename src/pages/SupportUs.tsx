@@ -10,7 +10,10 @@ const SupportUs = () => {
   const [iframeSrc, setIframeSrc] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const updateTimeoutRef = useRef<NodeJS.Timeout>();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const checkTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Fetch the embed URL from the API
   useEffect(() => {
@@ -20,7 +23,7 @@ const SupportUs = () => {
         setError(null);
         
         // Build API URL with city code and preserve query params
-        const apiUrl = `https://api.kikiapp.eu/auth/support-us/external?city=${city_code || ''}`;
+        const apiUrl = `https://api.kikiapp.eu/auth/support-us?city=${city_code || ''}`;
         const queryParams = location.search;
         const fullApiUrl = queryParams && queryParams.length > 1
           ? `${apiUrl}&${queryParams.substring(1)}`
@@ -49,6 +52,100 @@ const SupportUs = () => {
 
     fetchEmbedUrl();
   }, [city_code, location.search]);
+
+  // Check if iframe is blocked and redirect if needed
+  useEffect(() => {
+    if (!iframeSrc || shouldRedirect) return;
+
+    const checkIframeBlocked = () => {
+      const iframe = iframeRef.current;
+      if (!iframe) return;
+
+      try {
+        // Try to access iframe content - this will throw if blocked by X-Frame-Options
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        
+        // If we can't access the document, it's likely blocked
+        if (!iframeDoc) {
+          // Check if iframe has loaded but content is inaccessible
+          // This is a common sign of X-Frame-Options blocking
+          setShouldRedirect(true);
+          return;
+        }
+
+        // Additional check: see if we can read the document
+        // Some browsers allow access but the content is blocked
+        try {
+          const body = iframeDoc.body;
+          // If body exists but is empty/null after a delay, might be blocked
+        } catch (e) {
+          // Can't access body - likely blocked
+          setShouldRedirect(true);
+        }
+      } catch (e) {
+        // Cross-origin or blocked - redirect
+        setShouldRedirect(true);
+      }
+    };
+
+    // Set a timeout to check after iframe should have loaded
+    // Give it 2 seconds to load
+    checkTimeoutRef.current = setTimeout(() => {
+      checkIframeBlocked();
+    }, 2000);
+
+    return () => {
+      if (checkTimeoutRef.current) {
+        clearTimeout(checkTimeoutRef.current);
+      }
+    };
+  }, [iframeSrc, shouldRedirect]);
+
+  // Handle redirect when iframe is blocked
+  useEffect(() => {
+    if (shouldRedirect && iframeSrc) {
+      // Redirect the whole page to the URL
+      window.location.href = iframeSrc;
+    }
+  }, [shouldRedirect, iframeSrc]);
+
+  // Handle iframe load events
+  const handleIframeLoad = () => {
+    // Clear the timeout since iframe loaded
+    if (checkTimeoutRef.current) {
+      clearTimeout(checkTimeoutRef.current);
+    }
+
+    // Check if blocked after a short delay to allow content to render
+    setTimeout(() => {
+      const iframe = iframeRef.current;
+      if (!iframe) return;
+
+      try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (!iframeDoc) {
+          setShouldRedirect(true);
+          return;
+        }
+        // Try to access body to confirm it's not blocked
+        const body = iframeDoc.body;
+        if (!body || body.children.length === 0) {
+          // Might be blocked or empty - check if it's a cross-origin issue
+          // If we got here without error, it's probably just empty, not blocked
+        }
+      } catch (e) {
+        // Cross-origin or blocked - redirect
+        setShouldRedirect(true);
+      }
+    }, 500);
+  };
+
+  const handleIframeError = () => {
+    // Iframe failed to load - likely blocked
+    if (iframeSrc) {
+      setShouldRedirect(true);
+    }
+  };
 
   // Calculate actual visible viewport height (excludes browser chrome on mobile)
   useEffect(() => {
@@ -107,6 +204,36 @@ const SupportUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Don't render iframe if we're redirecting
+  if (shouldRedirect) {
+    return (
+      <>
+        <Seo
+          title={{
+            en: "Support Us | Pulse",
+            es: "Apóyanos | Pulse"
+          }}
+          description={{
+            en: "Support Pulse to help keep the service running and make it better for the community",
+            es: "Apoya a Pulse para ayudar a mantener el servicio funcionando y mejorarlo para la comunidad"
+          }}
+          pathname={`/support-us/${city_code || ''}`}
+        />
+        <div className="flex flex-col bg-white">
+          <main className="w-full">
+            <div className="flex items-center justify-center" style={{ height: iframeHeight }}>
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                <p className="text-gray-600">Redirecting...</p>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Seo
@@ -140,6 +267,7 @@ const SupportUs = () => {
           <>
             <div className="w-full">
               <iframe
+                ref={iframeRef}
                 src={iframeSrc}
                 className="w-full"
                 style={{ 
@@ -150,6 +278,8 @@ const SupportUs = () => {
                   maxHeight: '100dvh'
                 }}
                 loading="eager"
+                onLoad={handleIframeLoad}
+                onError={handleIframeError}
                 // Allow top-level navigation when triggered by a user (e.g., submit/cta)
                 sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
                 title="Pulse Support Us"
