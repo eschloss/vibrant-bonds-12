@@ -80,6 +80,12 @@ const QueerAffinityNeighborhoodPage = () => {
 
   const cityCode: string = matchedCity?.code || "";
 
+  const neighborhoodsEndpoint = useMemo(() => {
+    const baseUrl = cityCode ? `/auth/get_neighborhoods/${cityCode}` : "/auth/get_neighborhoods/_";
+    const langParam = `lang=${currentLanguage}`;
+    return `${baseUrl}?${langParam}`;
+  }, [cityCode, currentLanguage]);
+
   const {
     data: neighborhoods,
     loading: loadingNeighborhoods,
@@ -87,7 +93,7 @@ const QueerAffinityNeighborhoodPage = () => {
     url: neighborhoodsUrl,
     error: neighborhoodsError
   } = useApiJson<NeighborhoodData[]>(
-    cityCode ? `/auth/get_neighborhoods/${cityCode}` : "/auth/get_neighborhoods/_",
+    neighborhoodsEndpoint,
     {
       initialData: [],
       staleTime: 5 * 60 * 1000,
