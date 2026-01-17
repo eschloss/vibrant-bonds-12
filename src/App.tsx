@@ -44,6 +44,7 @@ const HowItWorksPage = lazy(() => import("@/pages/HowItWorks"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
+const CommunityGuidelines = lazy(() => import("@/pages/CommunityGuidelines"));
 const DoNotShare = lazy(() => import("@/pages/DoNotShare"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Signup = lazy(() => import("@/pages/Signup"));
@@ -91,6 +92,7 @@ function App() {
                   <Route path="terms" element={<Terms />} />
                   <Route path="privacy" element={<Privacy />} />
                   <Route path="cookie-policy" element={<CookiePolicy />} />
+                  <Route path="community-guidelines" element={<CommunityGuidelines />} />
                   <Route path="do-not-share" element={<DoNotShare />} />
                   
                   {/* Cities routes */}

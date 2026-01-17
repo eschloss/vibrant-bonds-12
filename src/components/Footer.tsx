@@ -287,6 +287,14 @@ const Footer = () => {
               <Link to="/terms" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.terms_of_service" className="">Terms of Service</Text>
               </Link>
+              <Link
+                to="/community-guidelines"
+                className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200"
+              >
+                <Text id="footer.community_guidelines" className="">
+                  Community Guidelines
+                </Text>
+              </Link>
               <Link to="/do-not-share" className="text-white/50 hover:text-purple-400 text-sm transition-colors duration-200">
                 <Text id="footer.do_not_share" className="">Do Not Share My Data</Text>
               </Link>
