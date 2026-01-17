@@ -99,9 +99,9 @@ const Signup = () => {
       />
       <div className="flex flex-col bg-white">
         <main className="w-full">
-        <div className="w-full">
+        <div className="w-full" style={{ height: '100vh', minHeight: '100dvh' }}>
           {/* Typeform embed */}
-          <div data-tf-live="01KF6GH6SFRY4N13DWFPB373NA"></div>
+          <div data-tf-live="01KF6GH6SFRY4N13DWFPB373NA" style={{ height: '100%', width: '100%' }}></div>
 
           {/* Commented out webframe code - in case we want to put it back in */}
           {/* <iframe
