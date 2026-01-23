@@ -74,15 +74,8 @@ export const Seo = ({
   // Self-canonical per language (with hreflang alternates)
   const currentUrl = canonicalUrl || alternateUrls[(currentLanguage as 'en' | 'es') || 'en'];
 
-  // Generate social graph image URL from pathname
-  const getSocialGraphImageUrl = () => {
-    // Normalize path: root path maps to "index", otherwise remove leading slash
-    const normalizedPath = pathname === '/' ? 'index' : pathname.replace(/^\//, '');
-    return `https://api.kikiapp.eu/sg/${normalizedPath}.png`;
-  };
-
-  // Use provided image prop, or fall back to social graph image URL
-  const finalImage = image || getSocialGraphImageUrl();
+  // Use provided image prop for structured data (og:image and twitter:image are set statically in index.html)
+  const finalImage = image || 'https://s.kikiapp.eu/desktop/socialimage.png';
 
   const organizationData = {
     "@context": "https://schema.org",
@@ -154,7 +147,7 @@ export const Seo = ({
       <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content={type} />
-      <meta property="og:image" content={finalImage} />
+      {/* og:image is set statically in index.html - do not override */}
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {section && <meta property="article:section" content={section} />}
@@ -162,7 +155,7 @@ export const Seo = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
-      <meta name="twitter:image" content={finalImage} />
+      {/* twitter:image is set statically in index.html - do not override */}
 
       {/* Stringify JSON for structured data */}
       <script type="application/ld+json">
