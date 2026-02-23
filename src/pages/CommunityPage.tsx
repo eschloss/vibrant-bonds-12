@@ -23,6 +23,8 @@ interface CommunityData {
   business_url: string;
   background_image: string;
   city: string;
+  form_before?: string;
+  form_after?: string;
 }
 
 const CommunityPage = () => {
@@ -97,8 +99,10 @@ const CommunityPage = () => {
     document.documentElement.classList.add('dark');
   }, [data]);
 
-  // Use title2 directly without encoding - it will be encoded in the template
-  const urlizedTitle2 = communityData.title2;
+  const cityLabel = (communityData.title2_part2 || communityData.title2)
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-");
   const derivedBq: boolean | undefined = Array.isArray(citiesCompact)
     ? (citiesCompact.find((c: any) => c.code === communityData.city)?.bq ?? undefined)
     : undefined;
@@ -125,7 +129,9 @@ const CommunityPage = () => {
           business_image: communityData.business_image,
           business_url: communityData.business_url,
           submatchId: communityData.id,
-          cityLabel: urlizedTitle2
+          cityLabel,
+          form_before: communityData.form_before,
+          form_after: communityData.form_after
         }}
       />
     </>

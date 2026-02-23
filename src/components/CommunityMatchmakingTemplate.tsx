@@ -34,6 +34,8 @@ interface CommunityMatchmakingTemplateProps {
     business_url: string;
     submatchId: string;
     cityLabel: string;
+    form_before?: string;
+    form_after?: string;
   };
 }
 
@@ -245,7 +247,7 @@ const CommunityMatchmakingTemplate = ({
                  {!isLoading && (
                    <div id="button-link1" className="flex flex-col items-center">
                      <Link 
-                       to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                       to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}${communityData.form_before ? `&welcome_before=${encodeURIComponent(communityData.form_before)}` : ''}${communityData.form_after ? `&welcome_after=${encodeURIComponent(communityData.form_after)}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${communityData.form_before ? `&welcome_before=${encodeURIComponent(communityData.form_before)}` : ''}${communityData.form_after ? `&welcome_after=${encodeURIComponent(communityData.form_after)}` : ''}`}`}
                        onClick={(e) => {
                          const href = (e.currentTarget as HTMLAnchorElement).href;
                          trackTypeformRedirect({ href, cityName, code, source: 'community:hero_cta' });
