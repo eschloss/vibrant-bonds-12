@@ -13,7 +13,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "./LanguageSelector";
 import { trackTypeformRedirect } from "@/lib/utils";
-import PreWaitlisterDialog from './PreWaitlisterDialog';
 
 interface CommunityMatchmakingTemplateProps {
   cityName: string;
@@ -22,7 +21,6 @@ interface CommunityMatchmakingTemplateProps {
   state?: string;
   image?: string;
   isLoading?: boolean;
-  active?: boolean;
   frequency_days?: number;
   bq?: boolean;
   communityData: {
@@ -46,7 +44,6 @@ const CommunityMatchmakingTemplate = ({
   state,
   image,
   isLoading,
-  active,
   frequency_days: _frequency_days,
   bq,
   communityData
@@ -246,34 +243,28 @@ const CommunityMatchmakingTemplate = ({
                 
                <AnimatePresence initial={false}>
                  {!isLoading && (
-                   <>
-                     {!active ? (
-                       <PreWaitlisterDialog cityName={cityName} city={code} isCommunity={true} state={state} />
-                     ) : (
-                       <div id="button-link1" className="flex flex-col items-center">
-                        <Link 
-                           to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
-                            onClick={(e) => {
-                              const href = (e.currentTarget as HTMLAnchorElement).href;
-                              trackTypeformRedirect({ href, cityName, code, source: 'community:hero_cta' });
-                            }}
-                          >
-                           <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
-                             <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
-                             <span className="relative z-10">
-                               {t("city.get_matched", "Get Matched")}
-                             </span>
-                             <ArrowRight size={18} />
-                           </Button>
-                         </Link>
-                          {state && (
-                         <div className="text-sm text-black/60 mt-2 text-center font-light">
-                           {cityName}, {state}
-                         </div>
-                       )}
+                   <div id="button-link1" className="flex flex-col items-center">
+                     <Link 
+                       to={`/signup${code ? `?city=${code}&cityLabel=${encodeURIComponent(communityData.cityLabel)}&submatch=${communityData.submatchId}&language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}${typeof bq === 'boolean' ? `&bq=${bq}` : ''}` : `?language=${currentLanguage}&redirect=${encodeURIComponent(currentUrl)}${refParam ? `&ref=${encodeURIComponent(refParam)}` : ''}`}`}
+                       onClick={(e) => {
+                         const href = (e.currentTarget as HTMLAnchorElement).href;
+                         trackTypeformRedirect({ href, cityName, code, source: 'community:hero_cta' });
+                       }}
+                     >
+                       <Button size="xl" className="relative rounded-full px-8 py-4 font-semibold text-white overflow-hidden border border-white/20 backdrop-blur-md transition-all duration-300 hover:brightness-110">
+                         <div className="absolute inset-0 z-0 bg-gradient-to-r from-pulse-pink to-pulse-green opacity-90" />
+                         <span className="relative z-10">
+                           {t("city.get_matched", "Get Matched")}
+                         </span>
+                         <ArrowRight size={18} />
+                       </Button>
+                     </Link>
+                     {state && (
+                       <div className="text-sm text-black/60 mt-2 text-center font-light">
+                         {cityName}, {state}
                        </div>
                      )}
-                   </>
+                   </div>
                  )}
                </AnimatePresence>
 
