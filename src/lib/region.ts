@@ -33,15 +33,22 @@ export async function fetchRegion(): Promise<{ country: string; in_eea_uk: boole
 
   try {
     const res = await fetch('/geo', { headers: { 'accept': 'application/json' } });
-    if (!res.ok) throw new Error('geo failed');
+    if (!res.ok) {
+      // Compliance-first fallback when geo endpoint isn't available.
+      const fallback = { country: 'XX', in_eea_uk: true };
+      writeCache(fallback);
+      return fallback;
+    }
     const json = await res.json();
     const country = typeof json?.country === 'string' ? json.country : 'XX';
     const in_eea_uk = Boolean(json?.in_eea_uk);
     writeCache({ country, in_eea_uk });
     return { country, in_eea_uk };
   } catch {
-    // Failure: propagate so callers can apply compliance-first fallbacks
-    throw new Error('geo lookup failed');
+    // Compliance-first fallback when geo lookup fails (network, parsing, etc).
+    const fallback = { country: 'XX', in_eea_uk: true };
+    writeCache(fallback);
+    return fallback;
   }
 }
 

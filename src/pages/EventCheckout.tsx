@@ -1,7 +1,13 @@
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  Elements,
+  ExpressCheckoutElement,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -17,12 +23,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 import {
   buildGetKikiUrl,
   type GetKikiEventResponse,
   formatEventPrice,
   getEventPriceOpts,
 } from "@/lib/eventApi";
+import { Lock, ShieldCheck, X } from "lucide-react";
 
 const CREATE_INTENT_URL =
   "https://staging-api.kikiapp.eu/payments/kiki/create_payment_intent/";
@@ -88,7 +96,12 @@ type CreateIntentResponse = {
 };
 
 const stripePk = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-const stripePromise = stripePk ? loadStripe(stripePk) : null;
+const stripePromise = stripePk
+  ? loadStripe(
+      stripePk,
+      import.meta.env.DEV ? ({ advancedFraudSignals: false } as any) : undefined
+    )
+  : null;
 
 function CheckoutForm({
   eventSlug,
@@ -117,6 +130,16 @@ function CheckoutForm({
   });
 
   const attendeeSameAsBuyer = form.watch("attendeeSameAsBuyer");
+  const buyerEmailValue = form.watch("buyerEmail");
+  const buyerEmailReadyForPayment = React.useMemo(() => {
+    return emailSchema.safeParse((buyerEmailValue || "").trim()).success;
+  }, [buyerEmailValue]);
+
+  const [showLockedPaymentDialog, setShowLockedPaymentDialog] = React.useState(false);
+
+  React.useEffect(() => {
+    if (buyerEmailReadyForPayment) setShowLockedPaymentDialog(false);
+  }, [buyerEmailReadyForPayment]);
 
   React.useEffect(() => {
     if (attendeeSameAsBuyer) {
@@ -134,10 +157,8 @@ function CheckoutForm({
   const priceOpts = getEventPriceOpts(eventData);
   const formattedTotalPrice = formatEventPrice(eventData.total_price, priceOpts);
 
-  const onSubmit = async (values: CheckoutFormValues) => {
-    if (!stripe || !elements) return;
-    setSubmitting(true);
-    try {
+  const attachEmails = React.useCallback(
+    async (values: CheckoutFormValues) => {
       const buyerEmail = values.buyerEmail.trim().toLowerCase();
       const attendeeEmail = values.attendeeSameAsBuyer
         ? buyerEmail
@@ -160,29 +181,72 @@ function CheckoutForm({
         throw new Error(msg);
       }
       await attachRes.json().catch(() => null);
+    },
+    [orderId],
+  );
 
-      const confirmResult = await stripe.confirmPayment({
-        elements,
-        confirmParams: { return_url: confirmationReturnUrl },
-        redirect: "if_required",
-      });
+  const confirmStripePayment = React.useCallback(async () => {
+    if (!stripe || !elements) return;
 
-      if (confirmResult.error) {
-        throw new Error(confirmResult.error.message || "Payment failed");
-      }
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      throw new Error(submitError.message || "Please check your payment details.");
+    }
 
-      const status = confirmResult.paymentIntent?.status;
-      if (status === "succeeded" || status === "processing" || status === "requires_capture") {
-        navigate(`/events/${eventSlug}/confirmation?order_id=${encodeURIComponent(orderId)}`, {
-          replace: true,
-        });
-        return;
-      }
+    const confirmResult = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: confirmationReturnUrl },
+      redirect: "if_required",
+    });
 
-      // Fallback: send user to confirmation anyway (some methods complete async after redirect).
+    if (confirmResult.error) {
+      throw new Error(confirmResult.error.message || "Payment failed");
+    }
+
+    const status = confirmResult.paymentIntent?.status;
+    if (status === "succeeded" || status === "processing" || status === "requires_capture") {
       navigate(`/events/${eventSlug}/confirmation?order_id=${encodeURIComponent(orderId)}`, {
         replace: true,
       });
+      return;
+    }
+
+    // Fallback: send user to confirmation anyway (some methods complete async after redirect).
+    navigate(`/events/${eventSlug}/confirmation?order_id=${encodeURIComponent(orderId)}`, {
+      replace: true,
+    });
+  }, [confirmationReturnUrl, elements, eventSlug, navigate, orderId, stripe]);
+
+  const onSubmit = async (values: CheckoutFormValues) => {
+    if (!stripe || !elements) return;
+    if (!buyerEmailReadyForPayment) return;
+    setSubmitting(true);
+    try {
+      await attachEmails(values);
+      await confirmStripePayment();
+    } catch (err: any) {
+      toast({
+        title: "Checkout error",
+        description: err?.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const onExpressConfirm = async () => {
+    if (!stripe || !elements) return;
+    if (!buyerEmailReadyForPayment) {
+      form.setFocus("buyerEmail");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const ok = await form.trigger(["buyerEmail", "attendeeSameAsBuyer", "attendeeEmail"]);
+      if (!ok) return;
+      await attachEmails(form.getValues());
+      await confirmStripePayment();
     } catch (err: any) {
       toast({
         title: "Checkout error",
@@ -200,7 +264,7 @@ function CheckoutForm({
         <CardContent className="p-6">
           <div className="text-sm font-semibold text-white">Checkout</div>
           <div className="mt-1 text-sm text-white/70">
-            Pay securely with card or local payment methods.
+            Payments are securely processed by Stripe. Enter your email to enable secure payment options.
           </div>
 
           <div className="mt-6">
@@ -212,6 +276,9 @@ function CheckoutForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-white/90">Buyer email</FormLabel>
+                      <div className="mt-1 text-xs text-white/60">
+                        We’ll send your ticket (and receipt) to this email address.
+                      </div>
                       <FormControl>
                         <Input
                           type="email"
@@ -235,7 +302,7 @@ function CheckoutForm({
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={(v) => field.onChange(Boolean(v))}
-                          className="border-white/30 data-[state=checked]:bg-pulse-pink data-[state=checked]:border-pulse-pink"
+                          className="border-white/30 data-[state=checked]:bg-pulse-blue data-[state=checked]:border-pulse-blue"
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
@@ -271,19 +338,171 @@ function CheckoutForm({
                   />
                 ) : null}
 
-                <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
-                  <PaymentElement />
-                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="text-sm font-semibold text-white">Payment</div>
+                    <div className="flex items-center gap-2 text-[12px] text-white/75">
+                      <ShieldCheck className="h-4 w-4" />
+                      <span>Secure checkout</span>
+                    </div>
+                  </div>
 
-                <Button
-                  type="submit"
-                  variant="gradient"
-                  size="xl"
-                  className="w-full rounded-full"
-                  disabled={!stripe || !elements || submitting}
-                >
-                  {submitting ? "Processing..." : `Pay ${formattedTotalPrice || ""}`.trim()}
-                </Button>
+                  <div
+                    className={cn(
+                      "relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/10 via-white/5 to-black/35 p-4 overflow-hidden shadow-[0_0_0_1px_rgba(0,0,0,0.45)]",
+                      !buyerEmailReadyForPayment && "opacity-70",
+                    )}
+                    aria-disabled={!buyerEmailReadyForPayment}
+                  >
+                    {!buyerEmailReadyForPayment ? (
+                      <>
+                        <button
+                          type="button"
+                          className="absolute inset-0 z-10 bg-black/35 backdrop-blur-[2px] cursor-pointer"
+                          onClick={() => setShowLockedPaymentDialog(true)}
+                          aria-label="Payment section locked. Click for details."
+                        />
+                        {showLockedPaymentDialog ? (
+                          <div
+                            className="absolute inset-0 z-20 flex items-start justify-center p-4"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label="Payment section locked"
+                            onClick={() => setShowLockedPaymentDialog(false)}
+                          >
+                            <div
+                              className="relative w-full max-w-md rounded-2xl border border-white/15 bg-gradient-to-b from-gray-950 to-black shadow-[0_20px_60px_rgba(0,0,0,0.70)] p-4"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <button
+                                type="button"
+                                onClick={() => setShowLockedPaymentDialog(false)}
+                                className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black text-white/85 hover:text-white hover:border-white/20 transition-colors"
+                                aria-label="Close"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+
+                              <div className="flex items-start gap-4 pr-10">
+                                <div className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-black border border-white/15">
+                                  <Lock className="h-[18px] w-[18px] text-white" />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center justify-between gap-3">
+                                    <div className="text-[13px] font-semibold tracking-wide text-white">
+                                      Payment panel locked
+                                    </div>
+                                    <div className="rounded-full border border-white/15 bg-black px-2 py-0.5 text-[11px] font-semibold text-white/80">
+                                      Requires email
+                                    </div>
+                                  </div>
+                                  <div className="mt-2 text-[12px] leading-relaxed text-white/80">
+                                    This payment section is disabled until we have a valid buyer email.
+                                  </div>
+                                  <div className="mt-3 rounded-xl border border-white/12 bg-black px-3 py-2">
+                                    <div className="text-[11px] font-semibold tracking-wide text-white/60">
+                                      UNLOCKS
+                                    </div>
+                                    <div className="mt-1 text-[12px] leading-relaxed text-white/85">
+                                      Apple Pay, Google Pay, and card payment options.
+                                    </div>
+                                  </div>
+                                  <div className="mt-3 flex items-center justify-between gap-3">
+                                    <div className="text-[12px] leading-relaxed text-white/75">
+                                      Enter your email above, then return here.
+                                    </div>
+                                    <button
+                                      type="button"
+                                      className="shrink-0 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] font-semibold text-white/90 hover:bg-white/10 hover:border-white/25 transition-colors"
+                                      onClick={() => {
+                                        setShowLockedPaymentDialog(false);
+                                        form.setFocus("buyerEmail");
+                                      }}
+                                    >
+                                      Add email
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
+                      </>
+                    ) : null}
+
+                    <div
+                      className={cn(
+                        "space-y-4",
+                        !buyerEmailReadyForPayment && "pointer-events-none select-none pt-16",
+                      )}
+                    >
+                      <div className="space-y-2">
+                        <div className="text-[12px] font-semibold text-white/80">Fast checkout</div>
+                        <ExpressCheckoutElement
+                          onConfirm={onExpressConfirm}
+                          options={{
+                            buttonTheme: {
+                              applePay: "black",
+                              googlePay: "black",
+                            },
+                            buttonType: {
+                              applePay: "buy",
+                              googlePay: "buy",
+                            },
+                            layout: { maxColumns: 2, overflow: "auto" },
+                          }}
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-3 py-1">
+                        <div className="h-px flex-1 bg-white/15" />
+                        <div className="text-[11px] font-semibold tracking-wide text-white/60">CARD</div>
+                        <div className="h-px flex-1 bg-white/15" />
+                      </div>
+
+                      <PaymentElement
+                        options={{
+                          layout: { type: "accordion", defaultCollapsed: false, radios: true },
+                          wallets: { applePay: "never", googlePay: "never" },
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="text-[12px] text-white/70">
+                      Your payment details are encrypted and sent directly to Stripe.
+                    </div>
+                    <a
+                      href="https://stripe.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="shrink-0 opacity-85 hover:opacity-100 transition-opacity"
+                      aria-label="Powered by Stripe"
+                      title="Powered by Stripe"
+                    >
+                      <img
+                        src="https://s.kikiapp.eu/desktop/stripe/PoweredBywhite.svg"
+                        alt="Powered by Stripe"
+                        className="h-5"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    size="xl"
+                    className="w-full rounded-full bg-[#6366F1] text-white hover:bg-[#5558E6] focus-visible:ring-[#6366F1]/40"
+                    disabled={!stripe || !elements || submitting || !buyerEmailReadyForPayment}
+                  >
+                    {submitting
+                      ? "Processing..."
+                      : buyerEmailReadyForPayment
+                        ? `Pay ${formattedTotalPrice || ""}`.trim()
+                        : "Enter email to continue"}
+                  </Button>
+                </div>
               </form>
             </Form>
           </div>
@@ -536,7 +755,82 @@ const EventCheckout = () => {
                 stripe={stripePromise}
                 options={{
                   clientSecret,
-                  appearance: { theme: "night" },
+                  appearance: {
+                    theme: "night",
+                    variables: {
+                      colorPrimary: "#38D1BF",
+                      colorBackground: "#1A1C23",
+                      colorText: "#FFFFFF",
+                      colorTextSecondary: "rgba(255,255,255,0.82)",
+                      colorTextPlaceholder: "rgba(255,255,255,0.55)",
+                      colorDanger: "#FF4D4D",
+                      borderRadius: "8px",
+                      fontFamily:
+                        'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
+                      spacingUnit: "4px",
+                      fontSizeBase: "16px",
+                    },
+                    rules: {
+                      ".PaymentMethodMessaging": {
+                        color: "#00D924",
+                      },
+                      ".Link": {
+                        color: "#00D924",
+                      },
+                      ".SecondaryLink": {
+                        color: "#00D924",
+                      },
+                      ".Label": {
+                        color: "rgba(255,255,255,0.85)",
+                        fontWeight: "600",
+                      },
+                      ".Input": {
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.20)",
+                        boxShadow: "none",
+                      },
+                      ".Input::placeholder": {
+                        color: "rgba(255,255,255,0.55)",
+                      },
+                      ".Input:focus": {
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                        borderColor: "rgba(255,255,255,0.35)",
+                        boxShadow: "0 0 0 3px rgba(56,209,191,0.22)",
+                      },
+                      ".Input--autocomplete": {
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.20)",
+                        boxShadow: "none",
+                      },
+                      ".Input--invalid": {
+                        borderColor: "rgba(255,90,90,0.85)",
+                        boxShadow: "0 0 0 3px rgba(255,90,90,0.18)",
+                      },
+                      ".Tab": {
+                        backgroundColor: "rgba(255,255,255,0.03)",
+                        border: "1px solid rgba(255,255,255,0.18)",
+                      },
+                      ".TabLabel": {
+                        color: "rgba(255,255,255,0.88)",
+                        fontWeight: "600",
+                      },
+                      ".Tab:hover": {
+                        borderColor: "rgba(255,255,255,0.28)",
+                      },
+                      ".Tab--selected": {
+                        backgroundColor: "rgba(56,209,191,0.14)",
+                        borderColor: "rgba(56,209,191,0.95)",
+                        boxShadow:
+                          "0 0 0 1px rgba(56,209,191,0.45), 0 10px 24px rgba(0,0,0,0.35)",
+                      },
+                      ".Block": {
+                        backgroundColor: "transparent",
+                      },
+                      ".Error": {
+                        color: "rgba(255,90,90,0.95)",
+                      },
+                    },
+                  },
                 }}
               >
                 <CheckoutForm

@@ -120,6 +120,30 @@ const EventConfirmation = () => {
     }
   }, [VIBE_CHECK_URL, eventData?.city, eventData?.slug, eventData?.title, eventSlug, confirmationNumber]);
 
+  React.useEffect(() => {
+    if (!eventData) return;
+
+    const providerName = `Provider ${eventData.provider}`;
+    const payload = {
+      city: eventData.city,
+      event_slug: eventData.slug,
+      event_title: eventData.title,
+      provider: providerName,
+      confirmation_number: confirmationNumber,
+      path: location.pathname + location.search,
+    };
+    trackMetaPixelEvent("event_signup_confirmation_view", payload, { custom: true });
+  }, [
+    confirmationNumber,
+    eventData,
+    eventData?.city,
+    eventData?.provider,
+    eventData?.slug,
+    eventData?.title,
+    location.pathname,
+    location.search,
+  ]);
+
   if (loading) {
     return (
       <>
@@ -175,19 +199,6 @@ const EventConfirmation = () => {
     keywords: ["event", "confirmation", "tickets", "Pulse", data.title, data.city_label, organiser, providerName].filter(Boolean),
     type: "website" as const,
   };
-
-  React.useEffect(() => {
-    const payload = {
-      city: data.city,
-      event_slug: data.slug,
-      event_title: data.title,
-      provider: providerName,
-      confirmation_number: confirmationNumber,
-      path: location.pathname + location.search,
-    };
-    trackMetaPixelEvent("event_signup_confirmation_view", payload, { custom: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [confirmationNumber, data.city, data.slug, data.title, location.pathname, location.search, providerName]);
   const handleVibeCheckClick = () => {
     trackMetaPixelEvent(
       "event_vibe_check_cta_click",
