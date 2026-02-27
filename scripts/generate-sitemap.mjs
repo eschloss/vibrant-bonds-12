@@ -18,6 +18,7 @@ const baseRoutes = [
   { path: '/careers', changefreq: 'monthly', priority: '0.7' },
   { path: '/meet-pip', changefreq: 'monthly', priority: '0.7' },
   { path: '/plan-ideas', changefreq: 'monthly', priority: '0.7' },
+  { path: '/events', changefreq: 'weekly', priority: '0.8' },
   { path: '/activities', changefreq: 'weekly', priority: '0.8' },
   { path: '/how-it-works', changefreq: 'monthly', priority: '0.7' },
   { path: '/download', changefreq: 'monthly', priority: '0.8' },

@@ -170,7 +170,6 @@ const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
 
   return (
     <div
-      ref={containerRef}
       className={clsx(
         // Avoid conflicting position utilities; only add "relative" if caller didn't specify position
         !(className || "").match(/\b(absolute|fixed|relative|sticky)\b/) && "relative",

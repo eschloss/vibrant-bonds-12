@@ -33,6 +33,12 @@ const MeetPip = lazy(() => import("@/pages/MeetPip"));
 const Press = lazy(() => import("@/pages/Press"));
 const PlanIdeas = lazy(() => import("@/pages/PlanIdeas"));
 const PlanIdeasCity = lazy(() => import("@/pages/PlanIdeasCity"));
+const Events = lazy(() => import("@/pages/Events"));
+const EventsCities = lazy(() => import("@/pages/EventsCities"));
+const EventsCity = lazy(() => import("@/pages/EventsCity"));
+const EventDetail = lazy(() => import("@/pages/EventDetail"));
+const EventBooking = lazy(() => import("@/pages/EventBooking"));
+const EventConfirmation = lazy(() => import("@/pages/EventConfirmation.tsx"));
 const Activities = lazy(() => import("@/pages/Activities"));
 const Download = lazy(() => import("@/pages/Download"));
 const AlmostThere = lazy(() => import("@/pages/AlmostThere"));
@@ -78,6 +84,12 @@ function App() {
                   <Route path="meet-pip" element={<MeetPip />} />
                   <Route path="plan-ideas" element={<PlanIdeas />} />
                   <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
+                  <Route path="events" element={<Events />} />
+                  <Route path="events/cities" element={<EventsCities />} />
+                  <Route path="events/:cityName" element={<EventsCity />} />
+                  <Route path="events/:cityName/:eventSlug" element={<EventDetail />} />
+                  <Route path="events/:cityName/:eventSlug/booking" element={<EventBooking />} />
+                  <Route path="events/:cityName/:eventSlug/confirmation" element={<EventConfirmation />} />
                   <Route path="activities" element={<Activities />} />
                   <Route path="download" element={<Download />} />
                   <Route path="almost-there" element={<AlmostThere />} />

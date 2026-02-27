@@ -14,6 +14,7 @@ export function getCurrentPageLabel(): string {
   if (path.startsWith('/ambassador-program')) return 'Ambassador Program';
   if (path.startsWith('/careers')) return 'Careers';
   if (path.startsWith('/cities')) return 'Cities';
+  if (path.startsWith('/events')) return 'Events';
   if (path.startsWith('/communities')) return 'Communities';
   if (path.startsWith('/about')) return 'About';
   if (path.startsWith('/contact')) return 'Contact';
