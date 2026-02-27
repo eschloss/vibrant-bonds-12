@@ -6,12 +6,18 @@ import Footer from "@/components/Footer";
 import NotFound from "@/pages/NotFound";
 import { Seo } from "@/hooks/useSeo";
 import { useTranslation } from "@/hooks/useTranslation";
-import { getEventBySlug, getEventPriceBreakdown, getEventProviderDetails } from "@/data/events";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import EventConfirmationNextSteps from "@/components/EventConfirmationNextSteps";
+import {
+  type GetKikiEventResponse,
+  buildGetKikiUrl,
+  formatEventPrice,
+  getEventPriceOpts,
+} from "@/lib/eventApi";
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
@@ -46,82 +52,149 @@ function getOrCreateConfirmationNumber(key: string): string {
 }
 
 const EventConfirmation = () => {
-  const { cityName, eventSlug } = useParams<{ cityName: string; eventSlug: string }>();
+  const { eventSlug } = useParams<{ eventSlug: string }>();
   const location = useLocation();
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const event = cityName && eventSlug ? getEventBySlug(cityName, eventSlug) : undefined;
-  if (!event) return <NotFound />;
+  const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [notFound, setNotFound] = React.useState(false);
 
-  const providerDetails = getEventProviderDetails(event);
-  const priceBreakdown = getEventPriceBreakdown(event);
-  const confirmationPath = `/events/${cityName}/${event.slug}/confirmation`;
+  React.useEffect(() => {
+    if (!eventSlug) {
+      setNotFound(true);
+      setLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    const url = buildGetKikiUrl(eventSlug);
+
+    fetch(url, {
+      signal: controller.signal,
+      headers: { accept: "application/json" },
+    })
+      .then((res) => {
+        if (res.status === 404) {
+          setNotFound(true);
+          return null;
+        }
+        if (!res.ok) {
+          setNotFound(true);
+          return null;
+        }
+        return res.json();
+      })
+      .then((json) => {
+        if (json) setEventData(json as GetKikiEventResponse);
+      })
+      .catch((err) => {
+        if (err?.name !== "AbortError") setNotFound(true);
+      })
+      .finally(() => setLoading(false));
+
+    return () => controller.abort();
+  }, [eventSlug]);
+
+  const confirmationKey =
+    eventData?.id != null
+      ? `event_confirmation_number:${eventData.id}`
+      : `event_confirmation_number:pending:${eventSlug || ""}`;
 
   const confirmationNumber = React.useMemo(() => {
-    return getOrCreateConfirmationNumber(`event_confirmation_number:${event.id}`);
-  }, [event.id]);
+    return getOrCreateConfirmationNumber(confirmationKey);
+  }, [confirmationKey]);
 
   const VIBE_CHECK_URL = "https://form.typeform.com/to/REPLACE_ME";
   const vibeCheckUrlWithParams = React.useMemo(() => {
     try {
       const url = new URL(VIBE_CHECK_URL);
-      url.searchParams.set("city", cityName || "");
-      url.searchParams.set("event_slug", event.slug);
-      url.searchParams.set("event_title", event.title);
+      url.searchParams.set("city", eventData?.city || "");
+      url.searchParams.set("event_slug", eventData?.slug || eventSlug || "");
+      url.searchParams.set("event_title", eventData?.title || "");
       url.searchParams.set("confirmation_number", confirmationNumber);
       return url.toString();
     } catch {
       return VIBE_CHECK_URL;
     }
-  }, [VIBE_CHECK_URL, cityName, event.slug, event.title, confirmationNumber]);
+  }, [VIBE_CHECK_URL, eventData?.city, eventData?.slug, eventData?.title, eventSlug, confirmationNumber]);
+
+  if (loading) {
+    return (
+      <>
+        <PageLoadingOverlay show={true} />
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+          <Navbar />
+          <main className="min-h-[60vh]" />
+          <Footer />
+        </div>
+      </>
+    );
+  }
+
+  if (notFound || !eventData) return <NotFound />;
+
+  const data = eventData;
+  const priceOpts = getEventPriceOpts(data);
+  const providerName = `Provider ${data.provider}`;
+  const organiser = data.place;
+  const durationText = data.duration_hours === 1 ? "1 hour" : `${data.duration_hours} hours`;
+
+  const formattedTicketPrice = formatEventPrice(data.ticket_price, priceOpts);
+  const formattedPulseFee = formatEventPrice(data.platform_fee, priceOpts);
+  const formattedProviderFee =
+    data.provider_fee > 0 ? formatEventPrice(data.provider_fee, priceOpts) : "";
+  const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
+
+  const confirmationPath = `/events/${data.slug}/confirmation`;
 
   const seoProps = {
     title: {
       en: t(
         "event_confirmation.seo.title",
-        `Confirmed: ${event.title} | Pulse`
+        `Confirmed: ${data.title} | Pulse`
       ),
       es: t(
         "event_confirmation.seo.title",
-        `Confirmado: ${event.title} | Pulse`
+        `Confirmado: ${data.title} | Pulse`
       ),
     },
     description: {
       en: t(
         "event_confirmation.seo.desc",
-        `You're confirmed for ${event.title}. Complete your vibe check for the best group match.`
+        `You're confirmed for ${data.title}. Complete your vibe check for the best group match.`
       ),
       es: t(
         "event_confirmation.seo.desc",
-        `Ya estás confirmado/a para ${event.title}. Completa tu vibe check para el mejor match de grupo.`
+        `Ya estás confirmado/a para ${data.title}. Completa tu vibe check para el mejor match de grupo.`
       ),
     },
     pathname: confirmationPath,
-    image: event.primaryImage,
-    keywords: ["event", "confirmation", "tickets", "Pulse", event.title, cityName, event.organiser, providerDetails.name].filter(Boolean),
+    image: data.primary_image,
+    keywords: ["event", "confirmation", "tickets", "Pulse", data.title, data.city_label, organiser, providerName].filter(Boolean),
     type: "website" as const,
   };
 
   React.useEffect(() => {
     const payload = {
-      city: cityName,
-      event_slug: event.slug,
-      event_title: event.title,
-      provider: providerDetails.name,
+      city: data.city,
+      event_slug: data.slug,
+      event_title: data.title,
+      provider: providerName,
       confirmation_number: confirmationNumber,
       path: location.pathname + location.search,
     };
     trackMetaPixelEvent("event_signup_confirmation_view", payload, { custom: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [confirmationNumber, data.city, data.slug, data.title, location.pathname, location.search, providerName]);
   const handleVibeCheckClick = () => {
     trackMetaPixelEvent(
       "event_vibe_check_cta_click",
       {
-        city: cityName,
-        event_slug: event.slug,
-        event_title: event.title,
+        city: data.city,
+        event_slug: data.slug,
+        event_title: data.title,
         confirmation_number: confirmationNumber,
         destination: vibeCheckUrlWithParams,
         path: location.pathname + location.search,
@@ -141,9 +214,9 @@ const EventConfirmation = () => {
       trackMetaPixelEvent(
         "event_confirmation_copy_confirmation_number",
         {
-          city: cityName,
-          event_slug: event.slug,
-          event_title: event.title,
+          city: data.city,
+          event_slug: data.slug,
+          event_title: data.title,
           confirmation_number: confirmationNumber,
           path: location.pathname + location.search,
         },
@@ -206,8 +279,8 @@ const EventConfirmation = () => {
                     <div className="relative flex items-start justify-between gap-4 flex-col md:flex-row">
                       <div className="flex items-start gap-4 min-w-0">
                         <img
-                          src={event.primaryImage}
-                          alt={event.title}
+                          src={data.primary_image}
+                          alt={data.title}
                           className="w-20 h-20 rounded-xl object-cover border border-white/10 bg-black/20 shrink-0"
                           loading="eager"
                           decoding="async"
@@ -217,20 +290,20 @@ const EventConfirmation = () => {
                             {t("event_confirmation.receipt.event_label", "Event")}
                           </div>
                           <div className="text-lg md:text-xl font-bold text-white leading-snug">
-                            {event.title}
+                            {data.title}
                           </div>
                           <div className="mt-2 space-y-2 text-sm text-white/75">
                             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
                               <div className="flex items-start gap-2 min-w-0">
                                 <Calendar size={16} className="text-pulse-blue shrink-0 mt-0.5" />
                                 <span className="leading-snug min-w-0">
-                                  {formatDateTime(event.dateTime)}
+                                  {formatDateTime(data.datetime_local)}
                                 </span>
                               </div>
                               <div className="flex items-start gap-2 min-w-0">
                                 <MapPin size={16} className="text-[#38D1BF] shrink-0 mt-0.5" />
                                 <span className="leading-snug min-w-0">
-                                  {event.place}
+                                  {data.place}
                                 </span>
                               </div>
                             </div>
@@ -238,13 +311,13 @@ const EventConfirmation = () => {
                               <div className="flex items-start gap-2 min-w-0">
                                 <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
                                 <span className="leading-snug min-w-0">
-                                  {event.duration}
+                                  {durationText}
                                 </span>
                               </div>
                               <div className="flex items-start gap-2 min-w-0">
                                 <Ticket size={16} className="text-purple-300 shrink-0 mt-0.5" />
                                 <span className="leading-snug min-w-0">
-                                  {providerDetails.name} <span className="text-white/50">•</span> {event.organiser}
+                                  {providerName} <span className="text-white/50">•</span> {organiser}
                                 </span>
                               </div>
                             </div>
@@ -283,27 +356,26 @@ const EventConfirmation = () => {
                     </div>
 
                     <div className="mt-3 space-y-2 text-sm text-white/80">
-                      {priceBreakdown ? (
-                        <>
-                          <div className="flex items-center justify-between gap-4">
-                            <span className="text-white/70">{t("event_confirmation.receipt.ticket", "Ticket")}</span>
-                            <span>{priceBreakdown.ticketPrice}</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-4">
-                            <span className="text-white/70">{t("event_confirmation.receipt.pulse_fee", "Pulse fee")}</span>
-                            <span>{priceBreakdown.pulseFee}</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-4 pt-2 mt-2 border-t border-white/10">
-                            <span className="font-semibold text-white">{t("event_confirmation.receipt.total", "Total")}</span>
-                            <span className="font-semibold text-white">{priceBreakdown.totalPrice}</span>
-                          </div>
-                        </>
-                      ) : (
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="text-white/70">{t("event_confirmation.receipt.ticket", "Ticket")}</span>
+                        <span>{formattedTicketPrice}</span>
+                      </div>
+                      {data.provider_fee > 0 ? (
                         <div className="flex items-center justify-between gap-4">
-                          <span className="font-semibold text-white">{t("event_confirmation.receipt.total", "Total")}</span>
-                          <span className="font-semibold text-white">{event.price}</span>
+                          <span className="text-white/70">
+                            {t("event_confirmation.receipt.provider_fee", "Provider fee")}
+                          </span>
+                          <span>{formattedProviderFee}</span>
                         </div>
-                      )}
+                      ) : null}
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="text-white/70">{t("event_confirmation.receipt.pulse_fee", "Pulse fee")}</span>
+                        <span>{formattedPulseFee}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 pt-2 mt-2 border-t border-white/10">
+                        <span className="font-semibold text-white">{t("event_confirmation.receipt.total", "Total")}</span>
+                        <span className="font-semibold text-white">{formattedTotalPrice}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -323,7 +395,7 @@ const EventConfirmation = () => {
                         {t("event_confirmation.vibe_check.cta", "Complete vibe check")}
                       </Button>
                       <Link
-                        to={`/events/${cityName}/${event.slug}`}
+                        to={`/events/${data.slug}`}
                         className="w-full sm:w-auto inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
                       >
                         {t("event_confirmation.back_to_event", "Back to event details")}

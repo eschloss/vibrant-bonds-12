@@ -354,7 +354,7 @@ export default function EventsCities() {
                         const cityName = city ? getLocalizedField(city, "name") : titleCaseFromSlug(citySlug);
                         const cityCountry = city ? getLocalizedField(city, "country") : "";
                         const dateLabel = formatDateShort(e.dateTime);
-                        const href = `/events/${citySlug}/${e.slug}`;
+                        const href = `/events/${e.slug}`;
 
                         return (
                           <motion.div
@@ -548,7 +548,7 @@ export default function EventsCities() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.45, delay: index * 0.03 }}
                                   >
-                                    <Link to={`/events/${city.citySlug}`}>
+                                    <Link to={`/events/cities/${city.citySlug}`}>
                                       <Card className="bg-gray-900/25 backdrop-blur-lg border border-dashed border-white/20 hover:border-white/30 transition-all duration-300 h-full group overflow-hidden rounded-3xl">
                                         <div className="relative h-40 overflow-hidden">
                                           <img

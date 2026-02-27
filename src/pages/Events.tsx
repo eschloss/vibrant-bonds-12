@@ -383,7 +383,7 @@ export default function Events() {
             {upcoming.slice(0, 9).map((e, idx) => {
               const cityLabel = titleCaseFromSlug(e.citySlug);
               const dateLabel = formatDateShort(e.dateTime);
-              const href = `/events/${e.citySlug}/${e.slug}`;
+              const href = `/events/${e.slug}`;
               return (
                 <motion.div
                   key={e.id}

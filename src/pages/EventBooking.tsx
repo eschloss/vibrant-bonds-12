@@ -1,201 +1,105 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NotFound from "@/pages/NotFound";
 import { Seo } from "@/hooks/useSeo";
-import { getEventBySlug } from "@/data/events";
+import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { buildGetKikiUrl, type GetKikiEventResponse } from "@/lib/eventApi";
 
 const EventBooking = () => {
-  const { cityName, eventSlug } = useParams<{ cityName: string; eventSlug: string }>();
-  const navigate = useNavigate();
-  const [iframeHeight, setIframeHeight] = useState("100vh");
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const checkTimeoutRef = useRef<NodeJS.Timeout>();
-  const updateTimeoutRef = useRef<NodeJS.Timeout>();
+  const { eventSlug } = useParams<{ eventSlug: string }>();
+  const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [notFound, setNotFound] = React.useState(false);
 
-  const event =
-    cityName && eventSlug
-      ? getEventBySlug(cityName, eventSlug)
-      : undefined;
-
-  const iframeSrc = event?.bookingUrl ?? "";
-
-  useEffect(() => {
-    if (!event || !cityName || !eventSlug) {
-      navigate("/events/cities", { replace: true });
+  React.useEffect(() => {
+    if (!eventSlug) {
+      setNotFound(true);
+      setLoading(false);
       return;
     }
-  }, [event, cityName, eventSlug, navigate]);
 
-  useEffect(() => {
-    if (!iframeSrc || shouldRedirect) return;
-
-    const checkIframeBlocked = () => {
-      const iframe = iframeRef.current;
-      if (!iframe) return;
-
-      try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-        if (!iframeDoc) {
-          setShouldRedirect(true);
-          return;
+    const controller = new AbortController();
+    const url = buildGetKikiUrl(eventSlug);
+    fetch(url, {
+      signal: controller.signal,
+      headers: { accept: "application/json" },
+    })
+      .then((res) => {
+        if (res.status === 404) {
+          setNotFound(true);
+          return null;
         }
-      } catch {
-        setShouldRedirect(true);
-      }
-    };
-
-    checkTimeoutRef.current = setTimeout(checkIframeBlocked, 2000);
-    return () => {
-      if (checkTimeoutRef.current) {
-        clearTimeout(checkTimeoutRef.current);
-      }
-    };
-  }, [iframeSrc, shouldRedirect]);
-
-  useEffect(() => {
-    if (shouldRedirect && iframeSrc) {
-      window.location.href = iframeSrc;
-    }
-  }, [shouldRedirect, iframeSrc]);
-
-  const handleIframeLoad = () => {
-    if (checkTimeoutRef.current) {
-      clearTimeout(checkTimeoutRef.current);
-    }
-    setTimeout(() => {
-      const iframe = iframeRef.current;
-      if (!iframe) return;
-      try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-        if (!iframeDoc) {
-          setShouldRedirect(true);
+        if (!res.ok) {
+          setNotFound(true);
+          return null;
         }
-      } catch {
-        setShouldRedirect(true);
-      }
-    }, 500);
-  };
+        return res.json();
+      })
+      .then((json) => {
+        if (json) setEventData(json as GetKikiEventResponse);
+      })
+      .catch((err) => {
+        if (err?.name !== "AbortError") setNotFound(true);
+      })
+      .finally(() => setLoading(false));
 
-  const handleIframeError = () => {
-    if (iframeSrc) setShouldRedirect(true);
-  };
+    return () => controller.abort();
+  }, [eventSlug]);
 
-  useEffect(() => {
-    const updateHeight = () => {
-      if (updateTimeoutRef.current) {
-        clearTimeout(updateTimeoutRef.current);
-      }
-      const height =
-        (window as Window & { visualViewport?: { height: number } }).visualViewport?.height ??
-        window.innerHeight;
-      updateTimeoutRef.current = window.setTimeout(
-        () => setIframeHeight(`${height}px`),
-        100
-      );
-    };
-
-    const initialHeight =
-      (window as Window & { visualViewport?: { height: number } }).visualViewport?.height ??
-      window.innerHeight;
-    setIframeHeight(`${initialHeight}px`);
-
-    const vv = (window as Window & { visualViewport?: { addEventListener: typeof window.addEventListener } }).visualViewport;
-    if (vv) {
-      vv.addEventListener("resize", updateHeight);
-      vv.addEventListener("scroll", updateHeight);
-    }
-    window.addEventListener("resize", updateHeight);
-    window.addEventListener("orientationchange", updateHeight);
-
-    return () => {
-      if (updateTimeoutRef.current) clearTimeout(updateTimeoutRef.current);
-      if (vv) {
-        vv.removeEventListener("resize", updateHeight);
-        vv.removeEventListener("scroll", updateHeight);
-      }
-      window.removeEventListener("resize", updateHeight);
-      window.removeEventListener("orientationchange", updateHeight);
-    };
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  if (!event || !cityName || !eventSlug) {
-    return null;
-  }
-
-  const formattedCityName = cityName
-    .split("-")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-
-  if (shouldRedirect) {
+  if (loading) {
     return (
-      <>
-        <Seo
-          title={{ en: `Book: ${event.title} | Pulse`, es: `Reservar: ${event.title} | Pulse` }}
-          description={{ en: event.shortDescription, es: event.shortDescription }}
-          pathname={`/events/${cityName}/${eventSlug}/booking`}
-        />
-        <div className="flex flex-col min-h-screen bg-gray-900">
-          <Navbar />
-          <main className="flex-1 flex items-center justify-center">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pulse-pink mx-auto mb-4"></div>
-              <p className="text-gray-300">Redirecting...</p>
-            </div>
-          </main>
-          <Footer />
-        </div>
-      </>
+      <div className="flex flex-col min-h-screen dark">
+        <PageLoadingOverlay show={true} />
+        <Navbar />
+        <main className="flex-grow" />
+        <Footer />
+      </div>
     );
   }
+
+  if (notFound || !eventData) return <NotFound />;
+
+  const data = eventData;
+  const confirmationHref = `/events/${data.slug}/confirmation`;
 
   return (
     <>
       <Seo
-        title={{ en: `Book: ${event.title} | Pulse`, es: `Reservar: ${event.title} | Pulse` }}
-        description={{ en: event.shortDescription, es: event.shortDescription }}
-        pathname={`/events/${cityName}/${eventSlug}/booking`}
+        title={{ en: `Book: ${data.title} | Pulse`, es: `Reservar: ${data.title} | Pulse` }}
+        description={{ en: data.short_description, es: data.short_description }}
+        pathname={`/events/${data.slug}/booking`}
+        image={data.primary_image}
+        type="website"
       />
-      <div className="flex flex-col min-h-screen bg-gray-900">
+      <div className="min-h-screen bg-gray-900 text-white">
         <Navbar />
-        <div className="px-4 py-3 flex items-center gap-4 bg-gray-800/50 border-b border-gray-700">
-          <button
-            onClick={() => navigate(`/events/${cityName}/${eventSlug}`)}
-            className="flex items-center text-pulse-pink hover:text-pulse-pink-300 transition-colors text-sm"
-          >
-            <ArrowLeft size={18} className="mr-2" />
-            Back to event
-          </button>
-          <span className="text-gray-400 text-sm truncate">
-            {event.title} · {formattedCityName}
-          </span>
-        </div>
-        <main className="flex-1">
-          <iframe
-            ref={iframeRef}
-            src={iframeSrc}
-            className="w-full"
-            style={{
-              border: "none",
-              height: iframeHeight,
-              minHeight: iframeHeight,
-              maxHeight: "100dvh",
-            }}
-            loading="eager"
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-            sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-            title={`Book: ${event.title}`}
-          />
-          <div className="sr-only">
-            <a href={iframeSrc}>Open booking form in new tab</a>
+        <main className="px-4 pt-32 pb-16">
+          <div className="w-full max-w-3xl mx-auto">
+            <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
+              <CardContent className="p-6">
+                <h1 className="text-2xl md:text-3xl font-extrabold text-white">
+                  Booking
+                </h1>
+                <p className="mt-2 text-white/70">
+                  Booking for this event is handled inside the Pulse app. Continue to the confirmation step.
+                </p>
+                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <Button asChild className="w-full sm:w-auto">
+                    <Link to={confirmationHref}>Continue</Link>
+                  </Button>
+                  <Link
+                    to={`/events/${data.slug}`}
+                    className="w-full sm:w-auto inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
+                  >
+                    Back to event details
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </main>
         <Footer />

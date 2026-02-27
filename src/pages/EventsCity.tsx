@@ -296,7 +296,7 @@ const EventsCity = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                       >
-                        <Link to={`/events/${cityName}/${event.slug}`}>
+                        <Link to={`/events/${event.slug}`}>
                           <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group hover:scale-[1.02] overflow-hidden">
                             <div className="relative h-48 overflow-hidden">
                               <img

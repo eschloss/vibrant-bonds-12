@@ -1,11 +1,31 @@
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import AppLayout from "@/AppLayout";
+
+function RedirectEventsCityLegacy() {
+  const { cityName } = useParams<{ cityName: string }>();
+  return <Navigate to={`/events/cities/${cityName || ""}`} replace />;
+}
+
+function RedirectEventDetailLegacy() {
+  const { eventSlug } = useParams<{ eventSlug: string }>();
+  return <Navigate to={`/events/${eventSlug || ""}`} replace />;
+}
+
+function RedirectEventBookingLegacy() {
+  const { eventSlug } = useParams<{ eventSlug: string }>();
+  return <Navigate to={`/events/${eventSlug || ""}/booking`} replace />;
+}
+
+function RedirectEventConfirmationLegacy() {
+  const { eventSlug } = useParams<{ eventSlug: string }>();
+  return <Navigate to={`/events/${eventSlug || ""}/confirmation`} replace />;
+}
 
 // Pages
 const Index = lazy(() => import("@/pages/Index"));
@@ -38,6 +58,7 @@ const EventsCities = lazy(() => import("@/pages/EventsCities"));
 const EventsCity = lazy(() => import("@/pages/EventsCity"));
 const EventDetail = lazy(() => import("@/pages/EventDetail"));
 const EventBooking = lazy(() => import("@/pages/EventBooking"));
+const EventCheckout = lazy(() => import("@/pages/EventCheckout"));
 const EventConfirmation = lazy(() => import("@/pages/EventConfirmation.tsx"));
 const Activities = lazy(() => import("@/pages/Activities"));
 const Download = lazy(() => import("@/pages/Download"));
@@ -86,10 +107,31 @@ function App() {
                   <Route path="plan-ideas/:cityName" element={<PlanIdeasCity />} />
                   <Route path="events" element={<Events />} />
                   <Route path="events/cities" element={<EventsCities />} />
-                  <Route path="events/:cityName" element={<EventsCity />} />
-                  <Route path="events/:cityName/:eventSlug" element={<EventDetail />} />
-                  <Route path="events/:cityName/:eventSlug/booking" element={<EventBooking />} />
-                  <Route path="events/:cityName/:eventSlug/confirmation" element={<EventConfirmation />} />
+                  <Route path="events/cities/:cityName" element={<EventsCity />} />
+
+                  {/* New canonical event routes */}
+                  <Route path="events/:eventSlug" element={<EventDetail />} />
+                  <Route path="events/:eventSlug/booking" element={<EventBooking />} />
+                  <Route path="events/:eventSlug/checkout" element={<EventCheckout />} />
+                  <Route path="events/:eventSlug/confirmation" element={<EventConfirmation />} />
+
+                  {/* Back-compat redirects from old city+slug URLs */}
+                  <Route
+                    path="events/:cityName"
+                    element={<RedirectEventsCityLegacy />}
+                  />
+                  <Route
+                    path="events/:cityName/:eventSlug"
+                    element={<RedirectEventDetailLegacy />}
+                  />
+                  <Route
+                    path="events/:cityName/:eventSlug/booking"
+                    element={<RedirectEventBookingLegacy />}
+                  />
+                  <Route
+                    path="events/:cityName/:eventSlug/confirmation"
+                    element={<RedirectEventConfirmationLegacy />}
+                  />
                   <Route path="activities" element={<Activities />} />
                   <Route path="download" element={<Download />} />
                   <Route path="almost-there" element={<AlmostThere />} />
