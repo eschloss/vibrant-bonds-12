@@ -29,11 +29,11 @@ export default function EventFaqSection({
 
   const faqs: Array<{ q: string; a: string }> = [
     {
-      q: `What is Pulse at “${eventTitle}” in ${city}?`,
+      q: `What is Pulse at "${eventTitle}" in ${city}?`,
       a:
         `Pulse matches you into a small group of people who are also attending ${eventTitle} in ${city} on ${dateTimeLabel} and want to make new friends.\n\n` +
-        `Before you arrive at ${venue}, you’ll get access to a private group chat in the Pulse app with your group. Pip, your group host, helps break the ice and coordinate a simple pre- and/or post-event meet.\n\n` +
-        `You don’t just show up to ${eventTitle}. You arrive with people.`,
+        `Before you arrive at ${venue}, you'll get access to a private group chat in the Pulse app with your group. Pip, your group host, helps break the ice and coordinate a simple pre- and/or post-event meet.\n\n` +
+        `You don't just show up to ${eventTitle}. You arrive with people.`,
     },
     {
       q: `Is Pulse organizing ${eventTitle}?`,
@@ -42,47 +42,35 @@ export default function EventFaqSection({
         `Your ticket is issued through ${provider}. Pulse adds the structured group experience around the event so you can actually meet people before, during, and after ${eventTitle}.`,
     },
     {
-      q: `How does Pulse match people for ${eventTitle}?`,
-      a:
-        `Everyone in your group has chosen Pulse for ${eventTitle} on ${dateTimeLabel} because they want to meet new people, not just attend the event.\n\n` +
-        `We place attendees into small groups, typically 4–6 people, so conversations feel natural and connection is possible throughout the ${duration} experience at ${venue}.`,
-    },
-    {
       q: `What happens after I buy my ticket for ${eventTitle}?`,
       a:
-        `After completing your ${price} booking, you’ll receive access to the Pulse app.\n\n` +
-        `Log in using the same email from checkout and you’ll see your private group for ${eventTitle} in ${city}. Pip will guide introductions and help you coordinate how and where you’ll meet at ${venue}.\n\n` +
+        `After completing your ${price} booking, you'll receive access to the Pulse app.\n\n` +
+        `Log in using the same email from checkout and you'll see your private group for ${eventTitle} in ${city}. Pip will guide introductions and help you coordinate how and where you'll meet at ${venue}.\n\n` +
         `The goal is simple: no one walks in cold.`,
     },
     {
       q: `Do I have to chat before ${eventTitle}?`,
       a:
         `No. But even a short introduction before ${eventTitle} at ${venue} makes a big difference.\n\n` +
-        `Something simple helps you recognize names and faces when you arrive. The experience works best when everyone shares a little, but there’s no pressure to perform.`,
-    },
-    {
-      q: `Do people usually attend ${eventTitle} alone?`,
-      a:
-        `Yes. Most Pulse members joining ${eventTitle} in ${city} are coming solo.\n\n` +
-        `Many are new to the city, recently moved, working remotely, or simply expanding their circle. Everyone in your group opted in for the same reason: to make friends beyond just this ${duration} event.`,
+        `Something simple helps you recognize names and faces when you arrive. The experience works best when everyone shares a little, but there's no pressure to perform.`,
     },
     {
       q: `Is this a dating event?`,
       a:
         `No. Pulse is built for friendship.\n\n` +
-        `While you’re meeting new people at ${eventTitle} at ${venue}, the focus is building real social circles in ${city}, not romantic matching.`,
+        `While you're meeting new people at ${eventTitle} at ${venue}, the focus is building real social circles in ${city}, not romantic matching.`,
     },
     {
-      q: `What if I’m nervous about going to ${eventTitle}?`,
+      q: `What if I'm nervous about going to ${eventTitle}?`,
       a:
-        `That’s completely normal. Showing up to ${eventTitle} in ${city} on ${dateTimeLabel} alone can feel intimidating.\n\n` +
-        `Pulse exists so you don’t have to. Pip guides light introductions beforehand so when you meet at ${venue}, you already recognize a few people.`,
+        `That's completely normal. Most Pulse members joining ${eventTitle} in ${city} are coming solo. Many are new to the city, recently moved, working remotely, or simply expanding their circle.\n\n` +
+        `Pip guides light introductions beforehand so when you meet at ${venue}, you already recognize a few people. You won't be walking in cold.`,
     },
     {
-      q: `What if my group doesn’t vibe?`,
+      q: `What if my group doesn't vibe?`,
       a:
-        `The event at ${venue} is still the anchor, and you’re free to connect naturally with others during ${eventTitle}.\n\n` +
-        `If there’s a serious issue, you can contact support inside the app and our team will step in. Friendship takes time, and many members attend multiple events as they grow their circle.`,
+        `The event at ${venue} is still the anchor, and you're free to connect naturally with others during ${eventTitle}.\n\n` +
+        `If there's a serious issue, you can contact support inside the app and our team will step in. Friendship takes time, and many members attend multiple events as they grow their circle.`,
     },
     {
       q: `Is Pulse safe?`,
@@ -94,7 +82,7 @@ export default function EventFaqSection({
       q: `Can I bring a friend to ${eventTitle}?`,
       a:
         `Yes. If you and a friend both purchased tickets for ${eventTitle} at ${venue} on ${dateTimeLabel}, you can request to be placed in the same group.\n\n` +
-        `Pulse works whether you’re coming solo or with one friend.`,
+        `Pulse works whether you're coming solo or with one friend.`,
     },
     {
       q: `What happens after ${eventTitle} ends?`,
@@ -103,23 +91,10 @@ export default function EventFaqSection({
         `Many groups from ${eventTitle} in ${city} plan follow-up dinners, coffee, or future events together. Pip will gently nudge the group to keep momentum going.`,
     },
     {
-      q: `What if there aren’t enough people for a group?`,
+      q: `What if there aren't enough people for a group?`,
       a:
-        `If we’re unable to form a Pulse group for ${eventTitle} on ${dateTimeLabel}, we’ll notify you in advance.\n\n` +
-        `In that case, the Pulse portion of your purchase will be refunded. Your event ticket remains valid under ${provider}’s policy.`,
-    },
-    {
-      q: `Why not just attend ${eventTitle} alone?`,
-      a:
-        `You can attend ${eventTitle} at ${venue} in ${city} on your own.\n\n` +
-        `But going alone means starting from zero. With Pulse, you arrive already knowing a few people, having shared conversation, and having a clear plan to meet when ${eventTitle} begins at ${dateTimeLabel}.\n\n` +
-        `It’s the difference between walking into a room as a stranger and walking in with your group.`,
-    },
-    {
-      q: `When and where is ${eventTitle}?`,
-      a:
-        `${eventTitle} takes place at ${venue}${cityLabel ? ` in ${cityLabel}` : ""}.\n\n` +
-        `It begins ${dateTimeLabel} and lasts approximately ${duration}. Your booking confirmation will contain the latest logistical details.`,
+        `If we're unable to form a Pulse group for ${eventTitle} on ${dateTimeLabel}, we'll notify you in advance.\n\n` +
+        `In that case, the Pulse portion of your purchase will be refunded. Your event ticket remains valid under ${provider}'s policy.`,
     },
   ];
 
@@ -195,4 +170,3 @@ export default function EventFaqSection({
     </section>
   );
 }
-

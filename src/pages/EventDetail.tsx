@@ -5,13 +5,12 @@ import {
   Calendar,
   MapPin,
   Clock,
-  ExternalLink,
-  DollarSign,
+  ArrowRight,
+  Tag,
   MessageSquare,
   Users,
   UtensilsCrossed,
   Globe,
-  BadgeInfo,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,8 +19,8 @@ import NotFound from "@/pages/NotFound";
 import { useRefParam } from "@/hooks/useRefParam";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
-import EventSignupHowItWorks from "@/components/EventSignupHowItWorks";
 import EventFaqSection from "@/components/EventFaqSection";
+import PipInfoPopover from "@/components/PipInfoPopover";
 import {
   type CarouselApi,
   Carousel,
@@ -142,7 +141,7 @@ const EventDetail = () => {
   const formattedProviderFee =
     data.provider_fee > 0 ? formatEventPrice(data.provider_fee, priceOpts) : null;
 
-  const introLine = `⭐ ${data.title} is a public event in ${formattedCityName}. Pulse isn't the organiser — we help you go with a small group of other solo attendees, so you can meet new friends before you arrive.`;
+  const introLine = `⭐ ${data.title} is a public event in ${formattedCityName}. Pulse isn't the organiser. We help you go with a small group of other solo attendees, so you can meet new friends before you arrive.`;
 
   const heroImages = [
     data.primary_image,
@@ -316,7 +315,7 @@ const EventDetail = () => {
                   {durationText}
                 </span>
                 <span className="flex items-center gap-2">
-                  <DollarSign size={18} />
+                  <Tag size={18} />
                   {formattedTotalPrice}
                 </span>
                 {formattedCityName ? (
@@ -338,9 +337,8 @@ const EventDetail = () => {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-4">
-                Meet New Friends at this event through Pulse. We give you access to a group chat
-                with other attendees and help you break the ice and get to know each other, setting
-                you up for new successful friendships.
+                This is a public event. Pulse matches you with a small group of other solo
+                attendees so you walk in with new friends, not alone.
               </p>
               <div className="max-w-3xl">
                 <div className="text-xs uppercase tracking-wider text-white/60">About the event</div>
@@ -348,8 +346,8 @@ const EventDetail = () => {
               </div>
 
               {/* Prominent CTA (above the fold) */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                <div className="flex items-center justify-center sm:justify-start gap-3 px-2">
+              <div className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
+                <div className="flex items-center gap-3 px-2">
                   <div className="text-xs uppercase tracking-wider text-white/60">Price</div>
                   <div>
                     <div className="text-2xl md:text-3xl font-extrabold text-white leading-none">
@@ -363,12 +361,12 @@ const EventDetail = () => {
                   className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   Sign up
-                  <ExternalLink size={20} />
+                  <ArrowRight size={20} />
                 </Link>
-                <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-white/70 px-2">
-                  <MessageSquare size={16} className="text-pulse-pink" />
-                  Group chat opens after booking
-                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
+                <Users size={16} className="text-[#38D1BF] shrink-0" />
+                Everyone in your group is looking to make new friends
               </div>
               <div className="mt-3">
                 <Link
@@ -393,172 +391,66 @@ const EventDetail = () => {
             >
               {/* Main details */}
               <div className="lg:col-span-2">
-                <div className="prose prose-invert max-w-none mb-8">
-                  <p className="text-gray-200 text-lg leading-relaxed whitespace-pre-wrap">
-                    {introLine}
-                  </p>
-                </div>
-
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
                   <CardContent className="p-6">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
-                        <BadgeInfo className="h-5 w-5 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-white">How Pulse fits in</h2>
-                        <p className="text-gray-300 mt-2 leading-relaxed">
-                          This event is organised by{" "}
-                          <span className="text-white/90 font-medium">{organiser}</span>. You may meet
-                          other attendees who didn't book through Pulse — that's normal for public
-                          events.
-                        </p>
-                        <ul className="mt-4 space-y-2 text-gray-300">
-                          <li className="flex gap-3">
-                            <span className="w-6 shrink-0">👥</span>
-                            <span>
-                              <span className="text-white/90 font-medium">Your benefit with Pulse:</span>{" "}
-                              you get a small group inside the wider crowd — other solo attendees who
-                              are also looking to meet new friends.
-                            </span>
-                          </li>
-                          <li className="flex gap-3">
-                            <span className="w-6 shrink-0">💬</span>
-                            <span>
-                              <span className="text-white/90 font-medium">Group chat:</span> opens
-                              after booking so you can introduce yourself and make a simple meet-up
-                              plan.
-                            </span>
-                          </li>
-                          <li className="flex gap-3">
-                            <span className="w-6 shrink-0">🍸</span>
-                            <span>
-                              <span className="text-white/90 font-medium">Optional pre‑meet:</span>{" "}
-                              coordinate a drink/dinner nearby if you want.
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
-                  <CardContent className="p-6">
-                    <h2 className="text-2xl font-bold mb-4 text-white">Provider details</h2>
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-white/80 font-bold">
-                        {providerName?.slice(0, 1)?.toUpperCase() || "P"}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="text-white font-semibold leading-snug">
-                          {providerName}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
-                  <CardContent className="p-6">
-                    <h2 className="text-2xl font-bold mb-4 text-white">General Info</h2>
-                    <div className="space-y-3 text-gray-300">
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">🎟️</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Organiser:</span> {organiser}
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">📍</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Venue:</span> {data.place}
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">📅</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Date & time:</span>{" "}
-                          {formatDate(data.datetime_local)}
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">⏳</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Duration:</span>{" "}
-                          {durationText}
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">💸</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Total price:</span>{" "}
-                          {formattedTotalPrice}
-                          <span className="block text-sm text-white/60 mt-0.5">
-                            Ticket: {formattedTicketPrice} · Pulse fee: {formattedPulseFee}
-                          </span>
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">🏷️</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Provider:</span>{" "}
-                          {providerName}
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">💬</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Pulse group chat:</span> After
-                          you sign up, you're automatically added to an in‑app attendee chat to meet
-                          people in advance.
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 shrink-0">🍸</span>
-                        <span>
-                          <span className="text-white/90 font-medium">Optional pre‑meet:</span>{" "}
-                          Coordinate drinks/dinner nearby if you want.
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
-                  <CardContent className="p-6">
-                    <h2 className="text-2xl font-bold mb-4 text-white">
+                    <h2 className="text-2xl font-bold mb-2 text-white">
                       What happens after you sign up
                     </h2>
+                    <p className="text-sm text-gray-400 mb-5">
+                      This event is organised by{" "}
+                      <span className="text-white/75 font-medium">{organiser}</span>.
+                      {" "}Here's what Pulse adds.
+                    </p>
 
-                    <div className="flex flex-col md:flex-row gap-3">
-                      <div className="flex items-center gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4 flex-1">
-                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mt-0.5">
                           <Users className="h-5 w-5 text-white" />
                         </div>
-                        <div className="text-white font-semibold leading-snug">You're in</div>
+                        <div>
+                          <div className="text-white font-semibold leading-snug">We match you into a small group</div>
+                          <p className="text-sm text-gray-400 mt-1">
+                            4–6 other solo attendees who are all looking to make new friends at this event.
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4 flex-1">
-                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center">
+                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center mt-0.5">
                           <MessageSquare className="h-5 w-5 text-white" />
                         </div>
-                        <div className="text-white font-semibold leading-snug">Group chat opens</div>
+                        <div>
+                          <div className="text-white font-semibold leading-snug"><PipInfoPopover /> breaks the ice in your group chat</div>
+                          <p className="text-sm text-gray-400 mt-1">
+                            Your group host kicks off introductions with prompts so you get to know each other before the event.
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4 flex-1">
-                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center">
+                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center mt-0.5">
                           <UtensilsCrossed className="h-5 w-5 text-white" />
                         </div>
-                        <div className="text-white font-semibold leading-snug">
-                          Optional pre‑meet
+                        <div>
+                          <div className="text-white font-semibold leading-snug">Your group plans a meetup</div>
+                          <p className="text-sm text-gray-400 mt-1">
+                            Coordinate drinks or dinner nearby before or after the event so you meet face-to-face.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center mt-0.5">
+                          <MapPin className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-white font-semibold leading-snug">Show up with your crew</div>
+                          <p className="text-sm text-gray-400 mt-1">
+                            Walk into the event with familiar faces instead of as a stranger.
+                          </p>
                         </div>
                       </div>
                     </div>
-
-                    <p className="mt-3 text-xs text-white/60">
-                      Chat opens automatically after booking.
-                    </p>
                   </CardContent>
                 </Card>
 
@@ -569,10 +461,10 @@ const EventDetail = () => {
                   </p>
                   <h3>Good to know</h3>
                   <ul className="text-gray-300">
-                    <li>Arrive 10–15 minutes early so the group can meet up.</li>
-                    <li>If you're coming solo, you'll be welcomed — most people are.</li>
-                    <li>Prefer a quieter vibe? Say so in the chat and we'll help coordinate.</li>
-                    <li>Questions about the venue or timing? Ask in the group chat.</li>
+                    <li>Groups are typically 4–6 people. You'll know your group before the event.</li>
+                    <li>Your booking includes a real event ticket issued through the provider.</li>
+                    <li>If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.</li>
+                    <li>You don't need to know anyone. That's the whole point.</li>
                   </ul>
                 </div>
               </div>
@@ -581,43 +473,42 @@ const EventDetail = () => {
               <aside className="lg:sticky lg:top-28 h-fit">
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between gap-3 mb-4">
-                      <h3 className="text-xl font-bold text-white">Sign up</h3>
-                      <span className="text-xs text-white/60 flex items-center gap-1.5">
-                        <MessageSquare size={14} className="text-pulse-pink" />
-                        Group chat included
-                      </span>
-                    </div>
+                    <h3 className="text-xl font-bold text-white mb-4">Sign up</h3>
 
-                    <div className="space-y-3 text-sm text-gray-300 mb-5">
+                    <div className="space-y-2.5 text-sm text-gray-300 mb-6">
                       <div className="flex items-center gap-2">
-                        <Users size={16} className="text-[#38D1BF]" />
-                        Meet others going to the same event
+                        <Users size={15} className="text-[#38D1BF] shrink-0" />
+                        Matched with solo attendees making friends
                       </div>
                       <div className="flex items-center gap-2">
-                        <MessageSquare size={16} className="text-purple-300" />
-                        Get added to the attendee chat after booking
+                        <MessageSquare size={15} className="text-purple-300 shrink-0" />
+                        Hosted group chat with icebreaking
                       </div>
                       <div className="flex items-center gap-2">
-                        <UtensilsCrossed size={16} className="text-amber-300" />
-                        Optional drinks/dinner before the event
+                        <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
+                        Optional pre or post-event meetup
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <div className="text-xs uppercase tracking-wider text-white/60">Price</div>
-                      <div className="text-2xl font-extrabold text-white leading-none mt-1">
+                    <div className="mb-5">
+                      <div className="text-2xl font-extrabold text-white leading-none">
                         {formattedTotalPrice}
                       </div>
-                      <div className="mt-2 text-xs text-white/60">
-                        <div className="flex items-center justify-between gap-3">
-                          <span>Ticket</span>
+                      <div className="mt-2 text-xs text-white/60 space-y-0.5">
+                        <div className="flex items-center justify-between">
+                          <span>Event ticket</span>
                           <span className="text-white/75">{formattedTicketPrice}</span>
                         </div>
-                        <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center justify-between">
                           <span>Pulse fee</span>
                           <span className="text-white/75">{formattedPulseFee}</span>
                         </div>
+                        {formattedProviderFee && data.provider_fee > 0 && (
+                          <div className="flex items-center justify-between">
+                            <span>Provider fee</span>
+                            <span className="text-white/75">{formattedProviderFee}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -626,21 +517,16 @@ const EventDetail = () => {
                       className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                     >
                       Sign up now
-                      <ExternalLink size={18} />
+                      <ArrowRight size={18} />
                     </Link>
 
-                    <p className="mt-3 text-xs text-white/60">
-                      You'll see the group chat inside the Pulse app after booking.
+                    <p className="mt-3 text-xs text-white/50 text-center">
+                      Most Pulse members make at least one new friend per event
                     </p>
                   </CardContent>
                 </Card>
               </aside>
             </motion.div>
-
-            {/* Full-width "How it works" module */}
-            <div className="mt-10">
-              <EventSignupHowItWorks ctaHref="/how-it-works" ctaLabel="How it works" />
-            </div>
 
             <EventFaqSection
               eventTitle={data.title}

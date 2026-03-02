@@ -30,7 +30,8 @@ import {
   formatEventPrice,
   getEventPriceOpts,
 } from "@/lib/eventApi";
-import { Lock, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const CREATE_INTENT_URL =
   "https://staging-api.kikiapp.eu/payments/kiki/create_payment_intent/";
@@ -156,6 +157,18 @@ function CheckoutForm({
 
   const priceOpts = getEventPriceOpts(eventData);
   const formattedTotalPrice = formatEventPrice(eventData.total_price, priceOpts);
+  const formattedEventDate = React.useMemo(
+    () =>
+      new Date(eventData.datetime_local).toLocaleString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      }),
+    [eventData.datetime_local]
+  );
 
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
@@ -176,8 +189,8 @@ function CheckoutForm({
       if (!attachRes.ok) {
         const msg = await attachRes
           .json()
-          .then((j) => j?.detail || "Couldn’t save emails")
-          .catch(() => "Couldn’t save emails");
+          .then((j) => j?.detail || "Couldn't save emails")
+          .catch(() => "Couldn't save emails");
         throw new Error(msg);
       }
       await attachRes.json().catch(() => null);
@@ -258,33 +271,184 @@ function CheckoutForm({
     }
   };
 
+  const durationText = React.useMemo(() => {
+    const h = eventData.duration_hours;
+    if (!h || h <= 0) return null;
+    if (h < 1) return `${Math.round(h * 60)} min`;
+    if (h === Math.floor(h)) return `${h}h`;
+    const hrs = Math.floor(h);
+    const mins = Math.round((h - hrs) * 60);
+    return `${hrs}h ${mins}min`;
+  }, [eventData.duration_hours]);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <Card className="lg:col-span-7 bg-gray-800/35 backdrop-blur-lg border-white/10">
-        <CardContent className="p-6">
-          <div className="text-sm font-semibold text-white">Checkout</div>
-          <div className="mt-1 text-sm text-white/70">
-            Payments are securely processed by Stripe. Enter your email to enable secure payment options.
+    <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
+      {/* ── Left panel: Order summary ── */}
+      <div className="order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]">
+        {/* Back nav */}
+        <div className="px-8 pt-6 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
+          <Link
+            to={`/events/${eventSlug}`}
+            className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to event
+          </Link>
+        </div>
+
+        {/* Event image */}
+        {eventData.primary_image ? (
+          <div className="hidden lg:block relative mx-8 lg:mx-10 rounded-xl overflow-hidden aspect-[16/9] mb-7 shrink-0">
+            <img
+              src={eventData.primary_image}
+              alt={eventData.title}
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070C14]/80 via-transparent to-transparent" />
+          </div>
+        ) : null}
+
+        <div className="flex-1 flex flex-col px-8 lg:px-10 pb-10 lg:pb-12">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
+            Order summary
+          </div>
+          <h2 className="text-xl font-semibold text-white leading-snug mb-3">
+            {eventData.title}
+          </h2>
+
+          {eventData.short_description ? (
+            <p className="text-sm text-white/60 leading-relaxed mb-5">
+              {eventData.short_description}
+            </p>
+          ) : null}
+
+          <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-7">
+            <div className="flex items-center gap-2">
+              <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
+              <span>{formattedEventDate}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 shrink-0 text-white/40" />
+              <span>{eventData.place}</span>
+            </div>
+            {durationText ? (
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 shrink-0 text-white/40" />
+                <span>{durationText}</span>
+              </div>
+            ) : null}
           </div>
 
-          <div className="mt-6">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <div className="border-t border-white/[0.08] pt-5 space-y-3">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-white/55">Ticket</span>
+              <span className="text-white/82">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
+            </div>
+            {eventData.provider_fee > 0 ? (
+              <div className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-1.5 text-white/55">
+                  Provider fee
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="h-3.5 w-3.5 text-white/35 hover:text-white/70 transition-colors cursor-default shrink-0" />
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="right"
+                        className="max-w-[220px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/85"
+                      >
+                        This fee is charged by the event organiser. We show it here so there are no surprises at payment.
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </span>
+                <span className="text-white/82">{formatEventPrice(eventData.provider_fee, priceOpts)}</span>
+              </div>
+            ) : null}
+            <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
+              <span className="text-white/55">Pulse fee</span>
+              <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
+            </div>
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-base font-semibold text-white">Total today</span>
+              <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/[0.06] space-y-2.5">
+            <div className="flex items-center gap-2 text-xs text-white/50">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#38D1BF]/60 shrink-0" />
+              Payment encrypted and processed securely by Stripe.
+            </div>
+            <div className="text-[11px] text-white/35 font-mono">
+              Order: {orderId}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Right panel: Payment form ── */}
+      <div className="order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10">
+        <h1 className="text-xl font-semibold text-white mb-6">Complete your booking</h1>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 flex-1">
+            <div className="space-y-4">
+              <FormField
+                control={form.control}
+                name="buyerEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
+                      Buyer email
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                        className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="attendeeSameAsBuyer"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center gap-3 space-y-0 py-2.5 border-t border-b border-white/[0.07]">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={(v) => field.onChange(Boolean(v))}
+                        className="border-white/30 data-[state=checked]:bg-[#38D1BF] data-[state=checked]:border-[#38D1BF]"
+                      />
+                    </FormControl>
+                    <FormLabel className="text-white/70 text-sm font-normal cursor-pointer leading-none">
+                      Ticket is for me
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+
+              {!attendeeSameAsBuyer ? (
                 <FormField
                   control={form.control}
-                  name="buyerEmail"
+                  name="attendeeEmail"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/90">Buyer email</FormLabel>
-                      <div className="mt-1 text-xs text-white/60">
-                        We’ll send your ticket (and receipt) to this email address.
-                      </div>
+                      <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
+                        Attendee email
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="you@example.com"
-                          autoComplete="email"
-                          className="bg-black/20 border-white/10 text-white placeholder:text-white/50"
+                          placeholder="attendee@example.com"
+                          className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                           {...field}
                         />
                       </FormControl>
@@ -292,284 +456,140 @@ function CheckoutForm({
                     </FormItem>
                   )}
                 />
+              ) : null}
+            </div>
 
-                <FormField
-                  control={form.control}
-                  name="attendeeSameAsBuyer"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={(v) => field.onChange(Boolean(v))}
-                          className="border-white/30 data-[state=checked]:bg-pulse-blue data-[state=checked]:border-pulse-blue"
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-white/80">
-                          Buyer and attendee are the same
-                        </FormLabel>
-                        <div className="text-xs text-white/55">
-                          If you’re buying for someone else, uncheck and enter their email.
-                        </div>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-
-                {!attendeeSameAsBuyer ? (
-                  <FormField
-                    control={form.control}
-                    name="attendeeEmail"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white/90">Attendee email</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="attendee@example.com"
-                            className="bg-black/20 border-white/10 text-white placeholder:text-white/50"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ) : null}
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-white">Payment</div>
-                    <div className="flex items-center gap-2 text-[12px] text-white/75">
-                      <ShieldCheck className="h-4 w-4" />
-                      <span>Secure checkout</span>
-                    </div>
-                  </div>
-
-                  <div
-                    className={cn(
-                      "relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/10 via-white/5 to-black/35 p-4 overflow-hidden shadow-[0_0_0_1px_rgba(0,0,0,0.45)]",
-                      !buyerEmailReadyForPayment && "opacity-70",
-                    )}
-                    aria-disabled={!buyerEmailReadyForPayment}
-                  >
-                    {!buyerEmailReadyForPayment ? (
-                      <>
-                        <button
-                          type="button"
-                          className="absolute inset-0 z-10 bg-black/35 backdrop-blur-[2px] cursor-pointer"
-                          onClick={() => setShowLockedPaymentDialog(true)}
-                          aria-label="Payment section locked. Click for details."
-                        />
-                        {showLockedPaymentDialog ? (
-                          <div
-                            className="absolute inset-0 z-20 flex items-start justify-center p-4"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-label="Payment section locked"
+            <div className="space-y-4">
+              <div
+                className={cn(
+                  "relative rounded-xl",
+                  !buyerEmailReadyForPayment && "opacity-60",
+                )}
+                aria-disabled={!buyerEmailReadyForPayment}
+              >
+                {!buyerEmailReadyForPayment ? (
+                  <>
+                    <button
+                      type="button"
+                      className="absolute inset-0 z-10 bg-black/30 backdrop-blur-[2px] cursor-pointer"
+                      onClick={() => setShowLockedPaymentDialog(true)}
+                      aria-label="Payment section locked. Click for details."
+                    />
+                    {showLockedPaymentDialog ? (
+                      <div
+                        className="absolute inset-0 z-20 flex items-start justify-center p-4"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Payment section locked"
+                        onClick={() => setShowLockedPaymentDialog(false)}
+                      >
+                        <div
+                          className="relative w-full max-w-md rounded-xl border border-white/15 bg-[#0D1322] shadow-[0_20px_60px_rgba(0,0,0,0.65)] p-5"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            type="button"
                             onClick={() => setShowLockedPaymentDialog(false)}
+                            className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-white hover:border-white/20 transition-colors"
+                            aria-label="Close"
                           >
-                            <div
-                              className="relative w-full max-w-md rounded-2xl border border-white/15 bg-gradient-to-b from-gray-950 to-black shadow-[0_20px_60px_rgba(0,0,0,0.70)] p-4"
-                              onClick={(e) => e.stopPropagation()}
-                            >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                          <div className="flex items-start gap-3.5 pr-8">
+                            <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.05] border border-white/15 shrink-0">
+                              <Lock className="h-4 w-4 text-white/70" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-sm font-semibold text-white">
+                                Enter your email first
+                              </div>
+                              <div className="mt-1.5 text-xs leading-relaxed text-white/70">
+                                Add a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.
+                              </div>
                               <button
                                 type="button"
-                                onClick={() => setShowLockedPaymentDialog(false)}
-                                className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black text-white/85 hover:text-white hover:border-white/20 transition-colors"
-                                aria-label="Close"
+                                className="mt-4 rounded-lg border border-white/15 bg-white/[0.05] px-4 py-2 text-xs font-semibold text-white/90 hover:bg-white/[0.09] hover:border-white/25 transition-colors"
+                                onClick={() => {
+                                  setShowLockedPaymentDialog(false);
+                                  form.setFocus("buyerEmail");
+                                }}
                               >
-                                <X className="h-4 w-4" />
+                                Add email
                               </button>
-
-                              <div className="flex items-start gap-4 pr-10">
-                                <div className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-black border border-white/15">
-                                  <Lock className="h-[18px] w-[18px] text-white" />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-center justify-between gap-3">
-                                    <div className="text-[13px] font-semibold tracking-wide text-white">
-                                      Payment panel locked
-                                    </div>
-                                    <div className="rounded-full border border-white/15 bg-black px-2 py-0.5 text-[11px] font-semibold text-white/80">
-                                      Requires email
-                                    </div>
-                                  </div>
-                                  <div className="mt-2 text-[12px] leading-relaxed text-white/80">
-                                    This payment section is disabled until we have a valid buyer email.
-                                  </div>
-                                  <div className="mt-3 rounded-xl border border-white/12 bg-black px-3 py-2">
-                                    <div className="text-[11px] font-semibold tracking-wide text-white/60">
-                                      UNLOCKS
-                                    </div>
-                                    <div className="mt-1 text-[12px] leading-relaxed text-white/85">
-                                      Apple Pay, Google Pay, and card payment options.
-                                    </div>
-                                  </div>
-                                  <div className="mt-3 flex items-center justify-between gap-3">
-                                    <div className="text-[12px] leading-relaxed text-white/75">
-                                      Enter your email above, then return here.
-                                    </div>
-                                    <button
-                                      type="button"
-                                      className="shrink-0 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] font-semibold text-white/90 hover:bg-white/10 hover:border-white/25 transition-colors"
-                                      onClick={() => {
-                                        setShowLockedPaymentDialog(false);
-                                        form.setFocus("buyerEmail");
-                                      }}
-                                    >
-                                      Add email
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
                             </div>
                           </div>
-                        ) : null}
-                      </>
+                        </div>
+                      </div>
                     ) : null}
+                  </>
+                ) : null}
 
-                    <div
-                      className={cn(
-                        "space-y-4",
-                        !buyerEmailReadyForPayment && "pointer-events-none select-none pt-16",
-                      )}
-                    >
-                      <div className="space-y-2">
-                        <div className="text-[12px] font-semibold text-white/80">Fast checkout</div>
-                        <ExpressCheckoutElement
-                          onConfirm={onExpressConfirm}
-                          options={{
-                            buttonTheme: {
-                              applePay: "black",
-                              googlePay: "black",
-                            },
-                            buttonType: {
-                              applePay: "buy",
-                              googlePay: "buy",
-                            },
-                            layout: { maxColumns: 2, overflow: "auto" },
-                          }}
-                        />
-                      </div>
+                <div
+                  className={cn(
+                    "space-y-3",
+                    !buyerEmailReadyForPayment && "pointer-events-none select-none pt-20",
+                  )}
+                >
+                  <ExpressCheckoutElement
+                    onConfirm={onExpressConfirm}
+                    options={{
+                      buttonTheme: {
+                        applePay: "black",
+                        googlePay: "black",
+                      },
+                      buttonType: {
+                        applePay: "buy",
+                        googlePay: "buy",
+                      },
+                      layout: { maxColumns: 2, overflow: "auto" },
+                    }}
+                  />
 
-                      <div className="flex items-center gap-3 py-1">
-                        <div className="h-px flex-1 bg-white/15" />
-                        <div className="text-[11px] font-semibold tracking-wide text-white/60">CARD</div>
-                        <div className="h-px flex-1 bg-white/15" />
-                      </div>
-
-                      <PaymentElement
-                        options={{
-                          layout: { type: "accordion", defaultCollapsed: false, radios: true },
-                          wallets: { applePay: "never", googlePay: "never" },
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-[12px] text-white/70">
-                      Your payment details are encrypted and sent directly to Stripe.
-                    </div>
-                    <a
-                      href="https://stripe.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="shrink-0 opacity-85 hover:opacity-100 transition-opacity"
-                      aria-label="Powered by Stripe"
-                      title="Powered by Stripe"
-                    >
-                      <img
-                        src="https://s.kikiapp.eu/desktop/stripe/PoweredBywhite.svg"
-                        alt="Powered by Stripe"
-                        className="h-5"
-                        loading="lazy"
-                      />
-                    </a>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="xl"
-                    className="w-full rounded-full bg-[#6366F1] text-white hover:bg-[#5558E6] focus-visible:ring-[#6366F1]/40"
-                    disabled={!stripe || !elements || submitting || !buyerEmailReadyForPayment}
-                  >
-                    {submitting
-                      ? "Processing..."
-                      : buyerEmailReadyForPayment
-                        ? `Pay ${formattedTotalPrice || ""}`.trim()
-                        : "Enter email to continue"}
-                  </Button>
+                  <PaymentElement
+                    options={{
+                      layout: { type: "tabs" },
+                      wallets: { applePay: "never", googlePay: "never" },
+                    }}
+                  />
                 </div>
-              </form>
-            </Form>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="lg:col-span-5 bg-gray-800/35 backdrop-blur-lg border-white/10">
-        <CardContent className="p-6">
-          <div className="text-sm font-semibold text-white">Order summary</div>
-          <div className="mt-3 space-y-2 text-sm text-white/75">
-            <div className="flex items-start justify-between gap-4">
-              <span className="text-white/65">Event</span>
-              <span className="text-right">{eventData.title}</span>
-            </div>
-            <div className="flex items-start justify-between gap-4">
-              <span className="text-white/65">When</span>
-              <span className="text-right">
-                {new Date(eventData.datetime_local).toLocaleString("en-US", {
-                  weekday: "short",
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                  hour: "numeric",
-                  minute: "2-digit",
-                })}
-              </span>
-            </div>
-            <div className="flex items-start justify-between gap-4">
-              <span className="text-white/65">Where</span>
-              <span className="text-right">{eventData.place}</span>
-            </div>
-            <div className="pt-3 mt-3 border-t border-white/10 space-y-2">
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-white/65">Ticket</span>
-                <span>{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
               </div>
-              {eventData.provider_fee > 0 ? (
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-white/65">Provider fee</span>
-                  <span>{formatEventPrice(eventData.provider_fee, priceOpts)}</span>
+
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-[11px] text-white/45">
+                  Details are encrypted and sent directly to Stripe.
                 </div>
-              ) : null}
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-white/65">Pulse fee</span>
-                <span>{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
+                <a
+                  href="https://stripe.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="shrink-0 opacity-70 hover:opacity-100 transition-opacity"
+                  aria-label="Powered by Stripe"
+                >
+                  <img
+                    src="https://s.kikiapp.eu/desktop/stripe/PoweredBywhite.svg"
+                    alt="Powered by Stripe"
+                    className="h-4"
+                    loading="lazy"
+                  />
+                </a>
               </div>
-              <div className="flex items-center justify-between gap-4 pt-2 mt-2 border-t border-white/10">
-                <span className="font-semibold text-white">Total</span>
-                <span className="font-semibold text-white">{formattedTotalPrice}</span>
-              </div>
+
+              <Button
+                type="submit"
+                size="xl"
+                className="w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
+                disabled={!stripe || !elements || submitting || !buyerEmailReadyForPayment}
+              >
+                {submitting
+                  ? "Processing..."
+                  : buyerEmailReadyForPayment
+                    ? `Pay ${formattedTotalPrice || ""}`.trim()
+                    : "Enter email to continue"}
+              </Button>
             </div>
-          </div>
-
-          <div className="mt-6">
-            <Link
-              to={`/events/${eventSlug}`}
-              className="w-full inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
-            >
-              Back to event details
-            </Link>
-          </div>
-
-          <div className="mt-3 text-[12px] text-white/55">
-            Order ID: <span className="font-mono">{orderId}</span>
-          </div>
-        </CardContent>
-      </Card>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }
@@ -637,8 +657,8 @@ const EventCheckout = () => {
       if (!res.ok) {
         const msg = await res
           .json()
-          .then((j) => j?.detail || "Couldn’t start checkout")
-          .catch(() => "Couldn’t start checkout");
+          .then((j) => j?.detail || "Couldn't start checkout")
+          .catch(() => "Couldn't start checkout");
         throw new Error(msg);
       }
       const json = (await res.json()) as CreateIntentResponse;
@@ -648,7 +668,7 @@ const EventCheckout = () => {
       setOrderId(json.order_id);
       setClientSecret(json.client_secret);
     } catch (err: any) {
-      const message = err?.message || "Couldn’t start checkout";
+      const message = err?.message || "Couldn't start checkout";
       setIntentError(message);
       toast({
         title: "Checkout error",
@@ -692,23 +712,25 @@ const EventCheckout = () => {
     return (
       <>
         <Seo {...seoProps} />
-        <div className="min-h-screen bg-gray-900 text-white">
+        <div className="min-h-screen bg-[#090D14] text-white">
           <Navbar />
-          <main className="px-4 pt-32 pb-16">
-            <div className="w-full max-w-2xl mx-auto">
-              <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
-                <CardContent className="p-6">
-                  <div className="text-lg font-bold text-white">Checkout unavailable</div>
-                  <div className="mt-2 text-sm text-white/70">
+          <main className="px-6 pt-32 pb-16">
+            <div className="w-full max-w-xl mx-auto">
+              <Card className="border-white/10 bg-[#0C1220]">
+                <CardContent className="p-8">
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
+                  <div className="text-2xl font-semibold text-white">Checkout unavailable</div>
+                  <div className="mt-2 text-sm text-white/65">
                     Stripe is not configured. Please set{" "}
-                    <span className="font-mono">VITE_STRIPE_PUBLISHABLE_KEY</span>.
+                    <span className="font-mono text-white/80">VITE_STRIPE_PUBLISHABLE_KEY</span>.
                   </div>
-                  <div className="mt-5">
+                  <div className="mt-6">
                     <Link
                       to={`/events/${eventSlug}`}
-                      className="inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
+                      className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-sm font-medium text-white/85 transition-colors"
                     >
-                      Back to event details
+                      <ArrowLeft className="h-4 w-4" />
+                      Back to event
                     </Link>
                   </div>
                 </CardContent>
@@ -724,132 +746,183 @@ const EventCheckout = () => {
   return (
     <>
       <Seo {...seoProps} />
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div className="min-h-screen bg-[#090D14] text-white">
         <Navbar />
-        <main className="px-4 pt-32 pb-16">
-          <div className="w-full max-w-6xl mx-auto">
-            {intentLoading && !clientSecret ? (
-              <div className="py-10">
-                <PageLoadingOverlay show={true} />
-              </div>
-            ) : intentError ? (
-              <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
-                <CardContent className="p-6">
-                  <div className="text-lg font-bold text-white">Couldn’t start checkout</div>
-                  <div className="mt-2 text-sm text-white/70">{intentError}</div>
-                  <div className="mt-6 flex gap-3 flex-col sm:flex-row">
-                    <Button onClick={createIntent} disabled={intentLoading}>
-                      Try again
-                    </Button>
-                    <Link
-                      to={`/events/${eventSlug}`}
-                      className="inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
-                    >
-                      Back to event details
-                    </Link>
+        <main className="pt-20">
+          {intentLoading && !clientSecret ? (
+            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
+              <div className="lg:col-span-5 bg-[#070C14] px-8 py-10 lg:px-10 lg:py-12 border-r border-white/[0.07] space-y-5">
+                <div className="h-4 w-24 rounded bg-white/10 animate-pulse" />
+                <div className="aspect-[16/9] rounded-xl bg-white/10 animate-pulse" />
+                <div className="h-6 w-56 rounded-lg bg-white/10 animate-pulse" />
+                <div className="h-4 w-full rounded bg-white/10 animate-pulse" />
+                <div className="h-4 w-4/5 rounded bg-white/10 animate-pulse" />
+                <div className="h-4 w-48 rounded bg-white/10 animate-pulse" />
+                <div className="mt-6 pt-5 border-t border-white/[0.07] space-y-3">
+                  <div className="flex justify-between">
+                    <div className="h-4 w-16 rounded bg-white/10 animate-pulse" />
+                    <div className="h-4 w-20 rounded bg-white/10 animate-pulse" />
                   </div>
-                </CardContent>
-              </Card>
-            ) : clientSecret && orderId ? (
-              <Elements
-                stripe={stripePromise}
-                options={{
-                  clientSecret,
-                  appearance: {
-                    theme: "night",
-                    variables: {
-                      colorPrimary: "#38D1BF",
-                      colorBackground: "#1A1C23",
-                      colorText: "#FFFFFF",
-                      colorTextSecondary: "rgba(255,255,255,0.82)",
-                      colorTextPlaceholder: "rgba(255,255,255,0.55)",
-                      colorDanger: "#FF4D4D",
-                      borderRadius: "8px",
-                      fontFamily:
-                        'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
-                      spacingUnit: "4px",
-                      fontSizeBase: "16px",
+                  <div className="flex justify-between">
+                    <div className="h-4 w-20 rounded bg-white/10 animate-pulse" />
+                    <div className="h-4 w-16 rounded bg-white/10 animate-pulse" />
+                  </div>
+                  <div className="flex justify-between pt-3">
+                    <div className="h-5 w-24 rounded bg-white/10 animate-pulse" />
+                    <div className="h-8 w-28 rounded bg-white/10 animate-pulse" />
+                  </div>
+                </div>
+              </div>
+              <div className="lg:col-span-7 bg-[#0C1220] px-8 py-10 lg:px-12 lg:py-12 space-y-6">
+                <div className="h-7 w-40 rounded-lg bg-white/10 animate-pulse" />
+                <div className="h-4 w-56 rounded bg-white/10 animate-pulse" />
+                <div className="space-y-3 mt-6">
+                  <div className="h-4 w-20 rounded bg-white/10 animate-pulse" />
+                  <div className="h-11 rounded-lg bg-white/10 animate-pulse" />
+                </div>
+                <div className="h-64 rounded-xl bg-white/10 animate-pulse mt-4" />
+                <div className="h-12 rounded-xl bg-[#38D1BF]/20 animate-pulse" />
+              </div>
+              <PageLoadingOverlay show={true} />
+            </div>
+          ) : intentError ? (
+            <div className="px-6 py-16">
+              <div className="w-full max-w-xl mx-auto">
+                <Card className="border-white/10 bg-[#0C1220]">
+                  <CardContent className="p-8">
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
+                    <div className="text-2xl font-semibold text-white">Couldn't start checkout</div>
+                    <div className="mt-2 text-sm text-white/65">{intentError}</div>
+                    <div className="mt-6 flex gap-3 flex-col sm:flex-row">
+                      <Button
+                        onClick={createIntent}
+                        disabled={intentLoading}
+                        className="rounded-lg bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] font-semibold"
+                      >
+                        Try again
+                      </Button>
+                      <Link
+                        to={`/events/${eventSlug}`}
+                        className="inline-flex items-center gap-2 justify-center rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2 text-sm font-medium text-white/85 transition-colors"
+                      >
+                        <ArrowLeft className="h-4 w-4" />
+                        Back to event
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          ) : clientSecret && orderId ? (
+            <Elements
+              stripe={stripePromise}
+              options={{
+                clientSecret,
+                appearance: {
+                  theme: "night",
+                  variables: {
+                    colorPrimary: "#38D1BF",
+                    colorBackground: "#0C1220",
+                    colorText: "#FFFFFF",
+                    colorTextSecondary: "rgba(255,255,255,0.78)",
+                    colorTextPlaceholder: "rgba(255,255,255,0.38)",
+                    colorDanger: "#FF4D4D",
+                    borderRadius: "10px",
+                    fontFamily:
+                      'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
+                    spacingUnit: "5px",
+                    fontSizeBase: "16px",
+                  },
+                  rules: {
+                    ".PaymentMethodMessaging": {
+                      color: "#00D924",
                     },
-                    rules: {
-                      ".PaymentMethodMessaging": {
-                        color: "#00D924",
-                      },
-                      ".Link": {
-                        color: "#00D924",
-                      },
-                      ".SecondaryLink": {
-                        color: "#00D924",
-                      },
-                      ".Label": {
-                        color: "rgba(255,255,255,0.85)",
-                        fontWeight: "600",
-                      },
-                      ".Input": {
-                        backgroundColor: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.20)",
-                        boxShadow: "none",
-                      },
-                      ".Input::placeholder": {
-                        color: "rgba(255,255,255,0.55)",
-                      },
-                      ".Input:focus": {
-                        backgroundColor: "rgba(255,255,255,0.06)",
-                        borderColor: "rgba(255,255,255,0.35)",
-                        boxShadow: "0 0 0 3px rgba(56,209,191,0.22)",
-                      },
-                      ".Input--autocomplete": {
-                        backgroundColor: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.20)",
-                        boxShadow: "none",
-                      },
-                      ".Input--invalid": {
-                        borderColor: "rgba(255,90,90,0.85)",
-                        boxShadow: "0 0 0 3px rgba(255,90,90,0.18)",
-                      },
-                      ".Tab": {
-                        backgroundColor: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(255,255,255,0.18)",
-                      },
-                      ".TabLabel": {
-                        color: "rgba(255,255,255,0.88)",
-                        fontWeight: "600",
-                      },
-                      ".Tab:hover": {
-                        borderColor: "rgba(255,255,255,0.28)",
-                      },
-                      ".Tab--selected": {
-                        backgroundColor: "rgba(56,209,191,0.14)",
-                        borderColor: "rgba(56,209,191,0.95)",
-                        boxShadow:
-                          "0 0 0 1px rgba(56,209,191,0.45), 0 10px 24px rgba(0,0,0,0.35)",
-                      },
-                      ".Block": {
-                        backgroundColor: "transparent",
-                      },
-                      ".Error": {
-                        color: "rgba(255,90,90,0.95)",
-                      },
+                    ".Link": {
+                      color: "#00D924",
+                    },
+                    ".SecondaryLink": {
+                      color: "#00D924",
+                    },
+                    ".Label": {
+                      color: "rgba(255,255,255,0.72)",
+                      fontWeight: "500",
+                      fontSize: "13px",
+                    },
+                    ".Input": {
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.20)",
+                      boxShadow: "none",
+                      padding: "11px 14px",
+                    },
+                    ".Input::placeholder": {
+                      color: "rgba(255,255,255,0.30)",
+                    },
+                    ".Input:focus": {
+                      backgroundColor: "rgba(255,255,255,0.10)",
+                      borderColor: "rgba(56,209,191,0.80)",
+                      boxShadow: "0 0 0 3px rgba(56,209,191,0.18)",
+                    },
+                    ".Input--autocomplete": {
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.20)",
+                      boxShadow: "none",
+                    },
+                    ".Input--invalid": {
+                      borderColor: "rgba(255,90,90,0.85)",
+                      boxShadow: "0 0 0 3px rgba(255,90,90,0.18)",
+                    },
+                    ".Tab": {
+                      backgroundColor: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.18)",
+                      padding: "10px 16px",
+                    },
+                    ".TabLabel": {
+                      color: "rgba(255,255,255,0.82)",
+                      fontWeight: "500",
+                    },
+                    ".Tab:hover": {
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      borderColor: "rgba(255,255,255,0.28)",
+                    },
+                    ".Tab--selected": {
+                      backgroundColor: "rgba(56,209,191,0.12)",
+                      borderColor: "rgba(56,209,191,0.90)",
+                      boxShadow: "0 0 0 1px rgba(56,209,191,0.40)",
+                    },
+                    ".Tab--selected:hover": {
+                      backgroundColor: "rgba(56,209,191,0.15)",
+                    },
+                    ".Block": {
+                      backgroundColor: "transparent",
+                    },
+                    ".Error": {
+                      color: "rgba(255,90,90,0.95)",
                     },
                   },
-                }}
-              >
-                <CheckoutForm
-                  eventSlug={eventSlug}
-                  eventData={eventData}
-                  orderId={orderId}
-                />
-              </Elements>
-            ) : (
-              <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
-                <CardContent className="p-6">
-                  <div className="text-lg font-bold text-white">Checkout loading</div>
-                  <div className="mt-2 text-sm text-white/70">
-                    Please wait while we prepare your payment.
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+                },
+              }}
+            >
+              <CheckoutForm
+                eventSlug={eventSlug}
+                eventData={eventData}
+                orderId={orderId}
+              />
+            </Elements>
+          ) : (
+            <div className="px-6 py-16">
+              <div className="w-full max-w-xl mx-auto">
+                <Card className="border-white/10 bg-[#0C1220]">
+                  <CardContent className="p-8">
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
+                    <div className="text-2xl font-semibold text-white">Loading checkout</div>
+                    <div className="mt-2 text-sm text-white/65">
+                      Please wait while we prepare your payment.
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
         </main>
         <Footer />
       </div>
@@ -858,4 +931,3 @@ const EventCheckout = () => {
 };
 
 export default EventCheckout;
-
