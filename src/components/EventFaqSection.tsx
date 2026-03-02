@@ -38,15 +38,14 @@ export default function EventFaqSection({
     {
       q: `Is Pulse organizing ${eventTitle}?`,
       a:
-        `No. ${eventTitle} at ${venue} in ${city} is organized by ${organiser}.\n\n` +
+        `No. ${eventTitle} at ${venue} in ${city} is organized by ${provider}.\n\n` +
         `Your ticket is issued through ${provider}. Pulse adds the structured group experience around the event so you can actually meet people before, during, and after ${eventTitle}.`,
     },
     {
       q: `What happens after I buy my ticket for ${eventTitle}?`,
       a:
-        `After completing your ${price} booking, you'll receive access to the Pulse app.\n\n` +
-        `Log in using the same email from checkout and you'll see your private group for ${eventTitle} in ${city}. Pip will guide introductions and help you coordinate how and where you'll meet at ${venue}.\n\n` +
-        `The goal is simple: no one walks in cold.`,
+        `After completing your ${price} booking, you'll take a quick vibe test so we can match you with the right group.\n\n` +
+        `Once your group is ready, we'll let you know. You then download the Pulse app, join your private group chat for ${eventTitle} in ${city}, and start getting to know each other before the event at ${venue}.`,
     },
     {
       q: `Do I have to chat before ${eventTitle}?`,
@@ -87,8 +86,8 @@ export default function EventFaqSection({
     {
       q: `What happens after ${eventTitle} ends?`,
       a:
-        `After the ${duration} experience at ${venue}, your Pulse group stays open.\n\n` +
-        `Many groups from ${eventTitle} in ${city} plan follow-up dinners, coffee, or future events together. Pip will gently nudge the group to keep momentum going.`,
+        `Your group chat stays open for 14 days after ${eventTitle} so you can plan a follow-up if you hit it off.\n\n` +
+        `Many groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.`,
     },
     {
       q: `What if there aren't enough people for a group?`,

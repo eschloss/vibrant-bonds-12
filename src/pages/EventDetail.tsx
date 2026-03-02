@@ -16,11 +16,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Seo } from "@/hooks/useSeo";
 import NotFound from "@/pages/NotFound";
-import { useRefParam } from "@/hooks/useRefParam";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import EventFaqSection from "@/components/EventFaqSection";
-import PipInfoPopover from "@/components/PipInfoPopover";
 import {
   type CarouselApi,
   Carousel,
@@ -54,8 +53,6 @@ function formatDuration(hours: number): string {
 
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
-  const { addRefToUrl } = useRefParam();
-
   const [eventData, setEventData] = useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -202,14 +199,6 @@ const EventDetail = () => {
 
   const durationText = formatDuration(data.duration_hours);
 
-  const priceBreakdownParts = [
-    formattedTicketPrice ? `Ticket ${formattedTicketPrice}` : "Ticket",
-    formattedPulseFee ? `Pulse fee ${formattedPulseFee}` : "Pulse fee",
-  ];
-  if (formattedProviderFee && data.provider_fee > 0) {
-    priceBreakdownParts.push(`Provider fee ${formattedProviderFee}`);
-  }
-  const priceBreakdownLine = priceBreakdownParts.join(" + ");
 
   return (
     <div className="flex flex-col min-h-screen dark">
@@ -285,16 +274,31 @@ const EventDetail = () => {
                   ) : null}
 
                   {/* Group chat preview */}
-                  <div className="absolute z-20 right-[22px] bottom-3 md:right-[26px] md:bottom-4 h-[90%] aspect-[9/16] pointer-events-none select-none">
-                    <img
-                      src={groupChatOverlayImageUrl}
-                      alt="Group chat preview"
-                      className="w-full h-full object-contain drop-shadow-2xl"
-                      loading="eager"
-                      decoding="async"
-                      draggable={false}
-                    />
-                  </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="absolute z-20 right-[22px] bottom-3 md:right-[26px] md:bottom-4 h-[90%] aspect-[9/16] cursor-pointer select-none"
+                        aria-label="View group chat preview"
+                      >
+                        <img
+                          src={groupChatOverlayImageUrl}
+                          alt="Group chat preview"
+                          className="w-full h-full object-contain drop-shadow-2xl"
+                          loading="eager"
+                          decoding="async"
+                          draggable={false}
+                        />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-sm border-0 bg-transparent p-0 shadow-none [&>button]:text-white [&>button]:hover:text-white/80">
+                      <img
+                        src={groupChatOverlayImageUrl}
+                        alt="Group chat preview"
+                        className="w-full rounded-2xl"
+                      />
+                    </DialogContent>
+                  </Dialog>
 
                   <div className="absolute z-10 inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -337,8 +341,8 @@ const EventDetail = () => {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-4">
-                This is a public event. Pulse matches you with a small group of other solo
-                attendees so you walk in with new friends, not alone.
+                Pulse matches you with a small group of solo attendees going to the
+                same event, so you show up with new friends.
               </p>
               <div className="max-w-3xl">
                 <div className="text-xs uppercase tracking-wider text-white/60">About the event</div>
@@ -347,14 +351,8 @@ const EventDetail = () => {
 
               {/* Prominent CTA (above the fold) */}
               <div className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
-                <div className="flex items-center gap-3 px-2">
-                  <div className="text-xs uppercase tracking-wider text-white/60">Price</div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-extrabold text-white leading-none">
-                      {formattedTotalPrice}
-                    </div>
-                    <div className="mt-1 text-xs text-white/60">{priceBreakdownLine}</div>
-                  </div>
+                <div className="text-2xl md:text-3xl font-extrabold text-white leading-none px-2">
+                  {formattedTotalPrice}
                 </div>
                 <Link
                   to={checkoutHref}
@@ -367,14 +365,6 @@ const EventDetail = () => {
               <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
                 <Users size={16} className="text-[#38D1BF] shrink-0" />
                 Everyone in your group is looking to make new friends
-              </div>
-              <div className="mt-3">
-                <Link
-                  to={addRefToUrl("/how-it-works")}
-                  className="text-sm text-white/70 hover:text-white underline underline-offset-4 decoration-white/30 hover:decoration-white/60 transition-colors"
-                >
-                  How it works (friend group matching)
-                </Link>
               </div>
             </motion.div>
           </div>
@@ -408,9 +398,9 @@ const EventDetail = () => {
                           <Users className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">We match you into a small group</div>
+                          <div className="text-white font-semibold leading-snug">Get matched with likeminded attendees</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            4–6 other solo attendees who are all looking to make new friends at this event.
+                            Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends.
                           </p>
                         </div>
                       </div>
@@ -420,21 +410,9 @@ const EventDetail = () => {
                           <MessageSquare className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug"><PipInfoPopover /> breaks the ice in your group chat</div>
+                          <div className="text-white font-semibold leading-snug">Break the ice</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            Your group host kicks off introductions with prompts so you get to know each other before the event.
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
-                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center mt-0.5">
-                          <UtensilsCrossed className="h-5 w-5 text-white" />
-                        </div>
-                        <div>
-                          <div className="text-white font-semibold leading-snug">Your group plans a meetup</div>
-                          <p className="text-sm text-gray-400 mt-1">
-                            Coordinate drinks or dinner nearby before or after the event so you meet face-to-face.
+                            Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.
                           </p>
                         </div>
                       </div>
@@ -450,6 +428,18 @@ const EventDetail = () => {
                           </p>
                         </div>
                       </div>
+
+                      <div className="flex items-start gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
+                        <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center mt-0.5">
+                          <UtensilsCrossed className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-white font-semibold leading-snug">Pre or post-event meetup</div>
+                          <p className="text-sm text-gray-400 mt-1">
+                            Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -461,10 +451,12 @@ const EventDetail = () => {
                   </p>
                   <h3>Good to know</h3>
                   <ul className="text-gray-300">
-                    <li>Groups are typically 4–6 people. You'll know your group before the event.</li>
+                    <li>Groups are typically 5–8 people. You'll know your group before the event.</li>
                     <li>Your booking includes a real event ticket issued through the provider.</li>
                     <li>If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.</li>
                     <li>You don't need to know anyone. That's the whole point.</li>
+                    <li>Meet 15 minutes before the start so you can all enter the venue together.</li>
+                    <li>This is a public event. You may meet other attendees who didn't book through Pulse.</li>
                   </ul>
                 </div>
               </div>

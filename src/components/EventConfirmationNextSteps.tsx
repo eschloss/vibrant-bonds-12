@@ -51,7 +51,7 @@ export default function EventConfirmationNextSteps({
             <p className="text-sm text-white/70 mt-2 max-w-2xl">
               {t(
                 "event_confirmation.steps.subtitle",
-                "Complete the vibe check now. Then we’ll email you when your group chat is ready."
+                "Vibe test now. We'll email when your chat is ready."
               )}
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function EventConfirmationNextSteps({
               onClick={onPrimaryCta}
               className="w-full md:w-auto rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95"
             >
-              {ctaLabel || t("event_confirmation.vibe_check.cta", "Complete vibe check")}
+              {ctaLabel || t("event_confirmation.vibe_check.cta", "Complete vibe test")}
               <ArrowRight size={16} className="ml-2" />
             </Button>
           </div>

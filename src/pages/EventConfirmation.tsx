@@ -34,23 +34,6 @@ function formatDateTime(iso: string): string {
   return `${date} · ${time}`;
 }
 
-function getOrCreateConfirmationNumber(key: string): string {
-  try {
-    const existing = sessionStorage.getItem(key);
-    if (existing) return existing;
-    const uuidLike =
-      typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-        ? crypto.randomUUID()
-        : `${Math.random().toString(16).slice(2)}${Date.now().toString(16)}`;
-    const compact = uuidLike.replace(/-/g, "").toUpperCase();
-    const confirmation = `PC-${compact.slice(0, 10)}`;
-    sessionStorage.setItem(key, confirmation);
-    return confirmation;
-  } catch {
-    return "PC-PENDING";
-  }
-}
-
 const EventConfirmation = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const location = useLocation();
@@ -97,14 +80,10 @@ const EventConfirmation = () => {
     return () => controller.abort();
   }, [eventSlug]);
 
-  const confirmationKey =
-    eventData?.id != null
-      ? `event_confirmation_number:${eventData.id}`
-      : `event_confirmation_number:pending:${eventSlug || ""}`;
-
   const confirmationNumber = React.useMemo(() => {
-    return getOrCreateConfirmationNumber(confirmationKey);
-  }, [confirmationKey]);
+    const params = new URLSearchParams(location.search);
+    return params.get("order_id") || "PENDING";
+  }, [location.search]);
 
   const VIBE_CHECK_URL = "https://form.typeform.com/to/REPLACE_ME";
   const vibeCheckUrlWithParams = React.useMemo(() => {
@@ -187,11 +166,11 @@ const EventConfirmation = () => {
     description: {
       en: t(
         "event_confirmation.seo.desc",
-        `You're confirmed for ${data.title}. Complete your vibe check for the best group match.`
+        `You're confirmed for ${data.title}. Complete your vibe test for the best group match.`
       ),
       es: t(
         "event_confirmation.seo.desc",
-        `Ya estás confirmado/a para ${data.title}. Completa tu vibe check para el mejor match de grupo.`
+        `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para el mejor match de grupo.`
       ),
     },
     pathname: confirmationPath,
@@ -268,7 +247,7 @@ const EventConfirmation = () => {
               <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
                 {t(
                   "event_confirmation.header.subtitle",
-                  "Thanks — your ticket is on the way. Next step: complete your vibe check so we can match you with the right people."
+                  "Confirmation sent. Ticket will follow when issued. Next: complete your vibe test."
                 )}
               </p>
             </div>
@@ -287,76 +266,76 @@ const EventConfirmation = () => {
                       <div className="absolute -bottom-20 right-0 w-64 h-64 rounded-full bg-blue-600/15 blur-3xl" />
                     </div>
 
-                    <div className="relative flex items-start justify-between gap-4 flex-col md:flex-row">
-                      <div className="flex items-start gap-4 min-w-0">
-                        <img
-                          src={data.primary_image}
-                          alt={data.title}
-                          className="w-20 h-20 rounded-xl object-cover border border-white/10 bg-black/20 shrink-0"
-                          loading="eager"
-                          decoding="async"
-                        />
-                        <div className="min-w-0">
+                    <div className="relative flex items-start gap-4">
+                      <img
+                        src={data.primary_image}
+                        alt={data.title}
+                        className="w-20 h-20 rounded-xl object-cover border border-white/10 bg-black/20 shrink-0"
+                        loading="eager"
+                        decoding="async"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-3">
                           <div className="text-xs uppercase tracking-wider text-white/60">
                             {t("event_confirmation.receipt.event_label", "Event")}
                           </div>
-                          <div className="text-lg md:text-xl font-bold text-white leading-snug">
-                            {data.title}
+                          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/15 px-3 py-1 text-xs text-white/75">
+                            <CheckCircle2 size={14} className="text-[#38D1BF]" />
+                            {t("event_confirmation.confirmation.status", "Payment confirmed")}
                           </div>
-                          <div className="mt-2 space-y-2 text-sm text-white/75">
-                            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
-                              <div className="flex items-start gap-2 min-w-0">
-                                <Calendar size={16} className="text-pulse-blue shrink-0 mt-0.5" />
-                                <span className="leading-snug min-w-0">
-                                  {formatDateTime(data.datetime_local)}
-                                </span>
-                              </div>
-                              <div className="flex items-start gap-2 min-w-0">
-                                <MapPin size={16} className="text-[#38D1BF] shrink-0 mt-0.5" />
-                                <span className="leading-snug min-w-0">
-                                  {data.place}
-                                </span>
-                              </div>
+                        </div>
+                        <div className="text-lg md:text-xl font-bold text-white leading-snug">
+                          {data.title}
+                        </div>
+                        <div className="mt-2 space-y-2 text-sm text-white/75">
+                          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
+                            <div className="flex items-start gap-2 min-w-0">
+                              <Calendar size={16} className="text-pulse-blue shrink-0 mt-0.5" />
+                              <span className="leading-snug min-w-0">
+                                {formatDateTime(data.datetime_local)}
+                              </span>
                             </div>
-                            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
-                              <div className="flex items-start gap-2 min-w-0">
-                                <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                                <span className="leading-snug min-w-0">
-                                  {durationText}
-                                </span>
-                              </div>
-                              <div className="flex items-start gap-2 min-w-0">
-                                <Ticket size={16} className="text-purple-300 shrink-0 mt-0.5" />
-                                <span className="leading-snug min-w-0">
-                                  {providerName} <span className="text-white/50">•</span> {organiser}
-                                </span>
-                              </div>
+                            <div className="flex items-start gap-2 min-w-0">
+                              <MapPin size={16} className="text-[#38D1BF] shrink-0 mt-0.5" />
+                              <span className="leading-snug min-w-0">
+                                {data.place}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
+                            <div className="flex items-start gap-2 min-w-0">
+                              <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                              <span className="leading-snug min-w-0">
+                                {durationText}
+                              </span>
+                            </div>
+                            <div className="flex items-start gap-2 min-w-0">
+                              <Ticket size={16} className="text-purple-300 shrink-0 mt-0.5" />
+                              <span className="leading-snug min-w-0">
+                                {providerName} <span className="text-white/50">•</span> {organiser}
+                              </span>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
 
-                      <div className="w-full md:w-auto md:text-right">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/15 px-3 py-1 text-xs text-white/75">
-                          <CheckCircle2 size={14} className="text-[#38D1BF]" />
-                          {t("event_confirmation.confirmation.status", "Payment confirmed")}
-                        </div>
-                        <div className="mt-2 text-xs uppercase tracking-wider text-white/60">
-                          {t("event_confirmation.receipt.confirmation_number", "Confirmation #")}
-                        </div>
-                        <div className="mt-1 inline-flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-black/25 px-3 py-2 shadow-sm shadow-black/20">
-                          <span className="font-mono text-xs sm:text-sm text-white/90 whitespace-nowrap tracking-wide">
-                            {confirmationNumber}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={handleCopyConfirmation}
-                            className="text-white/70 hover:text-white transition-colors"
-                            aria-label={t("event_confirmation.confirmation.copy", "Copy")}
-                          >
-                            <Copy size={16} />
-                          </button>
-                        </div>
+                    <div className="relative mt-4 pt-4 border-t border-white/10">
+                      <div className="text-xs uppercase tracking-wider text-white/60">
+                        {t("event_confirmation.receipt.confirmation_number", "Confirmation #")}
+                      </div>
+                      <div className="mt-1.5 flex items-center gap-2 rounded-xl border border-white/10 bg-black/25 px-3 py-2 shadow-sm shadow-black/20">
+                        <span className="font-mono text-[11px] sm:text-xs text-white/90 break-all leading-snug tracking-wide flex-1">
+                          {confirmationNumber}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleCopyConfirmation}
+                          className="text-white/70 hover:text-white transition-colors shrink-0"
+                          aria-label={t("event_confirmation.confirmation.copy", "Copy")}
+                        >
+                          <Copy size={16} />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -397,13 +376,13 @@ const EventConfirmation = () => {
                     <div className="mt-3 text-sm text-white/70">
                       {t(
                         "event_confirmation.next_steps.moved_note",
-                        "See the full next-steps checklist below."
+                        "See checklist below."
                       )}
                     </div>
 
                     <div className="mt-5 flex flex-col sm:flex-row gap-3">
                       <Button onClick={handleVibeCheckClick} className="w-full sm:w-auto">
-                        {t("event_confirmation.vibe_check.cta", "Complete vibe check")}
+                        {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
                       </Button>
                       <Link
                         to={`/events/${data.slug}`}
@@ -421,16 +400,16 @@ const EventConfirmation = () => {
                 <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
                   <CardContent className="p-6">
                     <div className="text-sm font-semibold text-white">
-                      {t("event_confirmation.vibe_check.title", "Complete vibe check")}
+                      {t("event_confirmation.vibe_check.title", "Complete vibe test")}
                     </div>
                     <p className="text-sm text-white/70 mt-2">
                       {t(
                         "event_confirmation.vibe_check.subtitle",
-                        "This helps us match you with the right people for this event."
+                        "For the best group match."
                       )}
                     </p>
                     <Button className="w-full mt-4" onClick={handleVibeCheckClick}>
-                      {t("event_confirmation.vibe_check.cta", "Complete vibe check")}
+                      {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
                     </Button>
                     <p className="text-[13px] text-white/55 mt-3">
                       {t("event_confirmation.vibe_check.note", "Takes ~2 minutes.")}
@@ -446,7 +425,7 @@ const EventConfirmation = () => {
                     <p className="text-sm text-white/70 mt-2">
                       {t(
                         "event_confirmation.email.subtitle",
-                        "Ticket sent — and we’ll email you again when your group chat is ready."
+                        "Confirmation sent. Ticket when issued. We'll email when your chat is ready."
                       )}
                     </p>
                     <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-4 text-sm text-white/70 flex items-start gap-2">
@@ -454,7 +433,7 @@ const EventConfirmation = () => {
                       <span className="leading-snug">
                         {t(
                           "event_confirmation.email.note",
-                          "When the chat is ready, you’ll get a link and instructions. Then you’ll download Pulse and start chatting with your group."
+                          "Link + instructions to download Pulse and chat with your group."
                         )}
                       </span>
                     </div>

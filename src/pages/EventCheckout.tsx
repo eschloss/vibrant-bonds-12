@@ -835,13 +835,13 @@ const EventCheckout = () => {
                   },
                   rules: {
                     ".PaymentMethodMessaging": {
-                      color: "#00D924",
+                      color: "#FFFFFF",
                     },
                     ".Link": {
-                      color: "#00D924",
+                      color: "#FFFFFF",
                     },
                     ".SecondaryLink": {
-                      color: "#00D924",
+                      color: "#FFFFFF",
                     },
                     ".Label": {
                       color: "rgba(255,255,255,0.72)",
@@ -891,6 +891,9 @@ const EventCheckout = () => {
                     },
                     ".Tab--selected:hover": {
                       backgroundColor: "rgba(56,209,191,0.15)",
+                    },
+                    ".TabIcon--selected": {
+                      fill: "#FFFFFF",
                     },
                     ".Block": {
                       backgroundColor: "transparent",
