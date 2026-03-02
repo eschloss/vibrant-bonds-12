@@ -87,7 +87,7 @@ const Footer = () => {
                 <a href="https://instagram.pulsenow.app" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Instagram size={18} />
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=61570738108928" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
+                <a href="https://www.facebook.com/pulsemeetnewfriends/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
                   <Facebook size={18} />
                 </a>
                 <a href="https://www.linkedin.com/company/pulse-plans/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-pulse-pink transition-colors">
