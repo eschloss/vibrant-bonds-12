@@ -25,6 +25,7 @@ export const eventConfirmation = {
     "event_confirmation.where": "Where",
     "event_confirmation.duration": "Duration",
     "event_confirmation.provider": "Provider",
+    "event_confirmation.provider.see_more_details": "See more details about the event",
     "event_confirmation.back_to_event": "Back to event details",
 
     "event_confirmation.next_steps.title": "Next steps",
@@ -46,6 +47,7 @@ export const eventConfirmation = {
     "event_confirmation.receipt.event_label": "Event",
     "event_confirmation.receipt.confirmation_number": "Confirmation #",
     "event_confirmation.receipt.ticket": "Ticket",
+    "event_confirmation.receipt.provider_fee": "Provider fee",
     "event_confirmation.receipt.pulse_fee": "Pulse fee",
     "event_confirmation.receipt.total": "Total",
 
@@ -84,6 +86,7 @@ export const eventConfirmation = {
     "event_confirmation.where": "Dónde",
     "event_confirmation.duration": "Duración",
     "event_confirmation.provider": "Proveedor",
+    "event_confirmation.provider.see_more_details": "Ver más detalles del evento",
     "event_confirmation.back_to_event": "Volver a los detalles del evento",
 
     "event_confirmation.next_steps.title": "Próximos pasos",
@@ -105,6 +108,7 @@ export const eventConfirmation = {
     "event_confirmation.receipt.event_label": "Evento",
     "event_confirmation.receipt.confirmation_number": "Confirmación #",
     "event_confirmation.receipt.ticket": "Entrada",
+    "event_confirmation.receipt.provider_fee": "Tarifa del proveedor",
     "event_confirmation.receipt.pulse_fee": "Tarifa Pulse",
     "event_confirmation.receipt.total": "Total",
 

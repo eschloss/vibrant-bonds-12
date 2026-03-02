@@ -30,6 +30,8 @@ import {
   formatEventPrice,
   getEventPriceOpts,
 } from "@/lib/eventApi";
+import EventProviderSection from "@/components/EventProviderSection";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -340,6 +342,14 @@ function CheckoutForm({
             ) : null}
           </div>
 
+          <div className="mb-6">
+            <EventProviderSection
+              provider={eventData.provider}
+              providerEventUrl={eventData.provider_event_url}
+              compact
+            />
+          </div>
+
           <div className="border-t border-white/[0.08] pt-5 space-y-3">
             <div className="flex items-center justify-between text-sm">
               <span className="text-white/55">Ticket</span>
@@ -597,6 +607,7 @@ function CheckoutForm({
 const EventCheckout = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { toast } = useToast();
+  const { changeLanguage } = useLanguage();
 
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -629,7 +640,11 @@ const EventCheckout = () => {
         return res.json();
       })
       .then((json) => {
-        if (json) setEventData(json as GetKikiEventResponse);
+        if (json) {
+          const data = json as GetKikiEventResponse;
+          setEventData(data);
+          if (data.language) changeLanguage(data.language);
+        }
       })
       .catch((err) => {
         if (err?.name !== "AbortError") setNotFound(true);
@@ -637,7 +652,7 @@ const EventCheckout = () => {
       .finally(() => setLoading(false));
 
     return () => controller.abort();
-  }, [eventSlug]);
+  }, [eventSlug, changeLanguage]);
 
   const idempotencyKey = React.useMemo(() => {
     const key = `kiki_checkout_idempotency_key:${eventSlug || ""}`;

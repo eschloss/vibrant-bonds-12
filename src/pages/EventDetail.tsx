@@ -14,12 +14,14 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Seo } from "@/hooks/useSeo";
 import NotFound from "@/pages/NotFound";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import EventFaqSection from "@/components/EventFaqSection";
+import EventProviderSection from "@/components/EventProviderSection";
 import {
   type CarouselApi,
   Carousel,
@@ -33,6 +35,7 @@ import {
   buildGetKikiUrl,
   formatEventPrice,
   getEventPriceOpts,
+  getProviderName,
 } from "@/lib/eventApi";
 
 function formatDate(iso: string): string {
@@ -53,6 +56,7 @@ function formatDuration(hours: number): string {
 
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
+  const { changeLanguage } = useLanguage();
   const [eventData, setEventData] = useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -100,7 +104,11 @@ const EventDetail = () => {
         return res.json();
       })
       .then((json) => {
-        if (json) setEventData(json as GetKikiEventResponse);
+        if (json) {
+          const data = json as GetKikiEventResponse;
+          setEventData(data);
+          if (data.language) changeLanguage(data.language);
+        }
       })
       .catch((err) => {
         if (err?.name !== "AbortError") setNotFound(true);
@@ -108,7 +116,7 @@ const EventDetail = () => {
       .finally(() => setLoading(false));
 
     return () => controller.abort();
-  }, [eventSlug]);
+  }, [eventSlug, changeLanguage]);
 
   if (loading) {
     return (
@@ -130,7 +138,7 @@ const EventDetail = () => {
 
   const formattedCityName = data.city_label || "";
   const organiser = data.place; // Default: use venue as organiser
-  const providerName = `Provider ${data.provider}`;
+  const providerName = getProviderName(data.provider);
 
   const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
   const formattedTicketPrice = formatEventPrice(data.ticket_price, priceOpts);
@@ -449,6 +457,12 @@ const EventDetail = () => {
                   <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
                     {data.long_description}
                   </p>
+                  <div className="mt-6 not-prose">
+                    <EventProviderSection
+                      provider={data.provider}
+                      providerEventUrl={data.provider_event_url}
+                    />
+                  </div>
                   <h3>Good to know</h3>
                   <ul className="text-gray-300">
                     <li>Groups are typically 5–8 people. You'll know your group before the event.</li>

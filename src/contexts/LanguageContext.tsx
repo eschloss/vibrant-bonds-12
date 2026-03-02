@@ -8,7 +8,7 @@ interface LanguageContextType {
   translate: (key: string, fallback: string) => string;
   translations: Record<string, any>;
   isLoading: boolean;
-  changeLanguage?: (lang: string) => void; // For future use
+  changeLanguage: (lang: string) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
@@ -16,6 +16,7 @@ const LanguageContext = createContext<LanguageContextType>({
   translate: (_, fallback) => fallback,
   translations: {},
   isLoading: false,
+  changeLanguage: () => {},
 });
 
 export const useLanguage = () => useContext(LanguageContext);
@@ -126,13 +127,21 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     return null;
   }
 
+  const changeLanguage = (lang: string) => {
+    const normalized = lang?.toLowerCase().slice(0, 2) || "en";
+    if (["en", "es"].includes(normalized) && normalized !== currentLanguage) {
+      setCurrentLanguage(normalized);
+    }
+  };
+
   return (
     <LanguageContext.Provider
       value={{
         currentLanguage,
         translate,
         translations,
-        isLoading
+        isLoading,
+        changeLanguage,
       }}
     >
       <Helmet>

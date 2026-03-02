@@ -1,22 +1,27 @@
 import React from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { Calendar, CheckCircle2, Clock, Copy, Mail, MapPin, Ticket } from "lucide-react";
+import { Calendar, CheckCircle2, Clock, Copy, Mail, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/NotFound";
 import { Seo } from "@/hooks/useSeo";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import EventConfirmationNextSteps from "@/components/EventConfirmationNextSteps";
+import EventProviderSection from "@/components/EventProviderSection";
 import {
   type GetKikiEventResponse,
+  type KikiOrderDetailsResponse,
   buildGetKikiUrl,
+  buildKikiOrderDetailsUrl,
   formatEventPrice,
   getEventPriceOpts,
+  getProviderName,
 } from "@/lib/eventApi";
 
 function formatDateTime(iso: string): string {
@@ -39,10 +44,20 @@ const EventConfirmation = () => {
   const location = useLocation();
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { changeLanguage } = useLanguage();
 
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [notFound, setNotFound] = React.useState(false);
+
+  const [orderData, setOrderData] = React.useState<KikiOrderDetailsResponse | null>(null);
+  const [orderLoading, setOrderLoading] = React.useState(true);
+  const [orderNotFound, setOrderNotFound] = React.useState(false);
+
+  const orderIdFromUrl = React.useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get("order_id") || null;
+  }, [location.search]);
 
   React.useEffect(() => {
     if (!eventSlug) {
@@ -70,7 +85,11 @@ const EventConfirmation = () => {
         return res.json();
       })
       .then((json) => {
-        if (json) setEventData(json as GetKikiEventResponse);
+        if (json) {
+          const data = json as GetKikiEventResponse;
+          setEventData(data);
+          if (data.language) changeLanguage(data.language);
+        }
       })
       .catch((err) => {
         if (err?.name !== "AbortError") setNotFound(true);
@@ -78,12 +97,47 @@ const EventConfirmation = () => {
       .finally(() => setLoading(false));
 
     return () => controller.abort();
-  }, [eventSlug]);
+  }, [eventSlug, changeLanguage]);
+
+  React.useEffect(() => {
+    if (!orderIdFromUrl) {
+      setOrderNotFound(true);
+      setOrderLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+    const url = buildKikiOrderDetailsUrl(orderIdFromUrl);
+
+    fetch(url, {
+      signal: controller.signal,
+      headers: { accept: "application/json" },
+    })
+      .then((res) => {
+        if (res.status === 404) {
+          setOrderNotFound(true);
+          return null;
+        }
+        if (!res.ok) {
+          setOrderNotFound(true);
+          return null;
+        }
+        return res.json();
+      })
+      .then((json) => {
+        if (json) setOrderData(json as KikiOrderDetailsResponse);
+      })
+      .catch((err) => {
+        if (err?.name !== "AbortError") setOrderNotFound(true);
+      })
+      .finally(() => setOrderLoading(false));
+
+    return () => controller.abort();
+  }, [orderIdFromUrl]);
 
   const confirmationNumber = React.useMemo(() => {
-    const params = new URLSearchParams(location.search);
-    return params.get("order_id") || "PENDING";
-  }, [location.search]);
+    return orderData?.customer_id ?? orderIdFromUrl ?? "PENDING";
+  }, [orderData?.customer_id, orderIdFromUrl]);
 
   const VIBE_CHECK_URL = "https://form.typeform.com/to/REPLACE_ME";
   const vibeCheckUrlWithParams = React.useMemo(() => {
@@ -102,7 +156,7 @@ const EventConfirmation = () => {
   React.useEffect(() => {
     if (!eventData) return;
 
-    const providerName = `Provider ${eventData.provider}`;
+    const providerName = getProviderName(eventData.provider);
     const payload = {
       city: eventData.city,
       event_slug: eventData.slug,
@@ -123,6 +177,8 @@ const EventConfirmation = () => {
     location.search,
   ]);
 
+  const hasOrderError = !orderIdFromUrl || orderNotFound;
+
   if (loading) {
     return (
       <>
@@ -138,17 +194,68 @@ const EventConfirmation = () => {
 
   if (notFound || !eventData) return <NotFound />;
 
+  if (orderLoading && orderIdFromUrl) {
+    return (
+      <>
+        <PageLoadingOverlay show={true} />
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+          <Navbar />
+          <main className="min-h-[60vh]" />
+          <Footer />
+        </div>
+      </>
+    );
+  }
+
+  if (hasOrderError) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white">
+        <Navbar />
+        <main className="px-4 pt-32 pb-16">
+          <div className="w-full max-w-xl mx-auto">
+            <Card className="border-white/10 bg-gray-800/35">
+              <CardContent className="p-8">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">
+                  Confirmation
+                </div>
+                <h1 className="text-2xl font-semibold text-white">
+                  {!orderIdFromUrl ? "Missing order" : "Order not found"}
+                </h1>
+                <p className="mt-2 text-sm text-white/65">
+                  {!orderIdFromUrl
+                    ? "No order ID was provided. Please complete your purchase from the checkout page."
+                    : "We couldn't find an order matching that reference. It may have expired or the link may be incorrect."}
+                </p>
+                <Link
+                  to={`/events/${eventData.slug}`}
+                  className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-sm font-medium text-white/85 transition-colors"
+                >
+                  Back to event details
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   const data = eventData;
+  const order = orderData!;
   const priceOpts = getEventPriceOpts(data);
-  const providerName = `Provider ${data.provider}`;
+  const providerName = getProviderName(data.provider);
   const organiser = data.place;
   const durationText = data.duration_hours === 1 ? "1 hour" : `${data.duration_hours} hours`;
 
-  const formattedTicketPrice = formatEventPrice(data.ticket_price, priceOpts);
-  const formattedPulseFee = formatEventPrice(data.platform_fee, priceOpts);
+  const toMajorUnits = (minor: number) => minor / 100;
+  const formattedTicketPrice = formatEventPrice(toMajorUnits(order.ticket_total), priceOpts);
+  const formattedPulseFee = formatEventPrice(toMajorUnits(order.pulse_total), priceOpts);
   const formattedProviderFee =
-    data.provider_fee > 0 ? formatEventPrice(data.provider_fee, priceOpts) : "";
-  const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
+    order.provider_total > 0
+      ? formatEventPrice(toMajorUnits(order.provider_total), priceOpts)
+      : "";
+  const formattedTotalPrice = formatEventPrice(toMajorUnits(order.amount_total), priceOpts);
 
   const confirmationPath = `/events/${data.slug}/confirmation`;
 
@@ -305,19 +412,19 @@ const EventConfirmation = () => {
                           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
                             <div className="flex items-start gap-2 min-w-0">
                               <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                              <span className="leading-snug min-w-0">
-                                {durationText}
-                              </span>
-                            </div>
-                            <div className="flex items-start gap-2 min-w-0">
-                              <Ticket size={16} className="text-purple-300 shrink-0 mt-0.5" />
-                              <span className="leading-snug min-w-0">
-                                {providerName} <span className="text-white/50">•</span> {organiser}
-                              </span>
+                              <span className="leading-snug min-w-0">{durationText}</span>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
+
+                    <div className="relative mt-4 pt-4 border-t border-white/10">
+                      <EventProviderSection
+                        provider={data.provider}
+                        providerEventUrl={data.provider_event_url}
+                        compact
+                      />
                     </div>
 
                     <div className="relative mt-4 pt-4 border-t border-white/10">
@@ -350,7 +457,7 @@ const EventConfirmation = () => {
                         <span className="text-white/70">{t("event_confirmation.receipt.ticket", "Ticket")}</span>
                         <span>{formattedTicketPrice}</span>
                       </div>
-                      {data.provider_fee > 0 ? (
+                      {order.provider_total > 0 ? (
                         <div className="flex items-center justify-between gap-4">
                           <span className="text-white/70">
                             {t("event_confirmation.receipt.provider_fee", "Provider fee")}
@@ -428,6 +535,27 @@ const EventConfirmation = () => {
                         "Confirmation sent. Ticket when issued. We'll email when your chat is ready."
                       )}
                     </p>
+                    {(order.attendee_email || order.buyer_email) ? (
+                      <div className="mt-3 space-y-2 text-sm">
+                        {order.attendee_email ? (
+                          <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-2">
+                            <span className="text-white/55 block text-xs uppercase tracking-wider mb-0.5">
+                              Ticket sent to
+                            </span>
+                            <span className="text-white/90">{order.attendee_email}</span>
+                          </div>
+                        ) : null}
+                        {order.buyer_email &&
+                        order.buyer_email !== order.attendee_email ? (
+                          <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-2">
+                            <span className="text-white/55 block text-xs uppercase tracking-wider mb-0.5">
+                              Confirmation sent to
+                            </span>
+                            <span className="text-white/90">{order.buyer_email}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
                     <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-4 text-sm text-white/70 flex items-start gap-2">
                       <Mail size={16} className="text-[#38D1BF] shrink-0 mt-0.5" />
                       <span className="leading-snug">
