@@ -2,7 +2,7 @@
  * Event API types and helpers for the get_kiki endpoint.
  */
 
-export const EVENTS_API_BASE_URL = "https://staging-api.kikiapp.eu";
+export const EVENTS_API_BASE_URL = "https://api.kikiapp.eu";
 
 /** Provider details returned by get_kiki */
 export interface KikiProviderDetails {

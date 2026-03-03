@@ -36,9 +36,9 @@ import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } fr
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const CREATE_INTENT_URL =
-  "https://staging-api.kikiapp.eu/payments/kiki/create_payment_intent/";
+  "https://api.kikiapp.eu/payments/kiki/create_payment_intent/";
 const ATTACH_EMAILS_URL =
-  "https://staging-api.kikiapp.eu/payments/kiki/attach_order_emails/";
+  "https://api.kikiapp.eu/payments/kiki/attach_order_emails/";
 
 function getOrCreateSessionKey(key: string): string {
   try {
