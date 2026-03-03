@@ -38,6 +38,7 @@ import {
   getEventPriceOpts,
   getProviderName,
 } from "@/lib/eventApi";
+import { trackMetaPixelEvent } from "@/lib/utils";
 
 function formatDateTimeWindowLong(startIso: string, latestIso?: string | null): { text: string; hasWindow: boolean } {
   const start = new Date(startIso);
@@ -131,6 +132,22 @@ const EventDetail = () => {
 
     return () => controller.abort();
   }, [eventSlug, changeLanguage]);
+
+  useEffect(() => {
+    if (!eventData || notFound) return;
+    trackMetaPixelEvent(
+      "event_page_view",
+      {
+        event_slug: eventData.slug,
+        event_title: eventData.title,
+        city: eventData.city,
+        city_label: eventData.city_label,
+        provider: eventData.provider,
+        path: `/events/${eventData.slug}`,
+      },
+      { custom: true }
+    );
+  }, [eventData, notFound]);
 
   if (loading) {
     return (
@@ -401,6 +418,21 @@ const EventDetail = () => {
                 </div>
                 <Link
                   to={checkoutHref}
+                  onClick={() =>
+                    trackMetaPixelEvent(
+                      "event_signup_click",
+                      {
+                        event_slug: data.slug,
+                        event_title: data.title,
+                        city: data.city,
+                        city_label: data.city_label,
+                        provider: data.provider,
+                        destination: checkoutHref,
+                        path: `/events/${data.slug}`,
+                      },
+                      { custom: true }
+                    )
+                  }
                   className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   Sign up
@@ -557,6 +589,21 @@ const EventDetail = () => {
 
                     <Link
                       to={checkoutHref}
+                      onClick={() =>
+                        trackMetaPixelEvent(
+                          "event_signup_click",
+                          {
+                            event_slug: data.slug,
+                            event_title: data.title,
+                            city: data.city,
+                            city_label: data.city_label,
+                            provider: data.provider,
+                            destination: checkoutHref,
+                            path: `/events/${data.slug}`,
+                          },
+                          { custom: true }
+                        )
+                      }
                       className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                     >
                       Sign up now
