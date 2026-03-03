@@ -59,6 +59,18 @@ export const eventConfirmation = {
     "event_confirmation.email.title": "Check your email",
     "event_confirmation.email.subtitle": "Confirmation sent. Ticket when issued. We'll email when your chat is ready.",
     "event_confirmation.email.note": "Link + instructions to download Pulse and chat with your group.",
+    "event_confirmation.email.ticket_sent_to": "Ticket sent to",
+    "event_confirmation.email.confirmation_sent_to": "Confirmation sent to",
+
+    "event_confirmation.error.missing_order": "Missing order",
+    "event_confirmation.error.order_not_found": "Order not found",
+    "event_confirmation.error.no_order_id": "No order ID was provided. Please complete your purchase from the checkout page.",
+    "event_confirmation.error.order_expired": "We couldn't find an order matching that reference. It may have expired or the link may be incorrect.",
+    "event_confirmation.error.back_to_event": "Back to event details",
+
+    "event_confirmation.entrance_time.tooltip":
+      "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
+    "event_confirmation.entrance_time.help": "Entrance time info",
   },
   es: {
     "event_confirmation.seo.title": "Evento confirmado | Pulse",
@@ -120,6 +132,18 @@ export const eventConfirmation = {
     "event_confirmation.email.title": "Revisa tu email",
     "event_confirmation.email.subtitle": "Confirmación enviada. Entrada cuando se emita. Te avisaremos cuando el chat esté listo.",
     "event_confirmation.email.note": "Enlace + instrucciones para descargar Pulse y chatear con tu grupo.",
+    "event_confirmation.email.ticket_sent_to": "Entrada enviada a",
+    "event_confirmation.email.confirmation_sent_to": "Confirmación enviada a",
+
+    "event_confirmation.error.missing_order": "Pedido faltante",
+    "event_confirmation.error.order_not_found": "Pedido no encontrado",
+    "event_confirmation.error.no_order_id": "No se proporcionó ID de pedido. Completa tu compra desde la página de checkout.",
+    "event_confirmation.error.order_expired": "No encontramos un pedido que coincida con esa referencia. Puede haber expirado o el enlace ser incorrecto.",
+    "event_confirmation.error.back_to_event": "Volver a los detalles del evento",
+
+    "event_confirmation.entrance_time.tooltip":
+      "Tu hora de entrada depende del grupo al que te asignemos — puede ser cualquier hora en este rango. Esto ayuda a que tu grupo de match se conozca entre sí (en lugar de mezclarse con todos a la vez).",
+    "event_confirmation.entrance_time.help": "Info de hora de entrada",
   },
 };
 

@@ -2,7 +2,11 @@
  * Event API types and helpers for the get_kiki endpoint.
  */
 
-export const EVENTS_API_BASE_URL = "https://api.kikiapp.eu";
+/** Default true: when VITE_IS_STRIPE_TEST_MODE is not set or is "true", use staging; when "false", use production. */
+const isStripeTestMode = import.meta.env.VITE_IS_STRIPE_TEST_MODE !== "false";
+export const EVENTS_API_BASE_URL = isStripeTestMode
+  ? "https://staging-api.kikiapp.eu"
+  : "https://api.kikiapp.eu";
 
 /** Provider details returned by get_kiki */
 export interface KikiProviderDetails {

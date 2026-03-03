@@ -15,6 +15,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import NotFound from "@/pages/NotFound";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
@@ -40,38 +41,41 @@ import {
 } from "@/lib/eventApi";
 import { trackMetaPixelEvent } from "@/lib/utils";
 
-function formatDateTimeWindowLong(startIso: string, latestIso?: string | null): { text: string; hasWindow: boolean } {
-  const start = new Date(startIso);
-  const date = start.toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-  const startTime = start.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-
-  const latest = (latestIso || "").trim();
-  if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
-
-  const latestTime = new Date(latest).toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-
-  return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
-}
-
-function formatDuration(hours: number): string {
-  if (hours === 1) return "1 hour";
-  return `${hours} hours`;
-}
-
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { changeLanguage } = useLanguage();
+  const { t, currentLanguage } = useTranslation();
+  const locale = currentLanguage === "es" ? "es" : "en-US";
+
+  const formatDateTimeWindowLong = (
+    startIso: string,
+    latestIso?: string | null
+  ): { text: string; hasWindow: boolean } => {
+    const start = new Date(startIso);
+    const date = start.toLocaleDateString(locale, {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+    const startTime = start.toLocaleTimeString(locale, {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const latest = (latestIso || "").trim();
+    if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
+    const latestTime = new Date(latest).toLocaleTimeString(locale, {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const startsBetween = t("event_detail.starts_between", "Starts between");
+    return { text: `${date} · ${startsBetween} ${startTime}–${latestTime}`, hasWindow: true };
+  };
+
+  const formatDuration = (hours: number): string => {
+    if (hours === 1) return t("event_detail.duration.hour", "1 hour");
+    return t("event_detail.duration.hours", "{n} hours").replace("{n}", String(hours));
+  };
   const [eventData, setEventData] = useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -238,8 +242,10 @@ const EventDetail = () => {
 
   const durationText = formatDuration(data.duration_hours);
   const dateTime = formatDateTimeWindowLong(data.datetime_local, data.datetime_local_latest);
-  const entranceTimeTooltip =
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).";
+  const entranceTimeTooltip = t(
+    "event_detail.entrance_time_tooltip",
+    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+  );
 
 
   return (
@@ -304,7 +310,7 @@ const EventDetail = () => {
                         <button
                           key={i}
                           type="button"
-                          aria-label={`Go to image ${i + 1}`}
+                            aria-label={t("event_detail.go_to_image", "Go to image {n}").replace("{n}", String(i + 1))}
                           onClick={() => heroCarouselApi?.scrollTo(i)}
                           className={[
                             "h-2 w-2 rounded-full transition-all",
@@ -321,7 +327,7 @@ const EventDetail = () => {
                       <button
                         type="button"
                         className="absolute z-20 right-[22px] bottom-3 md:right-[26px] md:bottom-4 h-[90%] aspect-[9/16] cursor-pointer select-none"
-                        aria-label="View group chat preview"
+                        aria-label={t("event_detail.view_group_chat_preview", "View group chat preview")}
                       >
                         <img
                           src={groupChatOverlayImageUrl}
@@ -359,7 +365,7 @@ const EventDetail = () => {
                             <button
                               type="button"
                               className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
-                              aria-label="Entrance time info"
+                              aria-label={t("event_detail.entrance_time_help", "Entrance time info")}
                             >
                               ?
                             </button>
@@ -394,8 +400,8 @@ const EventDetail = () => {
 
               <h1 className="mb-2 text-white leading-tight">
                 <span className="block text-2xl md:text-4xl font-bold">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                    Meet New Friends at
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
+                    {t("event_detail.meet_new_friends_at", "Meet New Friends at")}
                   </span>
                 </span>
                 <span className="block text-4xl md:text-6xl font-extrabold text-white">
@@ -403,11 +409,13 @@ const EventDetail = () => {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-4">
-                Pulse matches you with a small group of solo attendees going to the
-                same event, so you show up with new friends.
+                {t(
+                  "event_detail.pulse_matches",
+                  "Pulse matches you with a small group of solo attendees going to the same event, so you show up with new friends."
+                )}
               </p>
               <div className="max-w-3xl">
-                <div className="text-xs uppercase tracking-wider text-white/60">About the event</div>
+                <div className="text-xs uppercase tracking-wider text-white/60">{t("event_detail.about_the_event", "About the event")}</div>
                 <p className="text-lg text-gray-300 mt-1">{data.short_description}</p>
               </div>
 
@@ -435,13 +443,13 @@ const EventDetail = () => {
                   }
                   className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
-                  Sign up
+                  {t("event_detail.sign_up", "Sign up")}
                   <ArrowRight size={20} />
                 </Link>
               </div>
               <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
                 <Users size={16} className="text-[#38D1BF] shrink-0" />
-                Everyone in your group is looking to make new friends
+                {t("event_detail.everyone_making_friends", "Everyone in your group is looking to make new friends")}
               </div>
             </motion.div>
           </div>
@@ -461,12 +469,12 @@ const EventDetail = () => {
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-2 text-white">
-                      What happens after you sign up
+                      {t("event_detail.what_happens_title", "What happens after you sign up")}
                     </h2>
                     <p className="text-sm text-gray-400 mb-5">
-                      This event is organised by{" "}
+                      {t("event_detail.organised_by", "This event is organised by")}{" "}
                       <span className="text-white/75 font-medium">{organiser}</span>.
-                      {" "}Here's what Pulse adds.
+                      {" "}{t("event_detail.organised_by_suffix", "Here's what Pulse adds.")}
                     </p>
 
                     <div className="flex flex-col gap-4">
@@ -475,9 +483,9 @@ const EventDetail = () => {
                           <Users className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">Get matched with likeminded attendees</div>
+                          <div className="text-white font-semibold leading-snug">{t("event_detail.step1_title", "Get matched with likeminded attendees")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends.
+                            {t("event_detail.step1_desc", "Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends.")}
                           </p>
                         </div>
                       </div>
@@ -487,9 +495,9 @@ const EventDetail = () => {
                           <MessageSquare className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">Break the ice</div>
+                          <div className="text-white font-semibold leading-snug">{t("event_detail.step2_title", "Break the ice")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.
+                            {t("event_detail.step2_desc", "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.")}
                           </p>
                         </div>
                       </div>
@@ -499,9 +507,9 @@ const EventDetail = () => {
                           <MapPin className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">Show up with your crew</div>
+                          <div className="text-white font-semibold leading-snug">{t("event_detail.step3_title", "Show up with your crew")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            Walk into the event with familiar faces instead of as a stranger.
+                            {t("event_detail.step3_desc", "Walk into the event with familiar faces instead of as a stranger.")}
                           </p>
                         </div>
                       </div>
@@ -511,9 +519,9 @@ const EventDetail = () => {
                           <UtensilsCrossed className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">Pre or post-event meetup</div>
+                          <div className="text-white font-semibold leading-snug">{t("event_detail.step4_title", "Pre or post-event meetup")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself.
+                            {t("event_detail.step4_desc", "Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself.")}
                           </p>
                         </div>
                       </div>
@@ -522,7 +530,7 @@ const EventDetail = () => {
                 </Card>
 
                 <div className="prose prose-invert max-w-none">
-                  <h2>About this event</h2>
+                  <h2>{t("event_detail.about_this_event", "About this event")}</h2>
                   <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
                     {data.long_description}
                   </p>
@@ -532,14 +540,14 @@ const EventDetail = () => {
                       providerEventUrl={data.provider_event_url}
                     />
                   </div>
-                  <h3>Good to know</h3>
+                  <h3>{t("event_detail.good_to_know", "Good to know")}</h3>
                   <ul className="text-gray-300">
-                    <li>Groups are typically 5–8 people. You'll know your group before the event.</li>
-                    <li>Your booking includes a real event ticket issued through the provider.</li>
-                    <li>If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.</li>
-                    <li>You don't need to know anyone. That's the whole point.</li>
-                    <li>Meet 15 minutes before the start so you can all enter the venue together.</li>
-                    <li>This is a public event. You may meet other attendees who didn't book through Pulse.</li>
+                    <li>{t("event_detail.good_to_know_1", "Groups are typically 5–8 people. You'll know your group before the event.")}</li>
+                    <li>{t("event_detail.good_to_know_2", "Your booking includes a real event ticket issued through the provider.")}</li>
+                    <li>{t("event_detail.good_to_know_3", "If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.")}</li>
+                    <li>{t("event_detail.good_to_know_4", "You don't need to know anyone. That's the whole point.")}</li>
+                    <li>{t("event_detail.good_to_know_5", "Meet 15 minutes before the start so you can all enter the venue together.")}</li>
+                    <li>{t("event_detail.good_to_know_6", "This is a public event. You may meet other attendees who didn't book through Pulse.")}</li>
                   </ul>
                 </div>
               </div>
@@ -548,20 +556,20 @@ const EventDetail = () => {
               <aside className="lg:sticky lg:top-28 h-fit">
                 <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-4">Sign up</h3>
+                    <h3 className="text-xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
 
                     <div className="space-y-2.5 text-sm text-gray-300 mb-6">
                       <div className="flex items-center gap-2">
                         <Users size={15} className="text-[#38D1BF] shrink-0" />
-                        Matched with solo attendees making friends
+                        {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
                       </div>
                       <div className="flex items-center gap-2">
                         <MessageSquare size={15} className="text-purple-300 shrink-0" />
-                        Hosted group chat with icebreaking
+                        {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
                       </div>
                       <div className="flex items-center gap-2">
                         <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
-                        Optional pre or post-event meetup
+                        {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
                       </div>
                     </div>
 
@@ -571,16 +579,16 @@ const EventDetail = () => {
                       </div>
                       <div className="mt-2 text-xs text-white/60 space-y-0.5">
                         <div className="flex items-center justify-between">
-                          <span>Event ticket</span>
+                          <span>{t("event_detail.event_ticket", "Event ticket")}</span>
                           <span className="text-white/75">{formattedTicketPrice}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span>Pulse fee</span>
+                          <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
                           <span className="text-white/75">{formattedPulseFee}</span>
                         </div>
                         {formattedProviderFee && data.provider_fee > 0 && (
                           <div className="flex items-center justify-between">
-                            <span>Provider fee</span>
+                            <span>{t("event_detail.provider_fee", "Provider fee")}</span>
                             <span className="text-white/75">{formattedProviderFee}</span>
                           </div>
                         )}
@@ -606,12 +614,12 @@ const EventDetail = () => {
                       }
                       className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                     >
-                      Sign up now
+                      {t("event_detail.sign_up_now", "Sign up now")}
                       <ArrowRight size={18} />
                     </Link>
 
                     <p className="mt-3 text-xs text-white/50 text-center">
-                      Most Pulse members make at least one new friend per event
+                      {t("event_detail.most_make_friend", "Most Pulse members make at least one new friend per event")}
                     </p>
                   </CardContent>
                 </Card>

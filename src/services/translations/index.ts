@@ -3,7 +3,7 @@
 export const fetchTranslations = async (lang: string) => {
   const locale = ["en", "es"].includes(lang) ? lang : "en";
   if (locale === "es") {
-    const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere, eventConfirmation] = await Promise.all([
+    const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere, eventConfirmation, eventDetail, eventCheckout] = await Promise.all([
       import("./shared").then(m => m.shared.es),
       import("./about").then(m => m.about.es),
       import("./mission").then(m => m.mission.es),
@@ -24,6 +24,8 @@ export const fetchTranslations = async (lang: string) => {
       import("./download").then(m => m.download.es),
       import("./almostThere").then(m => m.almostThere.es),
       import("./eventConfirmation").then(m => m.eventConfirmation.es),
+      import("./eventDetail").then(m => m.eventDetail.es),
+      import("./eventCheckout").then(m => m.eventCheckout.es),
     ]);
     return {
       ...shared,
@@ -44,12 +46,14 @@ export const fetchTranslations = async (lang: string) => {
       ...legal,
       ...faq,
       ...download,
-      ...almostThere,
-      ...eventConfirmation,
+    ...almostThere,
+    ...eventConfirmation,
+    ...eventDetail,
+    ...eventCheckout,
     };
   }
 
-  const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere, eventConfirmation] = await Promise.all([
+  const [shared, about, mission, activities, realLifeMagic, city, citylist, communities, contact, forms, hero, howItWorks, icebreakers, team, lonelinessEpidemic, legal, faq, download, almostThere, eventConfirmation, eventDetail, eventCheckout] = await Promise.all([
     import("./shared").then(m => m.shared.en),
     import("./about").then(m => m.about.en),
     import("./mission").then(m => m.mission.en),
@@ -70,6 +74,8 @@ export const fetchTranslations = async (lang: string) => {
     import("./download").then(m => m.download.en),
     import("./almostThere").then(m => m.almostThere.en),
     import("./eventConfirmation").then(m => m.eventConfirmation.en),
+    import("./eventDetail").then(m => m.eventDetail.en),
+    import("./eventCheckout").then(m => m.eventCheckout.en),
   ]);
   return {
     ...shared,
@@ -92,5 +98,7 @@ export const fetchTranslations = async (lang: string) => {
     ...download,
     ...almostThere,
     ...eventConfirmation,
+    ...eventDetail,
+    ...eventCheckout,
   };
 };

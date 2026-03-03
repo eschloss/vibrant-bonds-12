@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useTranslation } from "@/hooks/useTranslation";
 
 type EventFaqSectionProps = {
   eventTitle: string;
@@ -14,6 +15,20 @@ type EventFaqSectionProps = {
   duration: string;
 };
 
+function replacePlaceholders(
+  text: string | undefined,
+  params: { eventTitle: string; city: string; venue: string; provider: string; price: string; dateTimeLabel: string }
+): string {
+  const str = text ?? "";
+  return str
+    .replace(/{eventTitle}/g, params.eventTitle)
+    .replace(/{city}/g, params.city)
+    .replace(/{venue}/g, params.venue)
+    .replace(/{provider}/g, params.provider)
+    .replace(/{price}/g, params.price)
+    .replace(/{dateTimeLabel}/g, params.dateTimeLabel);
+}
+
 export default function EventFaqSection({
   eventTitle,
   city,
@@ -25,82 +40,32 @@ export default function EventFaqSection({
   dateTimeLabel,
   duration,
 }: EventFaqSectionProps) {
-  const cityLabel = [city, country].filter(Boolean).join(", ");
+  const { t } = useTranslation();
+  const params = { eventTitle, city, venue, provider, price, dateTimeLabel };
 
-  const faqs: Array<{ q: string; a: string }> = [
-    {
-      q: `What is Pulse at "${eventTitle}" in ${city}?`,
-      a:
-        `Pulse matches you into a small group of people who are also attending ${eventTitle} in ${city} on ${dateTimeLabel} and want to make new friends.\n\n` +
-        `Before you arrive at ${venue}, you'll get access to a private group chat in the Pulse app with your group. Pip, your group host, helps break the ice and coordinate a simple pre- and/or post-event meet.\n\n` +
-        `You don't just show up to ${eventTitle}. You arrive with people.`,
-    },
-    {
-      q: `Is Pulse organizing ${eventTitle}?`,
-      a:
-        `No. ${eventTitle} at ${venue} in ${city} is organized by ${provider}.\n\n` +
-        `Your ticket is issued through ${provider}. Pulse adds the structured group experience around the event so you can actually meet people before, during, and after ${eventTitle}.`,
-    },
-    {
-      q: `What happens after I buy my ticket for ${eventTitle}?`,
-      a:
-        `After completing your ${price} booking, you'll take a quick vibe test so we can match you with the right group.\n\n` +
-        `Once your group is ready, we'll let you know. You then download the Pulse app, join your private group chat for ${eventTitle} in ${city}, and start getting to know each other before the event at ${venue}.`,
-    },
-    {
-      q: `Do I have to chat before ${eventTitle}?`,
-      a:
-        `No. But even a short introduction before ${eventTitle} at ${venue} makes a big difference.\n\n` +
-        `Something simple helps you recognize names and faces when you arrive. The experience works best when everyone shares a little, but there's no pressure to perform.`,
-    },
-    {
-      q: `Is this a dating event?`,
-      a:
-        `No. Pulse is built for friendship.\n\n` +
-        `While you're meeting new people at ${eventTitle} at ${venue}, the focus is building real social circles in ${city}, not romantic matching.`,
-    },
-    {
-      q: `What if I'm nervous about going to ${eventTitle}?`,
-      a:
-        `That's completely normal. Most Pulse members joining ${eventTitle} in ${city} are coming solo. Many are new to the city, recently moved, working remotely, or simply expanding their circle.\n\n` +
-        `Pip guides light introductions beforehand so when you meet at ${venue}, you already recognize a few people. You won't be walking in cold.`,
-    },
-    {
-      q: `What if my group doesn't vibe?`,
-      a:
-        `The event at ${venue} is still the anchor, and you're free to connect naturally with others during ${eventTitle}.\n\n` +
-        `If there's a serious issue, you can contact support inside the app and our team will step in. Friendship takes time, and many members attend multiple events as they grow their circle.`,
-    },
-    {
-      q: `Is Pulse safe?`,
-      a:
-        `Your Pulse group is private to verified attendees of ${eventTitle} in ${city}.\n\n` +
-        `We moderate activity, provide in-app reporting, and set clear community standards around respectful behavior. If something feels off before or during the event at ${venue}, you can reach out directly and we will respond.`,
-    },
-    {
-      q: `Can I bring a friend to ${eventTitle}?`,
-      a:
-        `Yes. If you and a friend both purchased tickets for ${eventTitle} at ${venue} on ${dateTimeLabel}, you can request to be placed in the same group.\n\n` +
-        `Pulse works whether you're coming solo or with one friend.`,
-    },
-    {
-      q: `What happens after ${eventTitle} ends?`,
-      a:
-        `Your group chat stays open for 14 days after ${eventTitle} so you can plan a follow-up if you hit it off.\n\n` +
-        `Many groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.`,
-    },
-    {
-      q: `What if there aren't enough people for a group?`,
-      a:
-        `If we're unable to form a Pulse group for ${eventTitle} on ${dateTimeLabel}, we'll notify you in advance.\n\n` +
-        `In that case, the Pulse portion of your purchase will be refunded. Your event ticket remains valid under ${provider}'s policy.`,
-    },
+  const faqs: Array<{ qKey: string; aKey: string }> = [
+    { qKey: "event_detail.faq.q1", aKey: "event_detail.faq.a1" },
+    { qKey: "event_detail.faq.q2", aKey: "event_detail.faq.a2" },
+    { qKey: "event_detail.faq.q3", aKey: "event_detail.faq.a3" },
+    { qKey: "event_detail.faq.q4", aKey: "event_detail.faq.a4" },
+    { qKey: "event_detail.faq.q5", aKey: "event_detail.faq.a5" },
+    { qKey: "event_detail.faq.q6", aKey: "event_detail.faq.a6" },
+    { qKey: "event_detail.faq.q7", aKey: "event_detail.faq.a7" },
+    { qKey: "event_detail.faq.q8", aKey: "event_detail.faq.a8" },
+    { qKey: "event_detail.faq.q9", aKey: "event_detail.faq.a9" },
+    { qKey: "event_detail.faq.q10", aKey: "event_detail.faq.a10" },
+    { qKey: "event_detail.faq.q11", aKey: "event_detail.faq.a11" },
   ];
+
+  const faqsWithText = faqs.map((f) => ({
+    q: replacePlaceholders(t(f.qKey, ""), params),
+    a: replacePlaceholders(t(f.aKey, ""), params),
+  }));
 
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: faqsWithText.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: {
@@ -123,19 +88,23 @@ export default function EventFaqSection({
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">FAQ</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              {t("event_detail.faq.title", "FAQ")}
+            </h2>
             <p className="text-white/75 text-lg">
-              Everything you need to know about Pulse at this event.
+              {t("event_detail.faq.subtitle", "Everything you need to know about Pulse at this event.")}
             </p>
           </div>
 
           <div className="bg-gray-800/40 backdrop-blur-lg rounded-3xl border border-gray-700 p-4 md:p-8">
             <div className="flex items-center gap-2 text-accent mb-4">
               <Sparkles className="h-4 w-4" />
-              <span className="text-sm uppercase tracking-wider">Helpful answers</span>
+              <span className="text-sm uppercase tracking-wider">
+                {t("event_detail.faq.helpful_answers", "Helpful answers")}
+              </span>
             </div>
             <div className="space-y-3">
-              {faqs.map((item, idx) => (
+              {faqsWithText.map((item, idx) => (
                 <Collapsible
                   key={idx}
                   className="group w-full rounded-2xl border border-white/10 bg-gray-900/25 backdrop-blur-md overflow-hidden transition-all hover:border-white/20 hover:bg-gray-900/35 data-[state=open]:border-[#38D1BF]/30 data-[state=open]:bg-gray-900/45 data-[state=open]:shadow-[0_0_0_1px_rgba(56,209,191,0.12)]"
@@ -152,7 +121,7 @@ export default function EventFaqSection({
                   <CollapsibleContent className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                     <div className="px-5 pb-5 pt-4 border-t border-white/10">
                       <div className="space-y-3">
-                        {item.a.split(/\n\s*\n/).map((p, i) => (
+                        {(item.a ?? "").split(/\n\s*\n/).map((p, i) => (
                           <p key={i} className="text-gray-300 leading-relaxed text-[15px]">
                             {p}
                           </p>

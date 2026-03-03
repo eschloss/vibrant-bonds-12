@@ -29,16 +29,16 @@ import {
   type GetKikiEventResponse,
   formatEventPrice,
   getEventPriceOpts,
+  EVENTS_API_BASE_URL,
 } from "@/lib/eventApi";
 import EventProviderSection from "@/components/EventProviderSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/hooks/useTranslation";
 import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-const CREATE_INTENT_URL =
-  "https://api.kikiapp.eu/payments/kiki/create_payment_intent/";
-const ATTACH_EMAILS_URL =
-  "https://api.kikiapp.eu/payments/kiki/attach_order_emails/";
+const CREATE_INTENT_URL = `${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`;
+const ATTACH_EMAILS_URL = `${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`;
 
 function getOrCreateSessionKey(key: string): string {
   try {
@@ -55,41 +55,43 @@ function getOrCreateSessionKey(key: string): string {
   }
 }
 
-const emailSchema = z
-  .string()
-  .trim()
-  .min(1, "Email is required")
-  .email("Enter a valid email");
+function createCheckoutSchema(t: (key: string, fallback: string) => string) {
+  const emailSchema = z
+    .string()
+    .trim()
+    .min(1, t("event_checkout.validation.email_required", "Email is required"))
+    .email(t("event_checkout.validation.email_invalid", "Enter a valid email"));
 
-const checkoutSchema = z
-  .object({
-    buyerEmail: emailSchema,
-    attendeeSameAsBuyer: z.boolean(),
-    attendeeEmail: z.string().trim().optional(),
-  })
-  .superRefine((val, ctx) => {
-    if (!val.attendeeSameAsBuyer) {
-      const attendee = (val.attendeeEmail || "").trim();
-      if (!attendee) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["attendeeEmail"],
-          message: "Attendee email is required",
-        });
-        return;
+  return z
+    .object({
+      buyerEmail: emailSchema,
+      attendeeSameAsBuyer: z.boolean(),
+      attendeeEmail: z.string().trim().optional(),
+    })
+    .superRefine((val, ctx) => {
+      if (!val.attendeeSameAsBuyer) {
+        const attendee = (val.attendeeEmail || "").trim();
+        if (!attendee) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ["attendeeEmail"],
+            message: t("event_checkout.validation.attendee_required", "Attendee email is required"),
+          });
+          return;
+        }
+        const parsed = emailSchema.safeParse(attendee);
+        if (!parsed.success) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ["attendeeEmail"],
+            message: t("event_checkout.validation.attendee_invalid", "Enter a valid attendee email"),
+          });
+        }
       }
-      const parsed = emailSchema.safeParse(attendee);
-      if (!parsed.success) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["attendeeEmail"],
-          message: "Enter a valid attendee email",
-        });
-      }
-    }
-  });
+    });
+}
 
-type CheckoutFormValues = z.infer<typeof checkoutSchema>;
+type CheckoutFormValues = z.infer<ReturnType<typeof createCheckoutSchema>>;
 
 type CreateIntentResponse = {
   order_id: string;
@@ -117,10 +119,13 @@ function CheckoutForm({
 }) {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t, currentLanguage } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
 
   const [submitting, setSubmitting] = React.useState(false);
+
+  const checkoutSchema = React.useMemo(() => createCheckoutSchema(t), [t]);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -135,7 +140,7 @@ function CheckoutForm({
   const attendeeSameAsBuyer = form.watch("attendeeSameAsBuyer");
   const buyerEmailValue = form.watch("buyerEmail");
   const buyerEmailReadyForPayment = React.useMemo(() => {
-    return emailSchema.safeParse((buyerEmailValue || "").trim()).success;
+    return z.string().trim().min(1).email().safeParse((buyerEmailValue || "").trim()).success;
   }, [buyerEmailValue]);
 
   const [showLockedPaymentDialog, setShowLockedPaymentDialog] = React.useState(false);
@@ -159,29 +164,34 @@ function CheckoutForm({
 
   const priceOpts = getEventPriceOpts(eventData);
   const formattedTotalPrice = formatEventPrice(eventData.total_price, priceOpts);
+  const locale = currentLanguage === "es" ? "es" : "en-US";
+
   const eventDateTime = React.useMemo(() => {
     const start = new Date(eventData.datetime_local);
-    const date = start.toLocaleDateString("en-US", {
+    const date = start.toLocaleDateString(locale, {
       weekday: "short",
       month: "short",
       day: "numeric",
       year: "numeric",
     });
-    const startTime = start.toLocaleTimeString("en-US", {
+    const startTime = start.toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "2-digit",
     });
     const latest = (eventData.datetime_local_latest || "").trim();
     if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
-    const latestTime = new Date(latest).toLocaleTimeString("en-US", {
+    const latestTime = new Date(latest).toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "2-digit",
     });
-    return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
-  }, [eventData.datetime_local, eventData.datetime_local_latest]);
+    const startsBetween = t("event_checkout.starts_between", "Starts between");
+    return { text: `${date} · ${startsBetween} ${startTime}–${latestTime}`, hasWindow: true };
+  }, [eventData.datetime_local, eventData.datetime_local_latest, locale, t]);
 
-  const entranceTimeTooltip =
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).";
+  const entranceTimeTooltip = t(
+    "event_checkout.entrance_time_tooltip",
+    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+  );
 
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
@@ -202,13 +212,13 @@ function CheckoutForm({
       if (!attachRes.ok) {
         const msg = await attachRes
           .json()
-          .then((j) => j?.detail || "Couldn't save emails")
-          .catch(() => "Couldn't save emails");
+          .then((j) => j?.detail || t("event_checkout.couldnt_save_emails", "Couldn't save emails"))
+          .catch(() => t("event_checkout.couldnt_save_emails", "Couldn't save emails"));
         throw new Error(msg);
       }
       await attachRes.json().catch(() => null);
     },
-    [orderId],
+    [orderId, t],
   );
 
   const confirmStripePayment = React.useCallback(async () => {
@@ -216,7 +226,7 @@ function CheckoutForm({
 
     const { error: submitError } = await elements.submit();
     if (submitError) {
-      throw new Error(submitError.message || "Please check your payment details.");
+      throw new Error(submitError.message || t("event_checkout.check_payment_details", "Please check your payment details."));
     }
 
     const confirmResult = await stripe.confirmPayment({
@@ -226,7 +236,7 @@ function CheckoutForm({
     });
 
     if (confirmResult.error) {
-      throw new Error(confirmResult.error.message || "Payment failed");
+      throw new Error(confirmResult.error.message || t("event_checkout.payment_failed", "Payment failed"));
     }
 
     const status = confirmResult.paymentIntent?.status;
@@ -252,8 +262,8 @@ function CheckoutForm({
       await confirmStripePayment();
     } catch (err: any) {
       toast({
-        title: "Checkout error",
-        description: err?.message || "Something went wrong. Please try again.",
+        title: t("event_checkout.checkout_error", "Checkout error"),
+        description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
         variant: "destructive",
       });
     } finally {
@@ -275,8 +285,8 @@ function CheckoutForm({
       await confirmStripePayment();
     } catch (err: any) {
       toast({
-        title: "Checkout error",
-        description: err?.message || "Something went wrong. Please try again.",
+        title: t("event_checkout.checkout_error", "Checkout error"),
+        description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
         variant: "destructive",
       });
     } finally {
@@ -305,7 +315,7 @@ function CheckoutForm({
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to event
+            {t("event_checkout.back_to_event", "Back to event")}
           </Link>
         </div>
 
@@ -324,7 +334,7 @@ function CheckoutForm({
 
         <div className="flex-1 flex flex-col px-8 lg:px-10 pb-10 lg:pb-12">
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
-            Order summary
+            {t("event_checkout.order_summary", "Order summary")}
           </div>
           <h2 className="text-xl font-semibold text-white leading-snug mb-3">
             {eventData.title}
@@ -348,7 +358,7 @@ function CheckoutForm({
                         <button
                           type="button"
                           className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
-                          aria-label="Entrance time info"
+                          aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
                         >
                           ?
                         </button>
@@ -386,13 +396,13 @@ function CheckoutForm({
 
           <div className="border-t border-white/[0.08] pt-5 space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-white/55">Ticket</span>
+              <span className="text-white/55">{t("event_checkout.ticket", "Ticket")}</span>
               <span className="text-white/82">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
             {eventData.provider_fee > 0 ? (
               <div className="flex items-center justify-between text-sm">
                 <span className="flex items-center gap-1.5 text-white/55">
-                  Provider fee
+                  {t("event_checkout.provider_fee", "Provider fee")}
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -402,7 +412,7 @@ function CheckoutForm({
                         side="right"
                         className="max-w-[220px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/85"
                       >
-                        This fee is charged by the event organiser. We show it here so there are no surprises at payment.
+                        {t("event_checkout.provider_fee_tooltip", "This fee is charged by the event organiser. We show it here so there are no surprises at payment.")}
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -411,11 +421,11 @@ function CheckoutForm({
               </div>
             ) : null}
             <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
-              <span className="text-white/55">Pulse fee</span>
+              <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
               <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
             </div>
             <div className="flex items-center justify-between pt-1">
-              <span className="text-base font-semibold text-white">Total today</span>
+              <span className="text-base font-semibold text-white">{t("event_checkout.total_today", "Total today")}</span>
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>
           </div>
@@ -423,10 +433,10 @@ function CheckoutForm({
           <div className="mt-8 pt-6 border-t border-white/[0.06] space-y-2.5">
             <div className="flex items-center gap-2 text-xs text-white/50">
               <ShieldCheck className="h-3.5 w-3.5 text-[#38D1BF]/60 shrink-0" />
-              Payment encrypted and processed securely by Stripe.
+              {t("event_checkout.payment_encrypted", "Payment encrypted and processed securely by Stripe.")}
             </div>
             <div className="text-[11px] text-white/35 font-mono">
-              Order: {orderId}
+              {t("event_checkout.order_label", "Order:")} {orderId}
             </div>
           </div>
         </div>
@@ -434,7 +444,7 @@ function CheckoutForm({
 
       {/* ── Right panel: Payment form ── */}
       <div className="order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10">
-        <h1 className="text-xl font-semibold text-white mb-6">Complete your booking</h1>
+        <h1 className="text-xl font-semibold text-white mb-6">{t("event_checkout.complete_booking", "Complete your booking")}</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 flex-1">
             <div className="space-y-4">
@@ -444,12 +454,12 @@ function CheckoutForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
-                      Buyer email
+                      {t("event_checkout.buyer_email", "Buyer email")}
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder={t("event_checkout.buyer_email_placeholder", "you@example.com")}
                         autoComplete="email"
                         className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                         {...field}
@@ -473,7 +483,7 @@ function CheckoutForm({
                       />
                     </FormControl>
                     <FormLabel className="text-white/70 text-sm font-normal cursor-pointer leading-none">
-                      Ticket is for me
+                      {t("event_checkout.ticket_is_for_me", "Ticket is for me")}
                     </FormLabel>
                   </FormItem>
                 )}
@@ -485,13 +495,13 @@ function CheckoutForm({
                   name="attendeeEmail"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
-                        Attendee email
-                      </FormLabel>
+                        <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
+                        {t("event_checkout.attendee_email", "Attendee email")}
+                        </FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="attendee@example.com"
+                          placeholder={t("event_checkout.attendee_email_placeholder", "attendee@example.com")}
                           className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                           {...field}
                         />
@@ -517,14 +527,14 @@ function CheckoutForm({
                       type="button"
                       className="absolute inset-0 z-10 bg-black/30 backdrop-blur-[2px] cursor-pointer"
                       onClick={() => setShowLockedPaymentDialog(true)}
-                      aria-label="Payment section locked. Click for details."
+                      aria-label={t("event_checkout.payment_section_locked", "Payment section locked. Click for details.")}
                     />
                     {showLockedPaymentDialog ? (
                       <div
                         className="absolute inset-0 z-20 flex items-start justify-center p-4"
                         role="dialog"
                         aria-modal="true"
-                        aria-label="Payment section locked"
+                        aria-label={t("event_checkout.payment_section_locked_label", "Payment section locked")}
                         onClick={() => setShowLockedPaymentDialog(false)}
                       >
                         <div
@@ -535,7 +545,7 @@ function CheckoutForm({
                             type="button"
                             onClick={() => setShowLockedPaymentDialog(false)}
                             className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-white hover:border-white/20 transition-colors"
-                            aria-label="Close"
+                            aria-label={t("event_checkout.close", "Close")}
                           >
                             <X className="h-3.5 w-3.5" />
                           </button>
@@ -545,10 +555,10 @@ function CheckoutForm({
                             </div>
                             <div className="min-w-0 flex-1">
                               <div className="text-sm font-semibold text-white">
-                                Enter your email first
+                                {t("event_checkout.enter_email_first", "Enter your email first")}
                               </div>
                               <div className="mt-1.5 text-xs leading-relaxed text-white/70">
-                                Add a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.
+                                {t("event_checkout.enter_email_desc", "Add a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.")}
                               </div>
                               <button
                                 type="button"
@@ -558,7 +568,7 @@ function CheckoutForm({
                                   form.setFocus("buyerEmail");
                                 }}
                               >
-                                Add email
+                                {t("event_checkout.add_email", "Add email")}
                               </button>
                             </div>
                           </div>
@@ -600,7 +610,7 @@ function CheckoutForm({
 
               <div className="flex items-center justify-between gap-4">
                 <div className="text-[11px] text-white/45">
-                  Details are encrypted and sent directly to Stripe.
+                  {t("event_checkout.details_encrypted", "Details are encrypted and sent directly to Stripe.")}
                 </div>
                 <a
                   href="https://stripe.com"
@@ -625,10 +635,10 @@ function CheckoutForm({
                 disabled={!stripe || !elements || submitting || !buyerEmailReadyForPayment}
               >
                 {submitting
-                  ? "Processing..."
+                  ? t("event_checkout.processing", "Processing...")
                   : buyerEmailReadyForPayment
-                    ? `Pay ${formattedTotalPrice || ""}`.trim()
-                    : "Enter email to continue"}
+                    ? t("event_checkout.pay_amount", "Pay {amount}").replace("{amount}", formattedTotalPrice || "")
+                    : t("event_checkout.enter_email_to_continue", "Enter email to continue")}
               </Button>
             </div>
           </form>
@@ -641,6 +651,7 @@ function CheckoutForm({
 const EventCheckout = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const { changeLanguage } = useLanguage();
 
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
@@ -706,8 +717,8 @@ const EventCheckout = () => {
       if (!res.ok) {
         const msg = await res
           .json()
-          .then((j) => j?.detail || "Couldn't start checkout")
-          .catch(() => "Couldn't start checkout");
+          .then((j) => j?.detail || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"))
+          .catch(() => t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"));
         throw new Error(msg);
       }
       const json = (await res.json()) as CreateIntentResponse;
@@ -717,17 +728,17 @@ const EventCheckout = () => {
       setOrderId(json.order_id);
       setClientSecret(json.client_secret);
     } catch (err: any) {
-      const message = err?.message || "Couldn't start checkout";
+      const message = err?.message || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
       setIntentError(message);
       toast({
-        title: "Checkout error",
+        title: t("event_checkout.checkout_error", "Checkout error"),
         description: message,
         variant: "destructive",
       });
     } finally {
       setIntentLoading(false);
     }
-  }, [eventSlug, idempotencyKey, toast]);
+  }, [eventSlug, idempotencyKey, toast, t]);
 
   React.useEffect(() => {
     if (!eventSlug) return;
@@ -750,7 +761,7 @@ const EventCheckout = () => {
 
   const checkoutPath = `/events/${eventSlug}/checkout`;
   const seoProps = {
-    title: { en: `Checkout: ${eventData.title} | Pulse`, es: `Checkout: ${eventData.title} | Pulse` },
+    title: { en: `Checkout: ${eventData.title} | Pulse`, es: `Pago: ${eventData.title} | Pulse` },
     description: { en: eventData.short_description, es: eventData.short_description },
     pathname: checkoutPath,
     image: eventData.primary_image,
@@ -767,10 +778,10 @@ const EventCheckout = () => {
             <div className="w-full max-w-xl mx-auto">
               <Card className="border-white/10 bg-[#0C1220]">
                 <CardContent className="p-8">
-                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
-                  <div className="text-2xl font-semibold text-white">Checkout unavailable</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">{t("event_checkout.checkout", "Checkout")}</div>
+                  <div className="text-2xl font-semibold text-white">{t("event_checkout.checkout_unavailable", "Checkout unavailable")}</div>
                   <div className="mt-2 text-sm text-white/65">
-                    Stripe is not configured. Please set{" "}
+                    {t("event_checkout.stripe_not_configured", "Stripe is not configured. Please set")}{" "}
                     <span className="font-mono text-white/80">VITE_STRIPE_PUBLISHABLE_KEY</span>.
                   </div>
                   <div className="mt-6">
@@ -779,7 +790,7 @@ const EventCheckout = () => {
                       className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-sm font-medium text-white/85 transition-colors"
                     >
                       <ArrowLeft className="h-4 w-4" />
-                      Back to event
+                      {t("event_checkout.back_to_event", "Back to event")}
                     </Link>
                   </div>
                 </CardContent>
@@ -839,8 +850,8 @@ const EventCheckout = () => {
               <div className="w-full max-w-xl mx-auto">
                 <Card className="border-white/10 bg-[#0C1220]">
                   <CardContent className="p-8">
-                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
-                    <div className="text-2xl font-semibold text-white">Couldn't start checkout</div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">{t("event_checkout.checkout", "Checkout")}</div>
+                    <div className="text-2xl font-semibold text-white">{t("event_checkout.couldnt_start_checkout", "Couldn't start checkout")}</div>
                     <div className="mt-2 text-sm text-white/65">{intentError}</div>
                     <div className="mt-6 flex gap-3 flex-col sm:flex-row">
                       <Button
@@ -848,14 +859,14 @@ const EventCheckout = () => {
                         disabled={intentLoading}
                         className="rounded-lg bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] font-semibold"
                       >
-                        Try again
+                        {t("event_checkout.try_again", "Try again")}
                       </Button>
                       <Link
                         to={`/events/${eventSlug}`}
                         className="inline-flex items-center gap-2 justify-center rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2 text-sm font-medium text-white/85 transition-colors"
                       >
                         <ArrowLeft className="h-4 w-4" />
-                        Back to event
+                        {t("event_checkout.back_to_event", "Back to event")}
                       </Link>
                     </div>
                   </CardContent>
@@ -965,10 +976,10 @@ const EventCheckout = () => {
               <div className="w-full max-w-xl mx-auto">
                 <Card className="border-white/10 bg-[#0C1220]">
                   <CardContent className="p-8">
-                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">Checkout</div>
-                    <div className="text-2xl font-semibold text-white">Loading checkout</div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">{t("event_checkout.checkout", "Checkout")}</div>
+                    <div className="text-2xl font-semibold text-white">{t("event_checkout.loading_checkout", "Loading checkout")}</div>
                     <div className="mt-2 text-sm text-white/65">
-                      Please wait while we prepare your payment.
+                      {t("event_checkout.please_wait", "Please wait while we prepare your payment.")}
                     </div>
                   </CardContent>
                 </Card>

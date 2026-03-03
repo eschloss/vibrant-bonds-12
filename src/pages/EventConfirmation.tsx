@@ -25,15 +25,21 @@ import {
   getProviderName,
 } from "@/lib/eventApi";
 
-function formatDateTimeWindow(startIso: string, latestIso?: string | null): { text: string; hasWindow: boolean } {
+function formatDateTimeWindow(
+  startIso: string,
+  latestIso?: string | null,
+  opts?: { locale?: string; startsBetween?: string }
+): { text: string; hasWindow: boolean } {
+  const locale = opts?.locale || "en-US";
+  const startsBetween = opts?.startsBetween || "Starts between";
   const start = new Date(startIso);
-  const date = start.toLocaleDateString("en-US", {
+  const date = start.toLocaleDateString(locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const startTime = start.toLocaleTimeString("en-US", {
+  const startTime = start.toLocaleTimeString(locale, {
     hour: "numeric",
     minute: "2-digit",
   });
@@ -41,18 +47,18 @@ function formatDateTimeWindow(startIso: string, latestIso?: string | null): { te
   const latest = (latestIso || "").trim();
   if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
 
-  const latestTime = new Date(latest).toLocaleTimeString("en-US", {
+  const latestTime = new Date(latest).toLocaleTimeString(locale, {
     hour: "numeric",
     minute: "2-digit",
   });
 
-  return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
+  return { text: `${date} · ${startsBetween} ${startTime}–${latestTime}`, hasWindow: true };
 }
 
 const EventConfirmation = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const { toast } = useToast();
   const { changeLanguage } = useLanguage();
 
@@ -235,21 +241,23 @@ const EventConfirmation = () => {
             <Card className="border-white/10 bg-gray-800/35">
               <CardContent className="p-8">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">
-                  Confirmation
+                  {t("event_confirmation.confirmation.title", "Confirmation")}
                 </div>
                 <h1 className="text-2xl font-semibold text-white">
-                  {!orderIdFromUrl ? "Missing order" : "Order not found"}
+                  {!orderIdFromUrl
+                    ? t("event_confirmation.error.missing_order", "Missing order")
+                    : t("event_confirmation.error.order_not_found", "Order not found")}
                 </h1>
                 <p className="mt-2 text-sm text-white/65">
                   {!orderIdFromUrl
-                    ? "No order ID was provided. Please complete your purchase from the checkout page."
-                    : "We couldn't find an order matching that reference. It may have expired or the link may be incorrect."}
+                    ? t("event_confirmation.error.no_order_id", "No order ID was provided. Please complete your purchase from the checkout page.")
+                    : t("event_confirmation.error.order_expired", "We couldn't find an order matching that reference. It may have expired or the link may be incorrect.")}
                 </p>
                 <Link
                   to={`/events/${eventData.slug}`}
                   className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-sm font-medium text-white/85 transition-colors"
                 >
-                  Back to event details
+                  {t("event_confirmation.error.back_to_event", "Back to event details")}
                 </Link>
               </CardContent>
             </Card>
@@ -265,7 +273,10 @@ const EventConfirmation = () => {
   const priceOpts = getEventPriceOpts(data);
   const providerName = getProviderName(data.provider);
   const organiser = data.place;
-  const durationText = data.duration_hours === 1 ? "1 hour" : `${data.duration_hours} hours`;
+  const durationText =
+    data.duration_hours === 1
+      ? t("event_detail.duration.hour", "1 hour")
+      : t("event_detail.duration.hours", "{n} hours").replace("{n}", String(data.duration_hours));
 
   const toMajorUnits = (minor: number) => minor / 100;
   const formattedTicketPrice = formatEventPrice(toMajorUnits(order.ticket_total), priceOpts);
@@ -277,7 +288,11 @@ const EventConfirmation = () => {
   const formattedTotalPrice = formatEventPrice(toMajorUnits(order.amount_total), priceOpts);
 
   const confirmationPath = `/events/${data.slug}/confirmation`;
-  const dateTime = formatDateTimeWindow(data.datetime_local, data.datetime_local_latest);
+  const locale = currentLanguage === "es" ? "es" : "en-US";
+  const dateTime = formatDateTimeWindow(data.datetime_local, data.datetime_local_latest, {
+    locale,
+    startsBetween: t("event_detail.starts_between", "Starts between"),
+  });
   const entranceTimeTooltip = t(
     "event_confirmation.entrance_time.tooltip",
     "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
@@ -582,7 +597,7 @@ const EventConfirmation = () => {
                         {order.attendee_email ? (
                           <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-2">
                             <span className="text-white/55 block text-xs uppercase tracking-wider mb-0.5">
-                              Ticket sent to
+                              {t("event_confirmation.email.ticket_sent_to", "Ticket sent to")}
                             </span>
                             <span className="text-white/90">{order.attendee_email}</span>
                           </div>
@@ -591,7 +606,7 @@ const EventConfirmation = () => {
                         order.buyer_email !== order.attendee_email ? (
                           <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-2">
                             <span className="text-white/55 block text-xs uppercase tracking-wider mb-0.5">
-                              Confirmation sent to
+                              {t("event_confirmation.email.confirmation_sent_to", "Confirmation sent to")}
                             </span>
                             <span className="text-white/90">{order.buyer_email}</span>
                           </div>
