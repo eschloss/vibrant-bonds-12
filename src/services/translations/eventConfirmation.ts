@@ -25,7 +25,7 @@ export const eventConfirmation = {
     "event_confirmation.where": "Where",
     "event_confirmation.duration": "Duration",
     "event_confirmation.provider": "Provider",
-    "event_confirmation.provider.see_more_details": "See more details about the event",
+    "event_confirmation.provider.see_more_details": "View official event page",
     "event_confirmation.back_to_event": "Back to event details",
 
     "event_confirmation.next_steps.title": "Next steps",
@@ -86,7 +86,7 @@ export const eventConfirmation = {
     "event_confirmation.where": "Dónde",
     "event_confirmation.duration": "Duración",
     "event_confirmation.provider": "Proveedor",
-    "event_confirmation.provider.see_more_details": "Ver más detalles del evento",
+    "event_confirmation.provider.see_more_details": "Ver página oficial del evento",
     "event_confirmation.back_to_event": "Volver a los detalles del evento",
 
     "event_confirmation.next_steps.title": "Próximos pasos",

@@ -28,6 +28,8 @@ export interface GetKikiEventResponse {
   image_4?: string;
   image_5?: string;
   datetime_local: string;
+  /** If present, user's entrance time can be any time between datetime_local and this latest start time. */
+  datetime_local_latest?: string | null;
   place: string;
   ticket_price: number;
   provider_fee: number;
@@ -40,7 +42,8 @@ export interface GetKikiEventResponse {
   provider: KikiProviderDetails;
   duration_hours: number;
   provider_event_url?: string;
-  steps?: unknown[];
+  /** URL for the post-purchase vibe test. */
+  vibe_test_url?: string;
 }
 
 /** Extract provider display name, handling both legacy string and new object shape */

@@ -159,18 +159,29 @@ function CheckoutForm({
 
   const priceOpts = getEventPriceOpts(eventData);
   const formattedTotalPrice = formatEventPrice(eventData.total_price, priceOpts);
-  const formattedEventDate = React.useMemo(
-    () =>
-      new Date(eventData.datetime_local).toLocaleString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-      }),
-    [eventData.datetime_local]
-  );
+  const eventDateTime = React.useMemo(() => {
+    const start = new Date(eventData.datetime_local);
+    const date = start.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    const startTime = start.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const latest = (eventData.datetime_local_latest || "").trim();
+    if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
+    const latestTime = new Date(latest).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
+  }, [eventData.datetime_local, eventData.datetime_local_latest]);
+
+  const entranceTimeTooltip =
+    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).";
 
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
@@ -328,7 +339,30 @@ function CheckoutForm({
           <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-7">
             <div className="flex items-center gap-2">
               <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
-              <span>{formattedEventDate}</span>
+              <span className="inline-flex items-center gap-2">
+                <span>{eventDateTime.text}</span>
+                {eventDateTime.hasWindow ? (
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                          aria-label="Entrance time info"
+                        >
+                          ?
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="right"
+                        className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
+                      >
+                        {entranceTimeTooltip}
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                ) : null}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4 shrink-0 text-white/40" />

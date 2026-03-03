@@ -20,6 +20,7 @@ import NotFound from "@/pages/NotFound";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import EventFaqSection from "@/components/EventFaqSection";
 import EventProviderSection from "@/components/EventProviderSection";
 import {
@@ -38,15 +39,28 @@ import {
   getProviderName,
 } from "@/lib/eventApi";
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-US", {
+function formatDateTimeWindowLong(startIso: string, latestIso?: string | null): { text: string; hasWindow: boolean } {
+  const start = new Date(startIso);
+  const date = start.toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
+  });
+  const startTime = start.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
   });
+
+  const latest = (latestIso || "").trim();
+  if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
+
+  const latestTime = new Date(latest).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
 }
 
 function formatDuration(hours: number): string {
@@ -206,6 +220,9 @@ const EventDetail = () => {
   };
 
   const durationText = formatDuration(data.duration_hours);
+  const dateTime = formatDateTimeWindowLong(data.datetime_local, data.datetime_local_latest);
+  const entranceTimeTooltip =
+    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).";
 
 
   return (
@@ -316,7 +333,27 @@ const EventDetail = () => {
               <div className="flex flex-wrap gap-4 text-gray-300 mb-5">
                 <span className="flex items-center gap-2">
                   <Calendar size={18} />
-                  {formatDate(data.datetime_local)}
+                  <span className="inline-flex items-center gap-2">
+                    <span>{dateTime.text}</span>
+                    {dateTime.hasWindow ? (
+                      <TooltipProvider delayDuration={100}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              type="button"
+                              className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                              aria-label="Entrance time info"
+                            >
+                              ?
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90">
+                            {entranceTimeTooltip}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : null}
+                  </span>
                 </span>
                 <span className="flex items-center gap-2">
                   <MapPin size={18} />
@@ -541,7 +578,7 @@ const EventDetail = () => {
               organiser={organiser}
               provider={providerName}
               price={formattedTotalPrice}
-              dateTimeLabel={formatDate(data.datetime_local)}
+              dateTimeLabel={dateTime.text}
               duration={durationText}
             />
           </div>

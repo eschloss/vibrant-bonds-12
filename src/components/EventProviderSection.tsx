@@ -63,7 +63,7 @@ export default function EventProviderSection({
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-1 text-xs text-[#38D1BF] hover:text-[#38D1BF]/80 transition-colors"
               >
-                {t("event_confirmation.provider.see_more_details", "See more details about the event")}
+                {t("event_confirmation.provider.see_more_details", "View official event page")}
                 <ExternalLink size={12} />
               </a>
             )}
@@ -96,7 +96,7 @@ export default function EventProviderSection({
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1.5 text-sm text-[#38D1BF] hover:text-[#38D1BF]/80 transition-colors"
             >
-              {t("event_confirmation.provider.see_more_details", "See more details about the event")}
+              {t("event_confirmation.provider.see_more_details", "View official event page")}
               <ExternalLink size={14} />
             </a>
           )}

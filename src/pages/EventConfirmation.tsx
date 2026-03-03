@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import EventConfirmationNextSteps from "@/components/EventConfirmationNextSteps";
 import EventProviderSection from "@/components/EventProviderSection";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   type GetKikiEventResponse,
   type KikiOrderDetailsResponse,
@@ -24,19 +25,28 @@ import {
   getProviderName,
 } from "@/lib/eventApi";
 
-function formatDateTime(iso: string): string {
-  const d = new Date(iso);
-  const date = d.toLocaleDateString("en-US", {
+function formatDateTimeWindow(startIso: string, latestIso?: string | null): { text: string; hasWindow: boolean } {
+  const start = new Date(startIso);
+  const date = start.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const time = d.toLocaleTimeString("en-US", {
+  const startTime = start.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
   });
-  return `${date} · ${time}`;
+
+  const latest = (latestIso || "").trim();
+  if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
+
+  const latestTime = new Date(latest).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  return { text: `${date} · Starts between ${startTime}–${latestTime}`, hasWindow: true };
 }
 
 const EventConfirmation = () => {
@@ -141,17 +151,26 @@ const EventConfirmation = () => {
 
   const VIBE_CHECK_URL = "https://form.typeform.com/to/REPLACE_ME";
   const vibeCheckUrlWithParams = React.useMemo(() => {
+    const baseUrl = (eventData?.vibe_test_url || "").trim() || VIBE_CHECK_URL;
     try {
-      const url = new URL(VIBE_CHECK_URL);
+      const url = new URL(baseUrl);
       url.searchParams.set("city", eventData?.city || "");
       url.searchParams.set("event_slug", eventData?.slug || eventSlug || "");
       url.searchParams.set("event_title", eventData?.title || "");
       url.searchParams.set("confirmation_number", confirmationNumber);
       return url.toString();
     } catch {
-      return VIBE_CHECK_URL;
+      return baseUrl;
     }
-  }, [VIBE_CHECK_URL, eventData?.city, eventData?.slug, eventData?.title, eventSlug, confirmationNumber]);
+  }, [
+    VIBE_CHECK_URL,
+    eventData?.vibe_test_url,
+    eventData?.city,
+    eventData?.slug,
+    eventData?.title,
+    eventSlug,
+    confirmationNumber,
+  ]);
 
   React.useEffect(() => {
     if (!eventData) return;
@@ -258,6 +277,11 @@ const EventConfirmation = () => {
   const formattedTotalPrice = formatEventPrice(toMajorUnits(order.amount_total), priceOpts);
 
   const confirmationPath = `/events/${data.slug}/confirmation`;
+  const dateTime = formatDateTimeWindow(data.datetime_local, data.datetime_local_latest);
+  const entranceTimeTooltip = t(
+    "event_confirmation.entrance_time.tooltip",
+    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+  );
 
   const seoProps = {
     title: {
@@ -398,8 +422,26 @@ const EventConfirmation = () => {
                           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
                             <div className="flex items-start gap-2 min-w-0">
                               <Calendar size={16} className="text-pulse-blue shrink-0 mt-0.5" />
-                              <span className="leading-snug min-w-0">
-                                {formatDateTime(data.datetime_local)}
+                              <span className="leading-snug min-w-0 inline-flex items-center gap-2">
+                                <span>{dateTime.text}</span>
+                                {dateTime.hasWindow ? (
+                                  <TooltipProvider delayDuration={100}>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <button
+                                          type="button"
+                                          className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                                          aria-label={t("event_confirmation.entrance_time.help", "Entrance time info")}
+                                        >
+                                          ?
+                                        </button>
+                                      </TooltipTrigger>
+                                      <TooltipContent className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90">
+                                        {entranceTimeTooltip}
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                ) : null}
                               </span>
                             </div>
                             <div className="flex items-start gap-2 min-w-0">
