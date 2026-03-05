@@ -16,15 +16,19 @@ export const eventCheckout = {
     "event_checkout.order_label": "Order:",
 
     "event_checkout.complete_booking": "Complete your booking",
+    "event_checkout.first_name": "First name",
+    "event_checkout.first_name_placeholder": "Jane",
+    "event_checkout.last_name": "Last name",
+    "event_checkout.last_name_placeholder": "Doe",
     "event_checkout.buyer_email": "Buyer email",
     "event_checkout.buyer_email_placeholder": "you@example.com",
     "event_checkout.ticket_is_for_me": "Ticket is for me",
     "event_checkout.attendee_email": "Attendee email",
     "event_checkout.attendee_email_placeholder": "attendee@example.com",
 
-    "event_checkout.enter_email_first": "Enter your email first",
+    "event_checkout.enter_email_first": "Enter your name and email first",
     "event_checkout.enter_email_desc":
-      "Add a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.",
+      "Add your first name, last name, and a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.",
     "event_checkout.add_email": "Add email",
     "event_checkout.payment_section_locked": "Payment section locked. Click for details.",
     "event_checkout.payment_section_locked_label": "Payment section locked",
@@ -33,7 +37,7 @@ export const eventCheckout = {
     "event_checkout.details_encrypted": "Details are encrypted and sent directly to Stripe.",
     "event_checkout.processing": "Processing...",
     "event_checkout.pay_amount": "Pay {amount}",
-    "event_checkout.enter_email_to_continue": "Enter email to continue",
+    "event_checkout.enter_email_to_continue": "Enter name and email to continue",
 
     "event_checkout.checkout_error": "Checkout error",
     "event_checkout.something_went_wrong": "Something went wrong. Please try again.",
@@ -50,6 +54,8 @@ export const eventCheckout = {
     "event_checkout.please_wait": "Please wait while we prepare your payment.",
 
     // Validation
+    "event_checkout.validation.first_name_required": "First name is required",
+    "event_checkout.validation.last_name_required": "Last name is required",
     "event_checkout.validation.email_required": "Email is required",
     "event_checkout.validation.email_invalid": "Enter a valid email",
     "event_checkout.validation.attendee_required": "Attendee email is required",
@@ -72,15 +78,19 @@ export const eventCheckout = {
     "event_checkout.order_label": "Pedido:",
 
     "event_checkout.complete_booking": "Completa tu reserva",
+    "event_checkout.first_name": "Nombre",
+    "event_checkout.first_name_placeholder": "María",
+    "event_checkout.last_name": "Apellido",
+    "event_checkout.last_name_placeholder": "García",
     "event_checkout.buyer_email": "Email del comprador",
     "event_checkout.buyer_email_placeholder": "tu@ejemplo.com",
     "event_checkout.ticket_is_for_me": "La entrada es para mí",
     "event_checkout.attendee_email": "Email del asistente",
     "event_checkout.attendee_email_placeholder": "asistente@ejemplo.com",
 
-    "event_checkout.enter_email_first": "Introduce tu email primero",
+    "event_checkout.enter_email_first": "Introduce tu nombre y email primero",
     "event_checkout.enter_email_desc":
-      "Añade un email de comprador válido arriba para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
+      "Añade tu nombre, apellido y un email de comprador válido arriba para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
     "event_checkout.add_email": "Añadir email",
     "event_checkout.payment_section_locked": "Sección de pago bloqueada. Haz clic para más información.",
     "event_checkout.payment_section_locked_label": "Sección de pago bloqueada",
@@ -89,7 +99,7 @@ export const eventCheckout = {
     "event_checkout.details_encrypted": "Los datos se encriptan y se envían directamente a Stripe.",
     "event_checkout.processing": "Procesando...",
     "event_checkout.pay_amount": "Pagar {amount}",
-    "event_checkout.enter_email_to_continue": "Introduce email para continuar",
+    "event_checkout.enter_email_to_continue": "Introduce nombre y email para continuar",
 
     "event_checkout.checkout_error": "Error en el checkout",
     "event_checkout.something_went_wrong": "Algo salió mal. Por favor, inténtalo de nuevo.",
@@ -106,6 +116,8 @@ export const eventCheckout = {
     "event_checkout.please_wait": "Por favor espera mientras preparamos tu pago.",
 
     // Validation
+    "event_checkout.validation.first_name_required": "El nombre es obligatorio",
+    "event_checkout.validation.last_name_required": "El apellido es obligatorio",
     "event_checkout.validation.email_required": "El email es obligatorio",
     "event_checkout.validation.email_invalid": "Introduce un email válido",
     "event_checkout.validation.attendee_required": "El email del asistente es obligatorio",

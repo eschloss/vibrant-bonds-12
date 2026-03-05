@@ -62,8 +62,19 @@ function createCheckoutSchema(t: (key: string, fallback: string) => string) {
     .min(1, t("event_checkout.validation.email_required", "Email is required"))
     .email(t("event_checkout.validation.email_invalid", "Enter a valid email"));
 
+  const firstNameSchema = z
+    .string()
+    .trim()
+    .min(1, t("event_checkout.validation.first_name_required", "First name is required"));
+  const lastNameSchema = z
+    .string()
+    .trim()
+    .min(1, t("event_checkout.validation.last_name_required", "Last name is required"));
+
   return z
     .object({
+      firstName: firstNameSchema,
+      lastName: lastNameSchema,
       buyerEmail: emailSchema,
       attendeeSameAsBuyer: z.boolean(),
       attendeeEmail: z.string().trim().optional(),
@@ -130,6 +141,8 @@ function CheckoutForm({
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
+      firstName: "",
+      lastName: "",
       buyerEmail: "",
       attendeeSameAsBuyer: true,
       attendeeEmail: "",
@@ -138,10 +151,15 @@ function CheckoutForm({
   });
 
   const attendeeSameAsBuyer = form.watch("attendeeSameAsBuyer");
+  const firstNameValue = form.watch("firstName");
+  const lastNameValue = form.watch("lastName");
   const buyerEmailValue = form.watch("buyerEmail");
   const buyerEmailReadyForPayment = React.useMemo(() => {
-    return z.string().trim().min(1).email().safeParse((buyerEmailValue || "").trim()).success;
-  }, [buyerEmailValue]);
+    const emailOk = z.string().trim().min(1).email().safeParse((buyerEmailValue || "").trim()).success;
+    const firstNameOk = (firstNameValue || "").trim().length > 0;
+    const lastNameOk = (lastNameValue || "").trim().length > 0;
+    return emailOk && firstNameOk && lastNameOk;
+  }, [buyerEmailValue, firstNameValue, lastNameValue]);
 
   const [showLockedPaymentDialog, setShowLockedPaymentDialog] = React.useState(false);
 
@@ -195,6 +213,8 @@ function CheckoutForm({
 
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
+      const firstName = values.firstName.trim();
+      const lastName = values.lastName.trim();
       const buyerEmail = values.buyerEmail.trim().toLowerCase();
       const attendeeEmail = values.attendeeSameAsBuyer
         ? buyerEmail
@@ -205,6 +225,8 @@ function CheckoutForm({
         headers: { "Content-Type": "application/json", accept: "application/json" },
         body: JSON.stringify({
           order_id: orderId,
+          first_name: firstName,
+          last_name: lastName,
           buyer_email: buyerEmail,
           attendee_email: attendeeEmail,
         }),
@@ -274,12 +296,17 @@ function CheckoutForm({
   const onExpressConfirm = async () => {
     if (!stripe || !elements) return;
     if (!buyerEmailReadyForPayment) {
-      form.setFocus("buyerEmail");
+      const first = (form.getValues("firstName") || "").trim();
+      const last = (form.getValues("lastName") || "").trim();
+      const emailOk = z.string().trim().min(1).email().safeParse((form.getValues("buyerEmail") || "").trim()).success;
+      if (!first) form.setFocus("firstName");
+      else if (!last) form.setFocus("lastName");
+      else if (!emailOk) form.setFocus("buyerEmail");
       return;
     }
     setSubmitting(true);
     try {
-      const ok = await form.trigger(["buyerEmail", "attendeeSameAsBuyer", "attendeeEmail"]);
+      const ok = await form.trigger(["firstName", "lastName", "buyerEmail", "attendeeSameAsBuyer", "attendeeEmail"]);
       if (!ok) return;
       await attachEmails(form.getValues());
       await confirmStripePayment();
@@ -448,6 +475,49 @@ function CheckoutForm({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 flex-1">
             <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
+                        {t("event_checkout.first_name", "First name")}
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t("event_checkout.first_name_placeholder", "Jane")}
+                          autoComplete="given-name"
+                          className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/70 text-xs font-medium uppercase tracking-wide">
+                        {t("event_checkout.last_name", "Last name")}
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={t("event_checkout.last_name_placeholder", "Doe")}
+                          autoComplete="family-name"
+                          className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <FormField
                 control={form.control}
                 name="buyerEmail"
@@ -555,17 +625,21 @@ function CheckoutForm({
                             </div>
                             <div className="min-w-0 flex-1">
                               <div className="text-sm font-semibold text-white">
-                                {t("event_checkout.enter_email_first", "Enter your email first")}
+                                {t("event_checkout.enter_email_first", "Enter your name and email first")}
                               </div>
                               <div className="mt-1.5 text-xs leading-relaxed text-white/70">
-                                {t("event_checkout.enter_email_desc", "Add a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.")}
+                                {t("event_checkout.enter_email_desc", "Add your first name, last name, and a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.")}
                               </div>
                               <button
                                 type="button"
                                 className="mt-4 rounded-lg border border-white/15 bg-white/[0.05] px-4 py-2 text-xs font-semibold text-white/90 hover:bg-white/[0.09] hover:border-white/25 transition-colors"
                                 onClick={() => {
                                   setShowLockedPaymentDialog(false);
-                                  form.setFocus("buyerEmail");
+                                  const first = (form.getValues("firstName") || "").trim();
+                                  const last = (form.getValues("lastName") || "").trim();
+                                  if (!first) form.setFocus("firstName");
+                                  else if (!last) form.setFocus("lastName");
+                                  else form.setFocus("buyerEmail");
                                 }}
                               >
                                 {t("event_checkout.add_email", "Add email")}
@@ -638,7 +712,7 @@ function CheckoutForm({
                   ? t("event_checkout.processing", "Processing...")
                   : buyerEmailReadyForPayment
                     ? t("event_checkout.pay_amount", "Pay {amount}").replace("{amount}", formattedTotalPrice || "")
-                    : t("event_checkout.enter_email_to_continue", "Enter email to continue")}
+                    : t("event_checkout.enter_email_to_continue", "Enter name and email to continue")}
               </Button>
             </div>
           </form>
