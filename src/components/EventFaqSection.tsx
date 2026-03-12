@@ -54,7 +54,6 @@ export default function EventFaqSection({
     { qKey: "event_detail.faq.q8", aKey: "event_detail.faq.a8" },
     { qKey: "event_detail.faq.q9", aKey: "event_detail.faq.a9" },
     { qKey: "event_detail.faq.q10", aKey: "event_detail.faq.a10" },
-    { qKey: "event_detail.faq.q11", aKey: "event_detail.faq.a11" },
   ];
 
   const faqsWithText = faqs.map((f) => ({

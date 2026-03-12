@@ -20,7 +20,7 @@ export const eventDetail = {
     "event_detail.organised_by": "This event is organised by",
     "event_detail.organised_by_suffix": "Here's what Pulse adds.",
     "event_detail.step1_title": "Get matched with likeminded attendees",
-    "event_detail.step1_desc": "Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends.",
+    "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small intimate group of likeminded solo attendees who all want to make friends.",
     "event_detail.step2_title": "Break the ice",
     "event_detail.step2_desc": "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.",
     "event_detail.step3_title": "Show up with your crew",
@@ -30,7 +30,7 @@ export const eventDetail = {
 
     "event_detail.about_this_event": "About this event",
     "event_detail.good_to_know": "Good to know",
-    "event_detail.good_to_know_1": "Groups are typically 5–8 people. You'll know your group before the event.",
+    "event_detail.good_to_know_1": "Depending on the event and number of signups, your group can be anywhere from 5 to 20 people. You'll know your group before the event.",
     "event_detail.good_to_know_2": "Your booking includes a real event ticket issued through the provider.",
     "event_detail.good_to_know_3": "If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.",
     "event_detail.good_to_know_4": "You don't need to know anyone. That's the whole point.",
@@ -89,10 +89,6 @@ export const eventDetail = {
     "event_detail.faq.q10": "What happens after {eventTitle} ends?",
     "event_detail.faq.a10":
       "Your group chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
-
-    "event_detail.faq.q11": "What if there aren't enough people for a group?",
-    "event_detail.faq.a11":
-      "If we're unable to form a Pulse group for {eventTitle} on {dateTimeLabel}, we'll notify you in advance.\n\nIn that case, the Pulse portion of your purchase will be refunded. Your event ticket remains valid under {provider}'s policy.",
   },
   es: {
     "event_detail.starts_between": "Comienza entre",
@@ -115,7 +111,7 @@ export const eventDetail = {
     "event_detail.organised_by": "Este evento está organizado por",
     "event_detail.organised_by_suffix": "Esto es lo que Pulse añade.",
     "event_detail.step1_title": "Emparejarte con asistentes afines",
-    "event_detail.step1_desc": "Completa un vibe test rápido para que podamos colocarte con 5–8 asistentes solos afines que quieren hacer amigos.",
+    "event_detail.step1_desc": "Completa un vibe test rápido para que podamos colocarte en un grupo pequeño e íntimo de asistentes solos afines que quieren hacer amigos.",
     "event_detail.step2_title": "Romper el hielo",
     "event_detail.step2_desc": "Chatea con los miembros de tu grupo, guiados por nuestros iniciadores de conversación para que os conozcáis antes del evento.",
     "event_detail.step3_title": "Llega con tu crew",
@@ -125,7 +121,7 @@ export const eventDetail = {
 
     "event_detail.about_this_event": "Sobre este evento",
     "event_detail.good_to_know": "Buena información",
-    "event_detail.good_to_know_1": "Los grupos suelen ser de 5–8 personas. Conocerás a tu grupo antes del evento.",
+    "event_detail.good_to_know_1": "Dependiendo del evento y del número de inscripciones, tu grupo puede ser de entre 5 y 20 personas. Conocerás a tu grupo antes del evento.",
     "event_detail.good_to_know_2": "Tu reserva incluye una entrada real emitida por el proveedor.",
     "event_detail.good_to_know_3": "Si no podemos formar un grupo, la tarifa de Pulse se reembolsa. Tu entrada sigue siendo válida.",
     "event_detail.good_to_know_4": "No necesitas conocer a nadie. Ese es el punto.",
@@ -184,9 +180,5 @@ export const eventDetail = {
     "event_detail.faq.q10": "¿Qué pasa cuando termina {eventTitle}?",
     "event_detail.faq.a10":
       "Tu chat grupal permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMuchos grupos usan ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
-
-    "event_detail.faq.q11": "¿Qué pasa si no hay suficientes personas para un grupo?",
-    "event_detail.faq.a11":
-      "Si no podemos formar un grupo de Pulse para {eventTitle} el {dateTimeLabel}, te avisaremos con antelación.\n\nEn ese caso, la parte de Pulse de tu compra se reembolsará. Tu entrada al evento sigue siendo válida según la política de {provider}.",
   },
 };

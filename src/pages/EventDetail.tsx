@@ -38,6 +38,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
+  parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import { trackMetaPixelEvent } from "@/lib/utils";
 
@@ -51,7 +52,7 @@ const EventDetail = () => {
     startIso: string,
     latestIso?: string | null
   ): { text: string; hasWindow: boolean } => {
-    const start = new Date(startIso);
+    const start = parseEventLocalDateTime(startIso);
     const date = start.toLocaleDateString(locale, {
       weekday: "long",
       month: "long",
@@ -64,7 +65,7 @@ const EventDetail = () => {
     });
     const latest = (latestIso || "").trim();
     if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
-    const latestTime = new Date(latest).toLocaleTimeString(locale, {
+    const latestTime = parseEventLocalDateTime(latest).toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "2-digit",
     });
@@ -76,6 +77,18 @@ const EventDetail = () => {
     if (hours === 1) return t("event_detail.duration.hour", "1 hour");
     return t("event_detail.duration.hours", "{n} hours").replace("{n}", String(hours));
   };
+
+  const sanitizeHtml = (html: string): string =>
+    html
+      .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
+      .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, "")
+      .replace(/\son\w+=(["']).*?\1/gi, "")
+      .replace(/\son\w+=([^\s>]+)/gi, "")
+      .replace(/(href|src)=(["'])javascript:[\s\S]*?\2/gi, '$1="#"');
+
+  const stripHtml = (html: string): string =>
+    html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
   const [eventData, setEventData] = useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -172,8 +185,8 @@ const EventDetail = () => {
   const priceOpts = getEventPriceOpts(data);
 
   const formattedCityName = data.city_label || "";
-  const organiser = data.place; // Default: use venue as organiser
   const providerName = getProviderName(data.provider);
+  const organiser = providerName || data.place;
 
   const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
   const formattedTicketPrice = formatEventPrice(data.ticket_price, priceOpts);
@@ -191,18 +204,7 @@ const EventDetail = () => {
     data.image_5,
   ].filter(Boolean) as string[];
 
-  const displayHeroImages =
-    heroImages.length >= 5
-      ? heroImages.slice(0, 5)
-      : heroImages.length > 0
-        ? [
-            ...heroImages,
-            ...Array.from(
-              { length: Math.max(0, 5 - heroImages.length) },
-              () => data.primary_image
-            ),
-          ]
-        : [data.primary_image];
+  const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
 
@@ -226,7 +228,7 @@ const EventDetail = () => {
     "@context": "https://schema.org",
     "@type": "Event",
     name: data.title,
-    description: `${introLine}\n\n${data.long_description}`,
+    description: `${introLine}\n\n${stripHtml(data.long_description)}`,
     startDate: data.datetime_local,
     location: {
       "@type": "Place",
@@ -273,7 +275,7 @@ const EventDetail = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="mb-8">
-                <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden border border-gray-700 bg-black/20">
+                <div className="relative h-64 md:h-96 xl:h-[34rem] 2xl:h-[38rem] rounded-2xl overflow-hidden border border-gray-700 bg-black/20">
                   <Carousel setApi={setHeroCarouselApi} opts={{ loop: true }} className="h-full">
                     <CarouselContent className="ml-0 h-full">
                       {displayHeroImages.map((img, i) => (
@@ -414,7 +416,7 @@ const EventDetail = () => {
                   "Pulse matches you with a small group of solo attendees going to the same event, so you show up with new friends."
                 )}
               </p>
-              <div className="max-w-3xl">
+              <div>
                 <div className="text-xs uppercase tracking-wider text-white/60">{t("event_detail.about_the_event", "About the event")}</div>
                 <p className="text-lg text-gray-300 mt-1">{data.short_description}</p>
               </div>
@@ -473,7 +475,15 @@ const EventDetail = () => {
                     </h2>
                     <p className="text-sm text-gray-400 mb-5">
                       {t("event_detail.organised_by", "This event is organised by")}{" "}
-                      <span className="text-white/75 font-medium">{organiser}</span>.
+                      <span className="text-white/75 font-medium">{organiser}</span>
+                      {data.place ? (
+                        <>
+                          {" "}
+                          <span className="text-gray-400">at</span>{" "}
+                          <span className="font-medium text-[#38D1BF]">{data.place}</span>
+                        </>
+                      ) : null}
+                      .
                       {" "}{t("event_detail.organised_by_suffix", "Here's what Pulse adds.")}
                     </p>
 
@@ -531,9 +541,10 @@ const EventDetail = () => {
 
                 <div className="prose prose-invert max-w-none">
                   <h2>{t("event_detail.about_this_event", "About this event")}</h2>
-                  <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
-                    {data.long_description}
-                  </p>
+                  <div
+                    className="text-gray-300 text-lg leading-relaxed prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-[#38D1BF] prose-a:no-underline hover:prose-a:underline prose-li:marker:text-gray-500"
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.long_description) }}
+                  />
                   <div className="mt-6 not-prose">
                     <EventProviderSection
                       provider={data.provider}
@@ -542,9 +553,8 @@ const EventDetail = () => {
                   </div>
                   <h3>{t("event_detail.good_to_know", "Good to know")}</h3>
                   <ul className="text-gray-300">
-                    <li>{t("event_detail.good_to_know_1", "Groups are typically 5–8 people. You'll know your group before the event.")}</li>
+                    <li>{t("event_detail.good_to_know_1", "Depending on the event and number of signups, your group can be anywhere from 5 to 20 people. You'll know your group before the event.")}</li>
                     <li>{t("event_detail.good_to_know_2", "Your booking includes a real event ticket issued through the provider.")}</li>
-                    <li>{t("event_detail.good_to_know_3", "If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.")}</li>
                     <li>{t("event_detail.good_to_know_4", "You don't need to know anyone. That's the whole point.")}</li>
                     <li>{t("event_detail.good_to_know_5", "Meet 15 minutes before the start so you can all enter the venue together.")}</li>
                     <li>{t("event_detail.good_to_know_6", "This is a public event. You may meet other attendees who didn't book through Pulse.")}</li>

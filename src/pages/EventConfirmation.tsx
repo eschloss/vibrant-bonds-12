@@ -23,6 +23,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
+  parseEventLocalDateTime,
 } from "@/lib/eventApi";
 
 function formatDateTimeWindow(
@@ -32,7 +33,7 @@ function formatDateTimeWindow(
 ): { text: string; hasWindow: boolean } {
   const locale = opts?.locale || "en-US";
   const startsBetween = opts?.startsBetween || "Starts between";
-  const start = new Date(startIso);
+  const start = parseEventLocalDateTime(startIso);
   const date = start.toLocaleDateString(locale, {
     weekday: "short",
     month: "short",
@@ -47,7 +48,7 @@ function formatDateTimeWindow(
   const latest = (latestIso || "").trim();
   if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
 
-  const latestTime = new Date(latest).toLocaleTimeString(locale, {
+  const latestTime = parseEventLocalDateTime(latest).toLocaleTimeString(locale, {
     hour: "numeric",
     minute: "2-digit",
   });

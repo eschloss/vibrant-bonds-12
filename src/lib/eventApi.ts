@@ -57,6 +57,32 @@ export function getProviderName(provider: KikiProviderDetails | string | null | 
   return provider.name || "Provider";
 }
 
+/**
+ * Treat event datetimes from the API as already-local wall-clock times.
+ * This avoids shifting the displayed time when the string includes a UTC offset.
+ */
+export function parseEventLocalDateTime(value: string): Date {
+  const trimmed = value.trim();
+  const match = trimmed.match(
+    /^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{1,3}))?)?)?/
+  );
+
+  if (match) {
+    const [, year, month, day, hour = "0", minute = "0", second = "0", millisecond = "0"] = match;
+    return new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+      Number(millisecond.padEnd(3, "0").slice(0, 3))
+    );
+  }
+
+  return new Date(trimmed);
+}
+
 export type FormatEventPriceOpts = {
   symbol: string;
   isSuffix: boolean;

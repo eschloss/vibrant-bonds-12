@@ -30,6 +30,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   EVENTS_API_BASE_URL,
+  parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import EventProviderSection from "@/components/EventProviderSection";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -185,7 +186,7 @@ function CheckoutForm({
   const locale = currentLanguage === "es" ? "es" : "en-US";
 
   const eventDateTime = React.useMemo(() => {
-    const start = new Date(eventData.datetime_local);
+    const start = parseEventLocalDateTime(eventData.datetime_local);
     const date = start.toLocaleDateString(locale, {
       weekday: "short",
       month: "short",
@@ -198,7 +199,7 @@ function CheckoutForm({
     });
     const latest = (eventData.datetime_local_latest || "").trim();
     if (!latest) return { text: `${date} · ${startTime}`, hasWindow: false };
-    const latestTime = new Date(latest).toLocaleTimeString(locale, {
+    const latestTime = parseEventLocalDateTime(latest).toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "2-digit",
     });
