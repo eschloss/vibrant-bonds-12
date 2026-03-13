@@ -25,11 +25,13 @@ export const eventCheckout = {
     "event_checkout.ticket_is_for_me": "Ticket is for me",
     "event_checkout.attendee_email": "Attendee email",
     "event_checkout.attendee_email_placeholder": "attendee@example.com",
+    "event_checkout.accept_booking_terms_prefix": "I agree to the",
+    "event_checkout.booking_terms_and": "and",
 
-    "event_checkout.enter_email_first": "Enter your name and email first",
+    "event_checkout.enter_email_first": "Complete your details first",
     "event_checkout.enter_email_desc":
-      "Add your first name, last name, and a valid buyer email above to unlock Apple Pay, Google Pay, and card payment options.",
-    "event_checkout.add_email": "Add email",
+      "Add your first name, last name, buyer email, and accept the booking terms below to unlock Apple Pay, Google Pay, and card payment options.",
+    "event_checkout.add_email": "Complete details",
     "event_checkout.payment_section_locked": "Payment section locked. Click for details.",
     "event_checkout.payment_section_locked_label": "Payment section locked",
     "event_checkout.close": "Close",
@@ -37,7 +39,7 @@ export const eventCheckout = {
     "event_checkout.details_encrypted": "Details are encrypted and sent directly to Stripe.",
     "event_checkout.processing": "Processing...",
     "event_checkout.pay_amount": "Pay {amount}",
-    "event_checkout.enter_email_to_continue": "Enter name and email to continue",
+    "event_checkout.complete_details_to_continue": "Complete required details to continue",
 
     "event_checkout.checkout_error": "Checkout error",
     "event_checkout.something_went_wrong": "Something went wrong. Please try again.",
@@ -60,6 +62,7 @@ export const eventCheckout = {
     "event_checkout.validation.email_invalid": "Enter a valid email",
     "event_checkout.validation.attendee_required": "Attendee email is required",
     "event_checkout.validation.attendee_invalid": "Enter a valid attendee email",
+    "event_checkout.validation.booking_terms_required": "You must accept the Event Booking Terms and Privacy Policy",
   },
   es: {
     "event_checkout.back_to_event": "Volver al evento",
@@ -87,11 +90,13 @@ export const eventCheckout = {
     "event_checkout.ticket_is_for_me": "La entrada es para mí",
     "event_checkout.attendee_email": "Email del asistente",
     "event_checkout.attendee_email_placeholder": "asistente@ejemplo.com",
+    "event_checkout.accept_booking_terms_prefix": "Acepto los",
+    "event_checkout.booking_terms_and": "y la",
 
-    "event_checkout.enter_email_first": "Introduce tu nombre y email primero",
+    "event_checkout.enter_email_first": "Completa tus datos primero",
     "event_checkout.enter_email_desc":
-      "Añade tu nombre, apellido y un email de comprador válido arriba para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
-    "event_checkout.add_email": "Añadir email",
+      "Añade tu nombre, apellido, email del comprador y acepta los términos de reserva para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
+    "event_checkout.add_email": "Completar datos",
     "event_checkout.payment_section_locked": "Sección de pago bloqueada. Haz clic para más información.",
     "event_checkout.payment_section_locked_label": "Sección de pago bloqueada",
     "event_checkout.close": "Cerrar",
@@ -99,7 +104,7 @@ export const eventCheckout = {
     "event_checkout.details_encrypted": "Los datos se encriptan y se envían directamente a Stripe.",
     "event_checkout.processing": "Procesando...",
     "event_checkout.pay_amount": "Pagar {amount}",
-    "event_checkout.enter_email_to_continue": "Introduce nombre y email para continuar",
+    "event_checkout.complete_details_to_continue": "Completa los datos obligatorios para continuar",
 
     "event_checkout.checkout_error": "Error en el checkout",
     "event_checkout.something_went_wrong": "Algo salió mal. Por favor, inténtalo de nuevo.",
@@ -122,5 +127,6 @@ export const eventCheckout = {
     "event_checkout.validation.email_invalid": "Introduce un email válido",
     "event_checkout.validation.attendee_required": "El email del asistente es obligatorio",
     "event_checkout.validation.attendee_invalid": "Introduce un email de asistente válido",
+    "event_checkout.validation.booking_terms_required": "Debes aceptar los Términos de Reserva de Eventos y la Política de Privacidad",
   },
 };

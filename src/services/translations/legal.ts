@@ -25,9 +25,11 @@ export const legal = {
     "legal.last_updated": "Last Updated",
     "legal.section.legal": "Legal",
     "legal.terms.title": "Terms of Service",
+    "legal.event_booking_terms.title": "Event Booking Terms",
     "legal.privacy.title": "Privacy Policy",
     "legal.community_guidelines.title": "Community Guidelines",
     "legal.terms.link_text": "terms of service",
+    "legal.event_booking_terms.link_text": "Event Booking Terms",
     "legal.privacy.link_text": "privacy policy",
   },
   es: {
@@ -56,9 +58,11 @@ export const legal = {
     "legal.last_updated": "Última actualización",
     "legal.section.legal": "Legal",
     "legal.terms.title": "Términos de Servicio",
+    "legal.event_booking_terms.title": "Términos de Reserva de Eventos",
     "legal.privacy.title": "Política de Privacidad",
     "legal.community_guidelines.title": "Normas de la Comunidad",
     "legal.terms.link_text": "términos de servicio",
+    "legal.event_booking_terms.link_text": "Términos de Reserva de Eventos",
     "legal.privacy.link_text": "política de privacidad",
   }
 };

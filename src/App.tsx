@@ -69,6 +69,7 @@ const LonelinessEpidemic = lazy(() => import("@/pages/LonelinessEpidemic"));
 const RealLifeMagic = lazy(() => import("@/pages/RealLifeMagic"));
 const HowItWorksPage = lazy(() => import("@/pages/HowItWorks"));
 const Terms = lazy(() => import("@/pages/Terms"));
+const EventBookingTerms = lazy(() => import("@/pages/EventBookingTerms"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
 const CommunityGuidelines = lazy(() => import("@/pages/CommunityGuidelines"));
@@ -144,6 +145,7 @@ function App() {
                   <Route path="loneliness-epidemic" element={<LonelinessEpidemic />} />
                   <Route path="real-life-magic" element={<RealLifeMagic />} />
                   <Route path="terms" element={<Terms />} />
+                  <Route path="event-booking-terms" element={<EventBookingTerms />} />
                   <Route path="privacy" element={<Privacy />} />
                   <Route path="cookie-policy" element={<CookiePolicy />} />
                   <Route path="community-guidelines" element={<CommunityGuidelines />} />

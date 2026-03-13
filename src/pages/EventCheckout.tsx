@@ -79,6 +79,7 @@ function createCheckoutSchema(t: (key: string, fallback: string) => string) {
       buyerEmail: emailSchema,
       attendeeSameAsBuyer: z.boolean(),
       attendeeEmail: z.string().trim().optional(),
+      acceptBookingTerms: z.boolean(),
     })
     .superRefine((val, ctx) => {
       if (!val.attendeeSameAsBuyer) {
@@ -99,6 +100,17 @@ function createCheckoutSchema(t: (key: string, fallback: string) => string) {
             message: t("event_checkout.validation.attendee_invalid", "Enter a valid attendee email"),
           });
         }
+      }
+
+      if (!val.acceptBookingTerms) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["acceptBookingTerms"],
+          message: t(
+            "event_checkout.validation.booking_terms_required",
+            "You must accept the Event Booking Terms and Privacy Policy"
+          ),
+        });
       }
     });
 }
@@ -147,26 +159,28 @@ function CheckoutForm({
       buyerEmail: "",
       attendeeSameAsBuyer: true,
       attendeeEmail: "",
+      acceptBookingTerms: false,
     },
     mode: "onTouched",
   });
 
   const attendeeSameAsBuyer = form.watch("attendeeSameAsBuyer");
+  const acceptBookingTerms = form.watch("acceptBookingTerms");
   const firstNameValue = form.watch("firstName");
   const lastNameValue = form.watch("lastName");
   const buyerEmailValue = form.watch("buyerEmail");
-  const buyerEmailReadyForPayment = React.useMemo(() => {
+  const paymentRequirementsMet = React.useMemo(() => {
     const emailOk = z.string().trim().min(1).email().safeParse((buyerEmailValue || "").trim()).success;
     const firstNameOk = (firstNameValue || "").trim().length > 0;
     const lastNameOk = (lastNameValue || "").trim().length > 0;
-    return emailOk && firstNameOk && lastNameOk;
-  }, [buyerEmailValue, firstNameValue, lastNameValue]);
+    return emailOk && firstNameOk && lastNameOk && acceptBookingTerms;
+  }, [acceptBookingTerms, buyerEmailValue, firstNameValue, lastNameValue]);
 
   const [showLockedPaymentDialog, setShowLockedPaymentDialog] = React.useState(false);
 
   React.useEffect(() => {
-    if (buyerEmailReadyForPayment) setShowLockedPaymentDialog(false);
-  }, [buyerEmailReadyForPayment]);
+    if (paymentRequirementsMet) setShowLockedPaymentDialog(false);
+  }, [paymentRequirementsMet]);
 
   React.useEffect(() => {
     if (attendeeSameAsBuyer) {
@@ -278,7 +292,7 @@ function CheckoutForm({
 
   const onSubmit = async (values: CheckoutFormValues) => {
     if (!stripe || !elements) return;
-    if (!buyerEmailReadyForPayment) return;
+    if (!paymentRequirementsMet) return;
     setSubmitting(true);
     try {
       await attachEmails(values);
@@ -296,18 +310,29 @@ function CheckoutForm({
 
   const onExpressConfirm = async () => {
     if (!stripe || !elements) return;
-    if (!buyerEmailReadyForPayment) {
+    if (!paymentRequirementsMet) {
       const first = (form.getValues("firstName") || "").trim();
       const last = (form.getValues("lastName") || "").trim();
       const emailOk = z.string().trim().min(1).email().safeParse((form.getValues("buyerEmail") || "").trim()).success;
       if (!first) form.setFocus("firstName");
       else if (!last) form.setFocus("lastName");
       else if (!emailOk) form.setFocus("buyerEmail");
+      else {
+        document.getElementById("accept-booking-terms")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        void form.trigger("acceptBookingTerms");
+      }
       return;
     }
     setSubmitting(true);
     try {
-      const ok = await form.trigger(["firstName", "lastName", "buyerEmail", "attendeeSameAsBuyer", "attendeeEmail"]);
+      const ok = await form.trigger([
+        "firstName",
+        "lastName",
+        "buyerEmail",
+        "attendeeSameAsBuyer",
+        "attendeeEmail",
+        "acceptBookingTerms",
+      ]);
       if (!ok) return;
       await attachEmails(form.getValues());
       await confirmStripePayment();
@@ -582,17 +607,60 @@ function CheckoutForm({
                   )}
                 />
               ) : null}
+
+              <FormField
+                control={form.control}
+                name="acceptBookingTerms"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start gap-3 space-y-0 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4">
+                    <FormControl>
+                      <Checkbox
+                        id="accept-booking-terms"
+                        checked={field.value}
+                        onCheckedChange={(value) => field.onChange(Boolean(value))}
+                        className="mt-0.5 border-white/30 data-[state=checked]:bg-[#38D1BF] data-[state=checked]:border-[#38D1BF]"
+                      />
+                    </FormControl>
+                    <div className="space-y-1.5 leading-none">
+                      <FormLabel
+                        htmlFor="accept-booking-terms"
+                        className="text-sm font-normal leading-6 text-white/75 cursor-pointer"
+                      >
+                        {t("event_checkout.accept_booking_terms_prefix", "I agree to the")}{" "}
+                        <Link
+                          to="/event-booking-terms"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#38D1BF] hover:underline"
+                        >
+                          {t("legal.event_booking_terms.link_text", "Event Booking Terms")}
+                        </Link>{" "}
+                        {t("event_checkout.booking_terms_and", "and")}{" "}
+                        <Link
+                          to="/privacy"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#38D1BF] hover:underline"
+                        >
+                          {t("legal.privacy.link_text", "privacy policy")}
+                        </Link>
+                      </FormLabel>
+                      <FormMessage />
+                    </div>
+                  </FormItem>
+                )}
+              />
             </div>
 
             <div className="space-y-4">
               <div
                 className={cn(
                   "relative rounded-xl",
-                  !buyerEmailReadyForPayment && "opacity-60",
+                  !paymentRequirementsMet && "opacity-60",
                 )}
-                aria-disabled={!buyerEmailReadyForPayment}
+                aria-disabled={!paymentRequirementsMet}
               >
-                {!buyerEmailReadyForPayment ? (
+                {!paymentRequirementsMet ? (
                   <>
                     <button
                       type="button"
@@ -656,7 +724,7 @@ function CheckoutForm({
                 <div
                   className={cn(
                     "space-y-3",
-                    !buyerEmailReadyForPayment && "pointer-events-none select-none pt-20",
+                    !paymentRequirementsMet && "pointer-events-none select-none pt-20",
                   )}
                 >
                   <ExpressCheckoutElement
@@ -707,13 +775,13 @@ function CheckoutForm({
                 type="submit"
                 size="xl"
                 className="w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
-                disabled={!stripe || !elements || submitting || !buyerEmailReadyForPayment}
+                disabled={!stripe || !elements || submitting || !paymentRequirementsMet}
               >
                 {submitting
                   ? t("event_checkout.processing", "Processing...")
-                  : buyerEmailReadyForPayment
+                  : paymentRequirementsMet
                     ? t("event_checkout.pay_amount", "Pay {amount}").replace("{amount}", formattedTotalPrice || "")
-                    : t("event_checkout.enter_email_to_continue", "Enter name and email to continue")}
+                    : t("event_checkout.complete_details_to_continue", "Complete required details to continue")}
               </Button>
             </div>
           </form>
