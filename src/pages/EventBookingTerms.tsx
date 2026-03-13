@@ -11,7 +11,7 @@ const LAST_UPDATED = {
   es: "13 de marzo de 2026",
 } as const;
 
-const GOVERNING_STATE = "[STATE - TODO]";
+const GOVERNING_STATE = "Delaware";
 
 const BOOKING_TERMS_HTML = {
   en: `
