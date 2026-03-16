@@ -43,7 +43,7 @@ export const eventDetail = {
     "event_detail.event_ticket": "Event ticket",
     "event_detail.pulse_fee": "Pulse fee",
     "event_detail.provider_fee": "Provider fee",
-    "event_detail.most_make_friend": "Most Pulse members make at least one new friend per event",
+    "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
 
     // EventFaqSection
     "event_detail.faq.title": "FAQ",
@@ -134,7 +134,7 @@ export const eventDetail = {
     "event_detail.event_ticket": "Entrada al evento",
     "event_detail.pulse_fee": "Tarifa Pulse",
     "event_detail.provider_fee": "Tarifa del proveedor",
-    "event_detail.most_make_friend": "La mayoría de miembros de Pulse hacen al menos un nuevo amigo por evento",
+    "event_detail.most_make_friend": "Te emparejaremos con al menos 3 otros asistentes que van solos.",
 
     // EventFaqSection
     "event_detail.faq.title": "Preguntas frecuentes",

@@ -629,7 +629,7 @@ const EventDetail = () => {
                     </Link>
 
                     <p className="mt-3 text-xs text-white/50 text-center">
-                      {t("event_detail.most_make_friend", "Most Pulse members make at least one new friend per event")}
+                      {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
                     </p>
                   </CardContent>
                 </Card>
