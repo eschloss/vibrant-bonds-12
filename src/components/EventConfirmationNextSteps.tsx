@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Mail, Users, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Users, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -26,7 +26,7 @@ const steps = [
   },
   {
     key: "arrive_early",
-    icon: Clock,
+    icon: UtensilsCrossed,
     color: "bg-gradient-to-r from-green-400 to-emerald-500",
   },
 ] as const;
@@ -46,12 +46,12 @@ export default function EventConfirmationNextSteps({
               {t("event_confirmation.steps.kicker", "Next steps")}
             </div>
             <div className="text-2xl md:text-3xl font-bold text-white mt-1">
-              {t("event_confirmation.steps.title", "You’re all set")}
+              {t("event_confirmation.steps.title", "One last step")}
             </div>
             <p className="text-sm text-white/70 mt-2 max-w-2xl">
               {t(
                 "event_confirmation.steps.subtitle",
-                "Vibe test now. We'll email when your chat is ready."
+                "Complete your vibe test now so we can match you with the right group for this event."
               )}
             </p>
           </div>

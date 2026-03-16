@@ -131,6 +131,46 @@ export function buildGetKikiUrl(eventSlug: string): string {
   return `${EVENTS_API_BASE_URL}/events/get_kiki?${params.toString()}`;
 }
 
+/**
+ * URL for listing featured/upcoming events (used on /events landing).
+ * Override with VITE_EVENTS_FEATURED_PATH (e.g. "get_list") if your backend uses a different endpoint.
+ */
+export function buildGetFeaturedEventsUrl(limit = 9): string {
+  const path =
+    import.meta.env.VITE_EVENTS_FEATURED_PATH || "get_featured";
+  const params = new URLSearchParams({ limit: String(limit) });
+  return `${EVENTS_API_BASE_URL}/events/${path}?${params.toString()}`;
+}
+
+/** Map API response to the Event shape used by Events landing/cards. */
+export function kikiEventToDisplayEvent(k: GetKikiEventResponse): {
+  id: string;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  primaryImage: string;
+  dateTime: string;
+  citySlug: string;
+  price: string;
+} {
+  const citySlug = (k.city || "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "") || "unknown";
+  return {
+    id: String(k.id ?? k.slug ?? k.event_id ?? Math.random().toString(36).slice(2)),
+    title: k.title ?? "",
+    slug: k.slug ?? "",
+    shortDescription: k.short_description ?? "",
+    primaryImage: k.primary_image ?? "",
+    dateTime: k.datetime_local ?? "",
+    citySlug,
+    price: formatEventPrice(k.total_price, getEventPriceOpts(k)),
+  };
+}
+
 /** Kiki Ticket Order Details API response */
 export interface KikiOrderDetailsResponse {
   status: string;

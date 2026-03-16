@@ -15,7 +15,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
-import { getCitiesWithEvents, getUpcomingEvents, type CityFromApi } from "@/data/events";
+import { getCitiesWithEvents, type CityFromApi } from "@/data/events";
+import { useFeaturedEvents } from "@/hooks/useFeaturedEvents";
 
 const DEFAULT_CITY_IMAGE =
   "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800&h=600&fit=crop";
@@ -136,9 +137,7 @@ export default function EventsCities() {
     });
   }, [citiesExpanded, cityBySlug, currentLanguage]);
 
-  const featuredEvents = useMemo(() => {
-    return getUpcomingEvents(12);
-  }, []);
+  const { events: featuredEvents } = useFeaturedEvents(12);
 
   const launchingSoonCities = useMemo((): DirectoryCity[] => {
     if (!Array.isArray(citiesExpanded) || citiesExpanded.length === 0) return [];
