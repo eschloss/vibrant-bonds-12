@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -94,6 +94,7 @@ const EventDetail = () => {
   const [notFound, setNotFound] = useState(false);
   const [heroCarouselApi, setHeroCarouselApi] = useState<CarouselApi | undefined>(undefined);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const hasTrackedQualifiedEventPageView = useRef(false);
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
@@ -166,6 +167,46 @@ const EventDetail = () => {
     );
   }, [eventData, notFound]);
 
+  const trackQualifiedEventPageView = useCallback(
+    (
+      trigger: "10_seconds" | "checkout_click",
+      extraParams?: Record<string, string>
+    ) => {
+      if (!eventData || notFound || hasTrackedQualifiedEventPageView.current) return;
+      hasTrackedQualifiedEventPageView.current = true;
+
+      trackMetaPixelEvent(
+        "event_page_view_10secs_or_ct",
+        {
+          event_slug: eventData.slug,
+          event_title: eventData.title,
+          city: eventData.city,
+          city_label: eventData.city_label,
+          provider: eventData.provider,
+          path: `/events/${eventData.slug}`,
+          trigger,
+          ...(extraParams || {}),
+        },
+        { custom: true }
+      );
+    },
+    [eventData, notFound]
+  );
+
+  useEffect(() => {
+    hasTrackedQualifiedEventPageView.current = false;
+  }, [eventData?.slug]);
+
+  useEffect(() => {
+    if (!eventData || notFound) return;
+
+    const timeoutId = window.setTimeout(() => {
+      trackQualifiedEventPageView("10_seconds");
+    }, 10000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [eventData, notFound, trackQualifiedEventPageView]);
+
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen dark">
@@ -207,6 +248,27 @@ const EventDetail = () => {
   const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
+  const trackCheckoutClick = (ctaLocation: "hero" | "sidebar") => {
+    trackQualifiedEventPageView("checkout_click", {
+      cta_location: ctaLocation,
+      destination: checkoutHref,
+    });
+
+    trackMetaPixelEvent(
+      "event_signup_click",
+      {
+        event_slug: data.slug,
+        event_title: data.title,
+        city: data.city,
+        city_label: data.city_label,
+        provider: data.provider,
+        destination: checkoutHref,
+        path: `/events/${data.slug}`,
+        cta_location: ctaLocation,
+      },
+      { custom: true }
+    );
+  };
 
   const seoProps = {
     title: {
@@ -428,21 +490,7 @@ const EventDetail = () => {
                 </div>
                 <Link
                   to={checkoutHref}
-                  onClick={() =>
-                    trackMetaPixelEvent(
-                      "event_signup_click",
-                      {
-                        event_slug: data.slug,
-                        event_title: data.title,
-                        city: data.city,
-                        city_label: data.city_label,
-                        provider: data.provider,
-                        destination: checkoutHref,
-                        path: `/events/${data.slug}`,
-                      },
-                      { custom: true }
-                    )
-                  }
+                  onClick={() => trackCheckoutClick("hero")}
                   className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   {t("event_detail.sign_up", "Sign up")}
@@ -607,21 +655,7 @@ const EventDetail = () => {
 
                     <Link
                       to={checkoutHref}
-                      onClick={() =>
-                        trackMetaPixelEvent(
-                          "event_signup_click",
-                          {
-                            event_slug: data.slug,
-                            event_title: data.title,
-                            city: data.city,
-                            city_label: data.city_label,
-                            provider: data.provider,
-                            destination: checkoutHref,
-                            path: `/events/${data.slug}`,
-                          },
-                          { custom: true }
-                        )
-                      }
+                      onClick={() => trackCheckoutClick("sidebar")}
                       className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                     >
                       {t("event_detail.sign_up_now", "Sign up now")}
