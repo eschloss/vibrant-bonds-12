@@ -120,7 +120,7 @@ export const eventDetail = {
     "event_detail.step4_desc": "Tu grupo coordina una quedada antes o después del evento para que las amistades continúen más allá del propio evento.",
 
     "event_detail.about_this_event": "Sobre este evento",
-    "event_detail.good_to_know": "Buena información",
+    "event_detail.good_to_know": "Lo que debes saber",
     "event_detail.good_to_know_1": "Dependiendo del evento y del número de inscripciones, tu grupo puede ser de entre 5 y 20 personas. Conocerás a tu grupo antes del evento.",
     "event_detail.good_to_know_2": "Tu reserva incluye una entrada real emitida por el proveedor.",
     "event_detail.good_to_know_3": "Si no podemos formar un grupo, la tarifa de Pulse se reembolsa. Tu entrada sigue siendo válida.",
@@ -161,7 +161,7 @@ export const eventDetail = {
     "event_detail.faq.a5":
       "No. Pulse está hecho para amistad.\n\nMientras conoces gente nueva en {eventTitle} en {venue}, el foco está en construir círculos sociales reales en {city}, no en matching romántico.",
 
-    "event_detail.faq.q6": "¿Qué pasa si me da vergüenza ir a {eventTitle}?",
+    "event_detail.faq.q6": "¿Qué pasa si estoy nervioso/a por ir a {eventTitle}?",
     "event_detail.faq.a6":
       "Es completamente normal. La mayoría de miembros de Pulse que se unen a {eventTitle} en {city} van solos. Muchos son nuevos en la ciudad, se mudaron recientemente, trabajan en remoto o simplemente quieren ampliar su círculo.\n\nPip guía presentaciones ligeras de antemano, así que cuando os reunáis en {venue} ya reconocerás a algunas caras. No entrarás en frío.",
 

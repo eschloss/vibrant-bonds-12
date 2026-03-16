@@ -9,7 +9,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
-import { trackMetaPixelEvent } from "@/lib/utils";
+import { trackMetaPixelEvent, buildCheckoutEventParams } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import EventConfirmationNextSteps from "@/components/EventConfirmationNextSteps";
@@ -202,6 +202,43 @@ const EventConfirmation = () => {
     location.pathname,
     location.search,
   ]);
+
+  React.useEffect(() => {
+    if (!eventData || !orderData || orderNotFound || !orderIdFromUrl) return;
+
+    const orderId = orderData.customer_id ?? orderIdFromUrl;
+    const storageKey = `meta_purchase_${orderId}`;
+    try {
+      if (sessionStorage.getItem(storageKey)) return;
+      sessionStorage.setItem(storageKey, "1");
+    } catch {
+      // sessionStorage might be unavailable
+    }
+
+    const value = orderData.amount_total / 100;
+    const contentId = String(eventData.event_id ?? eventData.id);
+    const baseParams = buildCheckoutEventParams(eventData, orderIdFromUrl);
+
+    trackMetaPixelEvent(
+      "Purchase",
+      {
+        ...baseParams,
+        value,
+        currency: orderData.currency,
+        content_ids: [contentId],
+        content_type: "product",
+        content_name: eventData.title,
+        num_items: orderData.ticket_total,
+      },
+      { eventID: orderId }
+    );
+
+    trackMetaPixelEvent(
+      "event_payment_complete",
+      { ...baseParams, value, currency: orderData.currency },
+      { custom: true }
+    );
+  }, [eventData, orderData, orderIdFromUrl, orderNotFound]);
 
   const hasOrderError = !orderIdFromUrl || orderNotFound;
 

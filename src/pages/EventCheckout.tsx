@@ -23,7 +23,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
+import {
+  cn,
+  trackMetaPixelEvent,
+  initMetaPixelAdvancedMatching,
+  buildCheckoutEventParams,
+} from "@/lib/utils";
 import {
   buildGetKikiUrl,
   type GetKikiEventResponse,
@@ -149,6 +154,13 @@ function CheckoutForm({
 
   const [submitting, setSubmitting] = React.useState(false);
 
+  const hasFiredInitiateCheckout = React.useRef(false);
+  const hasFiredFirstNameFocus = React.useRef(false);
+  const hasFiredFirstNameShared = React.useRef(false);
+  const hasFiredLastNameShared = React.useRef(false);
+  const hasFiredEmailShared = React.useRef(false);
+  const hasFiredTermsAccepted = React.useRef(false);
+
   const checkoutSchema = React.useMemo(() => createCheckoutSchema(t), [t]);
 
   const form = useForm<CheckoutFormValues>({
@@ -226,6 +238,25 @@ function CheckoutForm({
     "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
   );
 
+  const baseCheckoutParams = React.useMemo(
+    () => buildCheckoutEventParams(eventData, orderId),
+    [eventData, orderId]
+  );
+
+  React.useEffect(() => {
+    if (hasFiredInitiateCheckout.current) return;
+    hasFiredInitiateCheckout.current = true;
+    const contentId = String(eventData.event_id ?? eventData.id);
+    trackMetaPixelEvent("InitiateCheckout", {
+      ...baseCheckoutParams,
+      content_ids: [contentId],
+      content_type: "product",
+      content_name: eventData.title,
+      value: eventData.total_price,
+      currency: eventData.currency,
+    });
+  }, [baseCheckoutParams, eventData]);
+
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
       const firstName = values.firstName.trim();
@@ -234,6 +265,20 @@ function CheckoutForm({
       const attendeeEmail = values.attendeeSameAsBuyer
         ? buyerEmail
         : (values.attendeeEmail || "").trim().toLowerCase();
+
+      if (!hasFiredEmailShared.current && buyerEmail) {
+        const emailValid = z.string().trim().min(1).email().safeParse(buyerEmail).success;
+        if (emailValid) {
+          hasFiredEmailShared.current = true;
+          trackMetaPixelEvent("event_payment_email_shared", { ...baseCheckoutParams }, { custom: true });
+          initMetaPixelAdvancedMatching({
+            em: buyerEmail,
+            fn: firstName || undefined,
+            ln: lastName || undefined,
+            ct: eventData.city_label || undefined,
+          });
+        }
+      }
 
       const attachRes = await fetch(ATTACH_EMAILS_URL, {
         method: "POST",
@@ -255,7 +300,7 @@ function CheckoutForm({
       }
       await attachRes.json().catch(() => null);
     },
-    [orderId, t],
+    [baseCheckoutParams, eventData, orderId, t],
   );
 
   const confirmStripePayment = React.useCallback(async () => {
@@ -296,8 +341,23 @@ function CheckoutForm({
     setSubmitting(true);
     try {
       await attachEmails(values);
+    } catch (err: any) {
+      toast({
+        title: t("event_checkout.checkout_error", "Checkout error"),
+        description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
+        variant: "destructive",
+      });
+      setSubmitting(false);
+      return;
+    }
+    try {
       await confirmStripePayment();
     } catch (err: any) {
+      trackMetaPixelEvent(
+        "event_checkout_payment_failed",
+        { ...baseCheckoutParams, error_message: err?.message },
+        { custom: true }
+      );
       toast({
         title: t("event_checkout.checkout_error", "Checkout error"),
         description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
@@ -333,10 +393,28 @@ function CheckoutForm({
         "attendeeEmail",
         "acceptBookingTerms",
       ]);
-      if (!ok) return;
+      if (!ok) {
+        setSubmitting(false);
+        return;
+      }
       await attachEmails(form.getValues());
+    } catch (err: any) {
+      toast({
+        title: t("event_checkout.checkout_error", "Checkout error"),
+        description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
+        variant: "destructive",
+      });
+      setSubmitting(false);
+      return;
+    }
+    try {
       await confirmStripePayment();
     } catch (err: any) {
+      trackMetaPixelEvent(
+        "event_checkout_payment_failed",
+        { ...baseCheckoutParams, error_message: err?.message },
+        { custom: true }
+      );
       toast({
         title: t("event_checkout.checkout_error", "Checkout error"),
         description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
@@ -516,6 +594,32 @@ function CheckoutForm({
                           autoComplete="given-name"
                           className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                           {...field}
+                          onFocus={() => {
+                            if (!hasFiredFirstNameFocus.current) {
+                              hasFiredFirstNameFocus.current = true;
+                              trackMetaPixelEvent(
+                                "event_checkout_first_name_focused",
+                                { ...baseCheckoutParams },
+                                { custom: true }
+                              );
+                            }
+                          }}
+                          onBlur={(e) => {
+                            field.onBlur();
+                            const val = (e.target.value || "").trim();
+                            if (val.length >= 2 && !hasFiredFirstNameShared.current) {
+                              hasFiredFirstNameShared.current = true;
+                              trackMetaPixelEvent(
+                                "event_payment_first_name_shared",
+                                { ...baseCheckoutParams },
+                                { custom: true }
+                              );
+                              initMetaPixelAdvancedMatching({
+                                fn: val,
+                                ct: eventData.city_label || undefined,
+                              });
+                            }
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
@@ -536,6 +640,24 @@ function CheckoutForm({
                           autoComplete="family-name"
                           className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                           {...field}
+                          onBlur={(e) => {
+                            field.onBlur();
+                            const lnVal = (e.target.value || "").trim();
+                            if (lnVal.length >= 2 && !hasFiredLastNameShared.current) {
+                              hasFiredLastNameShared.current = true;
+                              trackMetaPixelEvent(
+                                "event_payment_last_name_shared",
+                                { ...baseCheckoutParams },
+                                { custom: true }
+                              );
+                              const fnVal = (form.getValues("firstName") || "").trim();
+                              initMetaPixelAdvancedMatching({
+                                fn: fnVal || undefined,
+                                ln: lnVal,
+                                ct: eventData.city_label || undefined,
+                              });
+                            }
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
@@ -559,6 +681,29 @@ function CheckoutForm({
                         autoComplete="email"
                         className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                         {...field}
+                        onBlur={(e) => {
+                          field.onBlur();
+                          const emVal = (e.target.value || "").trim().toLowerCase();
+                          if (emVal && !hasFiredEmailShared.current) {
+                            const emailValid = z.string().trim().min(1).email().safeParse(emVal).success;
+                            if (emailValid) {
+                              hasFiredEmailShared.current = true;
+                              trackMetaPixelEvent(
+                                "event_payment_email_shared",
+                                { ...baseCheckoutParams },
+                                { custom: true }
+                              );
+                              const fnVal = (form.getValues("firstName") || "").trim();
+                              const lnVal = (form.getValues("lastName") || "").trim();
+                              initMetaPixelAdvancedMatching({
+                                em: emVal,
+                                fn: fnVal || undefined,
+                                ln: lnVal || undefined,
+                                ct: eventData.city_label || undefined,
+                              });
+                            }
+                          }
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -617,7 +762,17 @@ function CheckoutForm({
                       <Checkbox
                         id="accept-booking-terms"
                         checked={field.value}
-                        onCheckedChange={(value) => field.onChange(Boolean(value))}
+                        onCheckedChange={(value) => {
+                          field.onChange(Boolean(value));
+                          if (value === true && !hasFiredTermsAccepted.current) {
+                            hasFiredTermsAccepted.current = true;
+                            trackMetaPixelEvent(
+                              "event_checkout_terms_accepted",
+                              { ...baseCheckoutParams },
+                              { custom: true }
+                            );
+                          }
+                        }}
                         className="mt-0.5 border-white/30 data-[state=checked]:bg-[#38D1BF] data-[state=checked]:border-[#38D1BF]"
                       />
                     </FormControl>
