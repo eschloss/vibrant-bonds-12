@@ -572,7 +572,7 @@ const EventDetail = () => {
                 <Link
                   to={checkoutHref}
                   onClick={() => trackCheckoutClick("hero")}
-                  className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
+                  className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   {t("event_detail.sign_up", "Sign up")}
                 </Link>
