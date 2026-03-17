@@ -591,16 +591,6 @@ function CheckoutForm({
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>
           </div>
-
-          <div className="mt-8 pt-6 border-t border-white/[0.06] space-y-2.5">
-            <div className="flex items-center gap-2 text-xs text-white/50">
-              <ShieldCheck className="h-3.5 w-3.5 text-[#38D1BF]/60 shrink-0" />
-              {t("event_checkout.payment_encrypted", "Payment encrypted and processed securely by Stripe.")}
-            </div>
-            <div className="text-[11px] text-white/35 font-mono">
-              {t("event_checkout.order_label", "Order:")} {orderId}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -969,6 +959,16 @@ function CheckoutForm({
                     ? t("event_checkout.pay_amount", "Pay {amount}").replace("{amount}", formattedTotalPrice || "")
                     : t("event_checkout.complete_details_to_continue", "Complete required details to continue")}
               </Button>
+
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-2 text-xs text-white/50">
+                  <ShieldCheck className="h-3.5 w-3.5 text-[#38D1BF]/60 shrink-0" />
+                  {t("event_checkout.payment_encrypted", "Payment encrypted and processed securely by Stripe.")}
+                </div>
+                <div className="text-[11px] text-white/35 font-mono">
+                  {t("event_checkout.order_label", "Order:")} {orderId}
+                </div>
+              </div>
             </div>
           </form>
         </Form>
