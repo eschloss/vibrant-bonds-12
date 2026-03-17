@@ -267,6 +267,26 @@ function CheckoutForm({
         ? buyerEmail
         : (values.attendeeEmail || "").trim().toLowerCase();
 
+      // Fallback: fire form engagement events if autofill prevented onFocus/onBlur from firing
+      if (!hasFiredFirstNameFocus.current && firstName.length > 0) {
+        hasFiredFirstNameFocus.current = true;
+        trackMetaPixelEvent("event_checkout_first_name_focused", { ...baseCheckoutParams }, { custom: true });
+      }
+      if (!hasFiredFirstNameShared.current && firstName.length >= 2) {
+        hasFiredFirstNameShared.current = true;
+        trackMetaPixelEvent("event_payment_first_name_shared", { ...baseCheckoutParams }, { custom: true });
+        initMetaPixelAdvancedMatching({ fn: firstName, ct: eventData.city_label || undefined });
+      }
+      if (!hasFiredLastNameShared.current && lastName.length >= 2) {
+        hasFiredLastNameShared.current = true;
+        trackMetaPixelEvent("event_payment_last_name_shared", { ...baseCheckoutParams }, { custom: true });
+        initMetaPixelAdvancedMatching({
+          fn: firstName || undefined,
+          ln: lastName,
+          ct: eventData.city_label || undefined,
+        });
+      }
+
       if (!hasFiredEmailShared.current && buyerEmail) {
         const emailValid = z.string().trim().min(1).email().safeParse(buyerEmail).success;
         if (emailValid) {
