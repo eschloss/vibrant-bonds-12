@@ -51,6 +51,7 @@ type SignUpCardProps = {
   formattedPulseFee: string;
   formattedProviderFee: string | null;
   providerFee: number;
+  whatsIncluded?: string[];
 };
 
 const SignUpCard = ({
@@ -62,6 +63,7 @@ const SignUpCard = ({
   formattedPulseFee,
   formattedProviderFee,
   providerFee,
+  whatsIncluded = [],
 }: SignUpCardProps) => (
   <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
     <CardContent className="p-6">
@@ -96,6 +98,13 @@ const SignUpCard = ({
             <span>{t("event_detail.event_ticket", "Event ticket")}</span>
             <span className="text-white/75">{formattedTicketPrice}</span>
           </div>
+          {whatsIncluded.length > 0 && (
+            <ul className="list-disc list-inside pl-0.5 space-y-0.5 text-white/60">
+              {whatsIncluded.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          )}
           <div className="flex items-center justify-between">
             <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
             <span className="text-white/75">{formattedPulseFee}</span>
@@ -683,6 +692,7 @@ const EventDetail = () => {
                     formattedPulseFee={formattedPulseFee}
                     formattedProviderFee={formattedProviderFee}
                     providerFee={data.provider_fee}
+                    whatsIncluded={data.whats_included ?? []}
                   />
                 </div>
 
@@ -720,6 +730,7 @@ const EventDetail = () => {
                   formattedPulseFee={formattedPulseFee}
                   formattedProviderFee={formattedProviderFee}
                   providerFee={data.provider_fee}
+                  whatsIncluded={data.whats_included ?? []}
                 />
               </aside>
             </motion.div>

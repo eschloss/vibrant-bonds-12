@@ -48,6 +48,8 @@ export interface GetKikiEventResponse {
   provider_event_url?: string;
   /** URL for the post-purchase vibe test. */
   vibe_test_url?: string;
+  /** List of strings describing what's included with the event ticket. */
+  whats_included?: string[];
 }
 
 /** Extract provider display name, handling both legacy string and new object shape */
