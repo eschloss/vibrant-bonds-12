@@ -82,11 +82,16 @@ const SignUpCard = ({
         </div>
       </div>
 
-      <div className="mb-5">
-        <div className="text-2xl font-extrabold text-white leading-none">
-          {formattedTotalPrice}
+      <div className="mb-5 space-y-2">
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-sm font-medium text-white/90">
+            {t("event_detail.total", "Total")}
+          </span>
+          <span className="text-2xl font-extrabold text-white tabular-nums text-right">
+            {formattedTotalPrice}
+          </span>
         </div>
-        <div className="mt-2 text-xs text-white/60 space-y-0.5">
+        <div className="text-xs text-white/60 space-y-0.5">
           <div className="flex items-center justify-between">
             <span>{t("event_detail.event_ticket", "Event ticket")}</span>
             <span className="text-white/75">{formattedTicketPrice}</span>
