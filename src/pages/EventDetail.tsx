@@ -65,7 +65,7 @@ const SignUpCard = ({
 }: SignUpCardProps) => (
   <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
     <CardContent className="p-6">
-      <h3 className="text-xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
+      <h3 className="text-2xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
 
       <div className="space-y-2.5 text-sm text-gray-300 mb-6">
         <div className="flex items-center gap-2">
@@ -84,10 +84,10 @@ const SignUpCard = ({
 
       <div className="mb-5 space-y-2">
         <div className="flex items-center justify-between gap-4">
-          <span className="text-sm font-medium text-white/90">
+          <span className="text-xl text-white/90">
             {t("event_detail.total", "Total")}
           </span>
-          <span className="text-2xl font-extrabold text-white tabular-nums text-right">
+          <span className="text-xl text-white tabular-nums text-right">
             {formattedTotalPrice}
           </span>
         </div>
