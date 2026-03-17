@@ -224,7 +224,7 @@ const MeetPip = () => {
                 </motion.ul>
 
                 <div className="mt-6">
-                  <a href="/" className="inline-block">
+                  <a href="/cities" className="inline-block">
                     <Button className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                       {t("meet_pip.module.cta", "Meet Your Crew")}
                     </Button>
@@ -544,7 +544,7 @@ const MeetPip = () => {
                 </ul>
 
                 <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                  <a href="/matchmaking" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
+                  <a href="/cities" className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 transition">
                     {t("meet_pip.repeat.cta_primary", "Meet your crew")}
                   </a>
                   <a href="/activities" className="inline-flex items-center justify-center rounded-full px-6 py-3 border border-gray-600 text-white hover:bg-gray-800 transition">

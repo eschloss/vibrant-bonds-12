@@ -150,7 +150,7 @@ const HowItWorks = ({ ctaHref, ctaLabel }: HowItWorksProps) => {
           }}
           className="flex justify-center mt-12"
         >
-          <Link to={addRefToUrl(ctaHref || "/matchmaking")}>
+          <Link to={addRefToUrl(ctaHref || "/cities")}>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

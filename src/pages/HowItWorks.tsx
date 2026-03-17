@@ -138,7 +138,7 @@ const HowItWorks = () => {
               )}
             </p>
             {/* Removed hero chips per request */}
-            <a href={addRefToUrl("/matchmaking")}>
+            <a href={addRefToUrl("/cities")}>
               <Button className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95">
                 {t("how_it_works_page.cta", "Meet your crew")}
               </Button>
@@ -420,7 +420,7 @@ const HowItWorks = () => {
                 </motion.ul>
 
                 <div className="mt-6">
-                  <a href={addRefToUrl("/matchmaking")}>
+                  <a href={addRefToUrl("/cities")}>
                     <Button className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                       {t("how_it_works_page.cta", "Meet your crew")}
                     </Button>

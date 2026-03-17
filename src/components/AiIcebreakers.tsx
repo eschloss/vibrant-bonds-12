@@ -164,7 +164,10 @@ const AiIcebreakers: React.FC<AiIcebreakersProps> = ({ heading1, heading2, descr
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex justify-center mt-12"
         >
-          <Link to={addRefToUrl("/matchmaking")}>
+          <Link to={addRefToUrl("/cities")}>
+            <Button size="lg" className="rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95">
+              {t("navbar.meet_your_crew", "Meet Your Crew")}
+            </Button>
           </Link>
         </motion.div>
       </div>
