@@ -42,6 +42,83 @@ import {
 import { trackMetaPixelEvent } from "@/lib/utils";
 import { EventHeaderProvider } from "@/contexts/EventHeaderContext";
 
+type SignUpCardProps = {
+  t: (key: string, fallback?: string) => string;
+  checkoutHref: string;
+  trackCheckoutClick: (location: "hero" | "sidebar" | "header") => void;
+  formattedTotalPrice: string;
+  formattedTicketPrice: string;
+  formattedPulseFee: string;
+  formattedProviderFee: string | null;
+  providerFee: number;
+};
+
+const SignUpCard = ({
+  t,
+  checkoutHref,
+  trackCheckoutClick,
+  formattedTotalPrice,
+  formattedTicketPrice,
+  formattedPulseFee,
+  formattedProviderFee,
+  providerFee,
+}: SignUpCardProps) => (
+  <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
+    <CardContent className="p-6">
+      <h3 className="text-xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
+
+      <div className="space-y-2.5 text-sm text-gray-300 mb-6">
+        <div className="flex items-center gap-2">
+          <Users size={15} className="text-[#38D1BF] shrink-0" />
+          {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
+        </div>
+        <div className="flex items-center gap-2">
+          <MessageSquare size={15} className="text-purple-300 shrink-0" />
+          {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
+        </div>
+        <div className="flex items-center gap-2">
+          <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
+          {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="text-2xl font-extrabold text-white leading-none">
+          {formattedTotalPrice}
+        </div>
+        <div className="mt-2 text-xs text-white/60 space-y-0.5">
+          <div className="flex items-center justify-between">
+            <span>{t("event_detail.event_ticket", "Event ticket")}</span>
+            <span className="text-white/75">{formattedTicketPrice}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
+            <span className="text-white/75">{formattedPulseFee}</span>
+          </div>
+          {formattedProviderFee && providerFee > 0 && (
+            <div className="flex items-center justify-between">
+              <span>{t("event_detail.provider_fee", "Provider fee")}</span>
+              <span className="text-white/75">{formattedProviderFee}</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <Link
+        to={checkoutHref}
+        onClick={() => trackCheckoutClick("sidebar")}
+        className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
+      >
+        {t("event_detail.sign_up_now", "Sign up now")}
+      </Link>
+
+      <p className="mt-3 text-xs text-white/50 text-center">
+        {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
+      </p>
+    </CardContent>
+  </Card>
+);
+
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { changeLanguage } = useLanguage();
@@ -492,13 +569,10 @@ const EventDetail = () => {
 
               {/* Prominent CTA (above the fold) */}
               <div className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
-                <div className="text-2xl md:text-3xl font-extrabold text-white leading-none px-2">
-                  {formattedTotalPrice}
-                </div>
                 <Link
                   to={checkoutHref}
                   onClick={() => trackCheckoutClick("hero")}
-                  className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
+                  className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   {t("event_detail.sign_up", "Sign up")}
                 </Link>
@@ -593,6 +667,20 @@ const EventDetail = () => {
                   </CardContent>
                 </Card>
 
+                {/* Sign up box above "About this event" – mobile only */}
+                <div className="mb-8 lg:hidden">
+                  <SignUpCard
+                    t={t}
+                    checkoutHref={checkoutHref}
+                    trackCheckoutClick={trackCheckoutClick}
+                    formattedTotalPrice={formattedTotalPrice}
+                    formattedTicketPrice={formattedTicketPrice}
+                    formattedPulseFee={formattedPulseFee}
+                    formattedProviderFee={formattedProviderFee}
+                    providerFee={data.provider_fee}
+                  />
+                </div>
+
                 <div className="prose prose-invert max-w-none">
                   <h2>{t("event_detail.about_this_event", "About this event")}</h2>
                   <div
@@ -618,60 +706,16 @@ const EventDetail = () => {
 
               {/* Sticky signup card */}
               <aside className="lg:sticky lg:top-28 h-fit">
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
-
-                    <div className="space-y-2.5 text-sm text-gray-300 mb-6">
-                      <div className="flex items-center gap-2">
-                        <Users size={15} className="text-[#38D1BF] shrink-0" />
-                        {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MessageSquare size={15} className="text-purple-300 shrink-0" />
-                        {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
-                        {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
-                      </div>
-                    </div>
-
-                    <div className="mb-5">
-                      <div className="text-2xl font-extrabold text-white leading-none">
-                        {formattedTotalPrice}
-                      </div>
-                      <div className="mt-2 text-xs text-white/60 space-y-0.5">
-                        <div className="flex items-center justify-between">
-                          <span>{t("event_detail.event_ticket", "Event ticket")}</span>
-                          <span className="text-white/75">{formattedTicketPrice}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
-                          <span className="text-white/75">{formattedPulseFee}</span>
-                        </div>
-                        {formattedProviderFee && data.provider_fee > 0 && (
-                          <div className="flex items-center justify-between">
-                            <span>{t("event_detail.provider_fee", "Provider fee")}</span>
-                            <span className="text-white/75">{formattedProviderFee}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <Link
-                      to={checkoutHref}
-                      onClick={() => trackCheckoutClick("sidebar")}
-                      className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
-                    >
-                      {t("event_detail.sign_up_now", "Sign up now")}
-                    </Link>
-
-                    <p className="mt-3 text-xs text-white/50 text-center">
-                      {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
-                    </p>
-                  </CardContent>
-                </Card>
+                <SignUpCard
+                  t={t}
+                  checkoutHref={checkoutHref}
+                  trackCheckoutClick={trackCheckoutClick}
+                  formattedTotalPrice={formattedTotalPrice}
+                  formattedTicketPrice={formattedTicketPrice}
+                  formattedPulseFee={formattedPulseFee}
+                  formattedProviderFee={formattedProviderFee}
+                  providerFee={data.provider_fee}
+                />
               </aside>
             </motion.div>
 
