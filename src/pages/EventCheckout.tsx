@@ -341,8 +341,8 @@ function CheckoutForm({
       attendeeSameAsBuyer || z.string().trim().min(1).email().safeParse(attendeeEmail).success;
 
     if (
-      firstName.length < 2 ||
-      lastName.length < 2 ||
+      firstName.length < 1 ||
+      lastName.length < 1 ||
       !emailValid ||
       !attendeeEmailValid
     ) {
