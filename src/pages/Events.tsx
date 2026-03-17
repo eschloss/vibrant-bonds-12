@@ -69,12 +69,12 @@ export default function Events() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen min-w-0 max-w-[100vw] overflow-x-hidden bg-gradient-to-b from-gray-900 to-black text-white">
       <Seo {...seoProps} />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-28 md:pt-32 pb-12 md:pb-20 relative overflow-hidden">
+      {/* Hero - pt clears fixed header on mobile */}
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl" />
           <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-pink-600 blur-3xl" />
@@ -93,7 +93,7 @@ export default function Events() {
           <FloatingActivityCollage items={collageItems} density={7} floatRange={6} stagger={0.14} parallax={false} />
         </div>
 
-        <div className="container mx-auto px-4 relative z-20">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-20">
           <div className="flex flex-col items-center text-center">
             <motion.div
               className="text-center px-1 max-w-4xl"
@@ -101,7 +101,7 @@ export default function Events() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                   {t("eventsLanding.hero.headline_focus", "Meet New Friends")}
                 </span>
@@ -109,26 +109,26 @@ export default function Events() {
                 {t("eventsLanding.hero.headline_rest", "at Events Near You")}
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-2xl mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto px-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
                 {t(
                   "eventsLanding.hero.copy",
                   "Pulse is for people going solo. Pick a real event in your city, get matched with a small group of other attendees, and meet in the app before you arrive."
                 )}
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-white/80 mb-7 md:mb-9">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
-                  <Ticket size={14} className="text-white/80" />
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-x-2 text-xs sm:text-xs text-white/80 mb-6 sm:mb-7 md:mb-9">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm w-full sm:w-auto justify-center">
+                  <Ticket size={14} className="shrink-0 text-white/80" />
                   {t("eventsLanding.hero.flow_1", "Book a real event")}
                 </span>
-                <span className="text-white/30 select-none">→</span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
-                  <MessageSquare size={14} className="text-white/80" />
+                <span className="text-white/30 select-none hidden sm:inline">→</span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm w-full sm:w-auto justify-center">
+                  <MessageSquare size={14} className="shrink-0 text-white/80" />
                   {t("eventsLanding.hero.flow_2", "Meet your small group")}
                 </span>
-                <span className="text-white/30 select-none">→</span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm">
-                  <Users size={14} className="text-white/80" />
+                <span className="text-white/30 select-none hidden sm:inline">→</span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm w-full sm:w-auto justify-center">
+                  <Users size={14} className="shrink-0 text-white/80" />
                   {t("eventsLanding.hero.flow_3", "Arrive with familiar faces")}
                 </span>
               </div>
@@ -166,23 +166,23 @@ export default function Events() {
       </section>
 
       {/* What Pulse Events are */}
-      <section className="py-14 md:py-18 relative">
-        <div className="container mx-auto px-4">
+      <section className="section-padding relative">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-10"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
               {t("eventsLanding.what.title_prefix", "A real event")}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 {" "}
                 {t("eventsLanding.what.title_focus", "plus the social layer")}
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-base sm:text-lg text-gray-300">
               {t(
                 "eventsLanding.what.subtitle",
                 "The venue or organizer runs the event. Pulse helps you meet the right people before it starts."
@@ -190,7 +190,7 @@ export default function Events() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {[
               {
                 icon: Ticket,
@@ -222,7 +222,7 @@ export default function Events() {
             ].map((c) => (
               <Card
                 key={c.title}
-                className="bg-gray-800/40 backdrop-blur-lg border border-gray-700 rounded-2xl p-6"
+                className="bg-gray-800/40 backdrop-blur-lg border border-gray-700 rounded-2xl p-4 sm:p-6"
               >
                 <div className={`w-12 h-12 rounded-full mb-4 flex items-center justify-center bg-gradient-to-r ${c.accent}`}>
                   <c.icon size={18} className="text-white" />
@@ -236,28 +236,28 @@ export default function Events() {
       </section>
 
       {/* Event vibes */}
-      <section className="py-12 md:py-16 relative">
+      <section className="section-padding relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-pulse-pink/15 blur-3xl" />
           <div className="absolute bottom-0 -left-10 w-72 h-72 rounded-full bg-accent/15 blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-10"
+            className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
               {t("eventsLanding.vibes.title_prefix", "Choose the kind of")}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                 {" "}
                 {t("eventsLanding.vibes.title_focus", "energy you want")}
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-base sm:text-lg text-gray-300">
               {t(
                 "eventsLanding.vibes.subtitle",
                 "Start with an event style that matches how you like to meet people: conversation-first, activity-first, or lively and social."
@@ -272,7 +272,7 @@ export default function Events() {
           </motion.div>
 
           <div className="max-w-6xl mx-auto">
-            <div className="flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:mx-0 lg:px-0">
+            <div className="flex gap-4 sm:gap-5 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] touch-pan-x overscroll-x-contain lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:mx-0 lg:px-0">
               {vibes.map((v, idx) => (
                 <motion.div
                   key={v.id}
@@ -280,7 +280,7 @@ export default function Events() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.45, delay: idx * 0.05 }}
-                  className="min-w-[84%] sm:min-w-[64%] md:min-w-[48%] lg:min-w-0 snap-start"
+                  className="min-w-[85%] sm:min-w-[64%] md:min-w-[48%] lg:min-w-0 flex-shrink-0 snap-start"
                 >
                   <Card className="relative overflow-hidden rounded-3xl border border-gray-700 bg-gray-900/35 backdrop-blur-xl">
                     <div className="absolute inset-0">
@@ -295,8 +295,8 @@ export default function Events() {
                       <div className={`absolute inset-0 bg-gradient-to-br ${v.gradient}`} />
                     </div>
 
-                    <div className="relative p-8 h-[300px] flex flex-col justify-end">
-                      <div className="text-[22px] md:text-2xl font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
+                    <div className="relative p-5 sm:p-6 md:p-8 min-h-[260px] sm:min-h-[280px] md:h-[300px] flex flex-col justify-end">
+                      <div className="text-lg sm:text-[22px] md:text-2xl font-bold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
                         {v.title}
                       </div>
                       <div className="text-sm text-white/80 mt-2 leading-snug line-clamp-2">
@@ -327,8 +327,8 @@ export default function Events() {
       </section>
 
       {/* How it works */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
+      <section className="section-padding">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -345,16 +345,16 @@ export default function Events() {
       <EventsLandingFaqSection />
 
       {/* Final CTA */}
-      <section className="py-16 md:py-20 border-t border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900/60 via-purple-900/35 to-gray-900/60 backdrop-blur-xl overflow-hidden">
-            <div className="p-10 md:p-14 text-center relative">
+      <section className="section-padding border-t border-white/10">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto rounded-2xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900/60 via-purple-900/35 to-gray-900/60 backdrop-blur-xl overflow-hidden">
+            <div className="p-6 sm:p-8 md:p-10 lg:p-14 text-center relative">
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-pulse-pink/20 blur-3xl" />
                 <div className="absolute -bottom-16 -right-16 w-72 h-72 rounded-full bg-accent/20 blur-3xl" />
               </div>
               <div className="relative z-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-white">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                   {t("eventsLanding.final.title", "Ready to meet new friends at events near you?")}
                 </h2>
                 <p className="text-white/75 text-lg mt-3 max-w-2xl mx-auto">
