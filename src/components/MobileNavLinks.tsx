@@ -5,14 +5,18 @@ import { Button } from "./ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useRefParam } from "@/hooks/useRefParam";
 import Text from "@/components/Text";
+import type { EventHeaderContextValue } from "@/contexts/EventHeaderContext";
 
 interface MobileNavLinksProps {
   closeMenu: () => void;
   scrollToSection: (id: string) => boolean;
   isMatchmakingPage: boolean;
+  isEventPage?: boolean;
+  eventSlug?: string;
+  eventHeader?: EventHeaderContextValue | null;
 }
 
-const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: MobileNavLinksProps) => {
+const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage, isEventPage, eventSlug, eventHeader }: MobileNavLinksProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const { t } = useTranslation();
@@ -51,6 +55,18 @@ const MobileNavLinks = ({ closeMenu, scrollToSection, isMatchmakingPage }: Mobil
               className="inline-flex bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
             >
               <span>{t("navbar.see_more_cities", "See More Cities")}</span>
+            </Link>
+          ) : isEventPage && eventSlug ? (
+            <Link
+              to={eventHeader?.checkoutHref ?? `/events/${eventSlug}/checkout`}
+              onClick={() => {
+                eventHeader?.trackCheckoutClick("header");
+                closeMenu();
+              }}
+              className="inline-flex bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+            >
+              <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>
+              <ArrowRight size={16} />
             </Link>
           ) : (
             <Link

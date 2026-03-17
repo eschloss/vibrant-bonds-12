@@ -25,6 +25,7 @@ import {
   getProviderName,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
+import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
 
 function formatDateTimeWindow(
   startIso: string,
@@ -242,8 +243,20 @@ const EventConfirmation = () => {
 
   const hasOrderError = !orderIdFromUrl || orderNotFound;
 
+  const checkoutHref = eventSlug ? `/events/${eventSlug}/checkout` : "";
+  const trackCheckoutClick = useEventTrackCheckoutClick(eventData || null, notFound, checkoutHref);
+  const eventHeaderValue =
+    eventSlug && checkoutHref ? { eventSlug, checkoutHref, trackCheckoutClick } : null;
+
+  const wrapWithEventHeader = (content: React.ReactNode) =>
+    eventHeaderValue ? (
+      <EventHeaderProvider value={eventHeaderValue}>{content}</EventHeaderProvider>
+    ) : (
+      content
+    );
+
   if (loading) {
-    return (
+    return wrapWithEventHeader(
       <>
         <PageLoadingOverlay show={true} />
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -258,7 +271,7 @@ const EventConfirmation = () => {
   if (notFound || !eventData) return <NotFound />;
 
   if (orderLoading && orderIdFromUrl) {
-    return (
+    return wrapWithEventHeader(
       <>
         <PageLoadingOverlay show={true} />
         <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -271,7 +284,7 @@ const EventConfirmation = () => {
   }
 
   if (hasOrderError) {
-    return (
+    return wrapWithEventHeader(
       <div className="min-h-screen bg-gray-900 text-white">
         <Navbar />
         <main className="px-4 pt-32 pb-16">
@@ -405,7 +418,7 @@ const EventConfirmation = () => {
     }
   };
 
-  return (
+  return wrapWithEventHeader(
     <>
       <Seo {...seoProps} />
       <div className="min-h-screen bg-gray-900 text-white">

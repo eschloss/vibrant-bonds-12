@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -9,13 +9,17 @@ import MobileNavLinks from "./MobileNavLinks";
 import { useTranslation } from "@/hooks/useTranslation";
 import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
+import { useEventHeader } from "@/contexts/EventHeaderContext";
 
 // --- Navigation Link List (for desktop and mobile reuse) ---
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { eventSlug } = useParams<{ eventSlug: string }>();
+  const eventHeader = useEventHeader();
   const isMatchmakingPage = location.pathname.includes("cities/") || location.pathname.includes("matchmaking") || location.pathname.includes("neighborhoods/");
+  const isEventPage = Boolean(eventSlug && /^\/events\/[^/]+(\/|$)/.test(location.pathname));
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -125,6 +129,14 @@ const Navbar = () => {
               >
                 <span>{t("navbar.see_more_cities", "See More Cities")}</span>
               </Link>
+            ) : isEventPage && eventSlug ? (
+              <Link
+                to={eventHeader?.checkoutHref ?? `/events/${eventSlug}/checkout`}
+                onClick={() => eventHeader?.trackCheckoutClick("header")}
+                className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+              >
+                <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>
+              </Link>
             ) : (
               <Link
                 to={addRefToUrl("/cities")}
@@ -149,6 +161,9 @@ const Navbar = () => {
           closeMenu={() => setIsMenuOpen(false)}
           scrollToSection={scrollToSection}
           isMatchmakingPage={isMatchmakingPage}
+          isEventPage={isEventPage}
+          eventSlug={eventSlug ?? undefined}
+          eventHeader={eventHeader}
         />
       </div>
     </>

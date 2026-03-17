@@ -38,6 +38,7 @@ import {
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import EventProviderSection from "@/components/EventProviderSection";
+import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } from "lucide-react";
@@ -1002,6 +1003,9 @@ const EventCheckout = () => {
     return getOrCreateSessionKey(key);
   }, [eventSlug]);
 
+  const checkoutHref = `/events/${eventSlug || ""}/checkout`;
+  const trackCheckoutClick = useEventTrackCheckoutClick(eventData, notFound, checkoutHref);
+
   const createIntent = React.useCallback(async () => {
     if (!eventSlug) return;
     setIntentError(null);
@@ -1044,8 +1048,22 @@ const EventCheckout = () => {
     void createIntent();
   }, [createIntent, eventSlug]);
 
+  const eventHeaderValue =
+    eventSlug && checkoutHref
+      ? { eventSlug, checkoutHref, trackCheckoutClick }
+      : null;
+
   if (loading) {
-    return (
+    return eventHeaderValue ? (
+      <EventHeaderProvider value={eventHeaderValue}>
+        <div className="flex flex-col min-h-screen dark">
+          <PageLoadingOverlay show={true} />
+          <Navbar />
+          <main className="flex-grow" />
+          <Footer />
+        </div>
+      </EventHeaderProvider>
+    ) : (
       <div className="flex flex-col min-h-screen dark">
         <PageLoadingOverlay show={true} />
         <Navbar />
@@ -1067,7 +1085,7 @@ const EventCheckout = () => {
   };
 
   if (!stripePromise) {
-    return (
+    const content = (
       <>
         <Seo {...seoProps} />
         <div className="min-h-screen bg-[#090D14] text-white">
@@ -1099,9 +1117,14 @@ const EventCheckout = () => {
         </div>
       </>
     );
+    return eventHeaderValue ? (
+      <EventHeaderProvider value={eventHeaderValue}>{content}</EventHeaderProvider>
+    ) : (
+      content
+    );
   }
 
-  return (
+  const mainContent = (
     <>
       <Seo {...seoProps} />
       <div className="min-h-screen bg-[#090D14] text-white">
@@ -1288,6 +1311,11 @@ const EventCheckout = () => {
         <Footer />
       </div>
     </>
+  );
+  return eventHeaderValue ? (
+    <EventHeaderProvider value={eventHeaderValue}>{mainContent}</EventHeaderProvider>
+  ) : (
+    mainContent
   );
 };
 

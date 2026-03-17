@@ -5,7 +5,6 @@ import {
   Calendar,
   MapPin,
   Clock,
-  ArrowRight,
   Tag,
   MessageSquare,
   Users,
@@ -41,6 +40,7 @@ import {
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import { trackMetaPixelEvent } from "@/lib/utils";
+import { EventHeaderProvider } from "@/contexts/EventHeaderContext";
 
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
@@ -248,7 +248,7 @@ const EventDetail = () => {
   const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
-  const trackCheckoutClick = (ctaLocation: "hero" | "sidebar") => {
+  const trackCheckoutClick = (ctaLocation: "hero" | "sidebar" | "header") => {
     trackQualifiedEventPageView("checkout_click", {
       cta_location: ctaLocation,
       destination: checkoutHref,
@@ -312,7 +312,14 @@ const EventDetail = () => {
   );
 
 
+  const eventHeaderValue = {
+    eventSlug: data.slug,
+    checkoutHref,
+    trackCheckoutClick,
+  };
+
   return (
+    <EventHeaderProvider value={eventHeaderValue}>
     <div className="flex flex-col min-h-screen dark">
       <script
         type="application/ld+json"
@@ -494,7 +501,6 @@ const EventDetail = () => {
                   className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   {t("event_detail.sign_up", "Sign up")}
-                  <ArrowRight size={20} />
                 </Link>
               </div>
               <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
@@ -659,7 +665,6 @@ const EventDetail = () => {
                       className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                     >
                       {t("event_detail.sign_up_now", "Sign up now")}
-                      <ArrowRight size={18} />
                     </Link>
 
                     <p className="mt-3 text-xs text-white/50 text-center">
@@ -686,6 +691,7 @@ const EventDetail = () => {
 
       <Footer />
     </div>
+    </EventHeaderProvider>
   );
 };
 
