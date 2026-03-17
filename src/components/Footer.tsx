@@ -273,7 +273,7 @@ const Footer = () => {
           delay: 0.2
         }} className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-white/50 text-sm mb-4 md:mb-0">
-              &copy; {currentYear} <Text id="footer.copyright" className="">Pulse App. All rights reserved.</Text>
+              &copy; {currentYear} <Text id="footer.copyright" className="">Pulse Now Co. All rights reserved.</Text>
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
