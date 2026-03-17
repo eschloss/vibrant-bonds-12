@@ -426,6 +426,8 @@ function CheckoutForm({
     }
   };
 
+  const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = React.useState(false);
+
   const durationText = React.useMemo(() => {
     const h = eventData.duration_hours;
     if (!h || h <= 0) return null;
@@ -473,7 +475,7 @@ function CheckoutForm({
           </h2>
 
           {eventData.short_description ? (
-            <p className="text-sm text-white/60 leading-relaxed mb-5">
+            <p className="hidden lg:block text-sm text-white/60 leading-relaxed mb-5">
               {eventData.short_description}
             </p>
           ) : null}
@@ -485,10 +487,11 @@ function CheckoutForm({
                 <span>{eventDateTime.text}</span>
                 {eventDateTime.hasWindow ? (
                   <TooltipProvider delayDuration={100}>
-                    <Tooltip>
+                    <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
+                          onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
                           className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
                           aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
                         >
@@ -518,7 +521,7 @@ function CheckoutForm({
             ) : null}
           </div>
 
-          <div className="mb-6">
+          <div className="hidden lg:block mb-6">
             <EventProviderSection
               provider={eventData.provider}
               providerEventUrl={eventData.provider_event_url}
@@ -564,7 +567,7 @@ function CheckoutForm({
               <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
             </div>
             <div className="flex items-center justify-between pt-1">
-              <span className="text-base font-semibold text-white">{t("event_checkout.total_today", "Total today")}</span>
+              <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>
           </div>
