@@ -258,6 +258,8 @@ function CheckoutForm({
     });
   }, [baseCheckoutParams, eventData]);
 
+  const lastEarlyAttachKeyRef = React.useRef<string | null>(null);
+
   const attachEmails = React.useCallback(
     async (values: CheckoutFormValues) => {
       const firstName = values.firstName.trim();
@@ -323,6 +325,61 @@ function CheckoutForm({
     },
     [baseCheckoutParams, eventData, orderId, t],
   );
+
+  const tryAttachEmailsEarly = React.useCallback(() => {
+    const values = form.getValues();
+    const firstName = (values.firstName || "").trim();
+    const lastName = (values.lastName || "").trim();
+    const buyerEmail = (values.buyerEmail || "").trim().toLowerCase();
+    const attendeeSameAsBuyer = values.attendeeSameAsBuyer;
+    const attendeeEmail = attendeeSameAsBuyer
+      ? buyerEmail
+      : (values.attendeeEmail || "").trim().toLowerCase();
+
+    const emailValid = z.string().trim().min(1).email().safeParse(buyerEmail).success;
+    const attendeeEmailValid =
+      attendeeSameAsBuyer || z.string().trim().min(1).email().safeParse(attendeeEmail).success;
+
+    if (
+      firstName.length < 2 ||
+      lastName.length < 2 ||
+      !emailValid ||
+      !attendeeEmailValid
+    ) {
+      return;
+    }
+
+    const key = `${firstName}|${lastName}|${buyerEmail}|${attendeeEmail}`;
+    if (lastEarlyAttachKeyRef.current === key) return;
+    lastEarlyAttachKeyRef.current = key;
+
+    void attachEmails({
+      ...values,
+      firstName,
+      lastName,
+      buyerEmail,
+      attendeeSameAsBuyer,
+      attendeeEmail,
+    }).catch(() => {
+      lastEarlyAttachKeyRef.current = null;
+    });
+  }, [form, attachEmails]);
+
+  // Detect autocomplete: watch form values and call attach when we have enough data
+  React.useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const sub = form.watch(() => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        tryAttachEmailsEarly();
+      }, 300);
+    });
+    return () => {
+      sub.unsubscribe();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [form, tryAttachEmailsEarly]);
 
   const confirmStripePayment = React.useCallback(async () => {
     if (!stripe || !elements) return;
@@ -640,6 +697,7 @@ function CheckoutForm({
                                 ct: eventData.city_label || undefined,
                               });
                             }
+                            tryAttachEmailsEarly();
                           }}
                         />
                       </FormControl>
@@ -678,6 +736,7 @@ function CheckoutForm({
                                 ct: eventData.city_label || undefined,
                               });
                             }
+                            tryAttachEmailsEarly();
                           }}
                         />
                       </FormControl>
@@ -724,6 +783,7 @@ function CheckoutForm({
                               });
                             }
                           }
+                          tryAttachEmailsEarly();
                         }}
                       />
                     </FormControl>
@@ -766,6 +826,10 @@ function CheckoutForm({
                           placeholder={t("event_checkout.attendee_email_placeholder", "attendee@example.com")}
                           className="mt-1.5 h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
                           {...field}
+                          onBlur={(e) => {
+                            field.onBlur();
+                            tryAttachEmailsEarly();
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
