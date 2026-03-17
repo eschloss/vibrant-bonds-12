@@ -2,14 +2,14 @@
 import { Suspense, lazy, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
 import Viewport from "@/components/Viewport";
 const NeuralNetworkLazy = lazy(() => import("@/components/NeuralNetwork"));
-import MeetPipPromo from "@/components/MeetPipPromo";
-import MissionCountdown from "@/components/MissionCountdown";
-import ActivitiesTeaser from "@/components/ActivitiesTeaser";
-import Footer from "@/components/Footer";
-import ShareCallout from "@/components/ShareCallout";
+const HowItWorksLazy = lazy(() => import("@/components/HowItWorks"));
+const MeetPipPromoLazy = lazy(() => import("@/components/MeetPipPromo"));
+const MissionCountdownLazy = lazy(() => import("@/components/MissionCountdown"));
+const ActivitiesTeaserLazy = lazy(() => import("@/components/ActivitiesTeaser"));
+const FooterLazy = lazy(() => import("@/components/Footer"));
+const ShareCalloutLazy = lazy(() => import("@/components/ShareCallout"));
 import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -39,22 +39,33 @@ const Index = () => {
         
         <main className="flex-grow">
           <Hero />
-          {/* Removed extra headline module; incorporated into HowItWorks */}
           <div id="how-it-works" ref={howItWorksRef}>
-            <HowItWorks ctaHref="/how-it-works" ctaLabel="How It Works" />
+            <Suspense fallback={null}>
+              <HowItWorksLazy ctaHref="/how-it-works" ctaLabel="How It Works" />
+            </Suspense>
           </div>
-          <ActivitiesTeaser />
-          <MeetPipPromo imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
+          <Suspense fallback={null}>
+            <ActivitiesTeaserLazy />
+          </Suspense>
+          <Suspense fallback={null}>
+            <MeetPipPromoLazy imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
+          </Suspense>
           <Viewport rootMargin="300px 0px" threshold={0}>
             <Suspense fallback={null}>
               <NeuralNetworkLazy />
             </Suspense>
           </Viewport>
-          <MissionCountdown />
-          <ShareCallout />
+          <Suspense fallback={null}>
+            <MissionCountdownLazy />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ShareCalloutLazy />
+          </Suspense>
         </main>
         
-        <Footer />
+        <Suspense fallback={null}>
+          <FooterLazy />
+        </Suspense>
       </div>
     </>
   );

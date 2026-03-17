@@ -86,7 +86,8 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           react: ["react", "react-dom", "react-router-dom"],
-          vendor: ["framer-motion", "@tanstack/react-query", "lucide-react"]
+          // lucide-react excluded: tree-shakes per route so each page only loads icons it uses
+          vendor: ["framer-motion", "@tanstack/react-query"]
         }
       }
     }
