@@ -531,6 +531,13 @@ function CheckoutForm({
               <span className="text-white/55">{t("event_checkout.ticket", "Ticket")}</span>
               <span className="text-white/82">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
+            {(eventData.whats_included ?? []).length > 0 && (
+              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
+                {(eventData.whats_included ?? []).map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            )}
             {eventData.provider_fee > 0 ? (
               <div className="flex items-center justify-between text-sm">
                 <span className="flex items-center gap-1.5 text-white/55">
