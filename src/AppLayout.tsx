@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
+import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
@@ -31,6 +32,7 @@ const AppLayout = () => {
           {CitiesPreloaderComp && <CitiesPreloaderComp />}
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
+          <WhatsAppChatButton />
         </ScrollContainerProvider>
       </ScrollArea>
     </div>

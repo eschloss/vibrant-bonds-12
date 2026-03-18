@@ -2,7 +2,7 @@ import React, { createContext, useContext, useCallback, useRef } from "react";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import { getProviderName, type GetKikiEventResponse } from "@/lib/eventApi";
 
-export type EventHeaderCtaLocation = "hero" | "sidebar" | "header";
+export type EventHeaderCtaLocation = "hero" | "sidebar" | "header" | "sticky";
 
 export interface EventHeaderContextValue {
   eventSlug: string;

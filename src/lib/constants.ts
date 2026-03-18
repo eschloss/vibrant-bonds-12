@@ -18,3 +18,8 @@ export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 
 // Mission duration (days) – single source of truth for copy/components
 export const MISSION_DAYS = 10;
+
+// WhatsApp chat widget (ManyChat-connected number)
+// Set VITE_WHATSAPP_PHONE (e.g. 14155551234) to enable the floating button
+export const WHATSAPP_PHONE = import.meta.env.VITE_WHATSAPP_PHONE as string | undefined;
+export const WHATSAPP_PREFILL = import.meta.env.VITE_WHATSAPP_PREFILL as string | undefined;

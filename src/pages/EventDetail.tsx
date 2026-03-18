@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import {
   Calendar,
   MapPin,
@@ -10,6 +11,9 @@ import {
   Users,
   UtensilsCrossed,
   Globe,
+  ChevronDown,
+  ChevronUp,
+  Ticket,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +26,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import EventFaqSection from "@/components/EventFaqSection";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import EventProviderSection from "@/components/EventProviderSection";
 import {
   type CarouselApi,
@@ -40,12 +45,17 @@ import {
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import { trackMetaPixelEvent } from "@/lib/utils";
-import { EventHeaderProvider } from "@/contexts/EventHeaderContext";
+import {
+  type EventHeaderCtaLocation,
+  EventHeaderProvider,
+} from "@/contexts/EventHeaderContext";
+import EventStickyCta from "@/components/EventStickyCta";
+import { useIsLg } from "@/hooks/use-mobile";
 
 type SignUpCardProps = {
   t: (key: string, fallback?: string) => string;
   checkoutHref: string;
-  trackCheckoutClick: (location: "hero" | "sidebar" | "header") => void;
+  trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   formattedTotalPrice: string;
   formattedTicketPrice: string;
   formattedPulseFee: string;
@@ -64,74 +74,100 @@ const SignUpCard = ({
   formattedProviderFee,
   providerFee,
   whatsIncluded = [],
-}: SignUpCardProps) => (
-  <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
-    <CardContent className="p-6">
-      <h3 className="text-2xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
+}: SignUpCardProps) => {
+  const [breakdownOpen, setBreakdownOpen] = useState(false);
 
-      <div className="space-y-2.5 text-sm text-gray-300 mb-6">
-        <div className="flex items-center gap-2">
-          <Users size={15} className="text-[#38D1BF] shrink-0" />
-          {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
-        </div>
-        <div className="flex items-center gap-2">
-          <MessageSquare size={15} className="text-purple-300 shrink-0" />
-          {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
-        </div>
-        <div className="flex items-center gap-2">
-          <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
-          {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
-        </div>
-      </div>
+  return (
+    <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
+      <CardContent className="p-6">
+        <h3 className="text-2xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
 
-      <div className="mb-5 space-y-2">
-        <div className="flex items-center justify-between gap-4">
-          <span className="text-xl text-white/90">
-            {t("event_detail.total", "Total")}
-          </span>
-          <span className="text-xl text-white tabular-nums text-right">
-            {formattedTotalPrice}
-          </span>
-        </div>
-        <div className="text-xs text-white/60 space-y-0.5">
-          <div className="flex items-center justify-between">
-            <span>{t("event_detail.event_ticket", "Event ticket")}</span>
-            <span className="text-white/75">{formattedTicketPrice}</span>
+        <div className="space-y-2.5 text-sm text-gray-300 mb-6">
+          <div className="flex items-center gap-2">
+            <Users size={15} className="text-[#38D1BF] shrink-0" />
+            {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
           </div>
-          {whatsIncluded.length > 0 && (
-            <ul className="list-disc list-inside pl-0.5 space-y-0.5 text-white/60">
-              {whatsIncluded.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          )}
-          <div className="flex items-center justify-between">
-            <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
-            <span className="text-white/75">{formattedPulseFee}</span>
+          <div className="flex items-center gap-2">
+            <MessageSquare size={15} className="text-purple-300 shrink-0" />
+            {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
           </div>
-          {formattedProviderFee && providerFee > 0 && (
-            <div className="flex items-center justify-between">
-              <span>{t("event_detail.provider_fee", "Provider fee")}</span>
-              <span className="text-white/75">{formattedProviderFee}</span>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
+            {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
+          </div>
         </div>
-      </div>
 
-      <Link
-        to={checkoutHref}
-        onClick={() => trackCheckoutClick("sidebar")}
-        className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
-      >
-        {t("event_detail.sign_up_now", "Sign up now")}
-      </Link>
+        <div className="mb-5 space-y-2">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-xl text-white/90">
+              {t("event_detail.total", "Total")}
+            </span>
+            <span className="text-xl text-white tabular-nums text-right">
+              {formattedTotalPrice}
+            </span>
+          </div>
+          <Collapsible open={breakdownOpen} onOpenChange={setBreakdownOpen}>
+            <CollapsibleTrigger asChild>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between gap-2 text-xs text-[#38D1BF] hover:text-[#4dd9c9] transition-colors py-1"
+              >
+                <span>{t("event_detail.see_whats_included", "See what's included")}</span>
+                {breakdownOpen ? (
+                  <ChevronUp size={14} className="shrink-0" />
+                ) : (
+                  <ChevronDown size={14} className="shrink-0" />
+                )}
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="text-xs text-white/60 space-y-0.5 pt-1">
+                <div className="flex items-center justify-between">
+                  <span>{t("event_detail.event_ticket", "Event ticket")}</span>
+                  <span className="text-white/75">{formattedTicketPrice}</span>
+                </div>
+                {whatsIncluded.length > 0 && (
+                  <ul className="list-disc list-inside pl-0.5 space-y-0.5 text-white/60">
+                    {whatsIncluded.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                <div className="flex items-center justify-between">
+                  <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
+                  <span className="text-white/75">{formattedPulseFee}</span>
+                </div>
+                {formattedProviderFee && providerFee > 0 && (
+                  <div className="flex items-center justify-between">
+                    <span>{t("event_detail.provider_fee", "Provider fee")}</span>
+                    <span className="text-white/75">{formattedProviderFee}</span>
+                  </div>
+                )}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
 
-      <p className="mt-3 text-xs text-white/50 text-center">
-        {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
-      </p>
-    </CardContent>
-  </Card>
-);
+        <div className="flex items-center gap-2 text-amber-400 text-sm font-medium mb-3">
+          <Ticket size={16} className="shrink-0" aria-hidden />
+          <span>{t("event_detail.sticky.tickets_remaining", "Only 20 tickets remaining")}</span>
+        </div>
+
+        <Link
+          to={checkoutHref}
+          onClick={() => trackCheckoutClick("sidebar")}
+          className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
+        >
+          {t("event_detail.buy_my_ticket", "Buy my ticket")}
+        </Link>
+
+        <p className="mt-3 text-xs text-white/50 text-center">
+          {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
+        </p>
+      </CardContent>
+    </Card>
+  );
+};
 
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
@@ -185,7 +221,11 @@ const EventDetail = () => {
   const [notFound, setNotFound] = useState(false);
   const [heroCarouselApi, setHeroCarouselApi] = useState<CarouselApi | undefined>(undefined);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const [showDesktopSticky, setShowDesktopSticky] = useState(false);
   const hasTrackedQualifiedEventPageView = useRef(false);
+  const heroCtaRef = useRef<HTMLDivElement>(null);
+  const whatHappensRef = useRef<HTMLDivElement>(null);
+  const isLg = useIsLg();
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
@@ -298,6 +338,35 @@ const EventDetail = () => {
     return () => window.clearTimeout(timeoutId);
   }, [eventData, notFound, trackQualifiedEventPageView]);
 
+  useEffect(() => {
+    if (!isLg || !eventData || notFound) return;
+
+    const updateDesktopSticky = () => {
+      const hero = heroCtaRef.current;
+      const whatHappens = whatHappensRef.current;
+      if (!hero || !whatHappens) return;
+
+      const heroRect = hero.getBoundingClientRect();
+      const whatHappensRect = whatHappens.getBoundingClientRect();
+      const STICKY_BAR_HEIGHT = 72;
+      const vh = window.innerHeight;
+
+      // Hide when: (1) hero CTA enters sticky zone, or (2) user has scrolled so "What happens" is in upper viewport
+      const heroInStickyZone = heroRect.bottom < STICKY_BAR_HEIGHT;
+      const whatHappensScrolledIntoView = whatHappensRect.top < 150;
+      setShowDesktopSticky(!heroInStickyZone && !whatHappensScrolledIntoView);
+    };
+
+    // Run on mount/resize so state is correct when refs are ready
+    updateDesktopSticky();
+    window.addEventListener("scroll", updateDesktopSticky, { passive: true });
+    window.addEventListener("resize", updateDesktopSticky);
+    return () => {
+      window.removeEventListener("scroll", updateDesktopSticky);
+      window.removeEventListener("resize", updateDesktopSticky);
+    };
+  }, [isLg, eventData, notFound]);
+
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen dark">
@@ -339,7 +408,7 @@ const EventDetail = () => {
   const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
-  const trackCheckoutClick = (ctaLocation: "hero" | "sidebar" | "header") => {
+  const trackCheckoutClick = (ctaLocation: EventHeaderCtaLocation) => {
     trackQualifiedEventPageView("checkout_click", {
       cta_location: ctaLocation,
       destination: checkoutHref,
@@ -419,7 +488,7 @@ const EventDetail = () => {
       <Seo {...seoProps} />
       <Navbar />
 
-      <main className="flex-grow">
+      <main className={cn("flex-grow", "pb-20 lg:pb-0")}>
         {/* Hero (match /cities visual language) */}
         <section className="relative pt-32 pb-12 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
@@ -582,13 +651,16 @@ const EventDetail = () => {
               </div>
 
               {/* Prominent CTA (above the fold) */}
-              <div className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
+              <div
+                ref={heroCtaRef}
+                className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center"
+              >
                 <Link
                   to={checkoutHref}
                   onClick={() => trackCheckoutClick("hero")}
                   className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
-                  {t("event_detail.sign_up", "Sign up")}
+                  {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
                 </Link>
               </div>
               <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
@@ -610,7 +682,7 @@ const EventDetail = () => {
             >
               {/* Main details */}
               <div className="lg:col-span-2">
-                <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
+                <Card ref={whatHappensRef} className="bg-gray-800/50 backdrop-blur-lg border-gray-700 mb-8">
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-2 text-white">
                       {t("event_detail.what_happens_title", "What happens after you sign up")}
@@ -750,6 +822,15 @@ const EventDetail = () => {
       </main>
 
       <Footer />
+
+      {(!isLg || showDesktopSticky) && (
+        <EventStickyCta
+          checkoutHref={checkoutHref}
+          formattedTotalPrice={formattedTotalPrice}
+          trackCheckoutClick={trackCheckoutClick}
+          t={t}
+        />
+      )}
     </div>
     </EventHeaderProvider>
   );

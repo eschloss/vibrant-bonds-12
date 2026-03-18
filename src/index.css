@@ -340,6 +340,15 @@ html, body, #root {
     }
   }
 
+  @keyframes chat-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
   @keyframes bounce-gentle {
     0%, 100% {
       transform: translateY(0);
@@ -380,6 +389,10 @@ html, body, #root {
     will-change: transform, opacity;
   }
 
+  .animate-chat-pulse {
+    animation: chat-pulse 2.5s ease-in-out infinite;
+  }
+
   .animate-bounce-gentle {
     animation: bounce-gentle 3s ease-in-out infinite;
     will-change: transform;
@@ -395,6 +408,7 @@ html, body, #root {
     .animate-float-reverse,
     .animate-spin-slow,
     .animate-pulse-slow,
+    .animate-chat-pulse,
     .animate-bounce-gentle,
     .animate-slide-up {
       animation: none;
