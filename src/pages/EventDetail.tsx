@@ -226,6 +226,7 @@ const EventDetail = () => {
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [showDesktopSticky, setShowDesktopSticky] = useState(false);
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = useState(false);
+  const [addressTooltipOpen, setAddressTooltipOpen] = useState(false);
   const hasTrackedQualifiedEventPageView = useRef(false);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const whatHappensRef = useRef<HTMLDivElement>(null);
@@ -593,7 +594,7 @@ const EventDetail = () => {
                   <Calendar size={15} className="shrink-0 text-gray-400" />
                   <span>{dateTime.text}</span>
                   {dateTime.hasWindow ? (
-                    <TooltipProvider delayDuration={100}>
+                    <TooltipProvider delayDuration={isLg ? 100 : 999999}>
                       <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
                         <TooltipTrigger asChild>
                           <button
@@ -617,11 +618,12 @@ const EventDetail = () => {
                   {isLg ? (
                     <span className="break-words">{data.place}</span>
                   ) : (
-                    <TooltipProvider delayDuration={100}>
-                      <Tooltip>
+                    <TooltipProvider delayDuration={999999}>
+                      <Tooltip open={addressTooltipOpen} onOpenChange={setAddressTooltipOpen}>
                         <TooltipTrigger asChild>
                           <button
                             type="button"
+                            onClick={() => setAddressTooltipOpen((prev) => !prev)}
                             className="text-left truncate min-w-0 w-full bg-transparent border-0 p-0 font-inherit text-inherit text-gray-300 hover:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-transparent rounded"
                             aria-label={data.place}
                           >

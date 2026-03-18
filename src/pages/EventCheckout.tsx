@@ -41,6 +41,7 @@ import EventProviderSection from "@/components/EventProviderSection";
 import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useIsLg } from "@/hooks/use-mobile";
 import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -504,6 +505,8 @@ function CheckoutForm({
   };
 
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = React.useState(false);
+  const [providerFeeTooltipOpen, setProviderFeeTooltipOpen] = React.useState(false);
+  const isLg = useIsLg();
 
   const durationText = React.useMemo(() => {
     const h = eventData.duration_hours;
@@ -563,7 +566,7 @@ function CheckoutForm({
               <span className="inline-flex items-center gap-2">
                 <span>{eventDateTime.text}</span>
                 {eventDateTime.hasWindow ? (
-                  <TooltipProvider delayDuration={100}>
+                  <TooltipProvider delayDuration={isLg ? 100 : 999999}>
                     <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
                       <TooltipTrigger asChild>
                         <button
@@ -622,10 +625,17 @@ function CheckoutForm({
               <div className="flex items-center justify-between text-sm">
                 <span className="flex items-center gap-1.5 text-white/55">
                   {t("event_checkout.provider_fee", "Provider fee")}
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
+                  <TooltipProvider delayDuration={isLg ? 100 : 999999}>
+                    <Tooltip open={providerFeeTooltipOpen} onOpenChange={setProviderFeeTooltipOpen}>
                       <TooltipTrigger asChild>
-                        <Info className="h-3.5 w-3.5 text-white/35 hover:text-white/70 transition-colors cursor-default shrink-0" />
+                        <button
+                          type="button"
+                          onClick={() => setProviderFeeTooltipOpen((prev) => !prev)}
+                          className="inline-flex cursor-default shrink-0 text-white/35 hover:text-white/70 transition-colors"
+                          aria-label={t("event_checkout.provider_fee_tooltip", "This fee is charged by the event organiser. We show it here so there are no surprises at payment.")}
+                        >
+                          <Info className="h-3.5 w-3.5" />
+                        </button>
                       </TooltipTrigger>
                       <TooltipContent
                         side="right"
