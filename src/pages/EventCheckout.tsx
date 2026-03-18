@@ -421,6 +421,11 @@ function CheckoutForm({
     try {
       await attachEmails(values);
     } catch (err: any) {
+      trackMetaPixelEvent(
+        "event_checkout_attach_emails_failed",
+        { ...baseCheckoutParams, error_message: err?.message },
+        { custom: true }
+      );
       toast({
         title: t("event_checkout.checkout_error", "Checkout error"),
         description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
@@ -478,6 +483,11 @@ function CheckoutForm({
       }
       await attachEmails(form.getValues());
     } catch (err: any) {
+      trackMetaPixelEvent(
+        "event_checkout_attach_emails_failed",
+        { ...baseCheckoutParams, error_message: err?.message },
+        { custom: true }
+      );
       toast({
         title: t("event_checkout.checkout_error", "Checkout error"),
         description: err?.message || t("event_checkout.something_went_wrong", "Something went wrong. Please try again."),
@@ -1136,6 +1146,14 @@ const EventCheckout = () => {
     } catch (err: any) {
       const message = err?.message || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
       setIntentError(message);
+      trackMetaPixelEvent(
+        "event_checkout_create_intent_failed",
+        {
+          event_slug: eventSlug,
+          error_message: message,
+        },
+        { custom: true }
+      );
       toast({
         title: t("event_checkout.checkout_error", "Checkout error"),
         description: message,
