@@ -50,6 +50,8 @@ export interface GetKikiEventResponse {
   vibe_test_url?: string;
   /** List of strings describing what's included with the event ticket. */
   whats_included?: string[];
+  /** Number of tickets remaining for this event. */
+  tickets_remaining?: number;
 }
 
 /** Extract provider display name, handling both legacy string and new object shape */

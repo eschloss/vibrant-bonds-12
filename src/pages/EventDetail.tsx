@@ -56,24 +56,28 @@ type SignUpCardProps = {
   t: (key: string, fallback?: string) => string;
   checkoutHref: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
+  onSeeWhatsIncludedClick?: () => void;
   formattedTotalPrice: string;
   formattedTicketPrice: string;
   formattedPulseFee: string;
   formattedProviderFee: string | null;
   providerFee: number;
   whatsIncluded?: string[];
+  ticketsRemaining: number;
 };
 
 const SignUpCard = ({
   t,
   checkoutHref,
   trackCheckoutClick,
+  onSeeWhatsIncludedClick,
   formattedTotalPrice,
   formattedTicketPrice,
   formattedPulseFee,
   formattedProviderFee,
   providerFee,
   whatsIncluded = [],
+  ticketsRemaining,
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
@@ -110,6 +114,7 @@ const SignUpCard = ({
             <CollapsibleTrigger asChild>
               <button
                 type="button"
+                onClick={() => onSeeWhatsIncludedClick?.()}
                 className="flex w-full items-center justify-between gap-2 text-xs text-[#38D1BF] hover:text-[#4dd9c9] transition-colors py-1"
               >
                 <span>{t("event_detail.see_whats_included", "See what's included")}</span>
@@ -150,7 +155,7 @@ const SignUpCard = ({
 
         <div className="flex items-center gap-2 text-amber-400 text-sm font-medium mb-3">
           <Ticket size={16} className="shrink-0" aria-hidden />
-          <span>{t("event_detail.sticky.tickets_remaining", "Only 20 tickets remaining")}</span>
+          <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets remaining").replace("{n}", String(ticketsRemaining))}</span>
         </div>
 
         <Link
@@ -300,7 +305,7 @@ const EventDetail = () => {
 
   const trackQualifiedEventPageView = useCallback(
     (
-      trigger: "10_seconds" | "checkout_click",
+      trigger: "10_seconds" | "checkout_click" | "see_whats_included",
       extraParams?: Record<string, string>
     ) => {
       if (!eventData || notFound || hasTrackedQualifiedEventPageView.current) return;
@@ -759,12 +764,14 @@ const EventDetail = () => {
                     t={t}
                     checkoutHref={checkoutHref}
                     trackCheckoutClick={trackCheckoutClick}
+                    onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
                     formattedTotalPrice={formattedTotalPrice}
                     formattedTicketPrice={formattedTicketPrice}
                     formattedPulseFee={formattedPulseFee}
                     formattedProviderFee={formattedProviderFee}
                     providerFee={data.provider_fee}
                     whatsIncluded={data.whats_included ?? []}
+                    ticketsRemaining={data.tickets_remaining ?? 20}
                   />
                 </div>
 
@@ -797,12 +804,14 @@ const EventDetail = () => {
                   t={t}
                   checkoutHref={checkoutHref}
                   trackCheckoutClick={trackCheckoutClick}
+                  onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
                   formattedTotalPrice={formattedTotalPrice}
                   formattedTicketPrice={formattedTicketPrice}
                   formattedPulseFee={formattedPulseFee}
                   formattedProviderFee={formattedProviderFee}
                   providerFee={data.provider_fee}
                   whatsIncluded={data.whats_included ?? []}
+                  ticketsRemaining={data.tickets_remaining ?? 20}
                 />
               </aside>
             </motion.div>
@@ -829,6 +838,7 @@ const EventDetail = () => {
           formattedTotalPrice={formattedTotalPrice}
           trackCheckoutClick={trackCheckoutClick}
           t={t}
+          ticketsRemaining={data.tickets_remaining ?? 20}
         />
       )}
     </div>

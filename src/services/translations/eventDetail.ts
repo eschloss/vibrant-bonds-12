@@ -49,8 +49,8 @@ export const eventDetail = {
     "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
 
     "event_detail.sticky.reserve_spot": "Reserve your spot",
-    "event_detail.sticky.tickets_remaining": "Only 20 tickets remaining",
-    "event_detail.sticky.tickets_remaining_short": "20 spots left",
+    "event_detail.sticky.tickets_remaining": "Only {n} tickets remaining",
+    "event_detail.sticky.tickets_remaining_short": "{n} spots left",
 
     // EventFaqSection
     "event_detail.faq.title": "FAQ",
@@ -147,8 +147,8 @@ export const eventDetail = {
     "event_detail.most_make_friend": "Te emparejaremos con al menos 3 otros asistentes que van solos.",
 
     "event_detail.sticky.reserve_spot": "Reserva tu lugar",
-    "event_detail.sticky.tickets_remaining": "Solo quedan 20 entradas",
-    "event_detail.sticky.tickets_remaining_short": "20 plazas",
+    "event_detail.sticky.tickets_remaining": "Solo quedan {n} entradas",
+    "event_detail.sticky.tickets_remaining_short": "{n} plazas",
 
     // EventFaqSection
     "event_detail.faq.title": "Preguntas frecuentes",

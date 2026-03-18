@@ -655,7 +655,7 @@ function CheckoutForm({
       <div className="order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10">
         <h1 className="text-xl font-semibold text-white mb-6">{t("event_checkout.complete_booking", "Complete your booking")}</h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 flex-1">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="form-autofill-dark flex flex-col gap-5 flex-1">
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField

@@ -545,6 +545,18 @@ html, body, #root {
 
 /* End of Utility Classes */
 
+/* --- Autofill: keep dark theme (no white flash on checkout) --- */
+.form-autofill-dark input:-webkit-autofill,
+.form-autofill-dark input:-webkit-autofill:hover,
+.form-autofill-dark input:-webkit-autofill:focus,
+.form-autofill-dark input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #131b2e inset !important;
+  box-shadow: 0 0 0 1000px #131b2e inset !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.95) !important;
+  caret-color: rgba(255, 255, 255, 0.95) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* --- Custom fixes for input/select focus states and colors --- */
 @layer base {
   /* ... keep existing root/variables ... */

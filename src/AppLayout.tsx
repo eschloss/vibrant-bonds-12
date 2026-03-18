@@ -10,6 +10,9 @@ import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 
+/** Set to true to show the "Chat with us" button */
+const SHOW_CHAT_BUTTON = false;
+
 const AppLayout = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const manageRef = useReactRef<() => void | null>(null);
@@ -32,7 +35,7 @@ const AppLayout = () => {
           {CitiesPreloaderComp && <CitiesPreloaderComp />}
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
-          <WhatsAppChatButton />
+          {SHOW_CHAT_BUTTON && <WhatsAppChatButton />}
         </ScrollContainerProvider>
       </ScrollArea>
     </div>

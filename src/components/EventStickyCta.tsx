@@ -9,6 +9,7 @@ type EventStickyCtaProps = {
   formattedTotalPrice: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   t: (key: string, fallback?: string) => string;
+  ticketsRemaining: number;
   className?: string;
 };
 
@@ -17,12 +18,13 @@ export default function EventStickyCta({
   formattedTotalPrice,
   trackCheckoutClick,
   t,
+  ticketsRemaining,
   className = "",
 }: EventStickyCtaProps) {
   const isMobile = useIsMobile();
   const urgencyText = isMobile
-    ? t("event_detail.sticky.tickets_remaining_short", "20 spots left")
-    : t("event_detail.sticky.tickets_remaining", "Only 20 tickets remaining");
+    ? t("event_detail.sticky.tickets_remaining_short", "{n} spots left").replace("{n}", String(ticketsRemaining))
+    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets remaining").replace("{n}", String(ticketsRemaining));
 
   return (
     <div
