@@ -6,7 +6,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 type EventStickyCtaProps = {
   checkoutHref: string;
-  formattedTotalPrice: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   t: (key: string, fallback?: string) => string;
   ticketsRemaining: number;
@@ -15,7 +14,6 @@ type EventStickyCtaProps = {
 
 export default function EventStickyCta({
   checkoutHref,
-  formattedTotalPrice,
   trackCheckoutClick,
   t,
   ticketsRemaining,
@@ -35,9 +33,6 @@ export default function EventStickyCta({
           <Ticket size={16} className="shrink-0" aria-hidden />
           <span>{urgencyText}</span>
         </div>
-        <span className="text-base font-semibold text-white tabular-nums">
-          {formattedTotalPrice}
-        </span>
       </div>
       <Link
         to={checkoutHref}

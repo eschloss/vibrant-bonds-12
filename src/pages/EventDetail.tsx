@@ -6,7 +6,6 @@ import {
   Calendar,
   MapPin,
   Clock,
-  Tag,
   MessageSquare,
   Users,
   UtensilsCrossed,
@@ -186,8 +185,8 @@ const EventDetail = () => {
   ): { text: string; hasWindow: boolean } => {
     const start = parseEventLocalDateTime(startIso);
     const date = start.toLocaleDateString(locale, {
-      weekday: "long",
-      month: "long",
+      weekday: "short",
+      month: "short",
       day: "numeric",
       year: "numeric",
     });
@@ -201,8 +200,7 @@ const EventDetail = () => {
       hour: "numeric",
       minute: "2-digit",
     });
-    const startsBetween = t("event_detail.starts_between", "Starts between");
-    return { text: `${date} · ${startsBetween} ${startTime}–${latestTime}`, hasWindow: true };
+    return { text: `${date} · ${startTime}–${latestTime}`, hasWindow: true };
   };
 
   const formatDuration = (hours: number): string => {
@@ -227,6 +225,7 @@ const EventDetail = () => {
   const [heroCarouselApi, setHeroCarouselApi] = useState<CarouselApi | undefined>(undefined);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [showDesktopSticky, setShowDesktopSticky] = useState(false);
+  const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = useState(false);
   const hasTrackedQualifiedEventPageView = useRef(false);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const whatHappensRef = useRef<HTMLDivElement>(null);
@@ -588,47 +587,61 @@ const EventDetail = () => {
                 </div>
               </div>
 
-              {/* Meta (move above title) */}
-              <div className="flex flex-wrap gap-4 text-gray-300 mb-5">
-                <span className="flex items-center gap-2">
-                  <Calendar size={18} />
-                  <span className="inline-flex items-center gap-2">
-                    <span>{dateTime.text}</span>
-                    {dateTime.hasWindow ? (
-                      <TooltipProvider delayDuration={100}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              type="button"
-                              className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
-                              aria-label={t("event_detail.entrance_time_help", "Entrance time info")}
-                            >
-                              ?
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90">
-                            {entranceTimeTooltip}
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    ) : null}
-                  </span>
+              {/* Meta (compact, single-line friendly) */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-gray-300 mb-5">
+                <span className="flex items-center gap-1.5">
+                  <Calendar size={15} className="shrink-0 text-gray-400" />
+                  <span>{dateTime.text}</span>
+                  {dateTime.hasWindow ? (
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
+                            className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[10px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                            aria-label={t("event_detail.entrance_time_help", "Entrance time info")}
+                          >
+                            ?
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90">
+                          {entranceTimeTooltip}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ) : null}
                 </span>
-                <span className="flex items-center gap-2">
-                  <MapPin size={18} />
-                  {data.place}
+                <span className="flex items-center gap-1.5 min-w-0 max-w-[180px] sm:max-w-[220px] lg:max-w-md xl:max-w-lg">
+                  <MapPin size={15} className="shrink-0 text-gray-400" />
+                  {isLg ? (
+                    <span className="break-words">{data.place}</span>
+                  ) : (
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="text-left truncate min-w-0 w-full bg-transparent border-0 p-0 font-inherit text-inherit text-gray-300 hover:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-transparent rounded"
+                            aria-label={data.place}
+                          >
+                            {data.place}
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom" className="max-w-[min(320px,90vw)] text-sm">
+                          {data.place}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 </span>
-                <span className="flex items-center gap-2">
-                  <Clock size={18} />
+                <span className="flex items-center gap-1.5 shrink-0">
+                  <Clock size={15} className="shrink-0 text-gray-400" />
                   {durationText}
                 </span>
-                <span className="flex items-center gap-2">
-                  <Tag size={18} />
-                  {formattedTotalPrice}
-                </span>
                 {formattedCityName ? (
-                  <span className="flex items-center gap-2">
-                    <Globe size={18} />
+                  <span className="flex items-center gap-1.5 shrink-0">
+                    <Globe size={15} className="shrink-0 text-gray-400" />
                     {formattedCityName}
                   </span>
                 ) : null}
@@ -835,7 +848,6 @@ const EventDetail = () => {
       {(!isLg || showDesktopSticky) && (
         <EventStickyCta
           checkoutHref={checkoutHref}
-          formattedTotalPrice={formattedTotalPrice}
           trackCheckoutClick={trackCheckoutClick}
           t={t}
           ticketsRemaining={data.tickets_remaining ?? 20}
