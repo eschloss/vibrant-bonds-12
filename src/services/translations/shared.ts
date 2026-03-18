@@ -115,6 +115,7 @@ export const shared = {
     "navbar.contact": "Contact",
     "navbar.see_more_cities": "See More Cities",
     "navbar.meet_your_crew": "Meet Your Crew",
+    "navbar.reserve_spot": "Reserve your spot",
 
     // Events (city page) messaging
     "events_city.back_to_cities": "Back to Cities",
@@ -798,6 +799,7 @@ export const shared = {
     "navbar.contact": "Contacto",
     "navbar.see_more_cities": "Ver Más Ciudades",
     "navbar.meet_your_crew": "Conoce a Tu Grupo",
+    "navbar.reserve_spot": "Reserva tu lugar",
 
     // Eventos (página de ciudad) — Mensajería
     "events_city.back_to_cities": "Volver a Ciudades",

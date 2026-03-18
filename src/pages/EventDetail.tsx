@@ -48,6 +48,7 @@ import {
   type EventHeaderCtaLocation,
   EventHeaderProvider,
 } from "@/contexts/EventHeaderContext";
+import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 import EventStickyCta from "@/components/EventStickyCta";
 import { useIsLg } from "@/hooks/use-mobile";
 
@@ -224,13 +225,15 @@ const EventDetail = () => {
   const [notFound, setNotFound] = useState(false);
   const [heroCarouselApi, setHeroCarouselApi] = useState<CarouselApi | undefined>(undefined);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
-  const [showDesktopSticky, setShowDesktopSticky] = useState(false);
+  const [showSticky, setShowSticky] = useState(false);
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = useState(false);
   const [addressTooltipOpen, setAddressTooltipOpen] = useState(false);
   const hasTrackedQualifiedEventPageView = useRef(false);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const whatHappensRef = useRef<HTMLDivElement>(null);
+  const signUpAsideRef = useRef<HTMLElement>(null);
   const isLg = useIsLg();
+  const scrollContainer = useScrollContainer();
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
@@ -343,34 +346,51 @@ const EventDetail = () => {
     return () => window.clearTimeout(timeoutId);
   }, [eventData, notFound, trackQualifiedEventPageView]);
 
+  const minDelayElapsedRef = useRef(false);
   useEffect(() => {
-    if (!isLg || !eventData || notFound) return;
+    if (!eventData || notFound) return;
+    const id = setTimeout(() => {
+      minDelayElapsedRef.current = true;
+    }, 3000);
+    return () => clearTimeout(id);
+  }, [eventData, notFound]);
 
-    const updateDesktopSticky = () => {
-      const hero = heroCtaRef.current;
-      const whatHappens = whatHappensRef.current;
-      if (!hero || !whatHappens) return;
+  useEffect(() => {
+    if (!eventData || notFound) return;
 
-      const heroRect = hero.getBoundingClientRect();
-      const whatHappensRect = whatHappens.getBoundingClientRect();
-      const STICKY_BAR_HEIGHT = 72;
-      const vh = window.innerHeight;
+    let cleanup: (() => void) | undefined;
+    let cancelled = false;
+    const STICKY_SCROLL_THRESHOLD = 80;
 
-      // Hide when: (1) hero CTA enters sticky zone, or (2) user has scrolled so "What happens" is in upper viewport
-      const heroInStickyZone = heroRect.bottom < STICKY_BAR_HEIGHT;
-      const whatHappensScrolledIntoView = whatHappensRect.top < 150;
-      setShowDesktopSticky(!heroInStickyZone && !whatHappensScrolledIntoView);
+    const setup = () => {
+      if (cancelled) return;
+      const el = scrollContainer?.current;
+      if (!el) {
+        setTimeout(setup, 50);
+        return;
+      }
+
+      const updateSticky = () => {
+        const scrolled = el.scrollTop > STICKY_SCROLL_THRESHOLD;
+        setShowSticky(scrolled && minDelayElapsedRef.current);
+      };
+
+      updateSticky();
+      el.addEventListener("scroll", updateSticky, { passive: true });
+      const intervalId = setInterval(updateSticky, 500);
+      cleanup = () => {
+        el.removeEventListener("scroll", updateSticky);
+        clearInterval(intervalId);
+      };
     };
 
-    // Run on mount/resize so state is correct when refs are ready
-    updateDesktopSticky();
-    window.addEventListener("scroll", updateDesktopSticky, { passive: true });
-    window.addEventListener("resize", updateDesktopSticky);
+    const timeoutId = setTimeout(setup, 0);
     return () => {
-      window.removeEventListener("scroll", updateDesktopSticky);
-      window.removeEventListener("resize", updateDesktopSticky);
+      cancelled = true;
+      clearTimeout(timeoutId);
+      cleanup?.();
     };
-  }, [isLg, eventData, notFound]);
+  }, [eventData, notFound, scrollContainer]);
 
   if (loading) {
     return (
@@ -659,33 +679,69 @@ const EventDetail = () => {
                   {data.title}
                 </span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-200 mb-4">
+              <p className="mt-3 text-lg md:text-xl text-gray-200 mb-3 md:mb-4 whitespace-pre-line leading-[1.52]">
                 {t(
                   "event_detail.pulse_matches",
-                  "Pulse matches you with a small group of solo attendees going to the same event, so you show up with new friends."
+                  "Show up with friends.\nGet matched into a small group before the event."
                 )}
               </p>
-              <div>
-                <div className="text-xs uppercase tracking-wider text-white/60">{t("event_detail.about_the_event", "About the event")}</div>
-                <p className="text-lg text-gray-300 mt-1">{data.short_description}</p>
-              </div>
 
-              {/* Prominent CTA (above the fold) */}
+              {/* Prominent CTA (directly below subheadline, above the fold) */}
               <div
                 ref={heroCtaRef}
-                className="mt-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center"
+                className="flex flex-col gap-2 lg:flex-row lg:items-start lg:gap-4 mb-5 md:mb-6"
               >
-                <Link
-                  to={checkoutHref}
-                  onClick={() => trackCheckoutClick("hero")}
-                  className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
-                >
-                  {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    to={checkoutHref}
+                    onClick={() => trackCheckoutClick("hero")}
+                    className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
+                  >
+                    {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
+                  </Link>
+                  <div className="flex flex-col gap-1 px-0.5">
+                    <div className="flex items-center gap-2 text-sm text-white/70">
+                      <Users size={16} className="text-[#38D1BF] shrink-0" />
+                      {t("event_detail.everyone_making_friends", "You'll be matched with 4–6 solo attendees")}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
+                      <Ticket size={16} className="shrink-0" aria-hidden />
+                      {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(data.tickets_remaining ?? 18))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mt-3 flex items-center gap-2 text-sm text-white/70 px-2">
-                <Users size={16} className="text-[#38D1BF] shrink-0" />
-                {t("event_detail.everyone_making_friends", "Everyone in your group is looking to make new friends")}
+
+              <div className="max-w-[600px] xl:max-w-[650px] mt-5">
+                <div className="space-y-2.5 md:space-y-4 text-lg text-gray-300 leading-[1.68]">
+                  {(() => {
+                    const desc = data.short_description;
+                    // Split before "so you" for better paragraph rhythm (e.g. "...before the workshop.\nSo you arrive already knowing people.")
+                    const soYouIdx = desc.toLowerCase().indexOf(" so you ");
+                    if (soYouIdx !== -1) {
+                      const firstPart = desc.slice(0, soYouIdx).replace(/[,.]\s*$/, ".").trim();
+                      const secondPart = "So you " + desc.slice(soYouIdx + 8).trim();
+                      return (
+                        <>
+                          <p>{firstPart}</p>
+                          <p>{secondPart}</p>
+                        </>
+                      );
+                    }
+                    const commaSoYouIdx = desc.toLowerCase().indexOf(", so you");
+                    if (commaSoYouIdx !== -1) {
+                      const firstPart = desc.slice(0, commaSoYouIdx).trim() + ".";
+                      const secondPart = "So you " + desc.slice(commaSoYouIdx + 8).trim();
+                      return (
+                        <>
+                          <p>{firstPart}</p>
+                          <p>{secondPart}</p>
+                        </>
+                      );
+                    }
+                    return <p>{desc}</p>;
+                  })()}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -814,7 +870,7 @@ const EventDetail = () => {
               </div>
 
               {/* Sticky signup card */}
-              <aside className="lg:sticky lg:top-28 h-fit">
+              <aside ref={signUpAsideRef} className="lg:sticky lg:top-28 h-fit">
                 <SignUpCard
                   t={t}
                   checkoutHref={checkoutHref}
@@ -847,7 +903,7 @@ const EventDetail = () => {
 
       <Footer />
 
-      {(!isLg || showDesktopSticky) && (
+      {showSticky && (
         <EventStickyCta
           checkoutHref={checkoutHref}
           trackCheckoutClick={trackCheckoutClick}

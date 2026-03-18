@@ -10,13 +10,13 @@ export const eventDetail = {
     "event_detail.view_group_chat_preview": "View group chat preview",
 
     "event_detail.meet_new_friends_at": "Meet New Friends at",
-    "event_detail.pulse_matches": "Pulse matches you with a small group of solo attendees going to the same event, so you show up with new friends.",
-    "event_detail.about_the_event": "About the event",
+    "event_detail.pulse_matches": "Show up with friends.\nGet matched into a small group before the event.",
+    "event_detail.what_to_expect": "What to expect",
     "event_detail.sign_up": "Sign up",
     "event_detail.sign_up_now": "Sign up now",
     "event_detail.buy_my_ticket": "Buy my ticket",
     "event_detail.see_whats_included": "See what's included",
-    "event_detail.everyone_making_friends": "Everyone in your group is looking to make new friends",
+    "event_detail.everyone_making_friends": "You'll be matched with 4–6 solo attendees",
 
     "event_detail.what_happens_title": "What happens after you sign up",
     "event_detail.organised_by": "This event is organised by",
@@ -50,7 +50,7 @@ export const eventDetail = {
 
     "event_detail.sticky.reserve_spot": "Reserve your spot",
     "event_detail.sticky.tickets_remaining": "Only {n} tickets remaining",
-    "event_detail.sticky.tickets_remaining_short": "{n} spots left",
+    "event_detail.sticky.tickets_remaining_short": "Only {n} spots left for this event",
 
     // EventFaqSection
     "event_detail.faq.title": "FAQ",
@@ -108,13 +108,13 @@ export const eventDetail = {
     "event_detail.view_group_chat_preview": "Ver vista previa del chat grupal",
 
     "event_detail.meet_new_friends_at": "Conoce nuevos amigos en",
-    "event_detail.pulse_matches": "Pulse te empareja con un grupo pequeño de asistentes solos que van al mismo evento, para que llegues con nuevos amigos.",
-    "event_detail.about_the_event": "Sobre el evento",
+    "event_detail.pulse_matches": "Llega con amigos.\nSerás emparejado en un grupo pequeño antes del evento.",
+    "event_detail.what_to_expect": "Qué esperar",
     "event_detail.sign_up": "Registrarse",
     "event_detail.sign_up_now": "Regístrate ahora",
     "event_detail.buy_my_ticket": "Comprar mi entrada",
     "event_detail.see_whats_included": "Ver qué incluye",
-    "event_detail.everyone_making_friends": "Todos en tu grupo buscan hacer nuevos amigos",
+    "event_detail.everyone_making_friends": "Te emparejaremos con 4–6 personas que van solas",
 
     "event_detail.what_happens_title": "Qué pasa después de registrarte",
     "event_detail.organised_by": "Este evento está organizado por",
@@ -148,7 +148,7 @@ export const eventDetail = {
 
     "event_detail.sticky.reserve_spot": "Reserva tu lugar",
     "event_detail.sticky.tickets_remaining": "Solo quedan {n} entradas",
-    "event_detail.sticky.tickets_remaining_short": "{n} plazas",
+    "event_detail.sticky.tickets_remaining_short": "Solo quedan {n} plazas para este evento",
 
     // EventFaqSection
     "event_detail.faq.title": "Preguntas frecuentes",

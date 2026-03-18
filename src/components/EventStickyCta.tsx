@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Ticket } from "lucide-react";
 import type { EventHeaderCtaLocation } from "@/contexts/EventHeaderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -21,11 +22,14 @@ export default function EventStickyCta({
 }: EventStickyCtaProps) {
   const isMobile = useIsMobile();
   const urgencyText = isMobile
-    ? t("event_detail.sticky.tickets_remaining_short", "{n} spots left").replace("{n}", String(ticketsRemaining))
+    ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(ticketsRemaining))
     : t("event_detail.sticky.tickets_remaining", "Only {n} tickets remaining").replace("{n}", String(ticketsRemaining));
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed bottom-0 left-0 right-0 z-40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 px-4 pr-24 py-4 sm:py-3 backdrop-blur-md bg-gray-900/95 border-t border-white/10 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] pb-[max(1rem,env(safe-area-inset-bottom))] ${className}`}
     >
       <div className="flex flex-col items-start gap-1 sm:gap-0.5 min-w-0">
@@ -41,6 +45,6 @@ export default function EventStickyCta({
       >
         {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
       </Link>
-    </div>
+    </motion.div>
   );
 }
