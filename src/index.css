@@ -349,6 +349,50 @@ html, body, #root {
     }
   }
 
+  @keyframes chat-bubble-lifecycle {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.95);
+    }
+    8% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    85% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+
+  .animate-chat-bubble {
+    animation: chat-bubble-lifecycle 5s ease-out forwards;
+  }
+
+  @keyframes typing-dot {
+    0%, 60%, 100% {
+      opacity: 0.35;
+    }
+    30% {
+      opacity: 1;
+    }
+  }
+
+  .animate-typing-dot {
+    animation: typing-dot 1.4s ease-in-out infinite;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
   @keyframes bounce-gentle {
     0%, 100% {
       transform: translateY(0);
@@ -409,10 +453,16 @@ html, body, #root {
     .animate-spin-slow,
     .animate-pulse-slow,
     .animate-chat-pulse,
+    .animate-chat-bubble,
     .animate-bounce-gentle,
-    .animate-slide-up {
+    .animate-slide-up,
+    .animate-typing-dot {
       animation: none;
       transform: none;
+    }
+
+    .animate-typing-dot {
+      opacity: 1;
     }
   }
 

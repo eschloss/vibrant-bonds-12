@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/NotFound";
@@ -7,10 +7,13 @@ import { Seo } from "@/hooks/useSeo";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { buildGetKikiUrl, type GetKikiEventResponse } from "@/lib/eventApi";
+import { buildEventContext, buildGetKikiUrl, type GetKikiEventResponse } from "@/lib/eventApi";
+import { useChatContext } from "@/contexts/ChatContext";
 
 const EventBooking = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
+  const { pathname } = useLocation();
+  const { setChatContext } = useChatContext();
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [notFound, setNotFound] = React.useState(false);
@@ -49,6 +52,12 @@ const EventBooking = () => {
 
     return () => controller.abort();
   }, [eventSlug]);
+
+  React.useEffect(() => {
+    if (!eventData || notFound) return;
+    setChatContext(buildEventContext(eventData, "en-US", pathname), eventData.title);
+    return () => setChatContext(null);
+  }, [eventData, notFound, pathname, setChatContext]);
 
   if (loading) {
     return (

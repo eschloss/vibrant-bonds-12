@@ -135,6 +135,54 @@ export function buildGetKikiUrl(eventSlug: string): string {
   return `${EVENTS_API_BASE_URL}/events/get_kiki?${params.toString()}`;
 }
 
+/** Build multiline event context for chat webhook (path, day, name, price, breakdown, what's included). */
+export function buildEventContext(
+  data: GetKikiEventResponse,
+  locale = "en-US",
+  pathname?: string
+): string {
+  const opts = getEventPriceOpts(data);
+  const start = parseEventLocalDateTime(data.datetime_local);
+  const dateStr = start.toLocaleDateString(locale, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const timeStr = start.toLocaleTimeString(locale, {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+  const latest = (data.datetime_local_latest || "").trim();
+  const dateTimeStr = latest
+    ? `${dateStr} · ${timeStr}–${parseEventLocalDateTime(latest).toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" })}`
+    : `${dateStr} · ${timeStr}`;
+
+  const lines: string[] = [];
+  const path = (pathname ?? "").trim();
+  if (path) {
+    lines.push(`Path: ${path}`, "");
+  }
+  lines.push(
+    `Event: ${data.title}`,
+    `Date: ${dateTimeStr}`,
+    `Location: ${data.place}${data.city_label ? `, ${data.city_label}` : ""}`,
+    "",
+    `Price: ${formatEventPrice(data.total_price, opts)}`,
+    `- Event ticket: ${formatEventPrice(data.ticket_price, opts)}`,
+    `- Pulse fee: ${formatEventPrice(data.platform_fee, opts)}`,
+  );
+  if (data.provider_fee > 0) {
+    lines.push(`- Provider fee: ${formatEventPrice(data.provider_fee, opts)}`);
+  }
+  const whatsIncluded = data.whats_included ?? [];
+  if (whatsIncluded.length > 0) {
+    lines.push("", "What's included:");
+    whatsIncluded.forEach((item) => lines.push(`- ${item}`));
+  }
+  return lines.join("\n");
+}
+
 /**
  * URL for listing featured/upcoming events (used on /events landing).
  * Override with VITE_EVENTS_FEATURED_PATH (e.g. "get_list") if your backend uses a different endpoint.

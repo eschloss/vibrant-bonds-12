@@ -8,6 +8,8 @@ interface ImportMetaEnv {
   readonly VITE_WHATSAPP_PHONE?: string;
   /** Optional pre-filled message when opening WhatsApp chat (e.g. "Hi! I have a question about Pulse."). */
   readonly VITE_WHATSAPP_PREFILL?: string;
+  /** Make.com (or other) webhook for in-widget chat; POST JSON { thread_id, message, count }. */
+  readonly VITE_CHAT_WEBHOOK_URL?: string;
 }
 
 interface ImportMeta {

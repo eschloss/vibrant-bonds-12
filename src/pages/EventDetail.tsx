@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/carousel";
 import {
   type GetKikiEventResponse,
+  buildEventContext,
   buildGetKikiUrl,
   formatEventPrice,
   getEventPriceOpts,
@@ -48,6 +49,7 @@ import {
   type EventHeaderCtaLocation,
   EventHeaderProvider,
 } from "@/contexts/EventHeaderContext";
+import { useChatContext } from "@/contexts/ChatContext";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 import EventStickyCta from "@/components/EventStickyCta";
 import { useIsLg } from "@/hooks/use-mobile";
@@ -234,6 +236,8 @@ const EventDetail = () => {
   const signUpAsideRef = useRef<HTMLElement>(null);
   const isLg = useIsLg();
   const scrollContainer = useScrollContainer();
+  const { pathname } = useLocation();
+  const { setChatContext } = useChatContext();
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
@@ -289,6 +293,12 @@ const EventDetail = () => {
 
     return () => controller.abort();
   }, [eventSlug, changeLanguage]);
+
+  useEffect(() => {
+    if (!eventData || notFound) return;
+    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title);
+    return () => setChatContext(null);
+  }, [eventData, notFound, locale, pathname, setChatContext]);
 
   useEffect(() => {
     if (!eventData || notFound) return;

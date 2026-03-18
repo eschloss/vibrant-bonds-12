@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -30,6 +30,7 @@ import {
   buildCheckoutEventParams,
 } from "@/lib/utils";
 import {
+  buildEventContext,
   buildGetKikiUrl,
   type GetKikiEventResponse,
   formatEventPrice,
@@ -39,6 +40,7 @@ import {
 } from "@/lib/eventApi";
 import EventProviderSection from "@/components/EventProviderSection";
 import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
+import { useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useIsLg } from "@/hooks/use-mobile";
@@ -1063,9 +1065,11 @@ function CheckoutForm({
 
 const EventCheckout = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
+  const { pathname } = useLocation();
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const { changeLanguage } = useLanguage();
+  const { setChatContext } = useChatContext();
 
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -1111,6 +1115,14 @@ const EventCheckout = () => {
 
     return () => controller.abort();
   }, [eventSlug, changeLanguage]);
+
+  const locale = currentLanguage === "es" ? "es" : "en-US";
+
+  React.useEffect(() => {
+    if (!eventData || notFound) return;
+    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title);
+    return () => setChatContext(null);
+  }, [eventData, notFound, locale, pathname, setChatContext]);
 
   const idempotencyKey = React.useMemo(() => {
     const key = `kiki_checkout_idempotency_key:${eventSlug || ""}`;
