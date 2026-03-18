@@ -5,6 +5,24 @@ import { getProviderName, type GetKikiEventResponse } from "@/lib/eventApi"
 /** Meta Pixel ID (same as index.html bootstrap) */
 export const META_PIXEL_ID = "1935826830293991"
 
+/** Map Meta event names to GA4 recommended event names where applicable. */
+const META_TO_GA_EVENT: Record<string, string> = {
+  InitiateCheckout: "begin_checkout",
+  Purchase: "purchase",
+}
+
+/** Send event to GA4 gtag. Uses META_TO_GA_EVENT for recommended names; others pass through. */
+function trackGoogleEvent(eventName: string, params?: Record<string, any>) {
+  try {
+    if (typeof window === "undefined" || typeof (window as any).gtag !== "function") return
+    const gtag = (window as any).gtag as (...args: any[]) => void
+    const gaEventName = META_TO_GA_EVENT[eventName] ?? eventName
+    gtag("event", gaEventName, params || {})
+  } catch {
+    // no-op
+  }
+}
+
 /** Re-init Meta Pixel with advanced matching params (em, fn, ln, ct). Caller should pass the full known set each time. */
 export function initMetaPixelAdvancedMatching(params: {
   em?: string
@@ -101,22 +119,11 @@ export function trackTypeformRedirect(params: {
       destination_host: destinationHost,
       destination_path: destinationPath,
     };
-    trackMetaPixelEvent(
-      isSignupClick ? 'signup_cta_click' : 'typeform_redirect_click',
-      metaPayload,
-      { custom: true }
-    );
-    // GA4 gtag support
-    // @ts-ignore
-    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
-      // @ts-ignore
-      (window as any).gtag('event', 'typeform_redirect', payload);
-    }
-    // GTM dataLayer support
-    // @ts-ignore
-    if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-      // @ts-ignore
-      (window as any).dataLayer.push({ event: 'typeform_redirect', ...payload });
+    const gaEventName = isSignupClick ? "signup_cta_click" : "typeform_redirect_click"
+    trackMetaPixelEvent(gaEventName, metaPayload, { custom: true })
+    // GTM dataLayer support (GA4 handled by trackMetaPixelEvent -> trackGoogleEvent)
+    if (typeof window !== "undefined" && Array.isArray((window as any).dataLayer)) {
+      ;(window as any).dataLayer.push({ event: gaEventName, ...metaPayload, ...(params.extra || {}) })
     }
   } catch (e) {
     // no-op
@@ -146,48 +153,39 @@ export function trackPreWaitlisterEvent(eventName: 'pre_waitlist_popup_open' | '
       source: payload.source,
       path: payload.path,
     };
-    trackMetaPixelEvent(eventName, sanitizedMetaPayload, { custom: true });
-    // GA4 gtag support
-    // @ts-ignore
-    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
-      // @ts-ignore
-      (window as any).gtag('event', eventName, payload);
-    }
-    // GTM dataLayer support
-    // @ts-ignore
-    if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
-      // @ts-ignore
-      (window as any).dataLayer.push({ event: eventName, ...payload });
+    trackMetaPixelEvent(eventName, sanitizedMetaPayload, { custom: true })
+    // GTM dataLayer support (GA4 handled by trackMetaPixelEvent -> trackGoogleEvent)
+    if (typeof window !== "undefined" && Array.isArray((window as any).dataLayer)) {
+      ;(window as any).dataLayer.push({ event: eventName, ...payload })
     }
   } catch (e) {
     // no-op
   }
 }
 
-// Track Meta Pixel events
+// Track Meta Pixel events (also sends parallel GA4 events with same payload)
 export function trackMetaPixelEvent(
   eventName: string,
   params?: Record<string, any>,
   options?: { custom?: boolean; eventID?: string }
 ) {
   try {
-    // @ts-ignore
-    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
-      // @ts-ignore
-      const fbq = (window as any).fbq as (...args: any[]) => void;
+    if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+      const fbq = (window as any).fbq as (...args: any[]) => void
       if (options?.custom) {
-        fbq('trackCustom', eventName, params || {});
+        fbq("trackCustom", eventName, params || {})
       } else {
-        const trackParams = params || {};
-        const metaOptions = options?.eventID ? { eventID: options.eventID } : undefined;
+        const trackParams = params || {}
+        const metaOptions = options?.eventID ? { eventID: options.eventID } : undefined
         if (metaOptions) {
-          fbq('track', eventName, trackParams, metaOptions);
+          fbq("track", eventName, trackParams, metaOptions)
         } else {
-          fbq('track', eventName, trackParams);
+          fbq("track", eventName, trackParams)
         }
       }
     }
-  } catch (e) {
+    trackGoogleEvent(eventName, params)
+  } catch {
     // no-op
   }
 }
