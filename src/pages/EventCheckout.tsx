@@ -189,13 +189,6 @@ function CheckoutForm({
   const nameReady = (firstNameValue || "").trim().length > 0;
   const isMobile = useIsMobile();
 
-  const prevNameReadyRef = React.useRef(false);
-  React.useEffect(() => {
-    if (nameReady && !prevNameReadyRef.current && isMobile) {
-      form.setFocus("buyerEmail");
-    }
-    prevNameReadyRef.current = nameReady;
-  }, [nameReady, isMobile, form]);
   const paymentRequirementsMet = React.useMemo(() => {
     const emailOk = z.string().trim().min(1).email().safeParse((buyerEmailValue || "").trim()).success;
     const firstNameOk = (firstNameValue || "").trim().length > 0;
@@ -1017,9 +1010,26 @@ function CheckoutForm({
                         <p className="text-xs font-medium uppercase tracking-wide text-white/60 mb-1">
                           {t("event_checkout.bank_transfer_amount_label", "Amount to transfer")}
                         </p>
-                        <p className="text-2xl font-bold text-[#38D1BF] tabular-nums">
-                          {formattedTotalPrice}
-                        </p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-2xl font-bold text-[#38D1BF] tabular-nums">
+                            {formattedTotalPrice}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const amountToCopy = priceOpts.useComma
+                                ? totalWithAddons.toFixed(2).replace(".", ",")
+                                : totalWithAddons.toFixed(2);
+                              trackMetaPixelEvent("event_bank_transfer_amount_copy_click", { ...baseCheckoutParams }, { custom: true });
+                              void navigator.clipboard.writeText(amountToCopy);
+                              toast({ title: t("event_checkout.amount_copied", "Amount copied") });
+                            }}
+                            className="text-[#38D1BF]/80 hover:text-[#38D1BF] transition-colors shrink-0"
+                            aria-label={t("event_checkout.copy_amount", "Copy amount")}
+                          >
+                            <Copy size={18} />
+                          </button>
+                        </div>
                       </div>
 
                       {/* 2. Bank account details — where to send the money */}
@@ -1058,38 +1068,6 @@ function CheckoutForm({
                         </div>
                       ) : null}
 
-                      {/* 4. Confirm payment — user confirms they've made the transfer */}
-                      <div>
-                        <Button
-                          type="button"
-                          variant={bankTransferConfirmedPaid ? "secondary" : "default"}
-                          className={cn(
-                            "w-full h-12 rounded-xl font-semibold text-base transition-colors",
-                            bankTransferConfirmedPaid
-                              ? "bg-[#38D1BF]/20 border-[#38D1BF]/40 text-[#38D1BF] cursor-default"
-                              : "bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45"
-                          )}
-                          onClick={() => {
-                            trackMetaPixelEvent("event_bank_transfer_i_paid_click", { ...baseCheckoutParams }, { custom: true });
-                            confirmAndSubmitRef.current = true;
-                            setBankTransferConfirmedPaid(true);
-                            form.handleSubmit(onSubmit)();
-                          }}
-                          disabled={bankTransferConfirmedPaid || submitting}
-                        >
-                          {bankTransferConfirmedPaid ? (
-                            <span className="flex items-center gap-2">
-                              <ShieldCheck className="h-4 w-4" />
-                              {t("event_checkout.bank_transfer_i_paid_done", "I've made the transfer")}
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-2">
-                              <CircleCheck className="h-4 w-4" />
-                              {t("event_checkout.bank_transfer_i_paid", "I confirm I've made the transfer")}
-                            </span>
-                          )}
-                        </Button>
-                      </div>
                       {bankTransferLoading && (
                         <p className="text-sm text-white/60">{t("event_checkout.processing", "Processing...")}</p>
                       )}
@@ -1222,26 +1200,53 @@ function CheckoutForm({
                       : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(eventData.tickets_remaining ?? 20))}
                   </p>
                 ) : null}
-                <Button
-                  type="submit"
-                  size="xl"
-                  className="w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
-                  disabled={
-                    hasDirectBankTransfer && paymentMethodTab === "bank"
-                      ? submitting || !bankTransferOrderId || !bankTransferCodeReady
-                      : !stripe || !elements || submitting || !paymentRequirementsMet
-                  }
-                >
-                  {submitting
-                    ? t("event_checkout.processing", "Processing...")
-                    : hasDirectBankTransfer && paymentMethodTab === "bank"
-                      ? bankTransferCodeReady
-                        ? t("event_checkout.bank_transfer_cta", "Confirm my booking")
-                        : t("event_checkout.bank_transfer_cta_disabled", "Confirm above that you've made the transfer to continue")
+                {hasDirectBankTransfer && paymentMethodTab === "bank" ? (
+                  <Button
+                    type="button"
+                    size="xl"
+                    variant={bankTransferConfirmedPaid ? "secondary" : "default"}
+                    className={cn(
+                      "w-full h-12 rounded-xl font-semibold text-base transition-colors",
+                      bankTransferConfirmedPaid
+                        ? "bg-[#38D1BF]/20 border-[#38D1BF]/40 text-[#38D1BF] cursor-default"
+                        : "bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45"
+                    )}
+                    onClick={() => {
+                      trackMetaPixelEvent("event_bank_transfer_i_paid_click", { ...baseCheckoutParams }, { custom: true });
+                      confirmAndSubmitRef.current = true;
+                      setBankTransferConfirmedPaid(true);
+                      form.handleSubmit(onSubmit)();
+                    }}
+                    disabled={bankTransferConfirmedPaid || submitting || !bankTransferOrderId}
+                  >
+                    {submitting
+                      ? t("event_checkout.processing", "Processing...")
+                      : bankTransferConfirmedPaid ? (
+                        <span className="flex items-center gap-2">
+                          <ShieldCheck className="h-4 w-4" />
+                          {t("event_checkout.bank_transfer_i_paid_done", "I've made the transfer")}
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-2">
+                          <CircleCheck className="h-4 w-4" />
+                          {t("event_checkout.bank_transfer_i_paid", "I confirm I've made the transfer")}
+                        </span>
+                      )}
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    size="xl"
+                    className="w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
+                    disabled={!stripe || !elements || submitting || !paymentRequirementsMet}
+                  >
+                    {submitting
+                      ? t("event_checkout.processing", "Processing...")
                       : paymentRequirementsMet
                         ? t("event_checkout.pay_amount", "Book your spot {amount}").replace("{amount}", formattedTotalPrice || "")
                         : t("event_checkout.complete_details_to_continue", "Complete required details to continue")}
-                </Button>
+                  </Button>
+                )}
               </div>
 
               <div className="space-y-2.5">
@@ -1631,15 +1636,6 @@ function CheckoutFormFields({
 }) {
   const firstNameValue = form.watch("firstName");
   const nameReady = (firstNameValue || "").trim().length > 0;
-  const isMobile = useIsMobile();
-
-  const prevNameReadyRef = React.useRef(false);
-  React.useEffect(() => {
-    if (nameReady && !prevNameReadyRef.current && isMobile) {
-      form.setFocus("buyerEmail");
-    }
-    prevNameReadyRef.current = nameReady;
-  }, [nameReady, isMobile, form]);
 
   return (
     <div className="space-y-4">

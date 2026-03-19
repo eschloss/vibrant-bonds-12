@@ -73,6 +73,8 @@ export const eventCheckout = {
     "event_checkout.bank_transfer_reference_hint": "Use this reference when making your bank transfer:",
     "event_checkout.reference_copied": "Reference copied",
     "event_checkout.copy_reference": "Copy reference",
+    "event_checkout.amount_copied": "Amount copied",
+    "event_checkout.copy_amount": "Copy amount",
     "event_checkout.bank_transfer_cta": "Confirm my booking",
     "event_checkout.bank_transfer_cta_disabled": "Confirm above that you've made the transfer to continue",
 
@@ -161,6 +163,8 @@ export const eventCheckout = {
     "event_checkout.bank_transfer_reference_hint": "Usa esta referencia al hacer tu transferencia bancaria:",
     "event_checkout.reference_copied": "Referencia copiada",
     "event_checkout.copy_reference": "Copiar referencia",
+    "event_checkout.amount_copied": "Importe copiado",
+    "event_checkout.copy_amount": "Copiar importe",
     "event_checkout.bank_transfer_cta": "Confirmar mi reserva",
     "event_checkout.bank_transfer_cta_disabled": "Confirma arriba que has realizado la transferencia para continuar",
 
