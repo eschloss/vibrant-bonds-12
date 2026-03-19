@@ -21,8 +21,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useChatContext } from "@/contexts/ChatContext";
+import { pathShowsChatBubbleByDefault, useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackMetaPixelEvent } from "@/lib/utils";
 
 const CHAT_WEBHOOK_URL =
   import.meta.env.VITE_CHAT_WEBHOOK_URL ??
@@ -483,7 +484,19 @@ export function WhatsAppChatButton() {
           <TooltipTrigger asChild>
             <button
               type="button"
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => {
+                setOpen((o) => {
+                  if (!o) {
+                    const pathname = window.location.pathname;
+                    const isEvents = pathShowsChatBubbleByDefault(pathname);
+                    trackMetaPixelEvent(
+                      isEvents ? "chat_bubble_clicked_events" : "chat_bubble_clicked_general",
+                      { path: pathname }
+                    );
+                  }
+                  return !o;
+                });
+              }}
               aria-label="Open chat"
               aria-expanded={open}
               className="relative flex h-14 w-14 min-w-[56px] min-h-[56px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg animate-chat-pulse transition-transform hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-background touch-manipulation active:scale-95"
