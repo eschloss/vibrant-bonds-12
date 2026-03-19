@@ -747,33 +747,7 @@ const EventDetail = () => {
 
               <div className="max-w-[600px] xl:max-w-[650px] mt-5">
                 <div className="space-y-2.5 md:space-y-4 text-lg text-gray-300 leading-[1.68]">
-                  {(() => {
-                    const desc = data.short_description;
-                    // Split before "so you" for better paragraph rhythm (e.g. "...before the workshop.\nSo you arrive already knowing people.")
-                    const soYouIdx = desc.toLowerCase().indexOf(" so you ");
-                    if (soYouIdx !== -1) {
-                      const firstPart = desc.slice(0, soYouIdx).replace(/[,.]\s*$/, ".").trim();
-                      const secondPart = "So you " + desc.slice(soYouIdx + 8).trim();
-                      return (
-                        <>
-                          <p>{firstPart}</p>
-                          <p>{secondPart}</p>
-                        </>
-                      );
-                    }
-                    const commaSoYouIdx = desc.toLowerCase().indexOf(", so you");
-                    if (commaSoYouIdx !== -1) {
-                      const firstPart = desc.slice(0, commaSoYouIdx).trim() + ".";
-                      const secondPart = "So you " + desc.slice(commaSoYouIdx + 8).trim();
-                      return (
-                        <>
-                          <p>{firstPart}</p>
-                          <p>{secondPart}</p>
-                        </>
-                      );
-                    }
-                    return <p>{desc}</p>;
-                  })()}
+                  <p>{data.short_description}</p>
                 </div>
               </div>
             </motion.div>
