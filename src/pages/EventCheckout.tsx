@@ -466,6 +466,7 @@ function CheckoutForm({
     if (isBankTransfer) {
       if (!bankTransferOrderId) return;
       if (!bankTransferCodeReady) return;
+      trackMetaPixelEvent("event_bank_transfer_confirm_booking_click", { ...baseCheckoutParams }, { custom: true });
       setSubmitting(true);
       if (!hasFiredTermsAccepted.current) {
         hasFiredTermsAccepted.current = true;
@@ -887,7 +888,12 @@ function CheckoutForm({
               {hasDirectBankTransfer ? (
                 <Tabs
                   value={paymentMethodTab}
-                  onValueChange={(v) => setPaymentMethodTab(v as "stripe" | "bank")}
+                  onValueChange={(v) => {
+                    setPaymentMethodTab(v as "stripe" | "bank");
+                    if (v === "bank") {
+                      trackMetaPixelEvent("event_bank_transfer_tab_click", { ...baseCheckoutParams }, { custom: true });
+                    }
+                  }}
                   className="w-full"
                 >
                   <TabsList className="mb-4 flex w-full rounded-xl border border-white/15 bg-white/[0.03] p-1">
@@ -1060,7 +1066,10 @@ function CheckoutForm({
                               ? "bg-[#38D1BF]/20 border-[#38D1BF]/40 text-[#38D1BF] cursor-default"
                               : "border-white/20 bg-white/[0.05] text-white hover:bg-white/[0.08] hover:border-white/30"
                           )}
-                          onClick={() => setBankTransferConfirmedPaid(true)}
+                          onClick={() => {
+                            trackMetaPixelEvent("event_bank_transfer_i_paid_click", { ...baseCheckoutParams }, { custom: true });
+                            setBankTransferConfirmedPaid(true);
+                          }}
                           disabled={bankTransferConfirmedPaid}
                         >
                           {bankTransferConfirmedPaid ? (
