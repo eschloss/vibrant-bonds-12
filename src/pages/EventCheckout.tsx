@@ -1620,7 +1620,14 @@ function CheckoutPrePayment({
             {t("event_checkout.back_to_event", "Back to event")}
           </Link>
         </div>
-        <div className="flex-1 flex flex-col px-8 lg:px-10 pb-10 lg:pb-12 overflow-visible">
+        <div className={cn(
+          "flex-1 flex flex-col px-8 lg:px-10 overflow-visible",
+          isMobile ? "pb-0 min-h-0" : "pb-10 lg:pb-12"
+        )}>
+          <div className={cn(
+            "flex-1 flex flex-col min-h-0",
+            isMobile && "overflow-y-auto pb-36"
+          )}>
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
             {t("event_checkout.order_summary", "Order summary")}
           </div>
@@ -1741,8 +1748,9 @@ function CheckoutPrePayment({
                                   </button>
                                 </TooltipTrigger>
                                 <TooltipContent
-                                  side="right"
-                                  className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
+                                  side={isMobile ? "top" : "right"}
+                                  collisionPadding={16}
+                                  className="max-w-[min(260px,calc(100vw-2rem))] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
                                 >
                                   {addon.description}
                                 </TooltipContent>
@@ -1816,23 +1824,32 @@ function CheckoutPrePayment({
               <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
               <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
             </div>
-            <div className="flex items-center justify-between pt-1 pr-8 lg:pr-10">
-              <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
-              <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
-            </div>
-            {isMobile ? (
-              <Button
-                type="button"
-                size="xl"
-                className="mt-6 w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
-                onClick={handleMobileContinueToDetails}
-              >
-                {t("event_checkout.continue_to_payment", "Continue")}
-              </Button>
+          </div>
+            {!isMobile ? (
+              <div className="flex items-center justify-between pt-1 pr-8 lg:pr-10">
+                <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
+                <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
+              </div>
             ) : null}
           </div>
         </div>
       </div>
+      {isMobile && showOrderSummary && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          <div className="flex items-center justify-between gap-4 mb-3">
+            <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
+            <span className="text-2xl font-bold text-white tabular-nums">{formattedTotalPrice}</span>
+          </div>
+          <Button
+            type="button"
+            size="xl"
+            className="w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
+            onClick={handleMobileContinueToDetails}
+          >
+            {t("event_checkout.continue_to_payment", "Continue")}
+          </Button>
+        </div>
+      )}
       <div
         className={cn(
           "order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-4 pb-8 lg:px-12 lg:pt-8 lg:pb-10",
