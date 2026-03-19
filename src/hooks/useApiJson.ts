@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { API_BASE_URL } from "@/lib/constants";
+import { shardApiUrl } from "@/lib/urlShard";
 
 type UseApiJsonOptions<T> = {
   initialData?: T;
@@ -24,9 +25,14 @@ type CacheEntry<T> = { data: T; timestamp: number };
 const urlCache = new Map<string, CacheEntry<unknown>>();
 
 function resolveUrl(pathOrUrl: string): string {
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  const trimmed = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
-  return `${API_BASE_URL}${trimmed}`;
+  let url: string;
+  if (/^https?:\/\//i.test(pathOrUrl)) {
+    url = pathOrUrl;
+  } else {
+    const trimmed = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
+    url = `${API_BASE_URL}${trimmed}`;
+  }
+  return shardApiUrl(url);
 }
 
 export function useApiJson<T = unknown>(

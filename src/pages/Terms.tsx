@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { shardApiUrl } from "@/lib/urlShard";
 import { Seo } from "@/hooks/useSeo";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -85,7 +86,8 @@ const Terms: React.FC = () => {
   };
 
   const url = useMemo(() => {
-    return currentLanguage === "es" ? TERMS_URLS.es : TERMS_URLS.en;
+    const raw = currentLanguage === "es" ? TERMS_URLS.es : TERMS_URLS.en;
+    return shardApiUrl(raw);
   }, [currentLanguage]);
 
   const proxyUrl = useMemo(() => {

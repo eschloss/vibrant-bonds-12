@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import { shardApiUrl } from "@/lib/urlShard";
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { Seo } from "@/hooks/useSeo";
@@ -23,7 +24,7 @@ const SupportUs = () => {
         setError(null);
         
         // Build API URL with city code and preserve query params
-        const apiUrl = `https://api.kikiapp.eu/auth/support-us?city=${city_code || ''}`;
+        const apiUrl = shardApiUrl(`https://api.kikiapp.eu/auth/support-us?city=${city_code || ''}`);
         const queryParams = location.search;
         const fullApiUrl = queryParams && queryParams.length > 1
           ? `${apiUrl}&${queryParams.substring(1)}`

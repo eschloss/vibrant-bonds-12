@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
 import { EVENTS_API_BASE_URL } from "@/lib/eventApi";
+import { shardApiUrl } from "@/lib/urlShard";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -107,7 +108,7 @@ export default function GetFutureInvitesModal({
         });
       });
 
-      const response = await fetch(`${EVENTS_API_BASE_URL}/events/future-invite-signup/`, {
+      const response = await fetch(shardApiUrl(`${EVENTS_API_BASE_URL}/events/future-invite-signup/`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

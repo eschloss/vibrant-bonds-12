@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
+import { shardApiUrl } from "@/lib/urlShard";
 
 // Create a type to represent our form values
 type FormValues = {
@@ -99,7 +100,7 @@ const CommunitySignupForm = () => {
         });
       });
 
-      const response = await fetch(`${API_BASE_URL}/contact/`, {
+      const response = await fetch(shardApiUrl(`${API_BASE_URL}/contact/`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

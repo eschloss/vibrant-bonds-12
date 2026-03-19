@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
+import { shardApiUrl } from "@/lib/urlShard";
 
 const ContactForm = () => {
   const { t } = useTranslation();
@@ -94,7 +95,7 @@ const ContactForm = () => {
         });
       });
 
-      const response = await fetch(`${API_BASE_URL}/contact/`, {
+      const response = await fetch(shardApiUrl(`${API_BASE_URL}/contact/`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

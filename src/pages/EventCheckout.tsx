@@ -37,6 +37,7 @@ import {
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
+import { shardApiUrl } from "@/lib/urlShard";
 import EventProviderSection from "@/components/EventProviderSection";
 import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
 import { useChatContext } from "@/contexts/ChatContext";
@@ -49,8 +50,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
-const CREATE_INTENT_URL = `${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`;
-const ATTACH_EMAILS_URL = `${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`;
+const CREATE_INTENT_URL = shardApiUrl(`${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`);
+const ATTACH_EMAILS_URL = shardApiUrl(`${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`);
 
 function getOrCreateSessionKey(key: string): string {
   try {

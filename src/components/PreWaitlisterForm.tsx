@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RECAPTCHA_SITE_KEY, API_BASE_URL } from "@/lib/constants";
+import { shardApiUrl } from "@/lib/urlShard";
 import { trackPreWaitlisterEvent } from "@/lib/utils";
 
 interface PreWaitlisterFormProps {
@@ -81,7 +82,7 @@ const PreWaitlisterForm = ({ cityName, city }: PreWaitlisterFormProps) => {
         });
       });
 
-      const response = await fetch(`${API_BASE_URL}/pre-waitlister/`, {
+      const response = await fetch(shardApiUrl(`${API_BASE_URL}/pre-waitlister/`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

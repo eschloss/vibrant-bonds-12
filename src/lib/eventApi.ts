@@ -2,6 +2,8 @@
  * Event API types and helpers for the get_kiki endpoint.
  */
 
+import { shardApiUrl } from "@/lib/urlShard";
+
 /** Default true: when VITE_IS_STRIPE_TEST_MODE is not set or is "true", use staging; when "false", use production. */
 const isStripeTestMode = import.meta.env.VITE_IS_STRIPE_TEST_MODE !== "false";
 export const EVENTS_API_BASE_URL = isStripeTestMode
@@ -144,7 +146,7 @@ export function getEventPriceOpts(data: GetKikiEventResponse): FormatEventPriceO
 
 export function buildGetKikiUrl(eventSlug: string): string {
   const params = new URLSearchParams({ slug: eventSlug });
-  return `${EVENTS_API_BASE_URL}/events/get_kiki?${params.toString()}`;
+  return shardApiUrl(`${EVENTS_API_BASE_URL}/events/get_kiki?${params.toString()}`);
 }
 
 /** Build multiline event context for chat webhook (path, day, name, price, breakdown, what's included). */
@@ -200,7 +202,7 @@ export function buildGetFeaturedEventsUrl(limit = 9): string {
   const path =
     import.meta.env.VITE_EVENTS_FEATURED_PATH || "get_featured";
   const params = new URLSearchParams({ limit: String(limit) });
-  return `${EVENTS_API_BASE_URL}/events/${path}?${params.toString()}`;
+  return shardApiUrl(`${EVENTS_API_BASE_URL}/events/${path}?${params.toString()}`);
 }
 
 /** Map API response to the Event shape used by Events landing/cards. */
@@ -256,5 +258,5 @@ export interface KikiOrderDetailsResponse {
 }
 
 export function buildKikiOrderDetailsUrl(idOrCustomerId: string): string {
-  return `${EVENTS_API_BASE_URL}/payments/kiki/order/${encodeURIComponent(idOrCustomerId)}/`;
+  return shardApiUrl(`${EVENTS_API_BASE_URL}/payments/kiki/order/${encodeURIComponent(idOrCustomerId)}/`);
 }
