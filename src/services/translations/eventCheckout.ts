@@ -61,19 +61,23 @@ export const eventCheckout = {
     "event_checkout.addons": "Add-ons",
     "event_checkout.addon_decrease": "Decrease quantity",
     "event_checkout.addon_increase": "Increase quantity",
-    "event_checkout.continue_to_payment": "Continue to payment — {amount}",
+    "event_checkout.continue_to_payment": "Continue",
 
     "event_checkout.tab_pay_with_card": "Pay with card",
     "event_checkout.tab_direct_bank_transfer": "Direct bank transfer",
+    "event_checkout.bank_transfer_amount_label": "Amount to transfer",
     "event_checkout.bank_transfer_intro": "Transfer directly to this bank account:",
-    "event_checkout.bank_transfer_confirmation_label": "Bank transfer confirmation code",
-    "event_checkout.bank_transfer_confirmation_placeholder": "e.g. REF123456",
-    "event_checkout.bank_transfer_confirmation_hint":
-      "Enter the reference or confirmation code from your bank transfer (at least 4 characters).",
+    "event_checkout.bank_transfer_i_paid": "I paid",
+    "event_checkout.bank_transfer_i_paid_done": "I've made the transfer",
+    "event_checkout.bank_transfer_reference_hint": "Use this reference when making your bank transfer:",
+    "event_checkout.reference_copied": "Reference copied",
+    "event_checkout.copy_reference": "Copy reference",
     "event_checkout.bank_transfer_cta": "Confirm my booking",
-    "event_checkout.bank_transfer_cta_disabled": "Enter confirmation code (min 4 characters)",
+    "event_checkout.bank_transfer_cta_disabled": "Click 'I paid' above after making your transfer",
 
     // Validation
+    "event_checkout.validation.complete_details_banner":
+      "Please enter your name and a valid email address to continue.",
     "event_checkout.validation.first_name_required": "Your name is required",
     "event_checkout.validation.last_name_required": "Last name is required",
     "event_checkout.validation.email_required": "Email is required",
@@ -144,19 +148,23 @@ export const eventCheckout = {
     "event_checkout.addons": "Extras",
     "event_checkout.addon_decrease": "Reducir cantidad",
     "event_checkout.addon_increase": "Aumentar cantidad",
-    "event_checkout.continue_to_payment": "Continuar al pago — {amount}",
+    "event_checkout.continue_to_payment": "Continuar",
 
     "event_checkout.tab_pay_with_card": "Pagar con tarjeta",
     "event_checkout.tab_direct_bank_transfer": "Transferencia bancaria directa",
+    "event_checkout.bank_transfer_amount_label": "Importe a transferir",
     "event_checkout.bank_transfer_intro": "Transfiere directamente a esta cuenta bancaria:",
-    "event_checkout.bank_transfer_confirmation_label": "Código de confirmación de transferencia",
-    "event_checkout.bank_transfer_confirmation_placeholder": "ej. REF123456",
-    "event_checkout.bank_transfer_confirmation_hint":
-      "Introduce el número de referencia o código de confirmación de tu transferencia (mínimo 4 caracteres).",
+    "event_checkout.bank_transfer_i_paid": "He pagado",
+    "event_checkout.bank_transfer_i_paid_done": "He realizado la transferencia",
+    "event_checkout.bank_transfer_reference_hint": "Usa esta referencia al hacer tu transferencia bancaria:",
+    "event_checkout.reference_copied": "Referencia copiada",
+    "event_checkout.copy_reference": "Copiar referencia",
     "event_checkout.bank_transfer_cta": "Confirmar mi reserva",
-    "event_checkout.bank_transfer_cta_disabled": "Introduce el código de confirmación (mín. 4 caracteres)",
+    "event_checkout.bank_transfer_cta_disabled": "Haz clic en 'He pagado' arriba después de hacer la transferencia",
 
     // Validation
+    "event_checkout.validation.complete_details_banner":
+      "Por favor introduce tu nombre y un email válido para continuar.",
     "event_checkout.validation.first_name_required": "Tu nombre es obligatorio",
     "event_checkout.validation.last_name_required": "El apellido es obligatorio",
     "event_checkout.validation.email_required": "El email es obligatorio",

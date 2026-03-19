@@ -43,7 +43,7 @@ import { useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useIsLg, useIsMobile } from "@/hooks/use-mobile";
-import { ArrowLeft, CalendarDays, Clock, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, CalendarDays, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -111,6 +111,7 @@ type CheckoutFormValues = z.infer<ReturnType<typeof createCheckoutSchema>>;
 
 type CreateIntentResponse = {
   order_id: string;
+  customer_id?: string;
   idempotency_key: string;
   payment_intent_id?: string;
   client_secret?: string;
@@ -152,8 +153,8 @@ function CheckoutForm({
   const [submitting, setSubmitting] = React.useState(false);
   const hasDirectBankTransfer = (eventData.direct_bank_details ?? "").trim().length > 0;
   const [paymentMethodTab, setPaymentMethodTab] = React.useState<"stripe" | "bank">("stripe");
-  const [bankTransferConfirmationCode, setBankTransferConfirmationCode] = React.useState("");
-  const bankTransferCodeReady = bankTransferConfirmationCode.trim().length >= 4;
+  const [bankTransferConfirmedPaid, setBankTransferConfirmedPaid] = React.useState(false);
+  const bankTransferCodeReady = bankTransferConfirmedPaid; // when true, we send "user_clicked_i_paid"
 
   const hasFiredInitiateCheckout = React.useRef(false);
   const hasFiredFirstNameFocus = React.useRef(false);
@@ -474,7 +475,7 @@ function CheckoutForm({
         await attachEmails(values, {
           orderIdOverride: bankTransferOrderId,
           directBankTransfer: true,
-          bankTransferConfirmationCode: bankTransferConfirmationCode.trim(),
+          bankTransferConfirmationCode: "user_clicked_i_paid",
         });
         navigate(`/events/${eventSlug}/confirmation?order_id=${encodeURIComponent(bankTransferOrderId)}`, {
           replace: true,
@@ -892,14 +893,14 @@ function CheckoutForm({
                   <TabsList className="mb-4 flex w-full rounded-xl border border-white/15 bg-white/[0.03] p-1">
                     <TabsTrigger
                       value="stripe"
-                      className="flex-1 data-[state=active]:bg-[#38D1BF]/15 data-[state=active]:text-[#38D1BF]"
+                      className="flex-1 text-white/80 hover:text-white/90 data-[state=active]:bg-[#38D1BF]/15 data-[state=active]:text-[#38D1BF]"
                     >
                       {t("event_checkout.tab_pay_with_card", "Pay with card")}
                     </TabsTrigger>
                     <TabsTrigger
                       value="bank"
                       disabled={!paymentRequirementsMet || bankTransferLoading}
-                      className="flex-1 data-[state=active]:bg-[#38D1BF]/15 data-[state=active]:text-[#38D1BF]"
+                      className="flex-1 text-white/80 hover:text-white/90 data-[state=active]:bg-[#38D1BF]/15 data-[state=active]:text-[#38D1BF]"
                     >
                       {t("event_checkout.tab_direct_bank_transfer", "Direct bank transfer")}
                     </TabsTrigger>
@@ -1003,27 +1004,74 @@ function CheckoutForm({
                   </TabsContent>
                   <TabsContent value="bank" className="mt-0">
                     <div className="rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
-                      <p className="text-sm text-white/80">
-                        {t("event_checkout.bank_transfer_intro", "Transfer directly to this bank account:")}
-                      </p>
-                      <pre className="text-sm text-white/90 whitespace-pre-wrap font-sans rounded-lg bg-black/20 p-4 border border-white/10">
-                        {(eventData.direct_bank_details ?? "").trim()}
-                      </pre>
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium uppercase tracking-wide text-white/70">
-                          {t("event_checkout.bank_transfer_confirmation_label", "Bank transfer confirmation code")}
-                        </label>
-                        <Input
-                          type="text"
-                          placeholder={t("event_checkout.bank_transfer_confirmation_placeholder", "e.g. REF123456")}
-                          value={bankTransferConfirmationCode}
-                          onChange={(e) => setBankTransferConfirmationCode(e.target.value)}
-                          className="h-11 rounded-lg bg-white/[0.05] border-white/15 text-white placeholder:text-white/35 focus-visible:ring-[#38D1BF]/35 focus-visible:border-[#38D1BF]/60"
-                          maxLength={64}
-                        />
-                        <p className="text-[11px] text-white/45">
-                          {t("event_checkout.bank_transfer_confirmation_hint", "Enter the reference or confirmation code from your bank transfer (at least 4 characters).")}
+                      {/* 1. Total amount to transfer — shown first so user knows exactly what to send */}
+                      <div className="rounded-lg border border-[#38D1BF]/30 bg-[#38D1BF]/5 p-4">
+                        <p className="text-xs font-medium uppercase tracking-wide text-white/60 mb-1">
+                          {t("event_checkout.bank_transfer_amount_label", "Amount to transfer")}
                         </p>
+                        <p className="text-2xl font-bold text-[#38D1BF] tabular-nums">
+                          {formattedTotalPrice}
+                        </p>
+                      </div>
+
+                      {/* 2. Bank account details — where to send the money */}
+                      <div>
+                        <p className="text-sm text-white/80 mb-2">
+                          {t("event_checkout.bank_transfer_intro", "Transfer directly to this bank account:")}
+                        </p>
+                        <pre className="text-sm text-white/90 whitespace-pre-wrap font-sans rounded-lg bg-black/20 p-4 border border-white/10">
+                          {(eventData.direct_bank_details ?? "").trim()}
+                        </pre>
+                      </div>
+
+                      {/* 3. Reference code — what to put in the transfer reference field */}
+                      {bankTransferOrderId ? (
+                        <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-4">
+                          <p className="text-sm text-white/90 mb-2">
+                            {t("event_checkout.bank_transfer_reference_hint", "Use this reference when making your bank transfer:")}
+                          </p>
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono font-bold text-lg text-amber-400 tracking-wide select-all">
+                              {bankTransferOrderId}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                void navigator.clipboard.writeText(bankTransferOrderId);
+                                toast({ title: t("event_checkout.reference_copied", "Reference copied") });
+                              }}
+                              className="text-amber-400/80 hover:text-amber-400 transition-colors shrink-0"
+                              aria-label={t("event_checkout.copy_reference", "Copy reference")}
+                            >
+                              <Copy size={18} />
+                            </button>
+                          </div>
+                        </div>
+                      ) : null}
+
+                      {/* 4. I paid — user confirms they've made the transfer */}
+                      <div>
+                        <Button
+                          type="button"
+                          variant={bankTransferConfirmedPaid ? "secondary" : "outline"}
+                          className={cn(
+                            "w-full h-12 rounded-lg font-semibold transition-colors",
+                            bankTransferConfirmedPaid
+                              ? "bg-[#38D1BF]/20 border-[#38D1BF]/40 text-[#38D1BF] cursor-default"
+                              : "border-white/20 bg-white/[0.05] text-white hover:bg-white/[0.08] hover:border-white/30"
+                          )}
+                          onClick={() => setBankTransferConfirmedPaid(true)}
+                          disabled={bankTransferConfirmedPaid}
+                        >
+                          {bankTransferConfirmedPaid ? (
+                            <span className="flex items-center gap-2">
+                              <ShieldCheck className="h-4 w-4" />
+                              {t("event_checkout.bank_transfer_i_paid_done", "I've made the transfer")}
+                            </span>
+                          ) : (
+                            t("event_checkout.bank_transfer_i_paid", "I paid")
+                          )}
+                        </Button>
                       </div>
                       {bankTransferLoading && (
                         <p className="text-sm text-white/60">{t("event_checkout.processing", "Processing...")}</p>
@@ -1172,7 +1220,7 @@ function CheckoutForm({
                     : hasDirectBankTransfer && paymentMethodTab === "bank"
                       ? bankTransferCodeReady
                         ? t("event_checkout.bank_transfer_cta", "Confirm my booking")
-                        : t("event_checkout.bank_transfer_cta_disabled", "Enter confirmation code (min 4 characters)")
+                        : t("event_checkout.bank_transfer_cta_disabled", "Click 'I paid' above after making your transfer")
                       : paymentRequirementsMet
                         ? t("event_checkout.pay_amount", "Book your spot {amount}").replace("{amount}", formattedTotalPrice || "")
                         : t("event_checkout.complete_details_to_continue", "Complete required details to continue")}
@@ -1270,6 +1318,7 @@ function CheckoutPrePayment({
 
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = React.useState(false);
   const [providerFeeTooltipOpen, setProviderFeeTooltipOpen] = React.useState(false);
+  const [showValidationBanner, setShowValidationBanner] = React.useState(false);
   const isLg = useIsLg();
   const isMobile = useIsMobile();
 
@@ -1280,9 +1329,49 @@ function CheckoutPrePayment({
 
   const handleContinue = React.useCallback(async () => {
     const ok = await form.trigger();
-    if (!ok) return;
+    if (!ok) {
+      setShowValidationBanner(true);
+      // Focus first invalid field so user sees where the problem is
+      const errors = form.formState.errors;
+      if (errors.firstName) form.setFocus("firstName");
+      else if (errors.buyerEmail) form.setFocus("buyerEmail");
+      else if (errors.attendeeEmail) form.setFocus("attendeeEmail");
+      return;
+    }
+    setShowValidationBanner(false);
     await onContinueToPayment(form.getValues());
   }, [form, onContinueToPayment]);
+
+  const firstNameValue = form.watch("firstName");
+  const buyerEmailValue = form.watch("buyerEmail");
+  const isPrepaymentFormValid = React.useMemo(() => {
+    const first = (firstNameValue || "").trim();
+    const email = (buyerEmailValue || "").trim();
+    const firstNameOk = first.length > 0;
+    const emailOk = z.string().trim().min(1).email().safeParse(email).success;
+    return firstNameOk && emailOk;
+  }, [firstNameValue, buyerEmailValue]);
+
+  // Clear validation banner when form becomes valid
+  React.useEffect(() => {
+    if (isPrepaymentFormValid) setShowValidationBanner(false);
+  }, [isPrepaymentFormValid]);
+
+  // Auto-trigger continue when name + email become valid (debounced)
+  const autoContinueTriggeredRef = React.useRef(false);
+  React.useEffect(() => {
+    if (!isPrepaymentFormValid) {
+      autoContinueTriggeredRef.current = false;
+      return;
+    }
+    if (intentLoading) return;
+    const t = setTimeout(() => {
+      if (autoContinueTriggeredRef.current) return;
+      autoContinueTriggeredRef.current = true;
+      void handleContinue();
+    }, 400);
+    return () => clearTimeout(t);
+  }, [isPrepaymentFormValid, intentLoading, handleContinue]);
 
   const setAddonQuantity = React.useCallback(
     (addonId: number, delta: number, maxQuantity?: number) => {
@@ -1478,6 +1567,17 @@ function CheckoutPrePayment({
         <Form {...form}>
           <form className="form-autofill-dark flex flex-col gap-5 flex-1">
             <CheckoutFormFields form={form} t={t} />
+            {showValidationBanner ? (
+              <div
+                role="alert"
+                className="rounded-lg border border-amber-500/50 bg-amber-500/15 px-4 py-3 text-sm text-amber-200"
+              >
+                {t(
+                  "event_checkout.validation.complete_details_banner",
+                  "Please enter your name and a valid email address to continue."
+                )}
+              </div>
+            ) : null}
             <div className="space-y-2">
               {(eventData.tickets_remaining ?? 20) > 0 ? (
                 <p className="text-sm text-amber-400/90">
@@ -1495,7 +1595,7 @@ function CheckoutPrePayment({
               >
                 {intentLoading
                   ? t("event_checkout.processing", "Processing...")
-                  : t("event_checkout.continue_to_payment", "Continue to payment — {amount}").replace("{amount}", formattedTotalPrice)}
+                  : t("event_checkout.continue_to_payment", "Continue")}
               </Button>
             </div>
           </form>
@@ -1711,7 +1811,7 @@ const EventCheckout = () => {
       if (!json?.client_secret || !json?.order_id) {
         throw new Error("Missing client secret from server");
       }
-      setOrderId(json.order_id);
+      setOrderId(json.customer_id ?? json.order_id);
       setClientSecret(json.client_secret);
     } catch (err: any) {
       const message = err?.message || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
@@ -1769,7 +1869,7 @@ const EventCheckout = () => {
         if (!json?.order_id) {
           throw new Error("Missing order ID from server");
         }
-        setBankTransferOrderId(json.order_id);
+        setBankTransferOrderId(json.customer_id ?? json.order_id);
       } catch (err: any) {
         const message = err?.message || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
         toast({
