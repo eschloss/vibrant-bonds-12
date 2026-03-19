@@ -53,6 +53,7 @@ import {
 import { useChatContext } from "@/contexts/ChatContext";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 import EventStickyCta from "@/components/EventStickyCta";
+import GetFutureInvitesModal from "@/components/GetFutureInvitesModal";
 import { useIsLg } from "@/hooks/use-mobile";
 
 type SignUpCardProps = {
@@ -60,6 +61,7 @@ type SignUpCardProps = {
   checkoutHref: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   onSeeWhatsIncludedClick?: () => void;
+  onOpenFutureInvites?: () => void;
   formattedTotalPrice: string;
   formattedBaseExperiencePrice: string;
   formattedPulseFee: string;
@@ -72,6 +74,7 @@ const SignUpCard = ({
   checkoutHref,
   trackCheckoutClick,
   onSeeWhatsIncludedClick,
+  onOpenFutureInvites,
   formattedTotalPrice,
   formattedBaseExperiencePrice,
   formattedPulseFee,
@@ -120,13 +123,24 @@ const SignUpCard = ({
             <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
             <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}</span>
           </div>
-          <Link
-            to={checkoutHref}
-            onClick={() => trackCheckoutClick("sidebar")}
-            className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-md shadow-purple-500/15 transition-all duration-300"
-          >
-            {t("event_detail.buy_my_ticket", "Buy my ticket")}
-          </Link>
+          <div className="space-y-2">
+            <Link
+              to={checkoutHref}
+              onClick={() => trackCheckoutClick("sidebar")}
+              className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-md shadow-purple-500/15 transition-all duration-300"
+            >
+              {t("event_detail.buy_my_ticket", "Buy my ticket")}
+            </Link>
+            {onOpenFutureInvites && (
+              <button
+                type="button"
+                onClick={onOpenFutureInvites}
+                className="block w-full text-left text-sm text-gray-400 hover:text-[#38D1BF] transition-colors py-0.5 mt-1"
+              >
+                {t("event_detail.cant_attend_link", "Can't make it? Get future invites →")}
+              </button>
+            )}
+          </div>
         </div>
 
         {/* 4. Secondary info zone — subtle divider, 16-20px from CTA */}
@@ -240,6 +254,7 @@ const EventDetail = () => {
   const [showSticky, setShowSticky] = useState(false);
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = useState(false);
   const [addressTooltipOpen, setAddressTooltipOpen] = useState(false);
+  const [futureInvitesOpen, setFutureInvitesOpen] = useState(false);
   const hasTrackedQualifiedEventPageView = useRef(false);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const whatHappensRef = useRef<HTMLDivElement>(null);
@@ -466,6 +481,18 @@ const EventDetail = () => {
   const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
+  const futureInvitesParams = {
+    event_slug: data.slug,
+    event_title: data.title,
+    city: data.city,
+    city_label: data.city_label,
+    provider: providerName,
+    path: `/events/${data.slug}`,
+  };
+  const handleOpenFutureInvites = () => {
+    trackMetaPixelEvent("event_future_invites_modal_click", futureInvitesParams, { custom: true });
+    setFutureInvitesOpen(true);
+  };
   const trackCheckoutClick = (ctaLocation: EventHeaderCtaLocation) => {
     trackQualifiedEventPageView("checkout_click", {
       cta_location: ctaLocation,
@@ -724,15 +751,24 @@ const EventDetail = () => {
                 ref={heroCtaRef}
                 className="flex flex-col gap-2 lg:flex-row lg:items-start lg:gap-4 mb-5 md:mb-6"
               >
-                <div className="flex flex-col gap-2">
-                  <Link
-                    to={checkoutHref}
-                    onClick={() => trackCheckoutClick("hero")}
-                    className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
-                  >
-                    {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
-                  </Link>
-                  <div className="flex flex-col gap-1 px-0.5">
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <Link
+                      to={checkoutHref}
+                      onClick={() => trackCheckoutClick("hero")}
+                      className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
+                    >
+                      {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleOpenFutureInvites}
+                      className="text-sm text-gray-400 hover:text-[#38D1BF] transition-colors"
+                    >
+                      {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
+                    </button>
+                  </div>
+                  <div className="flex flex-col gap-1.5 px-0.5">
                     <div className="flex items-center gap-2 text-sm text-white/70">
                       <Users size={16} className="text-[#38D1BF] shrink-0" />
                       {t("event_detail.everyone_making_friends", "You'll be matched with 4–6 solo attendees")}
@@ -833,6 +869,13 @@ const EventDetail = () => {
                         </div>
                       </div>
                     </div>
+                    <button
+                      type="button"
+                      onClick={handleOpenFutureInvites}
+                      className="mt-4 text-xs text-white/40 hover:text-[#38D1BF]/80 transition-colors"
+                    >
+                      {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
+                    </button>
                   </CardContent>
                 </Card>
 
@@ -843,6 +886,7 @@ const EventDetail = () => {
                     checkoutHref={checkoutHref}
                     trackCheckoutClick={trackCheckoutClick}
                     onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
+                    onOpenFutureInvites={handleOpenFutureInvites}
                     formattedTotalPrice={formattedTotalPrice}
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
@@ -881,6 +925,7 @@ const EventDetail = () => {
                     checkoutHref={checkoutHref}
                     trackCheckoutClick={trackCheckoutClick}
                     onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
+                    onOpenFutureInvites={handleOpenFutureInvites}
                     formattedTotalPrice={formattedTotalPrice}
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
@@ -913,6 +958,16 @@ const EventDetail = () => {
           ticketsRemaining={data.tickets_remaining ?? 20}
         />
       )}
+
+      <GetFutureInvitesModal
+        open={futureInvitesOpen}
+        onOpenChange={setFutureInvitesOpen}
+        t={t}
+        eventId={data.event_id ?? data.id}
+        onSuccess={() => {
+          trackMetaPixelEvent("event_future_invites_submitted", futureInvitesParams, { custom: true });
+        }}
+      />
     </div>
     </EventHeaderProvider>
   );
