@@ -141,7 +141,7 @@ export default function GetFutureInvitesModal({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
-        className="max-w-sm max-h-[90vh] overflow-y-auto border-gray-700 bg-gray-900 text-white sm:rounded-xl [&>button]:text-white/70 [&>button]:hover:text-white [&>button]:hover:bg-white/10"
+        className="top-4 sm:top-[50%] translate-y-0 sm:translate-y-[-50%] max-w-sm max-h-[85vh] sm:max-h-[90vh] overflow-y-auto border-gray-700 bg-gray-900 text-white sm:rounded-xl [&>button]:text-white/70 [&>button]:hover:text-white [&>button]:hover:bg-white/10"
         onEscapeKeyDown={() => handleOpenChange(false)}
         onPointerDownOutside={() => handleOpenChange(false)}
         aria-describedby={submitted ? undefined : "future-invites-description"}
