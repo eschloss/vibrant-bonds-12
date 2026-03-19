@@ -1770,6 +1770,11 @@ const EventCheckout = () => {
   const trackCheckoutClick = useEventTrackCheckoutClick(eventData, notFound, checkoutHref);
 
   const [selectedAddons, setSelectedAddons] = React.useState<Record<number, number>>({});
+  const selectedAddonsRef = React.useRef<Record<number, number>>({});
+  React.useEffect(() => {
+    selectedAddonsRef.current = selectedAddons;
+  }, [selectedAddons]);
+
   const [pendingFormValues, setPendingFormValues] = React.useState<CheckoutFormValues | null>(null);
   const [bankTransferOrderId, setBankTransferOrderId] = React.useState<string | null>(null);
   const [bankTransferLoading, setBankTransferLoading] = React.useState(false);
@@ -1797,7 +1802,8 @@ const EventCheckout = () => {
     setIntentError(null);
     setIntentLoading(true);
     try {
-      const addons = Object.entries(selectedAddons)
+      const currentAddons = selectedAddonsRef.current;
+      const addons = Object.entries(currentAddons)
         .filter(([, qty]) => qty > 0)
         .map(([addonId, qty]) => ({ addon_id: Number(addonId), quantity: qty }));
       const res = await fetch(CREATE_INTENT_URL, {
@@ -1841,7 +1847,7 @@ const EventCheckout = () => {
     } finally {
       setIntentLoading(false);
     }
-  }, [eventSlug, idempotencyKey, selectedAddons, toast, t]);
+  }, [eventSlug, idempotencyKey, toast, t]);
 
   const createBankTransferIntent = React.useCallback(
     async (values: CheckoutFormValues) => {
@@ -1852,7 +1858,8 @@ const EventCheckout = () => {
         const attendeeEmail = values.attendeeSameAsBuyer
           ? buyerEmail
           : (values.attendeeEmail || "").trim().toLowerCase();
-        const addons = Object.entries(selectedAddons)
+        const currentAddons = selectedAddonsRef.current;
+        const addons = Object.entries(currentAddons)
           .filter(([, qty]) => qty > 0)
           .map(([addonId, qty]) => ({ addon_id: Number(addonId), quantity: qty }));
         const res = await fetch(CREATE_INTENT_URL, {
@@ -1890,7 +1897,7 @@ const EventCheckout = () => {
         setBankTransferLoading(false);
       }
     },
-    [eventSlug, idempotencyKeyBank, selectedAddons, toast, t]
+    [eventSlug, idempotencyKeyBank, toast, t]
   );
 
   const handleContinueToPayment = React.useCallback(
