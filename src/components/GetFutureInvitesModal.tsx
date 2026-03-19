@@ -51,8 +51,10 @@ export default function GetFutureInvitesModal({
     [onOpenChange, reset]
   );
 
-  // Load reCAPTCHA script when modal is used
+  // Load reCAPTCHA script only when modal is opened
   useEffect(() => {
+    if (!open) return;
+
     const scriptId = "recaptcha-script";
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
@@ -67,7 +69,7 @@ export default function GetFutureInvitesModal({
       document.querySelector(".grecaptcha-badge")?.remove();
       if ((window as any).grecaptcha) delete (window as any).grecaptcha;
     };
-  }, []);
+  }, [open]);
 
   // Focus input when modal opens
   useEffect(() => {
