@@ -963,7 +963,7 @@ const EventDetail = () => {
         open={futureInvitesOpen}
         onOpenChange={setFutureInvitesOpen}
         t={t}
-        eventId={data.event_id ?? data.id}
+        kikiId={data.id}
         onSuccess={() => {
           trackMetaPixelEvent("event_future_invites_submitted", futureInvitesParams, { custom: true });
         }}

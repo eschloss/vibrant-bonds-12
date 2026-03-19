@@ -18,7 +18,7 @@ type GetFutureInvitesModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   t: (key: string, fallback?: string) => string;
-  eventId: number;
+  kikiId: number;
   onSuccess?: () => void;
 };
 
@@ -26,7 +26,7 @@ export default function GetFutureInvitesModal({
   open,
   onOpenChange,
   t,
-  eventId,
+  kikiId,
   onSuccess,
 }: GetFutureInvitesModalProps) {
   const [email, setEmail] = useState("");
@@ -113,7 +113,7 @@ export default function GetFutureInvitesModal({
         body: JSON.stringify({
           recaptcha: token,
           email: trimmed.toLowerCase(),
-          event_id: eventId,
+          kiki_id: kikiId,
         }),
       });
 
