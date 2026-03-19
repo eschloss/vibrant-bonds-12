@@ -1399,7 +1399,7 @@ function CheckoutForm({
     </div>
       {isMobile && (
         <Drawer>
-          <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(calc(1rem+3rem),calc(env(safe-area-inset-bottom)+3rem))]">
             <DrawerTrigger asChild>
               <button
                 type="button"
@@ -1835,7 +1835,7 @@ function CheckoutPrePayment({
         </div>
       </div>
       {isMobile && showOrderSummary && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(calc(1rem+3rem),calc(env(safe-area-inset-bottom)+3rem))]">
           <div className="flex items-center justify-between gap-4 mb-3">
             <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
             <span className="text-2xl font-bold text-white tabular-nums">{formattedTotalPrice}</span>

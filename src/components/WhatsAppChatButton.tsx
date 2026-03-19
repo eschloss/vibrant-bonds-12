@@ -94,7 +94,7 @@ const CHAT_BUBBLE_MESSAGES = {
   ],
 } as const;
 
-const BUBBLE_DELAYS_MS = [5000, 15000, 25000, 40000, 60000, 90000, 120000]; // 5s, 15s, 25s, 40s, 60s, 90s, 120s
+const BUBBLE_DELAYS_MS = [20000, 60000, 120000, 200000, 300000, 420000, 560000]; // 20s, 1m, 2m, 3m20s, 5m, 7m, 9m20s
 const BUBBLE_VISIBLE_MS = 5000; // How long the bubble stays visible
 
 function getRandomBubbleMessage(isSpanish: boolean): string {
