@@ -26,6 +26,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://widget.manychat.com" crossorigin>
+    <link rel="preconnect" href="https://mccdn.me" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="/placeholder.svg" imagesrcset="/placeholder.svg" imagesizes="100vw" />
     
@@ -106,8 +108,33 @@
       })();
     </script>
 
-    <!-- Manychat -->
-    <script src="//widget.manychat.com/3822754_24192.js" defer="defer"></script>
-    <script src="https://mccdn.me/assets/js/widget.js" defer="defer"></script>
+    <!-- Manychat + MCCDN: load on idle to avoid blocking; error handlers prevent failures from affecting the page -->
+    <script>
+      (function() {
+        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
+        if (isPrerender) return;
+        function loadWidgetScripts() {
+          var scripts = [
+            'https://widget.manychat.com/3822754_24192.js',
+            'https://mccdn.me/assets/js/widget.js'
+          ];
+          scripts.forEach(function(src) {
+            try {
+              if (document.querySelector('script[src="' + src + '"]')) return;
+              var s = document.createElement('script');
+              s.src = src;
+              s.async = true;
+              s.onerror = function() { /* ignore: adblocker, network error, etc. */ };
+              document.body.appendChild(s);
+            } catch (e) { /* ignore */ }
+          });
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadWidgetScripts);
+        } else {
+          setTimeout(loadWidgetScripts, 0);
+        }
+      })();
+    </script>
   </body>
 </html>

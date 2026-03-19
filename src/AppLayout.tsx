@@ -1,5 +1,5 @@
 
-import { useRef, useRef as useReactRef, useState, useEffect } from "react";
+import { useRef, useRef as useReactRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -8,6 +8,7 @@ import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
+import CitiesPreloader from "@/components/CitiesPreloader";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 import {
   ChatContextProvider,
@@ -26,12 +27,7 @@ function useShouldShowChatBubble(): boolean {
 const AppLayoutInner = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const manageRef = useReactRef<() => void | null>(null);
-  const [CitiesPreloaderComp, setCitiesPreloaderComp] = useState<React.ComponentType | null>(null);
   const shouldShowChatBubble = useShouldShowChatBubble();
-
-  useEffect(() => {
-    import("@/components/CitiesPreloader").then((m) => setCitiesPreloaderComp(() => m.default));
-  }, []);
 
   return (
     <div className="min-h-screen bg-background w-full max-w-[100vw]">
@@ -43,7 +39,7 @@ const AppLayoutInner = () => {
           </div>
           <GaPageViewTracker />
           <MetaPixelPageViewTracker />
-          {CitiesPreloaderComp && <CitiesPreloaderComp />}
+          <CitiesPreloader />
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
           {shouldShowChatBubble && <WhatsAppChatButton />}
