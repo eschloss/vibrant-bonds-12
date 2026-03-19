@@ -43,10 +43,11 @@ import { useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useIsLg, useIsMobile } from "@/hooks/use-mobile";
-import { ArrowLeft, CalendarDays, ChevronUp, CircleCheck, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, CalendarDays, ChevronDown, ChevronUp, CircleCheck, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const CREATE_INTENT_URL = `${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`;
 const ATTACH_EMAILS_URL = `${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`;
@@ -135,6 +136,7 @@ function CheckoutForm({
   bankTransferOrderId,
   onRequestBankTransferIntent,
   bankTransferLoading,
+  onBackToAddons,
 }: {
   eventSlug: string;
   eventData: GetKikiEventResponse;
@@ -144,6 +146,7 @@ function CheckoutForm({
   bankTransferOrderId: string | null;
   onRequestBankTransferIntent: (values: CheckoutFormValues) => Promise<void>;
   bankTransferLoading: boolean;
+  onBackToAddons?: () => void;
 }) {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -200,6 +203,7 @@ function CheckoutForm({
   }, [attendeeSameAsBuyer, attendeeEmailValue, buyerEmailValue, firstNameValue]);
 
   const [showLockedPaymentDialog, setShowLockedPaymentDialog] = React.useState(false);
+  const [whatsIncludedOpen, setWhatsIncludedOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (paymentRequirementsMet) setShowLockedPaymentDialog(false);
@@ -610,13 +614,24 @@ function CheckoutForm({
 
   const mobileOrderSummaryContent = (
     <>
-      <Link
-        to={`/events/${eventSlug}`}
-        className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit mb-4"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        {t("event_checkout.back_to_event", "Back to event")}
-      </Link>
+      {onBackToAddons ? (
+        <button
+          type="button"
+          onClick={onBackToAddons}
+          className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit mb-4"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          {t("event_checkout.back_to_addons", "Back to add-ons")}
+        </button>
+      ) : (
+        <Link
+          to={`/events/${eventSlug}`}
+          className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit mb-4"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          {t("event_checkout.back_to_event", "Back to event")}
+        </Link>
+      )}
       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
         {t("event_checkout.order_summary", "Order summary")}
       </div>
@@ -643,11 +658,28 @@ function CheckoutForm({
           <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
         </div>
         {(eventData.whats_included ?? []).length > 0 && (
-          <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
-            {(eventData.whats_included ?? []).map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
+          <Collapsible open={whatsIncludedOpen} onOpenChange={setWhatsIncludedOpen}>
+            <CollapsibleTrigger asChild>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between gap-2 text-sm text-white/55 hover:text-white/70 transition-colors py-0.5 -ml-0.5"
+              >
+                <span>{t("event_checkout.see_whats_included", "See what's included")}</span>
+                {whatsIncludedOpen ? (
+                  <ChevronUp className="h-4 w-4 shrink-0" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 shrink-0" />
+                )}
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5 pt-1">
+                {(eventData.whats_included ?? []).map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </CollapsibleContent>
+          </Collapsible>
         )}
         {(eventData.addons ?? []).length > 0 &&
           (() => {
@@ -692,7 +724,7 @@ function CheckoutForm({
       {/* ── Left panel: Order summary (desktop only on payment view) ── */}
       <div className={cn("order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]", isMobile && "hidden")}>
         {/* Back nav */}
-        <div className="px-8 pt-6 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
+        <div className="px-8 pt-4 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
           <Link
             to={`/events/${eventSlug}`}
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit"
@@ -769,11 +801,28 @@ function CheckoutForm({
                   <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
                 </div>
                 {(eventData.whats_included ?? []).length > 0 && (
-                  <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
-                    {(eventData.whats_included ?? []).map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+                  <Collapsible open={whatsIncludedOpen} onOpenChange={setWhatsIncludedOpen}>
+                    <CollapsibleTrigger asChild>
+                      <button
+                        type="button"
+                        className="flex w-full items-center justify-between gap-2 text-sm text-white/55 hover:text-white/70 transition-colors py-0.5 -ml-0.5"
+                      >
+                        <span>{t("event_checkout.see_whats_included", "See what's included")}</span>
+                        {whatsIncludedOpen ? (
+                          <ChevronUp className="h-4 w-4 shrink-0" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4 shrink-0" />
+                        )}
+                      </button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5 pt-1">
+                        {(eventData.whats_included ?? []).map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </CollapsibleContent>
+                  </Collapsible>
                 )}
                 {(eventData.addons ?? []).length > 0 &&
                   (() => {
@@ -837,7 +886,7 @@ function CheckoutForm({
       </div>
 
       {/* ── Right panel: Payment form ── */}
-      <div className={cn("order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10", isMobile && "pb-24")}>
+      <div className={cn("order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-4 pb-8 lg:px-12 lg:pt-8 lg:pb-10", isMobile && "pb-24")}>
         <h1 className="text-xl font-semibold text-white mb-6">{t("event_checkout.complete_booking", "Complete your booking")}</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="form-autofill-dark flex flex-col gap-5 flex-1">
@@ -1455,6 +1504,8 @@ function CheckoutPrePayment({
   const [providerFeeTooltipOpen, setProviderFeeTooltipOpen] = React.useState(false);
   const [showValidationBanner, setShowValidationBanner] = React.useState(false);
   const [mobileCheckoutStep, setMobileCheckoutStep] = React.useState<"summary" | "details">("summary");
+  const [whatsIncludedOpen, setWhatsIncludedOpen] = React.useState(false);
+  const [addonDescriptionTooltipId, setAddonDescriptionTooltipId] = React.useState<number | null>(null);
   const isLg = useIsLg();
   const isMobile = useIsMobile();
 
@@ -1466,6 +1517,7 @@ function CheckoutPrePayment({
   const handleMobileContinueToDetails = React.useCallback(() => {
     trackMetaPixelEvent("event_checkout_mobile_continue_to_details", { ...baseCheckoutParams }, { custom: true });
     setMobileCheckoutStep("details");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [baseCheckoutParams]);
 
   // Focus firstName when transitioning to details step on mobile
@@ -1559,7 +1611,7 @@ function CheckoutPrePayment({
           !showOrderSummary && "hidden lg:flex"
         )}
       >
-        <div className="px-8 pt-6 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
+        <div className="px-8 pt-4 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
           <Link
             to={`/events/${eventSlug}`}
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit"
@@ -1628,11 +1680,28 @@ function CheckoutPrePayment({
               <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
             {(eventData.whats_included ?? []).length > 0 && (
-              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5 pr-8 lg:pr-10">
-                {(eventData.whats_included ?? []).map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              <Collapsible open={whatsIncludedOpen} onOpenChange={setWhatsIncludedOpen} className="pr-8 lg:pr-10">
+                <CollapsibleTrigger asChild>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-2 text-sm text-white/55 hover:text-white/70 transition-colors py-0.5 -ml-0.5"
+                  >
+                    <span>{t("event_checkout.see_whats_included", "See what's included")}</span>
+                    {whatsIncludedOpen ? (
+                      <ChevronUp className="h-4 w-4 shrink-0" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 shrink-0" />
+                    )}
+                  </button>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5 pt-1">
+                    {(eventData.whats_included ?? []).map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </CollapsibleContent>
+              </Collapsible>
             )}
             {(eventData.addons ?? []).length > 0 ? (
               <div className="space-y-2.5 py-2">
@@ -1649,10 +1718,41 @@ function CheckoutPrePayment({
                     className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] pl-3 pr-0 pt-3 pb-3 mr-4 lg:mr-6"
                   >
                     <div className="min-w-0 flex-1">
-                      <div className="text-sm font-medium text-white/90">{addon.name}</div>
-                      {addon.description ? (
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-medium text-white/90">{addon.name}</span>
+                        {addon.description &&
+                          isMobile && (
+                            <TooltipProvider delayDuration={999999}>
+                              <Tooltip
+                                open={addonDescriptionTooltipId === addon.id}
+                                onOpenChange={(open) => setAddonDescriptionTooltipId(open ? addon.id : null)}
+                              >
+                                <TooltipTrigger asChild>
+                                  <button
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      setAddonDescriptionTooltipId((prev) => (prev === addon.id ? null : addon.id));
+                                    }}
+                                    className="inline-flex shrink-0 p-1.5 -m-1.5 rounded-full text-white/45 hover:text-white/75 active:text-white/90 transition-colors touch-manipulation"
+                                    aria-label={t("event_checkout.addon_description", "Add-on description")}
+                                  >
+                                    <Info className="h-3.5 w-3.5" />
+                                  </button>
+                                </TooltipTrigger>
+                                <TooltipContent
+                                  side="right"
+                                  className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
+                                >
+                                  {addon.description}
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                      </div>
+                      {addon.description && !isMobile && (
                         <p className="text-xs text-white/55 mt-0.5 line-clamp-2">{addon.description}</p>
-                      ) : null}
+                      )}
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       <button
@@ -1735,7 +1835,7 @@ function CheckoutPrePayment({
       </div>
       <div
         className={cn(
-          "order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10",
+          "order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-4 pb-8 lg:px-12 lg:pt-8 lg:pb-10",
           !showFormSection && "hidden lg:flex"
         )}
       >
@@ -2078,6 +2178,14 @@ const EventCheckout = () => {
     [createIntent]
   );
 
+  const handleBackToAddons = React.useCallback(() => {
+    setClientSecret(null);
+    setOrderId(null);
+    setPendingFormValues(null);
+    setBankTransferOrderId(null);
+    setIntentError(null);
+  }, []);
+
   const eventHeaderValue =
     eventSlug && checkoutHref
       ? { eventSlug, checkoutHref, trackCheckoutClick }
@@ -2120,7 +2228,7 @@ const EventCheckout = () => {
         <Seo {...seoProps} />
         <div className="min-h-screen bg-[#090D14] text-white">
           <Navbar />
-          <main className="px-6 pt-32 pb-16">
+          <main className="px-6 pt-20 lg:pt-32 pb-16">
             <div className="w-full max-w-xl mx-auto">
               <Card className="border-white/10 bg-[#0C1220]">
                 <CardContent className="p-8">
@@ -2159,7 +2267,7 @@ const EventCheckout = () => {
       <Seo {...seoProps} />
       <div className="min-h-screen bg-[#090D14] text-white">
         <Navbar />
-        <main className="pt-20">
+        <main className="pt-16 lg:pt-20">
           {intentError ? (
             <div className="px-6 py-16">
               <div className="w-full max-w-xl mx-auto">
@@ -2290,6 +2398,7 @@ const EventCheckout = () => {
                 bankTransferOrderId={bankTransferOrderId}
                 onRequestBankTransferIntent={createBankTransferIntent}
                 bankTransferLoading={bankTransferLoading}
+                onBackToAddons={handleBackToAddons}
               />
             </Elements>
           ) : (

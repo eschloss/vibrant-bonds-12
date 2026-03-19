@@ -1,6 +1,7 @@
 export const eventCheckout = {
   en: {
     "event_checkout.back_to_event": "Back to event",
+    "event_checkout.back_to_addons": "Back to add-ons",
     "event_checkout.starts_between": "Starts between",
     "event_checkout.order_summary": "Order summary",
     "event_checkout.view_order_summary": "View order summary",
@@ -8,6 +9,7 @@ export const eventCheckout = {
       "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
     "event_checkout.entrance_time_help": "Entrance time info",
     "event_checkout.ticket": "Ticket",
+    "event_checkout.see_whats_included": "See what's included",
     "event_checkout.provider_fee": "Provider fee",
     "event_checkout.provider_fee_tooltip":
       "This fee is charged by the event organiser. We show it here so there are no surprises at payment.",
@@ -61,6 +63,7 @@ export const eventCheckout = {
     "event_checkout.please_wait": "Please wait while we prepare your payment.",
 
     "event_checkout.addons": "Add-ons",
+    "event_checkout.addon_description": "Add-on description",
     "event_checkout.addon_decrease": "Decrease quantity",
     "event_checkout.addon_increase": "Increase quantity",
     "event_checkout.continue_to_payment": "Continue",
@@ -93,6 +96,7 @@ export const eventCheckout = {
   },
   es: {
     "event_checkout.back_to_event": "Volver al evento",
+    "event_checkout.back_to_addons": "Volver a los extras",
     "event_checkout.starts_between": "Comienza entre",
     "event_checkout.order_summary": "Resumen del pedido",
     "event_checkout.view_order_summary": "Ver resumen del pedido",
@@ -152,7 +156,9 @@ export const eventCheckout = {
     "event_checkout.loading_checkout": "Cargando checkout",
     "event_checkout.please_wait": "Por favor espera mientras preparamos tu pago.",
 
+    "event_checkout.see_whats_included": "Ver qué incluye",
     "event_checkout.addons": "Extras",
+    "event_checkout.addon_description": "Descripción del extra",
     "event_checkout.addon_decrease": "Reducir cantidad",
     "event_checkout.addon_increase": "Aumentar cantidad",
     "event_checkout.continue_to_payment": "Continuar",

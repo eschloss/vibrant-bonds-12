@@ -548,7 +548,7 @@ const EventDetail = () => {
 
       <main className={cn("flex-grow", "pb-20 lg:pb-0")}>
         {/* Hero (match /cities visual language) */}
-        <section className="relative pt-32 pb-12 overflow-hidden">
+        <section className="relative pt-20 md:pt-28 lg:pt-32 pb-12 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
