@@ -43,7 +43,7 @@ import { useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useIsLg, useIsMobile } from "@/hooks/use-mobile";
-import { ArrowLeft, CalendarDays, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, CalendarDays, CircleCheck, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -156,6 +156,7 @@ function CheckoutForm({
   const [bankTransferConfirmedPaid, setBankTransferConfirmedPaid] = React.useState(false);
   const bankTransferCodeReady = bankTransferConfirmedPaid; // when true, we send "user_clicked_i_paid"
 
+  const confirmAndSubmitRef = React.useRef(false);
   const hasFiredInitiateCheckout = React.useRef(false);
   const hasFiredFirstNameFocus = React.useRef(false);
   const hasFiredFirstNameShared = React.useRef(false);
@@ -465,7 +466,8 @@ function CheckoutForm({
 
     if (isBankTransfer) {
       if (!bankTransferOrderId) return;
-      if (!bankTransferCodeReady) return;
+      if (!bankTransferCodeReady && !confirmAndSubmitRef.current) return;
+      confirmAndSubmitRef.current = false;
       trackMetaPixelEvent("event_bank_transfer_confirm_booking_click", { ...baseCheckoutParams }, { custom: true });
       setSubmitting(true);
       if (!hasFiredTermsAccepted.current) {
@@ -1043,6 +1045,7 @@ function CheckoutForm({
                             <button
                               type="button"
                               onClick={() => {
+                                trackMetaPixelEvent("event_bank_transfer_reference_copy_click", { ...baseCheckoutParams }, { custom: true });
                                 void navigator.clipboard.writeText(bankTransferOrderId);
                                 toast({ title: t("event_checkout.reference_copied", "Reference copied") });
                               }}
@@ -1055,22 +1058,24 @@ function CheckoutForm({
                         </div>
                       ) : null}
 
-                      {/* 4. I paid — user confirms they've made the transfer */}
+                      {/* 4. Confirm payment — user confirms they've made the transfer */}
                       <div>
                         <Button
                           type="button"
-                          variant={bankTransferConfirmedPaid ? "secondary" : "outline"}
+                          variant={bankTransferConfirmedPaid ? "secondary" : "default"}
                           className={cn(
-                            "w-full h-12 rounded-lg font-semibold transition-colors",
+                            "w-full h-12 rounded-xl font-semibold text-base transition-colors",
                             bankTransferConfirmedPaid
                               ? "bg-[#38D1BF]/20 border-[#38D1BF]/40 text-[#38D1BF] cursor-default"
-                              : "border-white/20 bg-white/[0.05] text-white hover:bg-white/[0.08] hover:border-white/30"
+                              : "bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45"
                           )}
                           onClick={() => {
                             trackMetaPixelEvent("event_bank_transfer_i_paid_click", { ...baseCheckoutParams }, { custom: true });
+                            confirmAndSubmitRef.current = true;
                             setBankTransferConfirmedPaid(true);
+                            form.handleSubmit(onSubmit)();
                           }}
-                          disabled={bankTransferConfirmedPaid}
+                          disabled={bankTransferConfirmedPaid || submitting}
                         >
                           {bankTransferConfirmedPaid ? (
                             <span className="flex items-center gap-2">
@@ -1078,7 +1083,10 @@ function CheckoutForm({
                               {t("event_checkout.bank_transfer_i_paid_done", "I've made the transfer")}
                             </span>
                           ) : (
-                            t("event_checkout.bank_transfer_i_paid", "I paid")
+                            <span className="flex items-center gap-2">
+                              <CircleCheck className="h-4 w-4" />
+                              {t("event_checkout.bank_transfer_i_paid", "I confirm I've made the transfer")}
+                            </span>
                           )}
                         </Button>
                       </div>
@@ -1229,7 +1237,7 @@ function CheckoutForm({
                     : hasDirectBankTransfer && paymentMethodTab === "bank"
                       ? bankTransferCodeReady
                         ? t("event_checkout.bank_transfer_cta", "Confirm my booking")
-                        : t("event_checkout.bank_transfer_cta_disabled", "Click 'I paid' above after making your transfer")
+                        : t("event_checkout.bank_transfer_cta_disabled", "Confirm above that you've made the transfer to continue")
                       : paymentRequirementsMet
                         ? t("event_checkout.pay_amount", "Book your spot {amount}").replace("{amount}", formattedTotalPrice || "")
                         : t("event_checkout.complete_details_to_continue", "Complete required details to continue")}

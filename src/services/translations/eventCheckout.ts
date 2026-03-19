@@ -67,13 +67,13 @@ export const eventCheckout = {
     "event_checkout.tab_direct_bank_transfer": "Direct bank transfer",
     "event_checkout.bank_transfer_amount_label": "Amount to transfer",
     "event_checkout.bank_transfer_intro": "Transfer directly to this bank account:",
-    "event_checkout.bank_transfer_i_paid": "I paid",
+    "event_checkout.bank_transfer_i_paid": "I confirm I've made the transfer",
     "event_checkout.bank_transfer_i_paid_done": "I've made the transfer",
     "event_checkout.bank_transfer_reference_hint": "Use this reference when making your bank transfer:",
     "event_checkout.reference_copied": "Reference copied",
     "event_checkout.copy_reference": "Copy reference",
     "event_checkout.bank_transfer_cta": "Confirm my booking",
-    "event_checkout.bank_transfer_cta_disabled": "Click 'I paid' above after making your transfer",
+    "event_checkout.bank_transfer_cta_disabled": "Confirm above that you've made the transfer to continue",
 
     // Validation
     "event_checkout.validation.complete_details_banner":
@@ -154,13 +154,13 @@ export const eventCheckout = {
     "event_checkout.tab_direct_bank_transfer": "Transferencia bancaria directa",
     "event_checkout.bank_transfer_amount_label": "Importe a transferir",
     "event_checkout.bank_transfer_intro": "Transfiere directamente a esta cuenta bancaria:",
-    "event_checkout.bank_transfer_i_paid": "He pagado",
+    "event_checkout.bank_transfer_i_paid": "Confirmo que he realizado la transferencia",
     "event_checkout.bank_transfer_i_paid_done": "He realizado la transferencia",
     "event_checkout.bank_transfer_reference_hint": "Usa esta referencia al hacer tu transferencia bancaria:",
     "event_checkout.reference_copied": "Referencia copiada",
     "event_checkout.copy_reference": "Copiar referencia",
     "event_checkout.bank_transfer_cta": "Confirmar mi reserva",
-    "event_checkout.bank_transfer_cta_disabled": "Haz clic en 'He pagado' arriba después de hacer la transferencia",
+    "event_checkout.bank_transfer_cta_disabled": "Confirma arriba que has realizado la transferencia para continuar",
 
     // Validation
     "event_checkout.validation.complete_details_banner":
