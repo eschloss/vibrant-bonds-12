@@ -3,6 +3,7 @@ export const eventCheckout = {
     "event_checkout.back_to_event": "Back to event",
     "event_checkout.starts_between": "Starts between",
     "event_checkout.order_summary": "Order summary",
+    "event_checkout.view_order_summary": "View order summary",
     "event_checkout.entrance_time_tooltip":
       "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
     "event_checkout.entrance_time_help": "Entrance time info",
@@ -63,6 +64,7 @@ export const eventCheckout = {
     "event_checkout.addon_decrease": "Decrease quantity",
     "event_checkout.addon_increase": "Increase quantity",
     "event_checkout.continue_to_payment": "Continue",
+    "event_checkout.go_back": "Go back",
 
     "event_checkout.tab_pay_with_card": "Pay with card",
     "event_checkout.tab_direct_bank_transfer": "Direct bank transfer",
@@ -93,6 +95,7 @@ export const eventCheckout = {
     "event_checkout.back_to_event": "Volver al evento",
     "event_checkout.starts_between": "Comienza entre",
     "event_checkout.order_summary": "Resumen del pedido",
+    "event_checkout.view_order_summary": "Ver resumen del pedido",
     "event_checkout.entrance_time_tooltip":
       "Tu hora de entrada depende del grupo al que te asignemos — puede ser cualquier hora en este rango. Esto ayuda a que tu grupo de match se conozca entre sí (en lugar de mezclarse con todos a la vez).",
     "event_checkout.entrance_time_help": "Info de hora de entrada",
@@ -153,6 +156,7 @@ export const eventCheckout = {
     "event_checkout.addon_decrease": "Reducir cantidad",
     "event_checkout.addon_increase": "Aumentar cantidad",
     "event_checkout.continue_to_payment": "Continuar",
+    "event_checkout.go_back": "Volver",
 
     "event_checkout.tab_pay_with_card": "Pagar con tarjeta",
     "event_checkout.tab_direct_bank_transfer": "Transferencia bancaria directa",

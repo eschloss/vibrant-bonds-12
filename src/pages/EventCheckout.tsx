@@ -43,9 +43,10 @@ import { useChatContext } from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useIsLg, useIsMobile } from "@/hooks/use-mobile";
-import { ArrowLeft, CalendarDays, CircleCheck, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, CalendarDays, ChevronUp, CircleCheck, Clock, Copy, Info, Lock, MapPin, Minus, Plus, ShieldCheck, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 
 const CREATE_INTENT_URL = `${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`;
 const ATTACH_EMAILS_URL = `${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`;
@@ -595,6 +596,7 @@ function CheckoutForm({
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = React.useState(false);
   const [providerFeeTooltipOpen, setProviderFeeTooltipOpen] = React.useState(false);
   const isLg = useIsLg();
+  const showMinimalOrderSummary = isMobile; // mobile payment view: minimal summary (top + total only)
 
   const durationText = React.useMemo(() => {
     const h = eventData.duration_hours;
@@ -606,10 +608,89 @@ function CheckoutForm({
     return `${hrs}h ${mins}min`;
   }, [eventData.duration_hours]);
 
+  const mobileOrderSummaryContent = (
+    <>
+      <Link
+        to={`/events/${eventSlug}`}
+        className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit mb-4"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {t("event_checkout.back_to_event", "Back to event")}
+      </Link>
+      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
+        {t("event_checkout.order_summary", "Order summary")}
+      </div>
+      <h2 className="text-xl font-semibold text-white leading-snug mb-3">{eventData.title}</h2>
+      <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-4">
+        <div className="flex items-center gap-2">
+          <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
+          <span>{eventDateTime.text}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <MapPin className="h-4 w-4 shrink-0 text-white/40" />
+          <span>{eventData.place}</span>
+        </div>
+        {durationText ? (
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4 shrink-0 text-white/40" />
+            <span>{durationText}</span>
+          </div>
+        ) : null}
+      </div>
+      <div className="border-t border-white/[0.08] pt-5 space-y-3">
+        <div className="flex items-center justify-between text-2xl font-semibold">
+          <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
+          <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
+        </div>
+        {(eventData.whats_included ?? []).length > 0 && (
+          <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
+            {(eventData.whats_included ?? []).map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        )}
+        {(eventData.addons ?? []).length > 0 &&
+          (() => {
+            const addonLines = (eventData.addons ?? []).filter((a) => (selectedAddons[a.id] ?? 0) > 0);
+            return addonLines.length > 0 ? (
+              <div className="space-y-1.5">
+                {addonLines.map((a) => (
+                  <div key={a.id} className="flex items-center justify-between text-sm">
+                    <span className="text-white/55">
+                      {a.name}
+                      {selectedAddons[a.id] > 1 ? ` ×${selectedAddons[a.id]}` : ""}
+                    </span>
+                    <span className="text-white/82">
+                      {formatEventPrice(a.price * (selectedAddons[a.id] ?? 0), priceOpts)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : null;
+          })()}
+        {eventData.provider_fee > 0 ? (
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-white/55">{t("event_checkout.provider_fee", "Provider fee")}</span>
+            <span className="text-white/82">{formatEventPrice(eventData.provider_fee, priceOpts)}</span>
+          </div>
+        ) : null}
+        <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
+          <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
+          <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
+        </div>
+        <div className="flex items-center justify-between pt-1">
+          <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
+          <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
+        </div>
+      </div>
+    </>
+  );
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
-      {/* ── Left panel: Order summary ── */}
-      <div className="order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]">
+    <div className="min-h-[calc(100vh-80px)]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
+      {/* ── Left panel: Order summary (desktop only on payment view) ── */}
+      <div className={cn("order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]", isMobile && "hidden")}>
         {/* Back nav */}
         <div className="px-8 pt-6 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
           <Link
@@ -634,7 +715,7 @@ function CheckoutForm({
               <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
               <span className="inline-flex items-center gap-2">
                 <span>{eventDateTime.text}</span>
-                {eventDateTime.hasWindow ? (
+                {!showMinimalOrderSummary && eventDateTime.hasWindow ? (
                   <TooltipProvider delayDuration={isLg ? 100 : 999999}>
                     <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
                       <TooltipTrigger asChild>
@@ -662,7 +743,7 @@ function CheckoutForm({
               <MapPin className="h-4 w-4 shrink-0 text-white/40" />
               <span>{eventData.place}</span>
             </div>
-            {durationText ? (
+            {!showMinimalOrderSummary && durationText ? (
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 shrink-0 text-white/40" />
                 <span>{durationText}</span>
@@ -670,7 +751,7 @@ function CheckoutForm({
             ) : null}
           </div>
 
-          <div className="hidden lg:block mb-4">
+          <div className={cn("mb-4", showMinimalOrderSummary ? "hidden" : "hidden lg:block")}>
             <EventProviderSection
               provider={eventData.provider}
               compact
@@ -680,38 +761,40 @@ function CheckoutForm({
             />
           </div>
 
-          <div className="border-t border-white/[0.08] pt-5 space-y-3">
-            <div className="flex items-center justify-between text-2xl font-semibold">
-              <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
-              <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
-            </div>
-            {(eventData.whats_included ?? []).length > 0 && (
-              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
-                {(eventData.whats_included ?? []).map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            )}
-            {(eventData.addons ?? []).length > 0 &&
-              (() => {
-                const addonLines = (eventData.addons ?? []).filter((a) => (selectedAddons[a.id] ?? 0) > 0);
-                return addonLines.length > 0 ? (
-                  <div className="space-y-1.5">
-                    {addonLines.map((a) => (
-                      <div key={a.id} className="flex items-center justify-between text-sm">
-                        <span className="text-white/55">
-                          {a.name}
-                          {selectedAddons[a.id] > 1 ? ` ×${selectedAddons[a.id]}` : ""}
-                        </span>
-                        <span className="text-white/82">
-                          {formatEventPrice(a.price * (selectedAddons[a.id] ?? 0), priceOpts)}
-                        </span>
-                      </div>
+          <div className={cn("border-t border-white/[0.08] pt-5", showMinimalOrderSummary ? "" : "space-y-3")}>
+            {!showMinimalOrderSummary && (
+              <>
+                <div className="flex items-center justify-between text-2xl font-semibold">
+                  <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
+                  <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
+                </div>
+                {(eventData.whats_included ?? []).length > 0 && (
+                  <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
+                    {(eventData.whats_included ?? []).map((item, i) => (
+                      <li key={i}>{item}</li>
                     ))}
-                  </div>
-                ) : null;
-              })()}
-            {eventData.provider_fee > 0 ? (
+                  </ul>
+                )}
+                {(eventData.addons ?? []).length > 0 &&
+                  (() => {
+                    const addonLines = (eventData.addons ?? []).filter((a) => (selectedAddons[a.id] ?? 0) > 0);
+                    return addonLines.length > 0 ? (
+                      <div className="space-y-1.5">
+                        {addonLines.map((a) => (
+                          <div key={a.id} className="flex items-center justify-between text-sm">
+                            <span className="text-white/55">
+                              {a.name}
+                              {selectedAddons[a.id] > 1 ? ` ×${selectedAddons[a.id]}` : ""}
+                            </span>
+                            <span className="text-white/82">
+                              {formatEventPrice(a.price * (selectedAddons[a.id] ?? 0), priceOpts)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null;
+                  })()}
+                {eventData.provider_fee > 0 ? (
               <div className="flex items-center justify-between text-sm">
                 <span className="flex items-center gap-1.5 text-white/55">
                   {t("event_checkout.provider_fee", "Provider fee")}
@@ -739,11 +822,13 @@ function CheckoutForm({
                 <span className="text-white/82">{formatEventPrice(eventData.provider_fee, priceOpts)}</span>
               </div>
             ) : null}
-            <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
-              <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
-              <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
-            </div>
-            <div className="flex items-center justify-between pt-1">
+                <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
+                  <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
+                  <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
+                </div>
+              </>
+            )}
+            <div className={cn("flex items-center justify-between", showMinimalOrderSummary ? "pt-0" : "pt-1")}>
               <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>
@@ -752,7 +837,7 @@ function CheckoutForm({
       </div>
 
       {/* ── Right panel: Payment form ── */}
-      <div className="order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10">
+      <div className={cn("order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10", isMobile && "pb-24")}>
         <h1 className="text-xl font-semibold text-white mb-6">{t("event_checkout.complete_booking", "Complete your booking")}</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="form-autofill-dark flex flex-col gap-5 flex-1">
@@ -1263,6 +1348,34 @@ function CheckoutForm({
         </Form>
       </div>
     </div>
+      {isMobile && (
+        <Drawer>
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#070C14] border-t border-white/[0.12] px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <DrawerTrigger asChild>
+              <button
+                type="button"
+                className="w-full flex items-center justify-between rounded-xl bg-white/[0.06] border border-white/15 px-5 py-4 text-left hover:bg-white/[0.08] transition-colors"
+              >
+                <span className="text-sm text-white/70">{t("event_checkout.view_order_summary", "View order summary")}</span>
+                <span className="flex items-center gap-2 text-lg font-bold text-white tabular-nums">
+                  {formattedTotalPrice}
+                  <ChevronUp className="h-5 w-5 text-white/60" />
+                </span>
+              </button>
+            </DrawerTrigger>
+          </div>
+          <DrawerContent className="bg-[#070C14] border-white/[0.12] border-t max-h-[85vh] [&>div:first-of-type]:hidden">
+            <div className="mx-auto mt-3 h-1 w-12 shrink-0 rounded-full bg-white/20" aria-hidden />
+            <div className="overflow-y-auto px-6 pb-8 pt-4">
+              <DrawerHeader>
+                <DrawerTitle className="text-white sr-only">{t("event_checkout.order_summary", "Order summary")}</DrawerTitle>
+              </DrawerHeader>
+              {mobileOrderSummaryContent}
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </div>
   );
 }
 
@@ -1341,8 +1454,28 @@ function CheckoutPrePayment({
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = React.useState(false);
   const [providerFeeTooltipOpen, setProviderFeeTooltipOpen] = React.useState(false);
   const [showValidationBanner, setShowValidationBanner] = React.useState(false);
+  const [mobileCheckoutStep, setMobileCheckoutStep] = React.useState<"summary" | "details">("summary");
   const isLg = useIsLg();
   const isMobile = useIsMobile();
+
+  const baseCheckoutParams = React.useMemo(
+    () => buildCheckoutEventParams(eventData),
+    [eventData]
+  );
+
+  const handleMobileContinueToDetails = React.useCallback(() => {
+    trackMetaPixelEvent("event_checkout_mobile_continue_to_details", { ...baseCheckoutParams }, { custom: true });
+    setMobileCheckoutStep("details");
+  }, [baseCheckoutParams]);
+
+  // Focus firstName when transitioning to details step on mobile
+  React.useEffect(() => {
+    if (!isMobile || mobileCheckoutStep !== "details") return;
+    const id = requestAnimationFrame(() => {
+      setTimeout(() => form.setFocus("firstName"), 50);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [isMobile, mobileCheckoutStep, form]);
 
   const entranceTimeTooltip = t(
     "event_checkout.entrance_time_tooltip",
@@ -1415,9 +1548,17 @@ function CheckoutPrePayment({
     [setSelectedAddons]
   );
 
+  const showOrderSummary = !isMobile || mobileCheckoutStep === "summary";
+  const showFormSection = !isMobile || mobileCheckoutStep === "details";
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
-      <div className="order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]">
+      <div
+        className={cn(
+          "order-1 lg:order-1 lg:col-span-5 bg-[#070C14] flex flex-col border-r border-white/[0.07]",
+          !showOrderSummary && "hidden lg:flex"
+        )}
+      >
         <div className="px-8 pt-6 lg:px-10 lg:pt-12 pb-4 lg:pb-6">
           <Link
             to={`/events/${eventSlug}`}
@@ -1579,10 +1720,35 @@ function CheckoutPrePayment({
               <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>
+            {isMobile ? (
+              <Button
+                type="button"
+                size="xl"
+                className="mt-6 w-full h-12 rounded-xl bg-[#38D1BF] text-[#041712] hover:bg-[#2FC0AF] focus-visible:ring-[#38D1BF]/45 font-semibold text-base"
+                onClick={handleMobileContinueToDetails}
+              >
+                {t("event_checkout.continue_to_payment", "Continue")}
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>
-      <div className="order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10">
+      <div
+        className={cn(
+          "order-2 lg:order-2 lg:col-span-7 bg-[#0C1220] flex flex-col px-8 pt-6 pb-8 lg:px-12 lg:pt-8 lg:pb-10",
+          !showFormSection && "hidden lg:flex"
+        )}
+      >
+        {isMobile && (
+          <button
+            type="button"
+            onClick={() => setMobileCheckoutStep("summary")}
+            className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white/90 transition-colors w-fit mb-4 lg:hidden"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {t("event_checkout.go_back", "Go back")}
+          </button>
+        )}
         <h1 className="text-xl font-semibold text-white mb-6">
           {t("event_checkout.complete_booking", "Complete your booking")}
         </h1>
