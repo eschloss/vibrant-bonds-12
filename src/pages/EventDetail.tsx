@@ -158,7 +158,7 @@ const SignUpCard = ({
 
         <div className="flex items-center gap-2 text-amber-400 text-sm font-medium mb-3">
           <Ticket size={16} className="shrink-0" aria-hidden />
-          <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets remaining").replace("{n}", String(ticketsRemaining))}</span>
+          <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}</span>
         </div>
 
         <Link

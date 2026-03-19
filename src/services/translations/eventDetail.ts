@@ -49,7 +49,7 @@ export const eventDetail = {
     "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
 
     "event_detail.sticky.reserve_spot": "Reserve your spot",
-    "event_detail.sticky.tickets_remaining": "Only {n} tickets remaining",
+    "event_detail.sticky.tickets_remaining": "Only {n} tickets left",
     "event_detail.sticky.tickets_remaining_short": "Only {n} spots left for this event",
 
     // EventFaqSection

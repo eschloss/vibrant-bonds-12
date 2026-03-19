@@ -9,6 +9,12 @@ type EventProviderSectionProps = {
   providerEventUrl?: string;
   /** Optional: compact layout for sidebar/card contexts */
   compact?: boolean;
+  /** Hide provider bio/description */
+  hideDescription?: boolean;
+  /** Hide "View official event page" link */
+  hideEventLink?: boolean;
+  /** Extra compact for tight spaces (e.g. checkout) */
+  slim?: boolean;
   className?: string;
 };
 
@@ -16,6 +22,9 @@ export default function EventProviderSection({
   provider,
   providerEventUrl,
   compact = false,
+  hideDescription = false,
+  hideEventLink = false,
+  slim = false,
   className = "",
 }: EventProviderSectionProps) {
   const { t } = useTranslation();
@@ -25,38 +34,39 @@ export default function EventProviderSection({
   const hasBio = Boolean(provider?.bio?.trim());
   const hasEventUrl = Boolean(providerEventUrl?.trim());
 
+  const nameSizeClass = slim ? "text-xs" : "";
   const nameContent = hasUrl ? (
     <a
       href={provider.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-white/90 hover:text-white font-medium underline underline-offset-2 decoration-white/40 hover:decoration-white/70 transition-colors inline-flex items-center gap-1"
+      className={`text-white/90 hover:text-white font-medium underline underline-offset-2 decoration-white/40 hover:decoration-white/70 transition-colors inline-flex items-center gap-1 ${nameSizeClass}`}
     >
       {name}
-      <ExternalLink size={14} className="shrink-0 opacity-70" />
+      <ExternalLink size={slim ? 12 : 14} className="shrink-0 opacity-70" />
     </a>
   ) : (
-    <span className="text-white/90 font-medium">{name}</span>
+    <span className={`text-white/90 font-medium ${nameSizeClass}`}>{name}</span>
   );
 
   if (compact) {
     return (
       <div className={className}>
-        <div className="flex items-center gap-2">
+        <div className={`flex items-center gap-2 ${slim ? "gap-1.5" : ""}`}>
           {hasLogo && (
             <img
               src={provider.logo}
               alt=""
-              className="w-8 h-8 rounded-lg object-contain bg-white/5 border border-white/10 shrink-0"
+              className={`${slim ? "w-6 h-6 rounded-md" : "w-8 h-8 rounded-lg"} object-contain bg-white/5 border border-white/10 shrink-0`}
               loading="lazy"
             />
           )}
           <div className="min-w-0">
             {nameContent}
-            {hasBio && (
+            {hasBio && !hideDescription && (
               <p className="text-xs text-white/60 mt-0.5 line-clamp-2">{provider.bio}</p>
             )}
-            {hasEventUrl && (
+            {hasEventUrl && !hideEventLink && (
               <a
                 href={providerEventUrl}
                 target="_blank"
@@ -86,10 +96,10 @@ export default function EventProviderSection({
         )}
         <div className="min-w-0 flex-1">
           <div className="text-sm font-semibold">{nameContent}</div>
-          {hasBio && (
+          {hasBio && !hideDescription && (
             <p className="text-sm text-white/65 mt-1.5 leading-relaxed">{provider.bio}</p>
           )}
-          {hasEventUrl && (
+          {hasEventUrl && !hideEventLink && (
             <a
               href={providerEventUrl}
               target="_blank"

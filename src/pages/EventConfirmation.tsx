@@ -478,7 +478,9 @@ const EventConfirmation = () => {
                           </div>
                           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/15 px-3 py-1 text-xs text-white/75">
                             <CheckCircle2 size={14} className="text-[#38D1BF]" />
-                            {t("event_confirmation.confirmation.status", "Payment confirmed")}
+                            {order.status === "paid_unverified"
+                              ? t("event_confirmation.confirmation.status_unverified", "We're verifying your payment")
+                              : t("event_confirmation.confirmation.status", "Payment confirmed")}
                           </div>
                         </div>
                         <div className="text-lg md:text-xl font-bold text-white leading-snug">
@@ -577,6 +579,17 @@ const EventConfirmation = () => {
                         <span className="text-white/70">{t("event_confirmation.receipt.pulse_fee", "Pulse fee")}</span>
                         <span>{formattedPulseFee}</span>
                       </div>
+                      {(order.addons ?? []).length > 0
+                        ? (order.addons ?? []).map((oa) => (
+                            <div key={oa.addon_id} className="flex items-center justify-between gap-4">
+                              <span className="text-white/70">
+                                {oa.name}
+                                {oa.quantity > 1 ? ` ×${oa.quantity}` : ""}
+                              </span>
+                              <span>{formatEventPrice(toMajorUnits(oa.amount), priceOpts)}</span>
+                            </div>
+                          ))
+                        : null}
                       <div className="flex items-center justify-between gap-4 pt-2 mt-2 border-t border-white/10">
                         <span className="font-semibold text-white">{t("event_confirmation.receipt.total", "Total")}</span>
                         <span className="font-semibold text-white">{formattedTotalPrice}</span>

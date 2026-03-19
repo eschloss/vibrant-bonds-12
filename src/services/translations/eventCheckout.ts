@@ -16,21 +16,24 @@ export const eventCheckout = {
     "event_checkout.order_label": "Order:",
 
     "event_checkout.complete_booking": "Complete your booking",
-    "event_checkout.first_name": "First name",
+    "event_checkout.first_name": "Your name",
     "event_checkout.first_name_placeholder": "Jane",
     "event_checkout.last_name": "Last name",
     "event_checkout.last_name_placeholder": "Doe",
-    "event_checkout.buyer_email": "Buyer email",
+    "event_checkout.buyer_email": "Email for your ticket",
+    "event_checkout.buyer_email_helper": "We'll send your e-ticket here",
     "event_checkout.buyer_email_placeholder": "you@example.com",
-    "event_checkout.ticket_is_for_me": "Ticket is for me",
+    "event_checkout.ticket_is_for_me": "Actually, the ticket is for me",
+    "event_checkout.ticket_is_not_for_me": "The ticket is not for me",
     "event_checkout.attendee_email": "Attendee email",
     "event_checkout.attendee_email_placeholder": "attendee@example.com",
     "event_checkout.accept_booking_terms_prefix": "I agree to the",
+    "event_checkout.terms_inline": "By continuing, you agree to the",
     "event_checkout.booking_terms_and": "and",
 
-    "event_checkout.enter_email_first": "Complete your details first",
+    "event_checkout.enter_email_first": "Enter your name and email first",
     "event_checkout.enter_email_desc":
-      "Add your first name, last name, buyer email, and accept the booking terms below to unlock Apple Pay, Google Pay, and card payment options.",
+      "Add your name and email for your ticket to unlock Apple Pay, Google Pay, and card payment options.",
     "event_checkout.add_email": "Complete details",
     "event_checkout.payment_section_locked": "Payment section locked. Click for details.",
     "event_checkout.payment_section_locked_label": "Payment section locked",
@@ -38,7 +41,7 @@ export const eventCheckout = {
 
     "event_checkout.details_encrypted": "Details are encrypted and sent directly to Stripe.",
     "event_checkout.processing": "Processing...",
-    "event_checkout.pay_amount": "Pay {amount}",
+    "event_checkout.pay_amount": "Book your spot {amount}",
     "event_checkout.complete_details_to_continue": "Complete required details to continue",
 
     "event_checkout.checkout_error": "Checkout error",
@@ -55,8 +58,23 @@ export const eventCheckout = {
     "event_checkout.loading_checkout": "Loading checkout",
     "event_checkout.please_wait": "Please wait while we prepare your payment.",
 
+    "event_checkout.addons": "Add-ons",
+    "event_checkout.addon_decrease": "Decrease quantity",
+    "event_checkout.addon_increase": "Increase quantity",
+    "event_checkout.continue_to_payment": "Continue to payment — {amount}",
+
+    "event_checkout.tab_pay_with_card": "Pay with card",
+    "event_checkout.tab_direct_bank_transfer": "Direct bank transfer",
+    "event_checkout.bank_transfer_intro": "Transfer directly to this bank account:",
+    "event_checkout.bank_transfer_confirmation_label": "Bank transfer confirmation code",
+    "event_checkout.bank_transfer_confirmation_placeholder": "e.g. REF123456",
+    "event_checkout.bank_transfer_confirmation_hint":
+      "Enter the reference or confirmation code from your bank transfer (at least 4 characters).",
+    "event_checkout.bank_transfer_cta": "Confirm my booking",
+    "event_checkout.bank_transfer_cta_disabled": "Enter confirmation code (min 4 characters)",
+
     // Validation
-    "event_checkout.validation.first_name_required": "First name is required",
+    "event_checkout.validation.first_name_required": "Your name is required",
     "event_checkout.validation.last_name_required": "Last name is required",
     "event_checkout.validation.email_required": "Email is required",
     "event_checkout.validation.email_invalid": "Enter a valid email",
@@ -81,21 +99,24 @@ export const eventCheckout = {
     "event_checkout.order_label": "Pedido:",
 
     "event_checkout.complete_booking": "Completa tu reserva",
-    "event_checkout.first_name": "Nombre",
+    "event_checkout.first_name": "Tu nombre",
     "event_checkout.first_name_placeholder": "María",
     "event_checkout.last_name": "Apellido",
     "event_checkout.last_name_placeholder": "García",
-    "event_checkout.buyer_email": "Email del comprador",
+    "event_checkout.buyer_email": "Email para tu entrada",
+    "event_checkout.buyer_email_helper": "Te enviaremos tu entrada aquí",
     "event_checkout.buyer_email_placeholder": "tu@ejemplo.com",
-    "event_checkout.ticket_is_for_me": "La entrada es para mí",
+    "event_checkout.ticket_is_for_me": "En realidad, la entrada es para mí",
+    "event_checkout.ticket_is_not_for_me": "La entrada no es para mí",
     "event_checkout.attendee_email": "Email del asistente",
     "event_checkout.attendee_email_placeholder": "asistente@ejemplo.com",
     "event_checkout.accept_booking_terms_prefix": "Acepto los",
+    "event_checkout.terms_inline": "Al continuar, aceptas los",
     "event_checkout.booking_terms_and": "y la",
 
-    "event_checkout.enter_email_first": "Completa tus datos primero",
+    "event_checkout.enter_email_first": "Introduce tu nombre y email primero",
     "event_checkout.enter_email_desc":
-      "Añade tu nombre, apellido, email del comprador y acepta los términos de reserva para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
+      "Añade tu nombre y email para tu entrada para desbloquear Apple Pay, Google Pay y el pago con tarjeta.",
     "event_checkout.add_email": "Completar datos",
     "event_checkout.payment_section_locked": "Sección de pago bloqueada. Haz clic para más información.",
     "event_checkout.payment_section_locked_label": "Sección de pago bloqueada",
@@ -103,7 +124,7 @@ export const eventCheckout = {
 
     "event_checkout.details_encrypted": "Los datos se encriptan y se envían directamente a Stripe.",
     "event_checkout.processing": "Procesando...",
-    "event_checkout.pay_amount": "Pagar {amount}",
+    "event_checkout.pay_amount": "Reserva tu plaza {amount}",
     "event_checkout.complete_details_to_continue": "Completa los datos obligatorios para continuar",
 
     "event_checkout.checkout_error": "Error en el checkout",
@@ -120,8 +141,23 @@ export const eventCheckout = {
     "event_checkout.loading_checkout": "Cargando checkout",
     "event_checkout.please_wait": "Por favor espera mientras preparamos tu pago.",
 
+    "event_checkout.addons": "Extras",
+    "event_checkout.addon_decrease": "Reducir cantidad",
+    "event_checkout.addon_increase": "Aumentar cantidad",
+    "event_checkout.continue_to_payment": "Continuar al pago — {amount}",
+
+    "event_checkout.tab_pay_with_card": "Pagar con tarjeta",
+    "event_checkout.tab_direct_bank_transfer": "Transferencia bancaria directa",
+    "event_checkout.bank_transfer_intro": "Transfiere directamente a esta cuenta bancaria:",
+    "event_checkout.bank_transfer_confirmation_label": "Código de confirmación de transferencia",
+    "event_checkout.bank_transfer_confirmation_placeholder": "ej. REF123456",
+    "event_checkout.bank_transfer_confirmation_hint":
+      "Introduce el número de referencia o código de confirmación de tu transferencia (mínimo 4 caracteres).",
+    "event_checkout.bank_transfer_cta": "Confirmar mi reserva",
+    "event_checkout.bank_transfer_cta_disabled": "Introduce el código de confirmación (mín. 4 caracteres)",
+
     // Validation
-    "event_checkout.validation.first_name_required": "El nombre es obligatorio",
+    "event_checkout.validation.first_name_required": "Tu nombre es obligatorio",
     "event_checkout.validation.last_name_required": "El apellido es obligatorio",
     "event_checkout.validation.email_required": "El email es obligatorio",
     "event_checkout.validation.email_invalid": "Introduce un email válido",

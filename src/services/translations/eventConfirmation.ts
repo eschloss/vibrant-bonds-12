@@ -12,6 +12,7 @@ export const eventConfirmation = {
 
     "event_confirmation.confirmation.title": "Confirmation",
     "event_confirmation.confirmation.status": "Payment confirmed",
+    "event_confirmation.confirmation.status_unverified": "We're verifying your payment",
     "event_confirmation.confirmation.copy": "Copy",
     "event_confirmation.confirmation.email": "Your ticket will be sent to the email you used at checkout.",
 
@@ -85,6 +86,7 @@ export const eventConfirmation = {
 
     "event_confirmation.confirmation.title": "Confirmación",
     "event_confirmation.confirmation.status": "Pago confirmado",
+    "event_confirmation.confirmation.status_unverified": "Estamos verificando tu pago",
     "event_confirmation.confirmation.copy": "Copiar",
     "event_confirmation.confirmation.email": "Tu entrada se enviará al email que usaste en el checkout.",
 

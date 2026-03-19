@@ -23,7 +23,7 @@ export default function EventStickyCta({
   const isMobile = useIsMobile();
   const urgencyText = isMobile
     ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(ticketsRemaining))
-    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets remaining").replace("{n}", String(ticketsRemaining));
+    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining));
 
   return (
     <motion.div

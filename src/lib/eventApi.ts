@@ -52,6 +52,18 @@ export interface GetKikiEventResponse {
   whats_included?: string[];
   /** Number of tickets remaining for this event. */
   tickets_remaining?: number;
+  /** If set, direct bank transfer is available. Multiline text with bank details. */
+  direct_bank_details?: string | null;
+  /** Optional add-ons (drinks, upgrades, etc.). Shown only at checkout. */
+  addons?: Array<{
+    id: number;
+    name: string;
+    description: string;
+    price: number; // major units (e.g. 5000 NGN)
+    currency: string;
+    max_quantity?: number;
+    default_quantity?: number;
+  }>;
 }
 
 /** Extract provider display name, handling both legacy string and new object shape */
@@ -232,8 +244,18 @@ export interface KikiOrderDetailsResponse {
   ticket_total: number;
   provider_total: number;
   pulse_total: number;
+  addons?: Array<{
+    addon_id: number;
+    name: string;
+    quantity: number;
+    unit_amount: number; // minor units
+    amount: number; // minor units
+  }>;
+  addons_total?: number; // minor units
   buyer_email: string | null;
   attendee_email: string | null;
+  direct_bank_transfer?: boolean;
+  bank_transfer_confirmation_code?: string | null;
 }
 
 export function buildKikiOrderDetailsUrl(idOrCustomerId: string): string {
