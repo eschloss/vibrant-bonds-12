@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -241,6 +242,18 @@ const EventDetail = () => {
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
+
+  // Preload Stripe.js after event content loads so checkout is fast; defers until after event data + images
+  useEffect(() => {
+    if (!eventData || notFound) return;
+    const stripePk = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    if (stripePk) {
+      void loadStripe(
+        stripePk,
+        import.meta.env.DEV ? ({ advancedFraudSignals: false } as any) : undefined
+      );
+    }
+  }, [eventData, notFound]);
 
   useEffect(() => {
     if (!heroCarouselApi) return;
