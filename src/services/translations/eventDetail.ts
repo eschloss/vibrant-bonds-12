@@ -15,6 +15,7 @@ export const eventDetail = {
     "event_detail.sign_up": "Sign up",
     "event_detail.sign_up_now": "Sign up now",
     "event_detail.buy_my_ticket": "Buy my ticket",
+    "event_detail.buy_ticket_for_price": "Buy ticket for {price}",
     "event_detail.see_whats_included": "See what's included",
     "event_detail.everyone_making_friends": "You'll be matched with 4–6 solo attendees",
 
@@ -40,10 +41,16 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "This is a public event. You may meet other attendees who didn't book through Pulse.",
 
     "event_detail.matched_solo": "Matched with solo attendees making friends",
+    "event_detail.group_size": "Small groups of 4–6 people",
     "event_detail.hosted_chat": "Hosted group chat with icebreaking",
     "event_detail.optional_meetup": "Optional pre or post-event meetup",
     "event_detail.total": "Total",
-    "event_detail.event_ticket": "Event ticket",
+    "event_detail.price_from": "From",
+    "event_detail.from_price": "From {price}",
+    "event_detail.base_experience_addons": "Base experience + Pulse fee",
+    "event_detail.includes_base_and_fees": "Includes base experience and fees",
+    "event_detail.base_experience": "Base experience",
+    "event_detail.addons_at_checkout": "Add-ons available at checkout",
     "event_detail.pulse_fee": "Pulse fee",
     "event_detail.provider_fee": "Provider fee",
     "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
@@ -67,7 +74,7 @@ export const eventDetail = {
 
     "event_detail.faq.q3": "What happens after I buy my ticket for {eventTitle}?",
     "event_detail.faq.a3":
-      "After completing your {price} booking, you'll take a quick vibe test so we can match you with the right group.\n\nOnce your group is ready, we'll let you know. You then download the Pulse app, join your private group chat for {eventTitle} in {city}, and start getting to know each other before the event at {venue}.",
+      "After completing your booking, you'll take a quick vibe test so we can match you with the right group.\n\nOnce your group is ready, we'll let you know. You then download the Pulse app, join your private group chat for {eventTitle} in {city}, and start getting to know each other before the event at {venue}.",
 
     "event_detail.faq.q4": "Do I have to chat before {eventTitle}?",
     "event_detail.faq.a4":
@@ -113,6 +120,7 @@ export const eventDetail = {
     "event_detail.sign_up": "Registrarse",
     "event_detail.sign_up_now": "Regístrate ahora",
     "event_detail.buy_my_ticket": "Comprar mi entrada",
+    "event_detail.buy_ticket_for_price": "Comprar entrada por {price}",
     "event_detail.see_whats_included": "Ver qué incluye",
     "event_detail.everyone_making_friends": "Te emparejaremos con 4–6 personas que van solas",
 
@@ -138,10 +146,16 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "Este es un evento público. Puede que conozcas a otros asistentes que no reservaron por Pulse.",
 
     "event_detail.matched_solo": "Emparejado con asistentes solos haciendo amigos",
+    "event_detail.group_size": "Grupos pequeños de 4 a 6 personas",
     "event_detail.hosted_chat": "Chat grupal con rompehielos",
     "event_detail.optional_meetup": "Quedada opcional antes o después del evento",
     "event_detail.total": "Total",
-    "event_detail.event_ticket": "Entrada al evento",
+    "event_detail.price_from": "Desde",
+    "event_detail.from_price": "Desde {price}",
+    "event_detail.base_experience_addons": "Experiencia base + tarifa Pulse",
+    "event_detail.includes_base_and_fees": "Incluye experiencia base y tarifas",
+    "event_detail.base_experience": "Experiencia base",
+    "event_detail.addons_at_checkout": "Complementos disponibles al finalizar compra",
     "event_detail.pulse_fee": "Tarifa Pulse",
     "event_detail.provider_fee": "Tarifa del proveedor",
     "event_detail.most_make_friend": "Te emparejaremos con al menos 3 otros asistentes que van solos.",
@@ -165,7 +179,7 @@ export const eventDetail = {
 
     "event_detail.faq.q3": "¿Qué pasa después de comprar mi entrada para {eventTitle}?",
     "event_detail.faq.a3":
-      "Tras completar tu reserva de {price}, harás un vibe test rápido para que podamos emparejarte con el grupo adecuado.\n\nCuando tu grupo esté listo, te avisaremos. Descargas la app Pulse, te unes al chat grupal privado de {eventTitle} en {city} y empiezas a conoceros antes del evento en {venue}.",
+      "Tras completar tu reserva, harás un vibe test rápido para que podamos emparejarte con el grupo adecuado.\n\nCuando tu grupo esté listo, te avisaremos. Descargas la app Pulse, te unes al chat grupal privado de {eventTitle} en {city} y empiezas a conoceros antes del evento en {venue}.",
 
     "event_detail.faq.q4": "¿Tengo que chatear antes de {eventTitle}?",
     "event_detail.faq.a4":

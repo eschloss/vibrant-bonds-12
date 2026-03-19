@@ -10,14 +10,13 @@ type EventFaqSectionProps = {
   venue: string;
   organiser: string;
   provider: string;
-  price: string;
   dateTimeLabel: string;
   duration: string;
 };
 
 function replacePlaceholders(
   text: string | undefined,
-  params: { eventTitle: string; city: string; venue: string; provider: string; price: string; dateTimeLabel: string }
+  params: { eventTitle: string; city: string; venue: string; provider: string; dateTimeLabel: string }
 ): string {
   const str = text ?? "";
   return str
@@ -25,7 +24,6 @@ function replacePlaceholders(
     .replace(/{city}/g, params.city)
     .replace(/{venue}/g, params.venue)
     .replace(/{provider}/g, params.provider)
-    .replace(/{price}/g, params.price)
     .replace(/{dateTimeLabel}/g, params.dateTimeLabel);
 }
 
@@ -36,12 +34,11 @@ export default function EventFaqSection({
   venue,
   organiser,
   provider,
-  price,
   dateTimeLabel,
   duration,
 }: EventFaqSectionProps) {
   const { t } = useTranslation();
-  const params = { eventTitle, city, venue, provider, price, dateTimeLabel };
+  const params = { eventTitle, city, venue, provider, dateTimeLabel };
 
   const faqs: Array<{ qKey: string; aKey: string }> = [
     { qKey: "event_detail.faq.q1", aKey: "event_detail.faq.a1" },

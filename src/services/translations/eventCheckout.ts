@@ -12,6 +12,7 @@ export const eventCheckout = {
       "This fee is charged by the event organiser. We show it here so there are no surprises at payment.",
     "event_checkout.pulse_fee": "Pulse fee",
     "event_checkout.total": "Total",
+    "event_checkout.total_from": "From",
     "event_checkout.payment_encrypted": "Payment encrypted and processed securely by Stripe.",
     "event_checkout.order_label": "Order:",
 
@@ -99,6 +100,7 @@ export const eventCheckout = {
       "Esta tarifa la cobra el organizador del evento. La mostramos aquí para que no haya sorpresas al pagar.",
     "event_checkout.pulse_fee": "Tarifa Pulse",
     "event_checkout.total": "Total",
+    "event_checkout.total_from": "Desde",
     "event_checkout.payment_encrypted": "Pago encriptado y procesado de forma segura por Stripe.",
     "event_checkout.order_label": "Pedido:",
 

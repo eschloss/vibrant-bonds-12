@@ -61,10 +61,8 @@ type SignUpCardProps = {
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   onSeeWhatsIncludedClick?: () => void;
   formattedTotalPrice: string;
-  formattedTicketPrice: string;
+  formattedBaseExperiencePrice: string;
   formattedPulseFee: string;
-  formattedProviderFee: string | null;
-  providerFee: number;
   whatsIncluded?: string[];
   ticketsRemaining: number;
 };
@@ -75,10 +73,8 @@ const SignUpCard = ({
   trackCheckoutClick,
   onSeeWhatsIncludedClick,
   formattedTotalPrice,
-  formattedTicketPrice,
+  formattedBaseExperiencePrice,
   formattedPulseFee,
-  formattedProviderFee,
-  providerFee,
   whatsIncluded = [],
   ticketsRemaining,
 }: SignUpCardProps) => {
@@ -89,89 +85,102 @@ const SignUpCard = ({
       <CardContent className="p-6">
         <h3 className="text-2xl font-bold text-white mb-4">{t("event_detail.sign_up", "Sign up")}</h3>
 
-        <div className="space-y-2.5 text-sm text-gray-300 mb-6">
-          <div className="flex items-center gap-2">
-            <Users size={15} className="text-[#38D1BF] shrink-0" />
-            {t("event_detail.matched_solo", "Matched with solo attendees making friends")}
+        {/* 1. Value props */}
+        <div className="space-y-2.5 text-sm text-gray-300 mb-3">
+          <div className="flex items-start gap-2">
+            <Users size={15} className="text-[#38D1BF] shrink-0 mt-0.5" />
+            <div>
+              <div>{t("event_detail.matched_solo", "Matched with solo attendees making friends")}</div>
+              <div className="text-xs text-white/55 mt-0.5">{t("event_detail.group_size", "Small groups of 4–6 people")}</div>
+            </div>
           </div>
           <div className="flex items-center gap-2">
-            <MessageSquare size={15} className="text-purple-300 shrink-0" />
-            {t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}
+            <MessageSquare size={15} className="text-purple-300 shrink-0 mt-0.5" />
+            <span>{t("event_detail.hosted_chat", "Hosted group chat with icebreaking")}</span>
           </div>
           <div className="flex items-center gap-2">
-            <UtensilsCrossed size={15} className="text-amber-300 shrink-0" />
-            {t("event_detail.optional_meetup", "Optional pre or post-event meetup")}
+            <UtensilsCrossed size={15} className="text-amber-300 shrink-0 mt-0.5" />
+            <span>{t("event_detail.optional_meetup", "Optional pre or post-event meetup")}</span>
           </div>
         </div>
 
-        <div className="mb-5 space-y-2">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-xl text-white/90">
-              {t("event_detail.total", "Total")}
-            </span>
-            <span className="text-xl text-white tabular-nums text-right">
-              {formattedTotalPrice}
-            </span>
+        {/* 2. Price block */}
+        <span className="inline-flex items-baseline gap-1.5 leading-tight">
+          <span className="text-sm font-medium text-white/65">
+            {t("event_detail.price_from", "From")}
+          </span>
+          <span className="text-2xl font-bold text-white tabular-nums tracking-wide">
+            {formattedTotalPrice.replace(/[,.]00$/, "")}
+          </span>
+        </span>
+
+        {/* 3. Conversion area — breathing room: 16-20px price→scarcity, 12-16px scarcity→CTA */}
+        <div className="mt-5 space-y-4">
+          <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
+            <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
+            <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}</span>
           </div>
+          <Link
+            to={checkoutHref}
+            onClick={() => trackCheckoutClick("sidebar")}
+            className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-md shadow-purple-500/15 transition-all duration-300"
+          >
+            {t("event_detail.buy_my_ticket", "Buy my ticket")}
+          </Link>
+        </div>
+
+        {/* 4. Secondary info zone — subtle divider, 16-20px from CTA */}
+        <div className="mt-5 pt-3 border-t border-white/10">
           <Collapsible open={breakdownOpen} onOpenChange={setBreakdownOpen}>
             <CollapsibleTrigger asChild>
               <button
                 type="button"
                 onClick={() => onSeeWhatsIncludedClick?.()}
-                className="flex w-full items-center justify-between gap-2 text-xs text-[#38D1BF] hover:text-[#4dd9c9] transition-colors py-1"
+                className="flex w-full items-center justify-between gap-2 text-xs text-white/40 hover:text-white/55 transition-colors py-1"
               >
-                <span>{t("event_detail.see_whats_included", "See what's included")}</span>
-                {breakdownOpen ? (
-                  <ChevronUp size={14} className="shrink-0" />
-                ) : (
-                  <ChevronDown size={14} className="shrink-0" />
-                )}
-              </button>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="text-xs text-white/60 space-y-0.5 pt-1">
-                <div className="flex items-center justify-between">
-                  <span>{t("event_detail.event_ticket", "Event ticket")}</span>
-                  <span className="text-white/75">{formattedTicketPrice}</span>
+              <span>{t("event_detail.see_whats_included", "See what's included")}</span>
+              {breakdownOpen ? (
+                <ChevronUp size={14} className="shrink-0" />
+              ) : (
+                <ChevronDown size={14} className="shrink-0" />
+              )}
+            </button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="text-xs text-white/70 pt-1 space-y-0 mt-3">
+              {/* Base experience */}
+              <div className="space-y-0.5 mb-4">
+                <div className="flex items-center justify-between font-medium text-white/85">
+                  <span>{t("event_detail.base_experience", "Base experience")}</span>
+                  <span className="tabular-nums">{formattedBaseExperiencePrice}</span>
                 </div>
                 {whatsIncluded.length > 0 && (
-                  <ul className="list-disc list-inside pl-0.5 space-y-0.5 text-white/60">
+                  <ul className="list-disc list-inside pl-4 space-y-0.5 text-white/50 text-[11px]">
                     {whatsIncluded.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li key={i} className="leading-snug">{item}</li>
                     ))}
                   </ul>
                 )}
-                <div className="flex items-center justify-between">
-                  <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
-                  <span className="text-white/75">{formattedPulseFee}</span>
-                </div>
-                {formattedProviderFee && providerFee > 0 && (
-                  <div className="flex items-center justify-between">
-                    <span>{t("event_detail.provider_fee", "Provider fee")}</span>
-                    <span className="text-white/75">{formattedProviderFee}</span>
-                  </div>
-                )}
               </div>
+              {/* Pulse fee */}
+              <div className="flex items-center justify-between font-medium text-white/85 mb-1">
+                <span>{t("event_detail.pulse_fee", "Pulse fee")}</span>
+                <span className="tabular-nums">{formattedPulseFee}</span>
+              </div>
+              {/* Total */}
+              <div className="pt-4 mt-4 border-t border-white/10">
+                <div className="flex items-center justify-between font-semibold text-white">
+                  <span>{t("event_detail.total", "Total")}</span>
+                  <span className="tabular-nums">{formattedTotalPrice}</span>
+                </div>
+              </div>
+              <p className="mt-3 text-[11px] text-white/45">
+                {t("event_detail.addons_at_checkout", "Add-ons available at checkout")}
+              </p>
+            </div>
             </CollapsibleContent>
           </Collapsible>
         </div>
-
-        <div className="flex items-center gap-2 text-amber-400 text-sm font-medium mb-3">
-          <Ticket size={16} className="shrink-0" aria-hidden />
-          <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}</span>
-        </div>
-
-        <Link
-          to={checkoutHref}
-          onClick={() => trackCheckoutClick("sidebar")}
-          className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-lg shadow-purple-500/25 transition-all duration-300"
-        >
-          {t("event_detail.buy_my_ticket", "Buy my ticket")}
-        </Link>
-
-        <p className="mt-3 text-xs text-white/50 text-center">
-          {t("event_detail.most_make_friend", "You'll be matched with at least 3 other solo attendees.")}
-        </p>
       </CardContent>
     </Card>
   );
@@ -438,7 +447,8 @@ const EventDetail = () => {
   const organiser = providerName || data.place;
 
   const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
-  const formattedTicketPrice = formatEventPrice(data.ticket_price, priceOpts);
+  const baseExperienceAmount = data.ticket_price + data.provider_fee;
+  const formattedBaseExperiencePrice = formatEventPrice(baseExperienceAmount, priceOpts);
   const formattedPulseFee = formatEventPrice(data.platform_fee, priceOpts);
   const formattedProviderFee =
     data.provider_fee > 0 ? formatEventPrice(data.provider_fee, priceOpts) : null;
@@ -860,10 +870,8 @@ const EventDetail = () => {
                     trackCheckoutClick={trackCheckoutClick}
                     onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
                     formattedTotalPrice={formattedTotalPrice}
-                    formattedTicketPrice={formattedTicketPrice}
+                    formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
-                    formattedProviderFee={formattedProviderFee}
-                    providerFee={data.provider_fee}
                     whatsIncluded={data.whats_included ?? []}
                     ticketsRemaining={data.tickets_remaining ?? 20}
                   />
@@ -895,18 +903,16 @@ const EventDetail = () => {
               {/* Sticky signup card */}
               <aside ref={signUpAsideRef} className="lg:sticky lg:top-28 h-fit">
                 <SignUpCard
-                  t={t}
-                  checkoutHref={checkoutHref}
-                  trackCheckoutClick={trackCheckoutClick}
-                  onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
-                  formattedTotalPrice={formattedTotalPrice}
-                  formattedTicketPrice={formattedTicketPrice}
-                  formattedPulseFee={formattedPulseFee}
-                  formattedProviderFee={formattedProviderFee}
-                  providerFee={data.provider_fee}
-                  whatsIncluded={data.whats_included ?? []}
-                  ticketsRemaining={data.tickets_remaining ?? 20}
-                />
+                    t={t}
+                    checkoutHref={checkoutHref}
+                    trackCheckoutClick={trackCheckoutClick}
+                    onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
+                    formattedTotalPrice={formattedTotalPrice}
+                    formattedBaseExperiencePrice={formattedBaseExperiencePrice}
+                    formattedPulseFee={formattedPulseFee}
+                    whatsIncluded={data.whats_included ?? []}
+                    ticketsRemaining={data.tickets_remaining ?? 20}
+                  />
               </aside>
             </motion.div>
 
@@ -916,7 +922,6 @@ const EventDetail = () => {
               venue={data.place}
               organiser={organiser}
               provider={providerName}
-              price={formattedTotalPrice}
               dateTimeLabel={dateTime.text}
               duration={durationText}
             />

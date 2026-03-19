@@ -1422,7 +1422,7 @@ function CheckoutPrePayment({
             {t("event_checkout.back_to_event", "Back to event")}
           </Link>
         </div>
-        <div className="flex-1 flex flex-col px-8 lg:px-10 pb-10 lg:pb-12">
+        <div className="flex-1 flex flex-col px-8 lg:px-10 pb-10 lg:pb-12 overflow-visible">
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 mb-2.5">
             {t("event_checkout.order_summary", "Order summary")}
           </div>
@@ -1476,13 +1476,13 @@ function CheckoutPrePayment({
               hideEventLink
             />
           </div>
-          <div className="border-t border-white/[0.08] pt-5 space-y-3">
-            <div className="flex items-center justify-between text-2xl font-semibold">
+          <div className="border-t border-white/[0.08] pt-5 space-y-3 -mr-8 lg:-mr-10">
+            <div className="flex items-center justify-between text-2xl font-semibold pr-8 lg:pr-10">
               <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
               <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
             {(eventData.whats_included ?? []).length > 0 && (
-              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
+              <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5 pr-8 lg:pr-10">
                 {(eventData.whats_included ?? []).map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
@@ -1490,7 +1490,7 @@ function CheckoutPrePayment({
             )}
             {(eventData.addons ?? []).length > 0 ? (
               <div className="space-y-2.5 py-2">
-                <div className="text-xs font-medium text-white/50 uppercase tracking-wider">
+                <div className="text-xs font-medium text-white/50 uppercase tracking-wider pr-8 lg:pr-10">
                   {t("event_checkout.addons", "Add-ons")}
                 </div>
                 {(eventData.addons ?? []).map((addon) => {
@@ -1500,7 +1500,7 @@ function CheckoutPrePayment({
                   return (
                   <div
                     key={addon.id}
-                    className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] p-3"
+                    className="flex items-center justify-between gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] pl-3 pr-0 pt-3 pb-3 mr-4 lg:mr-6"
                   >
                     <div className="min-w-0 flex-1">
                       <div className="text-sm font-medium text-white/90">{addon.name}</div>
@@ -1529,7 +1529,7 @@ function CheckoutPrePayment({
                       >
                         <Plus className="h-3.5 w-3.5" />
                       </button>
-                      <span className="w-16 text-right text-sm text-white/82 tabular-nums">
+                      <span className="min-w-[5.5rem] text-right pl-2 pr-4 lg:pr-4 text-sm text-white/82 tabular-nums">
                         {formatEventPrice(addon.price, priceOpts)}
                       </span>
                     </div>
@@ -1539,7 +1539,7 @@ function CheckoutPrePayment({
               </div>
             ) : null}
             {eventData.provider_fee > 0 ? (
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-sm pr-8 lg:pr-10">
                 <span className="flex items-center gap-1.5 text-white/55">
                   {t("event_checkout.provider_fee", "Provider fee")}
                   <TooltipProvider delayDuration={isLg ? 100 : 999999}>
@@ -1566,11 +1566,11 @@ function CheckoutPrePayment({
                 <span className="text-white/82">{formatEventPrice(eventData.provider_fee, priceOpts)}</span>
               </div>
             ) : null}
-            <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07]">
+            <div className="flex items-center justify-between text-sm pb-4 border-b border-white/[0.07] pr-8 lg:pr-10">
               <span className="text-white/55">{t("event_checkout.pulse_fee", "Pulse fee")}</span>
               <span className="text-white/82">{formatEventPrice(eventData.platform_fee, priceOpts)}</span>
             </div>
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-between pt-1 pr-8 lg:pr-10">
               <span className="text-base font-semibold text-white">{t("event_checkout.total", "Total")}</span>
               <span className="text-3xl font-bold text-white">{formattedTotalPrice}</span>
             </div>

@@ -181,12 +181,9 @@ export function buildEventContext(
     `Location: ${data.place}${data.city_label ? `, ${data.city_label}` : ""}`,
     "",
     `Price: ${formatEventPrice(data.total_price, opts)}`,
-    `- Event ticket: ${formatEventPrice(data.ticket_price, opts)}`,
+    `- Base experience: ${formatEventPrice(data.ticket_price + data.provider_fee, opts)}`,
     `- Pulse fee: ${formatEventPrice(data.platform_fee, opts)}`,
   );
-  if (data.provider_fee > 0) {
-    lines.push(`- Provider fee: ${formatEventPrice(data.provider_fee, opts)}`);
-  }
   const whatsIncluded = data.whats_included ?? [];
   if (whatsIncluded.length > 0) {
     lines.push("", "What's included:");
