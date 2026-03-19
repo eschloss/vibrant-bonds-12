@@ -686,9 +686,9 @@ function CheckoutForm({
           </div>
 
           <div className="border-t border-white/[0.08] pt-5 space-y-3">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-white/55">{t("event_checkout.ticket", "Ticket")}</span>
-              <span className="text-white/82">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
+            <div className="flex items-center justify-between text-2xl font-semibold">
+              <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
+              <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
             {(eventData.whats_included ?? []).length > 0 && (
               <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
@@ -1469,9 +1469,9 @@ function CheckoutPrePayment({
             />
           </div>
           <div className="border-t border-white/[0.08] pt-5 space-y-3">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-white/55">{t("event_checkout.ticket", "Ticket")}</span>
-              <span className="text-white/82">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
+            <div className="flex items-center justify-between text-2xl font-semibold">
+              <span className="text-white/80">{t("event_checkout.ticket", "Ticket")}</span>
+              <span className="text-white tabular-nums">{formatEventPrice(eventData.ticket_price, priceOpts)}</span>
             </div>
             {(eventData.whats_included ?? []).length > 0 && (
               <ul className="list-disc list-inside text-sm text-white/55 space-y-0.5 pl-0.5">
