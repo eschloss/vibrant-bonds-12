@@ -9,6 +9,7 @@ import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
 import CitiesPreloader from "@/components/CitiesPreloader";
+import MatchmakingChatContextSync from "@/components/MatchmakingChatContextSync";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 import {
   ChatContextProvider,
@@ -35,6 +36,7 @@ const AppLayoutInner = () => {
         <ScrollContainerProvider value={viewportRef}>
           <ScrollToTop scrollRef={viewportRef} />
           <div className="w-full">
+            <MatchmakingChatContextSync />
             <Outlet />
           </div>
           <GaPageViewTracker />

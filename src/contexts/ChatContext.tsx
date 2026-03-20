@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
 
 interface ChatContextValue {
-  /** Multiline event context (day, name, price, breakdown, what's included). Set by event pages, cleared when leaving. */
+  /** Multiline context for the chat webhook: event details on event flows; Friend Group Matching on city pages. Cleared when leaving. */
   chatContext: string | null;
   /** Event title for WhatsApp prefill. Set by event pages, cleared when leaving. */
   eventTitle: string | null;
