@@ -468,6 +468,18 @@ export function WhatsAppChatButton() {
     e?.preventDefault();
     const message = (text ?? inputValue).trim();
     if (!message || sending) return;
+    const isFirstUserMessage = !messages.some((m) => m.isUser);
+    if (isFirstUserMessage && eventTitle?.trim()) {
+      trackMetaPixelEvent(
+        "event_qualified_lead",
+        {
+          lead_source: "event_chat_message",
+          path: pathname,
+          event_title: eventTitle,
+        },
+        { custom: true }
+      );
+    }
     const userMsgId = crypto.randomUUID();
     setMessages((prev) => [
       ...prev,
