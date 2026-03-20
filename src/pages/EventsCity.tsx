@@ -1,19 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, ArrowLeft, ArrowRight, Sparkles, Users, MessageSquare, UtensilsCrossed, CheckCircle } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  ArrowRight,
+  MessageSquare,
+  CheckCircle,
+  Ticket,
+  UtensilsCrossed,
+  Users,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Seo } from "@/hooks/useSeo";
-import {
-  getEventsByCity,
-  groupEventsByWeek,
-} from "@/data/events";
+import { getEventsByCity, orderEventsForCityPage, type Event } from "@/data/events";
 import { useApiJson } from "@/hooks/useApiJson";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { useTranslation } from "@/hooks/useTranslation";
+import EventsCityFaqSection from "@/components/EventsCityFaqSection";
+import EventsCityFutureInterestSection from "@/components/EventsCityFutureInterestSection";
 
 function formatCityName(slug: string): string {
   return slug
@@ -32,6 +40,39 @@ function formatDate(iso: string): string {
   });
 }
 
+const HERO_PARTICLES = [
+  { size: 10, top: "14%", left: "8%", duration: 18, delay: "0s" },
+  { size: 14, top: "18%", left: "83%", duration: 16, delay: "1.5s" },
+  { size: 8, top: "34%", left: "18%", duration: 20, delay: "3s" },
+  { size: 12, top: "28%", left: "70%", duration: 17, delay: "2s" },
+  { size: 9, top: "52%", left: "10%", duration: 19, delay: "4s" },
+  { size: 11, top: "48%", left: "88%", duration: 15, delay: "0.8s" },
+  { size: 8, top: "72%", left: "24%", duration: 21, delay: "2.5s" },
+  { size: 12, top: "78%", left: "74%", duration: 18, delay: "1.2s" },
+  { size: 9, top: "64%", left: "56%", duration: 16, delay: "3.2s" },
+  { size: 7, top: "22%", left: "48%", duration: 22, delay: "4.3s" },
+];
+
+function scrollToHowItWorksSection() {
+  document
+    .getElementById("events-city-how-it-works")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function hashString(value: string): number {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+function getTicketsLeftForEvent(event: Event): number | null {
+  if (event.soldOut) return null;
+  return (hashString(event.id) % 6) + 2;
+}
+
 const EventsCity = () => {
   const { cityName } = useParams<{ cityName: string }>();
   const navigate = useNavigate();
@@ -39,7 +80,15 @@ const EventsCity = () => {
   const { t } = useTranslation();
 
   const events = cityName ? getEventsByCity(cityName) : [];
-  const grouped = groupEventsByWeek(events);
+  const { upcomingAvailable, upcomingSoldOut, past } = useMemo(() => orderEventsForCityPage(events), [events]);
+  const orderedEvents = useMemo(
+    () => [
+      ...upcomingAvailable.map((event) => ({ event, variant: "upcoming" as const })),
+      ...upcomingSoldOut.map((event) => ({ event, variant: "upcoming" as const })),
+      ...past.map((event) => ({ event, variant: "past" as const })),
+    ],
+    [upcomingAvailable, upcomingSoldOut, past]
+  );
 
   const { data: cities, loading: loadingCities } = useApiJson<any[]>(
     "/auth/get_all_cities_expanded",
@@ -68,21 +117,11 @@ const EventsCity = () => {
     return matchedCity[nameField] || matchedCity.en_name || formatCityName(cityName);
   }, [cityName, matchedCity, currentLanguage]);
 
-  const citySubtitle = useMemo(() => {
-    if (!matchedCity) return "";
-    const countryField = currentLanguage === "es" ? "es_country" : "en_country";
-    const stateField = currentLanguage === "es" ? "es_state" : "en_state";
-    const country = matchedCity[countryField] || matchedCity.en_country || "";
-    const state = matchedCity[stateField] || matchedCity.en_state || "";
-    return [state, country].filter(Boolean).join(", ");
-  }, [matchedCity, currentLanguage]);
-
   const cityImage: string | undefined = useMemo(() => {
     if (!matchedCity) return undefined;
     return typeof matchedCity.image === "string" ? matchedCity.image : undefined;
   }, [matchedCity]);
 
-  /** Same as hero: slug-formatted until `matchedCity`, then API name (two-phase SEO). */
   const seoCityLabel = formattedCityName;
 
   const seoProps = {
@@ -91,13 +130,44 @@ const EventsCity = () => {
       es: `Eventos en ${seoCityLabel} | Pulse`,
     },
     description: {
-      en: `Discover upcoming events and activities in ${seoCityLabel}. From meetups to adventures, find plans perfect for your friend group.`,
-      es: `Descubre eventos y actividades en ${seoCityLabel}. Desde meetups hasta aventuras, encuentra planes perfectos para tu grupo.`,
+      en: `Discover upcoming events in ${seoCityLabel}. RSVP through Pulse, join a small group chat with other attendees, and show up with familiar faces — friendship-first, most people join solo.`,
+      es: `Descubre eventos en ${seoCityLabel}. Reserva con Pulse, únete a un chat pequeño con otras personas asistentes y llega con caras conocidas — amistad primero; la mayoría se une sola.`,
     },
     keywords: ["events", seoCityLabel, "activities", "meetups", "friend groups"],
     type: "website" as const,
     image: cityImage,
   };
+
+  const howItWorksSteps = [
+    {
+      icon: Ticket,
+      title: t("events_city.after_booking.step1.title", "Book the ticket"),
+      compactTitle: t("events_city.after_booking.step1.compact", "Book ticket"),
+      desc: t("events_city.after_booking.step1.desc", "Choose the event you actually want to go to and lock in your spot."),
+      gradient: "from-pink-500 to-purple-600",
+    },
+    {
+      icon: MessageSquare,
+      title: t("events_city.after_booking.step2.title", "Meet the group in the chat"),
+      compactTitle: t("events_city.after_booking.step2.compact", "Meet group"),
+      desc: t("events_city.after_booking.step2.desc", "We add you to a small group chat with other attendees going to the same event."),
+      gradient: "from-blue-500 to-cyan-400",
+    },
+    {
+      icon: UtensilsCrossed,
+      title: t("events_city.after_booking.step3.title", "Optionally plan a pre or post-event meetup"),
+      compactTitle: t("events_city.after_booking.step3.compact", "Optional pre/post meetup"),
+      desc: t("events_city.after_booking.step3.desc", "If you want, use the chat to plan drinks, dinner, or a follow-up hang before or after the event."),
+      gradient: "from-amber-500 to-orange-600",
+    },
+    {
+      icon: Users,
+      title: t("events_city.after_booking.step4.title", "Show up to the event and make friends"),
+      compactTitle: t("events_city.after_booking.step4.compact", "Show up to the event"),
+      desc: t("events_city.after_booking.step4.desc", "Show up to the event you booked already knowing people, so the first hello feels easy and natural."),
+      gradient: "from-emerald-500 to-teal-400",
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen dark">
@@ -106,26 +176,28 @@ const EventsCity = () => {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section (match /cities styling) */}
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative pt-24 md:pt-28 pb-10 md:pb-12 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
           {cityImage ? (
             <div className="absolute inset-0 -z-10 opacity-20">
               <img src={cityImage} alt="" className="w-full h-full object-cover" />
             </div>
           ) : null}
-          <div className="absolute inset-0 -z-5">
-            {Array.from({ length: 18 }).map((_, i) => (
+          <div className="absolute inset-0 -z-10 bg-black/35" />
+          <div className="absolute inset-0 -z-5 pointer-events-none">
+            <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-purple-600/10 blur-3xl" />
+            <div className="absolute top-1/3 -right-24 h-72 w-72 rounded-full bg-pink-600/10 blur-3xl" />
+            {HERO_PARTICLES.map((particle, i) => (
               <div
                 key={i}
                 className="absolute rounded-full bg-purple-500/20"
                 style={{
-                  width: `${Math.random() * 10 + 5}px`,
-                  height: `${Math.random() * 10 + 5}px`,
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-                  animationDelay: `${Math.random() * 5}s`,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                  top: particle.top,
+                  left: particle.left,
+                  animation: `float ${particle.duration}s linear infinite`,
+                  animationDelay: particle.delay,
                 }}
               />
             ))}
@@ -138,124 +210,71 @@ const EventsCity = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto"
             >
-              <button
-                onClick={() => navigate("/events/cities")}
-                className="flex items-center text-pulse-pink hover:text-pulse-pink-300 mb-6 transition-colors"
-              >
-                <ArrowLeft size={20} className="mr-2" />
-                {t("events_city.back_to_cities", "Back to Cities")}
-              </button>
-
               <div className="text-center">
-                <div className="flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 uppercase mb-4">
-                  <Sparkles size={16} className="text-purple-400" />
-                  {events.length === 0
-                    ? t("events_city.hero.badge_default", "Meet new people")
-                    : `${t("events_city.hero.badge_prefix", "Upcoming")} ${events.length} ${
-                        events.length === 1
-                          ? t("events_city.hero.badge_event", "event")
-                          : t("events_city.hero.badge_events", "events")
-                      }`}
-                </div>
-
-                <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight text-white">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
                   {t("events_city.hero.title_prefix", "Meet new people at events in")}{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                     {formattedCityName}
                   </span>
                 </h1>
-                {citySubtitle ? (
-                  <p className="text-sm text-white/70 mb-6">{citySubtitle}</p>
-                ) : null}
-                <p className="text-xl text-gray-300 mb-2 max-w-3xl mx-auto">
+
+                <p className="text-sm sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
                   {t(
-                    "events_city.hero.subtitle",
-                    "Book your spot — we’ll add you to an in‑app group chat with other attendees so you can meet before the event."
-                  ).replace("{city}", formattedCityName)}
+                    "events_city.hero.lead_short",
+                    "Pick a real event you would actually go to, meet your group in the Pulse chat, and arrive already knowing people."
+                  )}
                 </p>
-                <p className="text-sm text-white/70 max-w-3xl mx-auto">
-                  {t("events_city.hero.micro_trust", "You’ll show up with a crew, not alone.")}
-                </p>
+
+                <div className="max-w-3xl mx-auto rounded-2xl bg-gray-900/28 backdrop-blur-lg p-2.5 md:p-3 text-left shadow-[0_10px_30px_rgba(0,0,0,0.16)]">
+                  <button
+                    type="button"
+                    onClick={scrollToHowItWorksSection}
+                    className="group flex w-full items-center justify-between gap-3 rounded-xl border border-white/8 bg-white/[0.04] px-3 py-2.5 text-left md:hidden"
+                  >
+                    <span className="text-sm font-medium text-white">
+                      {t("events_city.after_booking.title", "How it works")}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-white/70 transition-transform group-hover:translate-x-0.5" />
+                  </button>
+
+                  <div className="hidden md:flex md:flex-nowrap md:justify-center gap-1.5">
+                    {howItWorksSteps.map((step) => (
+                      <div
+                        key={step.title}
+                        className="w-fit rounded-full border border-white/8 bg-white/[0.04] px-2.5 py-1.5"
+                      >
+                        <div className="flex items-center justify-center gap-2 text-center">
+                          <div
+                            className={`w-6 h-6 shrink-0 rounded-full bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-[0_6px_18px_rgba(0,0,0,0.2)]`}
+                          >
+                            <step.icon className="h-3 w-3 text-white" />
+                          </div>
+                          <h3 className="text-[11px] font-medium text-white/95 leading-snug text-center">
+                            {step.compactTitle}
+                          </h3>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-2 hidden md:flex justify-center">
+                    <button
+                      type="button"
+                      onClick={scrollToHowItWorksSection}
+                      className="inline-flex items-center gap-1 text-xs font-medium text-white/55 transition-colors hover:text-white/80"
+                    >
+                      {t("events_city.card.learn_more", "Learn more")}
+                      <ArrowRight size={12} />
+                    </button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Compact “After you book” strip */}
-        <section className="pb-10 -mt-10 bg-gradient-to-b from-gray-900 to-black text-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35 }}
-              className="max-w-6xl mx-auto"
-            >
-              <div className="bg-gray-800/40 backdrop-blur-xl border border-gray-700/70 rounded-2xl p-4 md:p-6">
-                <div className="flex items-center justify-between gap-4 mb-4">
-                  <h2 className="text-base md:text-lg font-semibold text-white">
-                    {t("events_city.after_booking.title", "After you book")}
-                  </h2>
-                  <div className="text-xs text-white/60 flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-pulse-pink" />
-                    {t("events_city.after_booking.pill", "In‑app group chat included")}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="flex gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
-                      <CheckCircle className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">
-                        {t("events_city.after_booking.step1.title", "You’re in")}
-                      </div>
-                      <div className="text-sm text-gray-300">
-                        {t("events_city.after_booking.step1.desc", "Your RSVP locks in your spot for the event.")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center">
-                      <MessageSquare className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">
-                        {t("events_city.after_booking.step2.title", "Meet your crew")}
-                      </div>
-                      <div className="text-sm text-gray-300">
-                        {t("events_city.after_booking.step2.desc", "We add you to a group chat with other attendees.")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 rounded-xl bg-gray-900/40 border border-gray-700/60 p-4">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center">
-                      <UtensilsCrossed className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">
-                        {t("events_city.after_booking.step3.title", "Optional pre‑meet")}
-                      </div>
-                      <div className="text-sm text-gray-300">
-                        {t("events_city.after_booking.step3.desc", "Coordinate drinks/dinner before the event if you want.")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="mt-4 text-xs text-white/60">
-                  {t("events_city.after_booking.note", "Chat opens automatically after booking. Leave anytime.")}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Events by Week */}
-        <section className="py-20 bg-gradient-to-b from-gray-900 to-black text-white">
+        {/* Events: sorted available → sold out → past */}
+        <section className="pt-8 pb-16 md:pt-10 md:pb-20 bg-gradient-to-b from-gray-900 to-black text-white">
           <div className="container mx-auto px-4">
             {events.length === 0 ? (
               <motion.div
@@ -278,82 +297,207 @@ const EventsCity = () => {
                 </button>
               </motion.div>
             ) : (
-              grouped.map(({ weekLabel, events: weekEvents }, groupIndex) => (
-                <motion.div
-                  key={weekLabel}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: groupIndex * 0.1 }}
-                  className="mb-16"
-                >
-                  <h2 className="text-2xl font-bold mb-6 text-gray-200">
-                    {weekLabel}
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {weekEvents.map((event, index) => (
-                      <motion.div
-                        key={event.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <Link to={`/events/${event.slug}`}>
-                          <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700 hover:border-purple-500/50 transition-all duration-300 h-full group hover:scale-[1.02] overflow-hidden">
-                            <div className="relative h-48 overflow-hidden">
-                              <img
-                                src={event.primaryImage}
-                                alt={event.title}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
-                              <div className="absolute top-3 left-3">
-                                <div className="inline-flex items-center gap-1.5 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-xs text-white border border-white/10">
-                                  <MessageSquare className="h-3.5 w-3.5 text-pulse-pink" />
-                                  {t("events_city.card.badge", "Group chat included")}
-                                </div>
-                              </div>
-                              <div className="absolute bottom-3 left-3 right-3">
-                                <div className="flex items-center text-pulse-pink text-sm gap-2">
-                                  <Calendar size={14} />
-                                  {formatDate(event.dateTime)}
-                                </div>
-                              </div>
-                            </div>
-                            <CardContent className="p-4">
-                              <h3 className="text-xl font-bold text-white group-hover:text-pulse-pink transition-colors mb-2">
-                                {event.title}
-                              </h3>
-                              <p className="text-gray-300 text-sm mb-3 line-clamp-2">
-                                {event.shortDescription}
-                              </p>
-                              <div className="flex items-center justify-between">
-                                <span className="text-gray-400 text-sm flex items-center gap-1">
-                                  <MapPin size={14} />
-                                  {event.place}
-                                </span>
-                                <span className="text-pulse-pink text-sm font-medium flex items-center gap-1">
-                                  Learn more
-                                  <ArrowRight size={14} />
-                                </span>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {orderedEvents.map(({ event, variant }, index) => (
+                  <CityEventCard
+                    key={event.id}
+                    event={event}
+                    variant={variant}
+                    index={index}
+                    t={t}
+                    formatDate={formatDate}
+                  />
+                ))}
+              </div>
             )}
           </div>
         </section>
+
+        <EventsCityFutureInterestSection cityLabel={formattedCityName} />
+
+        <section
+          id="events-city-how-it-works"
+          className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-black via-gray-950 to-black text-white border-t border-white/5"
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -top-16 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-purple-600/10 blur-3xl" />
+            <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-pulse-blue/10 blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <motion.div
+              className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+                {t("events_city.how_section.title", "What happens after you book")}
+              </h2>
+              <p className="text-base sm:text-lg text-gray-300">
+                {t(
+                  "events_city.how_section.subtitle",
+                  "The venue runs the event itself. Pulse adds the small-group chat and meetup layer that helps you show up already knowing people."
+                )}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="relative max-w-4xl mx-auto rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-4 sm:p-6 md:p-8 shadow-[0_24px_70px_rgba(0,0,0,0.22)]"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55 }}
+            >
+              <div className="relative">
+                <div className="absolute left-[21px] top-5 bottom-5 w-px bg-gradient-to-b from-pulse-pink via-pulse-blue to-transparent" />
+
+                <div className="space-y-4">
+                  {howItWorksSteps.map((step, index) => (
+                    <motion.div
+                      key={step.title}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.45, delay: index * 0.06 }}
+                      className="relative pl-14"
+                    >
+                      <div className="absolute left-0 top-1.5 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-gray-950 shadow-[0_10px_24px_rgba(0,0,0,0.25)]">
+                        <span className="text-xs font-semibold text-white/80">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/10 bg-gray-900/40 p-5 sm:p-6">
+                        <div className="flex items-start gap-4">
+                          <div
+                            className={`w-11 h-11 shrink-0 rounded-full bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-[0_8px_22px_rgba(0,0,0,0.22)]`}
+                          >
+                            <step.icon className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold text-white leading-snug">
+                              {step.title}
+                            </h3>
+                            <p className="text-sm text-gray-300 mt-2 leading-relaxed">
+                              {step.desc}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </section>
+
+        <EventsCityFaqSection cityLabel={formattedCityName} />
       </main>
 
       <Footer />
     </div>
   );
 };
+
+function CityEventCard({
+  event,
+  variant,
+  index,
+  t,
+  formatDate,
+}: {
+  event: Event;
+  variant: "upcoming" | "past";
+  index: number;
+  t: (key: string, fallback: string) => string;
+  formatDate: (iso: string) => string;
+}) {
+  const soldOut = Boolean(event.soldOut);
+  const isPast = variant === "past";
+  const ticketsLeft = !isPast && !soldOut ? getTicketsLeftForEvent(event) : null;
+
+  const cardInner = (
+    <Card
+      className={`bg-gray-800/50 backdrop-blur-lg border-gray-700 transition-all duration-300 h-full group overflow-hidden ${
+        isPast ? "grayscale border-white/10 bg-gray-800/35" : "hover:border-purple-500/50 hover:scale-[1.02]"
+      } ${soldOut && !isPast ? "border-amber-900/40" : ""}`}
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={event.primaryImage}
+          alt={event.title}
+          className={`w-full h-full object-cover transition-transform duration-300 ${
+            isPast ? "grayscale" : "group-hover:scale-110"
+          }`}
+        />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t ${isPast ? "from-gray-900/95 to-transparent" : "from-gray-900/80 to-transparent"}`}
+        />
+        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+          {ticketsLeft ? (
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/15 backdrop-blur px-3 py-1 text-xs font-medium text-amber-300">
+              <Ticket size={13} className="shrink-0" aria-hidden />
+              {t(
+                ticketsLeft === 1
+                  ? "events_city.card.ticket_left_singular"
+                  : "events_city.card.tickets_left",
+                ticketsLeft === 1 ? "Only 1 ticket left" : "Only {count} tickets left"
+              ).replace("{count}", String(ticketsLeft))}
+            </div>
+          ) : null}
+          {!isPast && soldOut ? (
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-950/80 backdrop-blur px-3 py-1 text-xs text-amber-100 border border-amber-700/50">
+              {t("events_city.card.sold_out", "Sold out")}
+            </div>
+          ) : null}
+          {isPast ? (
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur px-3 py-1 text-xs text-white/90 border border-white/15">
+              {t("events_city.card.past_event", "Past event")}
+            </div>
+          ) : null}
+        </div>
+        <div className="absolute bottom-3 left-3 right-3">
+          <div className="flex items-center text-pulse-pink text-sm gap-2">
+            <Calendar size={14} />
+            {formatDate(event.dateTime)}
+          </div>
+        </div>
+      </div>
+      <CardContent className="p-4">
+        <h3 className={`text-xl font-bold transition-colors mb-2 line-clamp-2 ${isPast ? "text-white/85" : "text-white group-hover:text-pulse-pink"}`}>
+          {event.title}
+        </h3>
+        <p className={`text-sm mb-3 line-clamp-2 ${isPast ? "text-gray-400" : "text-gray-300"}`}>{event.shortDescription}</p>
+        <div className="flex items-center justify-between gap-2">
+          <span className={`text-sm flex items-center gap-1 min-w-0 ${isPast ? "text-gray-500" : "text-gray-400"}`}>
+            <MapPin size={14} className="shrink-0" />
+            <span className="truncate">{event.place}</span>
+          </span>
+          <span className={`text-sm font-medium flex items-center gap-1 shrink-0 ${isPast ? "text-gray-500" : "text-pulse-pink"}`}>
+            {t("events_city.card.learn_more", "Learn more")}
+            <ArrowRight size={14} />
+          </span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <Link to={`/events/${event.slug}`} className="block">
+        {cardInner}
+      </Link>
+    </motion.div>
+  );
+}
 
 export default EventsCity;

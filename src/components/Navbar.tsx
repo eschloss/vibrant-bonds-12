@@ -19,12 +19,14 @@ const Navbar = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const eventHeader = useEventHeader();
   const isMatchmakingPage = location.pathname.includes("cities/") || location.pathname.includes("matchmaking") || location.pathname.includes("neighborhoods/");
+  const isEventsCityPage = /^\/events\/cities\/[^/]+\/?$/.test(location.pathname);
   const isEventPage = Boolean(eventSlug && /^\/events\/[^/]+(\/|$)/.test(location.pathname));
   const isHomePage = location.pathname === "/";
   const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
+  const useDarkTopNav = (isHomePage || isMatchmakingPage) && !isEventsCityPage;
 
   // Translated nav links
   const navLinks = [
@@ -84,7 +86,7 @@ const Navbar = () => {
           scrolled
             ? "bg-[#15191C]/70 shadow-md opacity-100 translate-y-0 py-3 text-white"
             : "bg-transparent opacity-90 translate-y-1 py-5",
-          (isHomePage || isMatchmakingPage) && !scrolled ? "text-[#15191C]" : "text-white"
+          useDarkTopNav && !scrolled ? "text-[#15191C]" : "text-white"
         )}
       >
         <div className="container mx-auto px-4 xl:max-w-7xl flex items-left justify-between">
@@ -97,14 +99,14 @@ const Navbar = () => {
                 alt="Pulse Logo"
                 src="https://s.kikiapp.eu/img/pulse-text.png"
                 className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
-                  scrolled ? 'opacity-0' : 'opacity-100'
+                  scrolled || !useDarkTopNav ? 'opacity-0' : 'opacity-100'
                 }`}
               />
               <img
                 alt="Pulse Logo"
                 src="https://s.kikiapp.eu/img/logo_pulse2.png"
                 className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
-                  scrolled ? 'opacity-100' : 'opacity-0'
+                  scrolled || !useDarkTopNav ? 'opacity-100' : 'opacity-0'
                 }`}
               />
             </div>
