@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Tooltip,
   TooltipContent,
@@ -21,7 +22,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { pathShowsChatBubbleByDefault, useChatContext } from "@/contexts/ChatContext";
+import {
+  getChatContentVariant,
+  pathShowsChatBubbleForCityPages,
+  useChatContext,
+} from "@/contexts/ChatContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trackMetaPixelEvent } from "@/lib/utils";
 
@@ -70,8 +75,8 @@ const INSTAGRAM_URL = "https://ig.me/m/meetfriendslagos";
 const MESSENGER_URL = "https://m.me/meetfriendslagos";
 const EMAIL_ADDRESS = "info@pulsenow.app";
 
-/** Helper messages for chat bubble prompts (shown when chat is closed). */
-const CHAT_BUBBLE_MESSAGES = {
+/** Helper messages for chat bubble prompts (shown when chat is closed) — event flows. */
+const CHAT_BUBBLE_MESSAGES_EVENTS = {
   en: [
     "Have any questions?",
     "Need help? We're here!",
@@ -94,21 +99,93 @@ const CHAT_BUBBLE_MESSAGES = {
   ],
 } as const;
 
+/** Bubble teasers on matchmaking city pages (Lagos-only for now). */
+const CHAT_BUBBLE_MESSAGES_MATCHMAKING = {
+  en: [
+    "Curious how matching works?",
+    "Questions about Pulse in Lagos?",
+    "Want to know who can join?",
+    "Chat with us about matchmaking!",
+    "We'd love to help you get started.",
+    "Wondering about introductions?",
+    "Ask us about the waitlist or pricing.",
+    "We're here if you need us.",
+  ],
+  es: [
+    "¿Te interesa cómo funciona el matchmaking?",
+    "¿Preguntas sobre Pulse en Lagos?",
+    "¿Quieres saber quién puede unirse?",
+    "¡Escríbenos sobre el matchmaking!",
+    "Nos encantaría ayudarte a empezar.",
+    "¿Dudas sobre las presentaciones?",
+    "Pregunta por la lista de espera o precios.",
+    "Estamos aquí si nos necesitas.",
+  ],
+} as const;
+
 const BUBBLE_DELAYS_MS = [20000, 60000, 120000, 200000, 300000, 420000, 560000]; // 20s, 1m, 2m, 3m20s, 5m, 7m, 9m20s
 const BUBBLE_VISIBLE_MS = 5000; // How long the bubble stays visible
 
-function getRandomBubbleMessage(isSpanish: boolean): string {
-  const list = CHAT_BUBBLE_MESSAGES[isSpanish ? "es" : "en"];
+function getRandomBubbleMessage(
+  isSpanish: boolean,
+  variant: "events" | "matchmaking"
+): string {
+  const bundle =
+    variant === "matchmaking" ? CHAT_BUBBLE_MESSAGES_MATCHMAKING : CHAT_BUBBLE_MESSAGES_EVENTS;
+  const list = bundle[isSpanish ? "es" : "en"];
   return list[Math.floor(Math.random() * list.length)] ?? list[0];
 }
 
-function getWhatsAppPrefill(eventTitle: string | null, isSpanish: boolean): string {
+function getWhatsAppPrefill(
+  eventTitle: string | null,
+  isSpanish: boolean,
+  variant: "events" | "matchmaking"
+): string {
   if (eventTitle) {
     return isSpanish
       ? `Tengo una pregunta sobre el evento ${eventTitle}`
       : `I have a question about the event ${eventTitle}`;
   }
+  if (variant === "matchmaking") {
+    return isSpanish
+      ? "Tengo una pregunta sobre el matchmaking en Lagos"
+      : "I have a question about matchmaking in Lagos";
+  }
   return isSpanish ? "Tengo una pregunta" : "I have a question";
+}
+
+const CONVERSATION_STARTERS_EVENTS = [
+  "What happens after I book?",
+  "Will I meet my group before the event?",
+  "Who gets matched together?",
+  "What's included in the ticket?",
+] as const;
+
+const CONVERSATION_STARTERS_MATCHMAKING_EN = [
+  "How does matching work in my city?",
+  "When do I get introduced to people?",
+  "Who can join — is there a waitlist?",
+  "How much does it cost?",
+] as const;
+
+const CONVERSATION_STARTERS_MATCHMAKING_ES = [
+  "¿Cómo funciona el matchmaking en mi ciudad?",
+  "¿Cuándo me presentan a la gente?",
+  "¿Quién puede unirse? ¿Hay lista de espera?",
+  "¿Cuánto cuesta?",
+] as const;
+
+function getChatBubblePixelEvent(pathname: string): string {
+  if (pathShowsChatBubbleForCityPages(pathname)) return "chat_bubble_clicked_matchmaking";
+  if (
+    pathname === "/events" ||
+    /^\/events\/[^/]+\/checkout$/.test(pathname) ||
+    /^\/events\/[^/]+\/confirmation$/.test(pathname) ||
+    /^\/events\/[^/]+$/.test(pathname)
+  ) {
+    return "chat_bubble_clicked_events";
+  }
+  return "chat_bubble_clicked_general";
 }
 
 /** Renders text with URLs as clickable links. Handles bare https? URLs and [text](url) markdown. */
@@ -289,11 +366,22 @@ export function WhatsAppChatButton() {
   const webhookDelayRef = useRef<number | null>(null);
   const bubbleTimersRef = useRef<number[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
   const { chatContext, eventTitle } = useChatContext();
   const { currentLanguage } = useLanguage();
   const isSpanish = currentLanguage === "es";
+  const chatVariant = getChatContentVariant(pathname);
 
-  const whatsAppPrefill = getWhatsAppPrefill(eventTitle, isSpanish);
+  const conversationStarters = useMemo(() => {
+    if (chatVariant === "matchmaking") {
+      return isSpanish
+        ? [...CONVERSATION_STARTERS_MATCHMAKING_ES]
+        : [...CONVERSATION_STARTERS_MATCHMAKING_EN];
+    }
+    return [...CONVERSATION_STARTERS_EVENTS];
+  }, [chatVariant, isSpanish]);
+
+  const whatsAppPrefill = getWhatsAppPrefill(eventTitle, isSpanish, chatVariant);
   const whatsAppHref = buildWhatsAppUrl(WHATSAPP_PHONE, whatsAppPrefill);
   const instagramHref = `${INSTAGRAM_URL}?ref=website`;
   const messengerHref = `${MESSENGER_URL}?ref=website`;
@@ -344,7 +432,7 @@ export function WhatsAppChatButton() {
     BUBBLE_DELAYS_MS.forEach((delayMs) => {
       const id = window.setTimeout(() => {
         if (open) return;
-        const msg = getRandomBubbleMessage(isSpanish);
+        const msg = getRandomBubbleMessage(isSpanish, chatVariant);
         setBubbleMessage(msg);
         setBubbleVisible(true);
         const hideId = window.setTimeout(() => {
@@ -361,7 +449,7 @@ export function WhatsAppChatButton() {
       timeouts.forEach((id) => clearTimeout(id));
       bubbleTimersRef.current = [];
     };
-  }, [open, isSpanish]);
+  }, [open, isSpanish, chatVariant]);
 
   // Scroll so the latest message (or typing indicator) is fully visible
   useEffect(() => {
@@ -458,13 +546,6 @@ export function WhatsAppChatButton() {
     );
   };
 
-  const CONVERSATION_STARTERS = [
-    "What happens after I book?",
-    "Will I meet my group before the event?",
-    "Who gets matched together?",
-    "What's included in the ticket?",
-  ];
-
   return (
     <TooltipProvider delayDuration={300}>
       <div ref={panelRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
@@ -487,12 +568,8 @@ export function WhatsAppChatButton() {
               onClick={() => {
                 setOpen((o) => {
                   if (!o) {
-                    const pathname = window.location.pathname;
-                    const isEvents = pathShowsChatBubbleByDefault(pathname);
-                    trackMetaPixelEvent(
-                      isEvents ? "chat_bubble_clicked_events" : "chat_bubble_clicked_general",
-                      { path: pathname }
-                    );
+                    const path = window.location.pathname;
+                    trackMetaPixelEvent(getChatBubblePixelEvent(path), { path });
                   }
                   return !o;
                 });
@@ -736,7 +813,7 @@ export function WhatsAppChatButton() {
                         Quick questions:
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {CONVERSATION_STARTERS.map((starter) => (
+                        {conversationStarters.map((starter) => (
                           <button
                             key={starter}
                             type="button"

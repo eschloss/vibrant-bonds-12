@@ -27,12 +27,47 @@ export function useChatContext(): ChatContextValue {
   return ctx;
 }
 
+/** City URL slugs that show the chat bubble on city/neighborhood routes. Expand when rolling out beyond Lagos. */
+export const CITY_SLUGS_SHOWING_CHAT = ["lagos"] as const;
+
+const CITY_SLUG_CHAT_SET = new Set(
+  CITY_SLUGS_SHOWING_CHAT.map((s) => s.toLowerCase())
+);
+
+function citySlugShowsChat(slug: string): boolean {
+  return CITY_SLUG_CHAT_SET.has(slug.toLowerCase());
+}
+
+/**
+ * True when pathname is a city-scoped page for a whitelisted slug (e.g. Lagos):
+ * /events/cities/:city, /cities/:city/..., /neighborhoods/:city/...
+ */
+export function pathShowsChatBubbleForCityPages(pathname: string): boolean {
+  const p = pathname.split("?")[0] ?? pathname;
+  const eventsCities = /^\/events\/cities\/([^/]+)/.exec(p);
+  if (eventsCities?.[1]) return citySlugShowsChat(eventsCities[1]);
+  const cities = /^\/cities\/([^/]+)/.exec(p);
+  if (cities?.[1]) return citySlugShowsChat(cities[1]);
+  const neighborhoods = /^\/neighborhoods\/([^/]+)/.exec(p);
+  if (neighborhoods?.[1]) return citySlugShowsChat(neighborhoods[1]);
+  return false;
+}
+
+export type ChatContentVariant = "events" | "matchmaking";
+
+/** Matchmaking copy (starters, bubbles, prefill) on whitelisted city routes; events everywhere else. */
+export function getChatContentVariant(pathname: string): ChatContentVariant {
+  return pathShowsChatBubbleForCityPages(pathname) ? "matchmaking" : "events";
+}
+
 /**
  * Returns true if the given pathname should show the chat bubble by default.
- * Pages: /events, /events/:slug, /events/:slug/checkout, /events/:slug/confirmation.
- * Excludes /events/cities and /events/cities/:cityName.
+ * Events: /events, /events/:slug, checkout, confirmation.
+ * City pages: only whitelisted city slugs (see CITY_SLUGS_SHOWING_CHAT), e.g. /cities/lagos, /events/cities/lagos.
+ * Other /events/cities/:city and non-whitelisted city URLs: hidden.
  */
 export function pathShowsChatBubbleByDefault(pathname: string): boolean {
+  if (pathShowsChatBubbleForCityPages(pathname)) return true;
   if (pathname === "/events") return true;
   if (pathname.startsWith("/events/cities")) return false;
   if (/^\/events\/[^/]+\/checkout$/.test(pathname)) return true;
