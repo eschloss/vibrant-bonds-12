@@ -149,6 +149,63 @@ export function buildGetKikiUrl(eventSlug: string): string {
   return shardApiUrl(`${EVENTS_API_BASE_URL}/events/get_kiki?${params.toString()}`);
 }
 
+/** Title-case display from URL slug (dashes → spaces). */
+export function slugToDisplayTitle(slug: string): string {
+  const s = slug.trim();
+  if (!s) return "";
+  return s
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+/** Colorful hero until real event images load (Unsplash abstract gradient). */
+export const EVENT_DETAIL_PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1614850523459-c2f4c299c58e?auto=format&fit=crop&w=1600&q=80";
+
+const PLACEHOLDER_SHORT_EN =
+  "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event.";
+
+/**
+ * Dummy `get_kiki` shape for loading / `?loading=true` UI. Display strings may be overridden in the page with translations.
+ */
+export function buildPlaceholderKikiEvent(slug: string): GetKikiEventResponse {
+  const title = slugToDisplayTitle(slug) || "Event";
+  return {
+    id: 0,
+    event_id: null,
+    city: "",
+    city_label: "",
+    slug,
+    title,
+    short_description: PLACEHOLDER_SHORT_EN,
+    long_description:
+      "<p>Full event details will appear here once they load.</p>",
+    language: undefined,
+    primary_image: EVENT_DETAIL_PLACEHOLDER_IMAGE,
+    datetime_local: "2030-06-15T19:00:00",
+    datetime_local_latest: null,
+    place: "",
+    ticket_price: 0,
+    provider_fee: 0,
+    platform_fee: 0,
+    total_price: 0,
+    currency: "",
+    currency_symbol: "",
+    currency_symbol_is_suffix: false,
+    currency_decimal_separator_is_comma: false,
+    provider: {
+      name: "Event organizer",
+      url: "",
+      logo: "",
+      bio: "",
+    },
+    duration_hours: 2,
+    whats_included: [],
+    tickets_remaining: undefined,
+  };
+}
+
+
 /** Build multiline event context for chat webhook (path, day, name, price, breakdown, what's included). */
 export function buildEventContext(
   data: GetKikiEventResponse,

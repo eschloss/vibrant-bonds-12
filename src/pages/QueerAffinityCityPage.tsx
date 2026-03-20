@@ -76,36 +76,37 @@ const QueerAffinityCityPage = () => {
     ? (currentLanguage === "es" ? affinityData.name_es : affinityData.name_en).toLowerCase()
     : null;
 
+  const seoCityLabel = useMemo(
+    () => (cityData.code ? cityData.name : fallbackCityName),
+    [cityData.code, cityData.name, fallbackCityName]
+  );
+
   const seoProps = {
     title: {
-      en: cityData && affinityData
-        ? `Meet Queer ${affinityData.name_en} Friends in ${cityData.name} | Pulse App`
-        : 'Find Your Queer Community | Pulse App',
-      es: cityData && affinityData
-        ? `Conoce Amigues Queer ${affinityData.name_es} en ${cityData.name} | Pulse App`
-        : 'Encuentra Tu Comunidad Queer | Pulse App'
+      en: `Meet Queer ${affinityData.name_en} Friends in ${seoCityLabel} | Pulse App`,
+      es: `Conoce Amigues Queer ${affinityData.name_es} en ${seoCityLabel} | Pulse App`,
     },
     description: {
-      en: cityData && affinityData
-        ? `Meet queer ${affinityData.name_en.toLowerCase()} friends in ${cityData.name}. Join groups, plan IRL meetups, and make real connections in ${cityData.name} with Pulse.`
-        : `Meet queer friends near you. Join groups, plan IRL meetups, and build real connections with Pulse.`,
-      es: cityData && affinityData
-        ? `Conoce amigues queer de ${affinityData.name_es.toLowerCase()} en ${cityData.name}. Únete a grupos, planifica quedadas en persona y crea conexiones reales en ${cityData.name} con Pulse.`
-        : `Conoce amigues queer cerca de ti. Únete a grupos, planifica quedadas en persona y crea conexiones reales con Pulse.`
+      en: `Meet queer ${affinityData.name_en.toLowerCase()} friends in ${seoCityLabel}. Join groups, plan IRL meetups, and make real connections in ${seoCityLabel} with Pulse.`,
+      es: `Conoce amigues queer de ${affinityData.name_es.toLowerCase()} en ${seoCityLabel}. Únete a grupos, planifica quedadas en persona y crea conexiones reales en ${seoCityLabel} con Pulse.`,
     },
-    keywords: cityData && affinityData ? [
-      `${cityData.name} ${affinityData.name_en} friends`,
-      `meet ${affinityData.name_en.toLowerCase()} friends in ${cityData.name}`,
-      `${cityData.name} ${affinityData.name_en.toLowerCase()} community`
-    ] : ['queer friends', 'affinity groups'],
+    keywords: [
+      `${seoCityLabel} ${affinityData.name_en} friends`,
+      `meet ${affinityData.name_en.toLowerCase()} friends in ${seoCityLabel}`,
+      `${seoCityLabel} ${affinityData.name_en.toLowerCase()} community`,
+    ],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
-    geoData: {
-      name: cityData
-        ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
-        : 'Unspecified City',
-      lat: cityData ? cityData.lat : 0,
-      lng: cityData ? cityData.lng : 0,
-    }
+    geoData: cityData.code
+      ? {
+          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ""}, ${String(cityData.country)}`,
+          lat: cityData.lat,
+          lng: cityData.lng,
+        }
+      : {
+          name: seoCityLabel,
+          lat: 0,
+          lng: 0,
+        },
   };
 
   useEffect(() => {

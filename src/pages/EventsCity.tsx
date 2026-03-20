@@ -82,16 +82,19 @@ const EventsCity = () => {
     return typeof matchedCity.image === "string" ? matchedCity.image : undefined;
   }, [matchedCity]);
 
+  /** Same as hero: slug-formatted until `matchedCity`, then API name (two-phase SEO). */
+  const seoCityLabel = formattedCityName;
+
   const seoProps = {
     title: {
-      en: `Events in ${formattedCityName} | Pulse`,
-      es: `Eventos en ${formattedCityName} | Pulse`,
+      en: `Events in ${seoCityLabel} | Pulse`,
+      es: `Eventos en ${seoCityLabel} | Pulse`,
     },
     description: {
-      en: `Discover upcoming events and activities in ${formattedCityName}. From meetups to adventures, find plans perfect for your friend group.`,
-      es: `Descubre eventos y actividades en ${formattedCityName}. Desde meetups hasta aventuras, encuentra planes perfectos para tu grupo.`,
+      en: `Discover upcoming events and activities in ${seoCityLabel}. From meetups to adventures, find plans perfect for your friend group.`,
+      es: `Descubre eventos y actividades en ${seoCityLabel}. Desde meetups hasta aventuras, encuentra planes perfectos para tu grupo.`,
     },
-    keywords: ["events", formattedCityName, "activities", "meetups", "friend groups"],
+    keywords: ["events", seoCityLabel, "activities", "meetups", "friend groups"],
     type: "website" as const,
     image: cityImage,
   };

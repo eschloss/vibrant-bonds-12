@@ -83,31 +83,32 @@ const AffinityCityPage = () => {
     ? (currentLanguage === "es" ? affinityData.name_es : affinityData.name_en).toLowerCase()
     : null;
 
+  const seoCityLabel = useMemo(
+    () => (cityData.code ? cityData.name : fallbackCityName),
+    [cityData.code, cityData.name, fallbackCityName]
+  );
+
   const seoProps = {
     title: {
-      en: cityData && affinityData
-        ? `Meet ${affinityData.name_en} Friends in ${cityData.name} | Pulse App`
-        : 'Find Your Community | Pulse App',
-      es: cityData && affinityData
-        ? `Conoce Amigues ${affinityData.name_es} en ${cityData.name} | Pulse App`
-        : 'Encuentra Tu Comunidad | Pulse App'
+      en: `Meet ${affinityData.name_en} Friends in ${seoCityLabel} | Pulse App`,
+      es: `Conoce Amigues ${affinityData.name_es} en ${seoCityLabel} | Pulse App`,
     },
     description: {
-      en: cityData && affinityData
-        ? `Join the ${affinityData.name_en.toLowerCase()} community in ${cityData.name}. Use Pulse to spark real friendships and plan fun in-person meetups.`
-        : `Pulse helps you meet people who share your interests. Make real friends and plan IRL hangouts that actually happen.`,
-      es: cityData && affinityData
-        ? `Únete a la comunidad de ${affinityData.name_es.toLowerCase()} en ${cityData.name}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`
-        : `Pulse te ayuda a conocer personas que comparten tus intereses. Haz amistades reales y queda en la vida real.`
+      en: `Join the ${affinityData.name_en.toLowerCase()} community in ${seoCityLabel}. Use Pulse to spark real friendships and plan fun in-person meetups.`,
+      es: `Únete a la comunidad de ${affinityData.name_es.toLowerCase()} en ${seoCityLabel}. Con Pulse puedes hacer amistades reales y organizar quedadas en persona.`,
     },
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
-    geoData: {
-      name: cityData
-        ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
-        : 'Unspecified City',
-      lat: cityData ? cityData.lat : 0,
-      lng: cityData ? cityData.lng : 0,
-    }
+    geoData: cityData.code
+      ? {
+          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ""}, ${String(cityData.country)}`,
+          lat: cityData.lat,
+          lng: cityData.lng,
+        }
+      : {
+          name: seoCityLabel,
+          lat: 0,
+          lng: 0,
+        },
   };
 
   useEffect(() => {

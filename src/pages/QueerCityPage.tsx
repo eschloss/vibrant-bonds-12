@@ -54,37 +54,38 @@ const QueerCityPage = () => {
     staleTime: 5 * 60 * 1000
   });
 
+  const seoCityLabel = useMemo(
+    () => (cityData.code ? cityData.name : fallbackCityName),
+    [cityData.code, cityData.name, fallbackCityName]
+  );
+
   const seoProps = {
     title: {
-      en: cityData
-        ? `Meet Gay, Lesbian, & Queer Friends in ${cityData.name} | Pulse App`
-        : 'Find LGBTQ+, Gay, Lesbian, & Queer Friends Near You | Pulse App',
-      es: cityData
-        ? `Conoce Amigues Gay, Lesbianas y Queer en ${cityData.name} | Pulse App`
-        : 'Encuentra Amigues LGBTQ+, Gay, Lesbianas y Queer Cerca de Ti | Pulse App'
+      en: `Meet Gay, Lesbian, & Queer Friends in ${seoCityLabel} | Pulse App`,
+      es: `Conoce Amigues Gay, Lesbianas y Queer en ${seoCityLabel} | Pulse App`,
     },
     description: {
-      en: cityData
-        ? `Meet LGBTQ+ friends in ${cityData.name}. Join queer friend groups, plan IRL meetups, and make real connections in ${cityData.name} with Pulse.`
-        : `Meet LGBTQ+ friends near you. Join queer friend groups, plan IRL meetups, and build real connections with Pulse.`,
-      es: cityData
-        ? `Conoce amigues LGBTQ+ en ${cityData.name}. Únete a grupos queer, planifica quedadas en persona y crea conexiones reales en ${cityData.name} con Pulse.`
-        : `Conoce amigues LGBTQ+ cerca de ti. Únete a grupos queer, planifica quedadas en persona y crea conexiones reales con Pulse.`
+      en: `Meet LGBTQ+ friends in ${seoCityLabel}. Join queer friend groups, plan IRL meetups, and make real connections in ${seoCityLabel} with Pulse.`,
+      es: `Conoce amigues LGBTQ+ en ${seoCityLabel}. Únete a grupos queer, planifica quedadas en persona y crea conexiones reales en ${seoCityLabel} con Pulse.`,
     },
-    keywords: cityData ? [
-      `${cityData.name} LGBTQ+ friends`,
-      `meet queer friends in ${cityData.name}`,
-      `${cityData.name} queer community`,
-      `gay friends ${cityData.name}`
-    ] : ['LGBTQ+ friends', 'queer community'],
+    keywords: [
+      `${seoCityLabel} LGBTQ+ friends`,
+      `meet queer friends in ${seoCityLabel}`,
+      `${seoCityLabel} queer community`,
+      `gay friends ${seoCityLabel}`,
+    ],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
-    geoData: {
-      name: cityData
-        ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
-        : 'Unspecified City',
-      lat: cityData ? cityData.lat : 0,
-      lng: cityData ? cityData.lng : 0,
-    }
+    geoData: cityData.code
+      ? {
+          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ""}, ${String(cityData.country)}`,
+          lat: cityData.lat,
+          lng: cityData.lng,
+        }
+      : {
+          name: seoCityLabel,
+          lat: 0,
+          lng: 0,
+        },
   };
 
   useEffect(() => {

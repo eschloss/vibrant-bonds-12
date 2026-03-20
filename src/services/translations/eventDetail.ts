@@ -106,6 +106,16 @@ export const eventDetail = {
     "event_detail.faq.a10":
       "Your group chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
 
+    "event_detail.placeholder_datetime": "Date & time to be confirmed",
+    "event_detail.placeholder_place": "Venue to be announced",
+    "event_detail.placeholder_city": "Your city",
+    "event_detail.placeholder_short":
+      "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event.",
+    "event_detail.placeholder_about_html": "<p>Full event details will appear here once they load.</p>",
+    "event_detail.placeholder_seo_description":
+      "Meet people before the event. Pulse matches you into a small group of solo attendees so you arrive with friends. Full details and tickets load in a moment.",
+    "event_detail.placeholder_organiser": "Event organizer",
+
     "future_invites.title": "Get future invites",
     "future_invites.helper": "Leave your email and we'll let you know about future dates and similar events.",
     "future_invites.email_label": "Email address",
@@ -226,6 +236,16 @@ export const eventDetail = {
     "event_detail.faq.q10": "¿Qué pasa cuando termina {eventTitle}?",
     "event_detail.faq.a10":
       "Tu chat grupal permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMuchos grupos usan ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
+
+    "event_detail.placeholder_datetime": "Fecha y hora por confirmar",
+    "event_detail.placeholder_place": "Lugar por anunciar",
+    "event_detail.placeholder_city": "Tu ciudad",
+    "event_detail.placeholder_short":
+      "Ven solo. Te emparejaremos en un grupo pequeño antes del evento para que llegues ya conociendo gente. El chat del grupo se abre con antelación para romper el hielo y coordinar planes.",
+    "event_detail.placeholder_about_html": "<p>Los detalles completos del evento aparecerán aquí al cargar.</p>",
+    "event_detail.placeholder_seo_description":
+      "Conoce gente antes del evento. Pulse te empareja en un grupo pequeño de asistentes que van solos para que llegues con amigos. Los detalles y entradas cargan en un momento.",
+    "event_detail.placeholder_organiser": "Organizador del evento",
 
     "future_invites.title": "Recibe invitaciones futuras",
     "future_invites.helper": "Deja tu email y te avisaremos de fechas futuras y eventos similares.",

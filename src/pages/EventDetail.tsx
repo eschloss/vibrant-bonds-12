@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
@@ -40,10 +40,13 @@ import {
   type GetKikiEventResponse,
   buildEventContext,
   buildGetKikiUrl,
+  buildPlaceholderKikiEvent,
+  EVENT_DETAIL_PLACEHOLDER_IMAGE,
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
   parseEventLocalDateTime,
+  slugToDisplayTitle,
 } from "@/lib/eventApi";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import {
@@ -67,6 +70,8 @@ type SignUpCardProps = {
   formattedPulseFee: string;
   whatsIncluded?: string[];
   ticketsRemaining: number;
+  showPricing?: boolean;
+  showSpotsRemaining?: boolean;
 };
 
 const SignUpCard = ({
@@ -80,6 +85,8 @@ const SignUpCard = ({
   formattedPulseFee,
   whatsIncluded = [],
   ticketsRemaining,
+  showPricing = true,
+  showSpotsRemaining = true,
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
@@ -108,21 +115,27 @@ const SignUpCard = ({
         </div>
 
         {/* 2. Price block */}
-        <span className="inline-flex items-baseline gap-1.5 leading-tight">
-          <span className="text-sm font-medium text-white/65">
-            {t("event_detail.price_from", "From")}
+        {showPricing ? (
+          <span className="inline-flex items-baseline gap-1.5 leading-tight">
+            <span className="text-sm font-medium text-white/65">
+              {t("event_detail.price_from", "From")}
+            </span>
+            <span className="text-2xl font-bold text-white tabular-nums tracking-wide">
+              {formattedTotalPrice.replace(/[,.]00$/, "")}
+            </span>
           </span>
-          <span className="text-2xl font-bold text-white tabular-nums tracking-wide">
-            {formattedTotalPrice.replace(/[,.]00$/, "")}
-          </span>
-        </span>
+        ) : null}
 
         {/* 3. Conversion area — breathing room: 16-20px price→scarcity, 12-16px scarcity→CTA */}
-        <div className="mt-5 space-y-4">
-          <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
-            <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
-            <span>{t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}</span>
-          </div>
+        <div className={cn("space-y-4", showPricing ? "mt-5" : "mt-0")}>
+          {showSpotsRemaining ? (
+            <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
+              <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
+              <span>
+                {t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}
+              </span>
+            </div>
+          ) : null}
           <div className="space-y-2">
             <Link
               to={checkoutHref}
@@ -144,6 +157,7 @@ const SignUpCard = ({
         </div>
 
         {/* 4. Secondary info zone — subtle divider, 16-20px from CTA */}
+        {showPricing ? (
         <div className="mt-5 pt-3 border-t border-white/10">
           <Collapsible open={breakdownOpen} onOpenChange={setBreakdownOpen}>
             <CollapsibleTrigger asChild>
@@ -195,6 +209,7 @@ const SignUpCard = ({
             </CollapsibleContent>
           </Collapsible>
         </div>
+        ) : null}
       </CardContent>
     </Card>
   );
@@ -261,15 +276,28 @@ const EventDetail = () => {
   const signUpAsideRef = useRef<HTMLElement>(null);
   const isLg = useIsLg();
   const scrollContainer = useScrollContainer();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const { setChatContext } = useChatContext();
+
+  const forceLoading = useMemo(
+    () => new URLSearchParams(search).get("loading") === "true",
+    [search]
+  );
+  const usePlaceholderUI = useMemo(
+    () =>
+      Boolean(eventSlug) &&
+      !notFound &&
+      ((loading && !eventData) || (Boolean(forceLoading) && !!eventData)),
+    [eventSlug, notFound, loading, eventData, forceLoading]
+  );
+  const showOverlay = loading || forceLoading;
 
   const groupChatOverlayImageUrl =
     "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
 
   // Preload Stripe.js after event content loads so checkout is fast; defers until after event data + images
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
     const stripePk = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
     if (stripePk) {
       void loadStripe(
@@ -277,7 +305,7 @@ const EventDetail = () => {
         import.meta.env.DEV ? ({ advancedFraudSignals: false } as any) : undefined
       );
     }
-  }, [eventData, notFound]);
+  }, [eventData, notFound, usePlaceholderUI]);
 
   useEffect(() => {
     if (!heroCarouselApi) return;
@@ -295,8 +323,13 @@ const EventDetail = () => {
     if (!eventSlug) {
       setNotFound(true);
       setLoading(false);
+      setEventData(null);
       return;
     }
+
+    setEventData(null);
+    setNotFound(false);
+    setLoading(true);
 
     const controller = new AbortController();
     const url = buildGetKikiUrl(eventSlug);
@@ -332,13 +365,13 @@ const EventDetail = () => {
   }, [eventSlug, changeLanguage]);
 
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
     setChatContext(buildEventContext(eventData, locale, pathname), eventData.title);
     return () => setChatContext(null);
-  }, [eventData, notFound, locale, pathname, setChatContext]);
+  }, [eventData, notFound, usePlaceholderUI, locale, pathname, setChatContext]);
 
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
     trackMetaPixelEvent(
       "event_page_view",
       {
@@ -351,14 +384,14 @@ const EventDetail = () => {
       },
       { custom: true }
     );
-  }, [eventData, notFound]);
+  }, [eventData, notFound, usePlaceholderUI]);
 
   const trackQualifiedEventPageView = useCallback(
     (
       trigger: "10_seconds" | "checkout_click" | "see_whats_included",
       extraParams?: Record<string, string>
     ) => {
-      if (!eventData || notFound || hasTrackedQualifiedEventPageView.current) return;
+      if (!eventData || notFound || usePlaceholderUI || hasTrackedQualifiedEventPageView.current) return;
       hasTrackedQualifiedEventPageView.current = true;
 
       trackMetaPixelEvent(
@@ -376,7 +409,7 @@ const EventDetail = () => {
         { custom: true }
       );
     },
-    [eventData, notFound]
+    [eventData, notFound, usePlaceholderUI]
   );
 
   useEffect(() => {
@@ -384,26 +417,26 @@ const EventDetail = () => {
   }, [eventData?.slug]);
 
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
 
     const timeoutId = window.setTimeout(() => {
       trackQualifiedEventPageView("10_seconds");
     }, 10000);
 
     return () => window.clearTimeout(timeoutId);
-  }, [eventData, notFound, trackQualifiedEventPageView]);
+  }, [eventData, notFound, usePlaceholderUI, trackQualifiedEventPageView]);
 
   const minDelayElapsedRef = useRef(false);
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
     const id = setTimeout(() => {
       minDelayElapsedRef.current = true;
     }, 3000);
     return () => clearTimeout(id);
-  }, [eventData, notFound]);
+  }, [eventData, notFound, usePlaceholderUI]);
 
   useEffect(() => {
-    if (!eventData || notFound) return;
+    if (!eventData || notFound || usePlaceholderUI) return;
 
     let cleanup: (() => void) | undefined;
     let cancelled = false;
@@ -437,36 +470,76 @@ const EventDetail = () => {
       clearTimeout(timeoutId);
       cleanup?.();
     };
-  }, [eventData, notFound, scrollContainer]);
+  }, [eventData, notFound, usePlaceholderUI, scrollContainer]);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col min-h-screen dark">
-        <PageLoadingOverlay show={true} />
-        <Navbar />
-        <main className="flex-grow" />
-        <Footer />
-      </div>
-    );
-  }
+  const seoProps = useMemo(() => {
+    if (!eventSlug || notFound) return null;
+    if (eventData) {
+      const cityLabel = eventData.city_label || "";
+      const providerName = getProviderName(eventData.provider);
+      return {
+        title: {
+          en: `${eventData.title} | ${cityLabel} Events | Pulse`,
+          es: `${eventData.title} | Eventos en ${cityLabel} | Pulse`,
+        },
+        description: {
+          en: eventData.short_description,
+          es: eventData.short_description,
+        },
+        keywords: [eventData.title, cityLabel, "event", "activities", providerName].filter(Boolean),
+        type: "website" as const,
+        image: eventData.primary_image,
+      };
+    }
+    const slugTitle = slugToDisplayTitle(eventSlug);
+    return {
+      title: {
+        en: `${slugTitle} | Events | Pulse`,
+        es: `${slugTitle} | Eventos | Pulse`,
+      },
+      description: {
+        en:
+          "Meet people before the event. Pulse matches you into a small group of solo attendees so you arrive with friends. Full details and tickets load in a moment.",
+        es:
+          "Conoce gente antes del evento. Pulse te empareja en un grupo pequeño de asistentes que van solos para que llegues con amigos. Los detalles y entradas cargan en un momento.",
+      },
+      keywords: [slugTitle, "event", "Pulse", "meet friends"],
+      type: "website" as const,
+      image: EVENT_DETAIL_PLACEHOLDER_IMAGE,
+    };
+  }, [eventData, eventSlug, notFound]);
 
-  if (notFound || !eventData) {
+  if (!eventSlug) {
     return <NotFound />;
   }
 
-  const data = eventData;
+  if (notFound && !loading) {
+    return <NotFound />;
+  }
+
+  if (!usePlaceholderUI && !eventData) {
+    return <NotFound />;
+  }
+
+  if (!seoProps) {
+    return <NotFound />;
+  }
+
+  const data = usePlaceholderUI && eventSlug ? buildPlaceholderKikiEvent(eventSlug) : eventData!;
   const priceOpts = getEventPriceOpts(data);
 
-  const formattedCityName = data.city_label || "";
+  const formattedCityName = usePlaceholderUI
+    ? t("event_detail.placeholder_city", "Your city")
+    : data.city_label || "";
   const providerName = getProviderName(data.provider);
-  const organiser = providerName || data.place;
+  const organiser = usePlaceholderUI
+    ? t("event_detail.placeholder_organiser", "Event organizer")
+    : providerName || data.place;
 
   const formattedTotalPrice = formatEventPrice(data.total_price, priceOpts);
   const baseExperienceAmount = data.ticket_price + data.provider_fee;
   const formattedBaseExperiencePrice = formatEventPrice(baseExperienceAmount, priceOpts);
   const formattedPulseFee = formatEventPrice(data.platform_fee, priceOpts);
-  const formattedProviderFee =
-    data.provider_fee > 0 ? formatEventPrice(data.provider_fee, priceOpts) : null;
 
   const introLine = `⭐ ${data.title} is a public event in ${formattedCityName}. Pulse isn't the organiser. We help you go with a small group of other solo attendees, so you can meet new friends before you arrive.`;
 
@@ -490,10 +563,12 @@ const EventDetail = () => {
     path: `/events/${data.slug}`,
   };
   const handleOpenFutureInvites = () => {
+    if (usePlaceholderUI) return;
     trackMetaPixelEvent("event_future_invites_modal_click", futureInvitesParams, { custom: true });
     setFutureInvitesOpen(true);
   };
   const trackCheckoutClick = (ctaLocation: EventHeaderCtaLocation) => {
+    if (usePlaceholderUI) return;
     trackQualifiedEventPageView("checkout_click", {
       cta_location: ctaLocation,
       destination: checkoutHref,
@@ -515,42 +590,37 @@ const EventDetail = () => {
     );
   };
 
-  const seoProps = {
-    title: {
-      en: `${data.title} | ${formattedCityName} Events | Pulse`,
-      es: `${data.title} | Eventos en ${formattedCityName} | Pulse`,
-    },
-    description: {
-      en: data.short_description,
-      es: data.short_description,
-    },
-    keywords: [data.title, formattedCityName, "event", "activities", providerName].filter(
-      Boolean
-    ),
-    type: "website" as const,
-    image: data.primary_image,
-  };
-
-  const eventSchema = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: data.title,
-    description: `${introLine}\n\n${stripHtml(data.long_description)}`,
-    startDate: data.datetime_local,
-    location: {
-      "@type": "Place",
-      name: data.place,
-    },
-    image: heroImages.length > 0 ? heroImages : [data.primary_image],
-    offers: {
-      "@type": "Offer",
-      price: String(data.total_price),
-      priceCurrency: data.currency || "USD",
-    },
-  };
+  const eventSchema =
+    eventData && !usePlaceholderUI
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: eventData.title,
+          description: `${introLine}\n\n${stripHtml(eventData.long_description)}`,
+          startDate: eventData.datetime_local,
+          location: {
+            "@type": "Place",
+            name: eventData.place,
+          },
+          image: heroImages.length > 0 ? heroImages : [eventData.primary_image],
+          offers: {
+            "@type": "Offer",
+            price: String(eventData.total_price),
+            priceCurrency: eventData.currency || "USD",
+          },
+        }
+      : null;
 
   const durationText = formatDuration(data.duration_hours);
-  const dateTime = formatDateTimeWindowLong(data.datetime_local, data.datetime_local_latest);
+  const dateTime = usePlaceholderUI
+    ? {
+        text: t("event_detail.placeholder_datetime", "Date & time to be confirmed"),
+        hasWindow: false,
+      }
+    : formatDateTimeWindowLong(data.datetime_local, data.datetime_local_latest);
+  const placeLabel = usePlaceholderUI
+    ? t("event_detail.placeholder_place", "Venue to be announced")
+    : data.place;
   const entranceTimeTooltip = t(
     "event_detail.entrance_time_tooltip",
     "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
@@ -563,13 +633,26 @@ const EventDetail = () => {
     trackCheckoutClick,
   };
 
+  const shortDescriptionText = usePlaceholderUI
+    ? t(
+        "event_detail.placeholder_short",
+        "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event."
+      )
+    : data.short_description;
+  const longDescriptionHtml = usePlaceholderUI
+    ? t("event_detail.placeholder_about_html", "<p>Full event details will appear here once they load.</p>")
+    : data.long_description;
+
   return (
     <EventHeaderProvider value={eventHeaderValue}>
     <div className="flex flex-col min-h-screen dark">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
-      />
+      <PageLoadingOverlay show={showOverlay} />
+      {eventSchema ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+        />
+      ) : null}
       <Seo {...seoProps} />
       <Navbar />
 
@@ -696,7 +779,7 @@ const EventDetail = () => {
                 <span className="flex items-center gap-1.5 min-w-0 max-w-[180px] sm:max-w-[220px] lg:max-w-md xl:max-w-lg">
                   <MapPin size={15} className="shrink-0 text-gray-400" />
                   {isLg ? (
-                    <span className="break-words">{data.place}</span>
+                    <span className="break-words">{placeLabel}</span>
                   ) : (
                     <TooltipProvider delayDuration={999999}>
                       <Tooltip open={addressTooltipOpen} onOpenChange={setAddressTooltipOpen}>
@@ -705,13 +788,13 @@ const EventDetail = () => {
                             type="button"
                             onClick={() => setAddressTooltipOpen((prev) => !prev)}
                             className="text-left truncate min-w-0 w-full bg-transparent border-0 p-0 font-inherit text-inherit text-gray-300 hover:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-transparent rounded"
-                            aria-label={data.place}
+                            aria-label={placeLabel}
                           >
-                            {data.place}
+                            {placeLabel}
                           </button>
                         </TooltipTrigger>
                         <TooltipContent side="bottom" className="max-w-[min(320px,90vw)] text-sm">
-                          {data.place}
+                          {placeLabel}
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -721,7 +804,7 @@ const EventDetail = () => {
                   <Clock size={15} className="shrink-0 text-gray-400" />
                   {durationText}
                 </span>
-                {formattedCityName ? (
+                {formattedCityName || usePlaceholderUI ? (
                   <span className="flex items-center gap-1.5 shrink-0">
                     <Globe size={15} className="shrink-0 text-gray-400" />
                     {formattedCityName}
@@ -773,17 +856,19 @@ const EventDetail = () => {
                       <Users size={16} className="text-[#38D1BF] shrink-0" />
                       {t("event_detail.everyone_making_friends", "You'll be matched with 4–6 solo attendees")}
                     </div>
-                    <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
-                      <Ticket size={16} className="shrink-0" aria-hidden />
-                      {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(data.tickets_remaining ?? 18))}
-                    </div>
+                    {!usePlaceholderUI ? (
+                      <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
+                        <Ticket size={16} className="shrink-0" aria-hidden />
+                        {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(data.tickets_remaining ?? 18))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
 
               <div className="max-w-[600px] xl:max-w-[650px] mt-5">
                 <div className="space-y-2.5 md:space-y-4 text-lg text-gray-300 leading-[1.68]">
-                  <p>{data.short_description}</p>
+                  <p>{shortDescriptionText}</p>
                 </div>
               </div>
             </motion.div>
@@ -809,11 +894,11 @@ const EventDetail = () => {
                     <p className="text-sm text-gray-400 mb-5">
                       {t("event_detail.organised_by", "This event is organised by")}{" "}
                       <span className="text-white/75 font-medium">{organiser}</span>
-                      {data.place ? (
+                      {placeLabel ? (
                         <>
                           {" "}
                           <span className="text-gray-400">at</span>{" "}
-                          <span className="font-medium text-[#38D1BF]">{data.place}</span>
+                          <span className="font-medium text-[#38D1BF]">{placeLabel}</span>
                         </>
                       ) : null}
                       .
@@ -892,6 +977,8 @@ const EventDetail = () => {
                     formattedPulseFee={formattedPulseFee}
                     whatsIncluded={data.whats_included ?? []}
                     ticketsRemaining={data.tickets_remaining ?? 20}
+                    showPricing={!usePlaceholderUI}
+                    showSpotsRemaining={!usePlaceholderUI}
                   />
                 </div>
 
@@ -899,7 +986,7 @@ const EventDetail = () => {
                   <h2>{t("event_detail.about_this_event", "About this event")}</h2>
                   <div
                     className="text-gray-300 text-lg leading-relaxed prose prose-invert max-w-none prose-headings:text-white prose-p:text-gray-300 prose-li:text-gray-300 prose-strong:text-white prose-a:text-[#38D1BF] prose-a:no-underline hover:prose-a:underline prose-li:marker:text-gray-500"
-                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.long_description) }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(longDescriptionHtml) }}
                   />
                   <div className="mt-6 not-prose">
                     <EventProviderSection
@@ -931,6 +1018,8 @@ const EventDetail = () => {
                     formattedPulseFee={formattedPulseFee}
                     whatsIncluded={data.whats_included ?? []}
                     ticketsRemaining={data.tickets_remaining ?? 20}
+                    showPricing={!usePlaceholderUI}
+                    showSpotsRemaining={!usePlaceholderUI}
                   />
               </aside>
             </motion.div>
@@ -938,7 +1027,7 @@ const EventDetail = () => {
             <EventFaqSection
               eventTitle={data.title}
               city={formattedCityName || ""}
-              venue={data.place}
+              venue={placeLabel}
               organiser={organiser}
               provider={providerName}
               dateTimeLabel={dateTime.text}
@@ -950,7 +1039,7 @@ const EventDetail = () => {
 
       <Footer />
 
-      {showSticky && (
+      {showSticky && !usePlaceholderUI && (
         <EventStickyCta
           checkoutHref={checkoutHref}
           trackCheckoutClick={trackCheckoutClick}
@@ -960,10 +1049,10 @@ const EventDetail = () => {
       )}
 
       <GetFutureInvitesModal
-        open={futureInvitesOpen}
+        open={futureInvitesOpen && !usePlaceholderUI}
         onOpenChange={setFutureInvitesOpen}
         t={t}
-        kikiId={data.id}
+        kikiId={eventData?.id ?? data.id}
         onSuccess={() => {
           trackMetaPixelEvent("event_future_invites_submitted", futureInvitesParams, { custom: true });
         }}

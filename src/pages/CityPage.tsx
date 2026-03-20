@@ -58,39 +58,40 @@ const CityPage = () => {
     staleTime: 5 * 60 * 1000
   });
 
+  /** Slug-based label while cities API is in flight; API `name` after match. */
+  const seoCityLabel = useMemo(
+    () => (cityData.code ? cityData.name : fallbackCityName),
+    [cityData.code, cityData.name, fallbackCityName]
+  );
 
   const seoProps = {
     title: {
-      en: cityData
-        ? `Meet New Friends in ${String(cityData.name)} | Pulse App`
-        : 'Find Your Crew | Pulse App',
-      es: cityData
-        ? `Conoce Nuevos Amigos en ${String(cityData.name)} | Pulse App`
-        : 'Encuentra Tu Grupo | Pulse App'
+      en: `Meet New Friends in ${seoCityLabel} | Pulse App`,
+      es: `Conoce Nuevos Amigos en ${seoCityLabel} | Pulse App`,
     },
     description: {
-      en: cityData
-        ? `Meet new friends in ${String(cityData.name)}. Join local friend groups, plan IRL meetups, and make real connections in ${String(cityData.name)} with Pulse.`
-        : 'Meet new friends near you. Join local friend groups, plan IRL meetups, and build real connections with Pulse.',
-      es: cityData
-        ? `Haz nuevos amigues en ${String(cityData.name)}. Únete a grupos de amistades, planifica quedadas en persona y crea conexiones reales en ${String(cityData.name)} con Pulse.`
-        : 'Haz nuevos amigues cerca de ti. Únete a grupos, planifica quedadas en persona y crea conexiones reales con Pulse.'
+      en: `Meet new friends in ${seoCityLabel}. Join local friend groups, plan IRL meetups, and make real connections in ${seoCityLabel} with Pulse.`,
+      es: `Haz nuevos amigues en ${seoCityLabel}. Únete a grupos de amistades, planifica quedadas en persona y crea conexiones reales en ${seoCityLabel} con Pulse.`,
     },
-    keywords: cityData ? [
-      `${String(cityData.name)} friends`,
-      `meet friends in ${String(cityData.name)}`,
-      `${String(cityData.name)} friend groups`,
-      `make friends ${String(cityData.name)}`,
-      `meet people in ${String(cityData.name)}`
-    ] : ['meet friends', 'friend groups', 'make friends'],
+    keywords: [
+      `${seoCityLabel} friends`,
+      `meet friends in ${seoCityLabel}`,
+      `${seoCityLabel} friend groups`,
+      `make friends ${seoCityLabel}`,
+      `meet people in ${seoCityLabel}`,
+    ],
     image: typeof cityData?.image === "string" ? cityData.image : undefined,
-    geoData: {
-      name: cityData
-        ? `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ''}, ${String(cityData.country)}`
-        : 'Unspecified City',
-      lat: cityData ? cityData.lat : 0,
-      lng: cityData ? cityData.lng : 0,
-    }
+    geoData: cityData.code
+      ? {
+          name: `${String(cityData.name)}${cityData.state ? `, ${String(cityData.state)}` : ""}, ${String(cityData.country)}`,
+          lat: cityData.lat,
+          lng: cityData.lng,
+        }
+      : {
+          name: seoCityLabel,
+          lat: 0,
+          lng: 0,
+        },
   };
 
   
