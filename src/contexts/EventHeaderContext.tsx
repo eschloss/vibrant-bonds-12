@@ -7,7 +7,7 @@ export type EventHeaderCtaLocation = "hero" | "sidebar" | "header" | "sticky";
 export interface EventHeaderContextValue {
   eventSlug: string;
   checkoutHref: string;
-  /** Fires qualified event_page_view_10secs_or_ct (if not yet fired) + event_signup_click. */
+  /** Fires qualified event_page_view_10secs_or_ct (if not yet fired) + event_signup_click + event_qualified_lead. */
   trackCheckoutClick: (ctaLocation: EventHeaderCtaLocation) => void;
 }
 
@@ -62,18 +62,20 @@ export function useEventTrackCheckoutClick(
         );
       }
 
+      const signupPayload = {
+        event_slug: eventData.slug,
+        event_title: eventData.title,
+        city: eventData.city,
+        city_label: eventData.city_label,
+        provider: getProviderName(eventData.provider),
+        destination: checkoutHref,
+        path: `/events/${eventData.slug}`,
+        cta_location: ctaLocation,
+      };
+      trackMetaPixelEvent("event_signup_click", signupPayload, { custom: true });
       trackMetaPixelEvent(
-        "event_signup_click",
-        {
-          event_slug: eventData.slug,
-          event_title: eventData.title,
-          city: eventData.city,
-          city_label: eventData.city_label,
-          provider: getProviderName(eventData.provider),
-          destination: checkoutHref,
-          path: `/events/${eventData.slug}`,
-          cta_location: ctaLocation,
-        },
+        "event_qualified_lead",
+        { ...signupPayload, lead_source: "signup_click" },
         { custom: true }
       );
     },

@@ -565,6 +565,11 @@ const EventDetail = () => {
   const handleOpenFutureInvites = () => {
     if (usePlaceholderUI) return;
     trackMetaPixelEvent("event_future_invites_modal_click", futureInvitesParams, { custom: true });
+    trackMetaPixelEvent(
+      "event_qualified_lead",
+      { ...futureInvitesParams, lead_source: "future_invites_modal" },
+      { custom: true }
+    );
     setFutureInvitesOpen(true);
   };
   const trackCheckoutClick = (ctaLocation: EventHeaderCtaLocation) => {
@@ -574,18 +579,20 @@ const EventDetail = () => {
       destination: checkoutHref,
     });
 
+    const signupPayload = {
+      event_slug: data.slug,
+      event_title: data.title,
+      city: data.city,
+      city_label: data.city_label,
+      provider: data.provider,
+      destination: checkoutHref,
+      path: `/events/${data.slug}`,
+      cta_location: ctaLocation,
+    };
+    trackMetaPixelEvent("event_signup_click", signupPayload, { custom: true });
     trackMetaPixelEvent(
-      "event_signup_click",
-      {
-        event_slug: data.slug,
-        event_title: data.title,
-        city: data.city,
-        city_label: data.city_label,
-        provider: data.provider,
-        destination: checkoutHref,
-        path: `/events/${data.slug}`,
-        cta_location: ctaLocation,
-      },
+      "event_qualified_lead",
+      { ...signupPayload, lead_source: "signup_click" },
       { custom: true }
     );
   };
