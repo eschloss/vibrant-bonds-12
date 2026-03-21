@@ -1,7 +1,22 @@
-
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { fetchTranslations } from "../services/translations";
+import { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
+import { useLocation } from "react-router-dom";
+import {
+  CRITICAL_NAMESPACES,
+  DEFERRED_NAMESPACES,
+  fetchCriticalTranslations,
+  fetchDeferredTranslations,
+  getNamespacesForPath,
+  loadTranslationNamespaces,
+} from "../services/translations";
 import { Helmet } from "react-helmet";
+
+function scheduleIdleTask(fn: () => void) {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    window.requestIdleCallback(() => fn(), { timeout: 4000 });
+  } else {
+    setTimeout(fn, 1);
+  }
+}
 
 interface LanguageContextType {
   currentLanguage: string;
@@ -42,6 +57,13 @@ const seoMetadata = {
 };
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
+  const location = useLocation();
+  const loadedNamespacesRef = useRef(new Set<string>());
+  /** True from sync start of language effect until critical load finishes (success or failure). Avoids route prefetch in the same commit where `isLoading` is still stale. */
+  const deferRoutePrefetchRef = useRef(false);
+  /** Only the latest language-load wave may clear `deferRoutePrefetchRef` (older async finally blocks must not run after a newer wave started). */
+  const languageLoadGenerationRef = useRef(0);
+
   const detectInitialLanguage = (): string => {
     const hostname = window.location.hostname;
     const subdomainParts = hostname.split(".");
@@ -70,23 +92,78 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   useEffect(() => {
-    const loadTranslations = async () => {
+    const waveId = ++languageLoadGenerationRef.current;
+    let cancelled = false;
+    loadedNamespacesRef.current = new Set();
+    deferRoutePrefetchRef.current = true;
+
+    void (async () => {
       setIsLoading(true);
       try {
-        const translationData = await fetchTranslations(currentLanguage);
-        setTranslations(translationData);
+        const critical = await fetchCriticalTranslations(currentLanguage);
+        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+        CRITICAL_NAMESPACES.forEach((n) => loadedNamespacesRef.current.add(n));
+        setTranslations(critical);
       } catch (error) {
-        console.error("Failed to load translations:", error);
+        console.error("Failed to load critical translations:", error);
       } finally {
-        setIsLoading(false);
+        if (languageLoadGenerationRef.current === waveId) {
+          deferRoutePrefetchRef.current = false;
+          if (!cancelled) setIsLoading(false);
+        }
       }
-    };
-    
-    loadTranslations();
-    
-    // Update HTML lang attribute
+
+      scheduleIdleTask(() => {
+        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+        void (async () => {
+          try {
+            const deferred = await fetchDeferredTranslations(currentLanguage);
+            if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+            DEFERRED_NAMESPACES.forEach((n) => loadedNamespacesRef.current.add(n));
+            setTranslations((prev) => ({ ...prev, ...deferred }));
+          } catch (error) {
+            console.error("Failed to load deferred translations:", error);
+          }
+        })();
+      });
+    })();
+
     document.documentElement.lang = currentLanguage;
+
+    return () => {
+      cancelled = true;
+    };
   }, [currentLanguage]);
+
+  // Wait until the critical wave finishes before merging route-specific namespaces.
+  // Otherwise a prefetch can run against stale translations from the previous language,
+  // or `setTranslations(critical)` can overwrite a merge that completed first.
+  // `deferRoutePrefetchRef` is required because route effects can run in the same commit as the
+  // language effect while `isLoading` from the previous render is still false.
+  useEffect(() => {
+    if (isLoading || deferRoutePrefetchRef.current) return;
+
+    let cancelled = false;
+    const routeNamespaces = getNamespacesForPath(location.pathname).filter(
+      (n) => !loadedNamespacesRef.current.has(n)
+    );
+    if (routeNamespaces.length === 0) return;
+
+    void (async () => {
+      try {
+        const extra = await loadTranslationNamespaces(currentLanguage, routeNamespaces);
+        if (cancelled) return;
+        routeNamespaces.forEach((n) => loadedNamespacesRef.current.add(n));
+        setTranslations((prev) => ({ ...prev, ...extra }));
+      } catch (error) {
+        console.error("Failed to load route translations:", error);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [location.pathname, currentLanguage, isLoading]);
   
   useEffect(() => {
     if (!hasLoadedOnce && !isLoading && Object.keys(translations).length > 0) {

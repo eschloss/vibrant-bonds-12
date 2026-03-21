@@ -1,5 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from "react-router-dom";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import React, { lazy } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -89,6 +90,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <Router>
+          <LanguageProvider>
           <Routes>
             <Route path="/" element={<AppLayout />}>
                   <Route index element={<Index />} />
@@ -177,6 +179,7 @@ function App() {
                   <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
+          </LanguageProvider>
         </Router>
         <Toaster />
       </ThemeProvider>

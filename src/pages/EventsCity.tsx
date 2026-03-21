@@ -30,8 +30,6 @@ import {
   getKikiListingDescription,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
-import { ensureHttpsAssetUrl } from "@/lib/imageUrl";
-
 function formatCityName(slug: string): string {
   return slug
     .split("-")
@@ -224,12 +222,6 @@ const EventsCity = () => {
     ? t("events_city.placeholder_city", "Your City")
     : displayCityName;
 
-  const cityImage: string | undefined = useMemo(() => {
-    if (!matchedCity) return undefined;
-    const raw = typeof matchedCity.image === "string" ? matchedCity.image : undefined;
-    return ensureHttpsAssetUrl(raw);
-  }, [matchedCity]);
-
   const seoCityLabel = displayCityName;
 
   const seoProps = {
@@ -243,7 +235,6 @@ const EventsCity = () => {
     },
     keywords: ["events", seoCityLabel, "activities", "meetups", "friend groups"],
     type: "website" as const,
-    image: cityImage,
   };
 
   const howItWorksSteps = [
@@ -297,11 +288,6 @@ const EventsCity = () => {
       <main className="flex-grow">
         <section className="relative pt-24 md:pt-28 pb-10 md:pb-12 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
-          {cityImage ? (
-            <div className="absolute inset-0 -z-10 opacity-20">
-              <img src={cityImage} alt="" className="w-full h-full object-cover" />
-            </div>
-          ) : null}
           <div className="absolute inset-0 -z-10 bg-black/35" />
           <div className="absolute inset-0 -z-5 pointer-events-none">
             <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-purple-600/10 blur-3xl" />

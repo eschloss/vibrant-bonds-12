@@ -2,14 +2,9 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { LanguageProvider } from './contexts/LanguageContext.tsx'
 import { onCLS, onFID, onLCP, onINP, onTTFB } from 'web-vitals'
 
-createRoot(document.getElementById("root")!).render(
-  <LanguageProvider>
-    <App />
-  </LanguageProvider>
-);
+createRoot(document.getElementById("root")!).render(<App />);
 
 // Minimal Web Vitals reporting (console + dataLayer if present)
 const report = (name: string, value: number) => {
