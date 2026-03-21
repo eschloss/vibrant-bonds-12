@@ -35,6 +35,9 @@
     <link rel="preconnect" href="https://api7.kikiapp.eu" crossorigin>
     <link rel="preconnect" href="https://api8.kikiapp.eu" crossorigin>
     <link rel="preconnect" href="https://api9.kikiapp.eu" crossorigin>
+    <!-- Prefetch script before Stripe/widgets preconnects so API fetches are not starved -->
+    <!-- KIKI_PREFETCH_CONFIG -->
+    <script src="/kiki-api-prefetch.js"></script>
     <link rel="preconnect" href="https://js.stripe.com" crossorigin>
     <link rel="preconnect" href="https://api.stripe.com" crossorigin>
     <link rel="preconnect" href="https://embed.typeform.com" crossorigin>

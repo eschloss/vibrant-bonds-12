@@ -25,6 +25,8 @@ export interface GetKikiEventResponse {
   city_label: string;
   slug: string;
   title: string;
+  /** Very short blurb for cards; prefer over short_description when present. */
+  micro_description?: string;
   short_description: string;
   long_description: string;
   language?: string;
@@ -66,6 +68,37 @@ export interface GetKikiEventResponse {
     max_quantity?: number;
     default_quantity?: number;
   }>;
+  /** From Kiki.get_json — when true, treat booking as closed. */
+  sold_out?: boolean;
+  /** From Kiki.get_json — when true, event date has passed. */
+  past_event?: boolean;
+}
+
+/** Response from GET /events/get_kikis */
+export interface GetKikisResponse {
+  code: string;
+  city_label_en: string;
+  city_label_es: string;
+  kikis: GetKikiEventResponse[];
+}
+
+export function buildGetKikisUrl(cityCode: string, page: number): string {
+  const params = new URLSearchParams({
+    code: cityCode,
+    page: String(page),
+  });
+  return shardApiUrl(`${EVENTS_API_BASE_URL}/events/get_kikis?${params.toString()}`);
+}
+
+export function buildFutureInviteSignupUrl(): string {
+  return shardApiUrl(`${EVENTS_API_BASE_URL}/events/future-invite-signup/`);
+}
+
+/** City listing cards: prefer API micro blurb, else short description. */
+export function getKikiListingDescription(k: GetKikiEventResponse): string {
+  const micro = (k.micro_description ?? "").trim();
+  if (micro) return micro;
+  return (k.short_description ?? "").trim();
 }
 
 /** Extract provider display name, handling both legacy string and new object shape */

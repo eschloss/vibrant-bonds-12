@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -6,7 +6,6 @@ import {
   MapPin,
   ArrowRight,
   MessageSquare,
-  CheckCircle,
   Ticket,
   UtensilsCrossed,
   Users,
@@ -15,29 +14,28 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Seo } from "@/hooks/useSeo";
-import { getEventsByCity, orderEventsForCityPage, type Event } from "@/data/events";
 import { useApiJson } from "@/hooks/useApiJson";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { useTranslation } from "@/hooks/useTranslation";
 import EventsCityFaqSection from "@/components/EventsCityFaqSection";
 import EventsCityFutureInterestSection from "@/components/EventsCityFutureInterestSection";
+import EventsCitiesPartnerAside from "@/components/EventsCitiesPartnerAside";
+import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
+import {
+  type GetKikiEventResponse,
+  type GetKikisResponse,
+  buildGetKikiUrl,
+  buildGetKikisUrl,
+  getKikiListingDescription,
+  parseEventLocalDateTime,
+} from "@/lib/eventApi";
 
 function formatCityName(slug: string): string {
   return slug
     .split("-")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-  });
 }
 
 const HERO_PARTICLES = [
@@ -59,18 +57,18 @@ function scrollToHowItWorksSection() {
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function hashString(value: string): number {
-  let hash = 0;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash << 5) - hash + value.charCodeAt(i);
-    hash |= 0;
+async function prefetchGetKikiForSlugs(slugs: string[]) {
+  const batch = 4;
+  for (let i = 0; i < slugs.length; i += batch) {
+    const chunk = slugs.slice(i, i + batch);
+    await Promise.all(
+      chunk.map((slug) =>
+        fetch(buildGetKikiUrl(slug), {
+          headers: { accept: "application/json" },
+        }).catch(() => undefined)
+      )
+    );
   }
-  return Math.abs(hash);
-}
-
-function getTicketsLeftForEvent(event: Event): number | null {
-  if (event.soldOut) return null;
-  return (hashString(event.id) % 6) + 2;
 }
 
 const EventsCity = () => {
@@ -78,17 +76,17 @@ const EventsCity = () => {
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
   const { t } = useTranslation();
+  const locale = currentLanguage === "es" ? "es" : "en-US";
 
-  const events = cityName ? getEventsByCity(cityName) : [];
-  const { upcomingAvailable, upcomingSoldOut, past } = useMemo(() => orderEventsForCityPage(events), [events]);
-  const orderedEvents = useMemo(
-    () => [
-      ...upcomingAvailable.map((event) => ({ event, variant: "upcoming" as const })),
-      ...upcomingSoldOut.map((event) => ({ event, variant: "upcoming" as const })),
-      ...past.map((event) => ({ event, variant: "past" as const })),
-    ],
-    [upcomingAvailable, upcomingSoldOut, past]
-  );
+  const [kikis, setKikis] = useState<GetKikiEventResponse[]>([]);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [loadingInitial, setLoadingInitial] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [kikiFetchError, setKikiFetchError] = useState<string | null>(null);
+  const [cityLabelsFromApi, setCityLabelsFromApi] = useState<{ en: string; es: string } | null>(null);
+  const loadMoreSentinelRef = useRef<HTMLDivElement | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   const { data: cities, loading: loadingCities } = useApiJson<any[]>(
     "/auth/get_all_cities_expanded",
@@ -97,10 +95,23 @@ const EventsCity = () => {
 
   const matchedCity = useMemo(() => {
     if (!cityName || !Array.isArray(cities) || cities.length === 0) return undefined;
-    return cities.find(
-      (c: any) => typeof c?.url2 === "string" && c.url2.replace(/^\//, "").toLowerCase() === cityName.toLowerCase()
-    );
+    const lower = cityName.toLowerCase();
+    return cities.find((c: any) => {
+      const urlMatch =
+        typeof c?.url2 === "string" && c.url2.replace(/^\//, "").toLowerCase() === lower;
+      const codeMatch = typeof c?.code === "string" && String(c.code).toLowerCase() === lower;
+      return urlMatch || codeMatch;
+    });
   }, [cities, cityName]);
+
+  const cityCode = matchedCity && typeof (matchedCity as any).code === "string" ? (matchedCity as any).code : "";
+  const cityDbId = useMemo(() => {
+    if (!matchedCity) return null;
+    const raw = (matchedCity as any).id;
+    if (raw === undefined || raw === null) return null;
+    const n = Number(raw);
+    return Number.isFinite(n) ? n : null;
+  }, [matchedCity]);
 
   useEffect(() => {
     if (!cityName) return;
@@ -110,19 +121,122 @@ const EventsCity = () => {
     }
   }, [cities, matchedCity, cityName, navigate]);
 
-  const formattedCityName = useMemo(() => {
+  const fetchKikisPage = useCallback(
+    async (page: number, append: boolean) => {
+      if (!cityCode) return;
+      if (abortRef.current) abortRef.current.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      try {
+        if (append) setLoadingMore(true);
+        else {
+          setLoadingInitial(true);
+          setKikiFetchError(null);
+        }
+        const url = buildGetKikisUrl(cityCode, page);
+        let json: GetKikisResponse;
+        const prefetchFirst = !append && page === 0 ? getPrefetchJsonPromise(url) : undefined;
+        if (prefetchFirst) {
+          try {
+            json = (await prefetchFirst) as GetKikisResponse;
+          } catch {
+            const res = await fetch(url, {
+              signal: controller.signal,
+              headers: { accept: "application/json" },
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            json = (await res.json()) as GetKikisResponse;
+          }
+        } else {
+          const res = await fetch(url, {
+            signal: controller.signal,
+            headers: { accept: "application/json" },
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          json = (await res.json()) as GetKikisResponse;
+        }
+        const batch = Array.isArray(json.kikis) ? json.kikis : [];
+        if (!append) {
+          setCityLabelsFromApi({
+            en: json.city_label_en || "",
+            es: json.city_label_es || "",
+          });
+        }
+        setKikis((prev) => (append ? [...prev, ...batch] : batch));
+        setHasMore(batch.length >= 10);
+        setPageIndex(page);
+        void prefetchGetKikiForSlugs(batch.map((k) => k.slug).filter(Boolean));
+      } catch (e: unknown) {
+        if ((e as Error)?.name === "AbortError") return;
+        setKikiFetchError(e instanceof Error ? e.message : "Error");
+        if (!append) setKikis([]);
+      } finally {
+        setLoadingInitial(false);
+        setLoadingMore(false);
+      }
+    },
+    [cityCode]
+  );
+
+  useEffect(() => {
+    if (!cityCode || !matchedCity) return;
+    setKikis([]);
+    setPageIndex(0);
+    setHasMore(true);
+    setCityLabelsFromApi(null);
+    void fetchKikisPage(0, false);
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, [cityCode, matchedCity, fetchKikisPage]);
+
+  useEffect(() => {
+    if (!hasMore || loadingInitial || loadingMore || !cityCode) return;
+    const el = loadMoreSentinelRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const [e] = entries;
+        if (e?.isIntersecting && hasMore && !loadingMore && !loadingInitial) {
+          void fetchKikisPage(pageIndex + 1, true);
+        }
+      },
+      { root: null, rootMargin: "200px", threshold: 0 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [hasMore, loadingInitial, loadingMore, cityCode, pageIndex, fetchKikisPage]);
+
+  const expandedCityName = useMemo(() => {
     if (!cityName) return "City";
     if (!matchedCity) return formatCityName(cityName);
     const nameField = currentLanguage === "es" ? "es_name" : "en_name";
     return matchedCity[nameField] || matchedCity.en_name || formatCityName(cityName);
   }, [cityName, matchedCity, currentLanguage]);
 
+  const displayCityName = useMemo(() => {
+    if (cityLabelsFromApi) {
+      return currentLanguage === "es"
+        ? cityLabelsFromApi.es || cityLabelsFromApi.en || expandedCityName
+        : cityLabelsFromApi.en || cityLabelsFromApi.es || expandedCityName;
+    }
+    return expandedCityName;
+  }, [cityLabelsFromApi, currentLanguage, expandedCityName]);
+
+  const heroCityName = loadingInitial && !cityLabelsFromApi
+    ? t("events_city.placeholder_city", "Your City")
+    : displayCityName;
+
+  const faqCityLabel = loadingInitial && !cityLabelsFromApi
+    ? t("events_city.placeholder_city", "Your City")
+    : displayCityName;
+
   const cityImage: string | undefined = useMemo(() => {
     if (!matchedCity) return undefined;
     return typeof matchedCity.image === "string" ? matchedCity.image : undefined;
   }, [matchedCity]);
 
-  const seoCityLabel = formattedCityName;
+  const seoCityLabel = displayCityName;
 
   const seoProps = {
     title: {
@@ -169,9 +283,20 @@ const EventsCity = () => {
     },
   ];
 
+  const formatEventDate = (iso: string) =>
+    parseEventLocalDateTime(iso).toLocaleString(locale, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+
+  const showOverlayOnlyInitialCities = loadingCities && (!cities || cities.length === 0);
+
   return (
     <div className="flex flex-col min-h-screen dark">
-      <PageLoadingOverlay show={loadingCities} />
+      <PageLoadingOverlay show={showOverlayOnlyInitialCities} />
       <Seo {...seoProps} />
       <Navbar />
 
@@ -213,9 +338,12 @@ const EventsCity = () => {
               <div className="text-center">
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]">
                   {t("events_city.hero.title_prefix", "Meet new people at events in")}{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                    {formattedCityName}
-                  </span>
+                  <Link
+                    to="/events/cities"
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue underline-offset-4 decoration-white/50 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+                  >
+                    {heroCityName}
+                  </Link>
                 </h1>
 
                 <p className="text-sm sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
@@ -273,47 +401,67 @@ const EventsCity = () => {
           </div>
         </section>
 
-        {/* Events: sorted available → sold out → past */}
         <section className="pt-8 pb-16 md:pt-10 md:pb-20 bg-gradient-to-b from-gray-900 to-black text-white">
           <div className="container mx-auto px-4">
-            {events.length === 0 ? (
+            {kikiFetchError ? (
+              <p className="text-center text-rose-300 py-8">{kikiFetchError}</p>
+            ) : null}
+            {loadingInitial ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-white/10 bg-gray-800/40 h-[340px] animate-pulse"
+                  />
+                ))}
+              </div>
+            ) : kikis.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-16"
               >
                 <h2 className="text-2xl font-bold mb-4">
-                  No events scheduled yet in {formattedCityName}
+                  {t("events_city.empty.title", "No events scheduled yet in {city}").replace("{city}", displayCityName)}
                 </h2>
-                <p className="text-gray-300 mb-8 max-w-xl mx-auto">
-                  Check back soon for upcoming events, or explore other cities.
+                <p className="text-gray-300 max-w-xl mx-auto">
+                  {t(
+                    "events_city.empty.body",
+                    "Check back soon for upcoming events, or explore other cities."
+                  )}
                 </p>
-                <button
-                  onClick={() => navigate("/events/cities")}
-                  className="inline-flex items-center gap-2 text-pulse-pink hover:text-pulse-pink-300 transition-colors"
-                >
-                  <ArrowLeft size={18} />
-                  Back to Cities
-                </button>
               </motion.div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {orderedEvents.map(({ event, variant }, index) => (
-                  <CityEventCard
-                    key={event.id}
-                    event={event}
-                    variant={variant}
-                    index={index}
-                    t={t}
-                    formatDate={formatDate}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {kikis.map((kiki, index) => (
+                    <CityKikiCard
+                      key={`${kiki.id}-${kiki.slug}-${index}`}
+                      kiki={kiki}
+                      index={index}
+                      t={t}
+                      formatEventDate={formatEventDate}
+                    />
+                  ))}
+                </div>
+                {hasMore ? (
+                  <div ref={loadMoreSentinelRef} className="h-16 flex items-center justify-center py-8">
+                    {loadingMore ? (
+                      <span className="text-sm text-white/50">
+                        {t("events_city.loading_more", "Loading more events…")}
+                      </span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </>
             )}
           </div>
         </section>
 
-        <EventsCityFutureInterestSection cityLabel={formattedCityName} />
+        <EventsCityFutureInterestSection
+          cityLabel={faqCityLabel}
+          cityId={cityDbId}
+        />
 
         <section
           id="events-city-how-it-works"
@@ -395,7 +543,13 @@ const EventsCity = () => {
           </div>
         </section>
 
-        <EventsCityFaqSection cityLabel={formattedCityName} />
+        <EventsCityFaqSection cityLabel={faqCityLabel} />
+
+        <section className="border-t border-white/5 bg-gradient-to-b from-gray-900 to-black py-10 md:py-12">
+          <div className="container mx-auto px-4">
+            <EventsCitiesPartnerAside className="mb-0" />
+          </div>
+        </section>
       </main>
 
       <Footer />
@@ -403,33 +557,34 @@ const EventsCity = () => {
   );
 };
 
-function CityEventCard({
-  event,
-  variant,
+function CityKikiCard({
+  kiki,
   index,
   t,
-  formatDate,
+  formatEventDate,
 }: {
-  event: Event;
-  variant: "upcoming" | "past";
+  kiki: GetKikiEventResponse;
   index: number;
   t: (key: string, fallback: string) => string;
-  formatDate: (iso: string) => string;
+  formatEventDate: (iso: string) => string;
 }) {
-  const soldOut = Boolean(event.soldOut);
-  const isPast = variant === "past";
-  const ticketsLeft = !isPast && !soldOut ? getTicketsLeftForEvent(event) : null;
+  const soldOut = Boolean(kiki.sold_out);
+  const isPast = Boolean(kiki.past_event);
+  const ticketsRemaining =
+    typeof kiki.tickets_remaining === "number" && kiki.tickets_remaining > 0 && !soldOut && !isPast
+      ? kiki.tickets_remaining
+      : null;
 
   const cardInner = (
     <Card
-      className={`bg-gray-800/50 backdrop-blur-lg border-gray-700 transition-all duration-300 h-full group overflow-hidden ${
+      className={`bg-gray-800/50 backdrop-blur-lg border-gray-700 transition-all duration-300 h-full flex flex-col group overflow-hidden ${
         isPast ? "grayscale border-white/10 bg-gray-800/35" : "hover:border-purple-500/50 hover:scale-[1.02]"
       } ${soldOut && !isPast ? "border-amber-900/40" : ""}`}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 shrink-0 overflow-hidden">
         <img
-          src={event.primaryImage}
-          alt={event.title}
+          src={kiki.primary_image}
+          alt={kiki.title}
           className={`w-full h-full object-cover transition-transform duration-300 ${
             isPast ? "grayscale" : "group-hover:scale-110"
           }`}
@@ -438,15 +593,21 @@ function CityEventCard({
           className={`absolute inset-0 bg-gradient-to-t ${isPast ? "from-gray-900/95 to-transparent" : "from-gray-900/80 to-transparent"}`}
         />
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-          {ticketsLeft ? (
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/15 backdrop-blur px-3 py-1 text-xs font-medium text-amber-300">
-              <Ticket size={13} className="shrink-0" aria-hidden />
-              {t(
-                ticketsLeft === 1
-                  ? "events_city.card.ticket_left_singular"
-                  : "events_city.card.tickets_left",
-                ticketsLeft === 1 ? "Only 1 ticket left" : "Only {count} tickets left"
-              ).replace("{count}", String(ticketsLeft))}
+          {ticketsRemaining ? (
+            <div className="relative inline-flex">
+              <span
+                className="pointer-events-none absolute -inset-[12px] rounded-full bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_93%,rgba(0,0,0,0.48)_96.5%,rgba(0,0,0,0.12)_99%,transparent_100%)]"
+                aria-hidden
+              />
+              <div className="relative inline-flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/15 backdrop-blur px-3 py-1 text-xs font-medium text-amber-300">
+                <Ticket size={13} className="shrink-0" aria-hidden />
+                {t(
+                  ticketsRemaining === 1
+                    ? "events_city.card.ticket_left_singular"
+                    : "events_city.card.tickets_left",
+                  ticketsRemaining === 1 ? "Only 1 ticket left" : "Only {count} tickets left"
+                ).replace("{count}", String(ticketsRemaining))}
+              </div>
             </div>
           ) : null}
           {!isPast && soldOut ? (
@@ -461,23 +622,47 @@ function CityEventCard({
           ) : null}
         </div>
         <div className="absolute bottom-3 left-3 right-3">
-          <div className="flex items-center text-pulse-pink text-sm gap-2">
-            <Calendar size={14} />
-            {formatDate(event.dateTime)}
+          <div className="relative inline-flex max-w-full">
+            <span
+              className="pointer-events-none absolute -inset-x-4 -inset-y-3 rounded-2xl bg-[radial-gradient(ellipse_100%_115%_at_center,transparent_0%,transparent_88%,rgba(0,0,0,0.42)_92%,rgba(0,0,0,0.1)_97%,transparent_100%)]"
+              aria-hidden
+            />
+            <div className="relative inline-flex max-w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm text-pulse-pink backdrop-blur-md [text-shadow:0_1px_2px_rgba(0,0,0,0.55)] [&_svg]:drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+              <Calendar size={14} className="shrink-0" aria-hidden />
+              <span className="min-w-0 truncate">{formatEventDate(kiki.datetime_local)}</span>
+            </div>
           </div>
         </div>
       </div>
-      <CardContent className="p-4">
-        <h3 className={`text-xl font-bold transition-colors mb-2 line-clamp-2 ${isPast ? "text-white/85" : "text-white group-hover:text-pulse-pink"}`}>
-          {event.title}
-        </h3>
-        <p className={`text-sm mb-3 line-clamp-2 ${isPast ? "text-gray-400" : "text-gray-300"}`}>{event.shortDescription}</p>
-        <div className="flex items-center justify-between gap-2">
+      <CardContent className="p-4 flex flex-col flex-1 min-h-0">
+        {/*
+          Fixed block = 2 lines title (text-xl/leading-7) + gap + 2 lines description (text-sm/leading-5)
+          so every card aligns; bottom row sits at the same vertical position.
+        */}
+        <div className="mb-3 flex min-h-[6.5rem] flex-col gap-2">
+          <h3
+            className={`text-xl font-bold leading-7 line-clamp-2 min-h-[3.5rem] transition-colors ${
+              isPast ? "text-white/85" : "text-white group-hover:text-pulse-pink"
+            }`}
+          >
+            {kiki.title}
+          </h3>
+          <p
+            className={`text-sm leading-5 line-clamp-2 min-h-[2.5rem] ${
+              isPast ? "text-gray-400" : "text-gray-300"
+            }`}
+          >
+            {getKikiListingDescription(kiki)}
+          </p>
+        </div>
+        <div className="mt-auto flex items-center justify-between gap-2">
           <span className={`text-sm flex items-center gap-1 min-w-0 ${isPast ? "text-gray-500" : "text-gray-400"}`}>
             <MapPin size={14} className="shrink-0" />
-            <span className="truncate">{event.place}</span>
+            <span className="truncate">{kiki.place}</span>
           </span>
-          <span className={`text-sm font-medium flex items-center gap-1 shrink-0 ${isPast ? "text-gray-500" : "text-pulse-pink"}`}>
+          <span
+            className={`text-sm font-medium flex items-center gap-1 shrink-0 ${isPast ? "text-gray-500" : "text-pulse-pink"}`}
+          >
             {t("events_city.card.learn_more", "Learn more")}
             <ArrowRight size={14} />
           </span>
@@ -492,8 +677,9 @@ function CityEventCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="h-full"
     >
-      <Link to={`/events/${event.slug}`} className="block">
+      <Link to={`/events/${kiki.slug}`} className="block h-full">
         {cardInner}
       </Link>
     </motion.div>

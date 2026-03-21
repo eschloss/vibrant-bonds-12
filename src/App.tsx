@@ -68,6 +68,7 @@ const FAQ = lazy(() => import("@/pages/FAQ"));
 const LonelinessEpidemic = lazy(() => import("@/pages/LonelinessEpidemic"));
 const RealLifeMagic = lazy(() => import("@/pages/RealLifeMagic"));
 const HowItWorksPage = lazy(() => import("@/pages/HowItWorks"));
+const HowItWorksEventsPage = lazy(() => import("@/pages/HowItWorksEvents"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const EventBookingTerms = lazy(() => import("@/pages/EventBookingTerms"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
@@ -109,6 +110,8 @@ function App() {
                   <Route path="events" element={<Events />} />
                   <Route path="events/cities" element={<EventsCities />} />
                   <Route path="events/cities/:cityName" element={<EventsCity />} />
+
+                  <Route path="events/how-it-works" element={<HowItWorksEventsPage />} />
 
                   {/* New canonical event routes */}
                   <Route path="events/:eventSlug" element={<EventDetail />} />

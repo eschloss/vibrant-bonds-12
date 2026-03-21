@@ -7,6 +7,7 @@ import { Seo } from "@/hooks/useSeo";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
 import { buildEventContext, buildGetKikiUrl, type GetKikiEventResponse } from "@/lib/eventApi";
 import { useChatContext } from "@/contexts/ChatContext";
 
@@ -27,30 +28,53 @@ const EventBooking = () => {
 
     const controller = new AbortController();
     const url = buildGetKikiUrl(eventSlug);
-    fetch(url, {
-      signal: controller.signal,
-      headers: { accept: "application/json" },
-    })
-      .then((res) => {
+    let cancelled = false;
+
+    const run = async () => {
+      const prefetchP = getPrefetchJsonPromise(url);
+      if (prefetchP) {
+        try {
+          const data = (await prefetchP) as GetKikiEventResponse;
+          if (cancelled) return;
+          setEventData(data);
+          setLoading(false);
+          return;
+        } catch {
+          /* fall through */
+        }
+      }
+      if (cancelled) return;
+
+      try {
+        const res = await fetch(url, {
+          signal: controller.signal,
+          headers: { accept: "application/json" },
+        });
+        if (cancelled) return;
         if (res.status === 404) {
           setNotFound(true);
-          return null;
+          return;
         }
         if (!res.ok) {
           setNotFound(true);
-          return null;
+          return;
         }
-        return res.json();
-      })
-      .then((json) => {
-        if (json) setEventData(json as GetKikiEventResponse);
-      })
-      .catch((err) => {
-        if (err?.name !== "AbortError") setNotFound(true);
-      })
-      .finally(() => setLoading(false));
+        const json = (await res.json()) as GetKikiEventResponse;
+        if (cancelled) return;
+        setEventData(json);
+      } catch (err: unknown) {
+        if ((err as Error)?.name !== "AbortError" && !cancelled) setNotFound(true);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
 
-    return () => controller.abort();
+    void run();
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
   }, [eventSlug]);
 
   React.useEffect(() => {

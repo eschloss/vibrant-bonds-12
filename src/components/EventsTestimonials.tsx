@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { getUpcomingEvents } from "@/data/events";
+import { EVENT_VIBES } from "@/data/eventVibes";
 
 type Review = {
   id: string;
@@ -20,8 +20,17 @@ type Review = {
   rating: number;
 };
 
+/** Decorative hero images for testimonial cards (not live event data). */
+const TESTIMONIAL_CARD_VISUALS: { primaryImage: string; title: string; citySlug: string }[] = [
+  { primaryImage: EVENT_VIBES[0].backgroundImage, title: "Hands-on workshop", citySlug: "london" },
+  { primaryImage: EVENT_VIBES[1].backgroundImage, title: "Live performance", citySlug: "new-york" },
+  { primaryImage: EVENT_VIBES[2].backgroundImage, title: "Outdoor adventure", citySlug: "los-angeles" },
+  { primaryImage: EVENT_VIBES[3].backgroundImage, title: "Game night", citySlug: "boston" },
+  { primaryImage: EVENT_VIBES[0].backgroundImage, title: "Waterfront meetup", citySlug: "lagos" },
+];
+
 export default function EventsTestimonials() {
-  const events = React.useMemo(() => getUpcomingEvents(8), []);
+  const events = React.useMemo(() => TESTIMONIAL_CARD_VISUALS, []);
 
   const reviews: Review[] = React.useMemo(
     () => [

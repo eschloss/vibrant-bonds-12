@@ -1,13 +1,10 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { UserPlus } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
 import MenuButton from "./MenuButton";
 import MobileNavLinks from "./MobileNavLinks";
 import { useTranslation } from "@/hooks/useTranslation";
-import Text from "@/components/Text";
 import { useRefParam } from "@/hooks/useRefParam";
 import { useEventHeader } from "@/contexts/EventHeaderContext";
 
@@ -16,23 +13,27 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { eventSlug } = useParams<{ eventSlug: string }>();
   const eventHeader = useEventHeader();
   const isMatchmakingPage = location.pathname.includes("cities/") || location.pathname.includes("matchmaking") || location.pathname.includes("neighborhoods/");
   const isEventsCityPage = /^\/events\/cities\/[^/]+\/?$/.test(location.pathname);
-  const isEventPage = Boolean(eventSlug && /^\/events\/[^/]+(\/|$)/.test(location.pathname));
+  /** Pulse events hub and all /events/* subpages — hide Meet Your Crew / See More Cities CTA */
+  const isEventsSection =
+    location.pathname === "/events" || location.pathname.startsWith("/events/");
+  /** Matchmaking “See More Cities” — not the Pulse events hub at /events/cities/:x */
+  const showSeeMoreCitiesCta = isMatchmakingPage && !isEventsCityPage;
   const isHomePage = location.pathname === "/";
-  const isMobile = useIsMobile();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();
   const { addRefToUrl } = useRefParam();
   const useDarkTopNav = (isHomePage || isMatchmakingPage) && !isEventsCityPage;
+  const howItWorksHref = isEventsSection
+    ? addRefToUrl("/events/how-it-works")
+    : addRefToUrl("/how-it-works");
 
   // Translated nav links
   const navLinks = [
-    { label: t("navbar.how_it_works", "How it works"), href: addRefToUrl("/how-it-works") },
+    { label: t("navbar.how_it_works", "How it works"), href: howItWorksHref },
     { label: t("navbar.activities", "Adventures"), href: addRefToUrl("/activities") },
-    { label: t("navbar.partnerships", "Partnerships"), href: addRefToUrl("/partners") },
     { label: t("navbar.meet_pip", "Meet Pip"), href: addRefToUrl("/meet-pip") },
     { label: t("navbar.contact", "Contact"), href: addRefToUrl("/contact") },
   ];
@@ -89,10 +90,11 @@ const Navbar = () => {
           useDarkTopNav && !scrolled ? "text-[#15191C]" : "text-white"
         )}
       >
-        <div className="container mx-auto px-4 xl:max-w-7xl flex items-left justify-between">
-          <Link
+        <div className="container mx-auto px-4 xl:max-w-7xl flex items-center justify-between">
+          <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:flex-none lg:shrink-0">
+            <Link
             to={addRefToUrl("/")}
-            className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out"
+            className="flex items-center gap-2 font-display font-bold text-2xl transition-colors duration-300 ease-in-out shrink-0"
           >
             <div className="relative h-6 w-32">
               <img
@@ -112,6 +114,7 @@ const Navbar = () => {
             </div>
 
           </Link>
+          </div>
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map(({ label, href }) => (
               <Link
@@ -123,26 +126,28 @@ const Navbar = () => {
               </Link>
             ))}
           </nav>
-          <div className="hidden lg:block">
-            {isMatchmakingPage ? (
+          <div className="hidden lg:block shrink-0">
+            {showSeeMoreCitiesCta ? (
               <Link
                 to={addRefToUrl("/cities")}
-                className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+                className={cn(
+                  "bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white",
+                  isEventsSection && "invisible pointer-events-none"
+                )}
+                tabIndex={isEventsSection ? -1 : undefined}
+                aria-hidden={isEventsSection ? true : undefined}
               >
                 <span>{t("navbar.see_more_cities", "See More Cities")}</span>
-              </Link>
-            ) : isEventPage && eventSlug ? (
-              <Link
-                to={eventHeader?.checkoutHref ?? `/events/${eventSlug}/checkout`}
-                onClick={() => eventHeader?.trackCheckoutClick("header")}
-                className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
-              >
-                <span>{t("navbar.reserve_spot", "Reserve your spot")}</span>
               </Link>
             ) : (
               <Link
                 to={addRefToUrl("/cities")}
-                className="bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white"
+                className={cn(
+                  "bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-[#FF2688]/20 transition-all duration-300 hover:shadow-[#FF2688]/30 font-medium text-white",
+                  isEventsSection && "invisible pointer-events-none"
+                )}
+                tabIndex={isEventsSection ? -1 : undefined}
+                aria-hidden={isEventsSection ? true : undefined}
               >
                 <span>{t("navbar.meet_your_crew", "Meet Your Crew")}</span>
               </Link>
@@ -162,10 +167,10 @@ const Navbar = () => {
         <MobileNavLinks
           closeMenu={() => setIsMenuOpen(false)}
           scrollToSection={scrollToSection}
-          isMatchmakingPage={isMatchmakingPage}
-          isEventPage={isEventPage}
-          eventSlug={eventSlug ?? undefined}
+          showSeeMoreCitiesCta={showSeeMoreCitiesCta}
+          hidePrimaryCta={isEventsSection}
           eventHeader={eventHeader}
+          howItWorksHref={howItWorksHref}
         />
       </div>
     </>

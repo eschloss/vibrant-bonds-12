@@ -12,6 +12,7 @@ import {
   UtensilsCrossed,
   Globe,
   ChevronDown,
+  ChevronLeft,
   ChevronUp,
   Ticket,
 } from "lucide-react";
@@ -19,6 +20,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useRefParam } from "@/hooks/useRefParam";
 import { Seo } from "@/hooks/useSeo";
 import NotFound from "@/pages/NotFound";
 import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
@@ -48,6 +50,7 @@ import {
   parseEventLocalDateTime,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
+import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import {
   type EventHeaderCtaLocation,
@@ -72,6 +75,8 @@ type SignUpCardProps = {
   ticketsRemaining: number;
   showPricing?: boolean;
   showSpotsRemaining?: boolean;
+  checkoutDisabled?: boolean;
+  checkoutDisabledLabel?: string;
 };
 
 const SignUpCard = ({
@@ -87,6 +92,8 @@ const SignUpCard = ({
   ticketsRemaining,
   showPricing = true,
   showSpotsRemaining = true,
+  checkoutDisabled = false,
+  checkoutDisabledLabel = "",
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
@@ -137,6 +144,14 @@ const SignUpCard = ({
             </div>
           ) : null}
           <div className="space-y-2">
+            {checkoutDisabled ? (
+              <span
+                role="status"
+                className="w-full justify-center inline-flex items-center gap-2 bg-white/10 text-white/55 px-6 py-4 rounded-full font-semibold text-lg cursor-not-allowed border border-white/10"
+              >
+                {checkoutDisabledLabel || t("event_detail.cta.unavailable", "Unavailable")}
+              </span>
+            ) : (
             <Link
               to={checkoutHref}
               onClick={() => trackCheckoutClick("sidebar")}
@@ -144,6 +159,7 @@ const SignUpCard = ({
             >
               {t("event_detail.buy_my_ticket", "Buy my ticket")}
             </Link>
+            )}
             {onOpenFutureInvites && (
               <button
                 type="button"
@@ -219,6 +235,7 @@ const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { changeLanguage } = useLanguage();
   const { t, currentLanguage } = useTranslation();
+  const { addRefToUrl } = useRefParam();
   const locale = currentLanguage === "es" ? "es" : "en-US";
 
   const formatDateTimeWindowLong = (
@@ -333,35 +350,55 @@ const EventDetail = () => {
 
     const controller = new AbortController();
     const url = buildGetKikiUrl(eventSlug);
+    let cancelled = false;
 
-    fetch(url, {
-      signal: controller.signal,
-      headers: { accept: "application/json" },
-    })
-      .then((res) => {
+    const run = async () => {
+      const prefetchP = getPrefetchJsonPromise(url);
+      if (prefetchP) {
+        try {
+          const data = (await prefetchP) as GetKikiEventResponse;
+          if (cancelled) return;
+          setEventData(data);
+          if (data.language) changeLanguage(data.language);
+          setLoading(false);
+          return;
+        } catch {
+          /* fall through to fetch */
+        }
+      }
+      if (cancelled) return;
+
+      try {
+        const res = await fetch(url, {
+          signal: controller.signal,
+          headers: { accept: "application/json" },
+        });
+        if (cancelled) return;
         if (res.status === 404) {
           setNotFound(true);
-          return null;
+          return;
         }
         if (!res.ok) {
           setNotFound(true);
-          return null;
+          return;
         }
-        return res.json();
-      })
-      .then((json) => {
-        if (json) {
-          const data = json as GetKikiEventResponse;
-          setEventData(data);
-          if (data.language) changeLanguage(data.language);
-        }
-      })
-      .catch((err) => {
-        if (err?.name !== "AbortError") setNotFound(true);
-      })
-      .finally(() => setLoading(false));
+        const json = (await res.json()) as GetKikiEventResponse;
+        if (cancelled) return;
+        setEventData(json);
+        if (json.language) changeLanguage(json.language);
+      } catch (err: unknown) {
+        if ((err as Error)?.name !== "AbortError" && !cancelled) setNotFound(true);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
 
-    return () => controller.abort();
+    void run();
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
   }, [eventSlug, changeLanguage]);
 
   useEffect(() => {
@@ -554,6 +591,18 @@ const EventDetail = () => {
   const displayHeroImages = heroImages.length > 0 ? heroImages : [data.primary_image];
 
   const checkoutHref = `/events/${data.slug}/checkout`;
+
+  const checkoutDisabled =
+    !usePlaceholderUI &&
+    !!eventData &&
+    (Boolean(eventData.past_event) || Boolean(eventData.sold_out));
+  const checkoutDisabledLabel =
+    !usePlaceholderUI && eventData?.past_event
+      ? t("event_detail.cta.past_event", "This event has already happened")
+      : !usePlaceholderUI && eventData?.sold_out
+        ? t("event_detail.cta.sold_out", "Sold out")
+        : "";
+
   const futureInvitesParams = {
     event_slug: data.slug,
     event_title: data.title,
@@ -573,7 +622,7 @@ const EventDetail = () => {
     setFutureInvitesOpen(true);
   };
   const trackCheckoutClick = (ctaLocation: EventHeaderCtaLocation) => {
-    if (usePlaceholderUI) return;
+    if (usePlaceholderUI || checkoutDisabled) return;
     trackQualifiedEventPageView("checkout_click", {
       cta_location: ctaLocation,
       destination: checkoutHref,
@@ -638,6 +687,13 @@ const EventDetail = () => {
     eventSlug: data.slug,
     checkoutHref,
     trackCheckoutClick,
+    backToCityEvents:
+      !usePlaceholderUI && data.city
+        ? {
+            href: `/events/cities/${encodeURIComponent(data.city)}`,
+            label: (data.city_label || formattedCityName || data.city).trim(),
+          }
+        : undefined,
   };
 
   const shortDescriptionText = usePlaceholderUI
@@ -665,7 +721,7 @@ const EventDetail = () => {
 
       <main className={cn("flex-grow", "pb-20 lg:pb-0")}>
         {/* Hero (match /cities visual language) */}
-        <section className="relative pt-20 md:pt-28 lg:pt-32 pb-12 overflow-hidden">
+        <section className="relative pt-[4.75rem] lg:pt-24 pb-12 overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900 via-purple-900/40 to-gray-900"></div>
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-600 blur-3xl"></div>
@@ -678,6 +734,18 @@ const EventDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
+              {eventHeaderValue.backToCityEvents ? (
+                <Link
+                  to={addRefToUrl(eventHeaderValue.backToCityEvents.href)}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-white/90 hover:text-[#FF2688] transition-colors mb-4"
+                >
+                  <ChevronLeft className="h-4 w-4 shrink-0" aria-hidden />
+                  {t("navbar.see_all_city_events", "See all {city} events").replace(
+                    "{city}",
+                    eventHeaderValue.backToCityEvents.label
+                  )}
+                </Link>
+              ) : null}
               <div className="mb-8">
                 <div className="relative h-64 md:h-96 xl:h-[34rem] 2xl:h-[38rem] rounded-2xl overflow-hidden border border-gray-700 bg-black/20">
                   <Carousel setApi={setHeroCarouselApi} opts={{ loop: true }} className="h-full">
@@ -821,13 +889,11 @@ const EventDetail = () => {
 
               <h1 className="mb-2 text-white leading-tight">
                 <span className="block text-2xl md:text-4xl font-bold">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
                     {t("event_detail.meet_new_friends_at", "Meet New Friends at")}
                   </span>
                 </span>
-                <span className="block text-4xl md:text-6xl font-extrabold text-white">
-                  {data.title}
-                </span>
+                <span className="block text-4xl md:text-6xl font-extrabold text-white">{data.title}</span>
               </h1>
               <p className="mt-3 text-lg md:text-xl text-gray-200 mb-3 md:mb-4 whitespace-pre-line leading-[1.52]">
                 {t(
@@ -843,6 +909,14 @@ const EventDetail = () => {
               >
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col items-center gap-1.5">
+                    {checkoutDisabled ? (
+                      <span
+                        role="status"
+                        className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-white/10 text-white/60 px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl border border-white/15 cursor-not-allowed"
+                      >
+                        {checkoutDisabledLabel}
+                      </span>
+                    ) : (
                     <Link
                       to={checkoutHref}
                       onClick={() => trackCheckoutClick("hero")}
@@ -850,6 +924,7 @@ const EventDetail = () => {
                     >
                       {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
                     </Link>
+                    )}
                     <button
                       type="button"
                       onClick={handleOpenFutureInvites}
@@ -863,7 +938,7 @@ const EventDetail = () => {
                       <Users size={16} className="text-[#38D1BF] shrink-0" />
                       {t("event_detail.everyone_making_friends", "You'll be matched with 4–6 solo attendees")}
                     </div>
-                    {!usePlaceholderUI ? (
+                    {!usePlaceholderUI && !checkoutDisabled ? (
                       <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
                         <Ticket size={16} className="shrink-0" aria-hidden />
                         {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(data.tickets_remaining ?? 18))}
@@ -920,7 +995,7 @@ const EventDetail = () => {
                         <div>
                           <div className="text-white font-semibold leading-snug">{t("event_detail.step1_title", "Get matched with likeminded attendees")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            {t("event_detail.step1_desc", "Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends.")}
+                            {t("event_detail.step1_desc", "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.")}
                           </p>
                         </div>
                       </div>
@@ -956,7 +1031,7 @@ const EventDetail = () => {
                         <div>
                           <div className="text-white font-semibold leading-snug">{t("event_detail.step4_title", "Pre or post-event meetup")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            {t("event_detail.step4_desc", "Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself.")}
+                            {t("event_detail.step4_desc", "If you want, your group can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together.")}
                           </p>
                         </div>
                       </div>
@@ -985,7 +1060,9 @@ const EventDetail = () => {
                     whatsIncluded={data.whats_included ?? []}
                     ticketsRemaining={data.tickets_remaining ?? 20}
                     showPricing={!usePlaceholderUI}
-                    showSpotsRemaining={!usePlaceholderUI}
+                    showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
+                    checkoutDisabled={checkoutDisabled}
+                    checkoutDisabledLabel={checkoutDisabledLabel}
                   />
                 </div>
 
@@ -1026,7 +1103,9 @@ const EventDetail = () => {
                     whatsIncluded={data.whats_included ?? []}
                     ticketsRemaining={data.tickets_remaining ?? 20}
                     showPricing={!usePlaceholderUI}
-                    showSpotsRemaining={!usePlaceholderUI}
+                    showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
+                    checkoutDisabled={checkoutDisabled}
+                    checkoutDisabledLabel={checkoutDisabledLabel}
                   />
               </aside>
             </motion.div>
@@ -1052,6 +1131,8 @@ const EventDetail = () => {
           trackCheckoutClick={trackCheckoutClick}
           t={t}
           ticketsRemaining={data.tickets_remaining ?? 20}
+          checkoutDisabled={checkoutDisabled}
+          checkoutDisabledLabel={checkoutDisabledLabel}
         />
       )}
 

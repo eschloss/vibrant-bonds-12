@@ -17,6 +17,7 @@ const staticRoutes = [
   '/download',
   '/almost-there',
   '/how-it-works',
+  '/events/how-it-works',
   '/press',
   '/faq',
   '/loneliness-epidemic',

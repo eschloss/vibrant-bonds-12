@@ -9,6 +9,8 @@ export interface EventHeaderContextValue {
   checkoutHref: string;
   /** Fires qualified event_page_view_10secs_or_ct (if not yet fired) + event_signup_click + event_qualified_lead. */
   trackCheckoutClick: (ctaLocation: EventHeaderCtaLocation) => void;
+  /** Event detail only: link back to `/events/cities/{code}` with localized label. */
+  backToCityEvents?: { href: string; label: string };
 }
 
 const EventHeaderContext = createContext<EventHeaderContextValue | null>(null);

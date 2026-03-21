@@ -10,7 +10,6 @@ import { Card } from "@/components/ui/card";
 import FloatingActivityCollage from "@/components/FloatingActivityCollage";
 import EventSignupHowItWorks from "@/components/EventSignupHowItWorks";
 import EventsLandingFaqSection from "@/components/EventsLandingFaqSection";
-import { getFeaturedEventImages } from "@/data/events";
 import { EVENT_VIBES } from "@/data/eventVibes";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -23,10 +22,10 @@ export default function Events() {
   }, []);
 
   const collageItems = useMemo(() => {
-    const sliced = getFeaturedEventImages(7);
-    return sliced.map((img, i) => ({
-      id: `event-${i}`,
-      img,
+    const vibeImages = EVENT_VIBES.map((v) => v.backgroundImage);
+    return Array.from({ length: 7 }, (_, i) => ({
+      id: `collage-${i}`,
+      img: vibeImages[i % vibeImages.length],
       alt: t("eventsLanding.collage_alt", "Pulse event photo"),
     }));
   }, [t]);
@@ -336,7 +335,7 @@ export default function Events() {
             transition={{ duration: 0.5 }}
             className="max-w-6xl mx-auto"
           >
-            <EventSignupHowItWorks ctaHref="/how-it-works" ctaLabel={t("eventsLanding.how.cta", "How Pulse works")} />
+            <EventSignupHowItWorks ctaHref="/events/how-it-works" ctaLabel={t("eventsLanding.how.cta", "How Pulse works")} />
           </motion.div>
         </div>
       </section>

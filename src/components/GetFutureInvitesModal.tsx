@@ -10,8 +10,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
-import { EVENTS_API_BASE_URL } from "@/lib/eventApi";
-import { shardApiUrl } from "@/lib/urlShard";
+import { buildFutureInviteSignupUrl } from "@/lib/eventApi";
+import { loadRecaptchaScriptOnce } from "@/lib/recaptchaLoader";
+import { suggestionsForApi } from "@/lib/futureInviteSuggestions";
+import FutureInviteSuggestionChips from "@/components/FutureInviteSuggestionChips";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,6 +36,7 @@ export default function GetFutureInvitesModal({
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [selectedSuggestionIds, setSelectedSuggestionIds] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const reset = useCallback(() => {
@@ -41,6 +44,7 @@ export default function GetFutureInvitesModal({
     setError(null);
     setSubmitted(false);
     setSubmitting(false);
+    setSelectedSuggestionIds([]);
   }, []);
 
   const handleOpenChange = useCallback(
@@ -51,33 +55,22 @@ export default function GetFutureInvitesModal({
     [onOpenChange, reset]
   );
 
-  // Load reCAPTCHA script only when modal is opened
   useEffect(() => {
-    if (!open) return;
-
-    const scriptId = "recaptcha-script";
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-    return () => {
-      document.getElementById(scriptId)?.remove();
-      document.querySelector(".grecaptcha-badge")?.remove();
-      if ((window as any).grecaptcha) delete (window as any).grecaptcha;
-    };
+    if (open) loadRecaptchaScriptOnce();
   }, [open]);
 
-  // Focus input when modal opens
   useEffect(() => {
     if (open && !submitted) {
       const timer = setTimeout(() => inputRef.current?.focus(), 50);
       return () => clearTimeout(timer);
     }
   }, [open, submitted]);
+
+  const toggleSuggestion = (id: string) => {
+    setSelectedSuggestionIds((cur) =>
+      cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,8 +90,25 @@ export default function GetFutureInvitesModal({
 
     setSubmitting(true);
     try {
+      loadRecaptchaScriptOnce();
       if (!(window as any).grecaptcha) {
-        throw new Error(t("future_invites.error_recaptcha", "Security check failed. Please refresh and try again."));
+        await new Promise<void>((resolve, reject) => {
+          let n = 0;
+          const id = window.setInterval(() => {
+            n += 1;
+            if ((window as any).grecaptcha) {
+              window.clearInterval(id);
+              resolve();
+            } else if (n > 80) {
+              window.clearInterval(id);
+              reject(new Error("timeout"));
+            }
+          }, 50);
+        }).catch(() => {
+          throw new Error(
+            t("future_invites.error_recaptcha", "Security check failed. Please refresh and try again.")
+          );
+        });
       }
 
       const token = await new Promise<string>((resolve, reject) => {
@@ -110,14 +120,18 @@ export default function GetFutureInvitesModal({
         });
       });
 
-      const response = await fetch(shardApiUrl(`${EVENTS_API_BASE_URL}/events/future-invite-signup/`), {
+      const payload: Record<string, unknown> = {
+        recaptcha: token,
+        email: trimmed.toLowerCase(),
+        kiki_id: kikiId,
+      };
+      const sug = suggestionsForApi(selectedSuggestionIds);
+      if (sug.length > 0) payload.suggestions = sug;
+
+      const response = await fetch(buildFutureInviteSignupUrl(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          recaptcha: token,
-          email: trimmed.toLowerCase(),
-          kiki_id: kikiId,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json().catch(() => ({ success: false }));
@@ -192,6 +206,8 @@ export default function GetFutureInvitesModal({
                 autoComplete="email"
                 placeholder={t("future_invites.email_placeholder", "you@example.com")}
                 value={email}
+                onFocus={() => loadRecaptchaScriptOnce()}
+                onClick={() => loadRecaptchaScriptOnce()}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setError(null);
@@ -213,6 +229,21 @@ export default function GetFutureInvitesModal({
                 </p>
               )}
             </div>
+
+            <div className="space-y-2">
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {t(
+                  "future_invites.suggestions_optional",
+                  "Optional: tell us what kinds of events you'd most want to see."
+                )}
+              </p>
+              <FutureInviteSuggestionChips
+                selectedIds={selectedSuggestionIds}
+                onToggle={toggleSuggestion}
+                t={t}
+              />
+            </div>
+
             <Button
               type="submit"
               disabled={submitting}

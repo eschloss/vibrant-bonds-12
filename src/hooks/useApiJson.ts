@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { API_BASE_URL } from "@/lib/constants";
+import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
 import { shardApiUrl } from "@/lib/urlShard";
 
 type UseApiJsonOptions<T> = {
@@ -52,6 +53,7 @@ export function useApiJson<T = unknown>(
   const [isStale, setIsStale] = useState<boolean>(false);
   const [hasFetched, setHasFetched] = useState<boolean>(false);
   const abortRef = useRef<AbortController | null>(null);
+  const fetchIdRef = useRef(0);
   const isNeighborhoodRequest = useMemo(() => url.includes("/auth/get_neighborhoods/"), [url]);
 
   useEffect(() => {
@@ -121,6 +123,31 @@ export function useApiJson<T = unknown>(
         }
       }
 
+      const myId = ++fetchIdRef.current;
+      const prefetchP = getPrefetchJsonPromise(url);
+      if (prefetchP) {
+        try {
+          const json = (await prefetchP) as T;
+          if (myId !== fetchIdRef.current) return;
+          setDataState(json);
+          if (cache) {
+            urlCache.set(url, { data: json, timestamp: Date.now() });
+          }
+          setIsStale(false);
+          setHasFetched(true);
+          if (isNeighborhoodRequest) {
+            const len = Array.isArray(json) ? json.length : undefined;
+            console.log("[useApiJson][neighborhoods]", { url, enabled, stage: "prefetch_success", len });
+          }
+          return;
+        } catch {
+          if (myId !== fetchIdRef.current) return;
+          // fall through to fetch
+        }
+      }
+
+      if (myId !== fetchIdRef.current) return;
+
       const response = await fetch(url, {
         ...fetchInit,
         signal: controller.signal,
@@ -143,8 +170,8 @@ export function useApiJson<T = unknown>(
         const len = Array.isArray(json) ? json.length : undefined;
         console.log("[useApiJson][neighborhoods]", { url, enabled, stage: "success", len });
       }
-    } catch (err: any) {
-      if (err?.name === "AbortError") return;
+    } catch (err: unknown) {
+      if ((err as { name?: string })?.name === "AbortError") return;
       setError(err instanceof Error ? err : new Error(String(err)));
       setHasFetched(true);
       if (isNeighborhoodRequest) {
@@ -158,7 +185,7 @@ export function useApiJson<T = unknown>(
     } finally {
       setLoading(false);
     }
-  }, [url, enabled, cache, fetchInit, staleTime]);
+  }, [url, enabled, cache, fetchInit, staleTime, isNeighborhoodRequest]);
 
   useEffect(() => {
     doFetch();

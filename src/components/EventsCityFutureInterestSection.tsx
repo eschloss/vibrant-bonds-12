@@ -4,43 +4,34 @@ import { CheckCircle2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation";
+import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
+import { buildFutureInviteSignupUrl } from "@/lib/eventApi";
+import { loadRecaptchaScriptOnce } from "@/lib/recaptchaLoader";
+import { suggestionsForApi } from "@/lib/futureInviteSuggestions";
+import FutureInviteSuggestionChips from "@/components/FutureInviteSuggestionChips";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Props = {
   cityLabel: string;
+  /** Django City PK from get_all_cities_expanded; required for signup. */
+  cityId: number | null;
 };
 
-const CHIP_IDS = [
-  "live",
-  "food_drinks",
-  "active",
-  "creative",
-  "fun_games",
-  "learn",
-  "outdoors",
-] as const;
-
-export default function EventsCityFutureInterestSection({ cityLabel }: Props) {
+export default function EventsCityFutureInterestSection({ cityLabel, cityId }: Props) {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-
-  const eventTypeOptions = useMemo(
-    () =>
-      CHIP_IDS.map((id) => ({
-        id,
-        label: t(`events_city.future_interest.types.${id}`, id),
-      })),
-    [t]
-  );
+  const [submitting, setSubmitting] = useState(false);
 
   const withCity = (value: string) => value.replace(/\{city\}/g, cityLabel);
 
-  const handleEmailSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = email.trim();
-    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+    const emailIsValid = EMAIL_REGEX.test(trimmed);
 
     if (!trimmed || !emailIsValid) {
       setEmailError(
@@ -52,8 +43,80 @@ export default function EventsCityFutureInterestSection({ cityLabel }: Props) {
       return;
     }
 
+    if (cityId == null) {
+      setEmailError(
+        t("events_city.future_interest.city_missing", "City data is still loading. Please try again in a moment.")
+      );
+      return;
+    }
+
     setEmailError("");
-    setSubmitted(true);
+    setSubmitting(true);
+    try {
+      loadRecaptchaScriptOnce();
+      if (!(window as any).grecaptcha) {
+        await new Promise<void>((resolve, reject) => {
+          let n = 0;
+          const id = window.setInterval(() => {
+            n += 1;
+            if ((window as any).grecaptcha) {
+              window.clearInterval(id);
+              resolve();
+            } else if (n > 80) {
+              window.clearInterval(id);
+              reject(new Error("recaptcha"));
+            }
+          }, 50);
+        }).catch(() => {
+          throw new Error(
+            t("future_invites.error_recaptcha", "Security check failed. Please refresh and try again.")
+          );
+        });
+      }
+
+      const token = await new Promise<string>((resolve, reject) => {
+        (window as any).grecaptcha.ready(() => {
+          (window as any).grecaptcha
+            .execute(RECAPTCHA_SITE_KEY, { action: "future_invite_signup" })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+
+      const payload: Record<string, unknown> = {
+        recaptcha: token,
+        email: trimmed.toLowerCase(),
+        city_id: cityId,
+      };
+      const sug = suggestionsForApi(selectedTypes);
+      if (sug.length > 0) payload.suggestions = sug;
+
+      const response = await fetch(buildFutureInviteSignupUrl(), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({ success: false }));
+
+      if (response.status === 429) {
+        throw new Error(
+          t("future_invites.error_rate_limit", "Too many attempts. Please try again in a minute.")
+        );
+      }
+
+      if (!result.success) {
+        throw new Error(
+          result.error || t("future_invites.error_generic", "Something went wrong. Please try again.")
+        );
+      }
+
+      setSubmitted(true);
+    } catch (e: unknown) {
+      setEmailError(e instanceof Error ? e.message : t("future_invites.error_generic", "Something went wrong. Please try again."));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const toggleType = (typeId: string) => {
@@ -153,6 +216,8 @@ export default function EventsCityFutureInterestSection({ cityLabel }: Props) {
                   <Input
                     type="email"
                     value={email}
+                    onFocus={() => loadRecaptchaScriptOnce()}
+                    onClick={() => loadRecaptchaScriptOnce()}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       if (emailError) setEmailError("");
@@ -173,39 +238,28 @@ export default function EventsCityFutureInterestSection({ cityLabel }: Props) {
                       {withCity(
                         t(
                           "events_city.future_interest.vote_inline",
-                          "Also tell us what kinds of events you'd most want to see in {city}."
+                          "Optional — tell us what kinds of events you'd most want to see in {city}."
                         )
                       )}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2.5">
-                    {eventTypeOptions.map((option) => {
-                      const selected = selectedTypes.includes(option.id);
-                      return (
-                        <button
-                          key={option.id}
-                          type="button"
-                          onClick={() => toggleType(option.id)}
-                          className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-all ${
-                            selected
-                              ? "bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20"
-                              : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.08] hover:text-white"
-                          }`}
-                        >
-                          {option.label}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <FutureInviteSuggestionChips
+                    selectedIds={selectedTypes}
+                    onToggle={toggleType}
+                    t={t}
+                  />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full sm:w-auto rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95"
+                  disabled={submitting}
+                  className="w-full sm:w-auto rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 disabled:opacity-60"
                   size="lg"
                 >
-                  {t(
+                  {submitting
+                    ? t("future_invites.submitting", "Submitting...")
+                    : t(
                     "events_city.future_interest.submit_cta",
                     "Get updates"
                   )}

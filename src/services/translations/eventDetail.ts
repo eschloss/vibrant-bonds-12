@@ -19,19 +19,19 @@ export const eventDetail = {
     "event_detail.cant_attend_link_light": "Can't make it? Get future invites →",
     "event_detail.buy_ticket_for_price": "Buy ticket for {price}",
     "event_detail.see_whats_included": "See what's included",
-    "event_detail.everyone_making_friends": "You'll be matched with 4–6 solo attendees",
+    "event_detail.everyone_making_friends": "You'll usually be matched with ~6 solo attendees (often roughly 4–10)",
 
     "event_detail.what_happens_title": "What happens after you sign up",
     "event_detail.organised_by": "This event is organised by",
     "event_detail.organised_by_suffix": "Here's what Pulse adds.",
     "event_detail.step1_title": "Get matched with likeminded attendees",
-    "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small intimate group of likeminded solo attendees who all want to make friends.",
+    "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.",
     "event_detail.step2_title": "Break the ice",
     "event_detail.step2_desc": "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.",
     "event_detail.step3_title": "Show up with your crew",
     "event_detail.step3_desc": "Walk into the event with familiar faces instead of as a stranger.",
     "event_detail.step4_title": "Pre or post-event meetup",
-    "event_detail.step4_desc": "Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself.",
+    "event_detail.step4_desc": "If you want, your group can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together.",
 
     "event_detail.about_this_event": "About this event",
     "event_detail.good_to_know": "Good to know",
@@ -43,7 +43,7 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "This is a public event. You may meet other attendees who didn't book through Pulse.",
 
     "event_detail.matched_solo": "Matched with solo attendees making friends",
-    "event_detail.group_size": "Small groups of 4–6 people",
+    "event_detail.group_size": "Small groups—often ~6, sometimes roughly 4–10",
     "event_detail.hosted_chat": "Hosted group chat with icebreaking",
     "event_detail.optional_meetup": "Optional pre or post-event meetup",
     "event_detail.total": "Total",
@@ -60,6 +60,9 @@ export const eventDetail = {
     "event_detail.sticky.reserve_spot": "Reserve your spot",
     "event_detail.sticky.tickets_remaining": "Only {n} tickets left",
     "event_detail.sticky.tickets_remaining_short": "Only {n} spots left for this event",
+    "event_detail.cta.past_event": "This event has already happened",
+    "event_detail.cta.sold_out": "Sold out",
+    "event_detail.cta.unavailable": "Unavailable",
 
     // EventFaqSection
     "event_detail.faq.title": "FAQ",
@@ -150,19 +153,19 @@ export const eventDetail = {
     "event_detail.cant_attend_link_light": "¿No puedes? Recibe invitaciones futuras →",
     "event_detail.buy_ticket_for_price": "Comprar entrada por {price}",
     "event_detail.see_whats_included": "Ver qué incluye",
-    "event_detail.everyone_making_friends": "Te emparejaremos con 4–6 personas que van solas",
+    "event_detail.everyone_making_friends": "Te emparejamos en un grupo pequeño: lo habitual son unas seis personas, a menudo entre unas cuatro y diez",
 
     "event_detail.what_happens_title": "Qué pasa después de registrarte",
     "event_detail.organised_by": "Este evento está organizado por",
     "event_detail.organised_by_suffix": "Esto es lo que Pulse añade.",
     "event_detail.step1_title": "Emparejarte con asistentes afines",
-    "event_detail.step1_desc": "Completa un vibe test rápido para que podamos colocarte en un grupo pequeño e íntimo de asistentes solos afines que quieren hacer amigos.",
+    "event_detail.step1_desc": "Completa un vibe test rápido para colocarte en un grupo pequeño de asistentes solos afines al mismo evento—lo habitual son unas seis personas, a veces de unas cuatro a diez según la noche.",
     "event_detail.step2_title": "Romper el hielo",
     "event_detail.step2_desc": "Chatea con los miembros de tu grupo, guiados por nuestros iniciadores de conversación para que os conozcáis antes del evento.",
     "event_detail.step3_title": "Llega con tu crew",
     "event_detail.step3_desc": "Entra al evento con caras conocidas en lugar de como un extraño.",
     "event_detail.step4_title": "Quedada pre o post evento",
-    "event_detail.step4_desc": "Tu grupo coordina una quedada antes o después del evento para que las amistades continúen más allá del propio evento.",
+    "event_detail.step4_desc": "Si queréis, podéis tomar un café o comer antes o después—es opcional; mucha gente solo disfruta el plan principal juntos.",
 
     "event_detail.about_this_event": "Sobre este evento",
     "event_detail.good_to_know": "Lo que debes saber",
@@ -174,7 +177,7 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "Este es un evento público. Puede que conozcas a otros asistentes que no reservaron por Pulse.",
 
     "event_detail.matched_solo": "Emparejado con asistentes solos haciendo amigos",
-    "event_detail.group_size": "Grupos pequeños de 4 a 6 personas",
+    "event_detail.group_size": "Grupos pequeños—suelen ser unas seis, a veces de unas cuatro a diez",
     "event_detail.hosted_chat": "Chat grupal con rompehielos",
     "event_detail.optional_meetup": "Quedada opcional antes o después del evento",
     "event_detail.total": "Total",
@@ -191,6 +194,9 @@ export const eventDetail = {
     "event_detail.sticky.reserve_spot": "Reserva tu lugar",
     "event_detail.sticky.tickets_remaining": "Solo quedan {n} entradas",
     "event_detail.sticky.tickets_remaining_short": "Solo quedan {n} plazas para este evento",
+    "event_detail.cta.past_event": "Este evento ya ha pasado",
+    "event_detail.cta.sold_out": "Agotado",
+    "event_detail.cta.unavailable": "No disponible",
 
     // EventFaqSection
     "event_detail.faq.title": "Preguntas frecuentes",

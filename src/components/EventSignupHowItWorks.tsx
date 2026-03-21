@@ -11,7 +11,7 @@ type EventSignupHowItWorksProps = {
 };
 
 export default function EventSignupHowItWorks({
-  ctaHref = "/how-it-works",
+  ctaHref = "/events/how-it-works",
   ctaLabel = "How it works",
 }: EventSignupHowItWorksProps) {
   const { addRefToUrl } = useRefParam();
@@ -23,7 +23,7 @@ export default function EventSignupHowItWorks({
       title: t("event_detail.step1_title", "Get matched with likeminded attendees"),
       description: t(
         "event_detail.step1_desc",
-        "Complete a quick vibe test so we can place you with 5–8 likeminded solo attendees who all want to make friends."
+        "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees for the same event—usually around six people, sometimes roughly four to ten."
       ),
       color: "bg-gradient-to-r from-pink-500 to-purple-600",
     },
