@@ -45,7 +45,7 @@ const HeroBackgroundImage: React.FC<HeroBackgroundImageProps> = ({
         alt={alt}
         onLoad={() => setLoaded(true)}
         loading={eager ? "eager" : "lazy"}
-        fetchPriority={fetchPriority}
+        fetchpriority={fetchPriority === "auto" ? undefined : fetchPriority}
         decoding="async"
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
           blur ? "blur-sm" : ""

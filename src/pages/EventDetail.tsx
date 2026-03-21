@@ -799,7 +799,7 @@ const EventDetail = () => {
                             width={1920}
                             height={1080}
                             loading={i === 0 ? "eager" : "lazy"}
-                            fetchPriority={i === 0 ? "high" : "low"}
+                            fetchpriority={i === 0 ? "high" : "low"}
                             decoding="async"
                           />
                         </CarouselItem>

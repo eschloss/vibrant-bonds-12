@@ -90,27 +90,14 @@
     @apply border-border;
   }
 
-
-
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: hsl(var(--background)); /* so dark mode works properly */
-}
-
-
-
-
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #15191C; /* match your theme */
-}
-
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Matches gunmetal theme (#15191C) via --background; single source for light/dark tokens */
+    background-color: hsl(var(--background));
+  }
 
   html {
     scroll-behavior: smooth;
@@ -133,10 +120,6 @@ html, body, #root {
     overscroll-behavior-y: none;
     overscroll-behavior-x: none;
   }
-
-.text-soft-glow {
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
-}
 
 @keyframes glow-bar {
   0%, 100% {
@@ -188,26 +171,6 @@ html, body, #root {
   }
 }
 
-@keyframes subtle-parallax {
-  0% {
-    transform: translateY(0) translateZ(0);
-  }
-  100% {
-    transform: translateY(-50px) translateZ(0);
-  }
-}
-
-@keyframes stagger-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes elegant-scale {
   from {
     transform: scale(1);
@@ -216,19 +179,6 @@ html, body, #root {
   to {
     transform: scale(1.05);
     filter: brightness(1.1);
-  }
-}
-
-@keyframes cinematic-reveal {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) rotateX(15deg);
-    filter: blur(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0deg);
-    filter: blur(0px);
   }
 }
 
@@ -244,11 +194,6 @@ html, body, #root {
   animation-fill-mode: backwards;
 }
 
-.animate-stagger-up {
-  animation: stagger-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
-}
-
 .animate-elegant-scale {
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -257,30 +202,8 @@ html, body, #root {
   animation: elegant-scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-cinematic-reveal {
-  animation: cinematic-reveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity, filter;
-}
-
-/* === Parallax & Depth === */
-.parallax-slow {
-  will-change: transform;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.parallax-fast {
-  will-change: transform;
-  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-
-
   .section-padding {
     @apply px-4 py-16 md:px-6 md:py-24 lg:px-8 lg:py-32;
-  }
-
-  .hero-padding {
-    @apply px-4 pt-24 md:px-6 md:pt-30 lg:px-8 lg:pt-36;
   }
 
   .heading-xl {
@@ -298,10 +221,6 @@ html, body, #root {
 
   .pulse-gradient-cta {
     @apply bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] hover:from-[#741ADD] hover:to-[#FF2688] transition-all duration-300;
-  }
-
-  .bg-brand-gradient {
-    background-image: linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%);
   }
 
   @keyframes float {
@@ -485,15 +404,6 @@ html, body, #root {
     }
   }
 
-  /* === Update Container Utilities === */
-  .section-padding {
-    @apply px-4 py-16 md:px-6 md:py-24 lg:px-8 lg:py-32;
-  }
-
-  .hero-padding {
-    @apply px-4 pt-24 md:px-6 md:pt-30 lg:px-8 lg:pt-36;
-  }
-
   .container {
     @apply px-4 md:px-6 lg:px-8;
     width: 100%;
@@ -529,71 +439,11 @@ html, body, #root {
   }
 }
 
-/* === Utility Classes for Refactored Styles === */
 @layer utilities {
-  .pulse-bg-fuchsia {
-    background-color: #FF2688;
-  }
-  .pulse-bg-violet {
-    background-color: #741ADD;
-  }
-  .pulse-bg-aqua {
-    background-color: #38D1BF;
-  }
-  .pulse-text-fuchsia {
-    color: #FF2688;
-  }
-  .pulse-text-violet {
-    color: #741ADD;
-  }
-  .pulse-text-aqua {
-    color: #38D1BF;
-  }
-  .pulse-text-black {
-    color: #15191C;
-  }
-  .pulse-bg-black {
-    background-color: #15191C;
-  }
-  .pulse-gradient {
-    background-image: linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%);
-  }
-  .pulse-gradient-radial {
-    background-image: radial-gradient(circle at 50% 50%, #FF2688, #741ADD, #38D1BF);
-  }
-  .pulse-border-fuchsia {
-    border-color: #FF2688;
-  }
-  .pulse-border-violet {
-    border-color: #741ADD;
-  }
-  .pulse-border-aqua {
-    border-color: #38D1BF;
-  }
-  .pulse-border-black {
-    border-color: #15191C;
-  }
-
-  /* Accent utility for bright aqua, to match #38D1BF for focus, border, highlight */
-  .accent-aqua {
-    --tw-border-opacity: 1;
-    border-color: #38D1BF !important;
-  }
-  .accent-aqua-bg {
-    background-color: #38D1BF !important;
-  }
-  .accent-aqua-bg10 {
-    background-color: rgba(56,209,191,0.10) !important;
-  }
-  .accent-aqua-text {
-    color: #38D1BF !important;
-  }
   .text-soft-gray {
     color: #8E9196 !important;
   }
 }
-
-/* End of Utility Classes */
 
 /* --- Autofill: keep dark theme (no white flash on checkout) --- */
 .form-autofill-dark input:-webkit-autofill,
@@ -609,33 +459,19 @@ html, body, #root {
 
 /* --- Custom fixes for input/select focus states and colors --- */
 @layer base {
-  /* ... keep existing root/variables ... */
   input:focus, select:focus {
     outline: none !important;
     box-shadow: none !important;
   }
 
-  /* Removing second outline/ring from shadcn or tailwind inputs, for this page */
   .ring-2,
   .focus\:ring-2:focus,
   .focus-visible\:ring-2:focus {
     box-shadow: none !important;
   }
-
-  .pulse-gradient-text {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(90deg, #FF2688 0%, #741ADD 50%, #38D1BF 100%);
-  }
-  /* ... keep existing classes ... */
 }
 
 @layer utilities {
-  /* ... keep existing theme util classes ... */
-  .focus-border-aqua:focus {
-    border-color: #38D1BF !important;
-    box-shadow: none !important;
-  }
-  
   /* FAQ Answer Link Styles */
   .faq-answer a {
     color: hsl(var(--pulse-pink));
@@ -652,4 +488,3 @@ html, body, #root {
     line-height: 1;
   }
 }
-/* ... keep the rest of index.css the same ... */

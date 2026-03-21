@@ -1,15 +1,13 @@
-import { Suspense, useRef, useRef as useReactRef } from "react";
+import { Suspense, lazy, useRef, useRef as useReactRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AppShellRouteFallback } from "@/components/AppShellRouteFallback";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
-import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
 import AppReadyDispatch from "@/components/analytics/AppReadyDispatch";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
-import CitiesPreloader from "@/components/CitiesPreloader";
 import MatchmakingChatContextSync from "@/components/MatchmakingChatContextSync";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 import {
@@ -17,6 +15,9 @@ import {
   pathShowsChatBubbleByDefault,
   useChatContext,
 } from "@/contexts/ChatContext";
+
+const WhatsAppChatButton = lazy(() => import("@/components/WhatsAppChatButton"));
+const CitiesPreloader = lazy(() => import("@/components/CitiesPreloader"));
 
 /** Whether to show the chat bubble. Uses path-based default (false) unless a page overrides via setShowChatBubble. */
 function useShouldShowChatBubble(): boolean {
@@ -45,10 +46,16 @@ const AppLayoutInner = () => {
           </div>
           <GaPageViewTracker />
           <MetaPixelPageViewTracker />
-          <CitiesPreloader />
+          <Suspense fallback={null}>
+            <CitiesPreloader />
+          </Suspense>
           <ConsentScriptLoader />
           <CookieConsent manageRef={manageRef} />
-          {shouldShowChatBubble && <WhatsAppChatButton />}
+          {shouldShowChatBubble && (
+            <Suspense fallback={null}>
+              <WhatsAppChatButton />
+            </Suspense>
+          )}
         </ScrollContainerProvider>
       </ScrollArea>
     </div>

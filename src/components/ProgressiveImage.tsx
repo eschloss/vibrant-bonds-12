@@ -80,12 +80,6 @@ const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
           });
         }
       }
-      // Apply fetchpriority attribute without React warning
-      if (img && fetchPriority && fetchPriority !== "auto") {
-        try {
-          img.setAttribute("fetchpriority", fetchPriority);
-        } catch {}
-      }
       if (img) {
         if (isDev) {
           // eslint-disable-next-line no-console
@@ -255,7 +249,7 @@ const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
           setLoaded(true);
         }}
         loading={eager ? "eager" : "lazy"}
-        fetchPriority={fetchPriority}
+        fetchpriority={fetchPriority === "auto" ? undefined : fetchPriority}
         decoding={decoding}
         sizes={sizes}
         srcSet={srcSet}

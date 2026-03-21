@@ -1,5 +1,17 @@
 /// <reference types="vite/client" />
 
+import "react";
+
+declare module "react" {
+  interface ImgHTMLAttributes<T> {
+    /**
+     * HTML `fetchpriority` (lowercase). Prefer this in JSX on React 18 instead of `fetchPriority`
+     * so the attribute matches the DOM and React does not warn.
+     */
+    fetchpriority?: "high" | "low" | "auto";
+  }
+}
+
 interface ImportMetaEnv {
   readonly VITE_STRIPE_PUBLISHABLE_KEY?: string;
   /** When true (default), use staging-api.kikiapp.eu for Stripe/payment APIs. When false, use api.kikiapp.eu. */

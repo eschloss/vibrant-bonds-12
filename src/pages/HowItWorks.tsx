@@ -104,7 +104,7 @@ const HowItWorks = () => {
           onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
           loading="eager"
           decoding="async"
-          fetchPriority="high"
+          fetchpriority="high"
         />
         {/* Color overlays for readability */}
         <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_20%_10%,rgba(116,26,221,0.35),transparent),radial-gradient(50%_40%_at_90%_60%,rgba(56,209,191,0.25),transparent)]" />
