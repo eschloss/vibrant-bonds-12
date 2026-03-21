@@ -145,7 +145,7 @@ export default function Events() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35 }}
               >
-                <Link to="/events/claymates-lekki-pottery">
+                <Link to="/events/cities">
                   <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                     {t("eventsLanding.hero.cta_primary", "Explore events")}
                     <ArrowRight className="ml-2 w-4 h-4" />
@@ -369,7 +369,7 @@ export default function Events() {
                   )}
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                  <Link to="/events/claymates-lekki-pottery">
+                  <Link to="/events/cities">
                     <Button size="lg" className="bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white hover:opacity-90">
                       {t("eventsLanding.final.cta_primary", "Explore events")}
                       <ArrowRight className="ml-2 w-4 h-4" />
