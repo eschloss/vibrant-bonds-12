@@ -5,7 +5,16 @@ interface ChatContextValue {
   chatContext: string | null;
   /** Event title for WhatsApp prefill. Set by event pages, cleared when leaving. */
   eventTitle: string | null;
-  setChatContext: (context: string | null, eventTitle?: string | null) => void;
+  /**
+   * FAQ-aligned quick questions for the chat panel on event flows (same as /events/:slug FAQ q1–q4).
+   * Cleared when leaving; null falls back to generic event starters in WhatsAppChatButton.
+   */
+  eventQuickQuestions: string[] | null;
+  setChatContext: (
+    context: string | null,
+    eventTitle?: string | null,
+    eventQuickQuestions?: string[] | null
+  ) => void;
   /** Whether to show the chat bubble. null = use path-based default. true/false = explicit override. */
   showChatBubble: boolean | null;
   setShowChatBubble: (value: boolean | null) => void;
@@ -19,6 +28,7 @@ export function useChatContext(): ChatContextValue {
     return {
       chatContext: null,
       eventTitle: null,
+      eventQuickQuestions: null,
       setChatContext: () => {},
       showChatBubble: null,
       setShowChatBubble: () => {},
@@ -79,11 +89,16 @@ export function pathShowsChatBubbleByDefault(pathname: string): boolean {
 export function ChatContextProvider({ children }: { children: React.ReactNode }) {
   const [chatContext, setChatContextState] = useState<string | null>(null);
   const [eventTitle, setEventTitleState] = useState<string | null>(null);
+  const [eventQuickQuestions, setEventQuickQuestionsState] = useState<string[] | null>(null);
   const [showChatBubble, setShowChatBubbleState] = useState<boolean | null>(null);
-  const setChatContext = useCallback((context: string | null, title?: string | null) => {
-    setChatContextState(context);
-    setEventTitleState(context === null ? null : (title ?? null));
-  }, []);
+  const setChatContext = useCallback(
+    (context: string | null, title?: string | null, quickQuestions?: string[] | null) => {
+      setChatContextState(context);
+      setEventTitleState(context === null ? null : (title ?? null));
+      setEventQuickQuestionsState(context === null ? null : (quickQuestions ?? null));
+    },
+    []
+  );
   const setShowChatBubble = useCallback((value: boolean | null) => {
     setShowChatBubbleState(value);
   }, []);
@@ -92,6 +107,7 @@ export function ChatContextProvider({ children }: { children: React.ReactNode })
       value={{
         chatContext,
         eventTitle,
+        eventQuickQuestions,
         setChatContext,
         showChatBubble,
         setShowChatBubble,

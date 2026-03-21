@@ -367,7 +367,7 @@ export function WhatsAppChatButton() {
   const bubbleTimersRef = useRef<number[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
-  const { chatContext, eventTitle } = useChatContext();
+  const { chatContext, eventTitle, eventQuickQuestions } = useChatContext();
   const { currentLanguage } = useLanguage();
   const isSpanish = currentLanguage === "es";
   const chatVariant = getChatContentVariant(pathname);
@@ -378,8 +378,11 @@ export function WhatsAppChatButton() {
         ? [...CONVERSATION_STARTERS_MATCHMAKING_ES]
         : [...CONVERSATION_STARTERS_MATCHMAKING_EN];
     }
+    if (eventQuickQuestions?.length) {
+      return [...eventQuickQuestions];
+    }
     return [...CONVERSATION_STARTERS_EVENTS];
-  }, [chatVariant, isSpanish]);
+  }, [chatVariant, isSpanish, eventQuickQuestions]);
 
   const whatsAppPrefill = getWhatsAppPrefill(eventTitle, isSpanish, chatVariant);
   const whatsAppHref = buildWhatsAppUrl(WHATSAPP_PHONE, whatsAppPrefill);

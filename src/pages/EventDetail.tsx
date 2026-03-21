@@ -50,6 +50,10 @@ import {
   parseEventLocalDateTime,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
+import {
+  buildEventChatQuickQuestions,
+  buildEventFaqParamsFromEventData,
+} from "@/lib/eventChatQuickQuestions";
 import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import {
@@ -403,9 +407,15 @@ const EventDetail = () => {
 
   useEffect(() => {
     if (!eventData || notFound || usePlaceholderUI) return;
-    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title);
+    const faqParams = buildEventFaqParamsFromEventData(
+      eventData,
+      locale,
+      t("event_detail.starts_between", "Starts between")
+    );
+    const quickQs = buildEventChatQuickQuestions(t, faqParams);
+    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title, quickQs);
     return () => setChatContext(null);
-  }, [eventData, notFound, usePlaceholderUI, locale, pathname, setChatContext]);
+  }, [eventData, notFound, usePlaceholderUI, locale, pathname, setChatContext, t]);
 
   useEffect(() => {
     if (!eventData || notFound || usePlaceholderUI) return;

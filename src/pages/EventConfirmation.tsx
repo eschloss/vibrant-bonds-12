@@ -18,6 +18,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import {
   type GetKikiEventResponse,
   type KikiOrderDetailsResponse,
+  buildEventContext,
   buildGetKikiUrl,
   buildKikiOrderDetailsUrl,
   formatEventPrice,
@@ -25,7 +26,12 @@ import {
   getProviderName,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
+import {
+  buildEventChatQuickQuestions,
+  buildEventFaqParamsFromEventData,
+} from "@/lib/eventChatQuickQuestions";
 import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
+import { useChatContext } from "@/contexts/ChatContext";
 
 function formatDateTimeWindow(
   startIso: string,
@@ -61,8 +67,10 @@ const EventConfirmation = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const location = useLocation();
   const { t, currentLanguage } = useTranslation();
+  const locale = currentLanguage === "es" ? "es" : "en-US";
   const { toast } = useToast();
   const { changeLanguage } = useLanguage();
+  const { setChatContext } = useChatContext();
 
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -152,6 +160,18 @@ const EventConfirmation = () => {
 
     return () => controller.abort();
   }, [orderIdFromUrl]);
+
+  React.useEffect(() => {
+    if (!eventData || notFound) return;
+    const faqParams = buildEventFaqParamsFromEventData(
+      eventData,
+      locale,
+      t("event_detail.starts_between", "Starts between")
+    );
+    const quickQs = buildEventChatQuickQuestions(t, faqParams);
+    setChatContext(buildEventContext(eventData, locale, location.pathname), eventData.title, quickQs);
+    return () => setChatContext(null);
+  }, [eventData, notFound, locale, location.pathname, setChatContext, t]);
 
   const confirmationNumber = React.useMemo(() => {
     return orderData?.customer_id ?? orderIdFromUrl ?? "PENDING";
@@ -339,7 +359,6 @@ const EventConfirmation = () => {
   const formattedTotalPrice = formatEventPrice(toMajorUnits(order.amount_total), priceOpts);
 
   const confirmationPath = `/events/${data.slug}/confirmation`;
-  const locale = currentLanguage === "es" ? "es" : "en-US";
   const dateTime = formatDateTimeWindow(data.datetime_local, data.datetime_local_latest, {
     locale,
     startsBetween: t("event_detail.starts_between", "Starts between"),

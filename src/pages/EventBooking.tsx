@@ -8,12 +8,23 @@ import PageLoadingOverlay from "@/components/ui/PageLoadingOverlay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
-import { buildEventContext, buildGetKikiUrl, type GetKikiEventResponse } from "@/lib/eventApi";
+import {
+  buildEventContext,
+  buildGetKikiUrl,
+  type GetKikiEventResponse,
+} from "@/lib/eventApi";
+import {
+  buildEventChatQuickQuestions,
+  buildEventFaqParamsFromEventData,
+} from "@/lib/eventChatQuickQuestions";
 import { useChatContext } from "@/contexts/ChatContext";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const EventBooking = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { pathname } = useLocation();
+  const { t, currentLanguage } = useTranslation();
+  const locale = currentLanguage === "es" ? "es" : "en-US";
   const { setChatContext } = useChatContext();
   const [eventData, setEventData] = React.useState<GetKikiEventResponse | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -79,9 +90,15 @@ const EventBooking = () => {
 
   React.useEffect(() => {
     if (!eventData || notFound) return;
-    setChatContext(buildEventContext(eventData, "en-US", pathname), eventData.title);
+    const faqParams = buildEventFaqParamsFromEventData(
+      eventData,
+      locale,
+      t("event_detail.starts_between", "Starts between")
+    );
+    const quickQs = buildEventChatQuickQuestions(t, faqParams);
+    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title, quickQs);
     return () => setChatContext(null);
-  }, [eventData, notFound, pathname, setChatContext]);
+  }, [eventData, notFound, pathname, setChatContext, t, locale]);
 
   if (loading) {
     return (

@@ -37,6 +37,10 @@ import {
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
+import {
+  buildEventChatQuickQuestions,
+  buildEventFaqParamsFromEventData,
+} from "@/lib/eventChatQuickQuestions";
 import { shardApiUrl } from "@/lib/urlShard";
 import EventProviderSection from "@/components/EventProviderSection";
 import { EventHeaderProvider, useEventTrackCheckoutClick } from "@/contexts/EventHeaderContext";
@@ -2041,9 +2045,15 @@ const EventCheckout = () => {
 
   React.useEffect(() => {
     if (!eventData || notFound) return;
-    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title);
+    const faqParams = buildEventFaqParamsFromEventData(
+      eventData,
+      locale,
+      t("event_detail.starts_between", "Starts between")
+    );
+    const quickQs = buildEventChatQuickQuestions(t, faqParams);
+    setChatContext(buildEventContext(eventData, locale, pathname), eventData.title, quickQs);
     return () => setChatContext(null);
-  }, [eventData, notFound, locale, pathname, setChatContext]);
+  }, [eventData, notFound, locale, pathname, setChatContext, t]);
 
   const idempotencyKey = React.useMemo(() => {
     const key = `kiki_checkout_idempotency_key:${eventSlug || ""}`;
