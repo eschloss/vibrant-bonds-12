@@ -63,6 +63,17 @@
     return shardApiUrl(config.eventsApiBase.replace(/\/$/, "") + path);
   }
 
+  /** Align with src/lib/imageUrl.ts ensureHttpsAssetUrl */
+  function ensureHttpsImageUrl(value) {
+    if (value == null || typeof value !== "string") return "";
+    var s = value.trim();
+    if (!s) return "";
+    if (/^https?:\/\//i.test(s)) return s;
+    if (s.indexOf("//") === 0) return "https:" + s;
+    if (s.indexOf("/") === 0) return s;
+    return "https://" + s;
+  }
+
   var registry = Object.create(null);
 
   function register(url, promise) {
@@ -154,6 +165,17 @@
         var getKikiUrl = eventsUrl("/events/get_kiki?" + kikiQs.toString());
         var pk = fetchJson(getKikiUrl);
         pk.then(function (data) {
+          if (data && data.primary_image) {
+            var href = ensureHttpsImageUrl(data.primary_image);
+            if (href && !document.getElementById("kiki-event-lcp-preload")) {
+              var link = document.createElement("link");
+              link.id = "kiki-event-lcp-preload";
+              link.rel = "preload";
+              link.as = "image";
+              link.href = href;
+              document.head.appendChild(link);
+            }
+          }
           if (!data || data.city == null || data.city === "") return;
           var kikisQs = new URLSearchParams({ code: String(data.city), page: "0" });
           fetchJson(eventsUrl("/events/get_kikis?" + kikisQs.toString()));

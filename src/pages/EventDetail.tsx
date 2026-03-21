@@ -55,6 +55,7 @@ import {
   buildEventFaqParamsFromEventData,
 } from "@/lib/eventChatQuickQuestions";
 import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
+import { ensureHttpsAssetUrl, upsertLcpImagePreload } from "@/lib/imageUrl";
 import { trackMetaPixelEvent } from "@/lib/utils";
 import {
   type EventHeaderCtaLocation,
@@ -328,6 +329,28 @@ const EventDetail = () => {
     }
   }, [eventData, notFound, usePlaceholderUI]);
 
+  /** Keeps <link rel=preload> in sync on SPA navigations; kiki-api-prefetch.js sets it earlier on full page loads. Does not satisfy Lighthouse "initial HTML" without SSR/edge. */
+  useEffect(() => {
+    if (!eventSlug || notFound) return;
+    if (usePlaceholderUI && eventSlug) {
+      const ph = buildPlaceholderKikiEvent(eventSlug);
+      const imgs = [ph.primary_image, ph.image_2, ph.image_3, ph.image_4, ph.image_5].filter(Boolean) as string[];
+      const list = imgs.length > 0 ? imgs : [ph.primary_image];
+      upsertLcpImagePreload(list[0]);
+      return;
+    }
+    if (!eventData) return;
+    const imgs = [
+      eventData.primary_image,
+      eventData.image_2,
+      eventData.image_3,
+      eventData.image_4,
+      eventData.image_5,
+    ].filter(Boolean) as string[];
+    const list = imgs.length > 0 ? imgs : [eventData.primary_image];
+    upsertLcpImagePreload(list[0]);
+  }, [eventSlug, notFound, usePlaceholderUI, eventData]);
+
   useEffect(() => {
     if (!heroCarouselApi) return;
     const onSelect = () => setHeroSlideIndex(heroCarouselApi.selectedScrollSnap());
@@ -497,15 +520,20 @@ const EventDetail = () => {
         return;
       }
 
+      let raf = 0;
       const updateSticky = () => {
-        const scrolled = el.scrollTop > STICKY_SCROLL_THRESHOLD;
-        setShowSticky(scrolled && minDelayElapsedRef.current);
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const scrolled = el.scrollTop > STICKY_SCROLL_THRESHOLD;
+          setShowSticky(scrolled && minDelayElapsedRef.current);
+        });
       };
 
       updateSticky();
       el.addEventListener("scroll", updateSticky, { passive: true });
       const intervalId = setInterval(updateSticky, 500);
       cleanup = () => {
+        cancelAnimationFrame(raf);
         el.removeEventListener("scroll", updateSticky);
         clearInterval(intervalId);
       };
@@ -760,17 +788,23 @@ const EventDetail = () => {
                 <div className="relative h-64 md:h-96 xl:h-[34rem] 2xl:h-[38rem] rounded-2xl overflow-hidden border border-gray-700 bg-black/20">
                   <Carousel setApi={setHeroCarouselApi} opts={{ loop: true }} className="h-full">
                     <CarouselContent className="ml-0 h-full">
-                      {displayHeroImages.map((img, i) => (
+                      {displayHeroImages.map((img, i) => {
+                        const src = ensureHttpsAssetUrl(img) ?? img;
+                        return (
                         <CarouselItem key={img + i} className="pl-0 h-full">
                           <img
-                            src={img}
+                            src={src}
                             alt={`${data.title} image ${i + 1}`}
                             className="w-full h-full object-cover"
+                            width={1920}
+                            height={1080}
                             loading={i === 0 ? "eager" : "lazy"}
+                            fetchPriority={i === 0 ? "high" : "low"}
                             decoding="async"
                           />
                         </CarouselItem>
-                      ))}
+                        );
+                      })}
                     </CarouselContent>
 
                     {displayHeroImages.length > 1 ? (
@@ -817,7 +851,9 @@ const EventDetail = () => {
                           src={groupChatOverlayImageUrl}
                           alt="Group chat preview"
                           className="w-full h-full object-contain drop-shadow-2xl"
-                          loading="eager"
+                          width={360}
+                          height={640}
+                          loading="lazy"
                           decoding="async"
                           draggable={false}
                         />
@@ -828,6 +864,10 @@ const EventDetail = () => {
                         src={groupChatOverlayImageUrl}
                         alt="Group chat preview"
                         className="w-full rounded-2xl"
+                        width={360}
+                        height={640}
+                        loading="lazy"
+                        decoding="async"
                       />
                     </DialogContent>
                   </Dialog>
