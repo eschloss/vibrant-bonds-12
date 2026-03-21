@@ -1,27 +1,29 @@
-import { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useRef, useCallback, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import {
-  CRITICAL_NAMESPACES,
-  DEFERRED_NAMESPACES,
-  fetchCriticalTranslations,
-  fetchDeferredTranslations,
+  ALL_NAMESPACE_KEYS,
+  IDLE_PREFETCH_BATCH_SIZE,
   getNamespacesForPath,
   loadTranslationNamespaces,
 } from "../services/translations";
 import { Helmet } from "react-helmet";
+import { waitForInitialPrefetchWork } from "../lib/apiPrefetchBridge";
 
-function scheduleIdleTask(fn: () => void) {
-  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-    window.requestIdleCallback(() => fn(), { timeout: 4000 });
-  } else {
-    setTimeout(fn, 1);
-  }
+function idleYield(): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      window.requestIdleCallback(() => resolve(), { timeout: 4000 });
+    } else {
+      setTimeout(resolve, 1);
+    }
+  });
 }
 
 interface LanguageContextType {
   currentLanguage: string;
   translate: (key: string, fallback: string) => string;
   translations: Record<string, any>;
+  /** Kept for API compatibility; translations are non-blocking — always false. */
   isLoading: boolean;
   changeLanguage: (lang: string) => void;
 }
@@ -59,10 +61,8 @@ const seoMetadata = {
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const location = useLocation();
   const loadedNamespacesRef = useRef(new Set<string>());
-  /** True from sync start of language effect until critical load finishes (success or failure). Avoids route prefetch in the same commit where `isLoading` is still stale. */
-  const deferRoutePrefetchRef = useRef(false);
-  /** Only the latest language-load wave may clear `deferRoutePrefetchRef` (older async finally blocks must not run after a newer wave started). */
   const languageLoadGenerationRef = useRef(0);
+  const prevLanguageRef = useRef<string | null>(null);
 
   const detectInitialLanguage = (): string => {
     const hostname = window.location.hostname;
@@ -88,102 +88,88 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
   const [currentLanguage, setCurrentLanguage] = useState<string>(detectInitialLanguage());
   const [translations, setTranslations] = useState<Record<string, any>>({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+
+  const changeLanguage = useCallback((lang: string) => {
+    const normalized = lang?.toLowerCase().slice(0, 2) || "en";
+    if (["en", "es"].includes(normalized) && normalized !== currentLanguage) {
+      setCurrentLanguage(normalized);
+    }
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage;
+  }, [currentLanguage]);
 
   useEffect(() => {
     const waveId = ++languageLoadGenerationRef.current;
     let cancelled = false;
-    loadedNamespacesRef.current = new Set();
-    deferRoutePrefetchRef.current = true;
 
-    void (async () => {
-      setIsLoading(true);
-      try {
-        const critical = await fetchCriticalTranslations(currentLanguage);
-        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
-        CRITICAL_NAMESPACES.forEach((n) => loadedNamespacesRef.current.add(n));
-        setTranslations(critical);
-      } catch (error) {
-        console.error("Failed to load critical translations:", error);
-      } finally {
-        if (languageLoadGenerationRef.current === waveId) {
-          deferRoutePrefetchRef.current = false;
-          if (!cancelled) setIsLoading(false);
-        }
-      }
+    const langChanged = prevLanguageRef.current !== null && prevLanguageRef.current !== currentLanguage;
+    prevLanguageRef.current = currentLanguage;
 
-      scheduleIdleTask(() => {
-        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
-        void (async () => {
-          try {
-            const deferred = await fetchDeferredTranslations(currentLanguage);
-            if (cancelled || languageLoadGenerationRef.current !== waveId) return;
-            DEFERRED_NAMESPACES.forEach((n) => loadedNamespacesRef.current.add(n));
-            setTranslations((prev) => ({ ...prev, ...deferred }));
-          } catch (error) {
-            console.error("Failed to load deferred translations:", error);
-          }
-        })();
-      });
-    })();
+    if (langChanged) {
+      loadedNamespacesRef.current.clear();
+      setTranslations({});
+    }
 
-    document.documentElement.lang = currentLanguage;
-
-    return () => {
-      cancelled = true;
-    };
-  }, [currentLanguage]);
-
-  // Wait until the critical wave finishes before merging route-specific namespaces.
-  // Otherwise a prefetch can run against stale translations from the previous language,
-  // or `setTranslations(critical)` can overwrite a merge that completed first.
-  // `deferRoutePrefetchRef` is required because route effects can run in the same commit as the
-  // language effect while `isLoading` from the previous render is still false.
-  useEffect(() => {
-    if (isLoading || deferRoutePrefetchRef.current) return;
-
-    let cancelled = false;
     const routeNamespaces = getNamespacesForPath(location.pathname).filter(
       (n) => !loadedNamespacesRef.current.has(n)
     );
-    if (routeNamespaces.length === 0) return;
+
+    if (routeNamespaces.length > 0) {
+      void (async () => {
+        try {
+          const extra = await loadTranslationNamespaces(currentLanguage, routeNamespaces);
+          if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+          routeNamespaces.forEach((n) => loadedNamespacesRef.current.add(n));
+          setTranslations((prev) => ({ ...prev, ...extra }));
+        } catch (error) {
+          console.error("Failed to load route translations:", error);
+        }
+      })();
+    }
 
     void (async () => {
-      try {
-        const extra = await loadTranslationNamespaces(currentLanguage, routeNamespaces);
-        if (cancelled) return;
-        routeNamespaces.forEach((n) => loadedNamespacesRef.current.add(n));
-        setTranslations((prev) => ({ ...prev, ...extra }));
-      } catch (error) {
-        console.error("Failed to load route translations:", error);
+      await waitForInitialPrefetchWork();
+      if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+
+      while (true) {
+        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+        await idleYield();
+        if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+
+        const nextBatch = ALL_NAMESPACE_KEYS.filter((n) => !loadedNamespacesRef.current.has(n)).slice(
+          0,
+          IDLE_PREFETCH_BATCH_SIZE
+        );
+        if (nextBatch.length === 0) break;
+
+        try {
+          const extra = await loadTranslationNamespaces(currentLanguage, nextBatch);
+          if (cancelled || languageLoadGenerationRef.current !== waveId) return;
+          nextBatch.forEach((n) => loadedNamespacesRef.current.add(n));
+          setTranslations((prev) => ({ ...prev, ...extra }));
+        } catch (error) {
+          console.error("Failed to load translation prefetch batch:", error);
+        }
       }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [location.pathname, currentLanguage, isLoading]);
-  
-  useEffect(() => {
-    if (!hasLoadedOnce && !isLoading && Object.keys(translations).length > 0) {
-      setHasLoadedOnce(true);
-    }
-  }, [hasLoadedOnce, isLoading, translations]);
+  }, [location.pathname, currentLanguage]);
 
   const translate = (key: string, fallback: string): string => {
     return translations[key] || fallback;
   };
 
-  // Get SEO metadata for the current language
   const metadata = seoMetadata[currentLanguage as keyof typeof seoMetadata] || seoMetadata.en;
-  
-  // Get base URL without language subdomain
+
   const getBaseUrl = () => {
     const url = new URL(window.location.href);
     let hostParts = url.hostname.split('.');
 
-    // Remove language subdomain (2-letter) and/or www if present at the start
     while (hostParts.length > 2 && (hostParts[0].length === 2 || hostParts[0].toLowerCase() === 'www')) {
       hostParts = hostParts.slice(1);
     }
@@ -191,24 +177,12 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
     return url.origin;
   };
-  
-  // Construct URLs for different languages
+
   const baseUrl = getBaseUrl();
   const currentPath = window.location.pathname;
   const alternateUrls = {
     en: `${baseUrl}${currentPath}`,
     es: `${baseUrl.replace('://', '://es.')}${currentPath}`
-  };
-
-  if (!hasLoadedOnce) {
-    return null;
-  }
-
-  const changeLanguage = (lang: string) => {
-    const normalized = lang?.toLowerCase().slice(0, 2) || "en";
-    if (["en", "es"].includes(normalized) && normalized !== currentLanguage) {
-      setCurrentLanguage(normalized);
-    }
   };
 
   return (
@@ -217,7 +191,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         currentLanguage,
         translate,
         translations,
-        isLoading,
+        isLoading: false,
         changeLanguage,
       }}
     >
@@ -225,13 +199,11 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         <html lang={currentLanguage} />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        
-        {/* Base SEO tags set at context level */}
+
         <meta property="og:title" content={metadata.ogTitle} />
         <meta property="og:description" content={metadata.ogDescription} />
         <meta property="og:type" content="website" />
-        
-        {/* Alternate language links */}
+
         <link rel="alternate" href={alternateUrls.en} hrefLang="en" />
         <link rel="alternate" href={alternateUrls.es} hrefLang="es" />
         <link rel="alternate" href={alternateUrls.en} hrefLang="x-default" />

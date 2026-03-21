@@ -1,6 +1,6 @@
 type Locale = "en" | "es";
 
-const ALL_NAMESPACE_KEYS = [
+export const ALL_NAMESPACE_KEYS = [
   "shared",
   "about",
   "mission",
@@ -28,19 +28,20 @@ const ALL_NAMESPACE_KEYS = [
 
 export type TranslationNamespace = (typeof ALL_NAMESPACE_KEYS)[number];
 
-/** First paint: shell + home sections that hydrate immediately */
-export const CRITICAL_NAMESPACES = [
-  "shared",
+/** Nav, footer, and global keys — loaded for every route. */
+export const SHELL_NAMESPACES = ["shared"] as const satisfies readonly TranslationNamespace[];
+
+/** Home page (`/`) sections above the fold and lazy siblings that share the same route. */
+export const HOME_INDEX_NAMESPACES = [
   "hero",
   "forms",
   "mission",
   "activities",
   "howItWorks",
-] as const;
+] as const satisfies readonly TranslationNamespace[];
 
-const CRITICAL_SET = new Set<string>(CRITICAL_NAMESPACES);
-
-export const DEFERRED_NAMESPACES = ALL_NAMESPACE_KEYS.filter((n) => !CRITICAL_SET.has(n));
+/** Namespaces per idle slice after route + shell (smaller chunks = less main-thread work per tick). */
+export const IDLE_PREFETCH_BATCH_SIZE = 4;
 
 type NamespaceLoader = (locale: Locale) => Promise<Record<string, unknown>>;
 
@@ -101,35 +102,44 @@ export async function loadTranslationNamespaces(
   return Object.assign({}, ...parts);
 }
 
-/** Blocking first paint — keep this list small (see CRITICAL_NAMESPACES). */
-export async function fetchCriticalTranslations(lang: string): Promise<Record<string, unknown>> {
-  return loadTranslationNamespaces(lang, CRITICAL_NAMESPACES);
-}
-
-/** Everything except critical; intended for idle scheduling. */
-export async function fetchDeferredTranslations(lang: string): Promise<Record<string, unknown>> {
-  return loadTranslationNamespaces(lang, DEFERRED_NAMESPACES);
-}
-
 /**
  * Full catalog (e.g. tests or callers that need everything at once).
- * Loads critical and deferred in parallel (same total work as a single Promise.all over all namespaces).
  */
 export async function fetchTranslations(lang: string): Promise<Record<string, unknown>> {
-  const [critical, deferred] = await Promise.all([
-    fetchCriticalTranslations(lang),
-    fetchDeferredTranslations(lang),
-  ]);
-  return { ...critical, ...deferred };
+  return loadTranslationNamespaces(lang, ALL_NAMESPACE_KEYS);
 }
 
 /**
- * Namespaces worth loading promptly on this path (subset of deferred or any).
- * Merges with idle loading; duplicate imports are avoided by the caller via a loaded set.
+ * Namespaces to load for this path (shell + route-specific). Idle prefetch fills the rest in batches.
+ * Duplicate imports are avoided by the caller via a loaded set.
  */
 export function getNamespacesForPath(pathname: string): TranslationNamespace[] {
   const p = pathname.replace(/\/$/, "") || "/";
   const out = new Set<TranslationNamespace>();
+
+  SHELL_NAMESPACES.forEach((n) => out.add(n));
+
+  if (p === "/") {
+    HOME_INDEX_NAMESPACES.forEach((n) => out.add(n));
+  }
+
+  if (p === "/activities" || p.startsWith("/activities/")) {
+    out.add("activities");
+  }
+
+  if (p === "/how-it-works" || p.startsWith("/how-it-works/")) {
+    out.add("howItWorks");
+    out.add("mission");
+    out.add("activities");
+  }
+
+  if (p === "/events/how-it-works" || p.startsWith("/events/how-it-works")) {
+    out.add("howItWorks");
+  }
+
+  if (p === "/matchmaking" || p.startsWith("/matchmaking/")) {
+    out.add("city");
+  }
 
   if (
     p.startsWith("/terms") ||
@@ -176,9 +186,6 @@ export function getNamespacesForPath(pathname: string): TranslationNamespace[] {
       if (after.length > 0) {
         out.add("city");
       }
-    }
-    if (p.startsWith("/events/how-it-works")) {
-      /* howItWorks is critical */
     }
     const slug = p.replace(/^\/events\//, "").split("/")[0];
     if (slug && slug !== "cities" && slug !== "how-it-works") {
