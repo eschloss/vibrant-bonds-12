@@ -1,6 +1,6 @@
 /**
- * Hash a string to a bucket 0-8 (djb2-style).
- * Buckets map to api, api2, api3, ... api9 (api1 is not a valid host).
+ * Hash a string to a bucket 0-3 (djb2-style).
+ * Buckets map to api, api2, api3, api4 (api1 is not a valid host).
  */
 function hashToBucket(str: string): number {
   let h = 0;
@@ -8,11 +8,11 @@ function hashToBucket(str: string): number {
     h = (h << 5) - h + str.charCodeAt(i);
     h |= 0;
   }
-  return Math.abs(h) % 9;
+  return Math.abs(h) % 4;
 }
 
 /**
- * Shard api.kikiapp.eu requests across api, api2, api3, ... api9 by hashing the path+params.
+ * Shard api.kikiapp.eu requests across api, api2, api3, api4 by hashing the path+params.
  * Note: api1 is not a valid bucket; numbering goes api, api2, api3, ...
  * Staging (staging-api.kikiapp.eu) is left unchanged.
  */

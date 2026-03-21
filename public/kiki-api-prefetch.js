@@ -32,7 +32,7 @@
       h = (h << 5) - h + str.charCodeAt(i);
       h |= 0;
     }
-    return Math.abs(h) % 9;
+    return Math.abs(h) % 4;
   }
 
   function shardApiUrl(urlStr) {

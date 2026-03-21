@@ -24,99 +24,18 @@
     
     <!-- Other Open Graph and Twitter meta tags are dynamically set by each page using React Helmet -->
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- API sharding: hash % 4 → api, api2, api3, api4 (see src/lib/urlShard.ts) -->
     <link rel="preconnect" href="https://api.kikiapp.eu" crossorigin>
     <link rel="preconnect" href="https://api2.kikiapp.eu" crossorigin>
     <link rel="preconnect" href="https://api3.kikiapp.eu" crossorigin>
     <link rel="preconnect" href="https://api4.kikiapp.eu" crossorigin>
-    <link rel="preconnect" href="https://api5.kikiapp.eu" crossorigin>
-    <link rel="preconnect" href="https://api6.kikiapp.eu" crossorigin>
-    <link rel="preconnect" href="https://api7.kikiapp.eu" crossorigin>
-    <link rel="preconnect" href="https://api8.kikiapp.eu" crossorigin>
-    <link rel="preconnect" href="https://api9.kikiapp.eu" crossorigin>
-    <!-- Prefetch script before Stripe/widgets preconnects so API fetches are not starved -->
     <!-- KIKI_PREFETCH_CONFIG -->
     <script defer src="/kiki-api-prefetch.js"></script>
-    <link rel="preconnect" href="https://js.stripe.com" crossorigin>
-    <link rel="preconnect" href="https://api.stripe.com" crossorigin>
-    <link rel="preconnect" href="https://embed.typeform.com" crossorigin>
-    <link rel="preconnect" href="https://widget.manychat.com" crossorigin>
     <!-- Google Fonts: preload then apply on load (non-render-blocking) -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="preload" as="image" href="/placeholder.svg" imagesrcset="/placeholder.svg" imagesizes="100vw" />
-    
-    <!-- dataLayer stub before React (web-vitals + queued gtag calls until gtag loads) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-    </script>
-    
-    <!-- GA + Meta: inject only after React dispatches kiki:app-ready (lazy route mounted) -->
-    <script>
-      (function() {
-        var GA_ID = 'G-J591H7VFMV';
-        var APP_READY = 'kiki:app-ready';
-        var ANALYTICS_INIT = 'kiki:analytics-init';
-        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
-        var loaded = false;
-
-        function initGA() {
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-          document.head.appendChild(s);
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', GA_ID, { send_page_view: false });
-        }
-
-        function initMetaPixel() {
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;
-          t.onload=function(){fbq('init','1935826830293991');};
-          s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-        }
-
-        function loadAnalytics() {
-          if (loaded || isPrerender) return;
-          loaded = true;
-          initGA();
-          initMetaPixel();
-          try {
-            window.dispatchEvent(new CustomEvent(ANALYTICS_INIT));
-          } catch (e) {}
-        }
-
-        function scheduleLoadAnalytics() {
-          if (loaded || isPrerender) return;
-          function go() {
-            loadAnalytics();
-          }
-          if (typeof requestIdleCallback === 'function') {
-            requestIdleCallback(go, { timeout: 2500 });
-          } else {
-            setTimeout(go, 0);
-          }
-        }
-
-        window.addEventListener(APP_READY, scheduleLoadAnalytics, { once: true });
-
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            if (!loaded) loadAnalytics();
-          }, 12000);
-        });
-      })();
-    </script>
     
   </head>
 
@@ -134,49 +53,9 @@
       />
     </noscript>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <script>
-      // Script to handle language detection from subdomain
-      (function() {
-        const hostname = window.location.hostname;
-        const subdomainParts = hostname.split(".");
-        const isSpanish = subdomainParts.length > 1 && subdomainParts[0].toLowerCase() === "es";
-        
-        // Update HTML lang attribute if Spanish is detected
-        if (isSpanish) {
-          document.documentElement.lang = "es";
-        }
-        // Note: All meta tags including title are dynamically set by React Helmet in each page component
-      })();
-    </script>
-
-    <!-- Manychat + MCCDN: load on idle to avoid blocking; error handlers prevent failures from affecting the page -->
-    <script>
-      (function() {
-        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
-        if (isPrerender) return;
-        function loadWidgetScripts() {
-          /* Manychat: single embed only — mccdn.me/widget.js duplicates the widget and threw "Page Id is required". */
-          var scripts = [
-            'https://widget.manychat.com/3822754_24192.js'
-          ];
-          scripts.forEach(function(src) {
-            try {
-              if (document.querySelector('script[src="' + src + '"]')) return;
-              var s = document.createElement('script');
-              s.src = src;
-              s.async = true;
-              s.onerror = function() { /* ignore: adblocker, network error, etc. */ };
-              document.body.appendChild(s);
-            } catch (e) { /* ignore */ }
-          });
-        }
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadWidgetScripts);
-        } else {
-          setTimeout(loadWidgetScripts, 0);
-        }
-      })();
-    </script>
+    <!-- Deferred after main: lang → GA/Meta listeners → Manychat (idle). dataLayer init in main.tsx -->
+    <script defer src="/lang-subdomain.js"></script>
+    <script defer src="/analytics-bootstrap.js"></script>
+    <script defer src="/manychat-widget.js"></script>
   </body>
 </html>
