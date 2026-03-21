@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   Calendar,
@@ -236,6 +236,23 @@ const SignUpCard = ({
   );
 };
 
+/**
+ * Hero group-chat — mount only: slow float into place (larger, up-left → rest).
+ * After `groupChatIntroDone`, hover uses plain tweens (`GROUP_CHAT_PREVIEW_HOVER_TWEEN`).
+ */
+const GROUP_CHAT_PREVIEW_INTRO_FLOAT = {
+  duration: 3.15,
+  /** Slow start (y1=0), near-linear mid, soft landing — Apple-like standard curve, not mechanical. */
+  ease: [0.4, 0.0, 0.2, 1] as const,
+  initial: { scale: 1.07, y: -32, x: -26 } as const,
+  rest: { scale: 1, y: -8, x: 0 } as const,
+};
+
+const GROUP_CHAT_PREVIEW_HOVER_TWEEN = {
+  duration: 0.28,
+  ease: [0.33, 0, 0.2, 1] as const,
+};
+
 const EventDetail = () => {
   const { eventSlug } = useParams<{ eventSlug: string }>();
   const { changeLanguage } = useLanguage();
@@ -292,11 +309,23 @@ const EventDetail = () => {
   const [entranceTimeTooltipOpen, setEntranceTimeTooltipOpen] = useState(false);
   const [addressTooltipOpen, setAddressTooltipOpen] = useState(false);
   const [futureInvitesOpen, setFutureInvitesOpen] = useState(false);
+  const [groupChatIntroDone, setGroupChatIntroDone] = useState(false);
+  const groupChatIntroCompleteRef = useRef(false);
+  const [lastEventSlugForIntro, setLastEventSlugForIntro] = useState(eventSlug);
   const hasTrackedQualifiedEventPageView = useRef(false);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const whatHappensRef = useRef<HTMLDivElement>(null);
   const signUpAsideRef = useRef<HTMLElement>(null);
   const isLg = useIsLg();
+  const prefersReducedMotion = useReducedMotion();
+  if (eventSlug !== lastEventSlugForIntro) {
+    setLastEventSlugForIntro(eventSlug);
+    setGroupChatIntroDone(false);
+    groupChatIntroCompleteRef.current = false;
+  }
+  useEffect(() => {
+    if (prefersReducedMotion) setGroupChatIntroDone(true);
+  }, [prefersReducedMotion]);
   const scrollContainer = useScrollContainer();
   const { pathname, search } = useLocation();
   const { setChatContext } = useChatContext();
@@ -316,6 +345,9 @@ const EventDetail = () => {
 
   const groupChatOverlayImageUrl =
     "https://s.kikiapp.eu/desktop/groupchinchillas.png";
+  /** Stacked drop-shadows follow PNG alpha — reads as floating off the page. */
+  const groupChatPreviewImageFilterClass =
+    "[filter:drop-shadow(0_28px_56px_rgba(0,0,0,0.62))_drop-shadow(0_14px_32px_rgba(0,0,0,0.48))_drop-shadow(0_6px_16px_rgba(0,0,0,0.42))_drop-shadow(0_1px_4px_rgba(0,0,0,0.75))]";
 
   // Preload Stripe.js after event content loads so checkout is fast; defers until after event data + images
   useEffect(() => {
@@ -785,41 +817,43 @@ const EventDetail = () => {
                 </Link>
               ) : null}
               <div className="mb-8">
-                <div className="relative h-64 md:h-96 xl:h-[34rem] 2xl:h-[38rem] rounded-2xl overflow-hidden border border-gray-700 bg-black/20">
-                  <Carousel setApi={setHeroCarouselApi} opts={{ loop: true }} className="h-full">
-                    <CarouselContent className="ml-0 h-full">
-                      {displayHeroImages.map((img, i) => {
-                        const src = ensureHttpsAssetUrl(img) ?? img;
-                        return (
-                        <CarouselItem key={img + i} className="pl-0 h-full">
-                          <img
-                            src={src}
-                            alt={`${data.title} image ${i + 1}`}
-                            className="w-full h-full object-cover"
-                            width={1920}
-                            height={1080}
-                            loading={i === 0 ? "eager" : "lazy"}
-                            fetchpriority={i === 0 ? "high" : "low"}
-                            decoding="async"
-                          />
-                        </CarouselItem>
-                        );
-                      })}
-                    </CarouselContent>
+                <div className="relative h-64 md:h-96 xl:h-[34rem] 2xl:h-[38rem] rounded-2xl overflow-visible border border-gray-700 bg-black/20">
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                    <Carousel setApi={setHeroCarouselApi} opts={{ loop: true }} className="h-full">
+                      <CarouselContent className="ml-0 h-full">
+                        {displayHeroImages.map((img, i) => {
+                          const src = ensureHttpsAssetUrl(img) ?? img;
+                          return (
+                          <CarouselItem key={img + i} className="pl-0 h-full">
+                            <img
+                              src={src}
+                              alt={`${data.title} image ${i + 1}`}
+                              className="w-full h-full object-cover"
+                              width={1920}
+                              height={1080}
+                              loading={i === 0 ? "eager" : "lazy"}
+                              fetchpriority={i === 0 ? "high" : "low"}
+                              decoding="async"
+                            />
+                          </CarouselItem>
+                          );
+                        })}
+                      </CarouselContent>
 
-                    {displayHeroImages.length > 1 ? (
-                      <>
-                        <CarouselPrevious
-                          variant="secondary"
-                          className="z-30 left-3 top-1/2 -translate-y-1/2 border-white/10 bg-black/35 hover:bg-black/50 text-white backdrop-blur-md hidden md:inline-flex"
-                        />
-                        <CarouselNext
-                          variant="secondary"
-                          className="z-30 right-3 top-1/2 -translate-y-1/2 border-white/10 bg-black/35 hover:bg-black/50 text-white backdrop-blur-md hidden md:inline-flex"
-                        />
-                      </>
-                    ) : null}
-                  </Carousel>
+                      {displayHeroImages.length > 1 ? (
+                        <>
+                          <CarouselPrevious
+                            variant="secondary"
+                            className="z-30 left-3 top-1/2 -translate-y-1/2 border-white/10 bg-black/35 hover:bg-black/50 text-white backdrop-blur-md hidden md:inline-flex"
+                          />
+                          <CarouselNext
+                            variant="secondary"
+                            className="z-30 right-3 top-1/2 -translate-y-1/2 border-white/10 bg-black/35 hover:bg-black/50 text-white backdrop-blur-md hidden md:inline-flex"
+                          />
+                        </>
+                      ) : null}
+                    </Carousel>
+                  </div>
 
                   {/* Dots */}
                   {displayHeroImages.length > 1 ? (
@@ -844,13 +878,54 @@ const EventDetail = () => {
                     <DialogTrigger asChild>
                       <button
                         type="button"
-                        className="absolute z-20 right-[22px] bottom-3 md:right-[26px] md:bottom-4 h-[90%] aspect-[9/16] cursor-pointer select-none"
+                        className="group absolute z-20 -right-4 -bottom-4 md:-right-6 md:-bottom-6 xl:-right-8 xl:-bottom-8 h-[90%] aspect-[9/16] cursor-pointer select-none"
                         aria-label={t("event_detail.view_group_chat_preview", "View group chat preview")}
                       >
-                        <img
+                        <motion.img
+                          key={eventSlug}
                           src={groupChatOverlayImageUrl}
                           alt="Group chat preview"
-                          className="w-full h-full object-contain drop-shadow-2xl"
+                          className={cn(
+                            "w-full h-full object-contain origin-bottom will-change-transform",
+                            groupChatPreviewImageFilterClass
+                          )}
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : GROUP_CHAT_PREVIEW_INTRO_FLOAT.initial
+                          }
+                          animate={GROUP_CHAT_PREVIEW_INTRO_FLOAT.rest}
+                          transition={
+                            prefersReducedMotion
+                              ? { duration: 0 }
+                              : groupChatIntroDone
+                                ? {
+                                    duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
+                                    ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
+                                  }
+                                : {
+                                    duration: GROUP_CHAT_PREVIEW_INTRO_FLOAT.duration,
+                                    ease: GROUP_CHAT_PREVIEW_INTRO_FLOAT.ease,
+                                  }
+                          }
+                          onAnimationComplete={() => {
+                            if (prefersReducedMotion || groupChatIntroCompleteRef.current) return;
+                            groupChatIntroCompleteRef.current = true;
+                            setGroupChatIntroDone(true);
+                          }}
+                          whileHover={
+                            prefersReducedMotion || !groupChatIntroDone
+                              ? undefined
+                              : {
+                                  scale: 1.045,
+                                  y: -16,
+                                  x: 0,
+                                  transition: {
+                                    duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
+                                    ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
+                                  },
+                                }
+                          }
                           width={360}
                           height={640}
                           loading="lazy"
@@ -863,7 +938,10 @@ const EventDetail = () => {
                       <img
                         src={groupChatOverlayImageUrl}
                         alt="Group chat preview"
-                        className="w-full rounded-2xl"
+                        className={cn(
+                          "w-full rounded-2xl -translate-y-1",
+                          groupChatPreviewImageFilterClass
+                        )}
                         width={360}
                         height={640}
                         loading="lazy"
@@ -872,7 +950,7 @@ const EventDetail = () => {
                     </DialogContent>
                   </Dialog>
 
-                  <div className="absolute z-10 inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute z-10 inset-0 rounded-2xl bg-gradient-to-t from-gray-900 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
 
