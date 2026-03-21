@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from "react-router-dom";
-import React, { Suspense, lazy } from "react";
+import React, { lazy } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Toaster } from "@/components/ui/toaster";
@@ -88,10 +88,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-          <Suspense fallback={null}>
-            <Router>
-              <Routes>
-                <Route path="/" element={<AppLayout />}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<AppLayout />}>
                   <Route index element={<Index />} />
                   <Route path="about" element={<About />} />
                   <Route path="contact" element={<Contact />} />
@@ -176,11 +175,10 @@ function App() {
                   
                   {/* 404 route */}
                   <Route path="*" element={<NotFound />} />
-                </Route>
-              </Routes>
-            </Router>
-          </Suspense>
-          <Toaster />
+            </Route>
+          </Routes>
+        </Router>
+        <Toaster />
       </ThemeProvider>
     </QueryClientProvider>
   );

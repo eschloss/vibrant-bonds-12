@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://api9.kikiapp.eu" crossorigin>
     <!-- Prefetch script before Stripe/widgets preconnects so API fetches are not starved -->
     <!-- KIKI_PREFETCH_CONFIG -->
-    <script src="/kiki-api-prefetch.js"></script>
+    <script defer src="/kiki-api-prefetch.js"></script>
     <link rel="preconnect" href="https://js.stripe.com" crossorigin>
     <link rel="preconnect" href="https://api.stripe.com" crossorigin>
     <link rel="preconnect" href="https://embed.typeform.com" crossorigin>
@@ -76,20 +76,30 @@
       })();
     </script>
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel: load on idle (same pattern as GA) so it does not compete with first paint -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;
-      t.onload=function(){fbq('init','1935826830293991');};
-      s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+      (function() {
+        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
+        if (isPrerender) return;
+        function initMetaPixel() {
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;
+          t.onload=function(){fbq('init','1935826830293991');};
+          s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(initMetaPixel);
+        } else {
+          setTimeout(initMetaPixel, 0);
+        }
+      })();
     </script>
-    <!-- End Meta Pixel Code -->
     
   </head>
 
@@ -106,8 +116,6 @@
         src="https://www.facebook.com/tr?id=1935826830293991&ev=PageView&noscript=1"
       />
     </noscript>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     
     <script>

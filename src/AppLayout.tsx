@@ -1,6 +1,6 @@
-
-import { useRef, useRef as useReactRef } from "react";
+import { Suspense, useRef, useRef as useReactRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { AppShellRouteFallback } from "@/components/AppShellRouteFallback";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
@@ -37,7 +37,9 @@ const AppLayoutInner = () => {
           <ScrollToTop scrollRef={viewportRef} />
           <div className="w-full">
             <MatchmakingChatContextSync />
-            <Outlet />
+            <Suspense fallback={<AppShellRouteFallback />}>
+              <Outlet />
+            </Suspense>
           </div>
           <GaPageViewTracker />
           <MetaPixelPageViewTracker />
