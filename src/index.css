@@ -487,4 +487,17 @@
     vertical-align: super;
     line-height: 1;
   }
+
+  /**
+   * Group chat lightbox: Safari composites stacked filter:drop-shadow on <img> badly inside
+   * Radix dialog (transform + zoom). Single drop-shadow on an isolated wrapper + -webkit-filter.
+   */
+  .group-chat-dialog-float {
+    isolation: isolate;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.52));
+    filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.52));
+  }
 }

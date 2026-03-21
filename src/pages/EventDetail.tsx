@@ -242,10 +242,12 @@ const SignUpCard = ({
  */
 const GROUP_CHAT_PREVIEW_INTRO_FLOAT = {
   duration: 3.15,
+  /** Opacity reaches 1 earlier so the float reads clearly while still feeling soft. */
+  fadeDuration: 0.82,
   /** Slow start (y1=0), near-linear mid, soft landing — Apple-like standard curve, not mechanical. */
   ease: [0.4, 0.0, 0.2, 1] as const,
-  initial: { scale: 1.07, y: -32, x: -26 } as const,
-  rest: { scale: 1, y: -8, x: 0 } as const,
+  initial: { scale: 1.07, y: -32, x: -26, opacity: 0 } as const,
+  rest: { scale: 1, y: -8, x: 0, opacity: 1 } as const,
 };
 
 const GROUP_CHAT_PREVIEW_HOVER_TWEEN = {
@@ -348,6 +350,22 @@ const EventDetail = () => {
   /** Stacked drop-shadows follow PNG alpha — reads as floating off the page. */
   const groupChatPreviewImageFilterClass =
     "[filter:drop-shadow(0_28px_56px_rgba(0,0,0,0.62))_drop-shadow(0_14px_32px_rgba(0,0,0,0.48))_drop-shadow(0_6px_16px_rgba(0,0,0,0.42))_drop-shadow(0_1px_4px_rgba(0,0,0,0.75))]";
+
+  const [groupChatImageReady, setGroupChatImageReady] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.onload = () => {
+      if (!cancelled) setGroupChatImageReady(true);
+    };
+    img.onerror = () => {
+      if (!cancelled) setGroupChatImageReady(true);
+    };
+    img.src = groupChatOverlayImageUrl;
+    return () => {
+      cancelled = true;
+    };
+  }, [groupChatOverlayImageUrl]);
 
   // Preload Stripe.js after event content loads so checkout is fast; defers until after event data + images
   useEffect(() => {
@@ -873,82 +891,92 @@ const EventDetail = () => {
                     </div>
                   ) : null}
 
-                  {/* Group chat preview */}
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <button
-                        type="button"
-                        className="group absolute z-20 -right-4 -bottom-4 md:-right-6 md:-bottom-6 xl:-right-8 xl:-bottom-8 h-[90%] aspect-[9/16] cursor-pointer select-none"
-                        aria-label={t("event_detail.view_group_chat_preview", "View group chat preview")}
-                      >
-                        <motion.img
-                          key={eventSlug}
-                          src={groupChatOverlayImageUrl}
-                          alt="Group chat preview"
-                          className={cn(
-                            "w-full h-full object-contain origin-bottom will-change-transform",
-                            groupChatPreviewImageFilterClass
-                          )}
-                          initial={
-                            prefersReducedMotion
-                              ? false
-                              : GROUP_CHAT_PREVIEW_INTRO_FLOAT.initial
-                          }
-                          animate={GROUP_CHAT_PREVIEW_INTRO_FLOAT.rest}
-                          transition={
-                            prefersReducedMotion
-                              ? { duration: 0 }
-                              : groupChatIntroDone
-                                ? {
-                                    duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
-                                    ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
-                                  }
-                                : {
-                                    duration: GROUP_CHAT_PREVIEW_INTRO_FLOAT.duration,
-                                    ease: GROUP_CHAT_PREVIEW_INTRO_FLOAT.ease,
-                                  }
-                          }
-                          onAnimationComplete={() => {
-                            if (prefersReducedMotion || groupChatIntroCompleteRef.current) return;
-                            groupChatIntroCompleteRef.current = true;
-                            setGroupChatIntroDone(true);
-                          }}
-                          whileHover={
-                            prefersReducedMotion || !groupChatIntroDone
-                              ? undefined
-                              : {
-                                  scale: 1.045,
-                                  y: -16,
-                                  x: 0,
-                                  transition: {
-                                    duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
-                                    ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
-                                  },
-                                }
-                          }
-                          width={360}
-                          height={640}
-                          loading="lazy"
-                          decoding="async"
-                          draggable={false}
-                        />
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-sm border-0 bg-transparent p-0 shadow-none [&>button]:text-white [&>button]:hover:text-white/80">
-                      <img
-                        src={groupChatOverlayImageUrl}
-                        alt="Group chat preview"
-                        className={cn(
-                          "w-full rounded-2xl -translate-y-1",
-                          groupChatPreviewImageFilterClass
-                        )}
-                        width={360}
-                        height={640}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </DialogContent>
-                  </Dialog>
+                  {/* Group chat preview — mount only after asset decode; dialog shadow uses Safari-safe wrapper */}
+                  <div className="absolute z-20 -right-4 -bottom-4 md:-right-6 md:-bottom-6 xl:-right-8 xl:-bottom-8 h-[90%] aspect-[9/16]">
+                    {!groupChatImageReady ? (
+                      <div className="h-full w-full" aria-hidden />
+                    ) : (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button
+                            type="button"
+                            className="group flex h-full w-full cursor-pointer select-none border-0 bg-transparent p-0"
+                            aria-label={t("event_detail.view_group_chat_preview", "View group chat preview")}
+                          >
+                            <motion.img
+                              key={eventSlug}
+                              src={groupChatOverlayImageUrl}
+                              alt="Group chat preview"
+                              className={cn(
+                                "w-full h-full object-contain origin-bottom will-change-transform",
+                                groupChatPreviewImageFilterClass
+                              )}
+                              initial={
+                                prefersReducedMotion
+                                  ? false
+                                  : GROUP_CHAT_PREVIEW_INTRO_FLOAT.initial
+                              }
+                              animate={GROUP_CHAT_PREVIEW_INTRO_FLOAT.rest}
+                              transition={
+                                prefersReducedMotion
+                                  ? { duration: 0 }
+                                  : groupChatIntroDone
+                                    ? {
+                                        duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
+                                        ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
+                                      }
+                                    : {
+                                        duration: GROUP_CHAT_PREVIEW_INTRO_FLOAT.duration,
+                                        ease: GROUP_CHAT_PREVIEW_INTRO_FLOAT.ease,
+                                        opacity: {
+                                          duration: GROUP_CHAT_PREVIEW_INTRO_FLOAT.fadeDuration,
+                                          ease: GROUP_CHAT_PREVIEW_INTRO_FLOAT.ease,
+                                        },
+                                      }
+                              }
+                              onAnimationComplete={() => {
+                                if (prefersReducedMotion || groupChatIntroCompleteRef.current) return;
+                                groupChatIntroCompleteRef.current = true;
+                                setGroupChatIntroDone(true);
+                              }}
+                              whileHover={
+                                prefersReducedMotion || !groupChatIntroDone
+                                  ? undefined
+                                  : {
+                                      scale: 1.045,
+                                      y: -16,
+                                      x: 0,
+                                      opacity: 1,
+                                      transition: {
+                                        duration: GROUP_CHAT_PREVIEW_HOVER_TWEEN.duration,
+                                        ease: GROUP_CHAT_PREVIEW_HOVER_TWEEN.ease,
+                                      },
+                                    }
+                              }
+                              width={360}
+                              height={640}
+                              loading="eager"
+                              decoding="async"
+                              draggable={false}
+                            />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-sm border-0 bg-transparent p-0 shadow-none [&>button]:text-white [&>button]:hover:text-white/80">
+                          <div className="group-chat-dialog-float -translate-y-1 rounded-2xl">
+                            <img
+                              src={groupChatOverlayImageUrl}
+                              alt="Group chat preview"
+                              className="relative block w-full rounded-2xl"
+                              width={360}
+                              height={640}
+                              loading="eager"
+                              decoding="async"
+                            />
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    )}
+                  </div>
 
                   <div className="absolute z-10 inset-0 rounded-2xl bg-gradient-to-t from-gray-900 via-transparent to-transparent pointer-events-none" />
                 </div>
