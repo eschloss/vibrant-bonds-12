@@ -315,7 +315,7 @@ const EventDetail = () => {
   const showOverlay = loading || forceLoading;
 
   const groupChatOverlayImageUrl =
-    "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Copy%20of%20may%2021,%201107%20am%20(Your%20Story).png";
+    "https://s.kikiapp.eu/desktop/groupchinchillas.png";
 
   // Preload Stripe.js after event content loads so checkout is fast; defers until after event data + images
   useEffect(() => {
