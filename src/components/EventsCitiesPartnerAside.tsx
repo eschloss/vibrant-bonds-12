@@ -1,21 +1,56 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2 } from "lucide-react";
+import { ArrowRight, Building2, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 
-type Props = { className?: string };
+type Props = {
+  className?: string;
+  /** Collapses to a single-line strip (e.g. while the user types in the city search). */
+  compact?: boolean;
+  onExpand?: () => void;
+};
 
-export default function EventsCitiesPartnerAside({ className }: Props) {
+export default function EventsCitiesPartnerAside({ className, compact, onExpand }: Props) {
   const { t } = useTranslation();
 
+  const shellClass = cn(
+    "max-w-6xl mx-auto rounded-xl border-2 border-dashed border-pulse-pink/25 bg-gradient-to-br from-gray-900/90 via-purple-950/35 to-gray-900/90 shadow-[0_0_0_1px_rgba(116,26,173,0.12),0_12px_40px_-12px_rgba(0,0,0,0.55)] shadow-lg shadow-purple-500/10 backdrop-blur-sm overflow-hidden flex mb-8 transition-[box-shadow] duration-300",
+    compact && "shadow-md",
+    className
+  );
+
+  if (compact && onExpand) {
+    const title = t("eventsCities.partner.title", "Run Pulse Events in your city");
+    const expandHint = t("eventsCities.partner.expand_hint", "Click to expand");
+    return (
+      <aside className={shellClass}>
+        <div
+          className="w-1.5 shrink-0 bg-gradient-to-b from-pulse-pink via-accent to-pulse-blue"
+          aria-hidden
+        />
+        <button
+          type="button"
+          onClick={onExpand}
+          className="flex min-h-[2.75rem] w-full min-w-0 flex-1 items-center gap-2 py-2 pl-3 pr-3 text-left outline-none transition-colors hover:bg-white/[0.04] focus-visible:ring-2 focus-visible:ring-pulse-pink/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950"
+          aria-expanded={false}
+          aria-label={`${title}. ${expandHint}`}
+        >
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue shadow-[0_0_12px_rgba(116,26,173,0.3)]">
+            <Building2 className="h-3.5 w-3.5 text-white" aria-hidden />
+          </div>
+          <span className="min-w-0 flex-1 truncate text-sm font-medium leading-none text-white">
+            {title}
+          </span>
+          <span className="hidden shrink-0 text-xs text-white/45 sm:inline">{expandHint}</span>
+          <ChevronDown className="h-4 w-4 shrink-0 text-pulse-pink/85" aria-hidden />
+        </button>
+      </aside>
+    );
+  }
+
   return (
-    <aside
-      className={cn(
-        "max-w-6xl mx-auto rounded-xl border-2 border-dashed border-pulse-pink/25 bg-gradient-to-br from-gray-900/90 via-purple-950/35 to-gray-900/90 shadow-[0_0_0_1px_rgba(116,26,173,0.12),0_12px_40px_-12px_rgba(0,0,0,0.55)] shadow-lg shadow-purple-500/10 backdrop-blur-sm overflow-hidden flex mb-8",
-        className
-      )}
-    >
+    <aside className={shellClass}>
       <div
         className="w-1.5 shrink-0 bg-gradient-to-b from-pulse-pink via-accent to-pulse-blue"
         aria-hidden

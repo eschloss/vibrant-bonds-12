@@ -5,6 +5,7 @@ export const eventsCities = {
     "eventsCities.partner.subtitle":
       "Have a venue or run experiences? Apply to partner and bring Pulse Events to your city.",
     "eventsCities.partner.cta": "Apply for partnership",
+    "eventsCities.partner.expand_hint": "Click to expand",
   },
   es: {
     "eventsCities.partner.kicker": "Para espacios y anfitriones",
@@ -12,5 +13,6 @@ export const eventsCities = {
     "eventsCities.partner.subtitle":
       "¿Tienes un espacio o ofreces experiencias? Aplica para asociarte y traer Pulse Events a tu ciudad.",
     "eventsCities.partner.cta": "Solicitar alianza",
+    "eventsCities.partner.expand_hint": "Clic para expandir",
   },
 };

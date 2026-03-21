@@ -42,6 +42,8 @@ export default function EventsCities() {
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
   const [openCountries, setOpenCountries] = useState<Record<string, boolean>>({});
+  /** While searching, the partnership strip starts collapsed; user can tap to expand. */
+  const [partnerExpandedWhileSearching, setPartnerExpandedWhileSearching] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const hasScrolledRef = useRef(false);
@@ -181,6 +183,10 @@ export default function EventsCities() {
   }, [searchTerm]);
 
   useEffect(() => {
+    if (!searchTerm) setPartnerExpandedWhileSearching(false);
+  }, [searchTerm]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add("dark");
     if (searchInputRef.current) {
@@ -304,7 +310,10 @@ export default function EventsCities() {
               </div>
             </motion.div>
 
-            <EventsCitiesPartnerAside />
+            <EventsCitiesPartnerAside
+              compact={Boolean(searchTerm) && !partnerExpandedWhileSearching}
+              onExpand={() => setPartnerExpandedWhileSearching(true)}
+            />
 
             <div className="max-w-6xl mx-auto">
               {Object.entries(groupedCities).length > 0 ? (
