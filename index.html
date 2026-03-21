@@ -48,39 +48,32 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="preload" as="image" href="/placeholder.svg" imagesrcset="/placeholder.svg" imagesizes="100vw" />
     
-    <!-- Google Analytics: load on idle; SPA handles page_view events -->
+    <!-- dataLayer stub before React (web-vitals + queued gtag calls until gtag loads) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    </script>
+    
+    <!-- GA + Meta: inject only after React dispatches kiki:app-ready (lazy route mounted) -->
     <script>
       (function() {
         var GA_ID = 'G-J591H7VFMV';
+        var APP_READY = 'kiki:app-ready';
+        var ANALYTICS_INIT = 'kiki:analytics-init';
         var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
-        if (isPrerender) return;
+        var loaded = false;
+
         function initGA() {
-          // Load gtag with the GA ID
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
           document.head.appendChild(s);
-          // Initialize dataLayer / gtag
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
           window.gtag = gtag;
           gtag('js', new Date());
-          // Disable automatic page_view; SPA sends manual page_view on route changes
           gtag('config', GA_ID, { send_page_view: false });
         }
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initGA);
-        } else {
-          setTimeout(initGA, 0);
-        }
-      })();
-    </script>
-    
-    <!-- Meta Pixel: load on idle (same pattern as GA) so it does not compete with first paint -->
-    <script>
-      (function() {
-        var isPrerender = typeof navigator !== 'undefined' && /ReactSnap/i.test(navigator.userAgent || '');
-        if (isPrerender) return;
+
         function initMetaPixel() {
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -93,11 +86,24 @@
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
         }
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initMetaPixel);
-        } else {
-          setTimeout(initMetaPixel, 0);
+
+        function loadAnalytics() {
+          if (loaded || isPrerender) return;
+          loaded = true;
+          initGA();
+          initMetaPixel();
+          try {
+            window.dispatchEvent(new CustomEvent(ANALYTICS_INIT));
+          } catch (e) {}
         }
+
+        window.addEventListener(APP_READY, loadAnalytics, { once: true });
+
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            if (!loaded) loadAnalytics();
+          }, 12000);
+        });
       })();
     </script>
     

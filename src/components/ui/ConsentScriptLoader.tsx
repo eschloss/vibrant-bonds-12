@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ANALYTICS_APP_READY_EVENT, ANALYTICS_INIT_EVENT } from "@/lib/analyticsAppReady";
 import { getConsent } from "@/lib/consent";
 import { isInEeaUk } from "@/lib/region";
 
@@ -16,7 +17,7 @@ export const ConsentScriptLoader: React.FC = () => {
     const maybeLoad = async () => {
       const consent = getConsent();
 
-      // Google Analytics now loads unconditionally in index.html
+      // Google Analytics loads from index.html after kiki:app-ready
       // Update Google Consent Mode v2 for ad signals based on CPRA opt-out, GPC, and region
       const gpcEnabled = typeof navigator !== 'undefined' && (navigator as any).globalPrivacyControl === true;
       let inEeaUk: boolean | null = null;
@@ -44,7 +45,7 @@ export const ConsentScriptLoader: React.FC = () => {
         }
       } catch {}
 
-      // Meta Pixel now loads unconditionally in index.html
+      // Meta Pixel loads from index.html after kiki:app-ready
       // No consent-based initialization needed
 
       // Other marketing/analytics vendor example (commented placeholders)
@@ -54,7 +55,13 @@ export const ConsentScriptLoader: React.FC = () => {
     void maybeLoad();
     const handler = () => { void maybeLoad(); };
     window.addEventListener('pulseConsentChanged', handler as EventListener);
-    return () => window.removeEventListener('pulseConsentChanged', handler as EventListener);
+    window.addEventListener(ANALYTICS_APP_READY_EVENT, handler as EventListener);
+    window.addEventListener(ANALYTICS_INIT_EVENT, handler as EventListener);
+    return () => {
+      window.removeEventListener('pulseConsentChanged', handler as EventListener);
+      window.removeEventListener(ANALYTICS_APP_READY_EVENT, handler as EventListener);
+      window.removeEventListener(ANALYTICS_INIT_EVENT, handler as EventListener);
+    };
   }, []);
 
   return null;

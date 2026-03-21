@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ANALYTICS_INIT_EVENT } from '@/lib/analyticsAppReady';
 
 export default function GaPageViewTracker() {
   const location = useLocation();
   useEffect(() => {
-    try {
-      const gtagFn = (window as any).gtag as undefined | ((...args: any[]) => void);
-      const debug = /(^|[?&])debug_ga=1(&|$)/.test(window.location.search);
-      if (typeof gtagFn === 'function') {
+    const send = () => {
+      try {
+        const gtagFn = (window as any).gtag as undefined | ((...args: any[]) => void);
+        const debug = /(^|[?&])debug_ga=1(&|$)/.test(window.location.search);
+        if (typeof gtagFn !== 'function') return;
         setTimeout(() => {
           const payload = {
             page_path: location.pathname + location.search + location.hash,
@@ -20,8 +22,11 @@ export default function GaPageViewTracker() {
           }
           gtagFn('event', 'page_view', payload);
         }, 0);
-      }
-    } catch {}
+      } catch {}
+    };
+    send();
+    window.addEventListener(ANALYTICS_INIT_EVENT, send);
+    return () => window.removeEventListener(ANALYTICS_INIT_EVENT, send);
   }, [location]);
   return null;
 }

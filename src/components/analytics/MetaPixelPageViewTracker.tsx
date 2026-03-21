@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ANALYTICS_INIT_EVENT } from '@/lib/analyticsAppReady';
 
 export default function MetaPixelPageViewTracker() {
   const location = useLocation();
   useEffect(() => {
-    try {
-      const fbq = (window as any).fbq as undefined | ((...args: any[]) => void);
-      const debug = /(^|[?&])debug_fb=1(&|$)/.test(window.location.search);
-      if (typeof fbq === 'function') {
+    const send = () => {
+      try {
+        const fbq = (window as any).fbq as undefined | ((...args: any[]) => void);
+        const debug = /(^|[?&])debug_fb=1(&|$)/.test(window.location.search);
+        if (typeof fbq !== 'function') return;
         setTimeout(() => {
           if (debug) {
             // eslint-disable-next-line no-console
@@ -19,8 +21,11 @@ export default function MetaPixelPageViewTracker() {
           }
           fbq('track', 'PageView');
         }, 0);
-      }
-    } catch {}
+      } catch {}
+    };
+    send();
+    window.addEventListener(ANALYTICS_INIT_EVENT, send);
+    return () => window.removeEventListener(ANALYTICS_INIT_EVENT, send);
   }, [location]);
   return null;
 }

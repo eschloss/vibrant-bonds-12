@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/ui/CookieConsent";
 import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 import ConsentScriptLoader from "@/components/ui/ConsentScriptLoader";
+import AppReadyDispatch from "@/components/analytics/AppReadyDispatch";
 import GaPageViewTracker from "@/components/analytics/GaPageViewTracker";
 import MetaPixelPageViewTracker from "@/components/analytics/MetaPixelPageViewTracker";
 import CitiesPreloader from "@/components/CitiesPreloader";
@@ -39,6 +40,7 @@ const AppLayoutInner = () => {
             <MatchmakingChatContextSync />
             <Suspense fallback={<AppShellRouteFallback />}>
               <Outlet />
+              <AppReadyDispatch />
             </Suspense>
           </div>
           <GaPageViewTracker />
