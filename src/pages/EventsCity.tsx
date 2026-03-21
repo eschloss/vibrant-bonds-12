@@ -454,7 +454,8 @@ const EventsCity = () => {
 
         <EventsCityFutureInterestSection
           cityLabel={faqCityLabel}
-          cityCode={cityCode}
+          kikiId={kikis[0]?.id}
+          kikisLoading={loadingInitial}
         />
 
         <section

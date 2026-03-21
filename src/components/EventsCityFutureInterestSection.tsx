@@ -1,24 +1,24 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation";
-import { RECAPTCHA_SITE_KEY } from "@/lib/constants";
-import { buildFutureInviteSignupUrl } from "@/lib/eventApi";
+import { submitFutureInviteSignup } from "@/lib/futureInviteSignup";
 import { loadRecaptchaScriptOnce } from "@/lib/recaptchaLoader";
-import { suggestionsForApi } from "@/lib/futureInviteSuggestions";
 import FutureInviteSuggestionChips from "@/components/FutureInviteSuggestionChips";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Props = {
   cityLabel: string;
-  /** Same city `code` as GET /events/get_kikis `code` query param; required for signup. */
-  cityCode: string;
+  /** First listed kiki id in this city — same as event detail future-invite signup (`kiki_id`). */
+  kikiId: number | undefined;
+  /** While the city’s kiki list is loading, signup is disabled. */
+  kikisLoading: boolean;
 };
 
-export default function EventsCityFutureInterestSection({ cityLabel, cityCode }: Props) {
+export default function EventsCityFutureInterestSection({ cityLabel, kikiId, kikisLoading }: Props) {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -31,21 +31,29 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityCode }:
   const handleEmailSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = email.trim();
-    const emailIsValid = EMAIL_REGEX.test(trimmed);
 
-    if (!trimmed || !emailIsValid) {
+    if (!trimmed) {
+      setEmailError(t("future_invites.error_required", "Email is required"));
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmed)) {
+      setEmailError(t("future_invites.error_invalid", "Please enter a valid email address"));
+      return;
+    }
+
+    if (kikisLoading) {
       setEmailError(
-        t(
-          "events_city.future_interest.email_error",
-          "Enter a valid email to get future event updates."
-        )
+        t("events_city.future_interest.city_missing", "City data is still loading. Please try again in a moment.")
       );
       return;
     }
 
-    if (!cityCode.trim()) {
+    if (typeof kikiId !== "number") {
       setEmailError(
-        t("events_city.future_interest.city_missing", "City data is still loading. Please try again in a moment.")
+        t(
+          "events_city.future_interest.no_kiki_anchor",
+          "There isn’t a published event listing for this city yet, so we can’t register interest. Check back soon."
+        )
       );
       return;
     }
@@ -53,63 +61,12 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityCode }:
     setEmailError("");
     setSubmitting(true);
     try {
-      loadRecaptchaScriptOnce();
-      if (!(window as any).grecaptcha) {
-        await new Promise<void>((resolve, reject) => {
-          let n = 0;
-          const id = window.setInterval(() => {
-            n += 1;
-            if ((window as any).grecaptcha) {
-              window.clearInterval(id);
-              resolve();
-            } else if (n > 80) {
-              window.clearInterval(id);
-              reject(new Error("recaptcha"));
-            }
-          }, 50);
-        }).catch(() => {
-          throw new Error(
-            t("future_invites.error_recaptcha", "Security check failed. Please refresh and try again.")
-          );
-        });
-      }
-
-      const token = await new Promise<string>((resolve, reject) => {
-        (window as any).grecaptcha.ready(() => {
-          (window as any).grecaptcha
-            .execute(RECAPTCHA_SITE_KEY, { action: "future_invite_signup" })
-            .then(resolve)
-            .catch(reject);
-        });
+      await submitFutureInviteSignup({
+        emailTrimmed: trimmed,
+        kikiId,
+        suggestionIds: selectedTypes,
+        t,
       });
-
-      const payload: Record<string, unknown> = {
-        recaptcha: token,
-        email: trimmed.toLowerCase(),
-        code: cityCode.trim(),
-      };
-      const sug = suggestionsForApi(selectedTypes);
-      if (sug.length > 0) payload.suggestions = sug;
-
-      const response = await fetch(buildFutureInviteSignupUrl(), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json().catch(() => ({ success: false }));
-
-      if (response.status === 429) {
-        throw new Error(
-          t("future_invites.error_rate_limit", "Too many attempts. Please try again in a minute.")
-        );
-      }
-
-      if (!result.success) {
-        throw new Error(
-          result.error || t("future_invites.error_generic", "Something went wrong. Please try again.")
-        );
-      }
 
       setSubmitted(true);
     } catch (e: unknown) {
@@ -180,6 +137,14 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityCode }:
                     "Get updates on future events"
                   )}
                 </h3>
+                {!kikisLoading && typeof kikiId !== "number" ? (
+                  <p className="text-sm text-white/60 mt-2 max-w-xl">
+                    {t(
+                      "events_city.future_interest.no_kiki_anchor",
+                      "There isn’t a published event listing for this city yet, so we can’t register interest. Check back soon."
+                    )}
+                  </p>
+                ) : null}
               </div>
             </div>
 
@@ -253,7 +218,7 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityCode }:
 
                 <Button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || kikisLoading || typeof kikiId !== "number"}
                   className="w-full sm:w-auto rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue text-white shadow-lg shadow-purple-500/20 hover:opacity-95 disabled:opacity-60"
                   size="lg"
                 >
