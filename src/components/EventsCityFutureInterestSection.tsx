@@ -14,11 +14,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Props = {
   cityLabel: string;
-  /** Django City PK from get_all_cities_expanded; required for signup. */
-  cityId: number | null;
+  /** Same city `code` as GET /events/get_kikis `code` query param; required for signup. */
+  cityCode: string;
 };
 
-export default function EventsCityFutureInterestSection({ cityLabel, cityId }: Props) {
+export default function EventsCityFutureInterestSection({ cityLabel, cityCode }: Props) {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -43,7 +43,7 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityId }: P
       return;
     }
 
-    if (cityId == null) {
+    if (!cityCode.trim()) {
       setEmailError(
         t("events_city.future_interest.city_missing", "City data is still loading. Please try again in a moment.")
       );
@@ -86,7 +86,7 @@ export default function EventsCityFutureInterestSection({ cityLabel, cityId }: P
       const payload: Record<string, unknown> = {
         recaptcha: token,
         email: trimmed.toLowerCase(),
-        city_id: cityId,
+        code: cityCode.trim(),
       };
       const sug = suggestionsForApi(selectedTypes);
       if (sug.length > 0) payload.suggestions = sug;

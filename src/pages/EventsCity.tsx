@@ -30,6 +30,7 @@ import {
   getKikiListingDescription,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
+import { ensureHttpsAssetUrl } from "@/lib/imageUrl";
 
 function formatCityName(slug: string): string {
   return slug
@@ -105,14 +106,6 @@ const EventsCity = () => {
   }, [cities, cityName]);
 
   const cityCode = matchedCity && typeof (matchedCity as any).code === "string" ? (matchedCity as any).code : "";
-  const cityDbId = useMemo(() => {
-    if (!matchedCity) return null;
-    const raw = (matchedCity as any).id;
-    if (raw === undefined || raw === null) return null;
-    const n = Number(raw);
-    return Number.isFinite(n) ? n : null;
-  }, [matchedCity]);
-
   useEffect(() => {
     if (!cityName) return;
     if (!Array.isArray(cities) || cities.length === 0) return;
@@ -233,7 +226,8 @@ const EventsCity = () => {
 
   const cityImage: string | undefined = useMemo(() => {
     if (!matchedCity) return undefined;
-    return typeof matchedCity.image === "string" ? matchedCity.image : undefined;
+    const raw = typeof matchedCity.image === "string" ? matchedCity.image : undefined;
+    return ensureHttpsAssetUrl(raw);
   }, [matchedCity]);
 
   const seoCityLabel = displayCityName;
@@ -460,7 +454,7 @@ const EventsCity = () => {
 
         <EventsCityFutureInterestSection
           cityLabel={faqCityLabel}
-          cityId={cityDbId}
+          cityCode={cityCode}
         />
 
         <section
