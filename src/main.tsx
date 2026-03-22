@@ -3,7 +3,7 @@ import App from './App.tsx'
 import './index.css'
 import { onCLS, onFID, onLCP, onINP, onTTFB } from 'web-vitals'
 
-// dataLayer before gtag loads (GA loads from /analytics-bootstrap.js after kiki:app-ready)
+// dataLayer before gtag loads (GA loads from /third-party-bootstrap.js after kiki:app-ready)
 ;(window as unknown as { dataLayer?: unknown[] }).dataLayer =
   (window as unknown as { dataLayer?: unknown[] }).dataLayer || []
 

@@ -53,9 +53,8 @@
       />
     </noscript>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Deferred after main: lang → GA/Meta listeners → Manychat (idle). dataLayer init in main.tsx -->
+    <!-- Deferred after main: lang → GA/Meta/ManyChat (after app-ready). dataLayer init in main.tsx -->
     <script defer src="/lang-subdomain.js"></script>
-    <script defer src="/analytics-bootstrap.js"></script>
-    <script defer src="/manychat-widget.js"></script>
+    <script defer src="/third-party-bootstrap.js"></script>
   </body>
 </html>

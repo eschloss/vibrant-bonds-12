@@ -1,6 +1,3 @@
-/**
- * GA4 + Meta Pixel: load after kiki:app-ready (lazy route mounted). Mirrors former index.html inline script.
- */
 (function () {
   window.dataLayer = window.dataLayer || [];
 
@@ -46,14 +43,36 @@
     })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
   }
 
+  function initManyChat() {
+    function loadWidgetScripts() {
+      var scripts = ["https://widget.manychat.com/3822754_24192.js"];
+      scripts.forEach(function (src) {
+        try {
+          if (document.querySelector('script[src="' + src + '"]')) return;
+          var s = document.createElement("script");
+          s.src = src;
+          s.async = true;
+          s.onerror = function () {};
+          document.body.appendChild(s);
+        } catch (e) {}
+      });
+    }
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(loadWidgetScripts);
+    } else {
+      setTimeout(loadWidgetScripts, 0);
+    }
+  }
+
   function loadAnalytics() {
     if (loaded || isPrerender) return;
     loaded = true;
-    initGA();
     initMetaPixel();
+    initGA();
     try {
       window.dispatchEvent(new CustomEvent(ANALYTICS_INIT));
     } catch (e) {}
+    initManyChat();
   }
 
   window.addEventListener(APP_READY, loadAnalytics, { once: true });
