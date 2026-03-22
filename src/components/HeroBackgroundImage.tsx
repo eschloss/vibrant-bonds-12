@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type HeroBackgroundImageProps = {
   src: string;
@@ -30,6 +30,26 @@ const HeroBackgroundImage: React.FC<HeroBackgroundImageProps> = ({
   fetchPriority = "high",
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  /** Fade only after bytes are loaded *and* the bitmap is decoded (avoids fading in while still painting). */
+  const revealWhenDecoded = useCallback((img: HTMLImageElement) => {
+    const done = () => setLoaded(true);
+    const p =
+      typeof img.decode === "function" ? img.decode() : Promise.resolve();
+    p.then(done).catch(done);
+  }, []);
+
+  useLayoutEffect(() => {
+    setLoaded(false);
+  }, [src]);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) {
+      revealWhenDecoded(img);
+    }
+  }, [src, revealWhenDecoded]);
 
   return (
     <div className="absolute inset-0 z-0">
@@ -41,9 +61,10 @@ const HeroBackgroundImage: React.FC<HeroBackgroundImageProps> = ({
         aria-hidden="true"
       />
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
-        onLoad={() => setLoaded(true)}
+        onLoad={(e) => revealWhenDecoded(e.currentTarget)}
         loading={eager ? "eager" : "lazy"}
         fetchpriority={fetchPriority === "auto" ? undefined : fetchPriority}
         decoding="async"
