@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preload" as="image" href="https://s.kikiapp.eu/city/lagos/Aerial_City_Photography.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="./lagos.css" />
     <link
       rel="preload"
@@ -79,10 +78,16 @@
     <main>
       <section class="hero">
         <div class="hero-decor" aria-hidden="true"></div>
-        <div
-          class="hero-bg"
-          style="background-image: url('https://s.kikiapp.eu/city/lagos/Aerial_City_Photography.jpg')"
-        ></div>
+        <div class="hero-bg" aria-hidden="true">
+          <img
+            src="https://s.kikiapp.eu/city/lagos/Aerial_City_Photography.jpg"
+            alt=""
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
         <div class="hero-bg-gradient"></div>
         <div class="hero-bg-fade"></div>
         <div class="container hero-inner">
