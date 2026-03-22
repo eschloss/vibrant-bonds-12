@@ -56,19 +56,7 @@
     } catch (e) {}
   }
 
-  function scheduleLoadAnalytics() {
-    if (loaded || isPrerender) return;
-    function go() {
-      loadAnalytics();
-    }
-    if (typeof requestIdleCallback === "function") {
-      requestIdleCallback(go, { timeout: 2500 });
-    } else {
-      setTimeout(go, 0);
-    }
-  }
-
-  window.addEventListener(APP_READY, scheduleLoadAnalytics, { once: true });
+  window.addEventListener(APP_READY, loadAnalytics, { once: true });
 
   window.addEventListener("load", function () {
     setTimeout(function () {
