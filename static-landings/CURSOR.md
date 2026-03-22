@@ -15,7 +15,7 @@ Conventions for fast, English-only HTML landings that mirror Pulse city pages **
 ## Visual target
 
 - **Pixel-perfect** alignment with the live `/cities/<slug>` page: spacing, typography, colors, breakpoints — **resting state only**.
-- **No animations**: no `@keyframes`, decorative `transition`/`animation`, scroll-driven motion, Framer-style effects, or `animate-*` utilities. Prefer instant paint; `:hover` color changes only if they match the live site and stay cheap.
+- **No animations** on the landing shell: no `@keyframes`, decorative `transition`/`animation`, scroll-driven motion, Framer-style effects, or `animate-*` utilities on page content. Prefer instant paint; `:hover` color changes only if they match the live site and stay cheap. **Exception:** the shared Pulse chat widget (`scripts/pulse-whatsapp-chat.css`) uses motion to match the in-app `WhatsAppChatButton`.
 
 ## Copy & data
 
@@ -39,9 +39,15 @@ Conventions for fast, English-only HTML landings that mirror Pulse city pages **
   - `width="0"` `height="0"` `hidden` `aria-hidden="true"` `tabindex="-1"`
   - `src="https://pulsenow.app/cities/<slug>"` for city landings (adjust for non-city landings).
 
-## Chat widget (ManyChat) — deferred
+## Analytics (Google + Meta) — deferred
 
-- To mirror the main app (`public/third-party-bootstrap.js`), load **ManyChat** only **after** the warm-up iframe: e.g. `load` → `requestIdleCallback` → inject iframe → `requestIdleCallback` again → append `https://widget.manychat.com/3822754_24192.js` (or the current widget URL from that file). Keeps the bot available without competing with first paint.
+- Append **`scripts/analytics-deferred.js`** at the end of `<body>` (with `defer`). It loads **Google Analytics** (`gtag`, measurement ID aligned with `public/third-party-bootstrap.js`) and **Meta Pixel** after `window` `load` + `requestIdleCallback`. **Do not** load ManyChat on static indexes.
+
+## Pulse WhatsApp chat (optional per landing)
+
+- Shared implementation: **`scripts/pulse-whatsapp-chat.js`** loads **`scripts/pulse-whatsapp-chat.css`** dynamically (same directory as the script). **Do not** add a render-blocking `<link>` for the chat CSS in `<head>` — the script injects the stylesheet after **`load`** + idle, then mounts the widget after the CSS loads (keeps first paint fast).
+- **`data-variant`**: `matchmaking` (e.g. Lagos static — mirror `/cities/lagos` chat) or `events` (e.g. event/campaign landings — mirror `/events/:slug` chat).
+- Optional: **`data-event-title`**, **`data-webhook-context`** (webhook `context` string), **`data-storage-id`** (namespaces `localStorage` chat thread/messages per page).
 
 ## Step icons (Lucide parity)
 
@@ -58,7 +64,8 @@ Conventions for fast, English-only HTML landings that mirror Pulse city pages **
 2. Set meta/SEO (title, description, `og:*`, canonical for the **landing** URL).
 3. Hero image: dimensions + `fetchpriority="high"` on LCP image.
 4. All in-site links → `https://pulsenow.app/...`.
-5. No animation/motion libraries; no duplicate API prefetch scripts.
-6. Append deferred hidden iframe to the canonical in-app URL, then ManyChat (idle) if you need the bot.
-7. Document or verify `frame-ancestors` for the landing host.
-8. Omit language UI; match hero CTA color and H1 line breaks; match dark section backgrounds; footer social as SVGs; no fake newsletter form.
+5. No animation/motion libraries on the page shell; no duplicate API prefetch scripts.
+6. Append deferred hidden iframe to the canonical in-app URL; append **`analytics-deferred.js`** at the end of `<body>`.
+7. If this landing needs the same floating chat as the app, append **`pulse-whatsapp-chat.js`** (with the correct **`data-variant`** and optional context attributes) — not a separate CSS link in `<head>`.
+8. Document or verify `frame-ancestors` for the landing host.
+9. Omit language UI; match hero CTA color and H1 line breaks; match dark section backgrounds; footer social as SVGs; no fake newsletter form.

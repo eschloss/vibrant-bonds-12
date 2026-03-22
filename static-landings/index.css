@@ -18,10 +18,12 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background: #fff;
   color: var(--gunmetal);

@@ -58,6 +58,10 @@ export const eventCheckout = {
     "event_checkout.checkout_unavailable": "Checkout unavailable",
     "event_checkout.stripe_not_configured": "Stripe is not configured. Please set",
     "event_checkout.couldnt_start_checkout": "Couldn't start checkout",
+    "event_checkout.event_sold_out_title": "This event is sold out",
+    "event_checkout.event_sold_out_body":
+      "There are no tickets left for this event. Head back to browse other experiences.",
+    "event_checkout.event_sold_out_toast": "There are no tickets left for this event.",
     "event_checkout.try_again": "Try again",
     "event_checkout.loading_checkout": "Loading checkout",
     "event_checkout.please_wait": "Please wait while we prepare your payment.",
@@ -152,6 +156,10 @@ export const eventCheckout = {
     "event_checkout.checkout_unavailable": "Checkout no disponible",
     "event_checkout.stripe_not_configured": "Stripe no está configurado. Configura",
     "event_checkout.couldnt_start_checkout": "No se pudo iniciar el checkout",
+    "event_checkout.event_sold_out_title": "Este evento está agotado",
+    "event_checkout.event_sold_out_body":
+      "No quedan entradas para este evento. Vuelve atrás para ver otras experiencias.",
+    "event_checkout.event_sold_out_toast": "No quedan entradas para este evento.",
     "event_checkout.try_again": "Intentar de nuevo",
     "event_checkout.loading_checkout": "Cargando checkout",
     "event_checkout.please_wait": "Por favor espera mientras preparamos tu pago.",

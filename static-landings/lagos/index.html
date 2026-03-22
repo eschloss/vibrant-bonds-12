@@ -575,8 +575,6 @@
     </script>
     <script>
       (function () {
-        var MANYCHAT_SRC = "https://widget.manychat.com/3822754_24192.js";
-
         function injectIframe() {
           var f = document.createElement("iframe");
           f.setAttribute("width", "0");
@@ -589,15 +587,6 @@
           document.body.appendChild(f);
         }
 
-        function loadManyChat() {
-          if (document.querySelector('script[src="' + MANYCHAT_SRC + '"]')) return;
-          var s = document.createElement("script");
-          s.src = MANYCHAT_SRC;
-          s.async = true;
-          s.onerror = function () {};
-          document.body.appendChild(s);
-        }
-
         function afterIdle(cb) {
           if ("requestIdleCallback" in window) {
             requestIdleCallback(cb, { timeout: 8000 });
@@ -607,12 +596,16 @@
         }
 
         window.addEventListener("load", function () {
-          afterIdle(function () {
-            injectIframe();
-            afterIdle(loadManyChat);
-          });
+          afterIdle(injectIframe);
         });
       })();
     </script>
+    <script
+      src="../scripts/pulse-whatsapp-chat.js"
+      defer
+      data-variant="matchmaking"
+      data-storage-id="static-lagos-mm"
+    ></script>
+    <script src="../scripts/analytics-deferred.js" defer></script>
   </body>
 </html>

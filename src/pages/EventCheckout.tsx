@@ -72,6 +72,23 @@ function getOrCreateSessionKey(key: string): string {
   }
 }
 
+/** FastAPI-style error bodies: `{ detail: string | [...] }` */
+function parsePaymentIntentErrorDetail(body: unknown): string {
+  if (!body || typeof body !== "object") return "";
+  const d = (body as { detail?: unknown }).detail;
+  if (typeof d === "string") return d.trim();
+  if (Array.isArray(d) && d.length > 0) {
+    const first = d[0] as { msg?: unknown };
+    if (first && typeof first.msg === "string") return first.msg.trim();
+  }
+  return "";
+}
+
+type CheckoutIntentFailure =
+  | null
+  | { kind: "sold_out" }
+  | { kind: "generic"; message: string };
+
 function createCheckoutSchema(t: (key: string, fallback: string) => string) {
   const emailSchema = z
     .string()
@@ -1332,7 +1349,7 @@ function CheckoutForm({
               )}
 
               <div className="space-y-2">
-                {(eventData.tickets_remaining ?? 20) > 0 ? (
+                {!eventData.sold_out && (eventData.tickets_remaining ?? 20) > 0 ? (
                   <p className="text-sm text-amber-400/90">
                     {isMobile
                       ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(eventData.tickets_remaining ?? 20))
@@ -1889,7 +1906,7 @@ function CheckoutPrePayment({
               </div>
             ) : null}
             <div className="space-y-2">
-              {(eventData.tickets_remaining ?? 20) > 0 ? (
+              {!eventData.sold_out && (eventData.tickets_remaining ?? 20) > 0 ? (
                 <p className="text-sm text-amber-400/90">
                   {isMobile
                     ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(eventData.tickets_remaining ?? 20))
@@ -2001,7 +2018,7 @@ const EventCheckout = () => {
   const [notFound, setNotFound] = React.useState(false);
 
   const [intentLoading, setIntentLoading] = React.useState(false);
-  const [intentError, setIntentError] = React.useState<string | null>(null);
+  const [intentFailure, setIntentFailure] = React.useState<CheckoutIntentFailure>(null);
   const [orderId, setOrderId] = React.useState<string | null>(null);
   const [clientSecret, setClientSecret] = React.useState<string | null>(null);
 
@@ -2097,7 +2114,7 @@ const EventCheckout = () => {
 
   const createIntent = React.useCallback(async () => {
     if (!eventSlug) return;
-    setIntentError(null);
+    setIntentFailure(null);
     setIntentLoading(true);
     try {
       const currentAddons = selectedAddonsRef.current;
@@ -2113,22 +2130,72 @@ const EventCheckout = () => {
           addons,
         }),
       });
-      if (!res.ok) {
-        const msg = await res
-          .json()
-          .then((j) => j?.detail || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"))
-          .catch(() => t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"));
-        throw new Error(msg);
+      let body: unknown = {};
+      try {
+        body = await res.json();
+      } catch {
+        body = {};
       }
-      const json = (await res.json()) as CreateIntentResponse;
+      if (!res.ok) {
+        const detail = parsePaymentIntentErrorDetail(body);
+        const msg =
+          detail || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
+        setIntentFailure({ kind: "generic", message: msg });
+        trackMetaPixelEvent(
+          "event_checkout_create_intent_failed",
+          {
+            event_slug: eventSlug,
+            error_message: msg,
+          },
+          { custom: true }
+        );
+        toast({
+          title: t("event_checkout.checkout_error", "Checkout error"),
+          description: msg,
+          variant: "destructive",
+        });
+        return;
+      }
+      const json = body as CreateIntentResponse;
       if (!json?.client_secret || !json?.order_id) {
-        throw new Error("Missing client secret from server");
+        const message = t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
+        setIntentFailure({ kind: "generic", message });
+        trackMetaPixelEvent(
+          "event_checkout_create_intent_failed",
+          {
+            event_slug: eventSlug,
+            error_message: "missing_client_secret",
+          },
+          { custom: true }
+        );
+        toast({
+          title: t("event_checkout.checkout_error", "Checkout error"),
+          description: message,
+          variant: "destructive",
+        });
+        return;
+      }
+      if (eventData?.sold_out) {
+        setIntentFailure({ kind: "sold_out" });
+        trackMetaPixelEvent(
+          "event_checkout_sold_out_after_intent",
+          { event_slug: eventSlug },
+          { custom: true }
+        );
+        toast({
+          title: t("event_checkout.event_sold_out_title", "This event is sold out"),
+          description: t(
+            "event_checkout.event_sold_out_toast",
+            "There are no tickets left for this event."
+          ),
+        });
+        return;
       }
       setOrderId(json.customer_id ?? json.order_id);
       setClientSecret(json.client_secret);
     } catch (err: any) {
       const message = err?.message || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
-      setIntentError(message);
+      setIntentFailure({ kind: "generic", message });
       trackMetaPixelEvent(
         "event_checkout_create_intent_failed",
         {
@@ -2145,7 +2212,7 @@ const EventCheckout = () => {
     } finally {
       setIntentLoading(false);
     }
-  }, [eventSlug, idempotencyKey, toast, t]);
+  }, [eventSlug, idempotencyKey, eventData?.sold_out, toast, t]);
 
   const createBankTransferIntent = React.useCallback(
     async (values: CheckoutFormValues) => {
@@ -2173,15 +2240,35 @@ const EventCheckout = () => {
           }),
         });
         if (!res.ok) {
-          const msg = await res
-            .json()
-            .then((j) => j?.detail || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"))
-            .catch(() => t("event_checkout.couldnt_start_checkout", "Couldn't start checkout"));
+          let body: unknown = {};
+          try {
+            body = await res.json();
+          } catch {
+            body = {};
+          }
+          const detail = parsePaymentIntentErrorDetail(body);
+          const msg =
+            detail || t("event_checkout.couldnt_start_checkout", "Couldn't start checkout");
           throw new Error(msg);
         }
         const json = (await res.json()) as CreateIntentResponse;
         if (!json?.order_id) {
           throw new Error("Missing order ID from server");
+        }
+        if (eventData?.sold_out) {
+          setClientSecret(null);
+          setOrderId(null);
+          setBankTransferOrderId(null);
+          setPendingFormValues(null);
+          setIntentFailure({ kind: "sold_out" });
+          toast({
+            title: t("event_checkout.event_sold_out_title", "This event is sold out"),
+            description: t(
+              "event_checkout.event_sold_out_toast",
+              "There are no tickets left for this event."
+            ),
+          });
+          return;
         }
         setBankTransferOrderId(json.customer_id ?? json.order_id);
       } catch (err: any) {
@@ -2195,7 +2282,7 @@ const EventCheckout = () => {
         setBankTransferLoading(false);
       }
     },
-    [eventSlug, idempotencyKeyBank, toast, t]
+    [eventSlug, idempotencyKeyBank, eventData?.sold_out, toast, t]
   );
 
   const handleContinueToPayment = React.useCallback(
@@ -2211,7 +2298,7 @@ const EventCheckout = () => {
     setOrderId(null);
     setPendingFormValues(null);
     setBankTransferOrderId(null);
-    setIntentError(null);
+    setIntentFailure(null);
   }, []);
 
   const eventHeaderValue =
@@ -2296,14 +2383,47 @@ const EventCheckout = () => {
       <div className="min-h-screen bg-[#090D14] text-white">
         <Navbar />
         <main className="pt-16 lg:pt-20">
-          {intentError ? (
+          {intentFailure?.kind === "sold_out" ? (
+            <div className="px-6 py-16">
+              <div className="w-full max-w-xl mx-auto">
+                <Card className="border-amber-500/35 bg-[#0C1220] shadow-[0_0_0_1px_rgba(245,158,11,0.12)]">
+                  <CardContent className="p-8">
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/80 mb-2">
+                      {t("event_checkout.checkout", "Checkout")}
+                    </div>
+                    <div className="text-2xl font-semibold text-white">
+                      {t("event_checkout.event_sold_out_title", "This event is sold out")}
+                    </div>
+                    <div
+                      role="status"
+                      className="mt-4 rounded-lg border border-amber-500/45 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed text-amber-100/95"
+                    >
+                      {t(
+                        "event_checkout.event_sold_out_body",
+                        "There are no tickets left for this event. Head back to browse other experiences."
+                      )}
+                    </div>
+                    <div className="mt-6">
+                      <Link
+                        to={`/events/${eventSlug}`}
+                        className="inline-flex items-center gap-2 justify-center rounded-lg border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2.5 text-sm font-medium text-white/85 transition-colors"
+                      >
+                        <ArrowLeft className="h-4 w-4" />
+                        {t("event_checkout.back_to_event", "Back to event")}
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          ) : intentFailure?.kind === "generic" ? (
             <div className="px-6 py-16">
               <div className="w-full max-w-xl mx-auto">
                 <Card className="border-white/10 bg-[#0C1220]">
                   <CardContent className="p-8">
                     <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45 mb-2">{t("event_checkout.checkout", "Checkout")}</div>
                     <div className="text-2xl font-semibold text-white">{t("event_checkout.couldnt_start_checkout", "Couldn't start checkout")}</div>
-                    <div className="mt-2 text-sm text-white/65">{intentError}</div>
+                    <div className="mt-2 text-sm text-white/65">{intentFailure.message}</div>
                     <div className="mt-6 flex gap-3 flex-col sm:flex-row">
                       <Button
                         onClick={createIntent}
