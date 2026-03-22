@@ -14,8 +14,9 @@ function RouteFallbackGlass() {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-white/[0.07] via-white/[0.02] to-pulse-blue/[0.08] backdrop-blur-[2px]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_65%_at_50%_0%,rgba(255,255,255,0.14),transparent_52%)]" />
-      <div className="absolute -left-[25%] -top-[20%] h-[min(85vw,520px)] w-[min(85vw,520px)] rounded-full bg-gradient-to-br from-pulse-pink/28 via-accent/16 to-transparent opacity-80 blur-3xl animate-spin-slow" />
-      <div className="absolute -bottom-[25%] -right-[20%] h-[min(75vw,480px)] w-[min(75vw,480px)] rounded-full bg-gradient-to-tl from-pulse-blue/32 via-accent/12 to-transparent opacity-70 blur-3xl animate-[spin-slow_22s_linear_infinite_reverse]" />
+      <div className="absolute -left-[25%] -top-[20%] h-[min(85vw,520px)] w-[min(85vw,520px)] rounded-full bg-gradient-to-br from-pulse-pink/[0.56] via-accent/[0.32] to-transparent opacity-90 blur-3xl animate-spin-slow" />
+      <div className="absolute -bottom-[25%] -right-[20%] h-[min(75vw,480px)] w-[min(75vw,480px)] rounded-full bg-gradient-to-tl from-pulse-blue/[0.64] via-accent/[0.24] to-transparent opacity-[0.85] blur-3xl animate-[spin-slow_22s_linear_infinite_reverse]" />
+      <div className="pointer-events-none absolute inset-0 bg-black/75" aria-hidden />
     </div>
   );
 }

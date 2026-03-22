@@ -1,7 +1,8 @@
 /**
  * Deferred Google Analytics (gtag) + Meta Pixel for static landings.
- * Loads after window "load" + requestIdleCallback. No ManyChat.
- * IDs match public/third-party-bootstrap.js
+ * Starts once the DOM is interactive (not window "load"), so pixel/gtag
+ * script fetches run in parallel with large images instead of after them.
+ * No ManyChat. IDs match public/third-party-bootstrap.js
  */
 (function () {
   var GA_ID = "G-J591H7VFMV";
@@ -51,15 +52,16 @@
     initGA();
   }
 
-  function afterIdle(cb) {
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(cb, { timeout: 8000 });
+  function scheduleRun() {
+    function kick() {
+      setTimeout(run, 0);
+    }
+    if (document.readyState !== "loading") {
+      kick();
     } else {
-      setTimeout(cb, 0);
+      document.addEventListener("DOMContentLoaded", kick);
     }
   }
 
-  window.addEventListener("load", function () {
-    afterIdle(run);
-  });
+  scheduleRun();
 })();
