@@ -34,6 +34,7 @@ import {
   type GetKikiEventResponse,
   formatEventPrice,
   getEventPriceOpts,
+  getProviderName,
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
@@ -53,6 +54,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import GetFutureInvitesModal from "@/components/GetFutureInvitesModal";
 
 const CREATE_INTENT_URL = shardApiUrl(`${EVENTS_API_BASE_URL}/payments/kiki/create_payment_intent/`);
 const ATTACH_EMAILS_URL = shardApiUrl(`${EVENTS_API_BASE_URL}/payments/kiki/attach_order_emails/`);
@@ -149,6 +151,10 @@ const stripePromise = stripePk
     )
   : null;
 
+/** Alternate path (future invites) vs transactional checkout — same dark panel, reads as an optional fork. */
+const CHECKOUT_FUTURE_INVITES_LINK_CLASS =
+  "group mt-3 inline-flex w-fit max-w-full rounded-lg border border-dashed border-white/20 bg-gradient-to-r from-[#38D1BF]/[0.09] to-transparent px-3 py-2.5 text-left text-[13px] font-medium leading-snug text-white/82 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition-all hover:border-[#38D1BF]/40 hover:from-[#38D1BF]/[0.15] hover:text-[#38D1BF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38D1BF]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C14]";
+
 function CheckoutForm({
   eventSlug,
   eventData,
@@ -159,6 +165,7 @@ function CheckoutForm({
   onRequestBankTransferIntent,
   bankTransferLoading,
   onBackToAddons,
+  onOpenFutureInvites,
 }: {
   eventSlug: string;
   eventData: GetKikiEventResponse;
@@ -169,6 +176,7 @@ function CheckoutForm({
   onRequestBankTransferIntent: (values: CheckoutFormValues) => Promise<void>;
   bankTransferLoading: boolean;
   onBackToAddons?: () => void;
+  onOpenFutureInvites?: () => void;
 }) {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -658,20 +666,31 @@ function CheckoutForm({
         {t("event_checkout.order_summary", "Order summary")}
       </div>
       <h2 className="text-xl font-semibold text-white leading-snug mb-3">{eventData.title}</h2>
-      <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-4">
-        <div className="flex items-center gap-2">
-          <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
-          <span>{eventDateTime.text}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <MapPin className="h-4 w-4 shrink-0 text-white/40" />
-          <span>{eventData.place}</span>
-        </div>
-        {durationText ? (
+      <div className="mb-4">
+        <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65">
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 shrink-0 text-white/40" />
-            <span>{durationText}</span>
+            <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
+            <span>{eventDateTime.text}</span>
           </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="h-4 w-4 shrink-0 text-white/40" />
+            <span>{eventData.place}</span>
+          </div>
+          {durationText ? (
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 shrink-0 text-white/40" />
+              <span>{durationText}</span>
+            </div>
+          ) : null}
+        </div>
+        {onOpenFutureInvites ? (
+          <button
+            type="button"
+            onClick={onOpenFutureInvites}
+            className={CHECKOUT_FUTURE_INVITES_LINK_CLASS}
+          >
+            {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
+          </button>
         ) : null}
       </div>
       <div className="border-t border-white/[0.08] pt-5 space-y-3">
@@ -764,44 +783,55 @@ function CheckoutForm({
             {eventData.title}
           </h2>
 
-          <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-4">
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
-              <span className="inline-flex items-center gap-2">
-                <span>{eventDateTime.text}</span>
-                {!showMinimalOrderSummary && eventDateTime.hasWindow ? (
-                  <TooltipProvider delayDuration={isLg ? 100 : 999999}>
-                    <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
-                          className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
-                          aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
-                        >
-                          ?
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent
-                        side="right"
-                        className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
-                      >
-                        {entranceTimeTooltip}
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                ) : null}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 shrink-0 text-white/40" />
-              <span>{eventData.place}</span>
-            </div>
-            {!showMinimalOrderSummary && durationText ? (
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65">
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 shrink-0 text-white/40" />
-                <span>{durationText}</span>
+                <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
+                <span className="inline-flex items-center gap-2">
+                  <span>{eventDateTime.text}</span>
+                  {!showMinimalOrderSummary && eventDateTime.hasWindow ? (
+                    <TooltipProvider delayDuration={isLg ? 100 : 999999}>
+                      <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
+                            className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                            aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
+                          >
+                            ?
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent
+                          side="right"
+                          className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
+                        >
+                          {entranceTimeTooltip}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ) : null}
+                </span>
               </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 shrink-0 text-white/40" />
+                <span>{eventData.place}</span>
+              </div>
+              {!showMinimalOrderSummary && durationText ? (
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 shrink-0 text-white/40" />
+                  <span>{durationText}</span>
+                </div>
+              ) : null}
+            </div>
+            {onOpenFutureInvites ? (
+              <button
+                type="button"
+                onClick={onOpenFutureInvites}
+                className={CHECKOUT_FUTURE_INVITES_LINK_CLASS}
+              >
+                {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
+              </button>
             ) : null}
           </div>
 
@@ -1458,6 +1488,7 @@ function CheckoutPrePayment({
   onContinueToPayment,
   intentLoading,
   t,
+  onOpenFutureInvites,
 }: {
   eventSlug: string;
   eventData: GetKikiEventResponse;
@@ -1466,6 +1497,7 @@ function CheckoutPrePayment({
   onContinueToPayment: (formValues: CheckoutFormValues) => Promise<void>;
   intentLoading: boolean;
   t: (key: string, fallback: string) => string;
+  onOpenFutureInvites?: () => void;
 }) {
   const checkoutSchema = React.useMemo(() => createCheckoutSchema(t), [t]);
   const form = useForm<CheckoutFormValues>({
@@ -1654,44 +1686,55 @@ function CheckoutPrePayment({
             {t("event_checkout.order_summary", "Order summary")}
           </div>
           <h2 className="text-xl font-semibold text-white leading-snug mb-3">{eventData.title}</h2>
-          <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65 mb-4">
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
-              <span className="inline-flex items-center gap-2">
-                <span>{eventDateTime.text}</span>
-                {eventDateTime.hasWindow ? (
-                  <TooltipProvider delayDuration={isLg ? 100 : 999999}>
-                    <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
-                          className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
-                          aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
-                        >
-                          ?
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent
-                        side="right"
-                        className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
-                      >
-                        {entranceTimeTooltip}
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                ) : null}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 shrink-0 text-white/40" />
-              <span>{eventData.place}</span>
-            </div>
-            {durationText ? (
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-sm text-white/65">
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 shrink-0 text-white/40" />
-                <span>{durationText}</span>
+                <CalendarDays className="h-4 w-4 shrink-0 text-white/40" />
+                <span className="inline-flex items-center gap-2">
+                  <span>{eventDateTime.text}</span>
+                  {eventDateTime.hasWindow ? (
+                    <TooltipProvider delayDuration={isLg ? 100 : 999999}>
+                      <Tooltip open={entranceTimeTooltipOpen} onOpenChange={setEntranceTimeTooltipOpen}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            onClick={() => setEntranceTimeTooltipOpen((prev) => !prev)}
+                            className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/20 text-[11px] font-semibold text-white/80 hover:bg-black/30 hover:text-white transition-colors"
+                            aria-label={t("event_checkout.entrance_time_help", "Entrance time info")}
+                          >
+                            ?
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent
+                          side="right"
+                          className="max-w-[260px] text-xs leading-relaxed border-white/15 bg-[#131B2E] text-white/90"
+                        >
+                          {entranceTimeTooltip}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ) : null}
+                </span>
               </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 shrink-0 text-white/40" />
+                <span>{eventData.place}</span>
+              </div>
+              {durationText ? (
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 shrink-0 text-white/40" />
+                  <span>{durationText}</span>
+                </div>
+              ) : null}
+            </div>
+            {onOpenFutureInvites ? (
+              <button
+                type="button"
+                onClick={onOpenFutureInvites}
+                className={CHECKOUT_FUTURE_INVITES_LINK_CLASS}
+              >
+                {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
+              </button>
             ) : null}
           </div>
           <div className="hidden lg:block mb-4">
@@ -2093,6 +2136,34 @@ const EventCheckout = () => {
   const [pendingFormValues, setPendingFormValues] = React.useState<CheckoutFormValues | null>(null);
   const [bankTransferOrderId, setBankTransferOrderId] = React.useState<string | null>(null);
   const [bankTransferLoading, setBankTransferLoading] = React.useState(false);
+  const [futureInvitesOpen, setFutureInvitesOpen] = React.useState(false);
+
+  const futureInvitesParams = React.useMemo(() => {
+    if (!eventData || notFound || !eventSlug) return null;
+    return {
+      event_slug: eventData.slug,
+      event_title: eventData.title,
+      city: eventData.city,
+      city_label: eventData.city_label,
+      provider: getProviderName(eventData.provider),
+      path: `/events/${eventData.slug}/checkout`,
+    };
+  }, [eventData, notFound, eventSlug]);
+
+  const handleOpenFutureInvites = React.useCallback(() => {
+    if (!futureInvitesParams) return;
+    trackMetaPixelEvent("event_future_invites_modal_click", futureInvitesParams, { custom: true });
+    trackMetaPixelEvent(
+      "event_qualified_lead",
+      { ...futureInvitesParams, lead_source: "future_invites_modal" },
+      { custom: true }
+    );
+    setFutureInvitesOpen(true);
+  }, [futureInvitesParams]);
+
+  React.useEffect(() => {
+    setFutureInvitesOpen(false);
+  }, [eventSlug]);
 
   // Initialize addons from default_quantity when event data loads
   React.useEffect(() => {
@@ -2299,6 +2370,7 @@ const EventCheckout = () => {
     setPendingFormValues(null);
     setBankTransferOrderId(null);
     setIntentFailure(null);
+    setFutureInvitesOpen(false);
   }, []);
 
   const eventHeaderValue =
@@ -2547,6 +2619,7 @@ const EventCheckout = () => {
                 onRequestBankTransferIntent={createBankTransferIntent}
                 bankTransferLoading={bankTransferLoading}
                 onBackToAddons={handleBackToAddons}
+                onOpenFutureInvites={handleOpenFutureInvites}
               />
             </Elements>
           ) : (
@@ -2558,11 +2631,23 @@ const EventCheckout = () => {
               onContinueToPayment={handleContinueToPayment}
               intentLoading={intentLoading}
               t={t}
+              onOpenFutureInvites={handleOpenFutureInvites}
             />
           )}
         </main>
         <Footer />
       </div>
+      <GetFutureInvitesModal
+        open={futureInvitesOpen}
+        onOpenChange={setFutureInvitesOpen}
+        t={t}
+        kikiId={eventData.id}
+        onSuccess={() => {
+          if (futureInvitesParams) {
+            trackMetaPixelEvent("event_future_invites_submitted", futureInvitesParams, { custom: true });
+          }
+        }}
+      />
     </>
   );
   return eventHeaderValue ? (
