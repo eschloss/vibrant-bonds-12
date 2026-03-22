@@ -4,21 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paint, Sip &amp; New Friends in Ikoyi 🎨🍷 | Lagos Events | Pulse</title>
-    <meta
-      name="description"
-      content="Come solo. We'll match you into a small group before the session. Arrive already knowing people, then enjoy a guided paint and sip experience in a relaxed, social setting."
-    />
-    <link rel="canonical" href="https://pulsenow.app/events/paint-and-sip-lagos" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pulsenow.app/events/paint-and-sip-lagos" />
-    <meta property="og:title" content="Paint, Sip &amp; New Friends in Ikoyi 🎨🍷 | Lagos Events | Pulse" />
-    <meta
-      property="og:description"
-      content="Come solo. We'll match you into a small group before the session. Arrive already knowing people, then enjoy a guided paint and sip experience in a relaxed, social setting."
-    />
-    <meta property="og:image" content="https://s.kikiapp.eu/kiki/5/primary_image.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://s.kikiapp.eu/kiki/5/primary_image.jpg" />
     <link rel="icon" type="image/png" href="https://s.kikiapp.eu/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,33 +13,18 @@
     />
     <link rel="preload" as="image" href="https://s.kikiapp.eu/kiki/5/primary_image.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="./paint-and-sip.css" />
+    <link
+      rel="preload"
+      href="../site-nav-mobile.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript><link rel="stylesheet" href="../site-nav-mobile.css" /></noscript>
     <!--
       Baked from production API (refresh when event changes):
       curl -sS "https://api.kikiapp.eu/events/get_kiki?slug=paint-and-sip-lagos"
       kiki id: 5
     -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        "name": "Paint, Sip & New Friends in Ikoyi 🎨🍷",
-        "description": "Come solo. We'll match you into a small group before the session. Public event in Lagos; Pulse matches solo attendees.",
-        "startDate": "2026-04-02T17:00:00+00:00",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "location": {
-          "@type": "Place",
-          "name": "30 Ajasa Street, Ikoyi, Nigeria Eti Osa Phase 1"
-        },
-        "image": ["https://s.kikiapp.eu/kiki/5/primary_image.jpg", "https://s.kikiapp.eu/kiki/5/image_2.jpg", "https://s.kikiapp.eu/kiki/5/image_3.jpeg"],
-        "offers": {
-          "@type": "Offer",
-          "price": "25000",
-          "priceCurrency": "NGN",
-          "availability": "https://schema.org/InStock",
-          "url": "https://pulsenow.app/events/paint-and-sip-lagos/checkout"
-        }
-      }
-    </script>
   </head>
   <body>
     <input type="hidden" name="paint_sip_kiki_id" value="5" form="future-invites-form" />
@@ -65,14 +35,45 @@
           <img class="logo-img" src="https://s.kikiapp.eu/img/pulse-text.png" width="128" height="24" alt="Pulse" />
         </a>
         <nav class="nav-desktop" aria-label="Primary">
-          <a href="https://pulsenow.app/how-it-works">How it works</a>
+          <a href="https://pulsenow.app/events/how-it-works">How it works</a>
           <a href="https://pulsenow.app/events">Events</a>
           <a href="https://pulsenow.app/meet-pip">Meet Pip</a>
           <a href="https://pulsenow.app/contact">Contact</a>
         </nav>
         <a class="cta-nav" href="https://pulsenow.app/cities">See More Cities</a>
+        <button
+          type="button"
+          class="nav-menu-btn"
+          aria-expanded="false"
+          aria-controls="nav-mobile-panel"
+          aria-label="Open menu"
+        >
+          <svg class="nav-menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+          <svg class="nav-menu-icon-close" hidden width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </header>
+
+    <div id="nav-mobile-panel" class="nav-mobile-panel" aria-hidden="true">
+      <div class="container xl-wide nav-mobile-inner">
+        <a href="https://pulsenow.app/">Home</a>
+        <a href="https://pulsenow.app/events/how-it-works">How it works</a>
+        <a href="https://pulsenow.app/events">Events</a>
+        <a href="https://pulsenow.app/meet-pip">Meet Pip</a>
+        <a href="https://pulsenow.app/about">About Us</a>
+        <a href="https://pulsenow.app/contact">Contact</a>
+        <div class="nav-mobile-cta-wrap">
+          <a class="nav-mobile-cta nav-mobile-cta--hidden" href="https://pulsenow.app/cities" tabindex="-1" aria-hidden="true"
+            ><span>See More Cities</span></a>
+        </div>
+      </div>
+    </div>
 
     <div class="event-hero-bg" aria-hidden="true"></div>
 
@@ -663,6 +664,7 @@
       </div>
     </footer>
 
+    <script src="../scripts/site-nav-mobile.js" defer></script>
     <script src="../scripts/paint-and-sip-event.js" defer></script>
     <script
       src="../scripts/pulse-whatsapp-chat.js"

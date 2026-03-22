@@ -4,26 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pulse: New Friends &amp; Real-Life Plans</title>
-    <meta
-      name="description"
-      content="Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships."
-    />
-    <meta
-      name="keywords"
-      content="make friends, group matching, real-life meetups, friendship app, city social, meet people, social connections"
-    />
-    <link rel="canonical" href="https://pulsenow.app/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pulsenow.app/" />
-    <meta property="og:title" content="Pulse: New Friends &amp; Real-Life Plans" />
-    <meta
-      property="og:description"
-      content="Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships."
-    />
-    <meta property="og:image" content="https://pulsenow.app/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@pulsefriendsirl" />
-    <meta name="twitter:image" content="https://pulsenow.app/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" />
     <link rel="icon" type="image/png" href="https://s.kikiapp.eu/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,15 +18,13 @@
     />
     <link rel="preload" as="image" href="https://pulsenow.app/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="./index.css" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Pulse",
-        "url": "https://pulsenow.app/",
-        "description": "Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships."
-      }
-    </script>
+    <link
+      rel="preload"
+      href="./site-nav-mobile.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript><link rel="stylesheet" href="./site-nav-mobile.css" /></noscript>
     <!--
       Infra: this page may be served from a marketing host while the warm-up iframe loads https://pulsenow.app/ (cross-origin).
       Ensure pulsenow.app CSP includes frame-ancestors for the landing origin so the iframe is not blocked.
@@ -65,8 +43,43 @@
           <a href="https://pulsenow.app/contact">Contact</a>
         </nav>
         <a class="cta-nav" href="https://pulsenow.app/cities">See More Cities</a>
+        <button
+          type="button"
+          class="nav-menu-btn"
+          aria-expanded="false"
+          aria-controls="nav-mobile-panel"
+          aria-label="Open menu"
+        >
+          <svg class="nav-menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+          <svg class="nav-menu-icon-close" hidden width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </header>
+
+    <div id="nav-mobile-panel" class="nav-mobile-panel" aria-hidden="true">
+      <div class="container xl-wide nav-mobile-inner">
+        <a href="https://pulsenow.app/">Home</a>
+        <a href="https://pulsenow.app/how-it-works">How it works</a>
+        <a href="https://pulsenow.app/activities">Adventures</a>
+        <a href="https://pulsenow.app/meet-pip">Meet Pip</a>
+        <a href="https://pulsenow.app/about">About Us</a>
+        <a href="https://pulsenow.app/contact">Contact</a>
+        <div class="nav-mobile-cta-wrap">
+          <a class="nav-mobile-cta" href="https://pulsenow.app/cities">
+            <span>Meet Your Crew</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
 
     <main>
       <section class="hero-home">
@@ -560,6 +573,7 @@
         });
       })();
     </script>
+    <script src="./scripts/site-nav-mobile.js" defer></script>
     <script src="./scripts/analytics-deferred.js" defer></script>
   </body>
 </html>
