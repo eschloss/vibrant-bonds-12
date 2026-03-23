@@ -11,7 +11,8 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  z-index: 40;
+  /* Above .site-header (9999) and event sticky CTA on paint-and-sip (10050) */
+  z-index: 10060;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -161,9 +162,10 @@
   left: 0.75rem;
   right: 0.75rem;
   bottom: 3.5rem;
-  /* Match WhatsAppChatButton: fill the allowed viewport band so the thread area isn’t content-height. */
-  height: 85vh;
-  max-height: 85vh;
+  /* Match WhatsAppChatButton: fill the allowed viewport band; JS pins pixel height on mobile (keyboard). */
+  height: min(85vh, calc(100vh - 5rem));
+  max-height: min(85vh, calc(100vh - 5rem));
+  min-height: 12rem;
   display: flex;
   flex-direction: column;
   /* Allow header “more” dropdown to extend past the panel edge (Radix uses a portal; we use absolute). */
@@ -174,6 +176,13 @@
   box-shadow:
     0 25px 50px -12px rgb(0 0 0 / 0.45),
     0 0 0 1px rgb(0 0 0 / 0.2);
+}
+
+@supports (height: 100dvh) {
+  .pulse-wa-chat__panel {
+    height: min(85dvh, calc(100dvh - 5rem));
+    max-height: min(85dvh, calc(100dvh - 5rem));
+  }
 }
 
 @media (min-width: 640px) {

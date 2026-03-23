@@ -63,7 +63,7 @@ img {
   color: transparent;
 }
 
-/* Header */
+/* Header — flush to the top on iOS (safe-area + compositor; avoids subpixel gaps under fixed layers) */
 .site-header {
   position: fixed;
   top: 0;
@@ -71,10 +71,15 @@ img {
   right: 0;
   z-index: 9999;
   width: 100%;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   background: rgba(255, 255, 255, 0.85);
-  padding: 1.25rem 0;
+  padding-top: calc(1.25rem + env(safe-area-inset-top, 0px));
+  padding-bottom: 1.25rem;
+  padding-left: 0;
+  padding-right: 0;
   color: var(--gunmetal);
 }
 

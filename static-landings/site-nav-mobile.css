@@ -36,7 +36,8 @@
   position: fixed;
   inset: 0;
   z-index: 40;
-  padding-top: 5rem;
+  /* Match taller fixed header on notch devices (safe-area added to .site-header) */
+  padding-top: calc(5rem + env(safe-area-inset-top, 0px));
   width: 100%;
   max-width: 100vw;
   background: #15191c;

@@ -835,6 +835,28 @@
       return panel;
     }
 
+    /** Mobile: cap chat height to the visible viewport and shrink when the keyboard opens (VisualViewport). */
+    function syncMobilePanelHeight() {
+      if (!panelBuilt || !panel) return;
+      if (window.matchMedia("(min-width: 640px)").matches) {
+        panel.style.height = "";
+        panel.style.maxHeight = "";
+        return;
+      }
+      var vv = window.visualViewport;
+      if (!vv) return;
+      var rootFont = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      var bottomStr = getComputedStyle(panel).bottom;
+      var bottomPx = parseFloat(bottomStr);
+      if (bottomStr.indexOf("rem") !== -1) bottomPx *= rootFont;
+      else if (bottomStr.indexOf("px") === -1 || isNaN(bottomPx)) bottomPx = 3.5 * rootFont;
+      var topPad = 12 + Math.max(0, vv.offsetTop);
+      var maxH = vv.height - bottomPx - topPad;
+      maxH = Math.max(200, Math.min(maxH, vv.height * 0.9));
+      panel.style.height = maxH + "px";
+      panel.style.maxHeight = maxH + "px";
+    }
+
     function setOpen(v) {
       open = v;
       fab.setAttribute("aria-expanded", open ? "true" : "false");
@@ -845,7 +867,15 @@
           panelBuilt = true;
         }
         updatePanelContent();
-        input.focus();
+        requestAnimationFrame(function () {
+          syncMobilePanelHeight();
+          requestAnimationFrame(syncMobilePanelHeight);
+        });
+      } else {
+        if (window.matchMedia("(max-width: 639.98px)").matches) {
+          panel.style.height = "";
+          panel.style.maxHeight = "";
+        }
       }
       scheduleBubbleTimers();
       updateBubbleDom();
@@ -904,6 +934,13 @@
     root.appendChild(fab);
     root.appendChild(panel);
     document.body.appendChild(root);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", syncMobilePanelHeight);
+      window.visualViewport.addEventListener("scroll", syncMobilePanelHeight);
+    }
+    window.addEventListener("resize", syncMobilePanelHeight);
+    window.addEventListener("orientationchange", syncMobilePanelHeight);
 
     function onDocMouseDown(e) {
       if (!open) return;
