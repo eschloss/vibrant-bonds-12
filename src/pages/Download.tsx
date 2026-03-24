@@ -18,7 +18,7 @@ const Download = () => {
       es: "Descarga la app Pulse para continuar. Únete a grupos pequeños y haz planes en la vida real."
     },
     pathname: "/download",
-    image: "https://s.kikiapp.eu/img/press/1024x.png",
+    image: "https://s.kikiapp.eu/img/pulselogo.webp",
     keywords: [
       "Pulse app download",
       "Pulse iOS",
@@ -49,7 +49,7 @@ const Download = () => {
               {/* Row 1: Big app icon */}
               <div className="mb-6">
                 <img
-                  src="https://s.kikiapp.eu/img/press/1024x.png"
+                  src="https://s.kikiapp.eu/img/pulselogo.webp"
                   alt="Pulse app icon"
                   width={160}
                   height={160}
@@ -95,7 +95,7 @@ const Download = () => {
                 className="inline-flex items-center justify-center rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors mx-auto p-2 md:p-3"
               >
                 <img
-                  src="https://s.kikiapp.eu/img/apple.png"
+                  src="https://s.kikiapp.eu/img/Apple+1550x600.webp"
                   alt={t("download.app_store", "Download on the App Store")}
                   className="h-24 md:h-[7.5rem] w-auto object-contain"
                   loading="eager"
@@ -115,7 +115,7 @@ const Download = () => {
                 className="inline-flex items-center justify-center rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors mx-auto p-2 md:p-3"
               >
                 <img
-                  src="https://s.kikiapp.eu/img/google.png"
+                  src="https://s.kikiapp.eu/img/Google+(1).webp"
                   alt={t("download.google_play", "Get it on Google Play")}
                   className="h-24 md:h-[7.5rem] w-auto object-contain"
                   loading="eager"

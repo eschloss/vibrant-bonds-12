@@ -56,7 +56,7 @@ export default function EventProviderSection({
           {hasLogo && (
             <img
               src={provider.logo}
-              alt=""
+              alt={name ? `${name} logo` : ""}
               className={`${slim ? "w-6 h-6 rounded-md" : "w-8 h-8 rounded-lg"} object-contain bg-white/5 border border-white/10 shrink-0`}
               loading="lazy"
             />
@@ -89,7 +89,7 @@ export default function EventProviderSection({
         {hasLogo && (
           <img
             src={provider.logo}
-            alt=""
+            alt={name ? `${name} logo` : ""}
             className="w-12 h-12 rounded-lg object-contain bg-white/5 border border-white/10 shrink-0"
             loading="lazy"
           />

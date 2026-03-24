@@ -11,7 +11,7 @@
   var MESSENGER_URL = "https://m.me/meetfriendslagos";
   var EMAIL_ADDRESS = "info@pulsenow.app";
   var AVATAR_URL =
-    "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png";
+    "https://s.kikiapp.eu/img/pip/piphello.webp";
 
   var BUBBLE_DELAYS_MS = [
     20000, 60000, 120000, 200000, 300000, 420000, 560000,

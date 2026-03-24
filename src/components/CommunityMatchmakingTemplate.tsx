@@ -60,12 +60,12 @@ const CommunityMatchmakingTemplate = ({
   const refParam = urlParams.get('ref');
 
   const peopleOptions: string[] = [
-    "https://s.kikiapp.eu/img/people/friends1.avif",
-    "https://s.kikiapp.eu/img/people/friends2.avif",
-    "https://s.kikiapp.eu/img/people/friends3.avif",
-    "https://s.kikiapp.eu/img/people/friends4.avif",
-    "https://s.kikiapp.eu/img/people/friends5.avif",
-    "https://s.kikiapp.eu/img/people/friends6.avif",
+    "https://s.kikiapp.eu/img/Friends+2940x1960+(1).avif",
+    "https://s.kikiapp.eu/img/Friends+2+(1).avif",
+    "https://s.kikiapp.eu/img/Friends+3+(1).avif",
+    "https://s.kikiapp.eu/img/Friends4+(1)+(1).avif",
+    "https://s.kikiapp.eu/img/Friends+5+(1).avif",
+    "https://s.kikiapp.eu/img/Friends+6+(1).avif",
   ];
   
   function cityScore(cityName: string, state?: string, country?: string): number {
@@ -198,14 +198,14 @@ const CommunityMatchmakingTemplate = ({
                       <a href={communityData.business_url} target="_blank" rel="noopener noreferrer">
                         <img 
                           src={`https://${communityData.business_image}`} 
-                          alt={communityData.business_name}
+                          alt={`${communityData.business_name} logo`}
                           className="h-10 max-w-20 object-contain cursor-pointer"
                         />
                       </a>
                     ) : (
                       <img 
                         src={`https://${communityData.business_image}`} 
-                        alt={communityData.business_name}
+                        alt={`${communityData.business_name} logo`}
                         className="h-10 max-w-20 object-contain"
                       />
                     )

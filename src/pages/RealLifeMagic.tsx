@@ -98,9 +98,8 @@ const RealLifeMagic: React.FC = () => {
         description: 'Face-to-face connection improves longevity, immunity, and mental health. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions.',
         datePublished: '2025-09-22T00:00:00Z',
         dateModified: '2025-09-22T00:00:00Z',
-        image: 'https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg',
         author: { '@type': 'Organization', name: 'Pulse' },
-        publisher: { '@type': 'Organization', name: 'Pulse', logo: { '@type': 'ImageObject', url: 'https://s.kikiapp.eu/img/pulse_logo.png' } },
+        publisher: { '@type': 'Organization', name: 'Pulse', logo: { '@type': 'ImageObject', url: 'https://s.kikiapp.eu/img/Pulse+Logo.webp' } },
         mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://pulsenow.app/real-life-magic' }
       }) }} />
 
@@ -127,7 +126,6 @@ const RealLifeMagic: React.FC = () => {
           "group adventures",
           "social capital"
         ]}
-        image="https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg"
         type="article"
         publishedTime="2025-09-22T00:00:00Z"
         modifiedTime="2025-09-22T00:00:00Z"

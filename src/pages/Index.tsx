@@ -28,7 +28,6 @@ const Index = () => {
     },
     keywords: ["make friends", "group matching", "real-life meetups", "friendship app", "city social", "meet people", "social connections"],
     type: "website",
-    image: "/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
   };
 
   return (
@@ -48,7 +47,7 @@ const Index = () => {
             <ActivitiesTeaserLazy />
           </Suspense>
           <Suspense fallback={null}>
-            <MeetPipPromoLazy imageSrc="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png" />
+            <MeetPipPromoLazy imageSrc="https://s.kikiapp.eu/img/pip/piphello.webp" />
           </Suspense>
           <Viewport rootMargin="300px 0px" threshold={0}>
             <Suspense fallback={null}>

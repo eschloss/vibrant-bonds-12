@@ -12,19 +12,19 @@ const TeamSection = () => {
       nameKey: "team.eric.name",
       roleKey: "team.eric.role",
       bioKey: "team.eric.bio",
-      image: "/lovable-uploads/bd8cf463-4a58-4a21-8681-90c958baf08a.jpg"
+      image: "https://s.kikiapp.eu/img/team/ericteam.webp"
     },
     {
       nameKey: "team.stian.name",
       roleKey: "team.stian.role",
       bioKey: "team.stian.bio",
-      image: "https://s.kikiapp.eu/img/team/stian.jpeg"
+      image: "https://s.kikiapp.eu/img/team/stianteam.webp"
     },
     {
       nameKey: "team.pedro.name",
       roleKey: "team.pedro.role",
       bioKey: "team.pedro.bio",
-      image: "https://s.kikiapp.eu/img/team/pedro_hipster.jpeg"
+      image: "https://s.kikiapp.eu/img/team/Pedro+Hipster+1080x1350.webp"
     }
   ];
 

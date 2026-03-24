@@ -30,6 +30,7 @@ import { Seo } from "@/hooks/useSeo";
 import EarningCalculator from "@/components/EarningCalculator";
 import { trackTypeformRedirect } from "@/lib/utils";
 import Text from "@/components/Text";
+import { getPipActivityImageAlt } from "@/lib/pipActivityImageAlt";
 
 const Partnerships = () => {
   const { t } = useTranslation();
@@ -205,20 +206,20 @@ const Partnerships = () => {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-md h-72 md:h-80">
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
-                    alt="Pip bowling with friends"
+                    src="https://s.kikiapp.eu/img/pip/bowling.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/bowling.webp") ?? ""}
                     className="absolute top-0 left-0 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg] z-20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
-                    alt="Pip paintball with friends"
+                    src="https://s.kikiapp.eu/img/pip/paintball.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/paintball.webp") ?? ""}
                     className="absolute top-6 right-0 w-44 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 z-10"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
-                    alt="Pip cooking with friends"
+                    src="https://s.kikiapp.eu/img/pip/cooking.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/cooking.webp") ?? ""}
                     className="absolute bottom-0 left-12 md:left-24 w-36 md:w-44 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1 z-30"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
@@ -242,22 +243,22 @@ const Partnerships = () => {
         <div className="container mx-auto px-4">
           {(() => {
             const partnerVenueItems = [
-              { id: 'arcade', name: 'Arcade', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png' },
-              { id: 'pottery-studio', name: 'Pottery Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png' },
-              { id: 'surf-club', name: 'Surf Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png' },
-              { id: 'outdoor-club', name: 'Outdoor Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/hiking.png' },
-              { id: 'wine-bar', name: 'Wine Bar', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/wine_tasting.png' },
-              { id: 'pilates-studio', name: 'Pilates Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Pilates.png' },
-              { id: 'climbing-gym', name: 'Climbing Gym', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/rock_climbing.png' },
-              { id: 'tennis-club', name: 'Tennis Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/tennis.png' },
-              { id: 'community-garden', name: 'Community Garden', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/gardening.png' },
-              { id: 'escape-room', name: 'Escape Room', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png' },
-              { id: 'cycling-club', name: 'Cycling Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/cycling.png' },
-              { id: 'yoga-studio', name: 'Yoga Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/yoga%20outdoors.png' },
-              { id: 'board-game-cafe', name: 'Board Game Cafe', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/arcade.png' },
-              { id: 'laser-tag', name: 'Laser Tag Arena', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Escape%20Room.png' },
-              { id: 'sailing-club', name: 'Sailing Club', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Surfing.png' },
-              { id: 'art-studio', name: 'Art Studio', image: 'https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/pottery.png' }
+              { id: 'arcade', name: 'Arcade', image: 'https://s.kikiapp.eu/img/pip/arcade.webp' },
+              { id: 'pottery-studio', name: 'Pottery Studio', image: 'https://s.kikiapp.eu/img/pip/pottery.webp' },
+              { id: 'surf-club', name: 'Surf Club', image: 'https://s.kikiapp.eu/img/pip/surfing.webp' },
+              { id: 'outdoor-club', name: 'Outdoor Club', image: 'https://s.kikiapp.eu/img/pip/hiking.webp' },
+              { id: 'wine-bar', name: 'Wine Bar', image: 'https://s.kikiapp.eu/img/pip/winetasting.webp' },
+              { id: 'pilates-studio', name: 'Pilates Studio', image: 'https://s.kikiapp.eu/img/pip/pilates.webp' },
+              { id: 'climbing-gym', name: 'Climbing Gym', image: 'https://s.kikiapp.eu/img/pip/rockclimbing.webp' },
+              { id: 'tennis-club', name: 'Tennis Club', image: 'https://s.kikiapp.eu/img/pip/tennis.webp' },
+              { id: 'community-garden', name: 'Community Garden', image: 'https://s.kikiapp.eu/img/pip/gardening.webp' },
+              { id: 'escape-room', name: 'Escape Room', image: 'https://s.kikiapp.eu/img/pip/escaperoom.webp' },
+              { id: 'cycling-club', name: 'Cycling Club', image: 'https://s.kikiapp.eu/img/pip/cycling.webp' },
+              { id: 'yoga-studio', name: 'Yoga Studio', image: 'https://s.kikiapp.eu/img/pip/yogaoutdoors.webp' },
+              { id: 'board-game-cafe', name: 'Board Game Cafe', image: 'https://s.kikiapp.eu/img/pip/boardgames.webp' },
+              { id: 'laser-tag', name: 'Laser Tag Arena', image: 'https://s.kikiapp.eu/img/pip/lasertag.webp' },
+              { id: 'sailing-club', name: 'Sailing Club', image: 'https://s.kikiapp.eu/img/pip/boat.webp' },
+              { id: 'art-studio', name: 'Art Studio', image: 'https://s.kikiapp.eu/img/pip/paintingclass.webp' }
             ];
             return (
               <ActivitiesTeaser

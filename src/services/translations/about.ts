@@ -45,7 +45,7 @@ export const about = {
     // Journey / Opera
     "journey.title": "The Journey of Pulse",
     "journey.subtitle": "From opera stages to Harvard research to building a platform that turns strangers into friends.",
-    "journey.opera.image": "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/204.jpg",
+    "journey.opera.image": "https://s.kikiapp.eu/img/team/Andreas+Grieger+Stage+Photographer.webp",
     "journey.opera.alt": "Eric performing opera on stage",
     "journey.opera.caption": "Eric performing on stage as a professional opera singer",
     "journey.step.opera.title": "Opera Singer on Global Stages",
@@ -69,15 +69,6 @@ export const about = {
     "loneliness.teaser.title": "The Loneliness Epidemic",
     "loneliness.teaser.body": "Loneliness has become a silent public health crisis—impacting mental health, physical well-being, and even life expectancy. But there's a better way forward: systems that help people meet, again and again, around the things they love.",
     "loneliness.teaser.cta": "Learn more about the crisis",
-    "loneliness.teaser.image": "/loneliness-epidemic-2025-stats.jpg",
-    "loneliness.teaser.image_alt": "Loneliness data visualization thumbnail",
-    
-    // FounderStory Translations
-    "founder.image_alt": "Eric performing opera",
-    "founder.journey_title": "The Journey",
-    "founder.journey_description": "After moving 10 times across 5 countries, Eric got good at making friends from scratch—but also saw just how hard it is for most people. Even with all the social apps out there, millions still feel disconnected. As a software engineer and former opera singer, he experienced both the highs of human connection and the quiet reality of isolation.",
-    "founder.quote": "What I learned—after starting over so many times—is that friendship takes more than a one-off coffee. Meeting someone new is actually the easy part. What's hard is building the rhythm: shared interests, repeated time together, and someone willing to say, \"Let's do this again next week!\"",
-    "founder.conclusion": "Those lessons became Pulse: a new kind of social platform that helps people turn strangers into real friends, in real life.",
     
     // FriendshipFormula Translations
     "friendship.title": "Our Friendship Formula",
@@ -138,7 +129,7 @@ export const about = {
     // Journey / Opera
     "journey.title": "El Viaje de Pulse",
     "journey.subtitle": "De los escenarios de ópera a la investigación en Harvard, hasta construir una plataforma que convierte desconocidos en amigos.",
-    "journey.opera.image": "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/204.jpg",
+    "journey.opera.image": "https://s.kikiapp.eu/img/team/Andreas+Grieger+Stage+Photographer.webp",
     "journey.opera.alt": "Eric interpretando ópera en el escenario",
     "journey.opera.caption": "Eric actuando como cantante de ópera profesional",
     "journey.step.opera.title": "Cantante de Ópera en Escenarios Globales",
@@ -162,15 +153,6 @@ export const about = {
     "loneliness.teaser.title": "La Epidemia de la Soledad",
     "loneliness.teaser.body": "La soledad se ha convertido en una crisis silenciosa de salud pública: afecta la salud mental, el bienestar físico e incluso la esperanza de vida. Hay un mejor camino: sistemas que ayudan a las personas a reunirse, una y otra vez, alrededor de lo que aman.",
     "loneliness.teaser.cta": "Aprende más sobre la crisis",
-    "loneliness.teaser.image": "/loneliness-epidemic-2025-stats.jpg",
-    "loneliness.teaser.image_alt": "Miniatura de visualización de datos sobre soledad",
-    
-    // FounderStory Translations
-    "founder.image_alt": "Eric interpretando ópera",
-    "founder.journey_title": "El Viaje",
-    "founder.journey_description": "Después de mudarse 10 veces a través de 5 países, Eric se volvió bueno haciendo amigos desde cero, pero también vio lo difícil que es para la mayoría de las personas. Incluso con todas las aplicaciones sociales que existen, millones todavía se sienten desconectados. Como ingeniero de software y ex cantante de ópera, experimentó tanto los altos de la conexión humana como la tranquila realidad del aislamiento.",
-    "founder.quote": "Lo que aprendí, después de empezar de nuevo tantas veces, es que la amistad requiere más que un café ocasional. Conocer a alguien nuevo es en realidad la parte fácil. Lo difícil es construir el ritmo: intereses compartidos, tiempo compartido repetidamente, y alguien dispuesto a decir, \"¡Hagamos esto de nuevo la próxima semana!\"",
-    "founder.conclusion": "Esas lecciones se convirtieron en Pulse: un nuevo tipo de plataforma social que ayuda a las personas a convertir extraños en amigos reales, en la vida real.",
     
     // FriendshipFormula Translations
     "friendship.title": "Nuestra Fórmula de Amistad",

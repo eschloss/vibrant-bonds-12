@@ -98,7 +98,6 @@ const LonelinessEpidemic: React.FC = () => {
             t("loneliness.seo.keyword11", "social isolation health risks"),
             t("loneliness.seo.keyword12", "loneliness epidemic solutions")
           ]}
-          image="https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg"
           type="article"
           publishedTime="2025-01-20T00:00:00Z"
           modifiedTime="2025-01-20T12:00:00Z"
@@ -1561,7 +1560,7 @@ const LonelinessEpidemic: React.FC = () => {
                   "name": "Pulse",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://s.kikiapp.eu/img/pulse_logo.png"
+                    "url": "https://s.kikiapp.eu/img/Pulse+Logo.webp"
                   }
                 },
                 "datePublished": "2025-01-20T00:00:00Z",
@@ -1569,7 +1568,6 @@ const LonelinessEpidemic: React.FC = () => {
                 "articleSection": t("loneliness.seo.section", "Health & Society"),
                 "keywords": [t("loneliness.seo.keyword1", "loneliness epidemic statistics"), t("loneliness.seo.keyword3", "social isolation data"), t("loneliness.seo.keyword4", "Gen Z loneliness"), t("loneliness.seo.keyword5", "health effects loneliness")],
                 "wordCount": "3500",
-                "image": "https://s.kikiapp.eu/img/loneliness-epidemic-2025-stats.jpg",
                 "mainEntityOfPage": {
                   "@type": "WebPage",
                   "@id": "https://pulse.kikiapp.eu/loneliness-epidemic"

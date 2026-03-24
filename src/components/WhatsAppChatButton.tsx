@@ -616,8 +616,8 @@ export function WhatsAppChatButton() {
                   <div className="relative shrink-0">
                     <Avatar className="h-12 w-12 border-2 border-white/20">
                       <AvatarImage
-                        src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png"
-                        alt="Pulse"
+                        src="https://s.kikiapp.eu/img/pip/piphello.webp"
+                        alt="Pip — Pulse app AI social host"
                       />
                       <AvatarFallback className="bg-gradient-to-br from-pulse-pink via-pulse-purple to-pulse-blue text-lg font-semibold text-white">
                         P

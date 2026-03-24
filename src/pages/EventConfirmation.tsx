@@ -485,7 +485,7 @@ const EventConfirmation = () => {
                     <div className="relative flex items-start gap-4">
                       <img
                         src={data.primary_image}
-                        alt={data.title}
+                        alt={`${data.title} — event image`}
                         className="w-20 h-20 rounded-xl object-cover border border-white/10 bg-black/20 shrink-0"
                         loading="eager"
                         decoding="async"

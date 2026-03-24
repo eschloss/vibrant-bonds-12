@@ -3,13 +3,11 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/about/HeroSection";
-import FounderStory from "@/components/about/FounderStory";
 import FoundersMap from "@/components/about/FoundersMap";
 import TeamSection from "@/components/about/TeamSection";
 import FriendshipFormula from "@/components/about/FriendshipFormula";
 import MissionSection from "@/components/about/MissionSection";
 import BusinessModelSection from "@/components/about/BusinessModelSection";
-import OperaPerformance from "@/components/about/OperaPerformance";
 import JourneyTimeline from "@/components/about/JourneyTimeline";
 import LonelinessTeaser from "@/components/about/LonelinessTeaser";
 import PulseAppPromo from "@/components/about/PulseAppPromo";
@@ -37,8 +35,7 @@ const About = () => {
     ],
     modifiedTime: "2025-05-15T12:00:00Z",
     type: "article",
-    section: "About",
-    image: "/lovable-uploads/41aeb601-a150-497b-bf78-4174c5e9ed71.jpg"
+    section: "About"
   };
 
   useEffect(() => {

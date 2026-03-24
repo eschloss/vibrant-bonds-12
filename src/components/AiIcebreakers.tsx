@@ -15,7 +15,7 @@ const getIcebreakers = (t) => [{
   id: "baba-yaga",
   name: t("icebreakers.characters.baba_yaga.name", "Baba Yaga"),
   tagline: t("icebreakers.characters.baba_yaga.tagline", "Choose Your Own Adventure"),
-  avatar: "/lovable-uploads/aa5d117e-d012-4bcd-b7b6-09b64d034f78.png",
+  avatar: "https://s.kikiapp.eu/img/Baba+Yaga+(1).webp",
   color: "from-emerald-800 to-emerald-950",
   bgColor: "bg-emerald-800/30",
   message: t("icebreakers.characters.baba_yaga.message", "Welcome, little wanderer. The mushrooms are watching. The shadows are bored. Pick someone here and invent a magical creature you two discovered while lost in my forest. Give it a name. Quick!")
@@ -23,7 +23,7 @@ const getIcebreakers = (t) => [{
   id: "mother-flawless",
   name: t("icebreakers.characters.mother_flawless.name", "Mother Flawless"),
   tagline: t("icebreakers.characters.mother_flawless.tagline", "Toast or Roast"),
-  avatar: "/lovable-uploads/c8835787-8f77-40c7-9df3-f0f092e43f1d.png",
+  avatar: "https://s.kikiapp.eu/img/Motherflawless+(2).webp",
   color: "from-pink-500 to-purple-600",
   bgColor: "bg-pink-500/20",
   message: t("icebreakers.characters.mother_flawless.message", "Alright, darlings. I'm choosing someone in this room—and when I do, I'm either going to crown you with praise or roast you to ashes. Buckle up.")
@@ -31,7 +31,7 @@ const getIcebreakers = (t) => [{
   id: "judge-snooty",
   name: t("icebreakers.characters.judge_snooty.name", "Judge Snooty"),
   tagline: t("icebreakers.characters.judge_snooty.tagline", "Chaos Courtroom"),
-  avatar: "/lovable-uploads/4511f010-fca9-4375-992c-dba8555e7191.png",
+  avatar: "https://s.kikiapp.eu/img/Jude+Snooty.webp",
   color: "from-amber-500 to-amber-700",
   bgColor: "bg-amber-500/20",
   message: t("icebreakers.characters.judge_snooty.message", "I hereby accuse YOU of a ridiculous crime! What's your defense, and who in this room would you implicate as your accomplice?")
@@ -39,7 +39,7 @@ const getIcebreakers = (t) => [{
   id: "sherlock",
   name: t("icebreakers.characters.sherlock.name", "Sherlock Holmes"),
   tagline: t("icebreakers.characters.sherlock.tagline", "Two Truths and a Lie"),
-  avatar: "/lovable-uploads/ee0c88d9-5380-4021-aef8-a0b7f194feda.png",
+  avatar: "https://s.kikiapp.eu/img/Sherlock+Holmes.webp",
   color: "from-blue-600 to-blue-800",
   bgColor: "bg-blue-600/20",
   message: t("icebreakers.characters.sherlock.message", "Share three statements about yourself—two true, one false—and let's see if your companions can deduce which is the clever lie.")

@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { Info, ArrowRight } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 
-const PIP_IMAGE_URL =
-  "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png";
-
+const PIP_IMAGE_URL = "https://s.kikiapp.eu/img/pip/piphello.webp";
 export default function PipInfoPopover() {
   return (
     <Popover>
@@ -25,7 +23,7 @@ export default function PipInfoPopover() {
         <div className="flex items-start gap-3 p-4">
           <img
             src={PIP_IMAGE_URL}
-            alt="Pip"
+            alt="Pip, Pulse app AI group host"
             className="w-14 h-14 rounded-full object-cover border border-gray-600 shrink-0 bg-gray-900/30"
           />
           <div className="min-w-0">

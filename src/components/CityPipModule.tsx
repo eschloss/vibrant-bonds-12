@@ -101,7 +101,7 @@ const CityPipModule: React.FC = () => {
               <div className="relative max-w-48">
                 <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-xl opacity-20" />
                 <img
-                  src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png"
+                  src="https://s.kikiapp.eu/img/pip/piphello.webp"
                   alt={t("city_pip.image_alt", "Pip celebrating with friends")}
                   className="relative z-10 w-full rounded-2xl object-cover border border-gray-700 bg-gray-900/30 shadow-xl shadow-purple-500/20"
                   onError={(e) => {

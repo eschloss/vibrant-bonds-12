@@ -95,7 +95,7 @@ const HowItWorks = () => {
       >
         {/* Background image with Ken Burns */}
         <motion.img
-          src="https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/vitaly-gariev-iqr2NaFrCKE-unsplash.jpg"
+          src="https://s.kikiapp.eu/img/peoplehero.webp"
           alt={t("hiw.hero.image_alt", "Friends laughing at sunset")}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.1 }}
@@ -228,7 +228,7 @@ const HowItWorks = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent z-10 pointer-events-none" />
                 <img
-                      src="https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/capybaras.jpg"
+                      src="https://s.kikiapp.eu/img/Capybaras.webp"
                       alt={t("hiw.matched.chat_preview_alt", "Group chat preview showing matched members")}
                   className="w-full h-auto object-cover"
                   loading="lazy"
@@ -269,7 +269,7 @@ const HowItWorks = () => {
               <div className="relative max-w-md mx-auto">
                 <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-blue-500 to-cyan-400 blur-2xl opacity-30" />
                 <motion.img
-                  src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20in%20chair.png"
+                  src="https://s.kikiapp.eu/img/pip/pipinchair.webp"
                   alt={t("hiw.break.pip_image_alt", "Pip encouraging the group chat")}
                   className="relative z-10 w-full rounded-3xl object-cover border border-gray-700 bg-gray-900/30 shadow-2xl shadow-blue-500/20"
                   onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
@@ -363,7 +363,7 @@ const HowItWorks = () => {
                 <div className="relative max-w-md mx-auto">
                   <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-indigo-500 to-blue-600 blur-2xl opacity-30" />
                   <motion.img
-                    src="https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/vitaly-gariev-7k2EkNAf4gw-unsplash%20(1).jpg"
+                    src="https://s.kikiapp.eu/img/friendsatbbq.webp"
                     alt={t("hiw.repeat.image_alt", "Friends keeping the streak alive")}
                     className="relative z-10 w-full rounded-3xl object-cover border border-gray-700 bg-gray-900/30 shadow-2xl shadow-indigo-500/20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}

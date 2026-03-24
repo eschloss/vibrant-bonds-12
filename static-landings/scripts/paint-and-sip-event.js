@@ -7,7 +7,7 @@
   "use strict";
 
   var RECAPTCHA_SITE_KEY = "6LcZtiArAAAAAO1kjOaw8dH6fZ-cR1krOe0Q_LOL";
-  var GROUP_CHAT_IMG = "https://s.kikiapp.eu/desktop/groupchinchillas.png";
+  var GROUP_CHAT_IMG = "https://s.kikiapp.eu/img/Group+Chinchillas.webp";
   var STICKY_SCROLL_THRESHOLD = 80;
   var STICKY_MIN_DELAY_MS = 3000;
 

@@ -83,7 +83,7 @@ export const Seo = ({
     "name": "Pulse",
     "url": baseUrl,
     "description": finalDescription,
-    "logo": `https://s.kikiapp.eu/img/pulse_logo.png`
+    "logo": `https://s.kikiapp.eu/img/Pulse+Logo.webp`
   };
 
   const pageStructuredData = {

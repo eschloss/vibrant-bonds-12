@@ -99,14 +99,14 @@ const Navbar = () => {
             <div className="relative h-6 w-32">
               <img
                 alt="Pulse Logo"
-                src="https://s.kikiapp.eu/img/pulse-text.png"
+                src="https://s.kikiapp.eu/img/Pulse+Text.webp"
                 className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                   scrolled || !useDarkTopNav ? 'opacity-0' : 'opacity-100'
                 }`}
               />
               <img
                 alt="Pulse Logo"
-                src="https://s.kikiapp.eu/img/logo_pulse2.png"
+                src="https://s.kikiapp.eu/img/Pulse+Logo+(2).webp"
                 className={`absolute top-0 left-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
                   scrolled || !useDarkTopNav ? 'opacity-100' : 'opacity-0'
                 }`}

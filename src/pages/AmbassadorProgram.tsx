@@ -10,6 +10,7 @@ import { Seo } from "@/hooks/useSeo";
 import { useRefParam } from "@/hooks/useRefParam";
 import { trackTypeformRedirect } from "@/lib/utils";
 import Text from "@/components/Text";
+import { getPipActivityImageAlt } from "@/lib/pipActivityImageAlt";
 
 const AmbassadorProgram = () => {
   const { addRefToUrl } = useRefParam();
@@ -166,20 +167,20 @@ const AmbassadorProgram = () => {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-md h-72 md:h-80">
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
-                    alt="Pip bowling with friends"
+                    src="https://s.kikiapp.eu/img/pip/bowling.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/bowling.webp") ?? ""}
                     className="absolute top-0 left-0 w-40 md:w-48 rounded-xl border border-gray-700 bg-gray-900/30 rotate-[-3deg] z-20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
-                    alt="Pip paintball with friends"
+                    src="https://s.kikiapp.eu/img/pip/paintball.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/paintball.webp") ?? ""}
                     className="absolute top-6 right-0 w-44 md:w-56 rounded-xl border border-gray-700 bg-gray-900/30 rotate-2 z-10"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
-                    alt="Pip cooking with friends"
+                    src="https://s.kikiapp.eu/img/pip/cooking.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/cooking.webp") ?? ""}
                     className="absolute bottom-0 left-12 md:left-24 w-36 md:w-44 rounded-xl border border-gray-700 bg-gray-900/30 rotate-1 z-30"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />

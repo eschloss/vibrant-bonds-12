@@ -31,8 +31,7 @@ const MeetPipPromo: React.FC<MeetPipPromoProps> = ({
   const { t } = useTranslation();
 
   const resolvedImage =
-    imageSrc ||
-    "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png";
+    imageSrc || "https://s.kikiapp.eu/img/pip/piphello.webp";
 
   const defaultItems = [
     {

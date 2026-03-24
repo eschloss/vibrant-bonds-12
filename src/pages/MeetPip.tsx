@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Seo } from "@/hooks/useSeo";
 import AiIcebreakers from "@/components/AiIcebreakers";
+import { getPipActivityImageAlt } from "@/lib/pipActivityImageAlt";
 
 const MeetPip = () => {
   const { t } = useTranslation();
@@ -102,7 +103,7 @@ const MeetPip = () => {
               <div className="relative">
                 <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-xl opacity-30" />
                 <img
-                  src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/PIP%20hello.png"
+                  src="https://s.kikiapp.eu/img/pip/piphello.webp"
                   alt={t("meet_pip.hero.image_alt", "Pip, your AI friend")}
                   className="relative z-10 w-36 h-36 md:w-52 md:h-52 rounded-full object-cover border border-gray-700 shadow-2xl shadow-purple-500/20 bg-gray-900/30"
                   onError={(e) => {
@@ -150,7 +151,7 @@ const MeetPip = () => {
                 <div className="relative max-w-md mx-auto">
                   <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-2xl opacity-30" />
                   <motion.img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20in%20chair.png"
+                    src="https://s.kikiapp.eu/img/pip/pipinchair.webp"
                     alt={t("meet_pip.module.image_alt", "Pip sitting in a chair")}
                     className="relative z-10 w-full rounded-3xl object-cover border border-gray-700 bg-gray-900/30 shadow-2xl shadow-purple-500/20"
                     onError={(e) => {
@@ -401,7 +402,7 @@ const MeetPip = () => {
                 {/* Center Pip */}
                 <div className="absolute inset-0 grid place-items-center">
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20chill.png"
+                    src="https://s.kikiapp.eu/img/pip/pipchill.webp"
                     alt={t("meet_pip.know.image_alt", "Pip avatar")}
                     className="w-56 h-56 md:w-64 md:h-64 rounded-full border border-gray-700 bg-gray-900/40 shadow-lg shadow-purple-500/20"
                   />
@@ -564,38 +565,38 @@ const MeetPip = () => {
                 <div className="relative max-w-xl mx-auto h-[460px] sm:h-[500px]">
                   <div className="absolute -inset-6 rounded-3xl bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue blur-2xl opacity-30" />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20cooking%20friends.png"
-                    alt="Pip cooking with friends"
+                    src="https://s.kikiapp.eu/img/pip/cooking.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/cooking.webp") ?? ""}
                     className="absolute top-2 left-0 w-44 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-3deg]"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20paintball%20friends.png"
-                    alt="Pip paintball with friends"
+                    src="https://s.kikiapp.eu/img/pip/paintball.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/paintball.webp") ?? ""}
                     className="absolute top-6 right-0 w-44 sm:w-52 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-1"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/Pip%20bowling%20friends.png"
-                    alt="Pip bowling with friends"
+                    src="https://s.kikiapp.eu/img/pip/bowling.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/bowling.webp") ?? ""}
                     className="absolute bottom-8 left-4 w-44 sm:w-52 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-1"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/golf%20pip.png"
-                    alt="Pip golfing with friends"
+                    src="https://s.kikiapp.eu/img/pip/golf.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/golf.webp") ?? ""}
                     className="absolute bottom-2 right-6 w-40 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-2deg]"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20skiing%20friends.png"
-                    alt="Pip skiing with friends"
+                    src="https://s.kikiapp.eu/img/pip/skiing.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/skiing.webp") ?? ""}
                     className="absolute top-20 left-1/4 w-40 sm:w-48 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-2 z-10"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />
                   <img
-                    src="https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/pip%20sailing%20friends.png"
-                    alt="Pip sailing with friends"
+                    src="https://s.kikiapp.eu/img/pip/boat.webp"
+                    alt={getPipActivityImageAlt("https://s.kikiapp.eu/img/pip/boat.webp") ?? ""}
                     className="absolute left-1/2 -translate-x-1/2 bottom-6 w-48 sm:w-56 rounded-2xl border border-gray-700 bg-gray-900/30 shadow-xl rotate-[-1deg] z-20"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
                   />

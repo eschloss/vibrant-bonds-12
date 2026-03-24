@@ -285,7 +285,7 @@ export default function Events() {
                     <div className="absolute inset-0">
                       <img
                         src={v.image}
-                        alt={v.title}
+                        alt={`${v.title} — find events on Pulse`}
                         className="h-full w-full object-cover scale-[1.02]"
                         loading="lazy"
                         decoding="async"

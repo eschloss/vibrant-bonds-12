@@ -77,7 +77,7 @@ const Footer = () => {
                 <img 
                   alt="Pulse Logo" 
                   className="h-24 md:h-28 object-contain w-auto" 
-                  src="https://s.kikiapp.eu/img/pulse_logo.png" 
+                  src="https://s.kikiapp.eu/img/Pulse+Logo.webp" 
                   width={280}
                   height={112}
                   loading="lazy"
@@ -107,10 +107,10 @@ const Footer = () => {
               {/* App Download Badges */}
               <div className="flex space-x-2">
                 <a href="https://apple.pulsenow.app" target="_blank" rel="noopener noreferrer">
-                  <img src="https://s.kikiapp.eu/img/apple.png" alt="Download on the App Store" className="h-12 md:h-14 w-auto object-contain" width={180} height={54} loading="lazy" decoding="async" />
+                  <img src="https://s.kikiapp.eu/img/Apple+1550x600.webp" alt="Download on the App Store" className="h-12 md:h-14 w-auto object-contain" width={180} height={54} loading="lazy" decoding="async" />
                 </a>
                 <a href="https://google.pulsenow.app" target="_blank" rel="noopener noreferrer">
-                  <img src="https://s.kikiapp.eu/img/google.png" alt="Get it on Google Play" className="h-12 md:h-14 w-auto object-contain" width={203} height={60} loading="lazy" decoding="async" />
+                  <img src="https://s.kikiapp.eu/img/Google+(1).webp" alt="Get it on Google Play" className="h-12 md:h-14 w-auto object-contain" width={203} height={60} loading="lazy" decoding="async" />
                 </a>
               </div>
 
@@ -255,10 +255,10 @@ const Footer = () => {
               {/* App Download Badges (Contact column) */}
               <div className="mt-4 grid grid-cols-1 gap-2">
                 <a href="https://apple.pulsenow.app" target="_blank" rel="noopener noreferrer">
-                  <img src="https://s.kikiapp.eu/img/apple.png" alt="Download on the App Store" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
+                  <img src="https://s.kikiapp.eu/img/Apple+1550x600.webp" alt="Download on the App Store" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
                 <a href="https://google.pulsenow.app" target="_blank" rel="noopener noreferrer">
-                  <img src="https://s.kikiapp.eu/img/google.png" alt="Get it on Google Play" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
+                  <img src="https://s.kikiapp.eu/img/Google+(1).webp" alt="Get it on Google Play" className="h-14 w-auto object-contain" loading="lazy" decoding="async" />
                 </a>
               </div>
             </div>

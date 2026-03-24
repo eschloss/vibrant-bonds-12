@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { MapPin, HeartHandshake, BookOpen } from "lucide-react";
 
-const OPERA_IMAGE = "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/Stage-Photographer-Andreas-Grieger-165.jpg";
+const OPERA_IMAGE = "https://s.kikiapp.eu/img/team/Andreas+Grieger+Stage+Photographer.webp";
 
 const Journey = () => {
   const { t } = useTranslation();

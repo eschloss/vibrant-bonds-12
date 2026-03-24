@@ -346,7 +346,7 @@ const EventDetail = () => {
   const showOverlay = loading || forceLoading;
 
   const groupChatOverlayImageUrl =
-    "https://s.kikiapp.eu/desktop/groupchinchillas.png";
+    "https://s.kikiapp.eu/img/Group+Chinchillas.webp";
   /** Stacked drop-shadows follow PNG alpha — reads as floating off the page. */
   const groupChatPreviewImageFilterClass =
     "[filter:drop-shadow(0_28px_56px_rgba(0,0,0,0.62))_drop-shadow(0_14px_32px_rgba(0,0,0,0.48))_drop-shadow(0_6px_16px_rgba(0,0,0,0.42))_drop-shadow(0_1px_4px_rgba(0,0,0,0.75))]";
@@ -845,7 +845,7 @@ const EventDetail = () => {
                           <CarouselItem key={img + i} className="pl-0 h-full">
                             <img
                               src={src}
-                              alt={`${data.title} image ${i + 1}`}
+                              alt={`${data.title} — photo ${i + 1}`}
                               className="w-full h-full object-cover"
                               width={1920}
                               height={1080}
@@ -906,7 +906,7 @@ const EventDetail = () => {
                             <motion.img
                               key={eventSlug}
                               src={groupChatOverlayImageUrl}
-                              alt="Group chat preview"
+                              alt={`${data.title} — group chat preview`}
                               className={cn(
                                 "w-full h-full object-contain origin-bottom will-change-transform",
                                 groupChatPreviewImageFilterClass
@@ -965,7 +965,7 @@ const EventDetail = () => {
                           <div className="group-chat-dialog-float -translate-y-1 rounded-2xl">
                             <img
                               src={groupChatOverlayImageUrl}
-                              alt="Group chat preview"
+                              alt={`${data.title} — group chat preview`}
                               className="relative block w-full rounded-2xl"
                               width={360}
                               height={640}

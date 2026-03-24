@@ -419,6 +419,7 @@ const EventsCity = () => {
                       key={`${kiki.id}-${kiki.slug}-${index}`}
                       kiki={kiki}
                       index={index}
+                      cityLabel={displayCityName}
                       t={t}
                       formatEventDate={formatEventDate}
                     />
@@ -541,11 +542,13 @@ const EventsCity = () => {
 function CityKikiCard({
   kiki,
   index,
+  cityLabel,
   t,
   formatEventDate,
 }: {
   kiki: GetKikiEventResponse;
   index: number;
+  cityLabel: string;
   t: (key: string, fallback: string) => string;
   formatEventDate: (iso: string) => string;
 }) {
@@ -565,7 +568,7 @@ function CityKikiCard({
       <div className="relative h-48 shrink-0 overflow-hidden">
         <img
           src={kiki.primary_image}
-          alt={kiki.title}
+          alt={`${kiki.title} — Pulse event in ${cityLabel}`}
           className={`w-full h-full object-cover transition-transform duration-300 ${
             isPast ? "grayscale" : "group-hover:scale-110"
           }`}

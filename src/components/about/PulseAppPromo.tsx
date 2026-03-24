@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Apple, Play, Users, MessageSquare, Sparkles, MapPin } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const APP_IMAGE = "https://xzbbpbuldlzkkvlplvij.supabase.co/storage/v1/object/public/activities/1024x.png";
+const APP_IMAGE = "https://s3.eu-central-1.amazonaws.com/s.kikiapp.eu/img/pulselogo.webp";
 
 const PulseAppPromo = () => {
   const { t } = useTranslation();

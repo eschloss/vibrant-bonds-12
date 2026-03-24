@@ -25,7 +25,7 @@ export const EVENT_VIBES: EventVibeDefinition[] = [
       "eventsLanding.vibes.chip_candle_making",
     ],
     defaultChips: ["Pottery", "Art & sip", "Candle making"],
-    backgroundImage: "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/alina-chernovolova-Q1AUTlf1D60-unsplash.jpg",
+    backgroundImage: "https://s.kikiapp.eu/img/events/workshop-category.webp",
   },
   {
     id: "experience",
@@ -39,7 +39,7 @@ export const EVENT_VIBES: EventVibeDefinition[] = [
       "eventsLanding.vibes.chip_poetry",
     ],
     defaultChips: ["Candlelit concerts", "Theatre", "Poetry"],
-    backgroundImage: "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg",
+    backgroundImage: "https://s.kikiapp.eu/img/events/experience-cat.webp",
   },
   {
     id: "move",
@@ -49,7 +49,7 @@ export const EVENT_VIBES: EventVibeDefinition[] = [
     defaultDescription: "Physical activities that reduce social anxiety and build connection through movement.",
     chipKeys: ["eventsLanding.vibes.chip_kayaking", "eventsLanding.vibes.chip_hiking", "eventsLanding.vibes.chip_dance_classes"],
     defaultChips: ["Kayaking", "Hiking", "Dance classes"],
-    backgroundImage: "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/IMG_0022.jpeg",
+    backgroundImage: "https://s.kikiapp.eu/img/events/move-cat.webp",
   },
   {
     id: "play",
@@ -59,7 +59,7 @@ export const EVENT_VIBES: EventVibeDefinition[] = [
     defaultDescription: "High‑energy, fun formats that spark quick chemistry.",
     chipKeys: ["eventsLanding.vibes.chip_game_nights", "eventsLanding.vibes.chip_trivia", "eventsLanding.vibes.chip_karaoke"],
     defaultChips: ["Game nights", "Trivia", "Karaoke"],
-    backgroundImage: "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/public/pulse/nasim-keshmiri-3F8-bpmB0vQ-unsplash.jpg",
+    backgroundImage: "https://s.kikiapp.eu/img/events/play-cat.webp",
   },
 ];
 

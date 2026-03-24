@@ -7,6 +7,7 @@ import { ExternalLink, Download, Image as ImageIcon, Newspaper } from "lucide-re
 import { Seo } from "@/hooks/useSeo";
 import { useTranslation } from "@/hooks/useTranslation";
 import { downloadAsset, getFilenameFromUrl } from "@/lib/download";
+import { getPipActivityImageAlt } from "@/lib/pipActivityImageAlt";
 
 const MEDIA_KIT_URL = "https://drive.google.com/drive/folders/1EvnYL_LHB0-J28DlWNa0Gt5uoSg9yZ9A";
 const PRESS_RELEASES_URL = "https://drive.google.com/drive/folders/1Bb8YS4g2Mi3i-5iMVCIWTv8XfXkJVr02?usp=drive_link";
@@ -68,47 +69,45 @@ const brandCategories: Array<{ id: string; defaultName: string; assets: string[]
   {
     id: "round_profile",
     defaultName: "Round Profile",
-    assets: ["https://s.kikiapp.eu/img/press/Logo-blend.jpeg"],
+    assets: ["https://s.kikiapp.eu/img/Logo+Circle+Blend.webp"],
   },
 ];
 
 // Use the same comprehensive list as the Activities page for full variety
 const pipActivityImages = [
-  { id: "arcade", name: "Arcade", image: "https://s.kikiapp.eu/img/pip/arcade.png" },
-  { id: "board-games", name: "Board Games", image: "https://s.kikiapp.eu/img/pip/boardgames.png" },
-  { id: "cycling", name: "Cycling", image: "https://s.kikiapp.eu/img/pip/cycling.png" },
-  { id: "escape-rooms", name: "Escape Rooms", image: "https://s.kikiapp.eu/img/pip/escaperoom.png" },
-  { id: "gardening", name: "Gardening", image: "https://s.kikiapp.eu/img/pip/gardening.png" },
-  { id: "golf", name: "Golf", image: "https://s.kikiapp.eu/img/pip/golf.png" },
-  { id: "hiking", name: "Hiking", image: "https://s.kikiapp.eu/img/pip/hiking.png" },
-  { id: "pilates", name: "Pilates", image: "https://s.kikiapp.eu/img/pip/pilates.png" },
-  { id: "pottery", name: "Pottery", image: "https://s.kikiapp.eu/img/pip/pottery.png" },
-  { id: "rock-climbing", name: "Rock Climbing", image: "https://s.kikiapp.eu/img/pip/rockclimbing.png" },
-  { id: "scavenger-hunt", name: "Scavenger Hunt", image: "https://s.kikiapp.eu/img/pip/scavengerhunt.png" },
-  { id: "surfing", name: "Surfing", image: "https://s.kikiapp.eu/img/pip/surfing.png" },
-  { id: "tennis", name: "Tennis", image: "https://s.kikiapp.eu/img/pip/tennis.png" },
-  { id: "wine-tasting", name: "Wine Tasting", image: "https://s.kikiapp.eu/img/pip/winetasting.png" },
-  { id: "yoga", name: "Yoga", image: "https://s.kikiapp.eu/img/pip/yogaoutdoors.png" },
-  { id: "music", name: "Music", image: "https://s.kikiapp.eu/img/pip/music.png" },
-  { id: "soccer", name: "Soccer", image: "https://s.kikiapp.eu/img/pip/soccer.png" },
-  { id: "basketball", name: "Basketball", image: "https://s.kikiapp.eu/img/pip/basketball.png" },
-  { id: "karaoke", name: "Karaoke", image: "https://s.kikiapp.eu/img/pip/karaoke.png" },
-  { id: "food-walking-tour", name: "Food Walking Tour", image: "https://s.kikiapp.eu/img/pip/foodwalkingtour.png" },
-  { id: "painting-class", name: "Painting Class", image: "https://s.kikiapp.eu/img/pip/paintingclass.png" },
-  { id: "brewery", name: "Brewery", image: "https://s.kikiapp.eu/img/pip/brewery.png" },
-  { id: "trivia", name: "Trivia", image: "https://s.kikiapp.eu/img/pip/trivia.png" },
-  { id: "pool", name: "Pool", image: "https://s.kikiapp.eu/img/pip/pool.png" },
-  { id: "poker", name: "Poker", image: "https://s.kikiapp.eu/img/pip/poker.png" },
-  { id: "cocktail-bar", name: "Cocktail Bar", image: "https://s.kikiapp.eu/img/pip/cocktailbar.png" },
-  { id: "day-tour", name: "Day Tour", image: "https://s.kikiapp.eu/img/pip/tour.png" },
-  { id: "gay-bar", name: "Gay Bar", image: "https://s.kikiapp.eu/img/pip/gaybar.png" },
-  { id: "photography", name: "Photography", image: "https://s.kikiapp.eu/img/pip/photography.png" },
-  { id: "picnic", name: "Picnic", image: "https://s.kikiapp.eu/img/pip/picnic.png" },
-  { id: "coffee", name: "Coffee", image: "https://s.kikiapp.eu/img/pip/cafe.png" },
-  { id: "dancing", name: "Dancing", image: "https://s.kikiapp.eu/img/pip/dancing.png" },
-  { id: "camping", name: "Camping", image: "https://s.kikiapp.eu/img/pip/camping.png" },
-  { id: "beach-activities", name: "Beach Activities", image: "https://s.kikiapp.eu/img/pip/beachvolleyball.png" },
-  { id: "boat", name: "Boat", image: "https://s.kikiapp.eu/img/pip/boat.png" },
+  { id: "arcade", name: "activity.arcade", image: "https://s.kikiapp.eu/img/pip/arcade.webp" },
+  { id: "pottery", name: "activity.pottery", image: "https://s.kikiapp.eu/img/pip/pottery.webp" },
+  { id: "surfing", name: "activity.surfing", image: "https://s.kikiapp.eu/img/pip/surfing.webp" },
+  { id: "hiking", name: "activity.hiking", image: "https://s.kikiapp.eu/img/pip/hiking.webp" },
+  { id: "wine", name: "activity.wine", image: "https://s.kikiapp.eu/img/pip/winetasting.webp" },
+  { id: "pilates", name: "activity.pilates", image: "https://s.kikiapp.eu/img/pip/pilates.webp" },
+  { id: "climbing", name: "activity.climbing", image: "https://s.kikiapp.eu/img/pip/rockclimbing.webp" },
+  { id: "tennis", name: "activity.tennis", image: "https://s.kikiapp.eu/img/pip/tennis.webp" },
+  { id: "gardening", name: "activity.gardening", image: "https://s.kikiapp.eu/img/pip/gardening.webp" },
+  { id: "escape", name: "activity.escape", image: "https://s.kikiapp.eu/img/pip/escaperoom.webp" },
+  { id: "cycling", name: "activity.cycling", image: "https://s.kikiapp.eu/img/pip/cycling.webp" },
+  { id: "yoga", name: "activity.yoga", image: "https://s.kikiapp.eu/img/pip/yogaoutdoors.webp" },
+  // Newly added items for a larger shuffle pool
+  { id: "music", name: "activity.music", image: "https://s.kikiapp.eu/img/pip/music.webp" },
+  { id: "soccer", name: "activity.soccer", image: "https://s.kikiapp.eu/img/pip/soccer.webp" },
+  { id: "basketball", name: "activity.basketball", image: "https://s.kikiapp.eu/img/pip/basketball.webp" },
+  { id: "karaoke", name: "activity.karaoke", image: "https://s.kikiapp.eu/img/pip/karaoke.webp" },
+  { id: "food-walking-tour", name: "activity.food-walking-tour", image: "https://s.kikiapp.eu/img/pip/foodwalkingtour.webp" },
+  { id: "painting-class", name: "activity.painting-class", image: "https://s.kikiapp.eu/img/pip/paintingclass.webp" },
+  { id: "brewery", name: "activity.brewery", image: "https://s.kikiapp.eu/img/pip/brewery.webp" },
+  { id: "trivia", name: "activity.trivia", image: "https://s.kikiapp.eu/img/pip/trivia.webp" },
+  { id: "pool", name: "activity.pool", image: "https://s.kikiapp.eu/img/pip/pool.webp" },
+  { id: "poker", name: "activity.poker", image: "https://s.kikiapp.eu/img/pip/poker.webp" },
+  { id: "cocktail-bar", name: "activity.cocktail-bar", image: "https://s.kikiapp.eu/img/pip/cocktailbar.webp" },
+  { id: "day-tour", name: "activity.day-tour", image: "https://s.kikiapp.eu/img/pip/tour.webp" },
+  { id: "gay-bar", name: "activity.gay-bar", image: "https://s.kikiapp.eu/img/pip/gaybar.webp" },
+  { id: "photography", name: "activity.photography", image: "https://s.kikiapp.eu/img/pip/photography.webp" },
+  { id: "picnic", name: "activity.picnic", image: "https://s.kikiapp.eu/img/pip/picnic.webp" },
+  { id: "coffee", name: "activity.coffee", image: "https://s.kikiapp.eu/img/pip/cafe.webp" },
+  { id: "dancing", name: "activity.dancing", image: "https://s.kikiapp.eu/img/pip/dancing.webp" },
+  { id: "camping", name: "activity.camping", image: "https://s.kikiapp.eu/img/pip/camping.webp" },
+  { id: "beach-activities", name: "activity.beach-activities", image: "https://s.kikiapp.eu/img/pip/beachvolleyball.webp" },
+  { id: "boat", name: "activity.boat", image: "https://s.kikiapp.eu/img/pip/boat.webp" },
 ];
 
 const Press: React.FC = () => {
@@ -259,7 +258,7 @@ const Press: React.FC = () => {
                     <div className="aspect-square relative overflow-hidden">
                       <img
                         src={img.image}
-                        alt={img.name}
+                        alt={getPipActivityImageAlt(img.image) ?? "Pulse app activity illustration"}
                         className="w-full h-full object-contain"
                         loading="lazy"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
