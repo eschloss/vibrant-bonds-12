@@ -32,7 +32,7 @@ export const realLifeMagic = {
     "rlm.mirror.sub2.p": "Mirror systems form a neurobiological basis for social learning and cultural transmission. Presence amplifies mirroring, making face‑to‑face interaction essential practice across the lifespan.",
     // SEO
     "rlm.seo.title": "The Science Behind Real-Life Magic: Health, Happiness, Longevity",
-    "rlm.seo.description": "Face-to-face connection improves longevity, immunity, and mental health. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions.",
+    "rlm.seo.description": "Face-to-face connection improves longevity, immunity, and mental health—and strengthens friendships and social bonds. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions.",
 
     // Hero
     "rlm.hero.badge": "SCIENCE OF CONNECTION",
@@ -220,7 +220,7 @@ export const realLifeMagic = {
     "rlm.mirror.sub2.p": "Los sistemas de espejado forman una base neurobiológica para el aprendizaje social y la transmisión cultural. La presencia amplifica el espejado, haciendo de la interacción cara a cara una práctica esencial a lo largo de la vida.",
     // SEO
     "rlm.seo.title": "La ciencia de la conexión real: salud, felicidad y longevidad",
-    "rlm.seo.description": "La conexión cara a cara mejora longevidad, inmunidad y salud mental. Explora oxitocina, dopamina, neuronas espejo, comidas compartidas y aventuras grupales con acciones basadas en evidencia.",
+    "rlm.seo.description": "La conexión cara a cara mejora longevidad, inmunidad y salud mental, y refuerza amistades y vínculos sociales. Explora oxitocina, dopamina, neuronas espejo, comidas compartidas y aventuras grupales con acciones basadas en evidencia.",
 
     // Hero
     "rlm.hero.badge": "CIENCIA DE LA CONEXIÓN",

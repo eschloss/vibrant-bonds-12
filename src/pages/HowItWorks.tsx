@@ -28,15 +28,31 @@ const HowItWorks = () => {
 
   const seoProps = {
     title: {
-      en: t("how_it_works_page.title", "How Pulse Works | Meet Your Crew, Make It A Ritual"),
-      es: t("how_it_works_page.title", "Cómo funciona Pulse | Conoce tu grupo, hazlo ritual")
+      en: t("how_it_works_page.title", "How Pulse Works | Meet Friends & Join Your Crew"),
+      es: t("how_it_works_page.title", "Cómo funciona Pulse | Haz amigos y únete a tu grupo")
     },
     description: {
-      en: t("how_it_works_page.description", "Six simple steps: take the vibe test, get matched, break the ice, let Pip guide, meet up, repeat."),
-      es: t("how_it_works_page.description", "Seis pasos simples: test de vibra, emparejamiento, rompehielos, guía de Pip, quedada, repetir.")
+      en: t(
+        "how_it_works_page.description",
+        "Meet new friends in your city: take the vibe test, get matched into a small group, break the ice, let Pip guide, meet up IRL, repeat."
+      ),
+      es: t(
+        "how_it_works_page.description",
+        "Haz nuevos amigos en tu ciudad: test de vibra, emparejamiento en grupo pequeño, rompehielos, guía de Pip, quedada en persona, repetir."
+      ),
     },
-    keywords: ["how it works", "vibe test", "matching", "group chat", "Pip", "meetups"],
-    type: "website"
+    keywords: [
+      "how it works",
+      "make friends",
+      "meet people",
+      "meet new people",
+      "vibe test",
+      "matching",
+      "group chat",
+      "Pip",
+      "meetups",
+    ],
+    type: "website",
   };
 
   // interactive hero motion values (mouse spotlight)

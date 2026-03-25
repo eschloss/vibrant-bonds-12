@@ -65,23 +65,34 @@ const CommunityPage = () => {
     staleTime: 5 * 60 * 1000
   });
 
+  const hasLoadedCommunity = Boolean(communityData.id);
   const seoProps = {
     title: {
-      en: communityData
+      en: hasLoadedCommunity
         ? `${communityData.title1} ${communityData.title2} | Pulse App`
-        : 'Find Your Community | Pulse App',
-      es: communityData
+        : "Find Your Community | Pulse App",
+      es: hasLoadedCommunity
         ? `${communityData.title1} ${communityData.title2} | Pulse App`
-        : 'Encuentra Tu Comunidad | Pulse App'
+        : "Encuentra Tu Comunidad | Pulse App",
     },
     description: {
-      en: communityData
-        ? `${communityData.title1} ${communityData.title2} with Pulse`
-        : 'Join communities and connect with like-minded people',
-      es: communityData
-        ? `${communityData.title1} ${communityData.title2} con Pulse`
-        : 'Únete a comunidades y conecta con personas afines'
+      en: hasLoadedCommunity
+        ? `${communityData.title1} ${communityData.title2} on Pulse. Join a matched local group and meet new friends IRL—small groups, real meetups.`
+        : "Discover Pulse communities: group matching to meet like-minded people and make friends near you.",
+      es: hasLoadedCommunity
+        ? `${communityData.title1} ${communityData.title2} en Pulse. Únete a un grupo local emparejado y haz nuevos amigos en persona—grupos pequeños, quedadas reales.`
+        : "Descubre comunidades en Pulse: emparejamiento en grupo para conocer gente afín y hacer amigos cerca de ti.",
     },
+    keywords: hasLoadedCommunity
+      ? [
+          communityData.title1,
+          communityData.title2,
+          communityData.title2_part2 || communityData.title2,
+          communityData.business_name,
+          "meet friends",
+          "Pulse",
+        ].filter(Boolean)
+      : ["community", "meet friends", "group matching", "Pulse"],
     image: communityData?.background_image ? `https://${communityData.background_image}` : undefined,
   };
 

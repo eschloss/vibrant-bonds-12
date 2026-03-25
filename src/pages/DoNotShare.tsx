@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { Shield } from "lucide-react";
-import { Helmet } from "react-helmet";
+import { Seo } from "@/hooks/useSeo";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const DoNotSharePage: React.FC = () => {
@@ -36,12 +36,23 @@ const DoNotSharePage: React.FC = () => {
     toast({ title: t("donotshare.toast.reset", "Preference reset"), description: t("donotshare.toast.reset_desc", "Sharing settings restored. You can opt out again at any time.") });
   };
 
+  const seoProps = {
+    title: {
+      en: "Do Not Share My Data | Pulse",
+      es: "No compartir mis datos | Pulse",
+    },
+    description: {
+      en: "Exercise your California privacy rights to opt out of the sale or sharing of your personal information for cross-context behavioral advertising.",
+      es: "Ejerce tus derechos de privacidad de California para rechazar la venta o el intercambio de tu información personal con fines de publicidad conductual entre contextos.",
+    },
+    pathname: "/do-not-share",
+    type: "website",
+    section: "Legal",
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <Helmet>
-        <title>{t("donotshare.title", "Do Not Share My Data")}</title>
-        <meta name="description" content={t("donotshare.meta_desc", "Exercise your California privacy rights to opt out of the sale or sharing of your personal information for cross-context behavioral advertising.")} />
-      </Helmet>
+      <Seo {...seoProps} />
       <Navbar />
 
       {/* Hero */}

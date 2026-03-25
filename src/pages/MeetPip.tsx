@@ -20,10 +20,19 @@ const MeetPip = () => {
       es: t("meet_pip.title", "Conoce a Pip | Tu Asistente de Conexión IA | Pulse")
     },
     description: {
-      en: t("meet_pip.description", "Meet Pip, the AI that makes group connections effortless. Learn how Pip helps facilitate conversations and plan perfect meetups for your friend groups."),
-      es: t("meet_pip.description", "Conoce a Pip, la IA que hace las conexiones grupales sin esfuerzo. Aprende cómo Pip ayuda a facilitar conversaciones y planificar encuentros perfectos para tus grupos de amigos.")
+      en: t("meet_pip.description", "Meet Pip, the AI that helps you meet friends and keep group chats flowing. Learn how Pip breaks the ice and plans real-life meetups for your crew."),
+      es: t("meet_pip.description", "Conoce a Pip, la IA que te ayuda a conocer gente y mantener el chat grupal fluido. Aprende cómo rompe el hielo y planifica quedadas reales con tu grupo.")
     },
-    keywords: ["AI assistant", "Pip", "group chat", "conversation starter", "meetup planning", "artificial intelligence"],
+    keywords: [
+      "Pip",
+      "meet friends",
+      "make friends",
+      "group chat",
+      "meetup planning",
+      "conversation starter",
+      "AI assistant",
+      "friend groups",
+    ],
     type: "website"
   };
 

@@ -24,6 +24,10 @@ interface SeoProps {
     lat?: number;
     lng?: number;
   };
+  /** When true, emit robots noindex,nofollow (e.g. client-side 404). */
+  noIndex?: boolean;
+  /** Extra JSON-LD objects (e.g. schema.org Event on event detail pages). */
+  additionalJsonLd?: Record<string, unknown>[];
 }
 
 export const Seo = ({
@@ -37,20 +41,22 @@ export const Seo = ({
   modifiedTime,
   type = "website",
   section,
-  geoData
+  geoData,
+  noIndex = false,
+  additionalJsonLd = [],
 }: SeoProps) => {
   const { currentLanguage } = useLanguage();
 
   const finalTitle = title?.[currentLanguage] || (
     currentLanguage === 'es'
-      ? 'Pulse: Nuevos Amigos y Planes en la Vida Real'
+      ? 'Pulse: Nuevos Amigos y Planes Reales'
       : 'Pulse: New Friends and IRL Plans'
   );
 
   const finalDescription = description?.[currentLanguage] || (
     currentLanguage === 'es'
-      ? 'Conoce personas afines y planifica encuentros en la vida real con Pulse'
-      : 'Meet like-minded people and plan real-life meetups with Pulse'
+      ? 'Conoce personas afines en tu ciudad y planifica encuentros reales con Pulse. Emparejamiento grupal con IA para amistades significativas.'
+      : 'Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships.'
   );
 
   const getBaseUrl = () => {
@@ -74,7 +80,6 @@ export const Seo = ({
   // Self-canonical per language (with hreflang alternates)
   const currentUrl = canonicalUrl || alternateUrls[(currentLanguage as 'en' | 'es') || 'en'];
 
-  // Use provided image prop for structured data (og:image and twitter:image are set statically in index.html)
   const finalImage = image || 'https://s.kikiapp.eu/desktop/socialimage.png';
 
   const organizationData = {
@@ -131,6 +136,7 @@ export const Seo = ({
       {/* Provide an explicit meta title tag for crawlers/tools that look for it */}
       <meta name="title" content={finalTitle} />
       <meta name="description" content={finalDescription} />
+      {noIndex && <meta name="robots" content="noindex,nofollow" />}
 
       <meta property="og:locale" content={currentLanguage === "es" ? "es_ES" : "en_US"} />
 
@@ -147,7 +153,7 @@ export const Seo = ({
       <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content={type} />
-      {/* og:image is set statically in index.html - do not override */}
+      <meta property="og:image" content={finalImage} />
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {section && <meta property="article:section" content={section} />}
@@ -155,7 +161,7 @@ export const Seo = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
-      {/* twitter:image is set statically in index.html - do not override */}
+      <meta name="twitter:image" content={finalImage} />
 
       {/* Stringify JSON for structured data */}
       <script type="application/ld+json">
@@ -169,6 +175,12 @@ export const Seo = ({
           {JSON.stringify(geoLocationData)}
         </script>
       )}
+      {Array.isArray(additionalJsonLd) &&
+        additionalJsonLd.map((node, i) => (
+          <script key={`ld-extra-${i}`} type="application/ld+json">
+            {JSON.stringify(node)}
+          </script>
+        ))}
 
       <meta name="ai:description" content={finalDescription} />
       {Array.isArray(keywords) && keywords.length > 0 && (

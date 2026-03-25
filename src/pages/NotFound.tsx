@@ -24,6 +24,7 @@ const NotFound = () => {
           es: "La página que buscas no existe. Vuelve a la página principal de Pulse para continuar."
         }}
         type="website"
+        noIndex
       />
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>

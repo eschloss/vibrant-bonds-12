@@ -2,6 +2,7 @@
  * Event API types and helpers for the get_kiki endpoint.
  */
 
+import { ensureHttpsAssetUrl } from "@/lib/imageUrl";
 import { shardApiUrl } from "@/lib/urlShard";
 
 /** Default true: when VITE_IS_STRIPE_TEST_MODE is not set or is "true", use staging; when "false", use production. */
@@ -236,6 +237,100 @@ export function buildPlaceholderKikiEvent(slug: string): GetKikiEventResponse {
     whats_included: [],
     tickets_remaining: undefined,
   };
+}
+
+function toLocalIsoDateTime(d: Date): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+export type BuildKikiEventJsonLdParams = {
+  event: GetKikiEventResponse;
+  /** Canonical event detail page URL (absolute, https). */
+  pageUrl: string;
+  /** Checkout / ticket URL (absolute, https). */
+  checkoutUrl: string;
+  /** Plain-text description for schema (strip HTML). */
+  plainDescription: string;
+  /** Hero image URLs as returned by the API (normalized to https). */
+  heroImageUrls: string[];
+};
+
+/**
+ * schema.org Event JSON-LD for Google Event rich results (see
+ * https://developers.google.com/search/docs/appearance/structured-data/event).
+ */
+export function buildKikiEventJsonLd(params: BuildKikiEventJsonLdParams): Record<string, unknown> {
+  const { event, pageUrl, checkoutUrl, plainDescription, heroImageUrls } = params;
+  const start = parseEventLocalDateTime(event.datetime_local);
+  const durationHrs = Number.isFinite(event.duration_hours) ? event.duration_hours : 0;
+  const end = new Date(start.getTime() + durationHrs * 3600000);
+  const startDate = (event.datetime_local || "").trim() || toLocalIsoDateTime(start);
+  const endDate = toLocalIsoDateTime(end);
+
+  const images = heroImageUrls
+    .map((u) => ensureHttpsAssetUrl(u))
+    .filter((u): u is string => Boolean(u));
+  const imageField: string | string[] =
+    images.length === 0
+      ? ensureHttpsAssetUrl(event.primary_image) || EVENT_DETAIL_PLACEHOLDER_IMAGE
+      : images.length === 1
+        ? images[0]!
+        : images;
+
+  const providerName = getProviderName(event.provider);
+  const venueName = (event.place || "").trim() || event.city_label?.trim() || providerName;
+
+  const organizer: Record<string, unknown> = {
+    "@type": "Organization",
+    name: providerName,
+  };
+  if (typeof event.provider === "object" && event.provider?.url?.trim()) {
+    organizer.url = event.provider.url.trim();
+  }
+
+  const location: Record<string, unknown> = {
+    "@type": "Place",
+    name: venueName,
+  };
+  if (event.city_label?.trim()) {
+    location.address = {
+      "@type": "PostalAddress",
+      addressLocality: event.city_label.trim(),
+    };
+  }
+
+  const currency = (event.currency || "USD").trim() || "USD";
+  const offer: Record<string, unknown> = {
+    "@type": "Offer",
+    url: checkoutUrl,
+    price: String(event.total_price ?? 0),
+    priceCurrency: currency,
+    availability: event.sold_out
+      ? "https://schema.org/SoldOut"
+      : "https://schema.org/InStock",
+  };
+
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    description: plainDescription.slice(0, 10000),
+    startDate,
+    endDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location,
+    image: imageField,
+    organizer,
+    offers: offer,
+    url: pageUrl,
+  };
+
+  if (!event.past_event) {
+    schema.eventStatus = "https://schema.org/EventScheduled";
+  }
+
+  return schema;
 }
 
 

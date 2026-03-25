@@ -109,8 +109,14 @@ const RealLifeMagic: React.FC = () => {
           es: t("rlm.seo.title", "La ciencia de la conexión real: salud, felicidad y longevidad")
         }}
         description={{
-          en: t("rlm.seo.description", "Face-to-face connection improves longevity, immunity, and mental health. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions."),
-          es: t("rlm.seo.description", "La conexión cara a cara mejora longevidad, inmunidad y salud mental. Explora oxitocina, dopamina, neuronas espejo, comidas compartidas y aventuras grupales con acciones basadas en evidencia.")
+          en: t(
+            "rlm.seo.description",
+            "Face-to-face connection improves longevity, immunity, and mental health—and strengthens friendships and social bonds. Explore oxytocin, dopamine, mirror neurons, shared meals, and group adventures—plus evidence-based actions."
+          ),
+          es: t(
+            "rlm.seo.description",
+            "La conexión cara a cara mejora longevidad, inmunidad y salud mental, y refuerza amistades y vínculos sociales. Explora oxitocina, dopamina, neuronas espejo, comidas compartidas y aventuras grupales con acciones basadas en evidencia."
+          ),
         }}
         keywords={[
           "real life magic",

@@ -4,8 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    
-    <!-- Title and meta tags are dynamically set by each page using React Helmet -->
+
+    <!-- Defaults before JS; each route overrides via Seo (react-helmet). Match src/hooks/useSeo.tsx English fallbacks. -->
+    <title>Pulse: New Friends and IRL Plans</title>
+    <meta name="title" content="Pulse: New Friends and IRL Plans" />
+    <meta name="description" content="Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships." />
+    <meta property="og:title" content="Pulse: New Friends and IRL Plans" />
+    <meta property="og:description" content="Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships." />
+    <meta property="og:type" content="website" />
 
     <link rel="icon" type="image/png" href="https://s.kikiapp.eu/img/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="https://s.kikiapp.eu/img/favicon/favicon.svg" />
@@ -17,12 +23,14 @@
     <meta name="author" content="Pulse Now Co." />
     <meta name="twitter:site" content="@pulsefriendsirl" />
     <meta name="twitter:card" content="summary_large_image" />
-    
-    <!-- Static social graph image - do not override in Helmet -->
+    <meta name="twitter:title" content="Pulse: New Friends and IRL Plans" />
+    <meta name="twitter:description" content="Meet like-minded people in your city and plan real-life meetups with Pulse. AI-powered group matching for meaningful friendships." />
+
+    <!-- Default social image; pages override via Seo (react-helmet) after load -->
     <meta property="og:image" content="https://s.kikiapp.eu/desktop/socialimage.png" />
     <meta name="twitter:image" content="https://s.kikiapp.eu/desktop/socialimage.png" />
     
-    <!-- Other Open Graph and Twitter meta tags are dynamically set by each page using React Helmet -->
+    <!-- Per-page Open Graph / Twitter (url, locale, images) set by Seo after load -->
     
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- API sharding: hash % 4 → api, api2, api3, api4 (see src/lib/urlShard.ts) -->

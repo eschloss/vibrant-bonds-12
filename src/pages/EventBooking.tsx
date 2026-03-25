@@ -11,8 +11,10 @@ import { getPrefetchJsonPromise } from "@/lib/apiPrefetchBridge";
 import {
   buildEventContext,
   buildGetKikiUrl,
+  getProviderName,
   type GetKikiEventResponse,
 } from "@/lib/eventApi";
+import { buildEventSeoDescriptions, buildEventSeoKeywords } from "@/lib/eventSeoMeta";
 import {
   buildEventChatQuickQuestions,
   buildEventFaqParamsFromEventData,
@@ -115,12 +117,19 @@ const EventBooking = () => {
 
   const data = eventData;
   const confirmationHref = `/events/${data.slug}/confirmation`;
+  const cityLabel = data.city_label || "";
+  const bookingDescriptions = buildEventSeoDescriptions(data.short_description, { variant: "booking" });
 
   return (
     <>
       <Seo
         title={{ en: `Book: ${data.title} | Pulse`, es: `Reservar: ${data.title} | Pulse` }}
-        description={{ en: data.short_description, es: data.short_description }}
+        description={bookingDescriptions}
+        keywords={buildEventSeoKeywords({
+          title: data.title,
+          cityLabel,
+          providerName: getProviderName(data.provider),
+        })}
         pathname={`/events/${data.slug}/booking`}
         image={data.primary_image}
         type="website"

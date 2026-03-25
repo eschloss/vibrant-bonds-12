@@ -42,6 +42,7 @@ import {
   type GetKikiEventResponse,
   buildEventContext,
   buildGetKikiUrl,
+  buildKikiEventJsonLd,
   buildPlaceholderKikiEvent,
   EVENT_DETAIL_PLACEHOLDER_IMAGE,
   formatEventPrice,
@@ -50,6 +51,7 @@ import {
   parseEventLocalDateTime,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
+import { buildEventSeoDescriptions, buildEventSeoKeywords } from "@/lib/eventSeoMeta";
 import {
   buildEventChatQuickQuestions,
   buildEventFaqParamsFromEventData,
@@ -607,11 +609,12 @@ const EventDetail = () => {
           en: `${eventData.title} | ${cityLabel} Events | Pulse`,
           es: `${eventData.title} | Eventos en ${cityLabel} | Pulse`,
         },
-        description: {
-          en: eventData.short_description,
-          es: eventData.short_description,
-        },
-        keywords: [eventData.title, cityLabel, "event", "activities", providerName].filter(Boolean),
+        description: buildEventSeoDescriptions(eventData.short_description),
+        keywords: buildEventSeoKeywords({
+          title: eventData.title,
+          cityLabel,
+          providerName,
+        }),
         type: "website" as const,
         image: eventData.primary_image,
       };
@@ -628,7 +631,7 @@ const EventDetail = () => {
         es:
           "Conoce gente antes del evento. Pulse te empareja en un grupo pequeño de asistentes que van solos para que llegues con amigos. Los detalles y entradas cargan en un momento.",
       },
-      keywords: [slugTitle, "event", "Pulse", "meet friends"],
+      keywords: [slugTitle, "event", "Pulse events", "meet friends"],
       type: "website" as const,
       image: EVENT_DETAIL_PLACEHOLDER_IMAGE,
     };
@@ -734,26 +737,16 @@ const EventDetail = () => {
     );
   };
 
-  const eventSchema =
-    eventData && !usePlaceholderUI
-      ? {
-          "@context": "https://schema.org",
-          "@type": "Event",
-          name: eventData.title,
-          description: `${introLine}\n\n${stripHtml(eventData.long_description)}`,
-          startDate: eventData.datetime_local,
-          location: {
-            "@type": "Place",
-            name: eventData.place,
-          },
-          image: heroImages.length > 0 ? heroImages : [eventData.primary_image],
-          offers: {
-            "@type": "Offer",
-            price: String(eventData.total_price),
-            priceCurrency: eventData.currency || "USD",
-          },
-        }
-      : null;
+  const eventJsonLd = useMemo(() => {
+    if (!eventData || usePlaceholderUI) return null;
+    return buildKikiEventJsonLd({
+      event: eventData,
+      pageUrl: `${window.location.origin}${pathname}`,
+      checkoutUrl: `${window.location.origin}${checkoutHref}`,
+      plainDescription: `${introLine}\n\n${stripHtml(eventData.long_description)}`,
+      heroImageUrls: heroImages,
+    });
+  }, [eventData, usePlaceholderUI, pathname, checkoutHref, introLine, heroImages]);
 
   const durationText = formatDuration(data.duration_hours);
   const dateTime = usePlaceholderUI
@@ -798,13 +791,7 @@ const EventDetail = () => {
     <EventHeaderProvider value={eventHeaderValue}>
     <div className="flex flex-col min-h-screen dark">
       <PageLoadingOverlay show={showOverlay} />
-      {eventSchema ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
-        />
-      ) : null}
-      <Seo {...seoProps} />
+      <Seo {...seoProps} additionalJsonLd={eventJsonLd ? [eventJsonLd] : undefined} />
       <Navbar />
 
       <main className={cn("flex-grow", "pb-20 lg:pb-0")}>

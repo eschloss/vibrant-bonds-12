@@ -19,7 +19,7 @@ const Index = () => {
 
   const seoProps = {
     title: {
-      en: "Pulse: New Friends & Real-Life Plans",
+      en: "Pulse: New Friends and IRL Plans",
       es: "Pulse: Nuevos Amigos y Planes Reales"
     },
     description: {

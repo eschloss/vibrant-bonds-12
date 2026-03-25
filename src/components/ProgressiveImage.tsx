@@ -181,8 +181,10 @@ const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
             const rect = container.getBoundingClientRect();
             if (rect.height === 0 && parentRect.height > 0) {
               container.style.height = `${parentRect.height}px`;
-              // eslint-disable-next-line no-console
-              console.warn("[ProgressiveImage] applied parent-height to container", { src, parentHeight: parentRect.height });
+              if (isDev) {
+                // eslint-disable-next-line no-console
+                console.warn("[ProgressiveImage] applied parent-height to container", { src, parentHeight: parentRect.height });
+              }
             }
           }
         } catch {}

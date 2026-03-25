@@ -12,8 +12,8 @@ export const howItWorks = {
     "how_it_works.headline": "10 new friends.\n10 days to meet in real life.",
     "how_it_works.cta": "Get Matched Now",
     // Page-specific meta and hero
-    "how_it_works_page.title": "How Pulse Works | Meet Your Crew, Make It A Ritual",
-    "how_it_works_page.description": "Six simple steps: take the vibe test, get matched, break the ice, let Pip guide, meet up, repeat.",
+    "how_it_works_page.title": "How Pulse Works | Meet Friends & Join Your Crew",
+    "how_it_works_page.description": "Meet new friends in your city: take the vibe test, get matched into a small group, break the ice, let Pip guide, meet up IRL, repeat.",
     "how_it_works_page.hero.subtitle": "A clear path from strangers in a chat to friends you see every week.",
     "how_it_works_page.cta": "Meet your crew",
     
@@ -188,8 +188,8 @@ export const howItWorks = {
     "how_it_works.headline": "10 nuevos amigos.\n10 días para conocerse en la vida real.",
     "how_it_works.cta": "Encuentra Tu Grupo Ahora",
     // Page-specific meta and hero
-    "how_it_works_page.title": "Cómo funciona Pulse | Conoce tu grupo, hazlo ritual",
-    "how_it_works_page.description": "Seis pasos simples: test de vibra, emparejamiento, rompehielos, guía de Pip, quedada, repetir.",
+    "how_it_works_page.title": "Cómo funciona Pulse | Haz amigos y únete a tu grupo",
+    "how_it_works_page.description": "Haz nuevos amigos en tu ciudad: test de vibra, emparejamiento en grupo pequeño, rompehielos, guía de Pip, quedada en persona, repetir.",
     "how_it_works_page.hero.subtitle": "Un camino claro de desconocidos en un chat a amigos que ves cada semana.",
     "how_it_works_page.cta": "Conoce tu grupo",
     

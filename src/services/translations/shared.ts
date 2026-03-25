@@ -606,7 +606,7 @@ export const shared = {
 
     // Meet Pip page
     "meet_pip.title": "Meet Pip | Your AI Connection Assistant | Pulse",
-    "meet_pip.description": "Meet Pip, the AI that makes group connections effortless. Learn how Pip helps facilitate conversations and plan perfect meetups for your friend groups.",
+    "meet_pip.description": "Meet Pip, the AI that helps you meet friends and keep group chats flowing. Learn how Pip breaks the ice and plans real-life meetups for your crew.",
     "meet_pip.hero.full_title_prefix": "Meet Pip",
     "meet_pip.hero.full_title_suffix": "Turning Group Chats Into Group Adventures",
     "meet_pip.hero.description": "From the first hello to the final high-five, Pip keeps the fun flowing. They know your crew's interests, suggest the perfect activities, and drop in daily games that turn small talk into big laughs.",
@@ -1242,7 +1242,7 @@ export const shared = {
 
     // Meet Pip page
     "meet_pip.title": "Conoce a Pip | Tu Asistente de Conexión IA | Pulse",
-    "meet_pip.description": "Conoce a Pip, la IA que hace las conexiones grupales sin esfuerzo. Aprende cómo Pip ayuda a facilitar conversaciones y planificar encuentros perfectos para tus grupos de amigos.",
+    "meet_pip.description": "Conoce a Pip, la IA que te ayuda a conocer gente y mantener el chat grupal fluido. Aprende cómo rompe el hielo y planifica quedadas reales con tu grupo.",
     "meet_pip.hero.full_title_prefix": "Conoce a Pip",
     "meet_pip.hero.full_title_suffix": "Convirtiendo Chats Grupales en Aventuras Grupales",
     "meet_pip.hero.description": "Desde el primer hola hasta el último choca esos cinco, Pip mantiene la diversión fluyendo. Conocen los intereses de tu grupo, sugieren las actividades perfectas y lanzan juegos diarios que convierten la charla en grandes risas.",

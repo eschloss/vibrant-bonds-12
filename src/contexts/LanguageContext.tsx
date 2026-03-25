@@ -6,7 +6,6 @@ import {
   getNamespacesForPath,
   loadTranslationNamespaces,
 } from "../services/translations";
-import { Helmet } from "react-helmet";
 import { waitForInitialPrefetchWork } from "../lib/apiPrefetchBridge";
 
 function idleYield(): Promise<void> {
@@ -41,22 +40,6 @@ export const useLanguage = () => useContext(LanguageContext);
 interface LanguageProviderProps {
   children: ReactNode;
 }
-
-// SEO metadata translations
-const seoMetadata = {
-  en: {
-    title: "Pulse: New Friends and IRL Plans",
-    description: "Meet like-minded people and plan real-life meetups with Pulse",
-    ogTitle: "Pulse: New Friends and IRL Plans",
-    ogDescription: "Connect with like-minded people and plan real-life meetups with Pulse"
-  },
-  es: {
-    title: "Pulse: Nuevos Amigos y Planes en la Vida Real",
-    description: "Conoce personas afines y planifica encuentros en la vida real con Pulse",
-    ogTitle: "Pulse: Nuevos Amigos y Planes en la Vida Real",
-    ogDescription: "Conecta con personas afines y planifica encuentros en la vida real con Pulse"
-  }
-};
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const location = useLocation();
@@ -164,27 +147,6 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
     return translations[key] || fallback;
   };
 
-  const metadata = seoMetadata[currentLanguage as keyof typeof seoMetadata] || seoMetadata.en;
-
-  const getBaseUrl = () => {
-    const url = new URL(window.location.href);
-    let hostParts = url.hostname.split('.');
-
-    while (hostParts.length > 2 && (hostParts[0].length === 2 || hostParts[0].toLowerCase() === 'www')) {
-      hostParts = hostParts.slice(1);
-    }
-    url.hostname = hostParts.join('.');
-
-    return url.origin;
-  };
-
-  const baseUrl = getBaseUrl();
-  const currentPath = window.location.pathname;
-  const alternateUrls = {
-    en: `${baseUrl}${currentPath}`,
-    es: `${baseUrl.replace('://', '://es.')}${currentPath}`
-  };
-
   return (
     <LanguageContext.Provider
       value={{
@@ -195,19 +157,6 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
         changeLanguage,
       }}
     >
-      <Helmet>
-        <html lang={currentLanguage} />
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:type" content="website" />
-
-        <link rel="alternate" href={alternateUrls.en} hrefLang="en" />
-        <link rel="alternate" href={alternateUrls.es} hrefLang="es" />
-        <link rel="alternate" href={alternateUrls.en} hrefLang="x-default" />
-      </Helmet>
       {children}
     </LanguageContext.Provider>
   );

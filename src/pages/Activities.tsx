@@ -49,7 +49,16 @@ const Activities = () => {
       en: t("activities.seo.description", "Discover amazing group activities curated by Pip. From surfing to book clubs, join matched crews for unforgettable experiences that build lasting friendships."),
       es: t("activities.seo.description", "Descubre increíbles actividades grupales curadas por Pip. Desde surf hasta clubes de lectura, únete a grupos compatibles para experiencias inolvidables.")
     },
-    keywords: ["group activities", "social experiences", "friendship building", "outdoor adventures", "creative workshops", "team activities"]
+    keywords: [
+      "group activities",
+      "meet friends",
+      "social activities",
+      "social experiences",
+      "friendship building",
+      "outdoor adventures",
+      "creative workshops",
+      "team activities",
+    ],
   };
 
   // SEO will be handled by Seo component
