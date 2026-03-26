@@ -147,6 +147,14 @@
     0 0 0 4px #25d366;
 }
 
+/* Match WhatsAppChatButton: dot is anchored to the icon box, not the full FAB. */
+.pulse-wa-chat__fab-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pulse-wa-chat__fab-dot {
   position: absolute;
   right: -0.125rem;

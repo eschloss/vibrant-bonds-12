@@ -902,6 +902,30 @@ img {
   filter: brightness(1.05);
 }
 
+.btn-hero-cta--disabled {
+  cursor: not-allowed;
+  filter: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+.btn-hero-cta--disabled:hover {
+  filter: none;
+}
+
+/*
+ * Our button classes set display:flex — that beats the default [hidden] display:none,
+ * so without this the "Sold out" placeholders stay visible until sold_out is true.
+ */
+.btn-hero-cta[hidden],
+.btn-sign-gradient[hidden],
+.event-sticky-cta__btn[hidden],
+.event-sticky-cta__muted[hidden] {
+  display: none !important;
+}
+
 .event-hero-future-link {
   background: none;
   border: 0;
@@ -930,6 +954,22 @@ img {
   height: 16px;
   flex-shrink: 0;
   color: var(--pulse-blue);
+}
+
+.event-hero-tickets-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(251, 191, 36, 0.95);
+  padding: 0 0.125rem;
+}
+
+.event-hero-tickets-line svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .event-short--hero {
@@ -1124,8 +1164,26 @@ img {
   font-variant-numeric: tabular-nums;
 }
 
-.sign-cta-block {
+.sign-tickets-urgency {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   margin-top: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(251, 191, 36, 0.95);
+  line-height: 1.4;
+}
+
+.sign-tickets-urgency__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.sign-cta-block {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -1147,6 +1205,19 @@ img {
 
 .btn-sign-gradient:hover {
   filter: brightness(1.06);
+}
+
+.btn-sign-gradient--disabled {
+  cursor: not-allowed;
+  filter: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.btn-sign-gradient--disabled:hover {
+  filter: none;
 }
 
 .sign-future-link {
@@ -1327,6 +1398,49 @@ img {
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
 }
 
+.event-sticky-cta__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.event-sticky-cta__urgency {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(251, 191, 36, 0.95);
+}
+
+.event-sticky-cta__ticket-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.paint-sip-sticky-urgency--desktop {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .paint-sip-sticky-urgency--mobile {
+    display: none;
+  }
+
+  .paint-sip-sticky-urgency--desktop {
+    display: inline;
+  }
+}
+
+.event-sticky-cta__muted {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
 .event-sticky-cta[hidden] {
   display: none !important;
 }
@@ -1338,17 +1452,11 @@ img {
     justify-content: space-between;
     padding-right: 1rem;
   }
-}
 
-.event-sticky-cta__label {
-  margin: 0;
-  min-width: 0;
-}
-
-.event-sticky-cta__hint {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  .event-sticky-cta__left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 }
 
 .event-sticky-cta__btn {
@@ -1368,6 +1476,19 @@ img {
 
 .event-sticky-cta__btn:hover {
   filter: brightness(1.05);
+}
+
+.event-sticky-cta__btn--disabled {
+  cursor: not-allowed;
+  filter: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.event-sticky-cta__btn--disabled:hover {
+  filter: none;
 }
 
 @media (min-width: 640px) {

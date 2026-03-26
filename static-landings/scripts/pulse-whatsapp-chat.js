@@ -77,6 +77,9 @@
     );
   }
   if (!scriptEl) {
+    scriptEl = document.querySelector('script[src*="pulse-whatsapp-chat.js"]');
+  }
+  if (!scriptEl) {
     return;
   }
 
@@ -89,6 +92,10 @@
     }
   })();
 
+  /**
+   * Inject chat CSS without blocking mount. React bundles styles with the app; waiting for
+   * link.onload delayed scheduleBubbleTimers() vs WhatsAppChatButton's useEffect (same T0).
+   */
   function loadChatStylesheet(done) {
     if (!CHAT_CSS_HREF) {
       done();
@@ -104,13 +111,9 @@
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = CHAT_CSS_HREF;
-    link.onload = function () {
-      done();
-    };
-    link.onerror = function () {
-      done();
-    };
+    link.onerror = function () {};
     document.head.appendChild(link);
+    done();
   }
 
   var variantRaw = (scriptEl.getAttribute("data-variant") || "").toLowerCase();
@@ -435,8 +438,10 @@
       "aria-label": "Open chat",
       "aria-expanded": "false",
     });
-    fab.appendChild(svgIcon(ICON_MSG, 28));
-    fab.appendChild(h("span", "pulse-wa-chat__fab-dot", { "aria-hidden": "true" }));
+    var fabInner = h("div", "pulse-wa-chat__fab-inner");
+    fabInner.appendChild(svgIcon(ICON_MSG, 28));
+    fabInner.appendChild(h("span", "pulse-wa-chat__fab-dot", { "aria-hidden": "true" }));
+    fab.appendChild(fabInner);
 
     var panel = h("div", "pulse-wa-chat__panel", { hidden: "true" });
 
@@ -883,10 +888,16 @@
 
     function updateBubbleDom() {
       if (!open && bubbleVisible && bubbleMessage) {
-        bubbleWrap.hidden = false;
         bubbleText.textContent = bubbleMessage;
+        bubbleWrap.removeAttribute("hidden");
+        /* React unmounts the teaser each time; we reuse one node — reset animation so
+           fill-mode forwards does not leave opacity 0 after the first cycle. */
+        bubbleWrap.style.animation = "none";
+        void bubbleWrap.offsetWidth;
+        bubbleWrap.style.animation = "";
       } else {
-        bubbleWrap.hidden = true;
+        bubbleWrap.setAttribute("hidden", "");
+        bubbleWrap.style.animation = "";
       }
     }
 
@@ -955,14 +966,16 @@
     updateBubbleDom();
   }
 
-  window.addEventListener("load", function () {
-    function run() {
+  /* Match React: useEffect runs after paint; one macrotask delay approximates that vs sync DOMContentLoaded. */
+  function scheduleMountAfterDomReady() {
+    setTimeout(function () {
       loadChatStylesheet(mount);
-    }
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(run, { timeout: 3000 });
-    } else {
-      setTimeout(run, 0);
-    }
-  });
+    }, 0);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleMountAfterDomReady);
+  } else {
+    scheduleMountAfterDomReady();
+  }
 })();

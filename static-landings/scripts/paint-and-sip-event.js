@@ -1,7 +1,8 @@
 /**
  * Paint-and-sip static event page: footer year, SPA warm-up iframe, hero carousel,
- * group chat preview reveal + lightbox, sticky CTA, future invites (reCAPTCHA v3 + API).
- * kiki_id must match get_kiki for slug paint-and-sip-lagos (see HTML data-kiki-id).
+ * group chat preview reveal + lightbox, sticky CTA, future invites (reCAPTCHA v3 + API),
+ * get_kiki-driven ticket urgency + sold-out CTAs.
+ * Initial kiki_id in HTML should match get_kiki for slug paint-and-sip-lagos; fetch overwrites id.
  */
 (function () {
   "use strict";
@@ -419,4 +420,110 @@
         });
     });
   }
+
+  /* Live ticket copy + sold-out state from get_kiki (matches /events/paint-and-sip-lagos) */
+  var PAINT_SIP_SLUG = "paint-and-sip-lagos";
+  var GET_KIKI_AVAILABILITY_URL = shardApiUrl(
+    "https://api.kikiapp.eu/events/get_kiki?slug=" + encodeURIComponent(PAINT_SIP_SLUG)
+  );
+
+  function setElHidden(el, hidden) {
+    if (!el) return;
+    if (hidden) {
+      el.setAttribute("hidden", "");
+    } else {
+      el.removeAttribute("hidden");
+    }
+  }
+
+  function applyPaintSipAvailability(data) {
+    if (!data || typeof data !== "object") return;
+
+    /* Only boolean true closes checkout; loose truthiness would mis-handle API quirks. */
+    var soldOut = data.sold_out === true;
+    var checkoutDisabled = soldOut;
+    var soldOutLabel = "Sold out";
+
+    if (data.id != null) {
+      var kikiInput = document.querySelector('input[name="paint_sip_kiki_id"]');
+      if (kikiInput) kikiInput.value = String(data.id);
+    }
+
+    var n = data.tickets_remaining;
+    var hasCount = typeof n === "number" && !isNaN(n);
+
+    var heroUrgency = document.querySelector(".js-paint-sip-hero-urgency");
+    var heroText = document.querySelector(".js-paint-sip-hero-urgency-text");
+    var sidebarUrgencyRoots = document.querySelectorAll(".js-paint-sip-sidebar-urgency");
+    var sidebarTexts = document.querySelectorAll(".js-paint-sip-sidebar-urgency-text");
+    var stickyUrgencyWrap = document.querySelector(".js-paint-sip-sticky-urgency-wrap");
+    var stickyMobile = document.querySelector(".js-paint-sip-sticky-urgency-mobile");
+    var stickyDesktop = document.querySelector(".js-paint-sip-sticky-urgency-desktop");
+    var stickyMuted = document.querySelector(".js-paint-sip-sticky-muted");
+    var checkoutOpenEls = document.querySelectorAll(".js-paint-sip-checkout-open");
+    var checkoutClosedEls = document.querySelectorAll(".js-paint-sip-checkout-closed");
+
+    if (checkoutDisabled) {
+      setElHidden(heroUrgency, true);
+      sidebarUrgencyRoots.forEach(function (el) {
+        setElHidden(el, true);
+      });
+      setElHidden(stickyUrgencyWrap, true);
+      if (stickyMuted) {
+        stickyMuted.textContent = soldOutLabel;
+        setElHidden(stickyMuted, false);
+      }
+
+      checkoutOpenEls.forEach(function (el) {
+        setElHidden(el, true);
+      });
+      checkoutClosedEls.forEach(function (el) {
+        el.textContent = soldOutLabel;
+        setElHidden(el, false);
+      });
+      return;
+    }
+
+    setElHidden(heroUrgency, false);
+    sidebarUrgencyRoots.forEach(function (el) {
+      setElHidden(el, false);
+    });
+    setElHidden(stickyUrgencyWrap, false);
+    if (stickyMuted) setElHidden(stickyMuted, true);
+
+    checkoutOpenEls.forEach(function (el) {
+      setElHidden(el, false);
+    });
+    checkoutClosedEls.forEach(function (el) {
+      setElHidden(el, true);
+    });
+
+    if (!hasCount) return;
+
+    if (heroText) {
+      heroText.textContent = "Only " + n + " spots left for this event";
+    }
+    sidebarTexts.forEach(function (el) {
+      el.textContent = "Only " + n + " tickets left";
+    });
+    if (stickyMobile) {
+      stickyMobile.textContent = "Only " + n + " spots left for this event";
+    }
+    if (stickyDesktop) {
+      stickyDesktop.textContent = "Only " + n + " tickets left";
+    }
+  }
+
+  fetch(GET_KIKI_AVAILABILITY_URL, {
+    credentials: "omit",
+    headers: { Accept: "application/json" },
+  })
+    .then(function (res) {
+      if (!res.ok) throw new Error("get_kiki failed");
+      return res.json();
+    })
+    .then(applyPaintSipAvailability)
+    .catch(function () {
+      /* Leave neutral placeholder copy */
+    });
 })();

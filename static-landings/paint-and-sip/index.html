@@ -191,7 +191,10 @@
 
         <div class="event-hero-cta">
           <div class="event-hero-cta-inner">
-            <a class="btn-hero-cta" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Reserve your spot</a>
+            <div class="js-paint-sip-hero-cta-row">
+              <a class="btn-hero-cta js-paint-sip-checkout-open" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Reserve your spot</a>
+              <span class="btn-hero-cta btn-hero-cta--disabled js-paint-sip-checkout-closed" hidden role="status">Sold out</span>
+            </div>
             <button type="button" class="event-hero-future-link" data-open-future-invites>Can't make it? Get future invites →</button>
             <div class="event-hero-matched">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -200,6 +203,13 @@
                 <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               <span>You'll be matched with 4–6 solo attendees</span>
+            </div>
+            <div class="event-hero-tickets-line js-paint-sip-hero-urgency" data-paint-sip-urgency-root>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9Z" />
+                <path d="M7 8V6a5 5 0 0 1 10 0v2" />
+              </svg>
+              <span class="js-paint-sip-hero-urgency-text">Ticket availability loads here.</span>
             </div>
           </div>
         </div>
@@ -315,8 +325,16 @@
                   <span class="sign-from-label">From</span>
                   <span class="sign-from-price">₦25,000</span>
                 </div>
+                <div class="sign-tickets-urgency js-paint-sip-sidebar-urgency" data-paint-sip-urgency-root>
+                  <svg class="sign-tickets-urgency__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9Z" />
+                    <path d="M7 8V6a5 5 0 0 1 10 0v2" />
+                  </svg>
+                  <span class="js-paint-sip-sidebar-urgency-text">Ticket availability loads here.</span>
+                </div>
                 <div class="sign-cta-block">
-                  <a class="btn-sign-gradient" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Buy my ticket</a>
+                  <a class="btn-sign-gradient js-paint-sip-checkout-open" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Buy my ticket</a>
+                  <span class="btn-sign-gradient btn-sign-gradient--disabled js-paint-sip-checkout-closed" hidden role="status">Sold out</span>
                   <button type="button" class="sign-future-link" data-open-future-invites>Can't make it? Get future invites →</button>
                 </div>
                 <div class="sign-breakdown">
@@ -457,8 +475,16 @@
                 <span class="sign-from-label">From</span>
                 <span class="sign-from-price">₦25,000</span>
               </div>
+              <div class="sign-tickets-urgency js-paint-sip-sidebar-urgency" data-paint-sip-urgency-root>
+                <svg class="sign-tickets-urgency__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9Z" />
+                  <path d="M7 8V6a5 5 0 0 1 10 0v2" />
+                </svg>
+                <span class="js-paint-sip-sidebar-urgency-text">Ticket availability loads here.</span>
+              </div>
               <div class="sign-cta-block">
-                <a class="btn-sign-gradient" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Buy my ticket</a>
+                <a class="btn-sign-gradient js-paint-sip-checkout-open" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Buy my ticket</a>
+                <span class="btn-sign-gradient btn-sign-gradient--disabled js-paint-sip-checkout-closed" hidden role="status">Sold out</span>
                 <button type="button" class="sign-future-link" data-open-future-invites>Can't make it? Get future invites →</button>
               </div>
               <div class="sign-breakdown">
@@ -508,10 +534,19 @@
     </div>
 
     <div id="event-sticky-cta" class="event-sticky-cta" hidden>
-      <p class="event-sticky-cta__label">
-        <span class="event-sticky-cta__hint">Join with a matched group</span>
-      </p>
-      <a class="event-sticky-cta__btn" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Reserve your spot</a>
+      <div class="event-sticky-cta__left">
+        <div class="event-sticky-cta__urgency js-paint-sip-sticky-urgency-wrap">
+          <svg class="event-sticky-cta__ticket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9Z" />
+            <path d="M7 8V6a5 5 0 0 1 10 0v2" />
+          </svg>
+          <span class="paint-sip-sticky-urgency--mobile js-paint-sip-sticky-urgency-mobile">Ticket availability loads here.</span>
+          <span class="paint-sip-sticky-urgency--desktop js-paint-sip-sticky-urgency-desktop">Ticket availability loads here.</span>
+        </div>
+        <span class="event-sticky-cta__muted js-paint-sip-sticky-muted" hidden role="status">Sold out</span>
+      </div>
+      <a class="event-sticky-cta__btn js-paint-sip-checkout-open" href="https://pulsenow.app/events/paint-and-sip-lagos/checkout">Reserve your spot</a>
+      <span class="event-sticky-cta__btn event-sticky-cta__btn--disabled js-paint-sip-checkout-closed" hidden role="status">Sold out</span>
     </div>
 
     <dialog id="future-invites-dialog" class="fi-dialog">
