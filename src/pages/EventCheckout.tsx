@@ -1489,6 +1489,7 @@ function CheckoutPrePayment({
   intentLoading,
   t,
   onOpenFutureInvites,
+  fireEventIntentToPayIfFirst,
 }: {
   eventSlug: string;
   eventData: GetKikiEventResponse;
@@ -1498,6 +1499,7 @@ function CheckoutPrePayment({
   intentLoading: boolean;
   t: (key: string, fallback: string) => string;
   onOpenFutureInvites?: () => void;
+  fireEventIntentToPayIfFirst: (intent_trigger: "mobile_continue" | "name" | "email") => void;
 }) {
   const checkoutSchema = React.useMemo(() => createCheckoutSchema(t), [t]);
   const form = useForm<CheckoutFormValues>({
@@ -1570,9 +1572,10 @@ function CheckoutPrePayment({
 
   const handleMobileContinueToDetails = React.useCallback(() => {
     trackMetaPixelEvent("event_checkout_mobile_continue_to_details", { ...baseCheckoutParams }, { custom: true });
+    fireEventIntentToPayIfFirst("mobile_continue");
     setMobileCheckoutStep("details");
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [baseCheckoutParams]);
+  }, [baseCheckoutParams, fireEventIntentToPayIfFirst]);
 
   // Focus firstName when transitioning to details step on mobile
   React.useEffect(() => {
@@ -1605,6 +1608,15 @@ function CheckoutPrePayment({
 
   const firstNameValue = form.watch("firstName");
   const buyerEmailValue = form.watch("buyerEmail");
+
+  React.useEffect(() => {
+    if ((firstNameValue ?? "").length >= 1) fireEventIntentToPayIfFirst("name");
+  }, [firstNameValue, fireEventIntentToPayIfFirst]);
+
+  React.useEffect(() => {
+    if ((buyerEmailValue ?? "").length >= 1) fireEventIntentToPayIfFirst("email");
+  }, [buyerEmailValue, fireEventIntentToPayIfFirst]);
+
   const isPrepaymentFormValid = React.useMemo(() => {
     const first = (firstNameValue || "").trim();
     const email = (buyerEmailValue || "").trim();
@@ -2165,6 +2177,41 @@ const EventCheckout = () => {
     setFutureInvitesOpen(false);
   }, [eventSlug]);
 
+  /** Persists across CheckoutPrePayment unmount (e.g. after continue, or back from payment). */
+  const intentToPayFiredRef = React.useRef({
+    mobile_continue: false,
+    name: false,
+    email: false,
+  });
+  /** Must reset in render when the event changes: child useEffects run before parent useEffects, so an effect-based reset runs too late for name/email re-fires. */
+  const intentToPayEventIdRef = React.useRef<number | undefined>(undefined);
+  if (eventData != null && eventData.id !== intentToPayEventIdRef.current) {
+    intentToPayEventIdRef.current = eventData.id;
+    intentToPayFiredRef.current = {
+      mobile_continue: false,
+      name: false,
+      email: false,
+    };
+  }
+
+  const baseCheckoutParamsForIntent = React.useMemo(
+    () => (eventData ? buildCheckoutEventParams(eventData) : null),
+    [eventData]
+  );
+  const fireEventIntentToPayIfFirst = React.useCallback(
+    (intent_trigger: "mobile_continue" | "name" | "email") => {
+      if (!baseCheckoutParamsForIntent) return;
+      if (intentToPayFiredRef.current[intent_trigger]) return;
+      intentToPayFiredRef.current[intent_trigger] = true;
+      trackMetaPixelEvent(
+        "event-intent-to-pay",
+        { ...baseCheckoutParamsForIntent, intent_trigger },
+        { custom: true }
+      );
+    },
+    [baseCheckoutParamsForIntent]
+  );
+
   // Initialize addons from default_quantity when event data loads
   React.useEffect(() => {
     const addons = eventData?.addons ?? [];
@@ -2632,6 +2679,7 @@ const EventCheckout = () => {
               intentLoading={intentLoading}
               t={t}
               onOpenFutureInvites={handleOpenFutureInvites}
+              fireEventIntentToPayIfFirst={fireEventIntentToPayIfFirst}
             />
           )}
         </main>
