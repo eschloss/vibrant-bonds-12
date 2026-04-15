@@ -56,11 +56,11 @@ export default function Events() {
     description: {
       en: t(
         "eventsLanding.seo.description",
-        "Browse real events in your city. Pulse matches solo attendees into small group chats so you can meet before you arrive and avoid walking in alone."
+        "Browse real events in your city. Pulse connects you with other attendees going to the same event, then opens a private group chat so you can meet before you arrive and avoid walking in alone."
       ),
       es: t(
         "eventsLanding.seo.description",
-        "Explora eventos reales en tu ciudad. Pulse empareja a personas que van solas en chats grupales pequeños para que se conozcan antes de llegar."
+        "Explora eventos reales en tu ciudad. Pulse te conecta con otras personas que van al mismo evento y luego abre un chat grupal privado para que os conozcáis antes de llegar."
       ),
     },
     keywords: ["events", "meet new people", "group chat", "meetups", "friends", "irl"],
@@ -111,7 +111,7 @@ export default function Events() {
               <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto px-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
                 {t(
                   "eventsLanding.hero.copy",
-                  "Pulse is for people going solo. Pick a real event in your city, get matched with a small group of other attendees, and meet in the app before you arrive."
+                  "Pulse is for people going solo. Pick a real event in your city, join the attendee group chat, and meet in the app before you arrive."
                 )}
               </p>
 
@@ -123,7 +123,7 @@ export default function Events() {
                 <span className="text-white/30 select-none hidden sm:inline">→</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm w-full sm:w-auto justify-center">
                   <MessageSquare size={14} className="shrink-0 text-white/80" />
-                  {t("eventsLanding.hero.flow_2", "Meet your small group")}
+                  {t("eventsLanding.hero.flow_2", "Meet people in chat")}
                 </span>
                 <span className="text-white/30 select-none hidden sm:inline">→</span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur-sm w-full sm:w-auto justify-center">
@@ -202,10 +202,10 @@ export default function Events() {
               },
               {
                 icon: MessageSquare,
-                title: t("eventsLanding.what.card2_title", "Get matched before you go"),
+                title: t("eventsLanding.what.card2_title", "Say hello before you go"),
                 body: t(
                   "eventsLanding.what.card2_body",
-                  "After booking, we place you in a small chat with other solo attendees going to that same event."
+                  "After booking, we open the Pulse group chat so you can meet other solo attendees going to that same event."
                 ),
                 accent: "from-blue-500 to-cyan-400",
               },

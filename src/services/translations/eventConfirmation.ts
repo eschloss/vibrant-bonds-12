@@ -2,10 +2,14 @@ export const eventConfirmation = {
   en: {
     "event_confirmation.seo.title": "Event confirmed | Pulse",
     "event_confirmation.seo.desc": "Your tickets are confirmed. Complete your vibe test for the best group match.",
+    "event_confirmation.seo.desc_single_group":
+      "Your tickets are confirmed. Complete your vibe test so we can tailor introductions in the attendee group chat.",
 
     "event_confirmation.badge": "Purchase confirmed",
     "event_confirmation.title_prefix": "Tickets confirmed for",
     "event_confirmation.subtitle": "Next step: complete your vibe test so we can match you with the right people for this event.",
+    "event_confirmation.subtitle_single_group":
+      "Next step: complete your vibe test so we can tailor introductions for the attendee group chat.",
 
     "event_confirmation.header.title": "Order successful",
     "event_confirmation.header.subtitle": "Confirmation sent. Ticket will follow when issued. Next: complete your vibe test.",
@@ -35,12 +39,18 @@ export const eventConfirmation = {
     "event_confirmation.steps.kicker": "Next steps",
     "event_confirmation.steps.title": "One last step",
     "event_confirmation.steps.subtitle": "Complete your vibe test now so we can match you with the right group for this event.",
+    "event_confirmation.steps.subtitle_single_group":
+      "Complete your vibe test now so we can tailor introductions for everyone in the attendee chat.",
     "event_confirmation.steps.vibe_check.title": "Complete vibe test",
     "event_confirmation.steps.vibe_check.desc": "It takes about 2 minutes and helps us match you with the right group.",
+    "event_confirmation.steps.vibe_check.desc_single_group":
+      "It takes about 2 minutes and helps us tailor introductions for the shared attendee chat.",
     "event_confirmation.steps.ticket_email.title": "Check your email",
     "event_confirmation.steps.ticket_email.desc": "Your confirmation has been sent, and your ticket will arrive by email once it’s issued.",
     "event_confirmation.steps.chat_ready.title": "Break the ice",
     "event_confirmation.steps.chat_ready.desc": "A few days before the event, the group chat will open so you can break the ice and get to know the group.",
+    "event_confirmation.steps.chat_ready.desc_single_group":
+      "A few days before the event, the group chat will open so you can break the ice and get to know other attendees.",
     "event_confirmation.steps.arrive_early.title": "Plan a pre or post-event meetup",
     "event_confirmation.steps.arrive_early.desc": "Use the group chat to line up drinks, dinner, or another casual meetup before or after the event.",
 
@@ -54,12 +64,15 @@ export const eventConfirmation = {
 
     "event_confirmation.vibe_check.title": "Complete your vibe test",
     "event_confirmation.vibe_check.subtitle": "For the best group match.",
+    "event_confirmation.vibe_check.subtitle_single_group": "So introductions fit the attendee chat.",
     "event_confirmation.vibe_check.cta": "Complete vibe test",
     "event_confirmation.vibe_check.note": "Takes ~2 minutes.",
 
     "event_confirmation.email.title": "Check your email",
     "event_confirmation.email.subtitle": "Confirmation sent. Ticket when issued. We'll email when your chat is ready.",
     "event_confirmation.email.note": "Link + instructions to download Pulse and chat with your group.",
+    "event_confirmation.email.note_single_group":
+      "Link + instructions to download Pulse and join the attendee group chat.",
     "event_confirmation.email.ticket_sent_to": "Ticket sent to",
     "event_confirmation.email.confirmation_sent_to": "Confirmation sent to",
 
@@ -71,15 +84,21 @@ export const eventConfirmation = {
 
     "event_confirmation.entrance_time.tooltip":
       "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
+    "event_confirmation.entrance_time.tooltip_single_group":
+      "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment.",
     "event_confirmation.entrance_time.help": "Entrance time info",
   },
   es: {
     "event_confirmation.seo.title": "Evento confirmado | Pulse",
     "event_confirmation.seo.desc": "Tus entradas están confirmadas. Completa tu vibe test para el mejor match de grupo.",
+    "event_confirmation.seo.desc_single_group":
+      "Tus entradas están confirmadas. Completa tu vibe test para adaptar las presentaciones en el chat de asistentes.",
 
     "event_confirmation.badge": "Compra confirmada",
     "event_confirmation.title_prefix": "Entradas confirmadas para",
     "event_confirmation.subtitle": "Siguiente paso: completa tu vibe test para que podamos hacer match con las personas adecuadas para este evento.",
+    "event_confirmation.subtitle_single_group":
+      "Siguiente paso: completa tu vibe test para adaptar las presentaciones en el chat grupal de asistentes.",
 
     "event_confirmation.header.title": "Pedido exitoso",
     "event_confirmation.header.subtitle": "Confirmación enviada. Tu entrada llegará cuando la emita el proveedor. Siguiente: completa tu vibe test.",
@@ -109,12 +128,18 @@ export const eventConfirmation = {
     "event_confirmation.steps.kicker": "Próximos pasos",
     "event_confirmation.steps.title": "Un último paso",
     "event_confirmation.steps.subtitle": "Completa tu vibe test ahora para que podamos hacer match contigo y el grupo adecuado para este evento.",
+    "event_confirmation.steps.subtitle_single_group":
+      "Completa tu vibe test ahora para adaptar las presentaciones para todos en el chat de asistentes.",
     "event_confirmation.steps.vibe_check.title": "Completa el vibe test",
     "event_confirmation.steps.vibe_check.desc": "Toma unos 2 minutos y nos ayuda a ponerte en el grupo adecuado.",
+    "event_confirmation.steps.vibe_check.desc_single_group":
+      "Toma unos 2 minutos y nos ayuda a adaptar las presentaciones para el chat compartido de asistentes.",
     "event_confirmation.steps.ticket_email.title": "Revisa tu email",
     "event_confirmation.steps.ticket_email.desc": "Tu confirmación ya se ha enviado y tu entrada llegará por email cuando se emita.",
     "event_confirmation.steps.chat_ready.title": "Rompe el hielo",
     "event_confirmation.steps.chat_ready.desc": "Unos días antes del evento, se abrirá el chat grupal para que puedan romper el hielo y conocerse mejor.",
+    "event_confirmation.steps.chat_ready.desc_single_group":
+      "Unos días antes del evento, se abrirá el chat grupal para que puedan romper el hielo y conocer a otras personas asistentes.",
     "event_confirmation.steps.arrive_early.title": "Planifica un pre o post-encuentro",
     "event_confirmation.steps.arrive_early.desc": "Usa el chat grupal para organizar unas bebidas, una cena u otro plan informal antes o después del evento.",
 
@@ -128,12 +153,15 @@ export const eventConfirmation = {
 
     "event_confirmation.vibe_check.title": "Completa tu vibe test",
     "event_confirmation.vibe_check.subtitle": "Para el mejor match de grupo.",
+    "event_confirmation.vibe_check.subtitle_single_group": "Para adaptar las presentaciones al chat de asistentes.",
     "event_confirmation.vibe_check.cta": "Completar vibe test",
     "event_confirmation.vibe_check.note": "Toma ~2 minutos.",
 
     "event_confirmation.email.title": "Revisa tu email",
     "event_confirmation.email.subtitle": "Confirmación enviada. Entrada cuando se emita. Te avisaremos cuando el chat esté listo.",
     "event_confirmation.email.note": "Enlace + instrucciones para descargar Pulse y chatear con tu grupo.",
+    "event_confirmation.email.note_single_group":
+      "Enlace + instrucciones para descargar Pulse y unirte al chat grupal de asistentes.",
     "event_confirmation.email.ticket_sent_to": "Entrada enviada a",
     "event_confirmation.email.confirmation_sent_to": "Confirmación enviada a",
 
@@ -145,6 +173,8 @@ export const eventConfirmation = {
 
     "event_confirmation.entrance_time.tooltip":
       "Tu hora de entrada depende del grupo al que te asignemos — puede ser cualquier hora en este rango. Esto ayuda a que tu grupo de match se conozca entre sí (en lugar de mezclarse con todos a la vez).",
+    "event_confirmation.entrance_time.tooltip_single_group":
+      "Tu hora de entrada puede caer en cualquier punto de esta ventana para que las personas de Pulse coordinen en el chat grupal sin que todo el mundo llegue exactamente al mismo momento.",
     "event_confirmation.entrance_time.help": "Info de hora de entrada",
   },
 };

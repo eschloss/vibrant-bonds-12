@@ -6,6 +6,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 type EventConfirmationNextStepsProps = {
   onPrimaryCta: () => void;
   ctaLabel?: string;
+  /** When false, copy refers to one attendee chat rather than small matched groups. */
+  microMatches?: boolean;
 };
 
 const steps = [
@@ -34,6 +36,7 @@ const steps = [
 export default function EventConfirmationNextSteps({
   onPrimaryCta,
   ctaLabel,
+  microMatches = true,
 }: EventConfirmationNextStepsProps) {
   const { t } = useTranslation();
 
@@ -50,8 +53,10 @@ export default function EventConfirmationNextSteps({
             </div>
             <p className="text-sm text-white/70 mt-2 max-w-2xl">
               {t(
-                "event_confirmation.steps.subtitle",
-                "Complete your vibe test now so we can match you with the right group for this event."
+                microMatches ? "event_confirmation.steps.subtitle" : "event_confirmation.steps.subtitle_single_group",
+                microMatches
+                  ? "Complete your vibe test now so we can match you with the right group for this event."
+                  : "Complete your vibe test now so we can tailor introductions for everyone in the attendee chat."
               )}
             </p>
           </div>
@@ -88,10 +93,25 @@ export default function EventConfirmationNextSteps({
                 )}
               </div>
               <div className="text-sm text-gray-300 mt-1 leading-relaxed">
-                {t(
-                  `event_confirmation.steps.${step.key}.desc`,
-                  ""
-                )}
+                {step.key === "vibe_check"
+                  ? t(
+                      microMatches
+                        ? "event_confirmation.steps.vibe_check.desc"
+                        : "event_confirmation.steps.vibe_check.desc_single_group",
+                      microMatches
+                        ? "It takes about 2 minutes and helps us match you with the right group."
+                        : "It takes about 2 minutes and helps us tailor introductions for the shared attendee chat."
+                    )
+                  : step.key === "chat_ready"
+                    ? t(
+                        microMatches
+                          ? "event_confirmation.steps.chat_ready.desc"
+                          : "event_confirmation.steps.chat_ready.desc_single_group",
+                        microMatches
+                          ? "A few days before the event, the group chat will open so you can break the ice and get to know the group."
+                          : "A few days before the event, the group chat will open so you can break the ice and get to know other attendees."
+                      )
+                    : t(`event_confirmation.steps.${step.key}.desc`, "")}
               </div>
             </motion.div>
           ))}

@@ -35,6 +35,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
+  isMicroMatchesEvent,
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
@@ -283,9 +284,12 @@ function CheckoutForm({
     return { text: `${date} · ${startsBetween} ${startTime}–${latestTime}`, hasWindow: true };
   }, [eventData.datetime_local, eventData.datetime_local_latest, locale, t]);
 
+  const microMatches = isMicroMatchesEvent(eventData);
   const entranceTimeTooltip = t(
-    "event_checkout.entrance_time_tooltip",
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+    microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
+    microMatches
+      ? "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+      : "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment."
   );
 
   const activeOrderId = paymentMethodTab === "bank" && bankTransferOrderId ? bankTransferOrderId : orderId;
@@ -1586,9 +1590,12 @@ function CheckoutPrePayment({
     return () => cancelAnimationFrame(id);
   }, [isMobile, mobileCheckoutStep, form]);
 
+  const microMatches = isMicroMatchesEvent(eventData);
   const entranceTimeTooltip = t(
-    "event_checkout.entrance_time_tooltip",
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+    microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
+    microMatches
+      ? "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+      : "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment."
   );
 
   const handleContinue = React.useCallback(async () => {

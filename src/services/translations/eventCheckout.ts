@@ -7,6 +7,8 @@ export const eventCheckout = {
     "event_checkout.view_order_summary": "View order summary",
     "event_checkout.entrance_time_tooltip":
       "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
+    "event_checkout.entrance_time_tooltip_single_group":
+      "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment.",
     "event_checkout.entrance_time_help": "Entrance time info",
     "event_checkout.ticket": "Ticket",
     "event_checkout.see_whats_included": "See what's included",
@@ -106,6 +108,8 @@ export const eventCheckout = {
     "event_checkout.view_order_summary": "Ver resumen del pedido",
     "event_checkout.entrance_time_tooltip":
       "Tu hora de entrada depende del grupo al que te asignemos — puede ser cualquier hora en este rango. Esto ayuda a que tu grupo de match se conozca entre sí (en lugar de mezclarse con todos a la vez).",
+    "event_checkout.entrance_time_tooltip_single_group":
+      "Tu hora de entrada puede caer en cualquier punto de esta ventana para que las personas de Pulse coordinen en el chat grupal sin que todo el mundo llegue exactamente al mismo momento.",
     "event_checkout.entrance_time_help": "Info de hora de entrada",
     "event_checkout.ticket": "Entrada",
     "event_checkout.provider_fee": "Tarifa del proveedor",

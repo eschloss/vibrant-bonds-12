@@ -73,6 +73,16 @@ export interface GetKikiEventResponse {
   sold_out?: boolean;
   /** From Kiki.get_json — when true, event date has passed. */
   past_event?: boolean;
+  /**
+   * When true (default), attendees are split into small matched groups.
+   * When false, everyone joins one Pulse attendee group chat for the event.
+   */
+  is_micro_matches?: boolean;
+}
+
+/** True when the API uses micro (small-group) matching; default true if the field is absent. */
+export function isMicroMatchesEvent(e: GetKikiEventResponse): boolean {
+  return e.is_micro_matches !== false;
 }
 
 /** Response from GET /events/get_kikis */
@@ -236,6 +246,7 @@ export function buildPlaceholderKikiEvent(slug: string): GetKikiEventResponse {
     duration_hours: 2,
     whats_included: [],
     tickets_remaining: undefined,
+    is_micro_matches: true,
   };
 }
 

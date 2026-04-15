@@ -230,8 +230,8 @@ const EventsCity = () => {
       es: `Eventos en ${seoCityLabel} | Pulse`,
     },
     description: {
-      en: `Discover upcoming events in ${seoCityLabel}. RSVP through Pulse, join a small group chat with other attendees, and show up with familiar faces — friendship-first, most people join solo.`,
-      es: `Descubre eventos en ${seoCityLabel}. Reserva con Pulse, únete a un chat pequeño con otras personas asistentes y llega con caras conocidas — amistad primero; la mayoría se une sola.`,
+      en: `Discover upcoming events in ${seoCityLabel}. RSVP through Pulse, join the attendee group chat, and show up with familiar faces — friendship-first, most people join solo.`,
+      es: `Descubre eventos en ${seoCityLabel}. Reserva con Pulse, únete al chat de asistentes y llega con caras conocidas — amistad primero; la mayoría se une sola.`,
     },
     keywords: ["events", seoCityLabel, "activities", "meetups", "friend groups"],
     type: "website" as const,
@@ -249,7 +249,10 @@ const EventsCity = () => {
       icon: MessageSquare,
       title: t("events_city.after_booking.step2.title", "Meet the group in the chat"),
       compactTitle: t("events_city.after_booking.step2.compact", "Meet group"),
-      desc: t("events_city.after_booking.step2.desc", "We add you to a small group chat with other attendees going to the same event."),
+      desc: t(
+        "events_city.after_booking.step2.desc",
+        "We connect you with other attendees for the same event, then open the Pulse group chat so you can get to know each other before it starts."
+      ),
       gradient: "from-blue-500 to-cyan-400",
     },
     {
@@ -468,7 +471,7 @@ const EventsCity = () => {
               <p className="text-base sm:text-lg text-gray-300">
                 {t(
                   "events_city.how_section.subtitle",
-                  "The venue runs the event itself. Pulse adds the small-group chat and meetup layer that helps you show up already knowing people."
+                  "The venue runs the event itself. Pulse adds the attendee group chat and meetup layer that helps you show up already knowing people."
                 )}
               </p>
             </motion.div>

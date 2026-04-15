@@ -5,12 +5,21 @@ export const eventDetail = {
     "event_detail.duration.hours": "{n} hours",
     "event_detail.entrance_time_tooltip":
       "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once).",
+    "event_detail.entrance_time_tooltip_single_group":
+      "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment.",
     "event_detail.entrance_time_help": "Entrance time info",
+
+    "event_detail.intro_line_micro":
+      "⭐ {title} is a public event in {city}. Pulse isn't the organiser. We help you go with a small group of other solo attendees, so you can meet new friends before you arrive.",
+    "event_detail.intro_line_single_group":
+      "⭐ {title} is a public event in {city}. Pulse isn't the organiser. We connect you with other solo attendees going to this event, then add you to a group chat so you can say hello before you arrive.",
     "event_detail.go_to_image": "Go to image {n}",
     "event_detail.view_group_chat_preview": "View group chat preview",
 
     "event_detail.meet_new_friends_at": "Meet New Friends at",
     "event_detail.pulse_matches": "Show up with friends.\nGet matched into a small group before the event.",
+    "event_detail.pulse_matches_single_group":
+      "Show up with friends.\nMeet other solo attendees going to the same event, then break the ice in a group chat beforehand.",
     "event_detail.what_to_expect": "What to expect",
     "event_detail.sign_up": "Sign up",
     "event_detail.sign_up_now": "Sign up now",
@@ -20,22 +29,32 @@ export const eventDetail = {
     "event_detail.buy_ticket_for_price": "Buy ticket for {price}",
     "event_detail.see_whats_included": "See what's included",
     "event_detail.everyone_making_friends": "You'll usually be matched with ~6 solo attendees (often roughly 4–10)",
+    "event_detail.everyone_making_friends_single_group":
+      "You'll meet other solo attendees going to this event—in one Pulse group chat",
 
     "event_detail.what_happens_title": "What happens after you sign up",
     "event_detail.organised_by": "This event is organised by",
     "event_detail.organised_by_suffix": "Here's what Pulse adds.",
     "event_detail.step1_title": "Get matched with likeminded attendees",
+    "event_detail.step1_title_single_group": "Join the attendee group chat",
     "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.",
+    "event_detail.step1_desc_single_group":
+      "Complete a quick vibe test so we can tailor introductions for everyone in the Pulse attendee chat for this event.",
     "event_detail.step2_title": "Break the ice",
     "event_detail.step2_desc": "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.",
     "event_detail.step3_title": "Show up with your crew",
+    "event_detail.step3_title_single_group": "Show up with familiar faces",
     "event_detail.step3_desc": "Walk into the event with familiar faces instead of as a stranger.",
     "event_detail.step4_title": "Pre or post-event meetup",
     "event_detail.step4_desc": "If you want, your group can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together.",
+    "event_detail.step4_desc_single_group":
+      "If you want, people in the chat can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together.",
 
     "event_detail.about_this_event": "About this event",
     "event_detail.good_to_know": "Good to know",
     "event_detail.good_to_know_1": "Depending on the event and number of signups, your group can be anywhere from 5 to 20 people. You'll know your group before the event.",
+    "event_detail.good_to_know_1_single_group":
+      "Everyone who booked through Pulse for this event is in the same attendee group chat, so you can coordinate and say hello before you arrive.",
     "event_detail.good_to_know_2": "Your booking includes a real event ticket issued through the provider.",
     "event_detail.good_to_know_3": "If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.",
     "event_detail.good_to_know_4": "You don't need to know anyone. That's the whole point.",
@@ -43,7 +62,9 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "This is a public event. You may meet other attendees who didn't book through Pulse.",
 
     "event_detail.matched_solo": "Matched with solo attendees making friends",
+    "event_detail.matched_solo_single_group": "Other solo attendees going to this event—together in one chat",
     "event_detail.group_size": "Small groups—often ~6, sometimes roughly 4–10",
+    "event_detail.group_size_single_group": "One attendee group chat for this event",
     "event_detail.hosted_chat": "Hosted group chat with icebreaking",
     "event_detail.optional_meetup": "Optional pre or post-event meetup",
     "event_detail.total": "Total",
@@ -109,14 +130,33 @@ export const eventDetail = {
     "event_detail.faq.a10":
       "Your group chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
 
+    "event_detail.faq.a1_single_group":
+      'Pulse brings together solo attendees who booked through Pulse for {eventTitle} in {city} on {dateTimeLabel}—people who want to make new friends—and puts you all in one private group chat in the Pulse app.\n\nBefore you arrive at {venue}, you\'ll use that chat to say hello. Pip, your host, helps break the ice and coordinate a simple pre- and/or post-event meet.\n\nYou don\'t just show up to {eventTitle}. You arrive having already said hello in chat.',
+
+    "event_detail.faq.a3_single_group":
+      "After completing your booking, you'll take a quick vibe test so we can tailor introductions for the attendee chat.\n\nOnce the chat is ready, we'll let you know. You then download the Pulse app, join the private attendee group chat for {eventTitle} in {city}, and start getting to know each other before the event at {venue}.",
+
+    "event_detail.faq.a7_single_group":
+      "The event at {venue} is still the anchor, and you're free to connect naturally with others during {eventTitle}.\n\nIf there's a serious issue, you can contact support inside the app and our team will step in. Friendship takes time, and many members attend multiple events as they grow their circle.",
+
+    "event_detail.faq.a9_single_group":
+      "Yes. If you and a friend both purchased tickets for {eventTitle} at {venue} on {dateTimeLabel}, you'll both be in the same attendee chat.\n\nPulse works whether you're coming solo or with one friend.",
+
+    "event_detail.faq.a10_single_group":
+      "The attendee chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany people use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
+
     "event_detail.placeholder_datetime": "Date & time to be confirmed",
     "event_detail.placeholder_place": "Venue to be announced",
     "event_detail.placeholder_city": "Your city",
     "event_detail.placeholder_short":
       "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event.",
+    "event_detail.placeholder_short_single_group":
+      "Come solo. We connect you with other solo attendees, then add you to the group chat so you arrive already knowing people. Your chat opens ahead of time to break the ice and plan around the event.",
     "event_detail.placeholder_about_html": "<p>Full event details will appear here once they load.</p>",
     "event_detail.placeholder_seo_description":
       "Meet people before the event. Pulse matches you into a small group of solo attendees so you arrive with friends. Full details and tickets load in a moment.",
+    "event_detail.placeholder_seo_description_single_group":
+      "Meet people before the event. Pulse connects you with other solo attendees going to the same event, then places you in a group chat so you arrive with friends. Full details and tickets load in a moment.",
     "event_detail.placeholder_organiser": "Event organizer",
 
     "future_invites.title": "Get future invites",
@@ -139,12 +179,21 @@ export const eventDetail = {
     "event_detail.duration.hours": "{n} horas",
     "event_detail.entrance_time_tooltip":
       "Tu hora de entrada depende del grupo al que te asignemos — puede ser cualquier hora en este rango. Esto ayuda a que tu grupo de match se conozca entre sí (en lugar de mezclarse con todos a la vez).",
+    "event_detail.entrance_time_tooltip_single_group":
+      "Tu hora de entrada puede caer en cualquier punto de esta ventana para que las personas de Pulse coordinen en el chat grupal sin que todo el mundo llegue exactamente al mismo momento.",
     "event_detail.entrance_time_help": "Info de hora de entrada",
+
+    "event_detail.intro_line_micro":
+      "⭐ {title} es un evento público en {city}. Pulse no es el organizador. Te ayudamos a ir con un grupo pequeño de otras personas que van solas, para que conozcas gente nueva antes de llegar.",
+    "event_detail.intro_line_single_group":
+      "⭐ {title} es un evento público en {city}. Pulse no es el organizador. Te conectamos con otras personas que van solas a este evento y luego os añadimos a un chat grupal para saludaros antes de llegar.",
     "event_detail.go_to_image": "Ir a la imagen {n}",
     "event_detail.view_group_chat_preview": "Ver vista previa del chat grupal",
 
     "event_detail.meet_new_friends_at": "Conoce nuevos amigos en",
     "event_detail.pulse_matches": "Llega con amigos.\nSerás emparejado en un grupo pequeño antes del evento.",
+    "event_detail.pulse_matches_single_group":
+      "Llega con amigos.\nConoce a otras personas que van solas al mismo evento y rompe el hielo en el chat grupal antes del día.",
     "event_detail.what_to_expect": "Qué esperar",
     "event_detail.sign_up": "Registrarse",
     "event_detail.sign_up_now": "Regístrate ahora",
@@ -154,22 +203,32 @@ export const eventDetail = {
     "event_detail.buy_ticket_for_price": "Comprar entrada por {price}",
     "event_detail.see_whats_included": "Ver qué incluye",
     "event_detail.everyone_making_friends": "Te emparejamos en un grupo pequeño: lo habitual son unas seis personas, a menudo entre unas cuatro y diez",
+    "event_detail.everyone_making_friends_single_group":
+      "Conocerás a otras personas que van solas a este evento en un único chat grupal de Pulse",
 
     "event_detail.what_happens_title": "Qué pasa después de registrarte",
     "event_detail.organised_by": "Este evento está organizado por",
     "event_detail.organised_by_suffix": "Esto es lo que Pulse añade.",
     "event_detail.step1_title": "Emparejarte con asistentes afines",
+    "event_detail.step1_title_single_group": "Únete al chat de asistentes",
     "event_detail.step1_desc": "Completa un vibe test rápido para colocarte en un grupo pequeño de asistentes solos afines al mismo evento—lo habitual son unas seis personas, a veces de unas cuatro a diez según la noche.",
+    "event_detail.step1_desc_single_group":
+      "Completa un vibe test rápido para adaptar las presentaciones en el chat de asistentes de Pulse para este evento.",
     "event_detail.step2_title": "Romper el hielo",
     "event_detail.step2_desc": "Chatea con los miembros de tu grupo, guiados por nuestros iniciadores de conversación para que os conozcáis antes del evento.",
     "event_detail.step3_title": "Llega con tu crew",
+    "event_detail.step3_title_single_group": "Llega con caras conocidas",
     "event_detail.step3_desc": "Entra al evento con caras conocidas en lugar de como un extraño.",
     "event_detail.step4_title": "Quedada pre o post evento",
     "event_detail.step4_desc": "Si queréis, podéis tomar un café o comer antes o después—es opcional; mucha gente solo disfruta el plan principal juntos.",
+    "event_detail.step4_desc_single_group":
+      "Si queréis, quienes están en el chat pueden tomar un café o comer antes o después—es opcional; mucha gente solo disfruta el plan principal juntos.",
 
     "event_detail.about_this_event": "Sobre este evento",
     "event_detail.good_to_know": "Lo que debes saber",
     "event_detail.good_to_know_1": "Dependiendo del evento y del número de inscripciones, tu grupo puede ser de entre 5 y 20 personas. Conocerás a tu grupo antes del evento.",
+    "event_detail.good_to_know_1_single_group":
+      "Todas las personas que reservaron por Pulse para este evento están en el mismo chat grupal de asistentes, para coordinar y saludarse antes de llegar.",
     "event_detail.good_to_know_2": "Tu reserva incluye una entrada real emitida por el proveedor.",
     "event_detail.good_to_know_3": "Si no podemos formar un grupo, la tarifa de Pulse se reembolsa. Tu entrada sigue siendo válida.",
     "event_detail.good_to_know_4": "No necesitas conocer a nadie. Ese es el punto.",
@@ -177,7 +236,9 @@ export const eventDetail = {
     "event_detail.good_to_know_6": "Este es un evento público. Puede que conozcas a otros asistentes que no reservaron por Pulse.",
 
     "event_detail.matched_solo": "Emparejado con asistentes solos haciendo amigos",
+    "event_detail.matched_solo_single_group": "Otras personas que van solas a este evento, juntas en un solo chat",
     "event_detail.group_size": "Grupos pequeños—suelen ser unas seis, a veces de unas cuatro a diez",
+    "event_detail.group_size_single_group": "Un chat grupal de asistentes para este evento",
     "event_detail.hosted_chat": "Chat grupal con rompehielos",
     "event_detail.optional_meetup": "Quedada opcional antes o después del evento",
     "event_detail.total": "Total",
@@ -243,14 +304,33 @@ export const eventDetail = {
     "event_detail.faq.a10":
       "Tu chat grupal permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMuchos grupos usan ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
 
+    "event_detail.faq.a1_single_group":
+      "Pulse reúne a las personas que reservaron por Pulse para {eventTitle} en {city} el {dateTimeLabel}—gente que quiere hacer nuevos amigos—y os pone a todos en un único chat grupal privado en la app Pulse.\n\nAntes de llegar a {venue}, usaréis ese chat para saludaros. Pip, tu anfitrión, ayuda a romper el hielo y coordina una quedada sencilla antes y/o después del evento.\n\nNo llegas solo a {eventTitle}. Llegas habiendo dicho ya hola en el chat.",
+
+    "event_detail.faq.a3_single_group":
+      "Tras completar tu reserva, harás un vibe test rápido para adaptar las presentaciones en el chat de asistentes.\n\nCuando el chat esté listo, te avisaremos. Descargas la app Pulse, te unes al chat grupal privado de {eventTitle} en {city} y empezáis a conoceros antes del evento en {venue}.",
+
+    "event_detail.faq.a7_single_group":
+      "El evento en {venue} sigue siendo el ancla, y eres libre de conectar naturalmente con otros durante {eventTitle}.\n\nSi hay un problema serio, puedes contactar soporte en la app y nuestro equipo intervendrá. La amistad lleva tiempo, y muchos miembros asisten a varios eventos para ampliar su círculo.",
+
+    "event_detail.faq.a9_single_group":
+      "Sí. Si tú y un amigo compraron entradas para {eventTitle} en {venue} el {dateTimeLabel}, estaréis en el mismo chat de asistentes.\n\nPulse funciona tanto si vas solo como con un amigo.",
+
+    "event_detail.faq.a10_single_group":
+      "El chat de asistentes permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMucha gente usa ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
+
     "event_detail.placeholder_datetime": "Fecha y hora por confirmar",
     "event_detail.placeholder_place": "Lugar por anunciar",
     "event_detail.placeholder_city": "Tu ciudad",
     "event_detail.placeholder_short":
       "Ven solo. Te emparejaremos en un grupo pequeño antes del evento para que llegues ya conociendo gente. El chat del grupo se abre con antelación para romper el hielo y coordinar planes.",
+    "event_detail.placeholder_short_single_group":
+      "Ven solo. Te conectamos con otras personas que van solas y luego te añadimos al chat grupal para que llegues ya conociendo gente. El chat se abre con antelación para romper el hielo y coordinar planes.",
     "event_detail.placeholder_about_html": "<p>Los detalles completos del evento aparecerán aquí al cargar.</p>",
     "event_detail.placeholder_seo_description":
       "Conoce gente antes del evento. Pulse te empareja en un grupo pequeño de asistentes que van solos para que llegues con amigos. Los detalles y entradas cargan en un momento.",
+    "event_detail.placeholder_seo_description_single_group":
+      "Conoce gente antes del evento. Pulse te conecta con otras personas que van solas al mismo evento y luego os reúne en un chat grupal para que llegues con amigos. Los detalles y entradas cargan en un momento.",
     "event_detail.placeholder_organiser": "Organizador del evento",
 
     "future_invites.title": "Recibe invitaciones futuras",

@@ -20,37 +20,37 @@ export default function EventSignupHowItWorks({
   const steps = [
     {
       icon: Users,
-      title: t("event_detail.step1_title", "Get matched with likeminded attendees"),
+      title: t("eventsLanding.how_steps.step1_title", "Join the attendee chat"),
       description: t(
-        "event_detail.step1_desc",
-        "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees for the same event—usually around six people, sometimes roughly four to ten."
+        "eventsLanding.how_steps.step1_desc",
+        "Complete a quick vibe test so we can tailor introductions for the Pulse group chat for your event."
       ),
       color: "bg-gradient-to-r from-pink-500 to-purple-600",
     },
     {
       icon: MessageSquare,
-      title: t("event_detail.step2_title", "Break the ice"),
+      title: t("eventsLanding.how_steps.step2_title", "Break the ice"),
       description: t(
-        "event_detail.step2_desc",
-        "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event."
+        "eventsLanding.how_steps.step2_desc",
+        "Chat with other attendees, guided by our conversation starters so you get to know each other before the event."
       ),
       color: "bg-gradient-to-r from-blue-500 to-cyan-400",
     },
     {
       icon: MapPin,
-      title: t("event_detail.step3_title", "Show up with your crew"),
+      title: t("eventsLanding.how_steps.step3_title", "Show up with familiar faces"),
       description: t(
-        "event_detail.step3_desc",
+        "eventsLanding.how_steps.step3_desc",
         "Walk into the event with familiar faces instead of as a stranger."
       ),
       color: "bg-gradient-to-r from-green-400 to-emerald-500",
     },
     {
       icon: UtensilsCrossed,
-      title: t("event_detail.step4_title", "Pre or post-event meetup"),
+      title: t("eventsLanding.how_steps.step4_title", "Pre or post-event meetup"),
       description: t(
-        "event_detail.step4_desc",
-        "Your group coordinates a pre or post-event hangout so the friendships keep going beyond the event itself."
+        "eventsLanding.how_steps.step4_desc",
+        "If you want, people in the chat can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together."
       ),
       color: "bg-gradient-to-r from-amber-500 to-orange-600",
     },

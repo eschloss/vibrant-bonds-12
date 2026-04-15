@@ -163,7 +163,7 @@ const HowItWorksEvents = () => {
                   {t("hiw_events.matched.title", "Matched for this exact event")}
                 </h2>
                 <p className="text-lg text-gray-300 mb-6 max-w-xl">
-                  {t("hiw_events.matched.subtitle", "Take a 1‑minute vibe test and we’ll add you to a group chat with other solo attendees going to the same showing—people who fit your energy, not random locals.")}
+                  {t("hiw_events.matched.subtitle", "Take a 1‑minute vibe test so we can match you with other solo attendees going to the same showing—people who fit your energy, not random locals—then add you to a group chat together.")}
                 </p>
 
                 <motion.ul

@@ -12,6 +12,8 @@ type EventFaqSectionProps = {
   provider: string;
   dateTimeLabel: string;
   duration: string;
+  /** When false, FAQ answers use single attendee-chat copy instead of small-group matching. */
+  microMatches?: boolean;
 };
 
 function replacePlaceholders(
@@ -36,21 +38,28 @@ export default function EventFaqSection({
   provider,
   dateTimeLabel,
   duration,
+  microMatches = true,
 }: EventFaqSectionProps) {
   const { t } = useTranslation();
   const params = { eventTitle, city, venue, provider, dateTimeLabel };
 
+  const faqAKey = (n: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): string => {
+    const base = `event_detail.faq.a${n}`;
+    if (!microMatches && [1, 3, 7, 9, 10].includes(n)) return `${base}_single_group`;
+    return base;
+  };
+
   const faqs: Array<{ qKey: string; aKey: string }> = [
-    { qKey: "event_detail.faq.q1", aKey: "event_detail.faq.a1" },
-    { qKey: "event_detail.faq.q2", aKey: "event_detail.faq.a2" },
-    { qKey: "event_detail.faq.q3", aKey: "event_detail.faq.a3" },
-    { qKey: "event_detail.faq.q4", aKey: "event_detail.faq.a4" },
-    { qKey: "event_detail.faq.q5", aKey: "event_detail.faq.a5" },
-    { qKey: "event_detail.faq.q6", aKey: "event_detail.faq.a6" },
-    { qKey: "event_detail.faq.q7", aKey: "event_detail.faq.a7" },
-    { qKey: "event_detail.faq.q8", aKey: "event_detail.faq.a8" },
-    { qKey: "event_detail.faq.q9", aKey: "event_detail.faq.a9" },
-    { qKey: "event_detail.faq.q10", aKey: "event_detail.faq.a10" },
+    { qKey: "event_detail.faq.q1", aKey: faqAKey(1) },
+    { qKey: "event_detail.faq.q2", aKey: faqAKey(2) },
+    { qKey: "event_detail.faq.q3", aKey: faqAKey(3) },
+    { qKey: "event_detail.faq.q4", aKey: faqAKey(4) },
+    { qKey: "event_detail.faq.q5", aKey: faqAKey(5) },
+    { qKey: "event_detail.faq.q6", aKey: faqAKey(6) },
+    { qKey: "event_detail.faq.q7", aKey: faqAKey(7) },
+    { qKey: "event_detail.faq.q8", aKey: faqAKey(8) },
+    { qKey: "event_detail.faq.q9", aKey: faqAKey(9) },
+    { qKey: "event_detail.faq.q10", aKey: faqAKey(10) },
   ];
 
   const faqsWithText = faqs.map((f) => ({

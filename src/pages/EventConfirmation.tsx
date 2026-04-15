@@ -24,6 +24,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
+  isMicroMatchesEvent,
   parseEventLocalDateTime,
 } from "@/lib/eventApi";
 import {
@@ -341,6 +342,7 @@ const EventConfirmation = () => {
 
   const data = eventData;
   const order = orderData!;
+  const microMatches = isMicroMatchesEvent(data);
   const priceOpts = getEventPriceOpts(data);
   const providerName = getProviderName(data.provider);
   const organiser = data.place;
@@ -364,8 +366,10 @@ const EventConfirmation = () => {
     startsBetween: t("event_detail.starts_between", "Starts between"),
   });
   const entranceTimeTooltip = t(
-    "event_confirmation.entrance_time.tooltip",
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+    microMatches ? "event_confirmation.entrance_time.tooltip" : "event_confirmation.entrance_time.tooltip_single_group",
+    microMatches
+      ? "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+      : "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment."
   );
 
   const seoProps = {
@@ -381,12 +385,16 @@ const EventConfirmation = () => {
     },
     description: {
       en: t(
-        "event_confirmation.seo.desc",
-        `You're confirmed for ${data.title}. Complete your vibe test for the best group match.`
+        microMatches ? "event_confirmation.seo.desc" : "event_confirmation.seo.desc_single_group",
+        microMatches
+          ? `You're confirmed for ${data.title}. Complete your vibe test for the best group match.`
+          : `You're confirmed for ${data.title}. Complete your vibe test so we can tailor introductions in the attendee group chat.`
       ),
       es: t(
-        "event_confirmation.seo.desc",
-        `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para el mejor match de grupo.`
+        microMatches ? "event_confirmation.seo.desc" : "event_confirmation.seo.desc_single_group",
+        microMatches
+          ? `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para el mejor match de grupo.`
+          : `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para adaptar las presentaciones en el chat de asistentes.`
       ),
     },
     pathname: confirmationPath,
@@ -651,8 +659,10 @@ const EventConfirmation = () => {
                     </div>
                     <p className="text-sm text-white/70 mt-2">
                       {t(
-                        "event_confirmation.vibe_check.subtitle",
-                        "For the best group match."
+                        microMatches
+                          ? "event_confirmation.vibe_check.subtitle"
+                          : "event_confirmation.vibe_check.subtitle_single_group",
+                        microMatches ? "For the best group match." : "So introductions fit the attendee chat."
                       )}
                     </p>
                     <Button className="w-full mt-4" onClick={handleVibeCheckClick}>
@@ -700,8 +710,12 @@ const EventConfirmation = () => {
                       <Mail size={16} className="text-[#38D1BF] shrink-0 mt-0.5" />
                       <span className="leading-snug">
                         {t(
-                          "event_confirmation.email.note",
-                          "Link + instructions to download Pulse and chat with your group."
+                          microMatches
+                            ? "event_confirmation.email.note"
+                            : "event_confirmation.email.note_single_group",
+                          microMatches
+                            ? "Link + instructions to download Pulse and chat with your group."
+                            : "Link + instructions to download Pulse and join the attendee group chat."
                         )}
                       </span>
                     </div>
@@ -711,7 +725,7 @@ const EventConfirmation = () => {
             </div>
 
             <div className="mt-8">
-              <EventConfirmationNextSteps onPrimaryCta={handleVibeCheckClick} />
+              <EventConfirmationNextSteps onPrimaryCta={handleVibeCheckClick} microMatches={microMatches} />
             </div>
           </div>
         </main>

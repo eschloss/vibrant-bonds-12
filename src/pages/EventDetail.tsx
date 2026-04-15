@@ -48,6 +48,7 @@ import {
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
+  isMicroMatchesEvent,
   parseEventLocalDateTime,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
@@ -84,6 +85,7 @@ type SignUpCardProps = {
   showSpotsRemaining?: boolean;
   checkoutDisabled?: boolean;
   checkoutDisabledLabel?: string;
+  microMatches?: boolean;
 };
 
 const SignUpCard = ({
@@ -101,6 +103,7 @@ const SignUpCard = ({
   showSpotsRemaining = true,
   checkoutDisabled = false,
   checkoutDisabledLabel = "",
+  microMatches = true,
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
 
@@ -114,8 +117,20 @@ const SignUpCard = ({
           <div className="flex items-start gap-2">
             <Users size={15} className="text-[#38D1BF] shrink-0 mt-0.5" />
             <div>
-              <div>{t("event_detail.matched_solo", "Matched with solo attendees making friends")}</div>
-              <div className="text-xs text-white/55 mt-0.5">{t("event_detail.group_size", "Small groups of 4–6 people")}</div>
+              <div>
+                {t(
+                  microMatches ? "event_detail.matched_solo" : "event_detail.matched_solo_single_group",
+                  microMatches
+                    ? "Matched with solo attendees making friends"
+                    : "Meet other solo attendees in one group chat"
+                )}
+              </div>
+              <div className="text-xs text-white/55 mt-0.5">
+                {t(
+                  microMatches ? "event_detail.group_size" : "event_detail.group_size_single_group",
+                  microMatches ? "Small groups of 4–6 people" : "One attendee group chat for this event"
+                )}
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -609,7 +624,9 @@ const EventDetail = () => {
           en: `${eventData.title} | ${cityLabel} Events | Pulse`,
           es: `${eventData.title} | Eventos en ${cityLabel} | Pulse`,
         },
-        description: buildEventSeoDescriptions(eventData.short_description),
+        description: buildEventSeoDescriptions(eventData.short_description, {
+          groupMode: isMicroMatchesEvent(eventData) ? "micro" : "single_group",
+        }),
         keywords: buildEventSeoKeywords({
           title: eventData.title,
           cityLabel,
@@ -654,6 +671,7 @@ const EventDetail = () => {
   }
 
   const data = usePlaceholderUI && eventSlug ? buildPlaceholderKikiEvent(eventSlug) : eventData!;
+  const microMatches = isMicroMatchesEvent(data);
   const priceOpts = getEventPriceOpts(data);
 
   const formattedCityName = usePlaceholderUI
@@ -669,7 +687,14 @@ const EventDetail = () => {
   const formattedBaseExperiencePrice = formatEventPrice(baseExperienceAmount, priceOpts);
   const formattedPulseFee = formatEventPrice(data.platform_fee, priceOpts);
 
-  const introLine = `⭐ ${data.title} is a public event in ${formattedCityName}. Pulse isn't the organiser. We help you go with a small group of other solo attendees, so you can meet new friends before you arrive.`;
+  const introLine = t(
+    microMatches ? "event_detail.intro_line_micro" : "event_detail.intro_line_single_group",
+    microMatches
+      ? "⭐ {title} is a public event in {city}. Pulse isn't the organiser. We help you go with a small group of other solo attendees, so you can meet new friends before you arrive."
+      : "⭐ {title} is a public event in {city}. Pulse isn't the organiser. We connect you with other solo attendees going to this event, then add you to a group chat so you can say hello before you arrive."
+  )
+    .replace("{title}", data.title)
+    .replace("{city}", formattedCityName);
 
   const heroImages = [
     data.primary_image,
@@ -759,8 +784,10 @@ const EventDetail = () => {
     ? t("event_detail.placeholder_place", "Venue to be announced")
     : data.place;
   const entranceTimeTooltip = t(
-    "event_detail.entrance_time_tooltip",
-    "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+    microMatches ? "event_detail.entrance_time_tooltip" : "event_detail.entrance_time_tooltip_single_group",
+    microMatches
+      ? "Your entrance time depends on the group we match you into — it can be any time in this range. This helps your match group meet each other (instead of mixing with everyone at once)."
+      : "Your entrance time can fall anywhere in this window so Pulse attendees can coordinate in the group chat without everyone arriving at exactly the same moment."
   );
 
 
@@ -779,8 +806,10 @@ const EventDetail = () => {
 
   const shortDescriptionText = usePlaceholderUI
     ? t(
-        "event_detail.placeholder_short",
-        "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event."
+        microMatches ? "event_detail.placeholder_short" : "event_detail.placeholder_short_single_group",
+        microMatches
+          ? "Come solo. We'll match you into a small group before the event so you arrive already knowing people. Your group chat opens ahead of time to break the ice and plan around the event."
+          : "Come solo. We connect you with other solo attendees, then add you to the group chat so you arrive already knowing people. Your chat opens ahead of time to break the ice and plan around the event."
       )
     : data.short_description;
   const longDescriptionHtml = usePlaceholderUI
@@ -1040,8 +1069,10 @@ const EventDetail = () => {
               </h1>
               <p className="mt-3 text-lg md:text-xl text-gray-200 mb-3 md:mb-4 whitespace-pre-line leading-[1.52]">
                 {t(
-                  "event_detail.pulse_matches",
-                  "Show up with friends.\nGet matched into a small group before the event."
+                  microMatches ? "event_detail.pulse_matches" : "event_detail.pulse_matches_single_group",
+                  microMatches
+                    ? "Show up with friends.\nGet matched into a small group before the event."
+                    : "Show up with friends.\nMeet other solo attendees going to the same event, then break the ice in a group chat beforehand."
                 )}
               </p>
 
@@ -1079,7 +1110,14 @@ const EventDetail = () => {
                   <div className="flex flex-col gap-1.5 px-0.5">
                     <div className="flex items-center gap-2 text-sm text-white/70">
                       <Users size={16} className="text-[#38D1BF] shrink-0" />
-                      {t("event_detail.everyone_making_friends", "You'll be matched with 4–6 solo attendees")}
+                      {t(
+                        microMatches
+                          ? "event_detail.everyone_making_friends"
+                          : "event_detail.everyone_making_friends_single_group",
+                        microMatches
+                          ? "You'll usually be matched with ~6 solo attendees (often roughly 4–10)"
+                          : "You'll meet other solo attendees going to this event—in one Pulse group chat"
+                      )}
                     </div>
                     {!usePlaceholderUI && !checkoutDisabled ? (
                       <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
@@ -1136,9 +1174,19 @@ const EventDetail = () => {
                           <Users className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">{t("event_detail.step1_title", "Get matched with likeminded attendees")}</div>
+                          <div className="text-white font-semibold leading-snug">
+                            {t(
+                              microMatches ? "event_detail.step1_title" : "event_detail.step1_title_single_group",
+                              microMatches ? "Get matched with likeminded attendees" : "Join the attendee group chat"
+                            )}
+                          </div>
                           <p className="text-sm text-gray-400 mt-1">
-                            {t("event_detail.step1_desc", "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.")}
+                            {t(
+                              microMatches ? "event_detail.step1_desc" : "event_detail.step1_desc_single_group",
+                              microMatches
+                                ? "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night."
+                                : "Complete a quick vibe test so we can tailor introductions for everyone in the Pulse attendee chat for this event."
+                            )}
                           </p>
                         </div>
                       </div>
@@ -1160,7 +1208,12 @@ const EventDetail = () => {
                           <MapPin className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <div className="text-white font-semibold leading-snug">{t("event_detail.step3_title", "Show up with your crew")}</div>
+                          <div className="text-white font-semibold leading-snug">
+                            {t(
+                              microMatches ? "event_detail.step3_title" : "event_detail.step3_title_single_group",
+                              microMatches ? "Show up with your crew" : "Show up with familiar faces"
+                            )}
+                          </div>
                           <p className="text-sm text-gray-400 mt-1">
                             {t("event_detail.step3_desc", "Walk into the event with familiar faces instead of as a stranger.")}
                           </p>
@@ -1174,7 +1227,12 @@ const EventDetail = () => {
                         <div>
                           <div className="text-white font-semibold leading-snug">{t("event_detail.step4_title", "Pre or post-event meetup")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            {t("event_detail.step4_desc", "If you want, your group can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together.")}
+                            {t(
+                              microMatches ? "event_detail.step4_desc" : "event_detail.step4_desc_single_group",
+                              microMatches
+                                ? "If you want, your group can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together."
+                                : "If you want, people in the chat can grab coffee or a bite before or after—totally optional; many people just enjoy the main event together."
+                            )}
                           </p>
                         </div>
                       </div>
@@ -1206,6 +1264,7 @@ const EventDetail = () => {
                     showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
                     checkoutDisabled={checkoutDisabled}
                     checkoutDisabledLabel={checkoutDisabledLabel}
+                    microMatches={microMatches}
                   />
                 </div>
 
@@ -1223,7 +1282,14 @@ const EventDetail = () => {
                   </div>
                   <h3>{t("event_detail.good_to_know", "Good to know")}</h3>
                   <ul className="text-gray-300">
-                    <li>{t("event_detail.good_to_know_1", "Depending on the event and number of signups, your group can be anywhere from 5 to 20 people. You'll know your group before the event.")}</li>
+                    <li>
+                      {t(
+                        microMatches ? "event_detail.good_to_know_1" : "event_detail.good_to_know_1_single_group",
+                        microMatches
+                          ? "Depending on the event and number of signups, your group can be anywhere from 5 to 20 people. You'll know your group before the event."
+                          : "Everyone who booked through Pulse for this event is in the same attendee group chat, so you can coordinate and say hello before you arrive."
+                      )}
+                    </li>
                     <li>{t("event_detail.good_to_know_2", "Your booking includes a real event ticket issued through the provider.")}</li>
                     <li>{t("event_detail.good_to_know_4", "You don't need to know anyone. That's the whole point.")}</li>
                     <li>{t("event_detail.good_to_know_5", "Meet 15 minutes before the start so you can all enter the venue together.")}</li>
@@ -1233,7 +1299,7 @@ const EventDetail = () => {
               </div>
 
               {/* Sticky signup card */}
-              <aside ref={signUpAsideRef} className="lg:sticky lg:top-28 h-fit">
+                <aside ref={signUpAsideRef} className="lg:sticky lg:top-28 h-fit">
                 <SignUpCard
                     t={t}
                     checkoutHref={checkoutHref}
@@ -1249,6 +1315,7 @@ const EventDetail = () => {
                     showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
                     checkoutDisabled={checkoutDisabled}
                     checkoutDisabledLabel={checkoutDisabledLabel}
+                    microMatches={microMatches}
                   />
               </aside>
             </motion.div>
@@ -1261,6 +1328,7 @@ const EventDetail = () => {
               provider={providerName}
               dateTimeLabel={dateTime.text}
               duration={durationText}
+              microMatches={microMatches}
             />
           </div>
         </section>

@@ -12,6 +12,7 @@ import {
   buildEventContext,
   buildGetKikiUrl,
   getProviderName,
+  isMicroMatchesEvent,
   type GetKikiEventResponse,
 } from "@/lib/eventApi";
 import { buildEventSeoDescriptions, buildEventSeoKeywords } from "@/lib/eventSeoMeta";
@@ -118,7 +119,10 @@ const EventBooking = () => {
   const data = eventData;
   const confirmationHref = `/events/${data.slug}/confirmation`;
   const cityLabel = data.city_label || "";
-  const bookingDescriptions = buildEventSeoDescriptions(data.short_description, { variant: "booking" });
+  const bookingDescriptions = buildEventSeoDescriptions(data.short_description, {
+    variant: "booking",
+    groupMode: isMicroMatchesEvent(data) ? "micro" : "single_group",
+  });
 
   return (
     <>
