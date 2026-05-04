@@ -1073,7 +1073,7 @@ const EventDetail = () => {
                 {t(
                   microMatches ? "event_detail.pulse_matches" : "event_detail.pulse_matches_single_group",
                   microMatches
-                    ? "Show up with friends.\nGet matched into a small group before the event."
+                    ? "Get matched into a small group before the event.\nShow up with new friends."
                     : "Show up alone. Leave with friends."
                 )}
               </p>

@@ -84,7 +84,9 @@ const HowItWorksEvents = ({ ctaHref, ctaLabel }: HowItWorksEventsProps) => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl font-bold tracking-tight text-white mb-4 max-w-4xl mx-auto backdrop-blur-sm py-2 rounded-lg bg-gray-900/40 px-0 md:text-5xl whitespace-pre-line"
           >
-            <Text id="hiw_events.headline">Show up with friends.</Text>
+            <Text id="hiw_events.headline">
+              {"Get matched into a small group before the event.\nShow up with new friends."}
+            </Text>
           </motion.h2>
         </motion.div>
 

@@ -17,7 +17,7 @@ export const eventDetail = {
     "event_detail.view_group_chat_preview": "View group chat preview",
 
     "event_detail.meet_new_friends_at": "Meet New Friends at",
-    "event_detail.pulse_matches": "Show up with friends.\nGet matched into a small group before the event.",
+    "event_detail.pulse_matches": "Get matched into a small group before the event.\nShow up with new friends.",
     "event_detail.pulse_matches_single_group": "Show up alone. Leave with friends.",
     "event_detail.what_to_expect": "What to expect",
     "event_detail.sign_up": "Sign up",
@@ -192,7 +192,7 @@ export const eventDetail = {
     "event_detail.view_group_chat_preview": "Ver vista previa del chat grupal",
 
     "event_detail.meet_new_friends_at": "Conoce nuevos amigos en",
-    "event_detail.pulse_matches": "Llega con amigos.\nSerás emparejado en un grupo pequeño antes del evento.",
+    "event_detail.pulse_matches": "Serás emparejado en un grupo pequeño antes del evento.\nLlega con nuevos amigos.",
     "event_detail.pulse_matches_single_group": "Ve solo. Sal con amigos.",
     "event_detail.what_to_expect": "Qué esperar",
     "event_detail.sign_up": "Registrarse",
