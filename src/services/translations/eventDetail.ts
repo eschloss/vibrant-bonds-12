@@ -18,8 +18,7 @@ export const eventDetail = {
 
     "event_detail.meet_new_friends_at": "Meet New Friends at",
     "event_detail.pulse_matches": "Show up with friends.\nGet matched into a small group before the event.",
-    "event_detail.pulse_matches_single_group":
-      "Show up with friends.\nMeet other solo attendees going to the same event, then break the ice in a group chat beforehand.",
+    "event_detail.pulse_matches_single_group": "Show up alone. Leave with friends.",
     "event_detail.what_to_expect": "What to expect",
     "event_detail.sign_up": "Sign up",
     "event_detail.sign_up_now": "Sign up now",
@@ -30,7 +29,7 @@ export const eventDetail = {
     "event_detail.see_whats_included": "See what's included",
     "event_detail.everyone_making_friends": "You'll usually be matched with ~6 solo attendees (often roughly 4–10)",
     "event_detail.everyone_making_friends_single_group":
-      "You'll meet other solo attendees going to this event—in one Pulse group chat",
+      "Get to know other people going in the shared group chat ahead of time—before you walk in.",
 
     "event_detail.what_happens_title": "What happens after you sign up",
     "event_detail.organised_by": "This event is organised by",
@@ -39,9 +38,11 @@ export const eventDetail = {
     "event_detail.step1_title_single_group": "Join the attendee group chat",
     "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.",
     "event_detail.step1_desc_single_group":
-      "Complete a quick vibe test so we can tailor introductions for everyone in the Pulse attendee chat for this event.",
+      "Once your booking is confirmed, we'll let you know when you're added. Download the Pulse app and join the private attendee group chat for this event so you can introduce yourself before the day.",
     "event_detail.step2_title": "Break the ice",
     "event_detail.step2_desc": "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.",
+    "event_detail.step2_desc_single_group":
+      "Chat with everyone else going—coordinate arrival, share a little about yourself, and break the ice before the event.",
     "event_detail.step3_title": "Show up with your crew",
     "event_detail.step3_title_single_group": "Show up with familiar faces",
     "event_detail.step3_desc": "Walk into the event with familiar faces instead of as a stranger.",
@@ -128,13 +129,13 @@ export const eventDetail = {
 
     "event_detail.faq.q10": "What happens after {eventTitle} ends?",
     "event_detail.faq.a10":
-      "Your group chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany groups use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
+      "Your group chat stays open for a few days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany groups use that window to grab dinner, coffee, or check out another event together. Then the chat closes, but the friendships are yours to keep.",
 
     "event_detail.faq.a1_single_group":
       'Pulse brings together solo attendees who booked through Pulse for {eventTitle} in {city} on {dateTimeLabel}—people who want to make new friends—and puts you all in one private group chat in the Pulse app.\n\nBefore you arrive at {venue}, you\'ll use that chat to say hello. Pip, your host, helps break the ice and coordinate a simple pre- and/or post-event meet.\n\nYou don\'t just show up to {eventTitle}. You arrive having already said hello in chat.',
 
     "event_detail.faq.a3_single_group":
-      "After completing your booking, you'll take a quick vibe test so we can tailor introductions for the attendee chat.\n\nOnce the chat is ready, we'll let you know. You then download the Pulse app, join the private attendee group chat for {eventTitle} in {city}, and start getting to know each other before the event at {venue}.",
+      "Once your booking is complete, we'll let you know when the attendee chat is ready.\n\nYou then download the Pulse app, join the private attendee group chat for {eventTitle} in {city}, and start getting to know each other before the event at {venue}.",
 
     "event_detail.faq.a7_single_group":
       "The event at {venue} is still the anchor, and you're free to connect naturally with others during {eventTitle}.\n\nIf there's a serious issue, you can contact support inside the app and our team will step in. Friendship takes time, and many members attend multiple events as they grow their circle.",
@@ -143,7 +144,7 @@ export const eventDetail = {
       "Yes. If you and a friend both purchased tickets for {eventTitle} at {venue} on {dateTimeLabel}, you'll both be in the same attendee chat.\n\nPulse works whether you're coming solo or with one friend.",
 
     "event_detail.faq.a10_single_group":
-      "The attendee chat stays open for 14 days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany people use that time to grab dinner, coffee, or check out another event together. After 14 days the chat closes, but the friendships are yours to keep.",
+      "The attendee chat stays open for a few days after {eventTitle} so you can plan a follow-up if you hit it off.\n\nMany people use that window to grab dinner, coffee, or check out another event together. Then the chat closes, but the friendships are yours to keep.",
 
     "event_detail.placeholder_datetime": "Date & time to be confirmed",
     "event_detail.placeholder_place": "Venue to be announced",
@@ -192,8 +193,7 @@ export const eventDetail = {
 
     "event_detail.meet_new_friends_at": "Conoce nuevos amigos en",
     "event_detail.pulse_matches": "Llega con amigos.\nSerás emparejado en un grupo pequeño antes del evento.",
-    "event_detail.pulse_matches_single_group":
-      "Llega con amigos.\nConoce a otras personas que van solas al mismo evento y rompe el hielo en el chat grupal antes del día.",
+    "event_detail.pulse_matches_single_group": "Ve solo. Sal con amigos.",
     "event_detail.what_to_expect": "Qué esperar",
     "event_detail.sign_up": "Registrarse",
     "event_detail.sign_up_now": "Regístrate ahora",
@@ -204,7 +204,7 @@ export const eventDetail = {
     "event_detail.see_whats_included": "Ver qué incluye",
     "event_detail.everyone_making_friends": "Te emparejamos en un grupo pequeño: lo habitual son unas seis personas, a menudo entre unas cuatro y diez",
     "event_detail.everyone_making_friends_single_group":
-      "Conocerás a otras personas que van solas a este evento en un único chat grupal de Pulse",
+      "Conoce en el chat grupal compartido a quien también va — antes incluso de entrar.",
 
     "event_detail.what_happens_title": "Qué pasa después de registrarte",
     "event_detail.organised_by": "Este evento está organizado por",
@@ -213,9 +213,11 @@ export const eventDetail = {
     "event_detail.step1_title_single_group": "Únete al chat de asistentes",
     "event_detail.step1_desc": "Completa un vibe test rápido para colocarte en un grupo pequeño de asistentes solos afines al mismo evento—lo habitual son unas seis personas, a veces de unas cuatro a diez según la noche.",
     "event_detail.step1_desc_single_group":
-      "Completa un vibe test rápido para adaptar las presentaciones en el chat de asistentes de Pulse para este evento.",
+      "Cuando tu reserva esté confirmada, te avisaremos cuando estés dentro. Descarga la app Pulse y únete al chat grupal privado de asistentes de este evento para presentarte antes del día.",
     "event_detail.step2_title": "Romper el hielo",
     "event_detail.step2_desc": "Chatea con los miembros de tu grupo, guiados por nuestros iniciadores de conversación para que os conozcáis antes del evento.",
+    "event_detail.step2_desc_single_group":
+      "Chatea con quien también va — coordinad la llegada, compartid un poco sobre vosotros y romped el hielo antes del evento.",
     "event_detail.step3_title": "Llega con tu crew",
     "event_detail.step3_title_single_group": "Llega con caras conocidas",
     "event_detail.step3_desc": "Entra al evento con caras conocidas en lugar de como un extraño.",
@@ -302,13 +304,13 @@ export const eventDetail = {
 
     "event_detail.faq.q10": "¿Qué pasa cuando termina {eventTitle}?",
     "event_detail.faq.a10":
-      "Tu chat grupal permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMuchos grupos usan ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
+      "Tu chat grupal permanece abierto unos días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMuchos grupos usan ese margen para cenar, tomar café o ir a otro evento juntos. Luego el chat se cierra, pero las amistades son vuestras.",
 
     "event_detail.faq.a1_single_group":
       "Pulse reúne a las personas que reservaron por Pulse para {eventTitle} en {city} el {dateTimeLabel}—gente que quiere hacer nuevos amigos—y os pone a todos en un único chat grupal privado en la app Pulse.\n\nAntes de llegar a {venue}, usaréis ese chat para saludaros. Pip, tu anfitrión, ayuda a romper el hielo y coordina una quedada sencilla antes y/o después del evento.\n\nNo llegas solo a {eventTitle}. Llegas habiendo dicho ya hola en el chat.",
 
     "event_detail.faq.a3_single_group":
-      "Tras completar tu reserva, harás un vibe test rápido para adaptar las presentaciones en el chat de asistentes.\n\nCuando el chat esté listo, te avisaremos. Descargas la app Pulse, te unes al chat grupal privado de {eventTitle} en {city} y empezáis a conoceros antes del evento en {venue}.",
+      "Cuando tu reserva esté completa, te avisaremos cuando el chat de asistentes esté listo.\n\nDescargas la app Pulse, te unes al chat grupal privado de {eventTitle} en {city} y empezáis a conoceros antes del evento en {venue}.",
 
     "event_detail.faq.a7_single_group":
       "El evento en {venue} sigue siendo el ancla, y eres libre de conectar naturalmente con otros durante {eventTitle}.\n\nSi hay un problema serio, puedes contactar soporte en la app y nuestro equipo intervendrá. La amistad lleva tiempo, y muchos miembros asisten a varios eventos para ampliar su círculo.",
@@ -317,7 +319,7 @@ export const eventDetail = {
       "Sí. Si tú y un amigo compraron entradas para {eventTitle} en {venue} el {dateTimeLabel}, estaréis en el mismo chat de asistentes.\n\nPulse funciona tanto si vas solo como con un amigo.",
 
     "event_detail.faq.a10_single_group":
-      "El chat de asistentes permanece abierto 14 días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMucha gente usa ese tiempo para cenar, tomar café o ir a otro evento juntos. Tras 14 días el chat se cierra, pero las amistades son vuestras.",
+      "El chat de asistentes permanece abierto unos días después de {eventTitle} para que podáis planear una quedada de seguimiento si conectasteis.\n\nMucha gente usa ese margen para cenar, tomar café o ir a otro evento juntos. Luego el chat se cierra, pero las amistades son vuestras.",
 
     "event_detail.placeholder_datetime": "Fecha y hora por confirmar",
     "event_detail.placeholder_place": "Lugar por anunciar",

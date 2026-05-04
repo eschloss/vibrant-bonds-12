@@ -125,12 +125,14 @@ const SignUpCard = ({
                     : "Meet other solo attendees in one group chat"
                 )}
               </div>
+              {microMatches ? (
               <div className="text-xs text-white/55 mt-0.5">
                 {t(
-                  microMatches ? "event_detail.group_size" : "event_detail.group_size_single_group",
-                  microMatches ? "Small groups of 4–6 people" : "One attendee group chat for this event"
+                  "event_detail.group_size",
+                  "Small groups of 4–6 people"
                 )}
               </div>
+              ) : null}
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -1072,7 +1074,7 @@ const EventDetail = () => {
                   microMatches ? "event_detail.pulse_matches" : "event_detail.pulse_matches_single_group",
                   microMatches
                     ? "Show up with friends.\nGet matched into a small group before the event."
-                    : "Show up with friends.\nMeet other solo attendees going to the same event, then break the ice in a group chat beforehand."
+                    : "Show up alone. Leave with friends."
                 )}
               </p>
 
@@ -1116,7 +1118,7 @@ const EventDetail = () => {
                           : "event_detail.everyone_making_friends_single_group",
                         microMatches
                           ? "You'll usually be matched with ~6 solo attendees (often roughly 4–10)"
-                          : "You'll meet other solo attendees going to this event—in one Pulse group chat"
+                          : "Get to know other people going in the shared group chat ahead of time—before you walk in."
                       )}
                     </div>
                     {!usePlaceholderUI && !checkoutDisabled ? (
@@ -1185,7 +1187,7 @@ const EventDetail = () => {
                               microMatches ? "event_detail.step1_desc" : "event_detail.step1_desc_single_group",
                               microMatches
                                 ? "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night."
-                                : "Complete a quick vibe test so we can tailor introductions for everyone in the Pulse attendee chat for this event."
+                                : "Once your booking is confirmed, we'll let you know when you're added. Download the Pulse app and join the private attendee group chat for this event so you can introduce yourself before the day."
                             )}
                           </p>
                         </div>
@@ -1198,7 +1200,12 @@ const EventDetail = () => {
                         <div>
                           <div className="text-white font-semibold leading-snug">{t("event_detail.step2_title", "Break the ice")}</div>
                           <p className="text-sm text-gray-400 mt-1">
-                            {t("event_detail.step2_desc", "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.")}
+                            {t(
+                              microMatches ? "event_detail.step2_desc" : "event_detail.step2_desc_single_group",
+                              microMatches
+                                ? "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event."
+                                : "Chat with everyone else going—coordinate arrival, share a little about yourself, and break the ice before the event."
+                            )}
                           </p>
                         </div>
                       </div>

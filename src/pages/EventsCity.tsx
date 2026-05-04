@@ -471,7 +471,7 @@ const EventsCity = () => {
               <p className="text-base sm:text-lg text-gray-300">
                 {t(
                   "events_city.how_section.subtitle",
-                  "The venue runs the event itself. Pulse adds the attendee group chat and meetup layer that helps you show up already knowing people."
+                  "The venue runs the event itself. Pulse adds the small-group chat and meetup layer that helps you show up already knowing people."
                 )}
               </p>
             </motion.div>

@@ -3,16 +3,18 @@ export const eventConfirmation = {
     "event_confirmation.seo.title": "Event confirmed | Pulse",
     "event_confirmation.seo.desc": "Your tickets are confirmed. Complete your vibe test for the best group match.",
     "event_confirmation.seo.desc_single_group":
-      "Your tickets are confirmed. Complete your vibe test so we can tailor introductions in the attendee group chat.",
+      "Your tickets are confirmed. Check your email for next steps—we'll notify you when the attendee group chat is ready in the Pulse app.",
 
     "event_confirmation.badge": "Purchase confirmed",
     "event_confirmation.title_prefix": "Tickets confirmed for",
     "event_confirmation.subtitle": "Next step: complete your vibe test so we can match you with the right people for this event.",
     "event_confirmation.subtitle_single_group":
-      "Next step: complete your vibe test so we can tailor introductions for the attendee group chat.",
+      "Next: check your email—we'll notify you when the attendee group chat opens in the Pulse app.",
 
     "event_confirmation.header.title": "Order successful",
     "event_confirmation.header.subtitle": "Confirmation sent. Ticket will follow when issued. Next: complete your vibe test.",
+    "event_confirmation.header.subtitle_single_group":
+      "Confirmation sent. Your ticket will follow when it's issued—we'll email you when your attendee chat is ready.",
 
     "event_confirmation.confirmation.title": "Confirmation",
     "event_confirmation.confirmation.status": "Payment confirmed",
@@ -38,9 +40,10 @@ export const eventConfirmation = {
 
     "event_confirmation.steps.kicker": "Next steps",
     "event_confirmation.steps.title": "One last step",
+    "event_confirmation.steps.title_single_group": "What's next",
     "event_confirmation.steps.subtitle": "Complete your vibe test now so we can match you with the right group for this event.",
     "event_confirmation.steps.subtitle_single_group":
-      "Complete your vibe test now so we can tailor introductions for everyone in the attendee chat.",
+      "Check your email, then watch for your group chat to open ahead of the event so you can say hi—and optionally plan an informal meetup.",
     "event_confirmation.steps.vibe_check.title": "Complete vibe test",
     "event_confirmation.steps.vibe_check.desc": "It takes about 2 minutes and helps us match you with the right group.",
     "event_confirmation.steps.vibe_check.desc_single_group":
@@ -92,16 +95,18 @@ export const eventConfirmation = {
     "event_confirmation.seo.title": "Evento confirmado | Pulse",
     "event_confirmation.seo.desc": "Tus entradas están confirmadas. Completa tu vibe test para el mejor match de grupo.",
     "event_confirmation.seo.desc_single_group":
-      "Tus entradas están confirmadas. Completa tu vibe test para adaptar las presentaciones en el chat de asistentes.",
+      "Tus entradas están confirmadas. Revisa tu email para los siguientes pasos—te avisaremos cuando el chat de asistentes esté listo en la app Pulse.",
 
     "event_confirmation.badge": "Compra confirmada",
     "event_confirmation.title_prefix": "Entradas confirmadas para",
     "event_confirmation.subtitle": "Siguiente paso: completa tu vibe test para que podamos hacer match con las personas adecuadas para este evento.",
     "event_confirmation.subtitle_single_group":
-      "Siguiente paso: completa tu vibe test para adaptar las presentaciones en el chat grupal de asistentes.",
+      "Siguiente: revisa tu email—te avisaremos cuando se abra el chat de asistentes en la app Pulse.",
 
     "event_confirmation.header.title": "Pedido exitoso",
     "event_confirmation.header.subtitle": "Confirmación enviada. Tu entrada llegará cuando la emita el proveedor. Siguiente: completa tu vibe test.",
+    "event_confirmation.header.subtitle_single_group":
+      "Confirmación enviada. Tu entrada llegará cuando la emita el proveedor—te enviaremos un email cuando el chat de asistentes esté listo.",
 
     "event_confirmation.confirmation.title": "Confirmación",
     "event_confirmation.confirmation.status": "Pago confirmado",
@@ -127,9 +132,10 @@ export const eventConfirmation = {
 
     "event_confirmation.steps.kicker": "Próximos pasos",
     "event_confirmation.steps.title": "Un último paso",
+    "event_confirmation.steps.title_single_group": "Qué viene ahora",
     "event_confirmation.steps.subtitle": "Completa tu vibe test ahora para que podamos hacer match contigo y el grupo adecuado para este evento.",
     "event_confirmation.steps.subtitle_single_group":
-      "Completa tu vibe test ahora para adaptar las presentaciones para todos en el chat de asistentes.",
+      "Revisa tu email y estate atento/a a que se abra el chat grupal antes del evento para saludar y, si queréis, planear una quedada informal.",
     "event_confirmation.steps.vibe_check.title": "Completa el vibe test",
     "event_confirmation.steps.vibe_check.desc": "Toma unos 2 minutos y nos ayuda a ponerte en el grupo adecuado.",
     "event_confirmation.steps.vibe_check.desc_single_group":

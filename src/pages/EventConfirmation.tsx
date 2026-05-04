@@ -388,13 +388,13 @@ const EventConfirmation = () => {
         microMatches ? "event_confirmation.seo.desc" : "event_confirmation.seo.desc_single_group",
         microMatches
           ? `You're confirmed for ${data.title}. Complete your vibe test for the best group match.`
-          : `You're confirmed for ${data.title}. Complete your vibe test so we can tailor introductions in the attendee group chat.`
+          : `You're confirmed for ${data.title}. Check your email for next steps—we'll notify you when the attendee group chat is ready in the Pulse app.`
       ),
       es: t(
         microMatches ? "event_confirmation.seo.desc" : "event_confirmation.seo.desc_single_group",
         microMatches
           ? `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para el mejor match de grupo.`
-          : `Ya estás confirmado/a para ${data.title}. Completa tu vibe test para adaptar las presentaciones en el chat de asistentes.`
+          : `Ya estás confirmado/a para ${data.title}. Revisa tu email para los siguientes pasos—te avisaremos cuando el chat de asistentes esté listo en la app Pulse.`
       ),
     },
     pathname: confirmationPath,
@@ -470,8 +470,10 @@ const EventConfirmation = () => {
               </h1>
               <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto">
                 {t(
-                  "event_confirmation.header.subtitle",
-                  "Confirmation sent. Ticket will follow when issued. Next: complete your vibe test."
+                  microMatches ? "event_confirmation.header.subtitle" : "event_confirmation.header.subtitle_single_group",
+                  microMatches
+                    ? "Confirmation sent. Ticket will follow when issued. Next: complete your vibe test."
+                    : "Confirmation sent. Your ticket will follow when it's issued—we'll email you when your attendee chat is ready."
                 )}
               </p>
             </div>
@@ -635,10 +637,12 @@ const EventConfirmation = () => {
                       )}
                     </div>
 
-                    <div className="mt-5 flex flex-col sm:flex-row gap-3">
-                      <Button onClick={handleVibeCheckClick} className="w-full sm:w-auto">
-                        {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
-                      </Button>
+                    <div className={`mt-5 flex flex-col sm:flex-row gap-3 ${!microMatches ? "sm:flex-col" : ""}`}>
+                      {microMatches ? (
+                        <Button onClick={handleVibeCheckClick} className="w-full sm:w-auto">
+                          {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
+                        </Button>
+                      ) : null}
                       <Link
                         to={`/events/${data.slug}`}
                         className="w-full sm:w-auto inline-flex items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2 text-sm font-medium text-white/90 transition-colors"
@@ -652,27 +656,24 @@ const EventConfirmation = () => {
 
               {/* Right: action cards */}
               <div className="lg:col-span-4 flex flex-col gap-6">
-                <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
-                  <CardContent className="p-6">
-                    <div className="text-sm font-semibold text-white">
-                      {t("event_confirmation.vibe_check.title", "Complete vibe test")}
-                    </div>
-                    <p className="text-sm text-white/70 mt-2">
-                      {t(
-                        microMatches
-                          ? "event_confirmation.vibe_check.subtitle"
-                          : "event_confirmation.vibe_check.subtitle_single_group",
-                        microMatches ? "For the best group match." : "So introductions fit the attendee chat."
-                      )}
-                    </p>
-                    <Button className="w-full mt-4" onClick={handleVibeCheckClick}>
-                      {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
-                    </Button>
-                    <p className="text-[13px] text-white/55 mt-3">
-                      {t("event_confirmation.vibe_check.note", "Takes ~2 minutes.")}
-                    </p>
-                  </CardContent>
-                </Card>
+                {microMatches ? (
+                  <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
+                    <CardContent className="p-6">
+                      <div className="text-sm font-semibold text-white">
+                        {t("event_confirmation.vibe_check.title", "Complete vibe test")}
+                      </div>
+                      <p className="text-sm text-white/70 mt-2">
+                        {t("event_confirmation.vibe_check.subtitle", "For the best group match.")}
+                      </p>
+                      <Button className="w-full mt-4" onClick={handleVibeCheckClick}>
+                        {t("event_confirmation.vibe_check.cta", "Complete vibe test")}
+                      </Button>
+                      <p className="text-[13px] text-white/55 mt-3">
+                        {t("event_confirmation.vibe_check.note", "Takes ~2 minutes.")}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ) : null}
 
                 <Card className="bg-gray-800/35 backdrop-blur-lg border-white/10">
                   <CardContent className="p-6">
@@ -725,7 +726,10 @@ const EventConfirmation = () => {
             </div>
 
             <div className="mt-8">
-              <EventConfirmationNextSteps onPrimaryCta={handleVibeCheckClick} microMatches={microMatches} />
+              <EventConfirmationNextSteps
+                onPrimaryCta={microMatches ? handleVibeCheckClick : undefined}
+                microMatches={microMatches}
+              />
             </div>
           </div>
         </main>
