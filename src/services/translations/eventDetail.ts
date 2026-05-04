@@ -18,7 +18,7 @@ export const eventDetail = {
 
     "event_detail.meet_new_friends_at": "Meet New Friends at",
     "event_detail.pulse_matches": "Get matched into a small group before the event.\nShow up with new friends.",
-    "event_detail.pulse_matches_single_group": "Show up alone. Leave with friends.",
+    "event_detail.pulse_matches_single_group": "Show up solo. Leave with friends.",
     "event_detail.what_to_expect": "What to expect",
     "event_detail.sign_up": "Sign up",
     "event_detail.sign_up_now": "Sign up now",
@@ -37,8 +37,6 @@ export const eventDetail = {
     "event_detail.step1_title": "Get matched with likeminded attendees",
     "event_detail.step1_title_single_group": "Join the attendee group chat",
     "event_detail.step1_desc": "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night.",
-    "event_detail.step1_desc_single_group":
-      "Once your booking is confirmed, we'll let you know when you're added. Download the Pulse app and join the private attendee group chat for this event so you can introduce yourself before the day.",
     "event_detail.step2_title": "Break the ice",
     "event_detail.step2_desc": "Chat with fellow group members, guided by our conversation starters so you get to know each other before the event.",
     "event_detail.step2_desc_single_group":
@@ -212,8 +210,6 @@ export const eventDetail = {
     "event_detail.step1_title": "Emparejarte con asistentes afines",
     "event_detail.step1_title_single_group": "Únete al chat de asistentes",
     "event_detail.step1_desc": "Completa un vibe test rápido para colocarte en un grupo pequeño de asistentes solos afines al mismo evento—lo habitual son unas seis personas, a veces de unas cuatro a diez según la noche.",
-    "event_detail.step1_desc_single_group":
-      "Cuando tu reserva esté confirmada, te avisaremos cuando estés dentro. Descarga la app Pulse y únete al chat grupal privado de asistentes de este evento para presentarte antes del día.",
     "event_detail.step2_title": "Romper el hielo",
     "event_detail.step2_desc": "Chatea con los miembros de tu grupo, guiados por nuestros iniciadores de conversación para que os conozcáis antes del evento.",
     "event_detail.step2_desc_single_group":

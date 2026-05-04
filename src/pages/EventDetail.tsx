@@ -1074,7 +1074,7 @@ const EventDetail = () => {
                   microMatches ? "event_detail.pulse_matches" : "event_detail.pulse_matches_single_group",
                   microMatches
                     ? "Get matched into a small group before the event.\nShow up with new friends."
-                    : "Show up alone. Leave with friends."
+                    : "Show up solo. Leave with friends."
                 )}
               </p>
 
@@ -1182,14 +1182,14 @@ const EventDetail = () => {
                               microMatches ? "Get matched with likeminded attendees" : "Join the attendee group chat"
                             )}
                           </div>
+                          {microMatches ? (
                           <p className="text-sm text-gray-400 mt-1">
                             {t(
-                              microMatches ? "event_detail.step1_desc" : "event_detail.step1_desc_single_group",
-                              microMatches
-                                ? "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night."
-                                : "Once your booking is confirmed, we'll let you know when you're added. Download the Pulse app and join the private attendee group chat for this event so you can introduce yourself before the day."
+                              "event_detail.step1_desc",
+                              "Complete a quick vibe test so we can place you in a small group of likeminded solo attendees going to the same event—usually around six people, sometimes roughly four to ten depending on the night."
                             )}
                           </p>
+                          ) : null}
                         </div>
                       </div>
 
