@@ -58,7 +58,6 @@ export const eventDetail = {
     "event_detail.good_to_know_3": "If we can't form a group, the Pulse fee is refunded. Your ticket stays valid.",
     "event_detail.good_to_know_4": "You don't need to know anyone. That's the whole point.",
     "event_detail.good_to_know_5": "Meet 15 minutes before the start so you can all enter the venue together.",
-    "event_detail.good_to_know_6": "This is a public event. You may meet other attendees who didn't book through Pulse.",
 
     "event_detail.matched_solo": "Matched with solo attendees making friends",
     "event_detail.matched_solo_single_group": "Other solo attendees going to this event—together in one chat",
@@ -231,7 +230,6 @@ export const eventDetail = {
     "event_detail.good_to_know_3": "Si no podemos formar un grupo, la tarifa de Pulse se reembolsa. Tu entrada sigue siendo válida.",
     "event_detail.good_to_know_4": "No necesitas conocer a nadie. Ese es el punto.",
     "event_detail.good_to_know_5": "Reúnete 15 minutos antes del inicio para entrar juntos al lugar.",
-    "event_detail.good_to_know_6": "Este es un evento público. Puede que conozcas a otros asistentes que no reservaron por Pulse.",
 
     "event_detail.matched_solo": "Emparejado con asistentes solos haciendo amigos",
     "event_detail.matched_solo_single_group": "Otras personas que van solas a este evento, juntas en un solo chat",

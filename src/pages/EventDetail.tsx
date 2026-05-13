@@ -1300,7 +1300,6 @@ const EventDetail = () => {
                     <li>{t("event_detail.good_to_know_2", "Your booking includes a real event ticket issued through the provider.")}</li>
                     <li>{t("event_detail.good_to_know_4", "You don't need to know anyone. That's the whole point.")}</li>
                     <li>{t("event_detail.good_to_know_5", "Meet 15 minutes before the start so you can all enter the venue together.")}</li>
-                    <li>{t("event_detail.good_to_know_6", "This is a public event. You may meet other attendees who didn't book through Pulse.")}</li>
                   </ul>
                 </div>
               </div>
