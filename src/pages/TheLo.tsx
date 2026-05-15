@@ -5,6 +5,7 @@ import { ArrowRight, ChevronUp, ExternalLink, Loader2, Mail, PenLine, Smartphone
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Seo } from "@/hooks/useSeo";
+import { loadRecaptchaScriptOnce } from "@/lib/recaptchaLoader";
 import { submitTheLoPartnerMember } from "@/lib/theLoPartnerApi";
 
 const THE_LO_LOGO_URL =
@@ -91,6 +92,12 @@ const TheLo = () => {
       setIsEditingEmail(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (isSheetOpen) {
+      loadRecaptchaScriptOnce();
+    }
+  }, [isSheetOpen]);
 
   const rememberTipText = useMemo(() => {
     if (savedEmail && !isEditingEmail) {
