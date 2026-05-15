@@ -22,6 +22,10 @@ interface ImportMetaEnv {
   readonly VITE_WHATSAPP_PREFILL?: string;
   /** Make.com (or other) webhook for in-widget chat; POST JSON { thread_id, message, count }. */
   readonly VITE_CHAT_WEBHOOK_URL?: string;
+  /** Partner community PK for /the-lo — POST community_partners/add_member/ */
+  readonly VITE_THE_LO_PARTNER_COMMUNITY_ID?: string;
+  /** PartnerCommunity.character_public_key (shared secret) for The LO landing. */
+  readonly VITE_THE_LO_PARTNER_CHARACTER_PUBLIC_KEY?: string;
 }
 
 interface ImportMeta {

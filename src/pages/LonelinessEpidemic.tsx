@@ -1582,6 +1582,7 @@ const LonelinessEpidemic: React.FC = () => {
                 "@type": "Dataset",
                 "name": t("loneliness.seo.dataset_name", "Loneliness Epidemic Statistics 2025"),
                 "description": t("loneliness.seo.dataset_description", "Comprehensive dataset on loneliness statistics, health impacts, and demographic breakdowns"),
+                "license": "https://pulsenow.app/terms",
                 "creator": {
                   "@type": "Organization",
                   "name": "Pulse"
