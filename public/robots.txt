@@ -1,32 +1,43 @@
+# /the-lo — partner landing; not for search (see also page meta noindex)
 User-agent: Googlebot
 Allow: /
+Disallow: /the-lo
 
 User-agent: Bingbot
 Allow: /
+Disallow: /the-lo
 
 User-agent: GPTBot
 Allow: /
+Disallow: /the-lo
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /the-lo
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /the-lo
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /the-lo
 
 User-agent: CCBot
 Allow: /
+Disallow: /the-lo
 
 User-agent: Twitterbot
 Allow: /
+Disallow: /the-lo
 
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /the-lo
 
 User-agent: *
 Allow: /
+Disallow: /the-lo
 
 Sitemap: https://pulsenow.app/sitemap.xml
 Sitemap: https://es.pulsenow.app/sitemap.xml

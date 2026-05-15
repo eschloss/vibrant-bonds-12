@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronUp, ExternalLink, Loader2, Mail, PenLine, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,12 +7,22 @@ import { Input } from "@/components/ui/input";
 import { Seo } from "@/hooks/useSeo";
 import { submitTheLoPartnerMember } from "@/lib/theLoPartnerApi";
 
-const WEB_LOGIN_BASE = "https://web2.pulsenow.app/login";
-const APP_LOGIN_BASE = "https://deeplink.pulsenow.app/login";
 const THE_LO_LOGO_URL =
   "https://images.squarespace-cdn.com/content/v1/647bbaf9b744834809e39011/07266d43-0cfc-4479-80f3-019ab3d965bf/White-THELO_RGB_Logo_Horizontal_Light.png?format=1500w";
 const EMAIL_COOKIE_NAME = "pulse_the_lo_email";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
+
+function theLoWebContinueUrl(normalizedEmail: string): string {
+  const url = new URL("https://web2.pulsenow.app/phoneAuth");
+  url.searchParams.set("email", normalizedEmail);
+  return url.href;
+}
+
+function theLoAppContinueUrl(normalizedEmail: string): string {
+  const url = new URL("https://deeplink.kikiapp.eu/login");
+  url.searchParams.set("email", normalizedEmail);
+  return url.href;
+}
 
 const getStoredEmail = () => {
   if (typeof document === "undefined") {
@@ -37,6 +48,13 @@ const storeEmail = (email: string) => {
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const TheLo = () => {
+  const [searchParams] = useSearchParams();
+  const partnerPublicKey = useMemo(
+    () => searchParams.get("key")?.trim() ?? "",
+    [searchParams],
+  );
+  const hasPartnerKey = partnerPublicKey.length > 0;
+
   const [email, setEmail] = useState("");
   const [savedEmail, setSavedEmail] = useState("");
   const [isEditingEmail, setIsEditingEmail] = useState(true);
@@ -61,6 +79,7 @@ const TheLo = () => {
     image: "https://s.kikiapp.eu/img/pulselogo.webp",
     keywords: ["Pulse web app", "Pulse login", "open Pulse app", "Pulse web version"],
     type: "website",
+    noIndex: true,
   };
 
   useEffect(() => {
@@ -105,6 +124,11 @@ const TheLo = () => {
       return;
     }
 
+    if (!hasPartnerKey) {
+      setError("Open this page from your partner link (missing key).");
+      return;
+    }
+
     const normalizedEmail = getNormalizedEmailOrSetError();
     if (!normalizedEmail) {
       return;
@@ -114,7 +138,7 @@ const TheLo = () => {
     setError("");
     setPartnerSubmitTarget("web");
     try {
-      await submitTheLoPartnerMember(normalizedEmail);
+      await submitTheLoPartnerMember(normalizedEmail, partnerPublicKey);
 
       storeEmail(normalizedEmail);
       const shouldUpdateSavedState = !savedEmail || isEditingEmail;
@@ -124,7 +148,7 @@ const TheLo = () => {
         setIsEditingEmail(false);
       }
 
-      window.location.assign(`${WEB_LOGIN_BASE}/${encodeURIComponent(normalizedEmail)}`);
+      window.location.assign(theLoWebContinueUrl(normalizedEmail));
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unable to continue. Please try again.";
       setError(msg);
@@ -138,6 +162,11 @@ const TheLo = () => {
       return;
     }
 
+    if (!hasPartnerKey) {
+      setError("Open this page from your partner link (missing key).");
+      return;
+    }
+
     const normalizedEmail = getNormalizedEmailOrSetError();
     if (!normalizedEmail) {
       return;
@@ -147,7 +176,7 @@ const TheLo = () => {
     setError("");
     setPartnerSubmitTarget("app");
     try {
-      await submitTheLoPartnerMember(normalizedEmail);
+      await submitTheLoPartnerMember(normalizedEmail, partnerPublicKey);
 
       storeEmail(normalizedEmail);
       const shouldUpdateSavedState = !savedEmail || isEditingEmail;
@@ -157,7 +186,7 @@ const TheLo = () => {
         setIsEditingEmail(false);
       }
 
-      window.location.assign(`${APP_LOGIN_BASE}/${encodeURIComponent(normalizedEmail)}`);
+      window.location.assign(theLoAppContinueUrl(normalizedEmail));
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unable to continue. Please try again.";
       setError(msg);
@@ -310,6 +339,19 @@ const TheLo = () => {
 
             {isSheetOpen && (
               <div className="relative max-h-[calc(86dvh-6.75rem)] overflow-y-auto px-6 pb-8 sm:px-8">
+                {!hasPartnerKey && (
+                  <p
+                    className="mb-4 rounded-xl border border-amber-500/35 bg-amber-500/10 px-3 py-2.5 text-sm leading-snug text-amber-100/95"
+                    role="status"
+                  >
+                    Use your partner invitation link. The URL must include a{" "}
+                    <span className="font-mono text-[0.8125rem] text-white/90">key</span> query parameter (e.g.{" "}
+                    <span className="break-all font-mono text-[0.7rem] text-white/75">
+                      /the-lo?key=…
+                    </span>
+                    ).
+                  </p>
+                )}
                 <form onSubmit={handleWebSubmit} className="space-y-4 pt-2">
                   {(!savedEmail || isEditingEmail) && (
                     <label className="block">
@@ -325,7 +367,7 @@ const TheLo = () => {
                           }}
                           placeholder="you@example.com"
                           autoComplete="email"
-                          disabled={partnerSubmitBusy}
+                          disabled={partnerSubmitBusy || !hasPartnerKey}
                           className="h-14 rounded-2xl border-white/15 bg-white/10 pl-12 text-base text-white placeholder:text-white/35 focus-visible:ring-[#FF2688] disabled:opacity-60"
                           aria-invalid={Boolean(error)}
                         />
@@ -345,7 +387,7 @@ const TheLo = () => {
                         </span>
                         <button
                           type="button"
-                          disabled={partnerSubmitBusy}
+                          disabled={partnerSubmitBusy || !hasPartnerKey}
                           onClick={handleEditEmail}
                           className="inline-flex shrink-0 items-center gap-1 rounded-full border border-white/15 px-3 py-1 text-[13px] font-medium text-white/80 transition hover:border-white/30 hover:text-white disabled:pointer-events-none disabled:opacity-45"
                         >
@@ -363,7 +405,7 @@ const TheLo = () => {
                   <Button
                     type="submit"
                     size="xl"
-                    disabled={partnerSubmitBusy}
+                    disabled={partnerSubmitBusy || !hasPartnerKey}
                     aria-busy={partnerSubmitTarget === "web"}
                     className="h-14 w-full rounded-2xl bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-base font-bold text-white shadow-xl shadow-[#FF2688]/20 transition hover:scale-[1.01] hover:opacity-95 disabled:pointer-events-none disabled:opacity-55"
                   >
@@ -386,7 +428,7 @@ const TheLo = () => {
                   type="button"
                   variant="outline"
                   size="xl"
-                  disabled={partnerSubmitBusy}
+                  disabled={partnerSubmitBusy || !hasPartnerKey}
                   aria-busy={partnerSubmitTarget === "app"}
                   onClick={handleOpenApp}
                   className="h-14 w-full rounded-2xl border-white/15 bg-white/[0.06] text-base font-bold text-white hover:bg-white/10 hover:text-white disabled:pointer-events-none disabled:opacity-55"
