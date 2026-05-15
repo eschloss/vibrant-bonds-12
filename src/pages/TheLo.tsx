@@ -1,6 +1,6 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronUp, ExternalLink, Mail, PenLine, Smartphone } from "lucide-react";
+import { ArrowRight, ChevronUp, ExternalLink, Loader2, Mail, PenLine, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Seo } from "@/hooks/useSeo";
@@ -44,7 +44,9 @@ const TheLo = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [dragStartY, setDragStartY] = useState<number | null>(null);
   const [theLoLogoFailed, setTheLoLogoFailed] = useState(false);
-  const [partnerSubmitLoading, setPartnerSubmitLoading] = useState(false);
+  const [partnerSubmitTarget, setPartnerSubmitTarget] = useState<null | "web" | "app">(null);
+  const partnerSubmitBusy = partnerSubmitTarget !== null;
+  const partnerSubmitInFlightRef = useRef(false);
 
   const seoProps = {
     title: {
@@ -99,13 +101,18 @@ const TheLo = () => {
   const handleWebSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (partnerSubmitInFlightRef.current) {
+      return;
+    }
+
     const normalizedEmail = getNormalizedEmailOrSetError();
     if (!normalizedEmail) {
       return;
     }
 
+    partnerSubmitInFlightRef.current = true;
     setError("");
-    setPartnerSubmitLoading(true);
+    setPartnerSubmitTarget("web");
     try {
       await submitTheLoPartnerMember(normalizedEmail);
 
@@ -121,18 +128,24 @@ const TheLo = () => {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unable to continue. Please try again.";
       setError(msg);
-      setPartnerSubmitLoading(false);
+      setPartnerSubmitTarget(null);
+      partnerSubmitInFlightRef.current = false;
     }
   };
 
   const handleOpenApp = async () => {
+    if (partnerSubmitInFlightRef.current) {
+      return;
+    }
+
     const normalizedEmail = getNormalizedEmailOrSetError();
     if (!normalizedEmail) {
       return;
     }
 
+    partnerSubmitInFlightRef.current = true;
     setError("");
-    setPartnerSubmitLoading(true);
+    setPartnerSubmitTarget("app");
     try {
       await submitTheLoPartnerMember(normalizedEmail);
 
@@ -148,7 +161,8 @@ const TheLo = () => {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unable to continue. Please try again.";
       setError(msg);
-      setPartnerSubmitLoading(false);
+      setPartnerSubmitTarget(null);
+      partnerSubmitInFlightRef.current = false;
     }
   };
 
@@ -167,7 +181,7 @@ const TheLo = () => {
 
     if (dragDistance < -28) {
       setIsSheetOpen(true);
-    } else if (dragDistance > 28) {
+    } else if (dragDistance > 28 && !partnerSubmitBusy) {
       setIsSheetOpen(false);
     }
 
@@ -246,7 +260,11 @@ const TheLo = () => {
             <button
               type="button"
               aria-label="Collapse entry panel"
-              onClick={() => setIsSheetOpen(false)}
+              onClick={() => {
+                if (!partnerSubmitBusy) {
+                  setIsSheetOpen(false);
+                }
+              }}
               className="fixed inset-0 z-30 bg-black/35 backdrop-blur-[2px]"
             />
           )}
@@ -307,7 +325,7 @@ const TheLo = () => {
                           }}
                           placeholder="you@example.com"
                           autoComplete="email"
-                          disabled={partnerSubmitLoading}
+                          disabled={partnerSubmitBusy}
                           className="h-14 rounded-2xl border-white/15 bg-white/10 pl-12 text-base text-white placeholder:text-white/35 focus-visible:ring-[#FF2688] disabled:opacity-60"
                           aria-invalid={Boolean(error)}
                         />
@@ -327,7 +345,7 @@ const TheLo = () => {
                         </span>
                         <button
                           type="button"
-                          disabled={partnerSubmitLoading}
+                          disabled={partnerSubmitBusy}
                           onClick={handleEditEmail}
                           className="inline-flex shrink-0 items-center gap-1 rounded-full border border-white/15 px-3 py-1 text-[13px] font-medium text-white/80 transition hover:border-white/30 hover:text-white disabled:pointer-events-none disabled:opacity-45"
                         >
@@ -345,16 +363,15 @@ const TheLo = () => {
                   <Button
                     type="submit"
                     size="xl"
-                    disabled={partnerSubmitLoading}
+                    disabled={partnerSubmitBusy}
+                    aria-busy={partnerSubmitTarget === "web"}
                     className="h-14 w-full rounded-2xl bg-gradient-to-r from-[#FF2688] via-[#741ADD] to-[#38D1BF] text-base font-bold text-white shadow-xl shadow-[#FF2688]/20 transition hover:scale-[1.01] hover:opacity-95 disabled:pointer-events-none disabled:opacity-55"
                   >
-                    {partnerSubmitLoading ? (
-                      "Working…"
+                    Enter web version of Pulse
+                    {partnerSubmitTarget === "web" ? (
+                      <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
                     ) : (
-                      <>
-                        Enter web version of Pulse
-                        <ArrowRight className="h-5 w-5" />
-                      </>
+                      <ArrowRight className="h-5 w-5" aria-hidden />
                     )}
                   </Button>
                 </form>
@@ -369,13 +386,22 @@ const TheLo = () => {
                   type="button"
                   variant="outline"
                   size="xl"
-                  disabled={partnerSubmitLoading}
+                  disabled={partnerSubmitBusy}
+                  aria-busy={partnerSubmitTarget === "app"}
                   onClick={handleOpenApp}
                   className="h-14 w-full rounded-2xl border-white/15 bg-white/[0.06] text-base font-bold text-white hover:bg-white/10 hover:text-white disabled:pointer-events-none disabled:opacity-55"
                 >
-                  <Smartphone className="h-5 w-5 text-[#38D1BF]" />
-                  {partnerSubmitLoading ? "Working…" : "Open the App"}
-                  <ExternalLink className="h-4 w-4 text-white/55" />
+                  {partnerSubmitTarget === "app" ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-[#38D1BF]" aria-hidden />
+                  ) : (
+                    <Smartphone className="h-5 w-5 text-[#38D1BF]" aria-hidden />
+                  )}
+                  Open the App
+                  {partnerSubmitTarget === "app" ? (
+                    <span className="inline-block h-4 w-4 shrink-0" aria-hidden />
+                  ) : (
+                    <ExternalLink className="h-4 w-4 text-white/55" aria-hidden />
+                  )}
                 </Button>
 
                 <p className="mt-5 text-center text-xs leading-relaxed text-white/42">
