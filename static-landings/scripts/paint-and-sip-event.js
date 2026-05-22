@@ -450,7 +450,7 @@
     }
 
     var n = data.tickets_remaining;
-    var hasCount = typeof n === "number" && !isNaN(n);
+    var hasCount = typeof n === "number" && !isNaN(n) && n > 0;
 
     var heroUrgency = document.querySelector(".js-paint-sip-hero-urgency");
     var heroText = document.querySelector(".js-paint-sip-hero-urgency-text");
@@ -484,13 +484,6 @@
       return;
     }
 
-    setElHidden(heroUrgency, false);
-    sidebarUrgencyRoots.forEach(function (el) {
-      setElHidden(el, false);
-    });
-    setElHidden(stickyUrgencyWrap, false);
-    if (stickyMuted) setElHidden(stickyMuted, true);
-
     checkoutOpenEls.forEach(function (el) {
       setElHidden(el, false);
     });
@@ -498,7 +491,22 @@
       setElHidden(el, true);
     });
 
-    if (!hasCount) return;
+    if (!hasCount) {
+      setElHidden(heroUrgency, true);
+      sidebarUrgencyRoots.forEach(function (el) {
+        setElHidden(el, true);
+      });
+      setElHidden(stickyUrgencyWrap, true);
+      if (stickyMuted) setElHidden(stickyMuted, true);
+      return;
+    }
+
+    setElHidden(heroUrgency, false);
+    sidebarUrgencyRoots.forEach(function (el) {
+      setElHidden(el, false);
+    });
+    setElHidden(stickyUrgencyWrap, false);
+    if (stickyMuted) setElHidden(stickyMuted, true);
 
     if (heroText) {
       heroText.textContent = "Only " + n + " spots left for this event";
