@@ -37,14 +37,14 @@ const Partnerships = () => {
   
   const seoProps = {
     title: {
-      en: t("partnerships.title", "Venue Partnerships | Boost Revenue & Community | Pulse"),
-      es: t("partnerships.title", "Asociaciones de Venues | Impulsa Ingresos | Pulse")
+      en: t("partnerships.title", "Sell Premium Event Tickets Through Pulse | Partner With Us"),
+      es: t("partnerships.title", "Vende Entradas para Eventos Premium en Pulse | Asóciate")
     },
     description: {
-      en: t("partnerships.description", "Partner with Pulse to solve loneliness, boost retention, and drive new customers to your venue. Create exclusive group matches and get featured in our app."),
-      es: t("partnerships.description", "Asóciate con Pulse para resolver la soledad, aumentar la retención e impulsar nuevos clientes a tu venue. Crea matches grupales exclusivos y destácate en nuestra app.")
+      en: t("partnerships.description", "Post premium events on Pulse and sell tickets through our app. Thousands join every week to meet new friends, and those groups need great events to book together."),
+      es: t("partnerships.description", "Publica eventos premium en Pulse y vende entradas desde nuestra app. Miles se unen cada semana para hacer nuevos amigos, y esos grupos necesitan grandes eventos para reservar juntos.")
     },
-    keywords: ["venue partnerships", "business partnerships", "community building", "customer retention", "loneliness solution"],
+    keywords: ["event partnerships", "premium events", "ticket sales", "event discovery", "venue ticketing"],
     type: "website"
   };
 
@@ -104,14 +104,14 @@ const Partnerships = () => {
         <div className="container mx-auto px-4 relative z-10 py-[85px]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center max-w-5xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <Text id="partnerships.hero.title1">Turn Your Venue Into a</Text>
+              <Text id="partnerships.hero.title1">Post Premium Events.</Text>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue">
-                <Text id="partnerships.hero.title2">Friendship Factory</Text>
+                <Text id="partnerships.hero.title2">Sell Tickets on Pulse</Text>
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              <Text id="partnerships.hero.description">Get more prepaid group bookings and loyal regulars with zero upfront cost. Pulse brings groups of compatible locals to your venue.</Text>
+              <Text id="partnerships.hero.description">Reach thousands of people joining Pulse every week to meet new friends. They get matched into friend groups, then need cool events to book together.</Text>
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
@@ -129,11 +129,11 @@ const Partnerships = () => {
             <div className="max-w-5xl mx-auto mt-2 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.what_you_do">What you do</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.hero.what_you_do_desc">Approve a simple group package and host prepaid groups.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.what_you_do_desc">Post your premium event, ticket price, capacity, and available dates.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.what_we_do">What we do</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.hero.what_we_do_desc">Match 10 locals, handle chat, bookings, and payments.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.hero.what_we_do_desc">Promote it to matched friend groups and handle in-app ticket sales.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="text-white font-semibold mb-1"><Text id="partnerships.hero.cost">Cost</Text></div>
@@ -161,12 +161,12 @@ const Partnerships = () => {
           {/* Headline */}
           <div className="text-center max-w-5xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs md:text-sm bg-purple-900/30 text-white border border-purple-700/40">
-              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> <Text id="partnerships.how_it_works.badge">How Pulse works</Text>
+              <span className="w-2 h-2 rounded-full bg-pulse-pink" /> <Text id="partnerships.how_it_works.badge">Why Pulse needs partners</Text>
             </div>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">
-              <Text id="partnerships.how_it_works.title">10 like‑minded locals on a 7‑day challenge to meet in person</Text>
+              <Text id="partnerships.how_it_works.title">Thousands join Pulse weekly. Their groups need great events.</Text>
             </h2>
-            <p className="text-gray-300 mt-3 text-sm md:text-base"><Text id="partnerships.how_it_works.subtitle">City‑wide and interest groups. Pip sparks the chat and lines up the plan.</Text></p>
+            <p className="text-gray-300 mt-3 text-sm md:text-base"><Text id="partnerships.how_it_works.subtitle">Friend-group matching creates the demand. Your premium events give those groups somewhere worth going.</Text></p>
           </div>
 
           <div className="max-w-6xl mx-auto">
@@ -178,8 +178,8 @@ const Partnerships = () => {
                     <Users2 className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step1">We match 10 locals by vibe</Text></div>
-                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step1_desc">Grouped in a shared chat in the same city</Text></div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step1">People join to meet new friends</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step1_desc">Thousands of locals are looking for real-life plans each week</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -187,8 +187,8 @@ const Partnerships = () => {
                     <MessageSquare className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step2">Pip sparks the chat and suggests plans</Text></div>
-                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step2_desc">Icebreakers + plan ideas tailored to the group</Text></div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step2">Pulse matches them into groups</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step2_desc">Pip sparks the chat and recommends events they can book together</Text></div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 rounded-xl border border-gray-700/70 bg-gray-900/40 p-4 md:p-5">
@@ -196,8 +196,8 @@ const Partnerships = () => {
                     <Calendar className="text-white" size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step3">They meet within 7 days</Text></div>
-                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step3_desc">They book a simple, prepaid experience at a venue</Text></div>
+                    <div className="text-white text-base md:text-lg font-semibold"><Text id="partnerships.how_it_works.step3">They buy tickets in the app</Text></div>
+                    <div className="text-gray-400 text-sm md:text-base"><Text id="partnerships.how_it_works.step3_desc">Your event becomes the shared plan that turns a match into a night out</Text></div>
                   </div>
                 </div>
               </div>
@@ -285,9 +285,9 @@ const Partnerships = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4"><Text id="partnerships.programs.title">Two Ways to Partner</Text></h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4"><Text id="partnerships.programs.title">Two Ways to Sell Events</Text></h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              <Text id="partnerships.programs.description">Choose between city‑wide featuring or your own recurring community built around your core experience.</Text>
+              <Text id="partnerships.programs.description">List one premium event or give Pulse recurring inventory to promote to matched friend groups.</Text>
             </p>
           </motion.div>
 
@@ -300,35 +300,35 @@ const Partnerships = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center text-white text-xl md:text-2xl font-bold">1</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.featured.title">Get Featured in the City</Text></h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.featured.title">List a Premium Event</Text></h3>
                   </div>
                   <p className="text-gray-300 mb-2">
-                    <Text id="partnerships.programs.featured.description">Show up as a ready‑to‑book group plan across the city. When a group chooses your plan, they prepay.</Text>
+                    <Text id="partnerships.programs.featured.description">Post a ticketed event or package in Pulse. We feature it to relevant groups across the city and they buy tickets in-app.</Text>
                   </p>
-                  <div className="text-xs text-gray-400 mb-6"><Text id="partnerships.programs.featured.example">Example: $30 × 10 people = $300 booking → You receive $225.</Text></div>
+                  <div className="text-xs text-gray-400 mb-6"><Text id="partnerships.programs.featured.example">Example: $30 × 10 tickets = $300 booking → You receive $225.</Text></div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit1">Featured as a plan idea promoted to relevant groups citywide.</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit1">Featured as a bookable event for matched friend groups citywide.</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit2">Groups opt in; no commitments or coupons required</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit2">Groups choose the event and pay upfront in Pulse</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit3">Prepaid, packaged bookings handled by Pulse — you just host</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.featured.benefit3">Ticketing, payments, and attendee coordination handled by Pulse</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                       <span className="text-gray-300">
-                        <Text id="partnerships.programs.featured.benefit4">You keep 75% of the booking (Pulse platform fee: 25%)</Text>
+                        <Text id="partnerships.programs.featured.benefit4">You keep 75% of ticket revenue (Pulse platform fee: 25%)</Text>
                       </span>
                     </li>
                   </ul>
 
                   <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-700">
-                    <div className="text-sm font-semibold mb-4 text-white">Typical package price points</div>
+                    <div className="text-sm font-semibold mb-4 text-white"><Text id="partnerships.programs.featured.price_points">Typical ticket price points</Text></div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div className="rounded-lg bg-gray-800/60 border border-gray-700 p-3 text-center">
                         <div className="text-lg font-bold text-white">$20–40</div>
@@ -360,53 +360,53 @@ const Partnerships = () => {
               </Card>
             </motion.div>
 
-            {/* Program 2: Exclusive Group Match */}
+            {/* Program 2: Recurring Ticketed Events */}
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <Card className="relative overflow-hidden bg-gray-800/50 backdrop-blur-lg border-gray-700 h-full hover:border-purple-400/60 hover:shadow-pink-500/20 hover:shadow-xl transition-all duration-300">
                 <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-pulse-pink/20 blur-3xl"></div>
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl md:text-2xl font-bold">2</div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.recurring.title">Your Own Recurring Community</Text></h3>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white"><Text id="partnerships.programs.recurring.title">Run Recurring Ticketed Events</Text></h3>
                   </div>
                   <p className="text-gray-300 mb-6">
-                    <Text id="partnerships.programs.recurring.description">We create a branded group for your core activity on Pulse so locals meet new friends at your venue. We continuously match many small groups and route them to your venue weekly or monthly, building loyal regulars while attracting new customers.</Text>
+                    <Text id="partnerships.programs.recurring.description">Give Pulse weekly or monthly event inventory to sell. We keep routing new matched groups into your sessions, helping you fill seats and build repeat demand.</Text>
                   </p>
                   {/* Example callouts moved above bullets and styled larger/bolder */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎳</div>
-                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example1", "Meet Fellow Bowlers in Boston")}</div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example1", "Bowling Nights in Boston")}</div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🏋️</div>
-                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example2", "Find Gym Buddies in Barcelona")}</div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example2", "Fitness Sessions in Barcelona")}</div>
                     </div>
                     <div className="bg-gray-700/40 rounded-lg p-3 text-center">
                       <div className="text-2xl mb-1">🎲</div>
-                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example3", "Meet Local Gamers in London")}</div>
+                      <div className="text-sm md:text-base font-semibold text-white">{t("partnerships.programs.recurring.example3", "Board Game Nights in London")}</div>
                     </div>
                   </div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit1">Dedicated, branded group in the Pulse app for your activity</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit1">Recurring event listings in the Pulse app for your activity</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit2">Pulse matches compatible people and fills your sessions</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit2">Pulse recommends your events to compatible friend groups</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit3">Recurring events to keep customers returning</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit3">In-app ticket sales for weekly or monthly sessions</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit4">Co‑promotion (venue + Pulse) and citywide featuring included</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit4">Co-promotion from your venue and Pulse included</Text></span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit5">Scales to dozens or hundreds of micro‑groups as demand grows</Text></span>
+                      <span className="text-gray-300"><Text id="partnerships.programs.recurring.benefit5">Scales from a few booked groups to steady event inventory as demand grows</Text></span>
                     </li>
                   </ul>
 
@@ -428,34 +428,34 @@ const Partnerships = () => {
             </motion.div>
           </div>
 
-          {/* Your Recurring Community (examples) moved up below the card */}
+          {/* Recurring event examples moved up below the card */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-10">
             {[
               {
-                title: t("partnerships.examples.boston.title", "Meet Fellow Bowlers in Boston"),
+                title: t("partnerships.examples.boston.title", "Bowling Nights in Boston"),
                 venue: t("partnerships.examples.boston.venue", "Boston Bowlers"),
                 poweredBy: t("partnerships.examples.boston.powered_by", "New England Bowling Alley"),
-                description: t("partnerships.examples.boston.description", "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley."),
+                description: t("partnerships.examples.boston.description", "Ticketed bowling nights promoted to Pulse groups looking for easy social plans."),
                 emoji: "🎳",
                 features: [
-                  t("partnerships.examples.boston.features.0", "Skill-based matching"),
-                  t("partnerships.examples.boston.features.1", "Weekly league nights"),
-                  t("partnerships.examples.boston.features.2", "Tournament events"),
-                  t("partnerships.examples.boston.features.3", "Social mixers")
+                  t("partnerships.examples.boston.features.0", "In-app tickets"),
+                  t("partnerships.examples.boston.features.1", "Weekly event slots"),
+                  t("partnerships.examples.boston.features.2", "Ticket sales"),
+                  t("partnerships.examples.boston.features.3", "Repeat demand")
                 ],
                 color: "from-blue-500 to-cyan-400"
               },
               {
-                title: t("partnerships.examples.barcelona.title", "Meet Gym Buddies in Barcelona"),
-                venue: t("partnerships.examples.barcelona.venue", "Barcelona Gym Buddies"),
+                title: t("partnerships.examples.barcelona.title", "Fitness Sessions in Barcelona"),
+                venue: t("partnerships.examples.barcelona.venue", "Barcelona Fitness Studio"),
                 poweredBy: t("partnerships.examples.barcelona.powered_by", "BCN Gym Group"),
-                description: t("partnerships.examples.barcelona.description", "Pulse‑matched workout partners. Recurring sessions hosted at your gym."),
+                description: t("partnerships.examples.barcelona.description", "Recurring workout classes sold to matched groups who want a social reason to train."),
                 emoji: "🏋️",
                 features: [
-                  t("partnerships.examples.barcelona.features.0", "Goal-based matching"),
-                  t("partnerships.examples.barcelona.features.1", "Workout partners"),
-                  t("partnerships.examples.barcelona.features.2", "Nutrition sharing"),
-                  t("partnerships.examples.barcelona.features.3", "Fitness challenges")
+                  t("partnerships.examples.barcelona.features.0", "Class tickets"),
+                  t("partnerships.examples.barcelona.features.1", "Recurring sessions"),
+                  t("partnerships.examples.barcelona.features.2", "New attendees"),
+                  t("partnerships.examples.barcelona.features.3", "Partner payout")
                 ],
                 color: "from-purple-500 to-pink-500"
               }
@@ -497,25 +497,25 @@ const Partnerships = () => {
             <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-blue-400/40 transition-all">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                <div className="text-white font-semibold">{t("partnerships.programs.comparison.featured_title", "Featured in the City")}</div>
+                <div className="text-white font-semibold">{t("partnerships.programs.comparison.featured_title", "List a Premium Event")}</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.featured_best">Occasional group bookings</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.featured_you_get">Citywide discovery + prepaid groups</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.featured_fee">25% per booking</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.featured_best">One-off premium events or special packages</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.featured_you_get">Citywide discovery + in-app ticket sales</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-blue-400 mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.featured_fee">25% per ticket booking</Text></span></li>
               </ul>
             </div>
 
-            {/* Your Recurring Community */}
+            {/* Recurring events */}
             <div className="rounded-xl border border-gray-700 bg-gray-900/60 backdrop-blur-md p-5 hover:border-purple-400/40 transition-all">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" />
-                <div className="text-white font-semibold">{t("partnerships.programs.comparison.recurring_title", "Your Recurring Community")}</div>
+                <div className="text-white font-semibold">{t("partnerships.programs.comparison.recurring_title", "Run Recurring Events")}</div>
               </div>
               <ul className="text-gray-300 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.recurring_best">Regular sessions (weekly/monthly)</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.recurring_you_get">Ongoing groups, co‑promotion</Text></span></li>
-                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.recurring_fee">25% per booking</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.best_for", "Best for:")}</span> <Text id="partnerships.programs.comparison.recurring_best">Regular ticketed sessions (weekly/monthly)</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.you_get", "You get:")}</span> <Text id="partnerships.programs.comparison.recurring_you_get">Ongoing promotion, ticketing, and group demand</Text></span></li>
+                <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-pulse-pink mt-0.5" /><span><span className="text-white font-medium">{t("partnerships.programs.comparison.fee", "Fee:")}</span> <Text id="partnerships.programs.comparison.recurring_fee">25% per ticket booking</Text></span></li>
               </ul>
             </div>
           </div>
@@ -525,7 +525,7 @@ const Partnerships = () => {
             <div className="rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg p-6 md:p-8 shadow-lg shadow-purple-500/10">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm bg-purple-900/30 text-white border border-purple-700/40">
-                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" /> <Text id="partnerships.how_it_works_venues.title">How it works for venues</Text>
+                  <span className="w-2 h-2 rounded-full bg-pulse-pink animate-pulse" /> <Text id="partnerships.how_it_works_venues.title">How event ticketing works</Text>
                 </div>
               </div>
               <ol className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -535,25 +535,25 @@ const Partnerships = () => {
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-pink to-accent flex items-center justify-center text-white">1</div>
                       <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step1">Apply</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step1_desc">Tell us your activity and preferred times.</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step1_desc">Tell us about your premium event, capacity, pricing, and dates.</Text></div>
                   </div>
                 </li>
                 <li className="bg-gradient-to-r from-accent to-pulse-blue p-[1px] rounded-2xl">
                   <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-pulse-blue flex items-center justify-center text-white">2</div>
-                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step2">Set your package</Text></div>
+                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step2">Post your event</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step2_desc">We craft a simple, prepaid plan (e.g., $25 per person for 10).</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step2_desc">We turn it into a clear in-app listing with ticketing and checkout.</Text></div>
                   </div>
                 </li>
                 <li className="bg-gradient-to-r from-pulse-blue to-pulse-pink p-[1px] rounded-2xl">
                   <div className="rounded-2xl bg-gray-900/60 border border-gray-700 p-5 h-full">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pulse-blue to-pulse-pink flex items-center justify-center text-white">3</div>
-                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step3">Host groups</Text></div>
+                      <div className="font-semibold text-white text-lg"><Text id="partnerships.how_it_works_venues.step3">Sell tickets</Text></div>
                     </div>
-                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step3_desc">We match and book groups. You host and get paid fast.</Text></div>
+                    <div className="text-gray-300 text-sm"><Text id="partnerships.how_it_works_venues.step3_desc">Pulse promotes, books, and collects payment. You host and get paid.</Text></div>
                   </div>
                 </li>
               </ol>
@@ -572,48 +572,48 @@ const Partnerships = () => {
           <div className="max-w-6xl mx-auto mt-6">
             <div className="rounded-xl border border-gray-700 bg-gray-800/50 p-4 text-sm text-gray-300 flex flex-col md:flex-row items-center justify-center gap-3">
               <span className="text-gray-400">Note:</span>
-              <span><Text id="partnerships.how_it_works_venues.note">Recurring Community partners also receive full city-wide featuring of their venue and events.</Text></span>
+              <span><Text id="partnerships.how_it_works_venues.note">Recurring partners also get citywide featuring for their venue and event inventory.</Text></span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Your Recurring Community Examples (trimmed) */}
+      {/* Recurring Event Examples (trimmed) */}
       <section className="py-12 relative">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6"><Text id="partnerships.examples.title">Your Recurring Community</Text></h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto"><Text id="partnerships.examples.description">We match small groups and route them to your venue weekly or monthly — building loyal regulars while attracting new customers.</Text></p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6"><Text id="partnerships.examples.title">Recurring Events That Can Fill Every Week</Text></h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto"><Text id="partnerships.examples.description">Friend-group matching creates new demand. Your recurring event inventory gives those groups a reason to buy tickets and show up together.</Text></p>
           </motion.div>
 
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
-                title: t("partnerships.examples.boston.title", "Meet Fellow Bowlers in Boston"),
+                title: t("partnerships.examples.boston.title", "Bowling Nights in Boston"),
                 venue: t("partnerships.examples.boston.venue", "Boston Bowlers"),
                 poweredBy: t("partnerships.examples.boston.powered_by", "New England Bowling Alley"),
-                description: t("partnerships.examples.boston.description", "Exclusive Pulse group for bowlers. Match by skill and meet weekly at the alley."),
+                description: t("partnerships.examples.boston.description", "Ticketed bowling nights promoted to Pulse groups looking for easy social plans."),
                 emoji: "🎳",
                 features: [
-                  t("partnerships.examples.boston.features.0", "Skill-based matching"),
-                  t("partnerships.examples.boston.features.1", "Weekly league nights"),
-                  t("partnerships.examples.boston.features.2", "Tournament events"),
-                  t("partnerships.examples.boston.features.3", "Social mixers")
+                  t("partnerships.examples.boston.features.0", "In-app tickets"),
+                  t("partnerships.examples.boston.features.1", "Weekly event slots"),
+                  t("partnerships.examples.boston.features.2", "Ticket sales"),
+                  t("partnerships.examples.boston.features.3", "Repeat demand")
                 ],
                 color: "from-blue-500 to-cyan-400"
               },
               {
-                title: t("partnerships.examples.barcelona.title", "Meet Gym Buddies in Barcelona"),
-                venue: t("partnerships.examples.barcelona.venue", "Barcelona Gym Buddies"),
+                title: t("partnerships.examples.barcelona.title", "Fitness Sessions in Barcelona"),
+                venue: t("partnerships.examples.barcelona.venue", "Barcelona Fitness Studio"),
                 poweredBy: t("partnerships.examples.barcelona.powered_by", "BCN Gym Group"),
-                description: t("partnerships.examples.barcelona.description", "Pulse‑matched workout partners. Recurring sessions hosted at your gym."),
+                description: t("partnerships.examples.barcelona.description", "Recurring workout classes sold to matched groups who want a social reason to train."),
                 emoji: "🏋️",
                 features: [
-                  t("partnerships.examples.barcelona.features.0", "Goal-based matching"),
-                  t("partnerships.examples.barcelona.features.1", "Workout partners"),
-                  t("partnerships.examples.barcelona.features.2", "Nutrition sharing"),
-                  t("partnerships.examples.barcelona.features.3", "Fitness challenges")
+                  t("partnerships.examples.barcelona.features.0", "Class tickets"),
+                  t("partnerships.examples.barcelona.features.1", "Recurring sessions"),
+                  t("partnerships.examples.barcelona.features.2", "New attendees"),
+                  t("partnerships.examples.barcelona.features.3", "Partner payout")
                 ],
                 color: "from-purple-500 to-pink-500"
               }
@@ -666,15 +666,15 @@ const Partnerships = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.who_pays">Who pays and when do we get paid?</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.faq.who_pays_answer">Groups prepay in Pulse. You receive 75% shortly after the event.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.who_pays_answer">Attendees buy tickets in Pulse. You receive 75% of ticket revenue shortly after the event.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.discounts">Do we need discounts or coupons?</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.faq.discounts_answer">No. Set a fair package price. No coupons needed.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.discounts_answer">No. Set a fair ticket price for the experience you want to sell.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.staff_time">How much staff time is required?</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.faq.staff_time_answer">Treat it like any small group booking (≈10 people). We handle the rest.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.staff_time_answer">Treat it like hosting your normal event. Pulse handles discovery, booking, payment, and group communications.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.cancellations">What about cancellations and no‑shows?</Text></div>
@@ -682,7 +682,7 @@ const Partnerships = () => {
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.subscription">Any subscription or long‑term contract?</Text></div>
-                <div className="text-gray-300"><Text id="partnerships.faq.subscription_answer">No. 25% per booking. No subscription. Cancel anytime.</Text></div>
+                <div className="text-gray-300"><Text id="partnerships.faq.subscription_answer">No. 25% per ticket booking. No subscription. Cancel anytime.</Text></div>
               </div>
               <div className="rounded-xl border border-gray-700 bg-gray-900/50 p-4">
                 <div className="font-semibold text-white mb-1"><Text id="partnerships.faq.how_soon">How soon can we start?</Text></div>
@@ -801,30 +801,30 @@ const Partnerships = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-3xl border border-gray-700 p-8 md:p-12 max-w-5xl mx-auto">
             <div className="text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <Text id="partnerships.cta.title">Turn Customers Into Friends Right at Your Venue</Text>
+                <Text id="partnerships.cta.title">Fill Premium Events With Pulse Groups</Text>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                <Text id="partnerships.cta.description">Loneliness is everywhere — but friendship is the solution. Join the Pulse Partner Program to turn social seekers into loyal regulars.</Text>
+                <Text id="partnerships.cta.description">Thousands of people join Pulse every week to meet new friends. Partner with us to turn that demand into ticket sales for your events.</Text>
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
               <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
                 <div className="text-3xl mb-2">😔</div>
-                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.problem_title">Loneliness Is Everywhere</Text></h3>
+                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.problem_title">Built-In Demand</Text></h3>
                 <ul className="space-y-2 text-gray-300 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point1">21M Americans have zero friends</Text></span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point2">1/3 unsatisfied with their circle</Text></span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point3">Impacts mental health and spend</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point1">Thousands join Pulse weekly</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point2">Friend groups need plans fast</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-red-400 mt-0.5" /><span><Text id="partnerships.cta.problem_point3">Premium events give them a reason to show up</Text></span></li>
                 </ul>
               </div>
               <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
                 <div className="text-3xl mb-2">🎉</div>
-                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.solution_title">The Friendship Solution</Text></h3>
+                <h3 className="text-lg font-semibold mb-3"><Text id="partnerships.cta.solution_title">Your Event Sales Channel</Text></h3>
                 <ul className="space-y-2 text-gray-300 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point1">Friends visit 3× more often</Text></span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point2">Longer stays and higher spend</Text></span></li>
-                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point3">Build a loyal community</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point1">Post events and ticket prices</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point2">Sell tickets through in-app checkout</Text></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle className="h-4 w-4 text-green-400 mt-0.5" /><span><Text id="partnerships.cta.solution_point3">Host attendees and keep 75%</Text></span></li>
                 </ul>
               </div>
             </div>
