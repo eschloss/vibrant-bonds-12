@@ -29,7 +29,7 @@ const EarningCalculator: React.FC = () => {
 
   const pricingTiers: PricingTier[] = [
     {
-      name: t("partnerships.calculator.tier.casual", "Casual Meetups"),
+      name: t("partnerships.calculator.tier.casual", "Casual Events"),
       minPrice: 20,
       maxPrice: 40,
       color: "from-blue-500 to-cyan-400",
@@ -38,10 +38,10 @@ const EarningCalculator: React.FC = () => {
         t("partnerships.calculator.examples.casual.1", "Laser Tag"),
         t("partnerships.calculator.examples.casual.2", "Football")
       ],
-      description: t("partnerships.calculator.tier.casual.description", "Great for driving regular foot traffic")
+      description: t("partnerships.calculator.tier.casual.description", "Accessible social plans with reliable group demand")
     },
     {
-      name: t("partnerships.calculator.tier.premium", "Premium Nights"),
+      name: t("partnerships.calculator.tier.premium", "Premium Events"),
       minPrice: 50,
       maxPrice: 100,
       color: "from-purple-500 to-pink-500",
@@ -50,7 +50,7 @@ const EarningCalculator: React.FC = () => {
         t("partnerships.calculator.examples.premium.1", "Sailing"),
         t("partnerships.calculator.examples.premium.2", "Art Classes")
       ],
-      description: t("partnerships.calculator.tier.premium.description", "Higher value experiences for engaged customers")
+      description: t("partnerships.calculator.tier.premium.description", "Higher-value experiences for groups looking for something memorable")
     },
     {
       name: t("partnerships.calculator.tier.luxury", "Luxury Events"),
@@ -62,7 +62,7 @@ const EarningCalculator: React.FC = () => {
         t("partnerships.calculator.examples.luxury.1", "Private Chef"),
         t("partnerships.calculator.examples.luxury.2", "Helicopter Tours")
       ],
-      description: t("partnerships.calculator.tier.luxury.description", "Exclusive experiences for your VIP customers")
+      description: t("partnerships.calculator.tier.luxury.description", "Exclusive experiences for groups ready to spend more")
     }
   ];
 
@@ -119,14 +119,14 @@ const EarningCalculator: React.FC = () => {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-3"
           >
-            {t("partnerships.calculator.title", "See Your Potential Earnings with Pulse")}
+            {t("partnerships.calculator.title", "Estimate Ticket Revenue From Pulse")}
           </motion.h2>
           
           <motion.p 
             variants={itemVariants}
             className="text-base text-gray-300 max-w-2xl mx-auto"
           >
-            {t("partnerships.calculator.description", "This estimates how much your venue could earn from Pulse‑driven group bookings. Adjust the tier and number of monthly groups. Assumes 10 people per group and the tier’s average ticket price.")}
+            {t("partnerships.calculator.description", "Estimate how much your event inventory could earn from Pulse-driven ticket sales. Adjust the ticket tier and number of monthly groups. Assumes 10 people per group and the tier's average ticket price.")}
           </motion.p>
         </motion.div>
 
@@ -171,7 +171,7 @@ const EarningCalculator: React.FC = () => {
               <div>
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <DollarSign className="h-5 w-5 text-pulse-pink" />
-                  {t("partnerships.calculator.choose_tier", "Choose Your Pricing Tier")}
+                  {t("partnerships.calculator.choose_tier", "Choose Your Ticket Tier")}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                   {pricingTiers.map((tier, index) => (
@@ -199,7 +199,7 @@ const EarningCalculator: React.FC = () => {
                 <div className="mt-6">
                   <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-pulse-blue" />
-                    {t("partnerships.calculator.bookings.title", "Number of Bookings")}
+                    {t("partnerships.calculator.bookings.title", "Number of Ticketed Bookings")}
                   </h4>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
@@ -220,14 +220,14 @@ const EarningCalculator: React.FC = () => {
                         <span className="text-pulse-blue">{peoplePerGroup}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>{t("partnerships.calculator.total_people_per_month", "Total people per month:")}</span>
+                        <span>{t("partnerships.calculator.total_people_per_month", "Total attendees per month:")}</span>
                         <span className="text-pulse-blue">{bookingsPerMonth[0] * peoplePerGroup}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 text-xs text-gray-400">{t("partnerships.calculator.disclaimer", "Estimates your venue’s take‑home from Pulse group bookings. Assumptions: 10 people per group • Average of selected tier • 75% partner share (Pulse platform fee: 25%).")}</div>
+                <div className="mt-4 text-xs text-gray-400">{t("partnerships.calculator.disclaimer", "Estimates your take-home from Pulse ticket bookings. Assumptions: 10 people per group • Average of selected tier • 75% partner share (Pulse platform fee: 25%).")}</div>
               </div>
             </CardContent>
           </Card>
