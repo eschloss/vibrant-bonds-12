@@ -50,6 +50,7 @@ import {
   getProviderName,
   isMicroMatchesEvent,
   parseEventLocalDateTime,
+  resolveTicketsRemainingForDisplay,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
 import { buildEventSeoDescriptions, buildEventSeoKeywords } from "@/lib/eventSeoMeta";
@@ -80,7 +81,7 @@ type SignUpCardProps = {
   formattedBaseExperiencePrice: string;
   formattedPulseFee: string;
   whatsIncluded?: string[];
-  ticketsRemaining: number;
+  ticketsRemaining: number | null;
   showPricing?: boolean;
   showSpotsRemaining?: boolean;
   checkoutDisabled?: boolean;
@@ -159,7 +160,7 @@ const SignUpCard = ({
 
         {/* 3. Conversion area — breathing room: 16-20px price→scarcity, 12-16px scarcity→CTA */}
         <div className={cn("space-y-4", showPricing ? "mt-5" : "mt-0")}>
-          {showSpotsRemaining ? (
+          {showSpotsRemaining && ticketsRemaining != null ? (
             <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
               <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
               <span>
@@ -714,6 +715,14 @@ const EventDetail = () => {
     !usePlaceholderUI &&
     !!eventData &&
     (Boolean(eventData.past_event) || Boolean(eventData.sold_out));
+  const displayTicketsRemaining = resolveTicketsRemainingForDisplay(
+    data.tickets_remaining,
+    20
+  );
+  const displayTicketsRemainingHero = resolveTicketsRemainingForDisplay(
+    data.tickets_remaining,
+    18
+  );
   const checkoutDisabledLabel =
     !usePlaceholderUI && eventData?.past_event
       ? t("event_detail.cta.past_event", "This event has already happened")
@@ -1121,10 +1130,13 @@ const EventDetail = () => {
                           : "Get to know other people going in the shared group chat ahead of time—before you walk in."
                       )}
                     </div>
-                    {!usePlaceholderUI && !checkoutDisabled ? (
+                    {!usePlaceholderUI && !checkoutDisabled && displayTicketsRemainingHero != null ? (
                       <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
                         <Ticket size={16} className="shrink-0" aria-hidden />
-                        {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(data.tickets_remaining ?? 18))}
+                        {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace(
+                          "{n}",
+                          String(displayTicketsRemainingHero)
+                        )}
                       </div>
                     ) : null}
                   </div>
@@ -1266,7 +1278,7 @@ const EventDetail = () => {
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
                     whatsIncluded={data.whats_included ?? []}
-                    ticketsRemaining={data.tickets_remaining ?? 20}
+                    ticketsRemaining={displayTicketsRemaining}
                     showPricing={!usePlaceholderUI}
                     showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
                     checkoutDisabled={checkoutDisabled}
@@ -1316,7 +1328,7 @@ const EventDetail = () => {
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
                     whatsIncluded={data.whats_included ?? []}
-                    ticketsRemaining={data.tickets_remaining ?? 20}
+                    ticketsRemaining={displayTicketsRemaining}
                     showPricing={!usePlaceholderUI}
                     showSpotsRemaining={!usePlaceholderUI && !checkoutDisabled}
                     checkoutDisabled={checkoutDisabled}
@@ -1347,7 +1359,7 @@ const EventDetail = () => {
           checkoutHref={checkoutHref}
           trackCheckoutClick={trackCheckoutClick}
           t={t}
-          ticketsRemaining={data.tickets_remaining ?? 20}
+          ticketsRemaining={displayTicketsRemaining}
           checkoutDisabled={checkoutDisabled}
           checkoutDisabledLabel={checkoutDisabledLabel}
         />

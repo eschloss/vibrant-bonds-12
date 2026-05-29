@@ -9,7 +9,7 @@ type EventStickyCtaProps = {
   checkoutHref: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
   t: (key: string, fallback?: string) => string;
-  ticketsRemaining: number;
+  ticketsRemaining: number | null;
   checkoutDisabled?: boolean;
   checkoutDisabledLabel?: string;
   className?: string;
@@ -25,9 +25,19 @@ export default function EventStickyCta({
   className = "",
 }: EventStickyCtaProps) {
   const isMobile = useIsMobile();
-  const urgencyText = isMobile
-    ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(ticketsRemaining))
-    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining));
+  const showUrgency = !checkoutDisabled && ticketsRemaining != null;
+  const urgencyText =
+    ticketsRemaining != null
+      ? isMobile
+        ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace(
+            "{n}",
+            String(ticketsRemaining)
+          )
+        : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace(
+            "{n}",
+            String(ticketsRemaining)
+          )
+      : "";
 
   return (
     <motion.div
@@ -39,12 +49,12 @@ export default function EventStickyCta({
       <div className="flex flex-col items-start gap-1 sm:gap-0.5 min-w-0">
         {checkoutDisabled ? (
           <span className="text-sm font-medium text-white/55">{checkoutDisabledLabel}</span>
-        ) : (
+        ) : showUrgency ? (
           <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
             <Ticket size={16} className="shrink-0" aria-hidden />
             <span>{urgencyText}</span>
           </div>
-        )}
+        ) : null}
       </div>
       {checkoutDisabled ? (
         <span

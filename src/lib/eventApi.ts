@@ -85,6 +85,27 @@ export function isMicroMatchesEvent(e: GetKikiEventResponse): boolean {
   return e.is_micro_matches !== false;
 }
 
+/**
+ * Positive ticket count for scarcity UI, or null to hide copy (0, -1, invalid).
+ * When the API omits the field, `fallbackWhenMissing` is used (e.g. placeholder loading).
+ */
+export function resolveTicketsRemainingForDisplay(
+  value: number | undefined,
+  fallbackWhenMissing?: number
+): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value > 0 ? value : null;
+  }
+  if (
+    fallbackWhenMissing != null &&
+    typeof fallbackWhenMissing === "number" &&
+    fallbackWhenMissing > 0
+  ) {
+    return fallbackWhenMissing;
+  }
+  return null;
+}
+
 /** Response from GET /events/get_kikis */
 export interface GetKikisResponse {
   code: string;

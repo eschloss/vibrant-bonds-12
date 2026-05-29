@@ -38,6 +38,7 @@ import {
   isMicroMatchesEvent,
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
+  resolveTicketsRemainingForDisplay,
 } from "@/lib/eventApi";
 import {
   buildEventChatQuickQuestions,
@@ -285,6 +286,10 @@ function CheckoutForm({
   }, [eventData.datetime_local, eventData.datetime_local_latest, locale, t]);
 
   const microMatches = isMicroMatchesEvent(eventData);
+  const displayTicketsRemaining = resolveTicketsRemainingForDisplay(
+    eventData.tickets_remaining,
+    20
+  );
   const entranceTimeTooltip = t(
     microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
     microMatches
@@ -1174,7 +1179,7 @@ function CheckoutForm({
                     options={{
                       buttonTheme: {
                         applePay: "black",
-                        googlePay: "black",
+                        googlePay: "white",
                       },
                       buttonType: {
                         applePay: "buy",
@@ -1341,7 +1346,7 @@ function CheckoutForm({
                       options={{
                         buttonTheme: {
                           applePay: "black",
-                          googlePay: "black",
+                          googlePay: "white",
                         },
                         buttonType: {
                           applePay: "buy",
@@ -1383,11 +1388,11 @@ function CheckoutForm({
               )}
 
               <div className="space-y-2">
-                {!eventData.sold_out && (eventData.tickets_remaining ?? 20) > 0 ? (
+                {!eventData.sold_out && displayTicketsRemaining != null ? (
                   <p className="text-sm text-amber-400/90">
                     {isMobile
-                      ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(eventData.tickets_remaining ?? 20))
-                      : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(eventData.tickets_remaining ?? 20))}
+                      ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(displayTicketsRemaining))
+                      : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(displayTicketsRemaining))}
                   </p>
                 ) : null}
                 {hasDirectBankTransfer && paymentMethodTab === "bank" ? (
@@ -1591,6 +1596,10 @@ function CheckoutPrePayment({
   }, [isMobile, mobileCheckoutStep, form]);
 
   const microMatches = isMicroMatchesEvent(eventData);
+  const displayTicketsRemaining = resolveTicketsRemainingForDisplay(
+    eventData.tickets_remaining,
+    20
+  );
   const entranceTimeTooltip = t(
     microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
     microMatches
@@ -1968,11 +1977,11 @@ function CheckoutPrePayment({
               </div>
             ) : null}
             <div className="space-y-2">
-              {!eventData.sold_out && (eventData.tickets_remaining ?? 20) > 0 ? (
+              {!eventData.sold_out && displayTicketsRemaining != null ? (
                 <p className="text-sm text-amber-400/90">
                   {isMobile
-                    ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(eventData.tickets_remaining ?? 20))
-                    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(eventData.tickets_remaining ?? 20))}
+                    ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(displayTicketsRemaining))
+                    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(displayTicketsRemaining))}
                 </p>
               ) : null}
               <Button
