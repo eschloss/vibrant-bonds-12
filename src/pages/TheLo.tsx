@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
-  Brain,
   CalendarDays,
   MessageSquare,
   Repeat,
@@ -82,23 +81,23 @@ const TheLoHowItWorks = ({ onEnter }: TheLoHowItWorksProps) => {
   const steps = [
     {
       icon: Users,
-      title: "Join the LO pool",
+      title: "Join with your LO invite",
       description:
-        "Enter with your LO invite so Pulse can match you with members from the same community.",
+        "Enter Pulse with your invite to access LO groups, events, and members in the community.",
       color: "bg-gradient-to-r from-pink-500 to-purple-600",
     },
     {
       icon: MessageSquare,
-      title: "Get matched",
+      title: "Find your groups",
       description:
-        "We match you with a small group of fellow LO members around shared interests and compatible rhythms.",
+        "Browse community groups organized around stage of life and identity within The LO.",
       color: "bg-gradient-to-r from-blue-500 to-cyan-400",
     },
     {
       icon: CalendarDays,
       title: "Plan together",
       description:
-        "Pip breaks the ice with prompts, availability checks, and low-pressure ideas for meeting up.",
+        "Use group chat, prompts, and simple tools to coordinate low-pressure meetups.",
       color: "bg-gradient-to-r from-stone-500 to-rose-500",
     },
     {
@@ -111,7 +110,7 @@ const TheLoHowItWorks = ({ onEnter }: TheLoHowItWorksProps) => {
   ];
 
   return (
-    <section ref={ref} id="lo-how-friend-groups-work" className="relative bg-gray-900 py-12 dark:bg-gray-950">
+    <section ref={ref} id="lo-how-groups-work" className="relative bg-gray-900 py-12 dark:bg-gray-950">
       <motion.div style={{ y: backgroundY }} className="absolute inset-0 opacity-10">
         <div className="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-purple-600 opacity-30 blur-3xl animate-ambient-drift" />
         <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-blue-600 blur-3xl animate-sophisticated-float" />
@@ -136,7 +135,7 @@ const TheLoHowItWorks = ({ onEnter }: TheLoHowItWorksProps) => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="mb-3 flex items-center justify-center text-sm font-medium uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-elegant-scale"
           >
-            Friend group matches
+            Community groups
           </motion.span>
 
           <motion.h2
@@ -146,7 +145,7 @@ const TheLoHowItWorks = ({ onEnter }: TheLoHowItWorksProps) => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mb-4 max-w-4xl rounded-lg bg-gray-900/40 px-0 py-2 text-3xl font-bold tracking-tight text-white backdrop-blur-sm md:text-5xl"
           >
-            How LO friend group matches work
+            How LO groups work on Pulse
           </motion.h2>
 
           <motion.p
@@ -156,8 +155,8 @@ const TheLoHowItWorks = ({ onEnter }: TheLoHowItWorksProps) => {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mb-6 max-w-2xl rounded-lg bg-gray-900/30 p-2 text-lg text-gray-300 backdrop-blur-md"
           >
-            Pulse takes the awkward parts of meeting new people and turns them into a simple path:
-            match, chat, plan, repeat.
+            Join your groups, chat, plan, and keep meeting up—the simple path from online to in
+            person.
           </motion.p>
         </motion.div>
 
@@ -574,8 +573,8 @@ const TheLo = () => {
                   transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="mt-6 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl"
                 >
-                  Get matched with fellow community members into small groups. An AI host breaks the
-                  ice through icebreakers and guided planning.
+                  Use Pulse with your LO invite to connect with the community—chat, plan casual
+                  meetups, and show up together.
                 </motion.p>
 
                 <motion.div
@@ -691,7 +690,8 @@ const TheLo = () => {
                   <canvas
                     ref={neuralCanvasRef}
                     className="h-full w-full cursor-pointer opacity-35"
-                    title="Move your cursor to interact with the matching network"
+                    title=""
+                    aria-hidden
                   />
                 </div>
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,38,136,0.14),transparent_30%),radial-gradient(circle_at_70%_65%,rgba(56,209,191,0.14),transparent_32%),linear-gradient(180deg,rgba(21,25,28,0.08),rgba(21,25,28,0.62))]" />
@@ -699,21 +699,20 @@ const TheLo = () => {
                 <div className="container relative z-10 mx-auto px-4">
                   <div className="mx-auto max-w-4xl">
                     <div className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#B35CFF]">
-                      <Brain className="h-4 w-4 text-[#B35CFF]" aria-hidden />
-                      <span>LO member matching</span>
+                      <Users className="h-4 w-4 text-[#B35CFF]" aria-hidden />
+                      <span>LO community on Pulse</span>
                     </div>
 
                     <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
-                      Find your{" "}
+                      Stay connected with{" "}
                       <span className="bg-gradient-to-r from-[#FF2688] via-[#B35CFF] to-[#38D1BF] bg-clip-text text-transparent">
-                        perfect LO friend group
+                        your LO community
                       </span>
                     </h2>
 
                     <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
-                      Pulse looks for shared interests, compatible rhythms, and the kinds of plans LO
-                      members actually want to say yes to, so your first group already has something
-                      to build on.
+                      Groups, casual Pulses, and official events—all in one place so you can keep
+                      building friendships beyond the big moments.
                     </p>
 
                     <button

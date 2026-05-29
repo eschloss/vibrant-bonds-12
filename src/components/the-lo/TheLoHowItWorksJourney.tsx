@@ -2,15 +2,15 @@ import { ArrowRight } from "lucide-react";
 
 export const memberActivationSteps = [
   {
-    title: "Group Matches",
+    title: "Groups",
     description:
-      "Get matched with LO members who share your interests, life stage, and appetite for real plans.",
+      "Connect with LO members in community groups—organized around stage of life, identity, and what you want from the community.",
     image:
       "https://mckbdmxblzjdsvjxgsnn.supabase.co/storage/v1/object/sign/app/Copy%20of%20Untitled.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lNWJkOTkyMi00ODg1LTQ1NTEtYWVjNi0wMDIzOTZiMDE3NDciLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhcHAvQ29weSBvZiBVbnRpdGxlZC5wbmciLCJpYXQiOjE3Nzg4NjgwNTYsImV4cCI6MjEyNDQ2ODA1Nn0._6ZLLOGotrZmnGVqHt49vUOW5fpqN8UPXFDr_QCC8EI",
-    imageAlt: "Pulse group profile showing shared interests for The LO members",
+    imageAlt: "Pulse group screen for The LO community",
     accent: "text-[#38D1BF]",
     glow: "from-[#38D1BF]/30",
-    outcome: "Match with members",
+    outcome: "Join your groups",
   },
   {
     title: "Pulses",
@@ -47,8 +47,7 @@ const TheLoHowItWorksJourney = () => {
       <div className="relative mb-7 flex flex-col gap-3 text-center md:mb-9">
         <h2 className="text-3xl font-bold leading-tight text-white md:text-5xl">How it works</h2>
         <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/65 md:text-lg">
-          Get matched with fellow community members into small groups. An AI host breaks the ice
-          through icebreakers and guided planning.
+          Enter with your LO invite, join community groups, and use Pulse to chat, plan, and meet up.
         </p>
       </div>
 
