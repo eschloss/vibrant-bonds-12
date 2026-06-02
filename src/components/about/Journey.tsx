@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { MapPin, HeartHandshake, BookOpen } from "lucide-react";
 
-const OPERA_IMAGE = "https://s.kikiapp.eu/img/team/Andreas+Grieger+Stage+Photographer.webp";
-
 const Journey = () => {
   const { t } = useTranslation();
 
@@ -23,24 +21,9 @@ const Journey = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid md:grid-cols-5 gap-8 items-center"
+          className="max-w-3xl mx-auto space-y-5"
         >
-          {/* Image */}
-          <div className="md:col-span-2">
-            <div className="relative overflow-hidden rounded-3xl border border-gray-700">
-              <img
-                src={OPERA_IMAGE}
-                alt={t("journey.opera.alt", "Eric performing opera on stage")}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            </div>
-          </div>
-
-          {/* Copy */}
-          <div className="md:col-span-3 space-y-5">
-            <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-3xl md:text-4xl font-bold">
               {t("journey.simple.title", "The Journey of Pulse")}
             </h2>
             <p className="text-gray-300 text-lg whitespace-pre-line">
@@ -81,7 +64,6 @@ const Journey = () => {
                 "Pulse turns strangers into real friends by making the healthy thing the easy thing."
               )}
             </div>
-          </div>
         </motion.div>
       </div>
     </section>

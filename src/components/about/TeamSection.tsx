@@ -54,10 +54,10 @@ const TeamSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-gray-800/30 rounded-2xl p-6 border border-gray-700/50"
             >
-              <div className="aspect-square mb-6 overflow-hidden rounded-xl">
+              <div className="aspect-[4/5] mb-6 overflow-hidden rounded-xl bg-gray-900/60">
                 <img 
                   alt={t(member.nameKey, "")} 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
+                  className="w-full h-full object-contain object-top" 
                   src={member.image}
                   loading="lazy"
                 />
