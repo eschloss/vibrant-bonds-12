@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { submitFutureInviteSignup } from "@/lib/futureInviteSignup";
 import { loadRecaptchaScriptOnce } from "@/lib/recaptchaLoader";
 import FutureInviteSuggestionChips from "@/components/FutureInviteSuggestionChips";
@@ -30,6 +31,7 @@ export default function GetFutureInvitesModal({
   kikiId,
   onSuccess,
 }: GetFutureInvitesModalProps) {
+  const { currentLanguage } = useLanguage();
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -92,6 +94,7 @@ export default function GetFutureInvitesModal({
         emailTrimmed: trimmed,
         kikiId,
         suggestionIds: selectedSuggestionIds,
+        language: currentLanguage,
         t,
       });
 

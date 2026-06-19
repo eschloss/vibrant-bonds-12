@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function EventsCityFutureInterestSection({ cityLabel, kikiId, kikisLoading }: Props) {
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -65,6 +65,7 @@ export default function EventsCityFutureInterestSection({ cityLabel, kikiId, kik
         emailTrimmed: trimmed,
         kikiId,
         suggestionIds: selectedTypes,
+        language: currentLanguage,
         t,
       });
 

@@ -5,16 +5,31 @@ import { suggestionsForApi } from "@/lib/futureInviteSuggestions";
 
 type TFn = (key: string, fallback?: string) => string;
 
+/** Returns a 2-letter language code for the API, or undefined to omit the field. */
+function safeLanguageForApi(language: unknown): string | undefined {
+  try {
+    if (typeof language !== "string") return undefined;
+    const trimmed = language.trim();
+    if (!trimmed) return undefined;
+    const lang = trimmed.toLowerCase().slice(0, 2);
+    if (!/^[a-z]{2}$/.test(lang)) return undefined;
+    return lang;
+  } catch {
+    return undefined;
+  }
+}
+
 /**
- * POST /events/future-invite-signup/ — same payload shape as GetFutureInvitesModal on event detail pages.
+ * POST /events/future-invite-signup/ — email, kiki_id, recaptcha, optional language & suggestions.
  */
 export async function submitFutureInviteSignup(params: {
   emailTrimmed: string;
   kikiId: number;
   suggestionIds: string[];
+  language?: string;
   t: TFn;
 }): Promise<void> {
-  const { emailTrimmed, kikiId, suggestionIds, t } = params;
+  const { emailTrimmed, kikiId, suggestionIds, language, t } = params;
   const email = emailTrimmed.trim().toLowerCase();
 
   loadRecaptchaScriptOnce();
@@ -52,6 +67,8 @@ export async function submitFutureInviteSignup(params: {
     email,
     kiki_id: kikiId,
   };
+  const lang = safeLanguageForApi(language);
+  if (lang) payload.language = lang;
   const sug = suggestionsForApi(suggestionIds);
   if (sug.length > 0) payload.suggestions = sug;
 

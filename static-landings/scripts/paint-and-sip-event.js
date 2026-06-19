@@ -44,6 +44,20 @@
     }
   }
 
+  function detectPageLanguage() {
+    try {
+      var hostname = window.location.hostname;
+      var parts = hostname.split(".");
+      var first = (parts[0] || "").toLowerCase();
+      if (parts.length > 1 && first.length === 2 && (first === "en" || first === "es")) {
+        return first;
+      }
+      var htmlLang = (document.documentElement.lang || "").toLowerCase().slice(0, 2);
+      if (/^[a-z]{2}$/.test(htmlLang)) return htmlLang;
+    } catch (e) {}
+    return null;
+  }
+
   /* Footer year */
   var yEl = document.getElementById("y");
   if (yEl) yEl.textContent = String(new Date().getFullYear());
@@ -383,6 +397,8 @@
             email: email.toLowerCase(),
             kiki_id: kikiId,
           };
+          var pageLang = detectPageLanguage();
+          if (pageLang) payload.language = pageLang;
           if (suggestions.length) payload.suggestions = suggestions;
 
           return fetch(shardApiUrl("https://api.kikiapp.eu/events/future-invite-signup/"), {
