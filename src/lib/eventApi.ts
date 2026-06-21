@@ -106,6 +106,60 @@ export function resolveTicketsRemainingForDisplay(
   return null;
 }
 
+export type TicketsRemainingBand = "none" | "fewSpotsLeft" | "almostGone" | "exactCount";
+
+/** Scarcity messaging band for a positive ticket count (16+ → hide urgency). */
+export function getTicketsRemainingBand(count: number): TicketsRemainingBand {
+  if (!Number.isFinite(count) || count <= 0) return "none";
+  if (count >= 16) return "none";
+  if (count >= 11) return "fewSpotsLeft";
+  if (count >= 6) return "almostGone";
+  return "exactCount";
+}
+
+export function shouldShowTicketsRemainingUrgency(
+  count: number | null | undefined
+): count is number {
+  return typeof count === "number" && getTicketsRemainingBand(count) !== "none";
+}
+
+export type TicketsRemainingLabelVariant = "default" | "short" | "card";
+
+export function formatTicketsRemainingLabel(
+  count: number,
+  t: (key: string, fallback?: string) => string,
+  variant: TicketsRemainingLabelVariant = "default"
+): string | null {
+  const band = getTicketsRemainingBand(count);
+  switch (band) {
+    case "none":
+      return null;
+    case "fewSpotsLeft":
+      return t("event_detail.tickets.few_spots_left", "A few spots left");
+    case "almostGone":
+      return t("event_detail.tickets.almost_gone", "Almost gone");
+    case "exactCount":
+      if (count === 1) {
+        return variant === "card"
+          ? t("events_city.card.ticket_left_singular", "Only 1 ticket left")
+          : t("event_detail.sticky.ticket_left_singular", "Only 1 ticket left");
+      }
+      if (variant === "short") {
+        return t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace(
+          "{n}",
+          String(count)
+        );
+      }
+      if (variant === "card") {
+        return t("events_city.card.tickets_left", "Only {count} tickets left").replace(
+          "{count}",
+          String(count)
+        );
+      }
+      return t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(count));
+  }
+}
+
 /** Response from GET /events/get_kikis */
 export interface GetKikisResponse {
   code: string;

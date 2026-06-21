@@ -29,6 +29,7 @@ import {
   buildGetKikisUrl,
   getKikiListingDescription,
   parseEventLocalDateTime,
+  formatTicketsRemainingLabel,
 } from "@/lib/eventApi";
 function formatCityName(slug: string): string {
   return slug
@@ -561,6 +562,8 @@ function CityKikiCard({
     typeof kiki.tickets_remaining === "number" && kiki.tickets_remaining > 0 && !soldOut && !isPast
       ? kiki.tickets_remaining
       : null;
+  const cardTicketsUrgencyLabel =
+    ticketsRemaining != null ? formatTicketsRemainingLabel(ticketsRemaining, t, "card") : null;
 
   const cardInner = (
     <Card
@@ -580,7 +583,7 @@ function CityKikiCard({
           className={`absolute inset-0 bg-gradient-to-t ${isPast ? "from-gray-900/95 to-transparent" : "from-gray-900/80 to-transparent"}`}
         />
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-          {ticketsRemaining ? (
+          {cardTicketsUrgencyLabel ? (
             <div className="relative inline-flex">
               <span
                 className="pointer-events-none absolute -inset-[12px] rounded-full bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_93%,rgba(0,0,0,0.48)_96.5%,rgba(0,0,0,0.12)_99%,transparent_100%)]"
@@ -588,12 +591,7 @@ function CityKikiCard({
               />
               <div className="relative inline-flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/15 backdrop-blur px-3 py-1 text-xs font-medium text-amber-300">
                 <Ticket size={13} className="shrink-0" aria-hidden />
-                {t(
-                  ticketsRemaining === 1
-                    ? "events_city.card.ticket_left_singular"
-                    : "events_city.card.tickets_left",
-                  ticketsRemaining === 1 ? "Only 1 ticket left" : "Only {count} tickets left"
-                ).replace("{count}", String(ticketsRemaining))}
+                {cardTicketsUrgencyLabel}
               </div>
             </div>
           ) : null}

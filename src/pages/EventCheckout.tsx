@@ -39,6 +39,7 @@ import {
   EVENTS_API_BASE_URL,
   parseEventLocalDateTime,
   resolveTicketsRemainingForDisplay,
+  formatTicketsRemainingLabel,
 } from "@/lib/eventApi";
 import {
   buildEventChatQuickQuestions,
@@ -290,6 +291,10 @@ function CheckoutForm({
     eventData.tickets_remaining,
     20
   );
+  const checkoutTicketsUrgencyLabel =
+    !eventData.sold_out && displayTicketsRemaining != null
+      ? formatTicketsRemainingLabel(displayTicketsRemaining, t, isMobile ? "short" : "default")
+      : null;
   const entranceTimeTooltip = t(
     microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
     microMatches
@@ -1388,12 +1393,8 @@ function CheckoutForm({
               )}
 
               <div className="space-y-2">
-                {!eventData.sold_out && displayTicketsRemaining != null ? (
-                  <p className="text-sm text-amber-400/90">
-                    {isMobile
-                      ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(displayTicketsRemaining))
-                      : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(displayTicketsRemaining))}
-                  </p>
+                {checkoutTicketsUrgencyLabel ? (
+                  <p className="text-sm text-amber-400/90">{checkoutTicketsUrgencyLabel}</p>
                 ) : null}
                 {hasDirectBankTransfer && paymentMethodTab === "bank" ? (
                   <Button
@@ -1600,6 +1601,10 @@ function CheckoutPrePayment({
     eventData.tickets_remaining,
     20
   );
+  const checkoutTicketsUrgencyLabel =
+    !eventData.sold_out && displayTicketsRemaining != null
+      ? formatTicketsRemainingLabel(displayTicketsRemaining, t, isMobile ? "short" : "default")
+      : null;
   const entranceTimeTooltip = t(
     microMatches ? "event_checkout.entrance_time_tooltip" : "event_checkout.entrance_time_tooltip_single_group",
     microMatches
@@ -1977,12 +1982,8 @@ function CheckoutPrePayment({
               </div>
             ) : null}
             <div className="space-y-2">
-              {!eventData.sold_out && displayTicketsRemaining != null ? (
-                <p className="text-sm text-amber-400/90">
-                  {isMobile
-                    ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace("{n}", String(displayTicketsRemaining))
-                    : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(displayTicketsRemaining))}
-                </p>
+              {checkoutTicketsUrgencyLabel ? (
+                <p className="text-sm text-amber-400/90">{checkoutTicketsUrgencyLabel}</p>
               ) : null}
               <Button
                 type="button"

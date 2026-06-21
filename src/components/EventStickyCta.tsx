@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Ticket } from "lucide-react";
 import type { EventHeaderCtaLocation } from "@/contexts/EventHeaderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { formatTicketsRemainingLabel } from "@/lib/eventApi";
 
 type EventStickyCtaProps = {
   checkoutHref: string;
@@ -25,19 +26,11 @@ export default function EventStickyCta({
   className = "",
 }: EventStickyCtaProps) {
   const isMobile = useIsMobile();
-  const showUrgency = !checkoutDisabled && ticketsRemaining != null;
   const urgencyText =
     ticketsRemaining != null
-      ? isMobile
-        ? t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace(
-            "{n}",
-            String(ticketsRemaining)
-          )
-        : t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace(
-            "{n}",
-            String(ticketsRemaining)
-          )
-      : "";
+      ? formatTicketsRemainingLabel(ticketsRemaining, t, isMobile ? "short" : "default")
+      : null;
+  const showUrgency = !checkoutDisabled && urgencyText != null;
 
   return (
     <motion.div

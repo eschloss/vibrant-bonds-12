@@ -452,6 +452,24 @@
     }
   }
 
+  function ticketsRemainingBand(count) {
+    if (typeof count !== "number" || !isFinite(count) || count <= 0) return "none";
+    if (count >= 16) return "none";
+    if (count >= 11) return "fewSpotsLeft";
+    if (count >= 6) return "almostGone";
+    return "exactCount";
+  }
+
+  function ticketsRemainingLabel(count, variant) {
+    var band = ticketsRemainingBand(count);
+    if (band === "none") return null;
+    if (band === "fewSpotsLeft") return "A few spots left";
+    if (band === "almostGone") return "Almost gone";
+    if (count === 1) return "Only 1 ticket left";
+    if (variant === "short") return "Only " + count + " spots left for this event";
+    return "Only " + count + " tickets left";
+  }
+
   function applyPaintSipAvailability(data) {
     if (!data || typeof data !== "object") return;
 
@@ -467,6 +485,11 @@
 
     var n = data.tickets_remaining;
     var hasCount = typeof n === "number" && !isNaN(n) && n > 0;
+    var heroLabel = hasCount ? ticketsRemainingLabel(n, "short") : null;
+    var sidebarLabel = hasCount ? ticketsRemainingLabel(n, "default") : null;
+    var stickyMobileLabel = hasCount ? ticketsRemainingLabel(n, "short") : null;
+    var stickyDesktopLabel = hasCount ? ticketsRemainingLabel(n, "default") : null;
+    var showUrgency = heroLabel != null;
 
     var heroUrgency = document.querySelector(".js-paint-sip-hero-urgency");
     var heroText = document.querySelector(".js-paint-sip-hero-urgency-text");
@@ -507,7 +530,7 @@
       setElHidden(el, true);
     });
 
-    if (!hasCount) {
+    if (!hasCount || !showUrgency) {
       setElHidden(heroUrgency, true);
       sidebarUrgencyRoots.forEach(function (el) {
         setElHidden(el, true);
@@ -525,16 +548,16 @@
     if (stickyMuted) setElHidden(stickyMuted, true);
 
     if (heroText) {
-      heroText.textContent = "Only " + n + " spots left for this event";
+      heroText.textContent = heroLabel;
     }
     sidebarTexts.forEach(function (el) {
-      el.textContent = "Only " + n + " tickets left";
+      el.textContent = sidebarLabel;
     });
     if (stickyMobile) {
-      stickyMobile.textContent = "Only " + n + " spots left for this event";
+      stickyMobile.textContent = stickyMobileLabel;
     }
     if (stickyDesktop) {
-      stickyDesktop.textContent = "Only " + n + " tickets left";
+      stickyDesktop.textContent = stickyDesktopLabel;
     }
   }
 

@@ -77,6 +77,9 @@ export const eventDetail = {
     "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
 
     "event_detail.sticky.reserve_spot": "Reserve your spot",
+    "event_detail.tickets.few_spots_left": "A few spots left",
+    "event_detail.tickets.almost_gone": "Almost gone",
+    "event_detail.sticky.ticket_left_singular": "Only 1 ticket left",
     "event_detail.sticky.tickets_remaining": "Only {n} tickets left",
     "event_detail.sticky.tickets_remaining_short": "Only {n} spots left for this event",
     "event_detail.cta.past_event": "This event has already happened",
@@ -249,6 +252,9 @@ export const eventDetail = {
     "event_detail.most_make_friend": "Te emparejaremos con al menos 3 otros asistentes que van solos.",
 
     "event_detail.sticky.reserve_spot": "Reserva tu lugar",
+    "event_detail.tickets.few_spots_left": "Quedan pocas plazas",
+    "event_detail.tickets.almost_gone": "Casi agotado",
+    "event_detail.sticky.ticket_left_singular": "Solo queda 1 entrada",
     "event_detail.sticky.tickets_remaining": "Solo quedan {n} entradas",
     "event_detail.sticky.tickets_remaining_short": "Solo quedan {n} plazas para este evento",
     "event_detail.cta.past_event": "Este evento ya ha pasado",

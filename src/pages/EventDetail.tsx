@@ -51,6 +51,7 @@ import {
   isMicroMatchesEvent,
   parseEventLocalDateTime,
   resolveTicketsRemainingForDisplay,
+  formatTicketsRemainingLabel,
   slugToDisplayTitle,
 } from "@/lib/eventApi";
 import { buildEventSeoDescriptions, buildEventSeoKeywords } from "@/lib/eventSeoMeta";
@@ -107,6 +108,10 @@ const SignUpCard = ({
   microMatches = true,
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
+  const ticketsUrgencyLabel =
+    showSpotsRemaining && ticketsRemaining != null
+      ? formatTicketsRemainingLabel(ticketsRemaining, t)
+      : null;
 
   return (
     <Card className="bg-gray-800/50 backdrop-blur-lg border-gray-700">
@@ -160,12 +165,10 @@ const SignUpCard = ({
 
         {/* 3. Conversion area — breathing room: 16-20px price→scarcity, 12-16px scarcity→CTA */}
         <div className={cn("space-y-4", showPricing ? "mt-5" : "mt-0")}>
-          {showSpotsRemaining && ticketsRemaining != null ? (
+          {ticketsUrgencyLabel ? (
             <div className="flex items-center gap-2 text-amber-400 text-sm font-medium">
               <Ticket size={16} className="shrink-0 mt-0.5" aria-hidden />
-              <span>
-                {t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(ticketsRemaining))}
-              </span>
+              <span>{ticketsUrgencyLabel}</span>
             </div>
           ) : null}
           <div className="space-y-2">
@@ -723,6 +726,10 @@ const EventDetail = () => {
     data.tickets_remaining,
     18
   );
+  const heroTicketsUrgencyLabel =
+    !usePlaceholderUI && !checkoutDisabled && displayTicketsRemainingHero != null
+      ? formatTicketsRemainingLabel(displayTicketsRemainingHero, t, "short")
+      : null;
   const checkoutDisabledLabel =
     !usePlaceholderUI && eventData?.past_event
       ? t("event_detail.cta.past_event", "This event has already happened")
@@ -1130,13 +1137,10 @@ const EventDetail = () => {
                           : "Get to know other people going in the shared group chat ahead of time—before you walk in."
                       )}
                     </div>
-                    {!usePlaceholderUI && !checkoutDisabled && displayTicketsRemainingHero != null ? (
+                    {heroTicketsUrgencyLabel ? (
                       <div className="flex items-center gap-2 text-sm font-semibold text-amber-400/95">
                         <Ticket size={16} className="shrink-0" aria-hidden />
-                        {t("event_detail.sticky.tickets_remaining_short", "Only {n} spots left for this event").replace(
-                          "{n}",
-                          String(displayTicketsRemainingHero)
-                        )}
+                        {heroTicketsUrgencyLabel}
                       </div>
                     ) : null}
                   </div>
