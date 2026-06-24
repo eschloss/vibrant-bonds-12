@@ -21,6 +21,7 @@ import {
   buildEventContext,
   buildGetKikiUrl,
   buildKikiOrderDetailsUrl,
+  formatEventDurationLabel,
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
@@ -346,10 +347,7 @@ const EventConfirmation = () => {
   const priceOpts = getEventPriceOpts(data);
   const providerName = getProviderName(data.provider);
   const organiser = data.place;
-  const durationText =
-    data.duration_hours === 1
-      ? t("event_detail.duration.hour", "1 hour")
-      : t("event_detail.duration.hours", "{n} hours").replace("{n}", String(data.duration_hours));
+  const durationText = formatEventDurationLabel(data.duration_hours, t);
 
   const toMajorUnits = (minor: number) => minor / 100;
   const formattedTicketPrice = formatEventPrice(toMajorUnits(order.ticket_total), priceOpts);
@@ -549,10 +547,12 @@ const EventConfirmation = () => {
                             </div>
                           </div>
                           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-2">
-                            <div className="flex items-start gap-2 min-w-0">
-                              <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                              <span className="leading-snug min-w-0">{durationText}</span>
-                            </div>
+                            {durationText ? (
+                              <div className="flex items-start gap-2 min-w-0">
+                                <Clock size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                                <span className="leading-snug min-w-0">{durationText}</span>
+                              </div>
+                            ) : null}
                           </div>
                         </div>
                       </div>

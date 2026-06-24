@@ -45,6 +45,7 @@ import {
   buildKikiEventJsonLd,
   buildPlaceholderKikiEvent,
   EVENT_DETAIL_PLACEHOLDER_IMAGE,
+  formatEventDurationLabel,
   formatEventPrice,
   getEventPriceOpts,
   getProviderName,
@@ -307,11 +308,6 @@ const EventDetail = () => {
       minute: "2-digit",
     });
     return { text: `${date} · ${startTime}–${latestTime}`, hasWindow: true };
-  };
-
-  const formatDuration = (hours: number): string => {
-    if (hours === 1) return t("event_detail.duration.hour", "1 hour");
-    return t("event_detail.duration.hours", "{n} hours").replace("{n}", String(hours));
   };
 
   const sanitizeHtml = (html: string): string =>
@@ -791,7 +787,7 @@ const EventDetail = () => {
     });
   }, [eventData, usePlaceholderUI, pathname, checkoutHref, introLine, heroImages]);
 
-  const durationText = formatDuration(data.duration_hours);
+  const durationText = formatEventDurationLabel(data.duration_hours, t);
   const dateTime = usePlaceholderUI
     ? {
         text: t("event_detail.placeholder_datetime", "Date & time to be confirmed"),
@@ -1065,10 +1061,12 @@ const EventDetail = () => {
                     </TooltipProvider>
                   )}
                 </span>
-                <span className="flex items-center gap-1.5 shrink-0">
-                  <Clock size={15} className="shrink-0 text-gray-400" />
-                  {durationText}
-                </span>
+                {durationText ? (
+                  <span className="flex items-center gap-1.5 shrink-0">
+                    <Clock size={15} className="shrink-0 text-gray-400" />
+                    {durationText}
+                  </span>
+                ) : null}
                 {formattedCityName || usePlaceholderUI ? (
                   <span className="flex items-center gap-1.5 shrink-0">
                     <Globe size={15} className="shrink-0 text-gray-400" />
@@ -1349,7 +1347,7 @@ const EventDetail = () => {
               organiser={organiser}
               provider={providerName}
               dateTimeLabel={dateTime.text}
-              duration={durationText}
+              duration={durationText ?? ""}
               microMatches={microMatches}
             />
           </div>

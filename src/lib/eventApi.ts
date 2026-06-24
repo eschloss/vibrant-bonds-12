@@ -49,7 +49,7 @@ export interface GetKikiEventResponse {
   currency_symbol_is_suffix: boolean;
   currency_decimal_separator_is_comma: boolean;
   provider: KikiProviderDetails;
-  duration_hours: number;
+  duration_hours: number | null;
   provider_event_url?: string;
   /** URL for the post-purchase vibe test. */
   vibe_test_url?: string;
@@ -158,6 +158,16 @@ export function formatTicketsRemainingLabel(
       }
       return t("event_detail.sticky.tickets_remaining", "Only {n} tickets left").replace("{n}", String(count));
   }
+}
+
+/** Localized duration label for event detail pages; null when duration is unknown or zero. */
+export function formatEventDurationLabel(
+  hours: number | null | undefined,
+  t: (key: string, fallback?: string) => string
+): string | null {
+  if (typeof hours !== "number" || !Number.isFinite(hours) || hours <= 0) return null;
+  if (hours === 1) return t("event_detail.duration.hour", "1 hour");
+  return t("event_detail.duration.hours", "{n} hours").replace("{n}", String(hours));
 }
 
 /** Response from GET /events/get_kikis */
