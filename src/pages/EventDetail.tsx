@@ -794,12 +794,19 @@ const EventDetail = () => {
   };
   const trackEarlyBirdAppClick = () => {
     if (usePlaceholderUI || checkoutDisabled) return;
+    const earlyBirdPayload = {
+      event_slug: data.slug,
+      event_title: data.title,
+      city: data.city,
+      city_label: data.city_label,
+      provider: providerName,
+      path: `/events/${data.slug}`,
+      destination: "/download",
+    };
+    trackMetaPixelEvent("event_early_bird_app_click", earlyBirdPayload, { custom: true });
     trackMetaPixelEvent(
-      "event_early_bird_app_click",
-      {
-        event_slug: data.slug,
-        path: `/events/${data.slug}`,
-      },
+      "event_qualified_lead",
+      { ...earlyBirdPayload, lead_source: "early_bird_app_click" },
       { custom: true }
     );
   };
