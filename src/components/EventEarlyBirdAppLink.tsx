@@ -23,19 +23,20 @@ export default function EventEarlyBirdAppLink({
       to="/download"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center justify-center gap-2.5 rounded-full border border-amber-400/70 bg-transparent hover:bg-amber-400/[0.06] hover:border-amber-400 transition-colors box-border",
+        "inline-flex items-center justify-center rounded-full border border-amber-400/70 bg-transparent hover:bg-amber-400/[0.06] hover:border-amber-400 transition-colors box-border",
         isHero
           ? "w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] px-6 py-5 sm:py-5 max-h-[72px]"
           : "w-full px-6 py-4 max-h-[60px]",
         className
       )}
     >
-      <Users
-        size={isHero ? 18 : 16}
-        className="shrink-0 text-amber-400"
-        aria-hidden
-      />
-      <span className="flex min-w-0 flex-col items-start text-left gap-0">
+      <span className="inline-flex items-start gap-2.5">
+        <Users
+          size={isHero ? 18 : 16}
+          className="shrink-0 text-amber-400 mt-px"
+          aria-hidden
+        />
+        <span className="flex min-w-0 flex-col items-start text-left gap-0">
         <span
           className={cn(
             "font-semibold text-amber-400 leading-none",
@@ -52,6 +53,7 @@ export default function EventEarlyBirdAppLink({
             "event_detail.hero.early_bird_app.subtitle",
             "Early bird pricing available in the app."
           )}
+        </span>
         </span>
       </span>
     </Link>
