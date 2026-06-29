@@ -5,12 +5,10 @@ import { Ticket } from "lucide-react";
 import type { EventHeaderCtaLocation } from "@/contexts/EventHeaderContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { formatTicketsRemainingLabel } from "@/lib/eventApi";
-import EventEarlyBirdAppLink from "@/components/EventEarlyBirdAppLink";
 
 type EventStickyCtaProps = {
   checkoutHref: string;
   trackCheckoutClick: (location: EventHeaderCtaLocation) => void;
-  onEarlyBirdAppClick?: () => void;
   t: (key: string, fallback?: string) => string;
   ticketsRemaining: number | null;
   checkoutDisabled?: boolean;
@@ -21,7 +19,6 @@ type EventStickyCtaProps = {
 export default function EventStickyCta({
   checkoutHref,
   trackCheckoutClick,
-  onEarlyBirdAppClick,
   t,
   ticketsRemaining,
   checkoutDisabled = false,
@@ -60,21 +57,13 @@ export default function EventStickyCta({
           {checkoutDisabledLabel || t("event_detail.cta.unavailable", "Unavailable")}
         </span>
       ) : (
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto shrink-0">
-          <EventEarlyBirdAppLink
-            t={t}
-            variant="compact"
-            onClick={onEarlyBirdAppClick}
-            className="self-center sm:order-1"
-          />
-          <Link
-            to={checkoutHref}
-            onClick={() => trackCheckoutClick("sticky")}
-            className="w-full sm:w-auto sm:order-2 shrink-0 justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3.5 sm:py-3 rounded-full font-semibold text-base shadow-lg shadow-purple-500/30 transition-all duration-300 hover:shadow-purple-500/40 min-h-[44px] items-center"
-          >
-            {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
-          </Link>
-        </div>
+        <Link
+          to={checkoutHref}
+          onClick={() => trackCheckoutClick("sticky")}
+          className="w-full sm:w-auto shrink-0 justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-3.5 sm:py-3 rounded-full font-semibold text-base shadow-lg shadow-purple-500/30 transition-all duration-300 hover:shadow-purple-500/40 min-h-[44px] items-center"
+        >
+          {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
+        </Link>
       )}
     </motion.div>
   );

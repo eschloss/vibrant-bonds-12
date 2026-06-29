@@ -36,7 +36,7 @@ export default function EventEarlyBirdAppLink({
       <span>
         {t(
           "event_detail.hero.early_bird_app",
-          "Early bird pricing in the Pulse app →"
+          "Get early bird pricing in the Pulse app →"
         )}
       </span>
     </Link>

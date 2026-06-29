@@ -178,38 +178,39 @@ const SignUpCard = ({
             </div>
           ) : null}
           <div className="space-y-2">
-            {checkoutDisabled ? (
-              <span
-                role="status"
-                className="w-full justify-center inline-flex items-center gap-2 bg-white/10 text-white/55 px-6 py-4 rounded-full font-semibold text-lg cursor-not-allowed border border-white/10"
+            <div className="flex flex-col items-center gap-1.5">
+              {checkoutDisabled ? (
+                <span
+                  role="status"
+                  className="w-full justify-center inline-flex items-center gap-2 bg-white/10 text-white/55 px-6 py-4 rounded-full font-semibold text-lg cursor-not-allowed border border-white/10"
+                >
+                  {checkoutDisabledLabel || t("event_detail.cta.unavailable", "Unavailable")}
+                </span>
+              ) : (
+              <Link
+                to={checkoutHref}
+                onClick={() => trackCheckoutClick("sidebar")}
+                className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-md shadow-purple-500/15 transition-all duration-300"
               >
-                {checkoutDisabledLabel || t("event_detail.cta.unavailable", "Unavailable")}
-              </span>
-            ) : (
-            <Link
-              to={checkoutHref}
-              onClick={() => trackCheckoutClick("sidebar")}
-              className="w-full justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-6 py-4 rounded-full font-semibold text-lg shadow-md shadow-purple-500/15 transition-all duration-300"
-            >
-              {t("event_detail.buy_my_ticket", "Buy my ticket")}
-            </Link>
-            )}
-            {!checkoutDisabled && showEarlyBirdAppLink && (
-              <EventEarlyBirdAppLink
-                t={t}
-                onClick={onEarlyBirdAppClick}
-                className="mx-auto"
-              />
-            )}
-            {onOpenFutureInvites && (
-              <button
-                type="button"
-                onClick={onOpenFutureInvites}
-                className="block w-full text-left text-sm text-gray-400 hover:text-[#38D1BF] transition-colors py-0.5 mt-1"
-              >
-                {t("event_detail.cant_attend_link", "Can't make it? Get future invites →")}
-              </button>
-            )}
+                {t("event_detail.buy_my_ticket", "Buy my ticket")}
+              </Link>
+              )}
+              {showEarlyBirdAppLink && (
+                <EventEarlyBirdAppLink
+                  t={t}
+                  onClick={onEarlyBirdAppClick}
+                />
+              )}
+              {onOpenFutureInvites && (
+                <button
+                  type="button"
+                  onClick={onOpenFutureInvites}
+                  className="text-sm text-center text-gray-400 hover:text-[#38D1BF] transition-colors py-0.5"
+                >
+                  {t("event_detail.cant_attend_link", "Can't make it? Get future invites →")}
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -1122,36 +1123,33 @@ const EventDetail = () => {
                 className="flex flex-col gap-2 lg:flex-row lg:items-start lg:gap-4 mb-5 md:mb-6"
               >
                 <div className="flex flex-col gap-6">
-                  <div className="flex flex-col items-center gap-1.5">
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-4 w-full lg:w-auto">
-                      {checkoutDisabled ? (
-                        <span
-                          role="status"
-                          className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-white/10 text-white/60 px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl border border-white/15 cursor-not-allowed"
-                        >
-                          {checkoutDisabledLabel}
-                        </span>
-                      ) : (
-                        <Link
-                          to={checkoutHref}
-                          onClick={() => trackCheckoutClick("hero")}
-                          className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
-                        >
-                          {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
-                        </Link>
-                      )}
-                      {showEarlyBirdAppLink && (
-                        <EventEarlyBirdAppLink
-                          t={t}
-                          onClick={trackEarlyBirdAppClick}
-                          className="self-center"
-                        />
-                      )}
-                    </div>
+                  <div className="flex flex-col items-center gap-1.5 w-full sm:w-auto">
+                    {checkoutDisabled ? (
+                      <span
+                        role="status"
+                        className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-white/10 text-white/60 px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl border border-white/15 cursor-not-allowed"
+                      >
+                        {checkoutDisabledLabel}
+                      </span>
+                    ) : (
+                      <Link
+                        to={checkoutHref}
+                        onClick={() => trackCheckoutClick("hero")}
+                        className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
+                      >
+                        {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
+                      </Link>
+                    )}
+                    {showEarlyBirdAppLink && (
+                      <EventEarlyBirdAppLink
+                        t={t}
+                        onClick={trackEarlyBirdAppClick}
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={handleOpenFutureInvites}
-                      className="text-sm text-gray-400 hover:text-[#38D1BF] transition-colors"
+                      className="text-sm text-center text-gray-400 hover:text-[#38D1BF] transition-colors"
                     >
                       {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
                     </button>
@@ -1397,7 +1395,6 @@ const EventDetail = () => {
         <EventStickyCta
           checkoutHref={checkoutHref}
           trackCheckoutClick={trackCheckoutClick}
-          onEarlyBirdAppClick={trackEarlyBirdAppClick}
           t={t}
           ticketsRemaining={displayTicketsRemaining}
           checkoutDisabled={checkoutDisabled}
