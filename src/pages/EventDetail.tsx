@@ -199,6 +199,7 @@ const SignUpCard = ({
                 <EventEarlyBirdAppLink
                   t={t}
                   onClick={onEarlyBirdAppClick}
+                  className="mt-[5px]"
                 />
               )}
               {onOpenFutureInvites && (
@@ -1144,6 +1145,7 @@ const EventDetail = () => {
                       <EventEarlyBirdAppLink
                         t={t}
                         onClick={trackEarlyBirdAppClick}
+                        className="mt-2.5"
                       />
                     )}
                     <button
