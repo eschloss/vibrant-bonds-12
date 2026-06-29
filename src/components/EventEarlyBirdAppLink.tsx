@@ -30,16 +30,15 @@ export default function EventEarlyBirdAppLink({
         className
       )}
     >
-      <span className="inline-flex items-start gap-2.5">
+      <span className="inline-grid grid-cols-[auto_1fr] items-center gap-x-2.5 gap-y-1">
         <Users
           size={isHero ? 18 : 16}
-          className="shrink-0 text-amber-400 mt-px"
+          className="row-start-1 col-start-1 shrink-0 text-amber-400"
           aria-hidden
         />
-        <span className="flex min-w-0 flex-col items-start text-left gap-0">
         <span
           className={cn(
-            "font-semibold text-amber-400 leading-none",
+            "row-start-1 col-start-2 min-w-0 text-left font-semibold text-amber-400 leading-none",
             isHero ? "text-sm sm:text-base" : "text-sm"
           )}
         >
@@ -48,12 +47,11 @@ export default function EventEarlyBirdAppLink({
             "See who's going in the Pulse app"
           )}
         </span>
-        <span className="text-xs text-white/85 font-normal leading-none mt-1">
+        <span className="row-start-2 col-start-2 min-w-0 text-left text-xs text-white/85 font-normal leading-none">
           {t(
             "event_detail.hero.early_bird_app.subtitle",
             "Early bird pricing available in the app."
           )}
-        </span>
         </span>
       </span>
     </Link>
