@@ -70,6 +70,7 @@ import {
 import { useChatContext } from "@/contexts/ChatContext";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
 import EventStickyCta from "@/components/EventStickyCta";
+import EventEarlyBirdAppLink from "@/components/EventEarlyBirdAppLink";
 import GetFutureInvitesModal from "@/components/GetFutureInvitesModal";
 import { useIsLg } from "@/hooks/use-mobile";
 
@@ -89,6 +90,8 @@ type SignUpCardProps = {
   checkoutDisabled?: boolean;
   checkoutDisabledLabel?: string;
   microMatches?: boolean;
+  showEarlyBirdAppLink?: boolean;
+  onEarlyBirdAppClick?: () => void;
 };
 
 const SignUpCard = ({
@@ -107,6 +110,8 @@ const SignUpCard = ({
   checkoutDisabled = false,
   checkoutDisabledLabel = "",
   microMatches = true,
+  showEarlyBirdAppLink = false,
+  onEarlyBirdAppClick,
 }: SignUpCardProps) => {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
   const ticketsUrgencyLabel =
@@ -188,6 +193,13 @@ const SignUpCard = ({
             >
               {t("event_detail.buy_my_ticket", "Buy my ticket")}
             </Link>
+            )}
+            {!checkoutDisabled && showEarlyBirdAppLink && (
+              <EventEarlyBirdAppLink
+                t={t}
+                onClick={onEarlyBirdAppClick}
+                className="mx-auto"
+              />
             )}
             {onOpenFutureInvites && (
               <button
@@ -732,6 +744,7 @@ const EventDetail = () => {
       : !usePlaceholderUI && eventData?.sold_out
         ? t("event_detail.cta.sold_out", "Sold out")
         : "";
+  const showEarlyBirdAppLink = !usePlaceholderUI && !checkoutDisabled;
 
   const futureInvitesParams = {
     event_slug: data.slug,
@@ -772,6 +785,17 @@ const EventDetail = () => {
     trackMetaPixelEvent(
       "event_qualified_lead",
       { ...signupPayload, lead_source: "signup_click" },
+      { custom: true }
+    );
+  };
+  const trackEarlyBirdAppClick = () => {
+    if (usePlaceholderUI || checkoutDisabled) return;
+    trackMetaPixelEvent(
+      "event_early_bird_app_click",
+      {
+        event_slug: data.slug,
+        path: `/events/${data.slug}`,
+      },
       { custom: true }
     );
   };
@@ -1099,22 +1123,31 @@ const EventDetail = () => {
               >
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col items-center gap-1.5">
-                    {checkoutDisabled ? (
-                      <span
-                        role="status"
-                        className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-white/10 text-white/60 px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl border border-white/15 cursor-not-allowed"
-                      >
-                        {checkoutDisabledLabel}
-                      </span>
-                    ) : (
-                    <Link
-                      to={checkoutHref}
-                      onClick={() => trackCheckoutClick("hero")}
-                      className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
-                    >
-                      {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
-                    </Link>
-                    )}
+                    <div className="flex flex-col lg:flex-row lg:items-center gap-2.5 lg:gap-4 w-full lg:w-auto">
+                      {checkoutDisabled ? (
+                        <span
+                          role="status"
+                          className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-white/10 text-white/60 px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl border border-white/15 cursor-not-allowed"
+                        >
+                          {checkoutDisabledLabel}
+                        </span>
+                      ) : (
+                        <Link
+                          to={checkoutHref}
+                          onClick={() => trackCheckoutClick("hero")}
+                          className="w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px] justify-center inline-flex items-center gap-2 bg-gradient-to-r from-pulse-pink via-accent to-pulse-blue hover:from-pulse-blue hover:via-accent hover:to-pulse-pink text-white px-14 py-5 sm:py-5 rounded-full font-bold text-lg sm:text-xl shadow-lg shadow-purple-500/25 transition-all duration-300"
+                        >
+                          {t("event_detail.sticky.reserve_spot", "Reserve your spot")}
+                        </Link>
+                      )}
+                      {showEarlyBirdAppLink && (
+                        <EventEarlyBirdAppLink
+                          t={t}
+                          onClick={trackEarlyBirdAppClick}
+                          className="self-center"
+                        />
+                      )}
+                    </div>
                     <button
                       type="button"
                       onClick={handleOpenFutureInvites}
@@ -1276,6 +1309,8 @@ const EventDetail = () => {
                     trackCheckoutClick={trackCheckoutClick}
                     onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
                     onOpenFutureInvites={handleOpenFutureInvites}
+                    onEarlyBirdAppClick={trackEarlyBirdAppClick}
+                    showEarlyBirdAppLink={showEarlyBirdAppLink}
                     formattedTotalPrice={formattedTotalPrice}
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
@@ -1326,6 +1361,8 @@ const EventDetail = () => {
                     trackCheckoutClick={trackCheckoutClick}
                     onSeeWhatsIncludedClick={() => trackQualifiedEventPageView("see_whats_included")}
                     onOpenFutureInvites={handleOpenFutureInvites}
+                    onEarlyBirdAppClick={trackEarlyBirdAppClick}
+                    showEarlyBirdAppLink={showEarlyBirdAppLink}
                     formattedTotalPrice={formattedTotalPrice}
                     formattedBaseExperiencePrice={formattedBaseExperiencePrice}
                     formattedPulseFee={formattedPulseFee}
@@ -1360,6 +1397,7 @@ const EventDetail = () => {
         <EventStickyCta
           checkoutHref={checkoutHref}
           trackCheckoutClick={trackCheckoutClick}
+          onEarlyBirdAppClick={trackEarlyBirdAppClick}
           t={t}
           ticketsRemaining={displayTicketsRemaining}
           checkoutDisabled={checkoutDisabled}

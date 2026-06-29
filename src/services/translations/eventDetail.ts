@@ -76,6 +76,7 @@ export const eventDetail = {
     "event_detail.provider_fee": "Provider fee",
     "event_detail.most_make_friend": "You'll be matched with at least 3 other solo attendees.",
 
+    "event_detail.hero.early_bird_app": "Early bird pricing in the Pulse app →",
     "event_detail.sticky.reserve_spot": "Reserve your spot",
     "event_detail.tickets.few_spots_left": "A few spots left",
     "event_detail.tickets.almost_gone": "Almost gone",
@@ -251,6 +252,7 @@ export const eventDetail = {
     "event_detail.provider_fee": "Tarifa del proveedor",
     "event_detail.most_make_friend": "Te emparejaremos con al menos 3 otros asistentes que van solos.",
 
+    "event_detail.hero.early_bird_app": "Precio early bird en la app Pulse →",
     "event_detail.sticky.reserve_spot": "Reserva tu lugar",
     "event_detail.tickets.few_spots_left": "Quedan pocas plazas",
     "event_detail.tickets.almost_gone": "Casi agotado",
