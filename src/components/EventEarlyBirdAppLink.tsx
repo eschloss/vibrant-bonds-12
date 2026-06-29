@@ -35,7 +35,7 @@ export default function EventEarlyBirdAppLink({
         className="shrink-0 text-amber-400"
         aria-hidden
       />
-      <span className="flex min-w-0 flex-col items-center text-center gap-0">
+      <span className="flex min-w-0 flex-col items-start text-left gap-0">
         <span
           className={cn(
             "font-semibold text-amber-400 leading-none",
