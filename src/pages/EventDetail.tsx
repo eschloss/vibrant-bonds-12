@@ -198,6 +198,7 @@ const SignUpCard = ({
               {showEarlyBirdAppLink && (
                 <EventEarlyBirdAppLink
                   t={t}
+                  layout="card"
                   onClick={onEarlyBirdAppClick}
                   className="mt-[5px]"
                 />
@@ -206,8 +207,9 @@ const SignUpCard = ({
                 <button
                   type="button"
                   onClick={onOpenFutureInvites}
-                  className="text-sm text-center text-gray-400 hover:text-[#38D1BF] transition-colors py-0.5"
+                  className="inline-flex items-center justify-center gap-1.5 text-sm text-gray-400 hover:text-[#38D1BF] transition-colors py-0.5"
                 >
+                  <Calendar size={14} className="shrink-0 text-[#38D1BF]/80" aria-hidden />
                   {t("event_detail.cant_attend_link", "Can't make it? Get future invites →")}
                 </button>
               )}
@@ -1144,6 +1146,7 @@ const EventDetail = () => {
                     {showEarlyBirdAppLink && (
                       <EventEarlyBirdAppLink
                         t={t}
+                        layout="hero"
                         onClick={trackEarlyBirdAppClick}
                         className="mt-2.5"
                       />
@@ -1151,8 +1154,9 @@ const EventDetail = () => {
                     <button
                       type="button"
                       onClick={handleOpenFutureInvites}
-                      className="text-sm text-center text-gray-400 hover:text-[#38D1BF] transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 text-sm text-gray-400 hover:text-[#38D1BF] transition-colors"
                     >
+                      <Calendar size={14} className="shrink-0 text-[#38D1BF]/80" aria-hidden />
                       {t("event_detail.cant_attend_link_light", "Can't make it? Get future invites →")}
                     </button>
                   </div>

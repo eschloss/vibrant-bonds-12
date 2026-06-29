@@ -1,43 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Smartphone } from "lucide-react";
+import { Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type EventEarlyBirdAppLinkProps = {
   t: (key: string, fallback?: string) => string;
-  variant?: "default" | "compact";
+  layout?: "hero" | "card";
   className?: string;
   onClick?: () => void;
 };
 
 export default function EventEarlyBirdAppLink({
   t,
-  variant = "default",
+  layout = "hero",
   className,
   onClick,
 }: EventEarlyBirdAppLinkProps) {
-  const isCompact = variant === "compact";
+  const isHero = layout === "hero";
 
   return (
     <Link
       to="/download"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/[0.07] font-medium text-amber-200/90 hover:bg-amber-400/12 hover:border-amber-400/35 hover:text-amber-100 transition-colors",
-        isCompact ? "px-2.5 py-1 text-xs" : "px-3 py-1.5 text-sm",
+        "inline-flex items-center justify-center gap-3 rounded-full border border-amber-400/70 bg-transparent px-6 py-3.5 sm:py-4 hover:bg-amber-400/[0.06] hover:border-amber-400 transition-colors",
+        isHero
+          ? "w-full sm:w-auto min-w-[200px] sm:min-w-[220px] lg:min-w-[600px] lg:w-[600px]"
+          : "w-full",
         className
       )}
     >
-      <Smartphone
-        size={isCompact ? 14 : 16}
-        className="shrink-0"
+      <Users
+        size={isHero ? 22 : 20}
+        className="shrink-0 text-amber-400"
         aria-hidden
       />
-      <span>
-        {t(
-          "event_detail.hero.early_bird_app",
-          "Get early bird pricing in the Pulse app →"
-        )}
+      <span className="flex flex-col items-center text-center">
+        <span className="font-semibold text-amber-400 text-base sm:text-lg leading-tight">
+          {t(
+            "event_detail.hero.early_bird_app.title",
+            "See who's going in the Pulse app"
+          )}
+        </span>
+        <span className="text-sm text-white/85 font-normal leading-snug mt-0.5">
+          {t(
+            "event_detail.hero.early_bird_app.subtitle",
+            "Early bird pricing available in the app."
+          )}
+        </span>
       </span>
     </Link>
   );
